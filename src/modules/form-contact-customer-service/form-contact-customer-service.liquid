@@ -1,4 +1,4 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% capture class %}form-contact-customer-service container{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }}" data-module="form-contact-customer-service">

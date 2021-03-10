@@ -1,4 +1,4 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% capture class %}form-success-message hidden{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <div class="{{ class }}" data-module="form-success-message">

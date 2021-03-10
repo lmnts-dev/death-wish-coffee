@@ -1,2 +1,10 @@
 {%- comment -%}Home Page{%- endcomment -%}
 {%- layout 'theme' -%}
+
+{%- capture grid_items -%}
+  {% for i in (0...8) %}
+    {% render 'category-card' %}
+  {% endfor %}
+{%- endcapture -%}
+
+{% render 'grid', children: grid_items, gutter: 'md' %}

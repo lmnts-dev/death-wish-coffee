@@ -1,4 +1,4 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% capture class %}footer-signup{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }} placeholder" data-module="footer-signup">

@@ -1,1 +1,165 @@
 /* styles for the grid module go in this file */
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+
+  &--margin-top {
+    margin-top: 6rem;
+  }
+
+  &--margin-system {
+    justify-content: center;
+  }
+
+  /* layouts */
+
+  &--xl > * {
+    width: calc(100% / 5 - 26.5px);
+
+    @media (--xl-max) and (--lg) {
+      width: calc(100% / 3 - 20px);
+    }
+
+    @media (--lg-max) and (--md) {
+      width: calc(100% / 2 - 15px);
+    }
+
+    @media (--md-max) {
+      width: 100%;
+    }
+
+    &:nth-child(n + 6) {
+      @media (--xl) {
+        margin-top: 5rem;
+      }
+    }
+
+    &:nth-child(n + 4) {
+      @media (--xl-max) and (--lg) {
+        margin-top: 5rem;
+      }
+    }
+
+    &:nth-child(n + 3) {
+      @media (--lg-max) and (--md) {
+        margin-top: 3rem;
+      }
+    }
+
+    &:not(:first-child) {
+      @media (--md-max) {
+        margin-top: 4rem;
+      }
+    }
+  }
+
+  &--lg > * {
+    width: calc(100% / 4 - 22.5px);
+
+    @media (--xl-max) and (--md) {
+      width: calc(100% / 2 - 15px);
+    }
+
+    @media (--md-max) {
+      width: 100%;
+    }
+
+    &:nth-child(n + 5) {
+      @media (--xl) {
+        margin-top: 3rem;
+      }
+    }
+
+    &:nth-child(n + 3) {
+      @media (--xl-max) and (--md) {
+        margin-top: 3rem;
+      }
+    }
+
+    &:not(:first-child) {
+      @media (--md-max) {
+        margin-top: 4rem;
+      }
+    }
+  }
+
+  &--md > * {
+    width: calc(100% / 3 - 37.5px);
+
+    @media (--lg-max) {
+      width: calc(100% / 2 - 15px);
+    }
+
+    @media (--md-max) {
+      width: 100%;
+    }
+
+    &:nth-child(n + 4) {
+      @media (--lg) {
+        margin-top: 3rem;
+      }
+    }
+
+    &:nth-child(n + 3) {
+      @media (--lg-max) {
+        margin-top: 3rem;
+      }
+    }
+
+    &:not(:first-child) {
+      @media (--md-max) {
+        margin-top: 3rem;
+      }
+    }
+  }
+
+  &--sm > * {
+    width: calc(50% - 20px);
+    margin-bottom: 28px;
+
+    @media (--md-max) {
+      width: 100%;
+      margin-bottom: 4rem;
+    }
+  }
+
+  &--margin-system > * {
+    margin-left: 18.75px;
+    margin-right: 18.75px;
+
+    @media (--lg-max) {
+      margin-left: 7.5px;
+      margin-right: 7.5px;
+    }
+
+    @media (--md-max) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+.grid-description {
+  max-width: 591px;
+  width: 100%;
+  margin-top: 70px;
+
+  p {
+    text-align: center;
+    color: var(--white);
+  }
+}
+
+.grid-cta {
+  margin-top: 50px;
+}

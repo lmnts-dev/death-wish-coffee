@@ -1,4 +1,4 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% capture class %}form-address{% if class %} {{- class -}}{% endif %}{% endcapture %}
 {% assign form_tag = form_tag | default: blank %}
 
