@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}media-hero-grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="media-hero-grid">
+  <h2 class="module-name">media-hero-grid</h2>
+</section>

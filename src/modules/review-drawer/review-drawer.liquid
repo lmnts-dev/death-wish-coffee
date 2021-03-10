@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}review-drawer{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="review-drawer">
+  <h2 class="module-name">review-drawer</h2>
+</section>

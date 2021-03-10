@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}category-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="category-card">
+  <h2 class="module-name">category-card</h2>
+</section>

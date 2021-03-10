@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}pop-out-cart{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="pop-out-cart">
+  <h2 class="module-name">pop-out-cart</h2>
+</section>

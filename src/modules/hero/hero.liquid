@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="hero">
+  <h2 class="module-name">hero</h2>
+</section>

@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}mirror-image-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="mirror-image-hero">
+  <h2 class="module-name">mirror-image-hero</h2>
+</section>

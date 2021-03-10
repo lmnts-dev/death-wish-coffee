@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}section-cta{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="section-cta">
+  <h2 class="module-name">section-cta</h2>
+</section>

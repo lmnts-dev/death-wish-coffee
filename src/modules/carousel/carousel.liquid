@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}carousel{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="carousel">
+  <h2 class="module-name">carousel</h2>
+</section>

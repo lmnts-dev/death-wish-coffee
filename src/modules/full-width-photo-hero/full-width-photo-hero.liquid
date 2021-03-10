@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}full-width-photo-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="full-width-photo-hero">
+  <h2 class="module-name">full-width-photo-hero</h2>
+</section>

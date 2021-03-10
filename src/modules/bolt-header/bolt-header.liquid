@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}bolt-header{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="bolt-header">
+  <h2 class="module-name">bolt-header</h2>
+</section>

@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="grid">
+  <h2 class="module-name">grid</h2>
+</section>

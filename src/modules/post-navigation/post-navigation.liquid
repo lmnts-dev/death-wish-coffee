@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}post-navigation{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="post-navigation">
+  <h2 class="module-name">post-navigation</h2>
+</section>
