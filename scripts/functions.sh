@@ -40,6 +40,12 @@ function parse_yaml() {
    }'
 }
 
+function create_config_for_build {
+  CONFIG="production:
+  store: $1"
+  echo "$CONFIG" > "config.yml";
+}
+
 
 # Make a network request to Shopify
 function request {
