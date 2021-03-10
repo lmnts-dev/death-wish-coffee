@@ -77,6 +77,7 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Makes sure that themekit is installed
+# TODO: This should be moved to our Docker Image
 echo -e "\nDownloading themekit..\n"
 download_themekit
 
