@@ -42,7 +42,10 @@ function parse_yaml() {
 
 function create_config_for_build {
   CONFIG="production:
-  store: $1"
+  store: $1
+  api_key: $2
+  password: $3
+  theme_id: $4"
   echo "$CONFIG" > "config.yml";
 }
 

@@ -61,12 +61,6 @@ if [ -z ${API_KEY+x} ]; then
     fi
 fi
 
-# Create an empty yaml file if doesn't exit
-if ! [ -f "config.yml" ]; then
-  echo "Setting temporary config for build purposes"
-  create_config_for_build $SHOPIFY_STORE
-fi
-
 # Make sure NPM is installed
 echo "Checking to see if NPM is available.."
 if [ ! -x "$(command -v npm)" ]; then
@@ -127,6 +121,12 @@ fi
 
 if ! [ "$THEME_TO_DEPLOY_TO" ]; then
   echo -e "\nNo theme found!!"
+fi
+
+# Create an empty yaml file if doesn't exit
+if ! [ -f "config.yml" ]; then
+  echo "Setting temporary config for build purposes"
+  create_config_for_build $SHOPIFY_STORE $API_KEY $API_PASSWORD $THEME_TO_DEPLOY_TO
 fi
 
 # Build current theme
