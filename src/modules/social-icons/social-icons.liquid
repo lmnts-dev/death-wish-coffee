@@ -1,0 +1,22 @@
+<div class="social-icons" data-module="social-icons">
+    {% if settings['socials_facebook'] %}    
+        <a class="social-icons__link" target="_blank" href="{{- settings['socials_facebook'] -}}">
+            {% render 'svg', type: 'facebook' %}
+        </a>
+    {% endif %}
+    {% if settings['socials_twitter'] %}
+        <a class="social-icons__link" target="_blank" href="{{- settings['socials_twitter'] -}}">
+            {% render 'svg', type: 'twitter' %}
+        </a>
+    {% endif %}
+    {% if settings['socials_instagram'] %}
+        <a class="social-icons__link" target="_blank" href="{{- settings['socials_instagram'] -}}">
+            {% render 'svg', type: 'instagram' %}
+        </a>
+    {% endif %}
+    {% if settings['socials_youtube'] %}
+        <a class="social-icons__link" target="_blank" href="{{- settings['socials_youtube'] -}}">
+            {% render 'svg', type: 'youtube' %}
+        </a>
+    {% endif %}
+</div>

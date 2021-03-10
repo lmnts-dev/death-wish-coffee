@@ -1,0 +1,33 @@
+{%- assign id = id | default: false -%}
+{%- assign label = label | default: false -%}
+{%- assign placeholder = placeholder | default: blank -%}
+{%- assign name = name | default: false -%}
+{%- assign label_top = label_top | default: false -%}
+{% assign label_font = label_font | default: false %}
+{%- assign value = value | default: false -%}
+{% assign button_value = button_value | default: false %}
+{% capture class %}form-field form-field--text{% if class %} {{- class -}}{% endif %}{% if label_top %} form-field--label-top{% endif %}{% if button_value %} form-field--inner{% endif %}{% endcapture %}
+{% assign custom_attrs = custom_attrs | default: false %}
+{% assign type = type | default: 'text' %}
+{% assign required = required | default: '' %}
+
+{% if name and label and id %}
+<div class="{{- class -}}" data-module="input-text">
+  <div class="form-field__input-wrapper">
+    <input class="form-field__input{% if value %} field-has-value{% endif %}" 
+      type="{{- type -}}"
+      id="{{- id -}}" 
+      name="{{- name -}}"
+      placeholder="{{- placeholder -}}"
+      {{ required }}
+      {% if value %}value="{{- value -}}"{% endif %}
+      {% if custom_attrs %}{{- custom_attrs -}}{% endif %}>
+    <label class="form-field__label{% unless label_top %} form-field__label--as-placeholder{% endunless %}" for="{{- id -}}">
+      <span class="{% if label_top %}h8{% elsif label_font %}{{ label_font }}{% else %}b1{% endif %}">{{- label -}}</span>
+    </label>
+    {% if button_value %}
+      {% render 'button', tag: 'button', button_value: button_value, class: 'form-submit button--light' %}
+    {% endif %}
+  </div>
+</div>
+{% endif %}

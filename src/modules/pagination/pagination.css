@@ -1,0 +1,63 @@
+/* styles for the pagination module go in this file */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
+}
+
+.pagination__container {
+  position: relative;
+}
+
+.pagination__nav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  color: var(--black);
+  text-decoration: none;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &--next {
+    right: -3.6rem;
+  }
+
+  &--prev {
+    left: -3.6rem;
+  }
+}
+
+.pagination__svg {
+  width: 16px;
+  height: 18px;
+}
+
+.pagination__page {
+  color: var(--black);
+  text-decoration: none;
+
+  &:not(:first-child) {
+    margin-left: 1rem;
+  }
+
+  &--current {
+    cursor: text;
+    text-decoration: underline;
+  }
+}
+
+.pagination__arrow {
+  color: var(--deep-purple);
+  position: absolute;
+
+  &--prev {
+    left: 2.5rem;
+  }
+
+  &--next {
+    right: 2.5rem;
+  }
+}

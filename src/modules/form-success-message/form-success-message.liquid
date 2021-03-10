@@ -1,0 +1,8 @@
+{% assign class = class | default false %}
+{% capture class %}form-success-message hidden{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<div class="{{ class }}" data-module="form-success-message">
+  <h3 class="form-success-message__title h4">{{- title -}}</h3>
+  <div class="form-success-message__copy b1">{{- message -}}</div>
+  {% render 'button', button_url: shop.url, button_value: 'Back Home', class: 'form-success-message__button' %}
+</div>

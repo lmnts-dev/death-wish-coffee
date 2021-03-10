@@ -1,0 +1,33 @@
+/* Break Points */
+
+/* We've synchronized @custom-media with bootstrap breakpoints layout */
+
+@custom-media --xxl (min-width: 1440px);
+
+@custom-media --xxl-max (max-width: 1439px);
+
+@custom-media --xl (min-width: 1200px);
+
+@custom-media --xl-max (max-width: 1199px);
+
+@custom-media --lg (min-width: 992px);
+
+@custom-media --lg-max (max-width: 991px);
+
+@custom-media --md (min-width: 768px);
+
+@custom-media --md-max (max-width: 767px);
+
+@custom-media --sm (min-width: 576px);
+
+@custom-media --sm-max (max-width: 575px);
+
+@custom-media --xs (min-width: 400px);
+
+@custom-media --xs-max (max-width: 399px);
+
+@custom-media --desktop-menu (min-width: 1001px);
+
+@custom-media --mobile-menu (max-width: 1000px);
+
+@custom-media --ie (-ms-high-contrast: none), (-ms-high-contrast: active);

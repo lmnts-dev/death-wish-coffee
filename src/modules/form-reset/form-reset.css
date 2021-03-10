@@ -1,0 +1,55 @@
+/* styles for the form-reset module go in this file */
+
+.form-reset {
+  padding-top: 110px;
+  padding-bottom: 70px;
+  margin-top: 30px;
+  margin-bottom: 70px;
+  position: relative;
+}
+
+.form-reset-back {
+  position: absolute;
+  top: 0;
+  left: var(--container-padding);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-timing) var(--transition-easing);
+
+  @media (--md) {
+    &:hover {
+      color: var(--yellow);
+    }
+  }
+
+  &:focus {
+    color: var(--yellow);
+  }
+}
+
+.form-reset-back__svg {
+  width: 22px;
+  height: 25px;
+  margin-right: 15px;
+}
+
+.form-reset-header__copy {
+  margin: 10px auto 0;
+}
+
+.form-reset-header {
+  margin: 0 auto 25px;
+}
+
+.form-reset-form {
+  max-width: 500px;
+}
+
+.form-reset-submit {
+  margin-top: 30px;
+}

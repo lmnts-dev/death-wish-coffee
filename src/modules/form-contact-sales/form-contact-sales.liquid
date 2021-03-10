@@ -1,0 +1,17 @@
+{% assign class = class | default false %}
+{% capture class %}form-contact-sales container{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }}" data-module="form-contact-sales">
+  <form class="form-contact-form form-contact-form--sales" action="/" data-name="Team Sales">
+    {%- render 'input-text', name: 'name', id: 'name', label: 'Name', placeholder: 'John Smith', label_top: true -%}
+    {%- render 'input-text', name: 'title', id: 'title', label: 'Title/Position', placeholder: 'Athletic Director', label_top: true -%}
+    {%- render 'input-text', name: 'organization', id: 'organization', label: 'Organization/Team Name', placeholder: 'University Name', label_top: true -%}
+    {%- render 'input-email', name: 'email', id: 'email', label: 'Email', placeholder: 'johnsmith@gmail.com', label_top: true  -%}
+    {%- render 'input-text', name: 'phone', id: 'phone', label: 'Phone', placeholder: '(123) 456-7890', label_top: true -%}
+    {%- render 'input-textarea', name: 'message', id: 'message', label: 'Message', placeholder: 'Type your message...', label_top: true -%}
+    <div class="form-contact-submit">
+      {% render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Submit', class: 'form-contact-submit__btn' %}
+    </div>
+    {%- render 'loading-animation', class: 'hidden' -%}
+  </form>
+</section>

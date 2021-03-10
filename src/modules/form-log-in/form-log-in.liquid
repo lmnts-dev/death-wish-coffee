@@ -1,0 +1,19 @@
+<section class="form-login" data-module="form-log-in">
+    <div class="form-login-wrapper z2">
+        <h1 class="form-login__header h3">SIGN IN</h1>
+        {% form 'customer_login' %}
+        <div class="form-login__message"></div>
+        {{ form.errors | default_errors }}
+        {%- render 'input-email', name: 'customer[email]', label: 'Email', id: 'user_email' -%}
+        {%- render 'input-password', name: 'customer[password]', label: 'Password', id: 'user_password' -%}
+        <div class="form-login-footer">
+            {%- comment -%}
+             "remember me" doesn't appear to be a thing in shopify, so leaving this out for now...
+             {%- render 'input-checkbox', label: 'Keep me logged in', name: 'remember_me' -%}
+             {%- endcomment -%}
+             <a class="form-login-footer__forgot b2" href="#">Forgot Password?</a>
+         </div>
+        {% render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Login', class: 'button--light' %}
+        {% endform %}
+    </div>
+</section>

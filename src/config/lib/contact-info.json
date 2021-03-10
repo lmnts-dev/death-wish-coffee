@@ -1,0 +1,11 @@
+{
+  "name": "Contact Info",
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone Number",
+      "default": "+1-401-555-1212"
+    }
+  ]
+}

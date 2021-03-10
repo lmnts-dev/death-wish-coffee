@@ -1,0 +1,23 @@
+/* styles for the input-radio module go in this file */
+
+.form-field--radio .form-field__input {
+  visibility: hidden;
+  display: none;
+
+  &:not(:checked) + label {
+    background-color: transparent;
+    border-color: var(--black);
+
+    &:hover {
+      border-color: var(--yellow);
+    }
+  }
+}
+
+.input-radio__button:hover {
+  background-color: var(--yellow);
+
+  .button-text {
+    color: var(--black);
+  }
+}

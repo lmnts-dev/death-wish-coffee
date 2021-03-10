@@ -1,0 +1,35 @@
+/* styles for the form-success-message module go in this file */
+
+.form-success-message {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.relative {
+    &.hidden {
+      position: absolute;
+    }
+
+    position: relative;
+  }
+}
+
+.form-success-message__copy {
+  margin: 8px auto 15px;
+  max-width: 500px;
+}
+
+.form-success-message__button {
+  margin: 15px auto 0;
+
+  .form-success-message.no-btn & {
+    display: none;
+  }
+}

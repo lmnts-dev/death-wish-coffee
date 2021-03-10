@@ -1,0 +1,44 @@
+/* styles for promo-bar */
+
+.promo-bar {
+  background-color: var(--black);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  display: none;
+
+  .has-promo-bar & {
+    display: block;
+  }
+}
+
+.promo-bar__content {
+  color: var(--white);
+  margin: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 45px;
+  padding: 1rem 7rem;
+
+  @media (--md-max) {
+    padding: 1rem 4.5rem;
+  }
+}
+
+.promo-bar__close {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  color: var(--white);
+  width: 10px;
+  cursor: pointer;
+
+  @media (--md-max) {
+    right: 2.5rem;
+  }
+}

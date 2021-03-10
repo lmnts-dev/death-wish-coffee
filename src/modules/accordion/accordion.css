@@ -1,0 +1,42 @@
+/* styles for accordion */
+
+.accordion__item {
+  position: relative;
+  border-top: 1px solid var(--gray);
+  padding-top: 2rem;
+  cursor: pointer;
+  padding-bottom: 2rem;
+}
+
+.accordion__question {
+  text-transform: uppercase;
+  padding-right: 2rem;
+}
+
+.accordion__answer {
+  display: none;
+  padding-top: 2rem;
+
+  .accordion__item.active & {
+    display: block;
+  }
+}
+
+.accordion__icon {
+  position: absolute;
+  right: 0;
+  top: 2rem;
+  width: 15px;
+
+  &--minus {
+    display: none;
+  }
+
+  .accordion__item.active &--plus {
+    display: none;
+  }
+
+  .accordion__item.active &--minus {
+    display: block;
+  }
+}

@@ -1,0 +1,17 @@
+<section class="form-reset container" data-module="form-reset">
+  {%- comment -%}Not sure we actually need a back button? Where should it go...
+  <button class="form-reset-back b2">{%- render 'svg', type: 'arrow-left', class: 'form-reset-back__svg' -%}Back</button>
+  {%- endcomment -%}
+  <div class="form-reset-header">
+      <h1 class="h3">RESET YOUR PASSWORD</h1>
+      <p class="b2 form-reset-header__copy">Enter a new password and your password will change.</p>
+  </div>
+  <div class="form-reset-form">
+      {% form 'reset_customer_password' %}
+      {{ form.errors | default_errors }}
+      {%- render 'input-password', name: 'customer[password]', id: 'new_password', label: 'New Password*' -%}
+      {%- render 'input-password', name: 'customer[password_confirmation]', id: 'confirm_password', label: 'Confirm New Password*' -%}
+      {% render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Reset', class: 'button--light form-reset-submit' %}
+      {% endform %}
+  </div>
+</section>

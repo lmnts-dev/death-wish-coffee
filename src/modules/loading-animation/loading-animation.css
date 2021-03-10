@@ -1,0 +1,5 @@
+/* styles for loading-animation */
+
+.loading-animation * {
+  stroke: var(--black);
+}

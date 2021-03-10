@@ -1,0 +1,16 @@
+### PRODUCTION STORE
+production:
+  theme_id: #########
+  api_key: ##################
+  password: ##################
+  store: example.myshopify.com
+staging:
+  theme_id: #########
+  api_key: ##################
+  password: ##################
+  store: example.myshopify.com
+development:
+  theme_id: #########
+  api_key: ##################
+  password: ##################
+  store: example.myshopify.com

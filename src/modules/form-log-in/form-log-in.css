@@ -1,0 +1,71 @@
+/* styles for the form-log-in module go in this file */
+
+.login-wrapper {
+  width: 100%;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  justify-content: space-between;
+  position: relative;
+  margin: 70px auto;
+  visibility: hidden;
+  opacity: 0;
+  transition: all var(--transition-timing) linear;
+  display: flex;
+
+  &.visible {
+    transition-delay: var(--transition-timing);
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media (--md-max) {
+    flex-direction: column;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: 0;
+  }
+}
+
+.form-login {
+  width: 44%;
+
+  @media (--lg-max) {
+    width: 46%;
+  }
+
+  @media (--md-max) {
+    width: 100%;
+    position: relative;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background-color: var(--black);
+    display: block;
+    height: 100%;
+
+    @media (--md-max) {
+      height: 1px;
+      width: 100%;
+      position: relative;
+      margin: 40px auto;
+    }
+  }
+}
+
+.form-login__header {
+  margin-bottom: 20px;
+}
+
+.form-login-footer {
+  margin: 0 0 35px;
+}
+
+.form-login-footer__forgot {
+  color: var(--yellow);
+}

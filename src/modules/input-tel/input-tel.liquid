@@ -1,0 +1,23 @@
+{%- assign id = id | default: false -%}
+{%- assign label = label | default: false -%}
+{%- assign placeholder = placeholder | default: blank -%}
+{%- assign name = name | default: false -%}
+{%- assign label_top = label_top | default: false -%}
+{%- assign value = value | default: false -%}
+{% capture class %}form-field form-field--tel{% if class %} {{- class -}}{% endif %}{% if label_top %} form-field--label-top{% endif %}{% endcapture %}
+
+{% if name and label and id %}
+<div class="{{- class -}}" data-module="input-tel">
+  <div class="form-field__input-wrapper">
+    <input class="form-field__input{% if value %} field-has-value{% endif %}" 
+      type="tel" 
+      id="{{- id -}}" 
+      name="{{- name -}}" 
+      placeholder="{{- placeholder -}}"
+      {% if value %}value="{{- value -}}"{% endif %}>
+    <label class="form-field__label{% unless label_top %} form-field__label--as-placeholder{% endunless %}" for="{{- id -}}">
+      <span class="{% if label_top %}h8{% else %}b1{% endif %}">{{- label -}}</span>
+    </label>
+  </div>
+</div>
+{% endif %}

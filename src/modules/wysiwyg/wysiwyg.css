@@ -1,0 +1,133 @@
+/* styles for wysiwyg */
+
+.wysiwyg {
+  max-width: 1100px;
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    @extend .h1;
+  }
+
+  h2 {
+    @extend .h2;
+  }
+
+  h3 {
+    @extend .h3;
+  }
+
+  h4 {
+    @extend .h4;
+  }
+
+  p, li, blockquote {
+    @extend .b1;
+  }
+
+  ul, ol {
+    margin: 20px auto;
+    padding: 0 7% 15px 7%;
+  }
+
+  a {
+    color: var(--deep-purple);
+  }
+
+  /**
+    * Imported image styles from wordpress
+    * @see https://codex.wordpress.org/Styling_Images_in_Posts_and_Pages
+    */
+
+  img.alignright {
+    float: right;
+    margin: 0 0 1em 1em;
+  }
+
+  img.alignleft {
+    float: left;
+    margin: 0 1em 1em 0;
+  }
+
+  img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a img.alignright {
+    float: right;
+    margin: 0 0 1em 1em;
+  }
+
+  a img.alignleft {
+    float: left;
+    margin: 0 1em 1em 0;
+  }
+
+  a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 45px 0 0 -20px;
+    max-width: 800px;
+
+    .wpcf7-list-item {
+      margin-left: 0;
+    }
+  }
+
+  /* responsive images to not break the page content if the image is top wide */
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+  }
+
+  li:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+
+  &--pad-bot {
+    padding-bottom: 7rem;
+  }
+
+  &--article {
+    margin-top: 2rem;
+  }
+}
+
+.terms-container {
+  margin: 100px auto;
+}
+
+.wysiwyg--margin-bottom {
+  margin-bottom: 80px;
+
+  @media (--md-max) {
+    margin-bottom: 50px;
+  }
+}
+
+.wysiwyg--margin-top {
+  margin-top: 80px;
+
+  @media (--md-max) {
+    margin-top: 50px;
+  }
+}

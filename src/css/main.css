@@ -1,0 +1,32 @@
+/* Global Styles & Utilities */
+
+@import 'base/fonts.css';
+
+@import 'base/variables.css';
+
+@import 'base/typography.css';
+
+@import 'base/normalize.css';
+
+@import 'base/form.css';
+
+@import 'base/breakpoints.css';
+
+@import 'base/placeholder.css';
+
+@import 'base/z-index.css';
+
+/* Lib for Dependencies */
+
+@import 'lib/hamburgers.css';
+
+@import 'lib/swiper.css';
+
+/**
+ * Get Module Styles
+ *
+ * Any css files within the modules directory are automatically imported.
+ * No need to add them here.
+ */
+
+@import '<Modules>';

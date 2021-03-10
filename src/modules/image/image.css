@@ -1,0 +1,93 @@
+/* styles for image */
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &:not(.no-hover)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black);
+    opacity: 0;
+    transition: opacity var(--transition-timing) var(--transition-easing);
+
+    a:hover & {
+      opacity: 0.45;
+    }
+  }
+
+  &--relative {
+    position: relative;
+  }
+}
+
+.image__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  &.vue-img, &.zoom-img {
+    opacity: 1 !important;
+  }
+
+  .image__zoom & {
+    z-index: 1;
+  }
+
+  .image--contain & {
+    object-fit: contain;
+  }
+
+  .image--relative & {
+    position: relative;
+  }
+
+  /* Animations */
+
+  .anim--fade & {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+    &.loaded {
+      opacity: 1;
+    }
+  }
+
+  .anim--wipe & {
+    transform: translateY(4%);
+    transition: transform 0.7s var(--transition-easing);
+
+    &.loaded {
+      transform: translateY(0);
+    }
+  }
+}
+
+.image__zoom {
+  width: 100%;
+  height: 100%;
+}
+
+.js-image-zoom__zoomed-area {
+  z-index: 2;
+  background-color: var(--black) !important;
+
+  @media (--lg-max) {
+    display: none !important;
+  }
+}
+
+.js-image-zoom__zoomed-image {
+  box-shadow: 1px 0 12px 2px rgba(0, 0, 0, 0.2);
+  z-index: 400;
+}

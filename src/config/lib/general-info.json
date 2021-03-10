@@ -1,0 +1,17 @@
+{
+  "name": "theme_info",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Shopify Base Theme"
+    },
+    {
+      "type": "paragraph",
+      "content": "v0.0.1"
+    },
+    {
+      "type": "paragraph",
+      "content": "Check out [the repo](https://gitlab.com/ruckusco/shopify-base-theme) for more information."
+    }
+  ]
+}

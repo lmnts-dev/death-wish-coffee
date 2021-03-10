@@ -1,0 +1,26 @@
+/* styles for social-icons */
+
+.social-icons {
+  display: flex;
+  margin: 20px 0 0;
+  flex-direction: row;
+
+  @media (--md-max) {
+    margin: 20px 15px 0;
+  }
+}
+
+.social-icons__icon {
+  width: 18px;
+  color: var(--light-purple);
+
+  &--facebook {
+    width: 12px;
+  }
+}
+
+.social-icons__link {
+  &:not(:last-of-type) {
+    margin-right: 18px;
+  }
+}

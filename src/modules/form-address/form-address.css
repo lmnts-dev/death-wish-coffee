@@ -1,0 +1,12 @@
+/* styles for the form-address module go in this file */
+
+.form-address__title {
+  margin-bottom: 15px;
+}
+
+.form-address {
+  &.hidden {
+    display: none;
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#ff8300",
+    "activityBar.foreground": "#292929",
+    "titleBar.activeBackground": "#ff8300",
+    "titleBar.activeForeground": "#292929"
+  },
+  "liquid.format": true,
+  "liquid.rules": {
+    "ignore": [
+      {
+        "type": "liquid",
+        "begin": "capture",
+        "end": "endcapture"
+      }
+    ]
+  },
+  "editor.formatOnType": true,
+  "files.associations": {
+    "*.css": "postcss",
+    ".stylelintrc": "jsonc",
+    "*.liquid": "html"
+  },
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "explorer.compactFolders": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true,
+    "source.fixAll.eslint": true
+  },
+  "emmet.includeLanguages": {
+    "liquid": "html"
+  },
+  "files.insertFinalNewline": true,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ]
+}

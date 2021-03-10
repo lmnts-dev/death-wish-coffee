@@ -1,0 +1,117 @@
+{
+  "Shorthand display: none;": {
+    "prefix": "dn",
+    "body": "display: none;",
+    "description": "Quick setup for display none",
+    "scope": "postcss"
+  },
+  "Shorthand display: flex;": {
+    "prefix": "df",
+    "body": "display: flex;",
+    "scope": "postcss"
+  },
+  "Shorthand justify-content: ;": {
+    "prefix": "jc",
+    "body": "justify-content: $0;",
+    "description": "Quick setup for justify-content",
+    "scope": "postcss"
+  },
+  "Shorthand justify-content: center;": {
+    "prefix": "jcc",
+    "body": "justify-content: center;",
+    "description": "Quick justify-content center",
+    "scope": "postcss"
+  },
+  "Shorthand justify-content: flex-start;": {
+    "prefix": "jcfs",
+    "body": "justify-content: flex-start;",
+    "description": "Quick justify-content flex start",
+    "scope": "postcss"
+  },
+  "Shorthand justify-content: flex-end;": {
+    "prefix": "jcfe",
+    "body": "justify-content: flex-end;",
+    "description": "Quick justify-content flex end",
+    "scope": "postcss"
+  },
+  "Shorthand justify-content: space-between;": {
+    "prefix": "jcsb",
+    "body": "justify-content: space-between;",
+    "description": "Quick justify-content space between",
+    "scope": "postcss"
+  },
+  "Shorthand align-items: ;": {
+    "prefix": "ai",
+    "body": "align-items: $0;",
+    "description": "Quick setup for align items",
+    "scope": "postcss"
+  },
+  "Shorthand align-items: center;": {
+    "prefix": "aic",
+    "body": "align-items: center;",
+    "description": "Quick align-items center",
+    "scope": "postcss"
+  },
+  "Shorthand align-items: flex-start;": {
+    "prefix": "aifs",
+    "body": "align-items: flex-start;",
+    "description": "Quick align-items flex start",
+    "scope": "postcss"
+  },
+  "Shorthand align-items: flex-end;": {
+    "prefix": "aife",
+    "body": "align-items: flex-end;",
+    "description": "Quick align-items flex end",
+    "scope": "postcss"
+  },
+  "Shorthand align-items: stretch;": {
+    "prefix": "ais",
+    "body": "align-items: stretch;",
+    "description": "Quick align-items stretch",
+    "scope": "postcss"
+  },
+  "Shorthand flex-direction: column;": {
+    "prefix": "fdc",
+    "body": "flex-direction: column;",
+    "description": "Quick flex-direction column",
+    "scope": "postcss"
+  },
+  "Aspect Ratio Pseudo Element": {
+    "prefix": "ar",
+    "body": [
+      "&::after {",
+      "  content: '';",
+      "  display: block;",
+      "  padding-bottom: $0;",
+      "}"
+    ],
+    "description": "Setup pseudo element for image aspect ratio",
+    "scope": "postcss"
+  },
+  "Shorthand position: relative;": {
+    "prefix": "pr",
+    "body": "position: relative;",
+    "description": "Quick position relative",
+    "scope": "postcss"
+  },
+  "Shorthand position: absolute;": {
+    "prefix": "pa",
+    "body": "position: absolute;",
+    "description": "Quick position absolute",
+    "scope": "postcss"
+  },
+  "Container calc": {
+    "prefix": "container-calc",
+    "body": "calc((100vw - var(--container-width)) / 2 + var(--container-padding));",
+    "description": "Mimic container with this calc. Use it for, 'right', 'left', 'margin-right', 'margin-left' properties.",
+    "scope": "postcss"
+  },
+  "Print and Exit": {
+		"prefix": "eprint",
+		"body": [
+			"printf(\"<pre>%s</pre>\", print_r($0)); exit;"
+		],
+    "description": "Print some data into a <pre> tag and exit the script",
+    "scope": "php"
+	}
+}

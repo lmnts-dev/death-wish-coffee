@@ -1,0 +1,28 @@
+<div class="pagination" data-module="pagination">
+  <div class="pagination__container{% if paginate == blank %} container{% endif %}">
+    {% if paginate.pages > 1 %}
+      {% if paginate.previous %}
+        <a href="{{- paginate.previous.url -}}" class="pagination__nav pagination__nav--prev">
+          {% render 'svg', type: 'arrow-left', class: 'pagination__svg' %}
+        </a>
+      {% endif %}
+      <div class="pagination__pages">
+        {% for part in paginate.parts %}
+          <a href="{{- part.url -}}" class="pagination__page {% if part.title == paginate.current_page %} pagination__page--current h8{% else %} h7{% endif %}">{{- forloop.index -}}</a>
+        {% endfor %}
+      </div>
+      {% if paginate.next %}
+        <a href="{{- paginate.next.url -}}" class="pagination__nav pagination__nav--next">
+          {% render 'svg', type: 'arrow-right', class: 'pagination__svg' %}
+        </a>
+      {% endif %}
+    {% else %}
+      {% unless blog.previous_article == blank %}
+        <a class="pagination__arrow pagination__arrow--prev b2" href="{{ blog.previous_article }}">< Read Previous Post</a>
+      {% endunless %}
+      {% unless blog.next_article == blank %}
+        <a class="pagination__arrow pagination__arrow--next b2" href="{{ blog.next_article }}">Read Next Post ></a>
+      {% endunless %}
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,20 @@
+/* styles for the affirm module go in this file */
+
+.affirm {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--white);
+
+  &--black {
+    color: var(--black);
+  }
+
+  & a {
+    text-align: center;
+    margin-top: 1rem;
+    display: block;
+    color: var(--yellow);
+
+    @extend .b2;
+  }
+}

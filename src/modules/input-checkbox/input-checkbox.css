@@ -1,0 +1,51 @@
+/* styles for input-checkbox */
+
+.form-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.form-checkbox__checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.form-checkbox__check-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border: 1px solid var(--black);
+
+  &:active,
+  .form-checkbox__checkbox:focus ~ & {
+    border-color: var(--light-purple);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 7px;
+    border: solid var(--black);
+    border-width: 0 1px 1px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+
+    .form-checkbox__checkbox:checked ~ & {
+      display: block;
+    }
+  }
+}

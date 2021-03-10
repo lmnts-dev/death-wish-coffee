@@ -1,0 +1,12 @@
+{% assign label_font = label_font | default: false %}
+{% capture class %}form-search container{% if class %} {{- class -}}{% endif %}{% endcapture %}
+<section class="{{- class -}}">
+  <form action="/search" class="form-search-form">
+    <div class="form-search-input-container">
+      <button type="submit" class="form-search__button z3">
+        {% render 'svg', type: 'search', class: 'form-search__icon' %}
+      </button>
+      {%- render 'input-text', id: 'search', name: 'q', label: 'Search', label_font: label_font, value: search.terms, class: 'form-search__input' -%}
+    </div>
+  </form>
+</section>

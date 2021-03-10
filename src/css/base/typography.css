@@ -1,0 +1,272 @@
+/* Google Font */
+
+:root {
+  --gothic: titling-gothic-fb-compressed, sans-serif;
+  --work: work-sans, sans-serif;
+  --thin: 100;
+  --extra-light: 200;
+  --light: 300;
+  --normal: 400;
+  --medium: 500;
+  --semi-bold: 600;
+  --bold: 700;
+  --extra-bold: 800;
+  --ultra-bold: 900;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
+.h1, .h2, .h3, .h4 {
+  font-family: var(--gothic);
+}
+
+.h5, .h6, .h7, .h8, .b1, .b2, .b3 {
+  font-family: var(--work);
+}
+
+.h1 {
+  font-size: 155px;
+  line-height: 160px;
+  letter-spacing: 3.88px;
+  font-weight: var(--medium);
+
+  @media (--md-max) {
+    font-size: 85px;
+    line-height: 90px;
+  }
+}
+
+.h2 {
+  font-weight: var(--medium);
+
+  @media (--xl) {
+    font-size: 110px;
+    line-height: 115px;
+    letter-spacing: 2.75px;
+
+    &--small {
+      font-size: 100px;
+      line-height: 105px;
+      letter-spacing: 3px;
+    }
+  }
+
+  @media (--xl-max) and (--lg) {
+    font-size: 100px;
+    line-height: 105px;
+    letter-spacing: 2.45px;
+  }
+
+  @media (--lg-max) and (--md) {
+    font-size: 90px;
+    line-height: 95px;
+    letter-spacing: 2.25px;
+  }
+
+  @media (--md-max) and (--xs) {
+    font-size: 65px;
+    line-height: 70px;
+    letter-spacing: 1.6px;
+  }
+
+  @media (--xs-max) {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: 1px;
+  }
+}
+
+.h3 {
+  font-size: 65px;
+  line-height: 70px;
+  letter-spacing: 1.63px;
+  font-weight: var(--medium);
+
+  @media (--md-max) {
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  &--small {
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  &--no-resize {
+    @media (--md-max) {
+      font-size: 65px;
+      line-height: 70px;
+    }
+  }
+}
+
+.h4 {
+  font-size: 25px;
+  line-height: 30px;
+  letter-spacing: 0.63px;
+  font-weight: var(--medium);
+
+  @media (--md-max) {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &--small {
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  &--card {
+    font-size: 20px;
+    line-height: 24px;
+
+    @media (--md-max) {
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
+}
+
+.h5 {
+  font-weight: var(--bold);
+
+  @supports (-webkit-text-stroke: 2px var(--gray)) {
+    -webkit-text-stroke: 2px var(--gray);
+    -webkit-text-fill-color: var(--white);
+  }
+
+  &--purple {
+    @supports (-webkit-text-stroke: 2px var(--deep-purple)) {
+      -webkit-text-stroke: 2px var(--deep-purple);
+      -webkit-text-fill-color: var(--white);
+    }
+  }
+
+  @media (--xl) {
+    font-size: 125px;
+    line-height: 130px;
+  }
+
+  @media (--xl-max) and (--lg) {
+    font-size: 100px;
+    line-height: 105px;
+  }
+
+  @media (--lg-max) and (--md) {
+    font-size: 85px;
+    line-height: 90px;
+  }
+
+  @media (--md-max) {
+    font-size: 76px;
+    line-height: 80px;
+  }
+}
+
+.h6 {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: var(--bold);
+
+  @media (--md-max) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.h7 {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: var(--normal);
+
+  @media (--md-max) {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.h8 {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: var(--bold);
+
+  @media (--md-max) {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.b1 {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: var(--normal);
+
+  @media (--md-max) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &--xl-small {
+    @media (--xl-max) and (--lg) {
+      font-size: 12px;
+    }
+  }
+}
+
+.b2 {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: var(--bold);
+
+  @media (--md-max) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.b3 {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 17px;
+
+  &--bold {
+    font-weight: var(--bold);
+  }
+}
+
+.link {
+  color: #f1c740;
+  font-weight: var(--bold);
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    height: 1px;
+    width: 100%;
+    background-color: #f1c740;
+  }
+}
+
+.search-font {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.83;
+}
+
+input,
+textarea,
+select {
+  @extend .b1;
+}

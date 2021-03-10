@@ -1,0 +1,107 @@
+
+{%- if template contains 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Corporation",
+      "url": "https://{{- shop.url -}}",
+      "logo": "https:{{- 'social-image.jpg' | file_url -}}",
+      {%- if settings['contact_phone'] != blank -%}
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "{{- settings['contact_phone'] -}}",
+            "contactType": "customer service"
+          }
+        ],
+      {%- endif -%}
+      {%- assign social_list = 'facebook,twitter,instagram,youtube' | split: ',' -%}
+      "sameAs": [
+          {%- for item in social_list -%}
+          {%- assign social = 'socials_' | append: item -%}
+          {% if settings[social] != blank %}
+            "{{- settings[social] -}}"{%- unless forloop.last -%},{%- endunless -%}
+          {% endif %}
+          {% assign social = nil %}
+        {% endfor %}
+      ]
+      {%- assign social_list = nil -%}
+    }
+  </script>
+{%- elsif template contains 'product' -%}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+  {%- if product.metafields.spr.reviews -%}
+    {%- capture temp_reviews -%}product.metafields.spr.reviews{%- endcapture -%}
+
+    {%- assign temp_reviews_count = temp_reviews | split: '<meta itemprop="reviewCount" content="' | last -%}
+    {%- assign reviews_count = temp_reviews_count | split: '"' | first -%}
+
+    {%- assign temp_rating_value = temp_reviews | split: '<meta itemprop="ratingValue" content="' | last -%}
+    {%- assign rating_value = temp_rating_value | split: '"' | first -%}
+  {%- endif -%}
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": "{{- product.title -}} {{- current_variant.title -}}",
+      "image": [
+        {%- for image in product.images -%}
+          "{{- image.src -}}"{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+       ],
+      "description": "{{- product.description -}}",
+      "sku": "{{- current_variant.sku -}}",
+      "brand": {
+        "@type": "Thing",
+        "name": "{{- product.vendor -}}"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{- rating_value | default: 0 -}}",
+        "reviewCount": "{{- reviews_count | default: 0 -}}"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "{{- shop.currency -}}",
+        "price": "{{- current_variant.price -}}",
+        {%- if current_variant.available -%}
+          "availability": "http://schema.org/InStock"
+        {%- else -%}
+          "availability": "http://schema.org/OutOfStock"
+        {%- endif -%}
+      }
+    }
+  </script>
+{%- elsif template contains 'article' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{- shop.url -}}{{- article.url -}}"
+      },
+      "headline": "{{- article.title -}}",
+      "image": [
+        "{{ article | img_url: 'master' }}"
+       ],
+      "datePublished": "{{- article.published_at | time_tag -}}",
+      "dateModified": "{{- article.published_at | time_tag -}}",
+      "author": {
+        "@type": "Person",
+        "name": "{{- article.author -}}"
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "{{- shop.name -}}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{- 'logo.jpg' | file_url: 'master' -}}"
+        }
+      },
+      "description": "{{- article.excerpt -}}"
+    }
+  </script>
+{%- endif -%}

@@ -1,0 +1,27 @@
+/* styles for the form-contact module go in this file */
+
+.form-contact {
+  position: relative;
+}
+
+.form-contact-form {
+  max-width: 830px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  position: relative;
+
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.form-contact-submit {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+
+  @media (--md-max) {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,29 @@
+/* styles for the form-create-account module go in this file */
+
+.create-account-form {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 15px;
+}
+
+.form-create-account {
+  margin: 120px auto;
+
+  @media (--md-max) {
+    margin: 40px 0 100px;
+  }
+}
+
+.create-account-header__copy {
+  margin: 10px 0 23px;
+
+  @media (--md-max) {
+    margin: 5px 0 16px;
+  }
+}
+
+.create-account-form__submit {
+  @media (--md-max) {
+    margin-top: 18px;
+  }
+}
