@@ -81,6 +81,7 @@ echo -e "\nDownloading themekit..\n"
 download_themekit
 
 # Get all active themes
+echo "Getting information on current themes...\n"
 ALL_THEMES_JSON="$(
   request \
     "$API_KEY" \
@@ -93,6 +94,7 @@ ALL_THEMES_JSON="$(
 # with following format: <id>:<role>,<id>:<role>
 ALL_THEMES_STRING=$(get_all_themes_from_json "$ALL_THEMES_JSON")
 
+echo "Establishing which theme we should push code to...\n"
 if [ "$CURRENT_BRANCH" = 'master' ]; then
   if [ -z ${LIVE_THEME+x} ]; then
       if ! [ -z ${config_production_theme_id+x} ]; then
@@ -122,9 +124,11 @@ if ! [ "$THEME_TO_DEPLOY_TO" ]; then
 fi
 
 # Build current theme
+echo "Building theme...\n"
 npm run build
 
 # Deploy current theme
+echo "Uploading theme to shopify...\n"
 upload_theme "$THEME_TO_DEPLOY_TO" "dist"
 
 # change theme name
