@@ -31,4 +31,25 @@
   &--black {
     background-color: var(--black);
   }
+
+  &--yellow {
+    background-color: var(--yellow);
+  }
+}
+
+.spacing {
+  &--lg {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  &--md {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+
+  &--sm {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }

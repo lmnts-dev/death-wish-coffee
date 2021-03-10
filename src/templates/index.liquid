@@ -2,9 +2,10 @@
 {%- layout 'theme' -%}
 
 {%- capture grid_items -%}
-  {% for i in (0...8) %}
+  {% for i in (0...10) %}
     {% render 'category-card' %}
   {% endfor %}
 {%- endcapture -%}
 
-{% render 'grid', children: grid_items, gutter: 'md' %}
+{% render 'grid', children: grid_items, gutter: 'md', use_margin: true, class: 'bg--yellow spacing--lg' %}
+

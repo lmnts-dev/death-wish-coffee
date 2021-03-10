@@ -12,7 +12,7 @@ gutter = sm || md || lg || xl
 {% assign use_margin = use_margin | default: false %}
 {% capture class %}grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} bg--black" data-module="grid">
+<section class="{{ class }}" data-module="grid">
   <div class="container grid-content grid-content--{{- gutter -}}{% if title or tagline or copy %} grid-content--margin-top{% endif %}{% if use_margin != false %} grid-content--margin-system{% endif %}">
     {{- children -}}
   </div>
