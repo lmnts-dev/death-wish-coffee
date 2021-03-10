@@ -1,20 +1,67 @@
 #!/usr/bin/env bash
 
+## This file is used to automatically deploy to shopify. 
+## It is intended to only be run when code is pushed to the <develop> or <master> branch
+## This file needs to be executed from the root of the project to be successful.
+##
+## The following variables need to be present for this script to complete. 
+## These can be set in the GitLab repository Settings > CI/CD
+## If these variables are not found, the script will prompt for them
+##
+## Assumptions
+## This script will attempt to pull varaibles from either GitLab CI/CD variables or a local config.yml file. 
+## In the case of pulling variables from config.yml, the script will use the production environment to determine the 
+## API Key, Store Name, and Password.
+##
+## Variables
+## SHOPIFY_STORE - the URL of the shopify store. something like example.myshopify.com
+## STAGING_THEME - the theme ID for the dedicated Staging theme
+## LIVE_THEME - the theme ID for the dedicated Live theme
+## API_PASSWORD - the password value from the shopify private app used for development
+## API_KEY - the api key from the shopify private app used for development
+
 # Get helper functions
 source $(dirname $0)/functions.sh
 
 # Setup variables
-CONFIG='config.yml'
-LIVE_THEME_NAME="LIVE - v$(npm version | grep -o  '[0-9.]\+' | head -n1) $(date +%Y-%m-%d %H:%M:%S)"
+THEME_NAME=" (v$(npm version | grep -o  '[0-9.]\+' | head -n1)) - $(date '+%m-%d-%Y %H:%M:%S')"
 CURRENT_BRANCH="$(get_current_branch)"
 IFS=','
 
-# These variable will come out of config.yml parsing
-development_api_key="$SHOPIFY_API_KEY"
-development_password="$SHOPIFY_PASSWORD"
-development_store="$SHOPIFY_STORE"
-production_theme_id="$SHOPIFY_PRODUCTION_THEME"
+if [ -f "config.yml" ]; then 
+    printf "Config file found. Loading it for fallback variables...\n";
+    eval $(parse_yaml config.yml "config_");
+fi
 
+# Set up default variables and request any missing variables.
+if [ -z ${SHOPIFY_STORE+x} ]; then
+    if ! [ -z ${config_production_store+x} ]; then
+      SHOPIFY_STORE="$config_production_store"
+    else
+      printf "Hmm... doesn't look like the shopify store URL is defined yet.. What's store are we deploying to? - Example: domain.myshopify.com\n";
+      read SHOPIFY_STORE;
+    fi
+fi
+
+if [ -z ${API_PASSWORD+x} ]; then
+    if ! [ -z ${config_production_password+x} ]; then
+      API_PASSWORD="$config_production_password"
+    else
+      printf "Hmm... I don't see an API Password here - please enter the API Password from the Shopify Private App used for development.\n";
+      read API_PASSWORD;
+    fi
+fi
+
+if [ -z ${API_KEY+x} ]; then
+    if ! [ -z ${config_production_api_key+x} ]; then
+      API_KEY="$config_production_api_key"
+    else
+      printf "Hmm... I don't see an API Key here - please enter the API Key from the Shopify Private App used for development.\n";
+      read API_KEY;
+    fi
+fi
+
+# Make sure NPM is installed
 echo "Checking to see if NPM is available.."
 if [ ! -x "$(command -v npm)" ]; then
   echo "npm must be available"
@@ -23,6 +70,7 @@ fi
 
 npm set progress=false
 
+# Install dependencies via NPM 
 echo -e "\nInstalling node modules..\n"
 if [ ! -d "node_modules" ]; then
   npm i --quiet
@@ -32,22 +80,12 @@ fi
 echo -e "\nDownloading themekit..\n"
 download_themekit
 
-# Create an empty yaml file if doesn't exit
-if ! [ -f "$CONFIG" ]; then
-  cp "$(pwd)/config-example.yml" "$CONFIG"
-fi
-
-# Parse the config.yml file
-if ! [ "$GITLAB_CI" = true ]; then
-  eval $(parse_yaml "$CONFIG")
-fi
-
 # Get all active themes
 ALL_THEMES_JSON="$(
   request \
-    "$development_api_key" \
-    "$development_password" \
-    "$development_store/admin/themes.json" \
+    "$API_KEY" \
+    "$API_PASSWORD" \
+    "$SHOPIFY_STORE/admin/themes.json" \
     "GET"
 )"
 
@@ -56,9 +94,27 @@ ALL_THEMES_JSON="$(
 ALL_THEMES_STRING=$(get_all_themes_from_json "$ALL_THEMES_JSON")
 
 if [ "$CURRENT_BRANCH" = 'master' ]; then
-  THEME_TO_DEPLOY_TO="$production_theme_id"
+  if [ -z ${LIVE_THEME+x} ]; then
+      if ! [ -z ${config_production_theme_id+x} ]; then
+        LIVE_THEME="$config_production_theme_id"
+      else
+        printf "Hmm... I don't see a ID for the production theme. What's the production theme ID?\n";
+        read LIVE_THEME;
+      fi
+  fi
+  THEME_TO_DEPLOY_TO="$LIVE_THEME"
+  THEME_NAME_PREFIX="LIVE"
 else
-  THEME_TO_DEPLOY_TO=$(get_existing_theme "$ALL_THEMES_JSON")
+  if [ -z ${STAGING_THEME+x} ]; then
+    if ! [ -z ${config_staging_theme_id+x} ]; then
+      STAGING_THEME="$config_staging_theme_id"
+    else
+      printf "Hmm... I don't see a ID for the staging theme. What's the staging theme ID?\n";
+      read STAGING_THEME;
+    fi
+  fi
+  THEME_TO_DEPLOY_TO="$STAGING_THEME"
+  THEME_NAME_PREFIX="STAGING"
 fi
 
 if ! [ "$THEME_TO_DEPLOY_TO" ]; then
@@ -71,15 +127,16 @@ npm run build
 # Deploy current theme
 upload_theme "$THEME_TO_DEPLOY_TO" "dist"
 
-#If Master, change name
-if [ "$CURRENT_BRANCH" = 'master' ]; then
+# change theme name
+if ! [ -z ${THEME_TO_DEPLOY_TO+x} ]; then
+  echo "Updating theme name"
   NEW_THEME_JSON="$(
     request \
-      "$development_api_key" \
-      "$development_password" \
-      "$development_store/admin/themes/$THEME_TO_DEPLOY_TO.json" \
+      "$API_KEY" \
+      "$API_PASSWORD" \
+      "$SHOPIFY_STORE/admin/themes/$THEME_TO_DEPLOY_TO.json" \
       "PUT" \
-      "{\"theme\": {\"name\": \"$LIVE_THEME_NAME\"} }"
+      "{\"theme\": {\"name\": \"$THEME_NAME_PREFIX $THEME_NAME\"} }"
   )"
 fi
 
