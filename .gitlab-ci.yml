@@ -1,6 +1,7 @@
 stages:
   - test
   - merge_request
+  - deploy
 
 image: ruckusco/general-ci:0.0.1
 
@@ -43,4 +44,11 @@ test_code:
     - /(develop|feature|hotfix)\/?(.*)/
   script:
     - bash scripts/lint-code.sh
+
+deploy:
+  stage: deploy
+  only: 
+    - /(develop|master)/
+  script:
+    - bash scripts/deployments.sh
 

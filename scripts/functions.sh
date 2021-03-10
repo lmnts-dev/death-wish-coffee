@@ -24,11 +24,10 @@ function get_remote_branches {
 }
 
 ## Parse a yaml file
-function parse_yaml {
+function parse_yaml() {
    local prefix=$2
    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-   sed -ne "s|^\($s\):|\1|" \
-        -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
+   sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
         -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
    awk -F$fs '{
       indent = length($1)/2;
@@ -36,10 +35,20 @@ function parse_yaml {
       for (i in vname) {if (i > indent) {delete vname[i]}}
       if (length($3) > 0) {
          vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("export %s%s%s=\"%s\" ", "'$prefix'",vn, $2, $3);
+         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
       }
    }'
 }
+
+function create_config_for_build {
+  CONFIG="production:
+  store: $1
+  api_key: $2
+  password: $3
+  theme_id: $4"
+  echo "$CONFIG" > "config.yml";
+}
+
 
 # Make a network request to Shopify
 function request {
@@ -62,6 +71,7 @@ function get_all_themes_from_json {
 # Downloads themekit
 function download_themekit {
   if ! [ -x "$(command -v theme)" ]; then
+    echo "Doesn't look like themekit is installed - attempting to install."
     if [ "$GITLAB_CI" ]; then
       npm install @shopify/themekit --quiet
       cp ./node_modules/@shopify/themekit/bin/theme \
@@ -73,6 +83,8 @@ function download_themekit {
       brew tap shopify/shopify
       brew install themekit
     fi
+  else
+    echo "Looks like themekit is installed already!"
   fi
 }
 
