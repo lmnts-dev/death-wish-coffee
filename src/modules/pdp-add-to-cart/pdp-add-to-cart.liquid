@@ -1,4 +1,4 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% capture class %}pdp-add-to-cart{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }} placeholder" data-module="pdp-add-to-cart">

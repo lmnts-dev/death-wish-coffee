@@ -1,2 +1,18 @@
 {%- comment -%}Home Page{%- endcomment -%}
 {%- layout 'theme' -%}
+
+{%- capture grid_items -%}
+  {% for i in (0...10) %}
+    {% render 'category-card', class: 'swiper-slide' %}
+  {% endfor %}
+{%- endcapture -%}
+
+{% render 'carousel', 
+  children: grid_items, 
+  class: 'spacing--lg',
+  slides_per_view: 3,
+  spacing: 30,
+  autoplay: 300,
+  pagination: true, 
+  navigation: true %}
+

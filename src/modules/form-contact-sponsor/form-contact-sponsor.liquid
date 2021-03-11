@@ -1,4 +1,4 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% assign sport_select_options = page.metafields.contact.sponsor_sport %}
 {% capture class %}form-contact-sponsor container{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
