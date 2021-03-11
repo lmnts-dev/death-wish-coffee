@@ -3,9 +3,16 @@
 
 {%- capture grid_items -%}
   {% for i in (0...10) %}
-    {% render 'category-card' %}
+    {% render 'category-card', class: 'swiper-slide' %}
   {% endfor %}
 {%- endcapture -%}
 
-{% render 'grid', children: grid_items, gutter: 'md', use_margin: true, class: 'bg--yellow spacing--lg' %}
+{% render 'carousel', 
+  children: grid_items, 
+  class: 'spacing--lg',
+  slides_per_view: 3,
+  spacing: 30,
+  autoplay: 300,
+  pagination: true, 
+  navigation: true %}
 
