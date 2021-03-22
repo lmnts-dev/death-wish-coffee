@@ -1,13 +1,19 @@
 /* styles for styleguide */
 
-.styleguide-colors__grid {
+.styleguide h2 {
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #707070;
+}
+
+.styleguide-colors {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 32px;
 }
 
-.styleguide-colors__grid-item {
+.styleguide-colors__item {
   width: 100%;
   margin-top: 50px;
 
@@ -118,5 +124,31 @@
 
   .styleguide-swatch--white & {
     color: var(--steel);
+  }
+}
+
+.styleguide-typo p {
+  position: relative;
+  padding: 10px 0;
+
+  @media (--xxl-max) {
+    padding-left: 50px;
+  }
+
+  &::before {
+    content: attr(data-name);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 40px;
+    text-transform: uppercase;
+    transform: translate(0, -50%);
+
+    @media (--xxl) {
+      left: -50px;
+    }
   }
 }
