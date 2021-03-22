@@ -1,1 +1,122 @@
 /* styles for styleguide */
+
+.styleguide-colors__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 32px;
+}
+
+.styleguide-colors__grid-item {
+  width: 100%;
+  margin-top: 50px;
+
+  @media (--xl) {
+    width: calc(50% - 24px);
+    margin-top: 100px;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:nth-child(-n+2) {
+    @media (--xl) {
+      margin-top: 0;
+    }
+  }
+}
+
+.styleguide-palette {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.styleguide-swatch {
+  position: relative;
+  margin: 13px 13px 0 0;
+  width: 100%;
+  max-width: 127px;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+
+  &--black {
+    background-color: var(--black);
+  }
+
+  &--white {
+    background-color: var(--white);
+    border: 1px solid #707070;
+  }
+
+  &--steel {
+    background-color: var(--steel);
+  }
+
+  &--bronze {
+    background-color: var(--bronze);
+  }
+
+  &--blood {
+    background-color: var(--blood);
+  }
+
+  &--shadow {
+    background-color: var(--shadow);
+  }
+
+  &--slate {
+    background-color: var(--slate);
+  }
+
+  &--ashe {
+    background-color: var(--ashe);
+  }
+
+  &--bone {
+    background-color: var(--bone);
+  }
+
+  &--pumpkin {
+    background-color: var(--pumpkin);
+  }
+
+  &--yule {
+    background-color: var(--yule);
+  }
+
+  &--passion {
+    background-color: var(--passion);
+  }
+
+  &--shamrock {
+    background-color: var(--shamrock);
+  }
+
+  &--bloom {
+    background-color: var(--bloom);
+  }
+
+  &--independance {
+    background-color: var(--independance);
+  }
+}
+
+.styleguide-swatch__description {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: var(--white);
+  text-align: center;
+  text-transform: uppercase;
+
+  .styleguide-swatch--white & {
+    color: var(--steel);
+  }
+}
