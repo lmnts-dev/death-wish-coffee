@@ -1,5 +1,6 @@
 <section class="styleguide" data-module="styleguide">
   <div class="container spacing--lg styleguide-colors">
+    {%- comment -%}Colors{%- endcomment -%}
     <h2>Colors</h2>
     <div class="styleguide-colors__grid">
       <div class="styleguide-colors__grid-item">
@@ -65,6 +66,66 @@
           </div>
         </div>
       </div>
+    </div>
+
+    {%- comment -%}Typography{%- endcomment -%}
+    <h2>Typography</h2>
+    <p class="h1">DEATH TO WEAK COFFEE</p>
+    <p class="h2">DEATH TO WEAK COFFEE</p>
+    <p class="h3">LET’S DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE</p>
+    <p class="h4">LET’S DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE</p>
+    <p class="h5">I’m much more of a morning person in the afternoon</p>
+    <p class="p1">The difference between coffee and your opinion is that coffee<br>doesn’t make me want to punch you in the face.</p>
+    <p class="b1">Sorry i’m late. I got caught up enjoying my last few moments of <br>not being here.</p>
+    <p class="b2">Sorry i’m late. I got caught up enjoying my last few moments of <br>not being here.</p>
+    <p class="b3">Since kids get an ice cream truck, why can’t I have a coffee truck that rides around near my place a few<br>times a day blaring Sabbath?</p>
+    <p class="b4">Tea is really just hot dirty water. Change my mind.</p>
+    <p class="b5">Cancelling plans is ok. Making coffee just for yourself is ok. Plotting the revenge<br>of your enemies is ok. Drinking coffee out of the skulls of your enemies is ok. It’s<br>called self care. </p>
+
+    <h2>Mobile Typography</h2>
+    <p class="h1">DEATH TO WEAK COFFEE</p>
+    <p class="h2">DEATH TO WEAK COFFEE</p>
+    <p class="h3">LET’S DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE</p>
+    <p class="h4">LET’S DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE</p>
+    <p class="h5">I’m much more of a morning person in the afternoon</p>
+    <p class="p1">The difference between coffee and your opinion is that coffee<br>doesn’t make me want to punch you in the face.</p>
+    <p class="b1">Sorry i’m late. I got caught up enjoying my last few moments of <br>not being here.</p>
+    <p class="b2">Sorry i’m late. I got caught up enjoying my last few moments of <br>not being here.</p>
+    <p class="b3">Since kids get an ice cream truck, why can’t I have a coffee truck that rides around near my place a few<br>times a day blaring Sabbath?</p>
+    <p class="b4">Tea is really just hot dirty water. Change my mind.</p>
+    <p class="b5">Cancelling plans is ok. Making coffee just for yourself is ok. Plotting the revenge<br>of your enemies is ok. Drinking coffee out of the skulls of your enemies is ok. It’s<br>called self care. </p>
+
+    {%- comment -%}Buttons{%- endcomment -%}
+    <h2>Buttons</h2>
+    <p class="b1">Shopping Buttons</p>
+    {%- render 'button', tag: 'button', button_value: 'Add to Cart' -%}
+    {%- render 'button', tag: 'button', button_value: 'Add to Cart' -%}
+    {%- render 'button', tag: 'button', button_value: 'Add to Cart' -%}
+    <p class="b1">Text Fields Buttons</p>
+    {%- render 'button', tag: 'button', button_value: 'Subscribe' -%}
+    {%- render 'button', tag: 'button', button_value: 'Subscribe' -%}
+    {%- render 'button', tag: 'button', button_value: 'Subscribe' -%}
+    <p class="b1">I am a...</p>
+    {%- assign options = 'Option1|Option2' | split: '|' -%}
+    {%- render 'input-select', options: options, placeholder: 'Select' -%}
+
+
+    {%- comment -%}Text Fields{%- endcomment -%}
+    <h2>Text Fields</h2>
+    <div>
+      {%- render 'input-text', type: 'text', name: 'text-field', label: 'Text field label', id: 'text-field-1' -%}
+      <div>
+        {%- render 'input-radio', name: 'input-radio', label: 'Option 1', id: 'radio1' -%}
+        {%- render 'input-radio', name: 'input-radio', label: 'Option 2', id: 'radio2' -%}
+      </div>
+      <div>
+        {%- render 'input-checkbox', name: 'input-checkbox1', label: 'Option 1', id: 'checkbox1' -%}
+        {%- render 'input-checkbox', name: 'input-checkbox2', label: 'Option 2', id: 'checkbox2' -%}
+      </div>
+    </div>
+    <div>
+      {%- render 'input-textarea', name: 'text-field', label: 'Text Area label', id: 'textarea-1' -%}
+      {%- render 'input-select', options: options, placeholder: 'Select' -%}
     </div>
   </div>
 </section>
