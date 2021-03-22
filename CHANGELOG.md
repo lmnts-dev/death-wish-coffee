@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.3 - 2021-03-21
+### CHANGED:
+- Update template files
+
 ## 0.0.2 - 2021-03-10
 ### CHANGED:
 - Update config issue 
