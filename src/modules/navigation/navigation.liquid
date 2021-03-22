@@ -1,40 +1,5 @@
-<header class="navigation z10" data-module="navigation">
-  <div class="navigation__search">
-    {% render 'form-search', class: 'form-search--no-margin form-search--center form-search--nav', label_font: 'search-font' %}
-  </div>
-  <div class="navigation__container container">
-    <a class="navigation__logo" href="{{- shop.url -}}">
-      {% render 'svg', type: 'logo' %}
-    </a>
-    <nav class="navigation__menu-container">
-      <ul class="navigation__menu">
-        {% for link in linklists.main-menu.links %}
-          <li class="navigation__menu-item">
-            <a class="navigation__menu-item-link b3" href="{{ shop.url }}{{- link.url -}}">{{- link.title -}}</a>
-          </li>
-        {% endfor %}
-      </ul>
-      {% render 'button', class: 'navigation__buy button--dark button--small', button_value: 'Buy', button_url: '/collections/insoles' %}
-    </nav>
-    <div class="navigation__actions">
-      <button class="navigation__action navigation__action--search">
-        {% render 'svg', type: 'search' %}
-      </button>
-      <a class="navigation__action navigation__action--user" href="{{ shop.url }}/account">
-        {% render 'svg', type: 'user' %}
-      </a>
-      <a class="navigation__action navigation__action--cart" href="{{ shop.url }}/cart">
-        {% render 'svg', type: 'cart' %}
-        {% if cart.item_count > 0 %}
-          <span class="navigation__cart-count b3 z1">{{ cart.item_count }}</span>
-        {% endif %}
-      </a>
-      <button class="navigation__mobile-menu hamburger hamburger--squeeze" type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </button>  
-    </div>
-  </div>
-</header>
 {%- render 'promo-bar' -%}
+<header class="navigation z10 placeholder" data-module="navigation">
+  <h2 class="h2">navigation</h2>
+</header>
+
