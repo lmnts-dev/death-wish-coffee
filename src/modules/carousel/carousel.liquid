@@ -30,6 +30,7 @@ You can see more about how options are privided as HTML attributes here.
 {% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
 
 <div class="{{ class }}" data-module="carousel">
+  {%- render 'section-title' -%}
   <div 
     class="carousel-container container swiper-container{{- init_at_bp_class -}}"
     data-slides-per-view="{{- slides_per_view -}}"

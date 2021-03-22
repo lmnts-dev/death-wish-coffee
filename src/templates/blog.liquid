@@ -1,1 +1,18 @@
 {%- layout 'theme' -%}
+
+{%- comment -%}
+This template has some complicated version depending on which type of blog we're showing. 
+If this comment is still here, please consult with the lead developer on the project before proceeding.
+{%- endcomment -%}
+
+{%- render 'carousel' -%}
+{%- render 'article-hero-card' -%}
+
+{%- render 'carousel' -%}
+{%- render 'post-card' -%}
+
+{%- render 'grid' -%}
+{%- render 'post-card' -%}
+
+{%- render 'pagination' -%}
+{%- render 'footer-cta' -%}
