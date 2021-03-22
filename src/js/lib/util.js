@@ -1,3 +1,5 @@
+import validator from 'validator'
+
 export const isMobile = () =>
   typeof window.orientation !== 'undefined' ||
   navigator.userAgent.indexOf('IEMobile') !== -1
@@ -253,13 +255,25 @@ export const debounce = fn => {
 /**
  * Toggles a class on fields based on whether or not the field has value
  */
+const validateInput = input => {
+  let isValid = true
+  console.log(input.type, validator.isEmpty(input.value))
+
+  if (input.required && validator.isEmpty(input.value) === true) {
+    removeClass(input, 'field-has-value')
+    addClass(input, 'field-empty')
+    isValid = false
+  } else {
+    removeClass(input, 'field-error')
+    removeClass(input, 'field-empty')
+    addClass(input, 'field-has-value')
+  }
+  return isValid
+}
+
 export const monitorFieldValue = (field) => {
   field.addEventListener('focusout', () => {
-    if (field.value !== '') {
-      addClass(field, 'field-has-value')
-    } else {
-      removeClass(field, 'field-has-value')
-    }
+    validateInput(field)
   })
 }
 

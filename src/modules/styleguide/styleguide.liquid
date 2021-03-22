@@ -133,20 +133,23 @@
     {%- comment -%}Text Fields{%- endcomment -%}
     <div class="spacing--lg">
       <h2 class="h2">Text Fields</h2>
-      <div>
-        {%- render 'input-text', type: 'text', name: 'text-field', label: 'Text field label', id: 'text-field-1' -%}
-        <div>
-          {%- render 'input-radio', name: 'input-radio', label: 'Option 1', id: 'radio1' -%}
-          {%- render 'input-radio', name: 'input-radio', label: 'Option 2', id: 'radio2' -%}
+      <div class="styleguide-fields">
+        <div class="styleguide-inputs">
+          {%- render 'input-text', type: 'text', name: 'text-field', label: 'Text field label', id: 'text-field-1', required: 'required', placeholder: 'Text input', label_top: true, button_value: 'Test' -%}
+          {%- render 'input-email', name: 'email-field', label: 'Email field label', id: 'email-field-1', required: 'required', placeholder: 'Email input', label_top: true -%}
+          <div>
+            {%- render 'input-radio', name: 'input-radio', label: 'Option 1', id: 'radio1' -%}
+            {%- render 'input-radio', name: 'input-radio', label: 'Option 2', id: 'radio2' -%}
+          </div>
+          <div>
+            {%- render 'input-checkbox', name: 'input-checkbox1', label: 'Option 1', id: 'checkbox1' -%}
+            {%- render 'input-checkbox', name: 'input-checkbox2', label: 'Option 2', id: 'checkbox2' -%}
+          </div>
         </div>
-        <div>
-          {%- render 'input-checkbox', name: 'input-checkbox1', label: 'Option 1', id: 'checkbox1' -%}
-          {%- render 'input-checkbox', name: 'input-checkbox2', label: 'Option 2', id: 'checkbox2' -%}
+        <div class="styleguide-inputs">
+          {%- render 'input-textarea', name: 'text-field', label: 'Text Area label', id: 'textarea-1' -%}
+          {%- render 'input-select', options: options, placeholder: 'Select' -%}
         </div>
-      </div>
-      <div>
-        {%- render 'input-textarea', name: 'text-field', label: 'Text Area label', id: 'textarea-1' -%}
-        {%- render 'input-select', options: options, placeholder: 'Select' -%}
       </div>
     </div>
   </div>
