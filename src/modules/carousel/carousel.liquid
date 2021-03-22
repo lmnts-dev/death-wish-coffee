@@ -1,6 +1,62 @@
-{% assign class = class | default false %}
-{% capture class %}carousel{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- comment -%}
+IMPORTANT NOTE: 
+For this module to work correctly, the root tag of each of your {{ children }} cards MUST have the class "swiper-slide" present.
+You should include this class before passing the markup to this module.
 
-<section class="{{ class }} placeholder" data-module="carousel">
-  <h2 class="module-name">carousel</h2>
-</section>
+TODO: Need to fix pagination and navigation components
+{%- endcomment -%}
+
+{% assign class = class | default: false %}
+{% assign children = children | default: false %}
+{% assign navigation = navigation | default: false %}
+{% assign pagination = pagination | default: false %}
+{% assign custom_params = custom_params | default: false %}
+{% assign cta_title = cta_title | default: false %}
+{% assign cta_link = cta_link | default: false %}
+{% capture class %}carousel{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign init_at_breakpoint = init_at_breakpoint | default: false %}
+{% capture init_at_bp_class %}{% if init_at_bp_class %} carousel-bp carousel-bp--{{init_at_breakpoint}}{% endif %}{% endcapture %}
+
+{%- comment -%}
+Carousel Data-Attribute Options
+Each of the following variables are used to configure different options for the carousel.
+You can see more about how options are privided as HTML attributes here.
+
+@see https://swiperjs.com/swiper-api
+{%- endcomment -%}
+{% assign slides_per_view = slides_per_view | default: 3 %}
+{% assign spacing = spacing | default: 10 %}
+{% assign loop = loop | default: true %}
+{% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
+
+<div class="{{ class }}" data-module="carousel">
+  {%- render 'section-title' -%}
+  <div 
+    class="carousel-container container swiper-container{{- init_at_bp_class -}}"
+    data-slides-per-view="{{- slides_per_view -}}"
+    data-spacing="{{- spacing -}}"  
+    data-loop="{{- loop -}}"
+    {% if autoplay %}data-autoplay="{{- autoplay -}}"{% endif %}
+    {% if custom_params %} {{- custom_params -}}{% endif %}>
+    <div class="carousel-wrapper{% if title or tagline or copy %} carousel-wrapper--margin-top{% endif %} swiper-wrapper">
+      {{- children -}}
+    </div>
+    {% if navigation %}
+      <div class="carousel-next swiper-button-next{{- init_at_bp_class -}}">
+        {% render 'svg', type: 'arrow-right' %}
+      </div>
+      <div class="carousel-prev swiper-button-prev{{- init_at_bp_class -}}">
+        {% render 'svg', type: 'arrow-left' %}
+      </div>
+    {% endif %}
+    {% if pagination %}
+        <div class="carousel-pagination swiper-pagination{{- init_at_bp_class -}}"></div>
+    {% endif %} 
+  </div>
+  {% if cta_link and cta_title %}
+    
+  <div class="carousel__cta-container">
+    {% render 'button', button_url: cta_link, button_value: cta_title, class: 'carousel__cta' %}
+  </div>
+  {% endif %}
+</div>

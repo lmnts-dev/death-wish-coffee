@@ -1,6 +1,7 @@
-{% assign class = class | default false %}
+{% assign class = class | default:false %}
 {% capture class %}pdp-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }} placeholder" data-module="pdp-hero">
-  <h2 class="module-name">pdp-hero</h2>
+  {%- render 'carousel' -%}
+  {%- render 'pdp-add-to-cart' -%}
 </section>

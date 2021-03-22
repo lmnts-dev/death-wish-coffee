@@ -51,34 +51,6 @@ img {
   position: relative;
 }
 
-.container {
-  max-width: var(--container-width);
-  padding: 0 var(--container-padding);
-  display: block;
-  margin: auto;
-  width: 100%;
-
-  @media (--lg-max) and (--md) {
-    padding: 0 var(--container-padding-tablet);
-  }
-}
-
-.right-container {
-  margin-left: auto;
-
-  @media (min-width: 1200px) {
-    margin-right: calc((100vw - var(--container-width)) / 2 + var(--container-padding));
-  }
-}
-
-.left-container {
-  margin-right: auto;
-
-  @media (min-width: 1200px) {
-    margin-left: calc((100vw - var(--container-width)) / 2 + var(--container-padding));
-  }
-}
-
 #preview-bar-iframe {
   height: 64px;
   transform: translateY(70%) !important;
