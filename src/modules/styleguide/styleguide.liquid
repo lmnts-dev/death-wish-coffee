@@ -106,25 +106,32 @@
     </div>
 
     {%- comment -%}Buttons{%- endcomment -%}
-
     <div class="spacing--lg">
       <h2 class="h2">Buttons</h2>
       <p class="b1">Shopping Buttons</p>
-      {%- render 'button', tag: 'button', button_value: 'Add to Cart' -%}
-      {%- render 'button', tag: 'button', button_value: 'Add to Cart' -%}
-      {%- render 'button', tag: 'button', button_value: 'Add to Cart' -%}
+      <div class="styleguide-buttons">
+        {%- render 'button', tag: 'button', button_value: 'Add to Cart', class: 'styleguide-button' -%}
+        {%- render 'button', tag: 'button', button_value: 'Add to Cart', class: 'styleguide-button button--light' -%}
+        {%- render 'button', tag: 'button', button_value: 'Add to Cart', class: 'styleguide-button button--light-alt' -%}
+        {%- render 'button', tag: 'button', button_value: 'Add to Cart', class: 'styleguide-button button--dark' -%}
+      </div>
       <p class="b1">Text Fields Buttons</p>
-      {%- render 'button', tag: 'button', button_value: 'Subscribe' -%}
-      {%- render 'button', tag: 'button', button_value: 'Subscribe' -%}
-      {%- render 'button', tag: 'button', button_value: 'Subscribe' -%}
+      <div class="styleguide-buttons">
+        {%- render 'button', tag: 'button', button_value: 'Subscribe', class: 'styleguide-button button--small-h button--small-w button--text-light' -%}
+        {%- render 'button', tag: 'button', button_value: 'Subscribe', class: 'styleguide-button button--small-h button--small-w button--light button--text-dark' -%}
+        {%- render 'button', tag: 'button', button_value: 'Subscribe', class: 'styleguide-button button--small-h button--light-alt button--text-light' -%}
+        {%- render 'button', tag: 'button', button_value: 'Subscribe', class: 'styleguide-button button--small-h button--small-w button--dark' -%}
+      </div>
       <p class="b1">I am a...</p>
-      {%- assign options = 'Option1|Option2' | split: '|' -%}
-      {%- render 'input-select', options: options, placeholder: 'Select' -%}
+      <div class="styleguide-buttons">
+        {%- assign options = 'Option1|Option2' | split: '|' -%}
+        {%- render 'input-select', options: options, placeholder: 'Select' -%}
+      </div>
     </div>
 
 
     {%- comment -%}Text Fields{%- endcomment -%}
-    <div class="spacing--lg"></div>
+    <div class="spacing--lg">
       <h2 class="h2">Text Fields</h2>
       <div>
         {%- render 'input-text', type: 'text', name: 'text-field', label: 'Text field label', id: 'text-field-1' -%}
