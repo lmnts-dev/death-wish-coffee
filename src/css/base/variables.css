@@ -2,12 +2,19 @@
   /* Color Palette */
   --black: #000;
   --white: #fff;
-  --gray: #e9e9e9;
-  --yellow: #f1c740;
-  --deep-purple: #3b3899;
-  --light-purple: #c1c1e1;
-  --error-red: #e63500;
-  --light-black: #242424;
+  --steel: #898e8e;
+  --bronze: #8f6d4f;
+  --blood: #e12727;
+  --shadow: #201e1d;
+  --slate: #464442;
+  --ashe: #5c5957;
+  --bone: #dedbd9;
+  --pumpkin: #d24728;
+  --yule: #541110;
+  --passion: #a1316a;
+  --shamrock: #00793f;
+  --bloom: #3d3385;
+  --independance: #284196;
 
   /* Transparent Colors */
   --transparent-purple: rgba(59, 56, 153, 0.75);
