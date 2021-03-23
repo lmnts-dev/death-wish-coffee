@@ -1,8 +1,8 @@
 /* Google Font */
 
 :root {
-  --gothic: titling-gothic-fb-compressed, sans-serif;
-  --work: work-sans, sans-serif;
+  --revans: 'Revans', sans-serif;
+  --fenomen: 'Fenomen Sans', sans-serif;
   --thin: 100;
   --extra-light: 200;
   --light: 300;
@@ -23,12 +23,12 @@ h5 {
   margin: 0;
 }
 
-.h1, .h2, .h3, .h4 {
-  font-family: var(--gothic);
+.h1, .h2 {
+  font-family: var(--revans);
 }
 
-.h5, .h6, .h7, .h8, .b1, .b2, .b3 {
-  font-family: var(--work);
+.h3, .h4, .h5, .p1, .b1, .b2, .b3, .b4, .b5 {
+  font-family: var(--fenomen);
 }
 
 .h1 {

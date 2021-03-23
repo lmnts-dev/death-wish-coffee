@@ -14,8 +14,10 @@
   background-color: var(--blood);
   font-size: 1.6rem;
   line-height: 1.5;
-  font-family: var(--gothic);
+  font-family: var(--fenomen);
+  font-weight: var(--semi-bold);
   text-decoration: none;
+  text-transform: uppercase;
   -webkit-appearance: none !important;
   transition: background-color var(--transition-timing) var(--transition-easing);
 
