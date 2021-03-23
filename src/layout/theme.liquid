@@ -37,6 +37,7 @@
   <main id="page" class="relative z0" role="main">
     {{ content_for_layout }}
   </main>
+  {%- render 'footer' -%}
 
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}

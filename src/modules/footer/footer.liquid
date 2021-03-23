@@ -1,0 +1,62 @@
+<section class="footer" data-module="footer">
+  <div class="footer__wrapper">
+    <div class="footer__inner">
+      <div class="footer__block">
+        <div class="footer__logo">
+          <a href="{{ shop.url }}">
+            {% render 'svg', type: 'logo' %}
+          </a>
+        </div>
+        <h2 class="h2 footer__title">End of the Road, Jack.</h2>
+      </div>
+      <div class="footer__block">
+        <div class="footer__menus">
+          <div class="footer__menu">
+            <h4 class="footer__menu-title">Company</h4>
+            <div class="footer__menu-list">
+              {%- for link in linklists['company-footer-menu'].links -%}
+                <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+              {%- endfor -%}
+            </div>
+          </div>
+          <div class="footer__menu">
+            <h4 class="footer__menu-title">Accounts + Orders</h4>
+            <div class="footer__menu-list">
+              {%- for link in linklists['account-footer-menu'].links -%}
+                <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+        <div class="footer__copyright">&copy; Death Wish Coffee Co. {{ 'now' | date: '%Y' }}. All Rights Reserved.</div>
+      </div>
+      <div class="footer__block">
+        <div class="footer__legal">
+          <h4 class="footer__legal-title">Legal</h4>
+          <div class="footer__legal-menu">
+            {%- for link in linklists['legal-footer-menu'].links -%}
+              <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+            {%- endfor -%}
+          </div>
+        </div>
+        <div class="footer__social">
+          <p class="footer__social-text">Get wired with us</p>
+          <div class="footer__social-links">
+            <a href="#" target="_blank" class="footer__social-link footer__social-link--twitter">
+              {% render 'svg', type: 'twitter', class: 'footer__social-icon' %}
+            </a>
+            <a href="#" target="_blank" class="footer__social-link footer__social-link--facebook">
+              {% render 'svg', type: 'facebook', class: 'footer__social-icon' %}
+            </a>
+            <a href="#" target="_blank" class="footer__social-link footer__social-link--instagram">
+              {% render 'svg', type: 'instagram', class: 'footer__social-icon' %}
+            </a>
+            <a href="#" target="_blank" class="footer__social-link footer__social-link--youtube">
+              {% render 'svg', type: 'youtube', class: 'footer__social-icon' %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
