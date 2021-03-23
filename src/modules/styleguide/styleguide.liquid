@@ -122,10 +122,9 @@
         {%- render 'button', tag: 'button', button_value: 'Subscribe', class: 'styleguide-button button--small-h button--light-alt button--text-light' -%}
         {%- render 'button', tag: 'button', button_value: 'Subscribe', class: 'styleguide-button button--small-h button--small-w button--dark' -%}
       </div>
-      <p class="b1">I am a...</p>
-      <div class="styleguide-buttons">
+      <div>
         {%- assign options = 'Option1|Option2' | split: '|' -%}
-        {%- render 'input-select', options: options, placeholder: 'Select' -%}
+        {%- render 'input-select', options: options, placeholder: 'Select', label: 'I am a...' -%}
       </div>
     </div>
 
@@ -135,20 +134,44 @@
       <h2 class="h2">Text Fields</h2>
       <div class="styleguide-fields">
         <div class="styleguide-inputs">
-          {%- render 'input-text', type: 'text', name: 'text-field', label: 'Text field label', id: 'text-field-1', required: 'required', placeholder: 'Text input', label_top: true, button_value: 'Test' -%}
-          {%- render 'input-email', name: 'email-field', label: 'Email field label', id: 'email-field-1', required: 'required', placeholder: 'Email input', label_top: true -%}
-          <div>
+          {%- render 'input-text',
+            class: 'styleguide-input',
+            type: 'text',
+            name: 'text-field',
+            label: 'Text field label',
+            id: 'text-field-1',
+            required: 'required',
+            placeholder: 'Text input',
+            label_top: true -%}
+          {%- render 'input-email',
+            class: 'styleguide-input',
+            name: 'email-field',
+            label: 'Email field label',
+            id: 'email-field-1',
+            required: 'required',
+            placeholder: 'Email input',
+            label_top: true -%}
+          <div class="styleguide-radio">
             {%- render 'input-radio', name: 'input-radio', label: 'Option 1', id: 'radio1' -%}
             {%- render 'input-radio', name: 'input-radio', label: 'Option 2', id: 'radio2' -%}
           </div>
-          <div>
+          <div class="styleguide-checkbox">
             {%- render 'input-checkbox', name: 'input-checkbox1', label: 'Option 1', id: 'checkbox1' -%}
             {%- render 'input-checkbox', name: 'input-checkbox2', label: 'Option 2', id: 'checkbox2' -%}
           </div>
         </div>
         <div class="styleguide-inputs">
-          {%- render 'input-textarea', name: 'text-field', label: 'Text Area label', id: 'textarea-1' -%}
-          {%- render 'input-select', options: options, placeholder: 'Select' -%}
+          {%- render 'input-textarea',
+            name: 'text-field',
+            label: 'Text Area label',
+            id: 'textarea-1',
+            placeholder: 'Text Area',
+            label_top: true -%}
+          {%- render 'input-select',
+            class: 'styleguide-select'
+            label: 'Test',
+            options: options,
+            placeholder: 'Select' -%}
         </div>
       </div>
     </div>

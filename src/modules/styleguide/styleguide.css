@@ -170,9 +170,40 @@
 }
 
 .styleguide-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
+  margin-top: 32px;
 
   @media (--md) {
     width: calc(50% - 20px);
+    margin-top: 0;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  > * {
+    width: 100%;
+  }
+}
+
+.styleguide-input {
+  margin-bottom: 24px;
+}
+
+.styleguide-checkbox,
+.styleguide-radio {
+  width: calc(50% - 20px);
+}
+
+.styleguide-select {
+  margin-top: 24px;
+
+  @media (--lg) {
+    margin-top: 49px;
   }
 }
