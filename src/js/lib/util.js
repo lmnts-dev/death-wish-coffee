@@ -257,16 +257,41 @@ export const debounce = fn => {
  */
 const validateInput = input => {
   let isValid = true
-  console.log(input.type, validator.isEmpty(input.value))
+  let errorMessage = ''
+  const messageEl = input.closest('.form-field').querySelector('.form-field__error')
+  const hasValueClass = 'field-has-value'
+  const emptyClass = 'field-empty'
+  const errorClass = 'field-has-error'
+  removeClass(input, hasValueClass)
+  removeClass(input, emptyClass)
+  removeClass(input, errorClass)
 
-  if (input.required && validator.isEmpty(input.value) === true) {
-    removeClass(input, 'field-has-value')
-    addClass(input, 'field-empty')
-    isValid = false
+  if (validator.isEmpty(input.value) === true) {
+    if (input.required) {
+      isValid = false
+      addClass(input, emptyClass)
+      errorMessage = 'Field is required'
+      if (messageEl) {
+        messageEl.innerHTML = errorMessage
+      }
+      return isValid
+    }
   } else {
-    removeClass(input, 'field-error')
-    removeClass(input, 'field-empty')
-    addClass(input, 'field-has-value')
+    addClass(input, hasValueClass)
+    if (input.type === 'email' && validator.isEmail(input.value) === false) {
+      errorMessage = 'Please enter a valid email'
+      isValid = false
+    }
+    if (input.type === 'tel' && validator.isMobilePhone(input.value) === false) {
+      errorMessage = 'Please enter a valid phone number'
+      isValid = false
+    }
+  }
+  if (!isValid) {
+    addClass(input, errorClass)
+    if (messageEl) {
+      messageEl.innerHTML = errorMessage
+    }
   }
   return isValid
 }
