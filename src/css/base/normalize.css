@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  font-size: 1.9rem; /* body font-size default is 19px */
+  font-size: 1.6rem; /* body font-size default is 16px */
   color: var(--black);
   margin-top: var(--navbar-height);
 
