@@ -9,3 +9,63 @@
  *   font-weight: 100 400;
  * }
  */
+
+@font-face {
+  font-family: 'Revans';
+  src: url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Revans-Bold.eot?v=1616471330');
+  src:
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Revans-Bold.woff2?v=1616471329') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Revans-Bold.woff?v=1616471387') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Revans-Bold.ttf?v=1616471329') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fenomen Sans';
+  src: url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Book.eot?v=1616473858');
+  src:
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Book.woff2?v=1616473857') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Book.woff?v=1616473858') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Book.ttf?v=1616473858') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fenomen Sans';
+  src: url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Bold.eot?v=1616473798');
+  src:
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Bold.woff2?v=1616473798') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Bold.woff?v=1616473798') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Bold.ttf?v=1616473798') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fenomen Sans';
+  src: url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Light.eot?v=1616473924');
+  src:
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Light.woff2?v=1616473923') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Light.woff?v=1616473923') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-Light.ttf?v=1616473924') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fenomen Sans';
+  src: url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-SemiBold.eot?v=1616473975');
+  src:
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-SemiBold.woff2?v=1616473975') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-SemiBold.woff?v=1616473975') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0506/4183/0047/files/FenomenSans-SemiBold.ttf?v=1616473975') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
