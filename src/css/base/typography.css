@@ -36,6 +36,7 @@ h5 {
   line-height: 1;
   letter-spacing: normal;
   font-weight: var(--bold);
+  text-transform: uppercase;
 
   @media (--md-max) {
     font-size: 40px;
@@ -47,6 +48,7 @@ h5 {
   line-height: 1;
   letter-spacing: normal;
   font-weight: var(--bold);
+  text-transform: uppercase;
 
   @media (--md-max) {
     font-size: 32px;
@@ -59,6 +61,7 @@ h5 {
   line-height: 48px;
   letter-spacing: normal;
   font-weight: var(--light);
+  text-transform: uppercase;
 
   @media (--md-max) {
     font-size: 24px;
