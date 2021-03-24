@@ -1,0 +1,15 @@
+<section class="form-subscribe" data-module="form-subscribe">
+  {%- form 'customer', class: 'form-subscribe__form', ref: 'form' -%}
+    <div class="form-subscribe__form-inner">
+      {%- assign form_success = form.posted_successfully? -%}
+      {%- render 'input-email',
+        class: 'form-fiel--error-alt form-field--borderless form-subscribe__field',
+        name: 'contact[email]',
+        id: 'form-subscribe-email',
+        required: 'required',
+        placeholder: 'Enter Your Email Address',
+        label_top: true -%}
+      {%- render 'button', tag: 'button', class: 'form-subscribe__submit button--small-h button--dark', button_value: 'Sign Me Up', custom_attrs: 'type="submit"' -%}
+    </div>
+  {%- endform -%}
+</section>

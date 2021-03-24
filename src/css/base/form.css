@@ -175,6 +175,10 @@
   display: none;
   color: var(--blood);
 
+  .form-fiel--error-alt & {
+    color: var(--shadow);
+  }
+
   .field-empty ~ &,
   .field-has-error ~ & {
     display: block;
