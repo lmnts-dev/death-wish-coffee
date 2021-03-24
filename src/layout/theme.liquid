@@ -23,6 +23,7 @@
 
   {{ content_for_header }}
 
+  {%- render 'fonts' -%}
   {%- if settings.is_dev_mode -%}
     {{- '/dev/main.js' | script_tag -}}
   {%- else -%}
