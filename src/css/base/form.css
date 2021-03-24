@@ -84,11 +84,6 @@
   color: var(--shadow);
   transition: all var(--transition-timing) var(--transition-easing);
 
-  @media (--md-max) {
-    margin: 4px 0 12px;
-    padding: 13px 15px;
-  }
-
   &:focus {
     outline: none;
     box-shadow: inset 0 0 0 2px var(--bronze);
@@ -126,6 +121,12 @@
       box-shadow: inset 0 0 0 2px var(--blood);
     }
   }
+
+  .form-field--borderless &:not(:focus),
+  .form-field--borderless &:not(.field-has-error,.field-empty,.field-has-value) {
+    box-shadow: none;
+  }
+
 }
 
 .button.form-submit {
