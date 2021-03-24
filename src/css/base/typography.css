@@ -74,10 +74,12 @@ h5 {
   line-height: 48px;
   letter-spacing: normal;
   font-weight: var(--bold);
+  text-transform: uppercase;
 
   @media (--md-max) {
     font-size: 20px;
     line-height: 24px;
+    text-transform: none;
   }
 }
 
