@@ -22,7 +22,7 @@
 
     content: '+';
     position: absolute;
-    top: 50%;
+    top: calc(50% - 3px);
     right: 16px;
     transform: translate(0, -50%);
   }
