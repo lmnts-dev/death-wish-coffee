@@ -14,42 +14,128 @@
   padding: 48px 0 84px;
   color: var(--bone);
   text-align: center;
+
+  @media (--lg) {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .footer__block {
-  &:nth-child(2) {
-    order: 3;
-    margin-top: 14px;
+  @media (--lg) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  &:nth-child(3) {
+  &--logo {
+    @media (--lg) {
+      align-self: center;
+    }
+  }
+
+  &--menu {
+    order: 3;
+    margin-top: 14px;
+
+    @media (--lg) {
+      order: 0;
+      margin: 0 calc(100% * 94 / 1440) 0 calc(100% * 140 / 1440);
+    }
+
+    @media (--xl) {
+      margin-left: 140px;
+      margin-right: 94px;
+    }
+  }
+
+  &--legal {
     margin-top: 16px;
+
+    @media (--lg) {
+      margin-top: 0;
+    }
   }
 }
 
 .footer__logo {
-  @media (--lg-max) {
-    display: none;
+  display: none;
+
+  @media (--lg) {
+    display: block;
+    width: 184px;
+    height: 184px;
   }
+}
+
+.footer__logo-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.footer__logo-icon {
+  color: var(--blood);
 }
 
 .footer__title {
   max-width: 230px;
   margin: 0 auto;
   color: var(--blood);
-}
 
-.footer__legal,
-.footer__menus {
-  @media (--lg-max) {
+  @media (--md) {
+    max-width: 400px;
+  }
+
+  @media (--lg) {
     display: none;
   }
 }
 
-.footer__copyright {
-  @media (--lg-max) {
-    @extend .b5;
+.footer__menus {
+  display: none;
+
+  @media (--lg) {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
+}
+
+.footer__menu {
+  text-align: left;
+}
+
+.footer__menu-link {
+  display: block;
+  color: var(--bone);
+  text-decoration: none;
+}
+
+.footer__copyright {
+  @extend .b5;
+
+  @media (--lg) {
+    @extend .b1;
+
+    margin-top: auto;
+  }
+}
+
+.footer__legal {
+  display: none;
+
+  @media (--lg) {
+    display: block;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+}
+
+.footer__legal-link {
+  display: block;
+  color: var(--bone);
+  text-decoration: none;
 }
 
 .footer__social-links {

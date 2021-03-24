@@ -1,41 +1,41 @@
 <section class="footer" data-module="footer">
   <div class="footer__wrapper">
     <div class="footer__inner">
-      <div class="footer__block">
+      <div class="footer__block footer__block--logo">
         <div class="footer__logo">
-          <a href="{{ shop.url }}">
-            {% render 'svg', type: 'logo' %}
+          <a class="footer__logo-link" href="{{ shop.url }}">
+            {% render 'svg', type: 'logo', class: 'footer__logo-icon' %}
           </a>
         </div>
         <h2 class="h2 footer__title">End of the Road, Jack.</h2>
       </div>
-      <div class="footer__block">
+      <div class="footer__block footer__block--menu">
         <div class="footer__menus">
           <div class="footer__menu">
-            <h4 class="footer__menu-title">Company</h4>
+            <h4 class="h5 footer__menu-title">Company</h4>
             <div class="footer__menu-list">
               {%- for link in linklists['company-footer-menu'].links -%}
-                <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+                <a href="{{ link.url }}" class="b1 footer__menu-link">{{ link.title }}</a>
               {%- endfor -%}
             </div>
           </div>
           <div class="footer__menu">
-            <h4 class="footer__menu-title">Accounts + Orders</h4>
+            <h4 class="h5 footer__menu-title">Accounts + Orders</h4>
             <div class="footer__menu-list">
               {%- for link in linklists['account-footer-menu'].links -%}
-                <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+                <a href="{{ link.url }}" class="b1 footer__menu-link">{{ link.title }}</a>
               {%- endfor -%}
             </div>
           </div>
         </div>
         <div class="footer__copyright">&copy; Death Wish Coffee Co. {{ 'now' | date: '%Y' }}. All Rights Reserved.</div>
       </div>
-      <div class="footer__block">
+      <div class="footer__block footer__block--legal">
         <div class="footer__legal">
-          <h4 class="footer__legal-title">Legal</h4>
+          <h4 class="h5 footer__legal-title">Legal</h4>
           <div class="footer__legal-menu">
-            {%- for link in linklists['legal-footer-menu'].links -%}
-              <a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+            {%- for link in linklists['footer'].links -%}
+              <a href="{{ link.url }}" class="b1 footer__legal-link">{{ link.title }}</a>
             {%- endfor -%}
           </div>
         </div>
