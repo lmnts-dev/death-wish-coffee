@@ -11,30 +11,42 @@
       </div>
       <div class="footer__block footer__block--menu">
         <div class="footer__menus">
-          <div class="footer__menu">
-            <h4 class="h5 footer__menu-title">Company</h4>
-            <div class="footer__menu-list">
-              {%- for link in linklists['company-footer-menu'].links -%}
-                <a href="{{ link.url }}" class="b1 footer__menu-link">{{ link.title }}</a>
-              {%- endfor -%}
-            </div>
-          </div>
-          <div class="footer__menu">
-            <h4 class="h5 footer__menu-title">Accounts + Orders</h4>
-            <div class="footer__menu-list">
-              {%- for link in linklists['account-footer-menu'].links -%}
-                <a href="{{ link.url }}" class="b1 footer__menu-link">{{ link.title }}</a>
-              {%- endfor -%}
-            </div>
-          </div>
+          {%- for i in (1..2) -%}
+            {%- capture footer_menu_title -%}footer_menu_title_{{- i -}}{%- endcapture -%}
+            {%- capture footer_menu -%}footer_menu_{{- i -}}{%- endcapture -%}
+            {%- assign menu_title_handle = settings[footer_menu_title] -%}
+            {%- assign menu_handle = settings[footer_menu] -%}
+            {%- if linklists[menu_handle].links.size > 0 -%}
+              <div class="footer__menu">
+                <h4 class="h5 footer__menu-title">
+                  {%- if menu_title_handle != blank -%}
+                    {{- menu_title_handle -}}
+                  {%- else -%}
+                    {{- linklists[menu_handle].title -}}
+                  {%- endif -%}
+                </h4>
+                <div class="footer__menu-list">
+                  {%- for link in linklists[menu_handle].links -%}
+                    <a href="{{ link.url }}" class="b1 footer__menu-link">{{ link.title }}</a>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
         <div class="footer__copyright">&copy; Death Wish Coffee Co. {{ 'now' | date: '%Y' }}. All Rights Reserved.</div>
       </div>
       <div class="footer__block footer__block--legal">
         <div class="footer__legal">
-          <h4 class="h5 footer__legal-title">Legal</h4>
+          <h4 class="h5 footer__legal-title">
+            {%- if settings.footer_menu_title_3 != blank -%}
+              {{- settings.footer_menu_title_3 -}}
+            {%- else -%}
+              {{ linklists[settings.footer_menu_3].title }}
+            {%- endif -%}
+          </h4>
           <div class="footer__legal-menu">
-            {%- for link in linklists['footer'].links -%}
+            {%- for link in linklists[settings.footer_menu_3].links -%}
               <a href="{{ link.url }}" class="b1 footer__legal-link">{{ link.title }}</a>
             {%- endfor -%}
           </div>
