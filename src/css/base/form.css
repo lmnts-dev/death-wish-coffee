@@ -126,7 +126,6 @@
   .form-field--borderless &:not(.field-has-error,.field-empty,.field-has-value) {
     box-shadow: none;
   }
-
 }
 
 .button.form-submit {
