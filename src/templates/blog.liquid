@@ -9,10 +9,11 @@ If this comment is still here, please consult with the lead developer on the pro
 {%- render 'article-hero-card' -%}
 
 {%- render 'carousel' -%}
-{%- render 'post-card' -%}
+{%- assign post = blog.articles[0] -%}
+{%- render 'post-card', post: post, class: 'post-card--test' -%}
 
 {%- render 'grid' -%}
-{%- render 'post-card' -%}
+{%- render 'post-card', post: post, class: 'post-card--test post-card--viewed' -%}
 
 {%- render 'pagination' -%}
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
