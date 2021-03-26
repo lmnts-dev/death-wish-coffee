@@ -9,14 +9,13 @@
   {%- include 'alternate-urls' -%}
 
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-
-  {% comment %} <link rel="apple-touch-icon" sizes="180x180" href="{{'apple-touch-icon.png' | asset_url -}}"> {% endcomment %}
-  {% comment %} <link rel="icon" type="image/png" href="{{'favicon-32x32.png' | asset_url -}}" sizes="32x32"> {% endcomment %}
-  {% comment %} <link rel="icon" type="image/png" href="{{'favicon-16x16.png' | asset_url -}}" sizes="16x16"> {% endcomment %}
-  {% comment %} <link rel="manifest" href="{{'manifest.json' | asset_url -}}"> {% endcomment %}
-  {% comment %} <link rel="mask-icon" href="{{'safari-pinned-tab.svg' | asset_url -}}" color="#5bbad5"> {% endcomment %}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{'apple-touch-icon.png' | asset_url -}}">
+  <link rel="icon" type="image/png" href="{{'favicon-32x32.png' | asset_url -}}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{'favicon-16x16.png' | asset_url -}}" sizes="16x16">
+ {% comment %}  <link rel="manifest" href="{{'manifest.json' | asset_url -}}"> {% endcomment %}
+  <link rel="mask-icon" href="{{'safari-pinned-tab.svg' | asset_url -}}" color="#5bbad5">
   {% comment %} <meta name="theme-color" content="#ffffff"> {% endcomment %}
-  <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0296/6847/4933/files/favicon.png?v=1593211272" type="image/png">
+  <link rel="icon" type="image/png" href="{{ 'favicon.ico' | asset_url }}" type="image/png">
   <link rel="stylesheet" href="https://use.typekit.net/dge3sjv.css">
 
   {%- include 'social-meta' -%}
