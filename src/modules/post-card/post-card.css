@@ -1,6 +1,8 @@
 /* styles for the post-card module go in this file */
 
 .post-card {
+  background: var(--black);
+
   &--test {
     width: 100%;
     max-width: 336px;
@@ -27,6 +29,7 @@
 
 .post-card__content {
   margin-top: 12px;
+  color: var(--white);
 }
 
 .post-card__title-wrapper {
