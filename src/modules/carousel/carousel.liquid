@@ -27,10 +27,13 @@ You can see more about how options are privided as HTML attributes here.
 {% assign slides_per_view = slides_per_view | default: 3 %}
 {% assign spacing = spacing | default: 10 %}
 {% assign loop = loop | default: true %}
+{% assign title = title | default: false %}
 {% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
 
 <div class="{{ class }}" data-module="carousel">
-  {%- render 'section-title' -%}
+  {% if title %}
+    {%- render 'section-title', title: title -%}
+  {% endif %}
   <div 
     class="carousel-container container swiper-container{{- init_at_bp_class -}}"
     data-slides-per-view="{{- slides_per_view -}}"
