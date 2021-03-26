@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     callback_enter: function (el) {
       const parentNode = el.parentNode
       const prevSibling = el.previousElementSibling
-      const webpSrc = prevSibling.srcset
+      const webpSrc = prevSibling && prevSibling.srcset
       const src = el.getAttribute('data-src') || el.src
       const isSized = contains(el, 'sized-img')
       const isExcludeSmallWidths = el.getAttribute('data-srcset-exclude-small') !== null
