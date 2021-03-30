@@ -16,9 +16,13 @@ const navigation = el => {
 
   const searchBarRepos = () => {
     if (breakpointXLMax.matches) {
-      menuContainer.insertBefore(searchBar, menuContainer.childNodes[0])
+      if (menuContainer && searchBar) {
+        menuContainer.insertBefore(searchBar, menuContainer.childNodes[0])
+      }
     } else {
-      el.insertBefore(searchBar, el.childNodes[0])
+      if (searchBar) {
+        el.insertBefore(searchBar, el.childNodes[0])
+      }
     }
   }
 
@@ -26,14 +30,18 @@ const navigation = el => {
 
   searchBarRepos()
 
-  searchButton.addEventListener('click', () => {
-    toggle(searchBar, 'active')
-  })
+  if (searchButton) {
+    searchButton.addEventListener('click', () => {
+      toggle(searchBar, 'active')
+    })
+  }
 
-  hamburger.addEventListener('click', () => {
-    toggle(hamburger, 'is-active')
-    toggle(mobileMenu, 'active')
-  })
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      toggle(hamburger, 'is-active')
+      toggle(mobileMenu, 'active')
+    })
+  }
 }
 
 export default navigation
