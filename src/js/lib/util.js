@@ -255,7 +255,7 @@ export const debounce = fn => {
 /**
  * Toggles a class on fields based on whether or not the field has value
  */
-const validateInput = input => {
+export const validateInput = input => {
   let isValid = true
   let errorMessage = ''
   const messageEl = input.closest('.form-field').querySelector('.form-field__error')

@@ -4,18 +4,24 @@
 {%- assign title = title | default: false -%}
 {%- assign buttons_url = buttons_url | default: false -%}
 {%- assign buttons_value = buttons_value | default: false -%}
+{%- assign enable_subscribe_form = enable_subscribe_form | default: false -%}
+{%- assign has_cta = false -%}
+{%- if buttons_url.size > 0 or enable_subscribe_form -%}
+  {%- assign has_cta = true -%}
+{%- endif -%}
 
-
-{% if title and buttons_url.size > 0 %}
+{% if title and has_cta %}
   <section class="footer-cta" data-module="footer-cta">
-    <div class="footer-cta__img-box z1">
-      {% if desktop_image %}
-          {%- render 'image', src: desktop_image, class: 'footer-cta__desktop-image' -%}
-      {% endif %}
-      {% if mobile_image %}
-          {%- render 'image', src: mobile_image, class: 'footer-cta__mobile-image' -%}
-      {% endif %}
-    </div>
+    {% if desktop_image or mobile_image %}
+      <div class="footer-cta__img-box z1">
+        {% if desktop_image %}
+            {%- render 'image', src: desktop_image, class: 'footer-cta__desktop-image' -%}
+        {% endif %}
+        {% if mobile_image %}
+            {%- render 'image', src: mobile_image, class: 'footer-cta__mobile-image' -%}
+        {% endif %}
+      </div>
+    {% endif %}
     <div class="container footer-cta__container z2">
       {% if subtitle %}   
           <p class="h4">{{subtitle}}</p>
@@ -23,32 +29,37 @@
       {% if title %}
           <p class="h2 footer-cta__title">{{title}}</p>
       {% endif %}
-      <div class="footer-cta__links">
-        {%- assign buttons_count = 1 -%}
-        {% assign primary_class = 'footer-cta__link' %}
-        {% assign secondary_class = 'button--secondary footer-cta__link' %}
-        {% for i in (0..buttons_url.size) %}
-          {% if i == buttons_url.size %}
-            {% break %}
-          {% else %}
-            {% assign value = buttons_count | modulo:2 %}
-            {% if value == 0 %}
-              {%- render 'button', 
-                button_url: buttons_url[i],
-                button_value: buttons_value[i],
-                class: 'button--secondary footer-cta__link' 
-              -%}
+      {%- if buttons_url.size > 0 -%}
+        <div class="footer-cta__links">
+          {%- assign buttons_count = 1 -%}
+          {% assign primary_class = 'footer-cta__link' %}
+          {% assign secondary_class = 'button--secondary footer-cta__link' %}
+          {% for i in (0..buttons_url.size) %}
+            {% if i == buttons_url.size %}
+              {% break %}
             {% else %}
-              {%- render 'button', 
-                button_url: buttons_url[i],
-                button_value: buttons_value[i],
-                class: 'footer-cta__link' 
-              -%}
+              {% assign value = buttons_count | modulo:2 %}
+              {% if value == 0 %}
+                {%- render 'button', 
+                  button_url: buttons_url[i],
+                  button_value: buttons_value[i],
+                  class: 'button--secondary footer-cta__link' 
+                -%}
+              {% else %}
+                {%- render 'button', 
+                  button_url: buttons_url[i],
+                  button_value: buttons_value[i],
+                  class: 'footer-cta__link' 
+                -%}
+              {% endif %}
+              {%- assign buttons_count = buttons_count | plus: 1 -%}
             {% endif %}
-            {%- assign buttons_count = buttons_count | plus: 1 -%}
-          {% endif %}
-        {% endfor %}
-      </div>
+          {% endfor %}
+        </div>
+      {%- endif -%}
+      {%- if enable_subscribe_form -%}
+        {%- render 'form-subscribe' -%}
+      {%- endif -%}
     </div>
   </section>
 {% endif %}

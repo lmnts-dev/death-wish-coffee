@@ -1,0 +1,40 @@
+/* styles for form-subscribe */
+
+.form-subscribe {
+  margin-top: 36px;
+
+  @media (--lg) {
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+}
+
+.form-subscribe__form-inner {
+  @media (--lg) {
+    display: flex;
+  }
+}
+
+.form-subscribe__field {
+  @media (--lg) {
+    flex: 1 0 auto;
+  }
+
+  .form-field__input {
+    @media (--lg-max) {
+      text-align: center;
+    }
+  }
+}
+
+.form-subscribe__submit {
+  @media (--lg-max) {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+.form-subscribe__success {
+  text-align: center;
+  margin-bottom: 12px;
+}
