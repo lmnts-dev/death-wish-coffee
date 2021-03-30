@@ -1,0 +1,17 @@
+{%- assign level = level | default: 0 -%}
+{%- capture prefix_class -%}{% if is_sub == true %}sub-menu{% else %}menu{% endif %}{%- endcapture -%}
+{%- capture class -%}
+  {{ prefix_class }}{% if level > 0 %} {{ prefix_class | append: '--level-' | append: level }}{% endif %} {{ class }}
+{%- endcapture -%}
+{%- capture tag -%}{% if is_sub == true %}div{% else %}section{% endif %}{%- endcapture -%}
+<{{ tag | strip }} class="{{ class | strip }}" data-module="menu">
+  {%- for link in links -%}
+    <div class="{{ prefix_class | append: '__item' }}">
+      <a class="{{ prefix_class | append: '__item-link' }}" href="{{ link.url }}">{{ link.title }}</a>
+      {%- if link.links.size > 0 -%}
+        {%- assign sub_level = level | plus: 1 -%}
+        {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+</{{ tag | strip }}>

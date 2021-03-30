@@ -1,21 +1,11 @@
 /* styles for navigation */
 
 .navigation {
-  background-color: var(--white);
+  background-color: var(--black);
   position: fixed;
   width: 100vw;
+  height: 104px;
   top: 0;
-
-  &::after {
-    content: '';
-    top: 0;
-    left: 0;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-    z-index: 1;
-  }
 }
 
 .navigation__container {
@@ -29,17 +19,16 @@
 }
 
 .navigation__logo {
-  width: 19px;
-  height: 47px;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  width: 87px;
+  transform: translate(-50%, 0);
 
-  @media (--xxl-max) {
-    width: 140px;
-    height: 38px;
-  }
-
-  @media (--xl-max) {
-    width: 126px;
-    height: 31px;
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
   }
 }
 
@@ -248,4 +237,100 @@
 
 .navigation__buy {
   height: 45px;
+}
+
+.navigation__utilities {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  display: flex;
+  transform: translate(0, -50%);
+}
+
+.navigation__utilities-login {
+  @media (--lg-max) {
+    display: none;
+  }
+}
+
+.navigation__utilities-cart,
+.navigation__utilities-search {
+  width: 24px;
+  height: 24px;
+  color: var(--bone);
+}
+
+.navigation__utilities-cart {
+  margin-right: 10px;
+}
+
+.navigation__main {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 104px);
+  background: var(--black);
+  overflow: auto;
+
+  &.active {
+    display: block;
+  }
+
+  @media (--lg) {
+    display: block;
+  }
+}
+
+.navigation__footer {
+  @media (--lg) {
+    display: none;
+  }
+}
+
+.navigation__hamburger {
+  padding: 0;
+
+  @media (--lg) {
+    display: none;
+  }
+
+  &:hover,
+  &.is-active,
+  &.is-active:hover {
+    opacity: 1;
+  }
+}
+
+.navigation__hamburger-box {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+.navigation__hamburger-inner,
+.navigation__hamburger-inner::before,
+.navigation__hamburger-inner::after {
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  width: 24px;
+  height: 3px;
+  background-color: var(--bone);
+  border-radius: 0;
+  transform: translate(-50%, -50%);
+  margin-top: 0;
+
+  .navigation__hamburger.is-active & {
+    background-color: var(--bone);
+  }
+}
+
+.navigation__hamburger-inner::before {
+  top: calc(50% - 8px);
+}
+
+.navigation__hamburger-inner::after {
+  top: calc(50% + 7.5px);
 }

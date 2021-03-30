@@ -1,5 +1,27 @@
+{%- assign logo = settings.logo | img_url: 'master' -%}
 {%- render 'promo-bar' -%}
-<header class="navigation z10 placeholder" data-module="navigation">
-  <h2 class="h2">navigation</h2>
-</header>
 
+<header class="navigation z10" data-module="navigation">
+  <div class="navigation__container">
+    <button class="navigation__hamburger hamburger js-hamburger" type="button">
+      <div class="navigation__hamburger-box hamburger-box">
+        <span class="navigation__hamburger-inner hamburger-inner"></span>
+      </div>
+    </button>
+    <div class="navigation__logo">
+      <a href="" class="naviation__logo-link">
+        {%- render 'image', src: logo, class: 'navigation__logo-image' -%}
+      </a>
+    </div>
+    <div class="navigation__utilities">
+      <div class="navigation__utilities-login">{%- render 'svg', type: 'login' -%}</div>
+      <div class="navigation__utilities-cart">{%- render 'svg', type: 'cart' -%}</div>
+      <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
+    </div>
+    <div class="navigation__main js-mobile-menu">
+      <div class="navigation__mobile-login"></div>
+      {%- render 'menu', links: menu.links, class: 'navigation__menu' -%}
+      {%- render 'footer', class: 'navigation__footer' -%}
+    </div>
+  </div>
+</header>

@@ -7,8 +7,8 @@
 import { toggle } from 'lib/util'
 
 const navigation = el => {
-  const hamburger = el.querySelector('.navigation__mobile-menu')
-  const mobileMenu = el.querySelector('.navigation__menu-container')
+  const hamburger = el.querySelector('.js-hamburger')
+  const mobileMenu = el.querySelector('.js-mobile-menu')
   const searchButton = el.querySelector('.navigation__action--search')
   const searchBar = el.querySelector('.navigation__search')
   const breakpointXLMax = window.matchMedia('(max-width: 1199px)')
@@ -36,8 +36,9 @@ const navigation = el => {
     })
   }
 
-  if (hamburger) {
+  if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
+      console.log(mobileMenu)
       toggle(hamburger, 'is-active')
       toggle(mobileMenu, 'active')
     })
