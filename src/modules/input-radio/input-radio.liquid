@@ -13,10 +13,13 @@
     placeholder="{{- placeholder -}}"
     {% if value %}value="{{- value -}}"{% endif %}
     {% if custom_attrs %}{{- custom_attrs -}}{% endif %}>
-  <!-- <label class="form-field__label button" for="{{- id -}}">
-    <span class="{% if label_top %}h8{% elsif label_font %}{{ label_font }}{% else %}b1{% endif %}">{{- label -}}</span>
-  </label> -->
-  {% capture custom_attr %}for="{{ id }}"{% endcapture %}
-  {% render 'button', tag: 'label', class: 'input-radio__button', custom_attrs: custom_attr, button_value: label %}
+  {% if use_button %}
+    {% capture custom_attr %}for="{{ id }}"{% endcapture %}
+    {% render 'button', tag: 'label', class: 'input-radio__button', custom_attrs: custom_attr, button_value: label %}
+  {% else %}
+    <label class="form-field__label" for="{{- id -}}">
+      <span class="{% if label_top %}h8{% elsif label_font %}{{ label_font }}{% else %}b1{% endif %}">{{- label -}}</span>
+    </label>
+  {% endif %}
 </div>
 {% endif %}

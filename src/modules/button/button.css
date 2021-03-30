@@ -3,36 +3,30 @@
 .button {
   cursor: pointer;
   position: relative;
-  width: 225px;
-  height: 40px;
-  font-size: 1.7rem;
-  border: solid 1px var(--black);
-  text-decoration: none;
+  width: 216px;
+  height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--black);
-  background-color: transparent;
-  font-family: var(--gothic);
+  border: none;
   border-radius: 0;
+  color: var(--shadow);
+  background-color: var(--blood);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-family: var(--fenomen);
+  font-weight: var(--semi-bold);
+  text-decoration: none;
+  text-transform: uppercase;
   -webkit-appearance: none !important;
-  transition:
-    color var(--transition-timing) var(--transition-easing),
-    background-color var(--transition-timing) var(--transition-easing),
-    border-color var(--transition-timing) var(--transition-easing);
-
-  @media (--md-max) {
-    max-width: 500px;
-    width: 100%;
-  }
+  transition: background-color var(--transition-timing) var(--transition-easing);
 
   &:focus {
     outline: none;
   }
 
   &:hover, &:focus {
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--bronze);
   }
 
   &:disabled {
@@ -40,54 +34,41 @@
     opacity: 0.5;
   }
 
-  &--small {
-    font-size: 1.3rem;
-    height: 32px;
+  &--small-h {
+    height: 48px;
+  }
+
+  &--small-w {
+    width: 159px;
   }
 
   &--full {
     width: 100%;
   }
 
-  &--light {
-    color: var(--white);
-    border: solid 1px var(--white);
-
-    &:hover, &:focus {
-      background-color: var(--white);
-      color: var(--black);
-      border: solid 1px var(--white);
-    }
-  }
-
   &--center {
     margin: 0 auto;
   }
 
-  &--light-alt {
-    color: var(--white);
-    border: solid 1px var(--white);
+  &--light {
+    background: var(--steel);
+  }
 
-    &:hover, &:focus {
-      background-color: var(--white);
-      color: var(--black);
-      border: solid 1px var(--black);
-    }
+  &--light-alt {
+    background: var(--bronze);
   }
 
   &--dark {
-    border: solid 1px var(--black);
+    background: var(--shadow);
+    color: var(--white);
   }
 
-  &--dark-alt {
-    border: solid 1px var(--black);
-    background-color: var(--black);
+  &--text-light {
     color: var(--white);
+  }
 
-    &:hover, &:focus {
-      border: solid 1px var(--black);
-      background-color: var(--black);
-    }
+  &--text-dark {
+    color: var(--dark);
   }
 
   &.form-submit {
