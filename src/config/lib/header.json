@@ -1,0 +1,14 @@
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "header_menu",
+      "label": "Header Menu"
+    }
+  ]
+}
