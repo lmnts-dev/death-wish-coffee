@@ -1,3 +1,5 @@
+import validator from 'validator'
+
 export const isMobile = () =>
   typeof window.orientation !== 'undefined' ||
   navigator.userAgent.indexOf('IEMobile') !== -1
@@ -253,13 +255,50 @@ export const debounce = fn => {
 /**
  * Toggles a class on fields based on whether or not the field has value
  */
+const validateInput = input => {
+  let isValid = true
+  let errorMessage = ''
+  const messageEl = input.closest('.form-field').querySelector('.form-field__error')
+  const hasValueClass = 'field-has-value'
+  const emptyClass = 'field-empty'
+  const errorClass = 'field-has-error'
+  removeClass(input, hasValueClass)
+  removeClass(input, emptyClass)
+  removeClass(input, errorClass)
+
+  if (validator.isEmpty(input.value) === true) {
+    if (input.required) {
+      isValid = false
+      addClass(input, emptyClass)
+      errorMessage = 'Field is required'
+      if (messageEl) {
+        messageEl.innerHTML = errorMessage
+      }
+      return isValid
+    }
+  } else {
+    addClass(input, hasValueClass)
+    if (input.type === 'email' && validator.isEmail(input.value) === false) {
+      errorMessage = 'Please enter a valid email'
+      isValid = false
+    }
+    if (input.type === 'tel' && validator.isMobilePhone(input.value) === false) {
+      errorMessage = 'Please enter a valid phone number'
+      isValid = false
+    }
+  }
+  if (!isValid) {
+    addClass(input, errorClass)
+    if (messageEl) {
+      messageEl.innerHTML = errorMessage
+    }
+  }
+  return isValid
+}
+
 export const monitorFieldValue = (field) => {
   field.addEventListener('focusout', () => {
-    if (field.value !== '') {
-      addClass(field, 'field-has-value')
-    } else {
-      removeClass(field, 'field-has-value')
-    }
+    validateInput(field)
   })
 }
 

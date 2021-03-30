@@ -5,49 +5,42 @@
   align-items: center;
 }
 
-.input-select__label {
-  margin-right: 1rem;
-}
-
 .input-select__cta {
   margin-left: auto;
   appearance: none;
   padding: none;
   border: none;
   text-decoration: underline;
-  color: var(--deep-purple);
   cursor: pointer;
 }
 
 .input-select__select-container {
   position: relative;
-  background-color: var(--white);
 
-  @media (--md-max) {
-    margin: 4px 0 12px;
+  &::before {
+    @extend .p1;
+
+    content: '+';
+    position: absolute;
+    top: calc(50% - 3px);
+    right: 16px;
+    transform: translate(0, -50%);
   }
 }
 
 .input-select__select {
-  width: 100%;
-  appearance: none;
-  border: 1px solid var(--black);
-  border-radius: 8px;
-  height: 45px;
-  background-color: transparent;
-  padding: 0 2rem;
-  z-index: 2;
   position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 48px;
+  padding: 0 1.2rem;
+  appearance: none;
+  border: 1px solid var(--shadow);
+  border-radius: 0;
+  background-color: transparent;
   cursor: pointer;
 }
 
 .input-select__chevron {
-  position: absolute;
-  width: 15px;
-  height: 13px;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--light-purple);
-  z-index: 1;
+  display: none;
 }
