@@ -6,12 +6,22 @@
 {%- capture tag -%}{% if is_sub == true %}div{% else %}section{% endif %}{%- endcapture -%}
 <{{ tag | strip }} class="{{ class | strip }}" data-module="menu">
   {%- for link in links -%}
-    <div class="{{ prefix_class | append: '__item' }}">
-      <a class="{{ prefix_class | append: '__item-link' }}" href="{{ link.url }}">{{ link.title }}</a>
-      {%- if link.links.size > 0 -%}
-        {%- assign sub_level = level | plus: 1 -%}
-        {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
-      {%- endif -%}
-    </div>
+    {%- if link.title == 'Logo' -%}
+      <div class="menu__logo">
+        <a href="{{ link.url }}" class="menu__logo-link">
+          {%- assign logo = settings.logo | img_url: 'master' -%}
+          {%- render 'image', src: logo, class: 'menu__logo-image' -%}
+        </a>
+      </div>
+    {%- else -%}
+      <div class="{{ prefix_class | append: '__item' }}{% if link.active == true %} is-active{% endif %}">
+        <a class="{{ prefix_class | append: '__item-link' }}" href="{{ link.url }}">{{ link.title }}</a>
+        {%- if link.links.size > 0 -%}
+          {%- assign sub_level = level | plus: 1 -%}
+          {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
   {%- endfor -%}
 </{{ tag | strip }}>

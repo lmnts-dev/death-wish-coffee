@@ -167,3 +167,10 @@
     height: 100%;
   }
 }
+
+.footer--navigation {
+  & .footer__legal,
+  & .footer__menus {
+    display: block;
+  }
+}
