@@ -173,4 +173,70 @@
   & .footer__menus {
     display: block;
   }
+
+  & .footer__title {
+    display: none;
+  }
+
+  & .footer__inner {
+    padding: 0;
+    text-align: left;
+    color: var(--white);
+  }
+
+  & .footer__social-links {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  & .footer__block--menu {
+    margin-top: 0;
+    order: 1;
+  }
+
+  & .footer__block--legal {
+    margin-top: 0;
+    order: 2;
+  }
+
+  & .footer__legal-title,
+  & .footer__menu-title {
+    @extend .h4;
+
+    padding-bottom: 8px;
+  }
+
+  & .footer__copyright {
+    display: none;
+  }
+
+  & .footer__social-link {
+    background: var(--white);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  & .footer__social-text {
+    @extend .b1;
+  }
+
+  & .footer__menu-link {
+    padding: 3px 0;
+    color: var(--white);
+
+    &:last-child {
+      padding-bottom: 18px;
+    }
+  }
+
+  & .footer__legal-link {
+    padding: 3px 0;
+    color: var(--white);
+  }
+
+  & .footer__social {
+    padding: 22px 0 25px;
+  }
 }

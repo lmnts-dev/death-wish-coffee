@@ -15,13 +15,20 @@
       </div>
     {%- else -%}
       <div class="{{ prefix_class | append: '__item' }}{% if link.active == true %} is-active{% endif %}">
-        <a class="{{ prefix_class | append: '__item-link' }}" href="{{ link.url }}">{{ link.title }}</a>
+        {% comment %}Hard code for mega menu banner{% endcomment %}
+          <div class="sub-menu__item-banner">
+            {%- assign banner = 'mega_banner.jpg' | file_url -%}
+            {%- render 'image', src: banner, class: 'sub-menu__item-image' -%}
+          </div>
+        {% comment %}End hard code{% endcomment %}
+        <a class="{{ prefix_class | append: '__item-link' }}{% if link.active == true %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
         {%- if link.links.size > 0 -%}
-          {%- assign sub_level = level | plus: 1 -%}
-          {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
+          <div class="menu__item-content">
+            {%- assign sub_level = level | plus: 1 -%}
+            {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
+          </div>
         {%- endif -%}
       </div>
     {%- endif -%}
-
   {%- endfor -%}
 </{{ tag | strip }}>
