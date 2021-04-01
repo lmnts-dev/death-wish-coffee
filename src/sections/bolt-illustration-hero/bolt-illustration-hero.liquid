@@ -1,0 +1,45 @@
+{%- render 'bolt-illustration-hero',
+  blocks: section.blocks,
+  section: section.settings
+-%}
+
+{% schema %}
+{
+  "name": "Bolt Illustration Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Feature Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image_mobile",
+      "label": "Feature Image (Mobile)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bolt-illustration-hero",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
