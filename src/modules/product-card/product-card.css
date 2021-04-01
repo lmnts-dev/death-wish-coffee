@@ -1,1 +1,28 @@
 /* styles for the product-card module go in this file */
+
+.grid-product {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .product-card {
+    width: calc((1 / 2) * 100%);
+
+    @media (--l) {
+      width: calc((1 / 3) * 100%);
+    }
+
+    &--large {
+      width: 100%;
+
+      @media (--l) {
+        width: calc((1 / 3) * 100%);
+      }
+    }
+  }
+}
+
+.product-card__image-container {
+  position: relative;
+}

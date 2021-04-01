@@ -9,6 +9,9 @@
 {%- render 'plp-filter' -%}
 
 {%- render 'grid' -%}
-{%- render 'product-card' -%}
+<div class="grid-product">
+  {%- render 'product-card' -%}
+  {%- render 'product-card', class: 'product-card--large' -%}
+</div>
 
 {%- render 'footer-cta', title: 'LETS DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE', enable_subscribe_form: true %}
