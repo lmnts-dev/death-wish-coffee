@@ -1,6 +1,34 @@
-{% assign class = class | default:false %}
+{%- assign class = class | default:false -%}
+{%- assign plp_filter_tags = settings.plp_filter_tags | default: '' -%}
+{%- assign prefix_tags = plp_filter_tags | split: ',' -%}
+{%- assign all_tags = collection.all_tags -%}
+
 {% capture class %}plp-filter{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="plp-filter">
-  <h2 class="module-name">plp-filter</h2>
+<section class="{{ class }}" data-module="plp-filter">
+  <div class="plp-filter__wrapper">
+    {%- if prefix_tags.size > 0 -%}
+      {%- for prefix in prefix_tags -%}
+        {%- capture matched_tags -%}
+          {%- for tag in all_tags -%}
+            {%- assign _prefix = tag | split: ':' | first -%}
+            {%- if prefix == _prefix -%}
+              ,{{- tag -}}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign matched_tags = matched_tags | remove_first: ',' | split: ',' -%}
+        <div class="plp-filter__box">
+          <h4 class="plp-filter__box-title">{{- prefix -}}</h4>
+          <div class="plp-filter__box-list">
+            {%- for matched_tag in matched_tags -%}
+              <div class="plp-filter__box-item" data-tag="{{- matched_tag | handle -}}">
+                {{- matched_tag | remove: prefix | remove: ':' -}}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
 </section>
