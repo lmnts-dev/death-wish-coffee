@@ -12,58 +12,71 @@
           {%- render 'image', src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411' -%}
         </a>
       </div>
-      <form method="post" action="/cart/add" class="product-card__form"> 
-        <div class="product-card__variant-choices-wrapper">
-          <div class="product-card__variant-choices product-card__variant-choices--weight">
-            <div class="product-card__variant-choices-inner">
-              <div class="product-card__choice">
-                <input id="variant-1-size-1" type="radio" name="variant[Size]" class="radio product-card__item-input" value="1lb">
-                <label for="variant-1-size-1" class="label label--radio product-card__item">
-                  1LB
-                </label>
-              </div>
-              <div class="variant-selector__choice">
-                <input id="variant-1-size-2" type="radio" name="variant[Size]" class="radio product-card__item-input" value="2lb">
-                <label for="variant-1-size-2" class="label label--radio product-card__item">
-                  2LB
-                </label>
-              </div>
-              <div class="variant-selector__choice">
-                <input id="variant-1-size-3" type="radio" name="variant[Size]" class="radio product-card__item-input" value="5lb">
-                <label for="variant-1-size-3" class="label label--radio product-card__item">
-                  5LB
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="product-card__variant-choices product-card__variant-choices--material">
-            <div class="product-card__variant-choices-inner">
-              <div class="variant-selector__choice">
-                <input id="variant-2-size-1" type="radio" name="variant[Size]" class="radio product-card__item-input" value="1lb">
-                <label for="product-2-size-1" class="label label--radio product-card__item">
-                  Ground
-                </label>
-              </div>
-              <div class="variant-selector__choice">
-                <input id="variant-2-size-2" type="radio" name="variant[Size]" class="radio product-card__item-input" value="1lb">
-                <label for="product-2-size-2" class="label label--radio product-card__item">
-                  Whole Bean
-                </label>
-              </div>
-            </div>
-          </div>
+      <div class="product-card__overlay">
+        <div class="product-card__quick-shop">
+          {%- render 'button', button_url: button_url, button_value: 'Quick Shop', tag: 'button', custom_attrs: 'type="submit"' class: 'product-card__quick-shop-btn button--light js-button' -%}
         </div>
-        {%- render 'button', button_url: button_url, button_value: 'Add To Cart', tag: 'button', custom_attrs: 'type="submit"' class: button_class -%}
-      </form>
+        <form method="post" action="/cart/add" class="product-card__form">
+          <button class="product-card__close js-close" type="button">
+            {%- render 'svg', type: 'close', class: 'product-card__close-icon' -%}
+          </button>
+          <div class="product-card__variant-choices-wrapper">
+            <div class="product-card__variant-choices product-card__variant-choices--weight">
+              <div class="product-card__variant-choices-inner">
+                <div class="product-card__choice">
+                  <input id="variant-1-size-1" type="radio" name="variant[Weight]" class="radio product-card__choice-input" value="1lb">
+                  <label for="variant-1-size-1" class="label label--radio product-card__choice-label">
+                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
+                    1LB
+                  </label>
+                </div>
+                <div class="product-card__choice">
+                  <input id="variant-1-size-2" type="radio" name="variant[Weight]" class="radio product-card__choice-input" value="2lb">
+                  <label for="variant-1-size-2" class="label label--radio product-card__choice-label">
+                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
+                    2LB
+                  </label>
+                </div>
+                <div class="product-card__choice">
+                  <input id="variant-1-size-3" type="radio" name="variant[Weight]" class="radio product-card__choice-input" value="5lb">
+                  <label for="variant-1-size-3" class="label label--radio product-card__choice-label">
+                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
+                    5LB
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="product-card__variant-choices product-card__variant-choices--material">
+              <div class="product-card__variant-choices-inner">
+                <div class="product-card__choice">
+                  <input id="variant-2-size-1" type="radio" name="variant[Material]" class="radio product-card__choice-input" value="1lb">
+                  <label for="variant-2-size-1" class="label label--radio product-card__choice-label">
+                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
+                    Ground
+                  </label>
+                </div>
+                <div class="product-card__choice">
+                  <input id="variant-2-size-2" type="radio" name="variant[Material]" class="radio product-card__choice-input" value="1lb">
+                  <label for="variant-2-size-2" class="label label--radio product-card__choice-label">
+                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
+                    Whole Bean
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%- render 'button', button_url: button_url, button_value: 'Add To Cart', tag: 'button', custom_attrs: 'type="submit"' class: button_class -%}
+        </form>
+      </div>
     </div>
     <div class="product-card__infor">
-      <div class="product-card__title">
+      <div class="b1 product-card__title">
         Featured product title for each item
       </div>
-      <div class="product-card__review">
+      <div class="b1 product-card__review">
         Review
       </div>
-      <div class="product-card__price b2">
+      <div class="h5 product-card__price">
         $33
       </div>
     </div>
