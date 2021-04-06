@@ -1,7 +1,6 @@
 /* styles for navigation */
 
 .navigation {
-  background-color: var(--black);
   position: fixed;
   width: 100vw;
   height: 104px;

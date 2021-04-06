@@ -14,7 +14,7 @@
         </a>
       </div>
     {%- else -%}
-      <div class="{{ prefix_class | append: '__item' }}{% if link.active == true %} is-active{% endif %}">
+      <div class="{{ prefix_class | append: '__item' }}{% if level > 0 %} {{ prefix_class | append: '__item' | append: '--level-' | append: level }}{% endif %}{% if link.active == true %} is-active{% endif %}">
         {% comment %}Hard code for mega menu banner{% endcomment %}
           <div class="sub-menu__item-banner">
             {%- assign banner = 'mega_banner.jpg' | file_url -%}

@@ -132,12 +132,6 @@ h5 {
   font-weight: var(--normal);
 }
 
-.b6 {
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: var(--bold);
-}
-
 .link {
   color: #f1c740;
   font-weight: var(--bold);
