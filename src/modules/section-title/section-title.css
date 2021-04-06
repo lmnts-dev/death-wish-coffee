@@ -1,1 +1,16 @@
 /* styles for the section-title module go in this file */
+
+.section-title {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.section-title__title {
+  @extend .h2;
+
+  color: var(--blood);
+
+  @media (--lg) {
+    @extend .h1;
+  }
+}
