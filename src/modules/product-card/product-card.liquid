@@ -1,4 +1,6 @@
-{% assign class = class | default:false %}
+{% assign class = class | default: false %}
+{% assign title = title | default: false %}
+{% assign price = price | default: false %}
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 {% if button_class_custom %}
   {%- assign button_class = button_class | append: ' ' | append: button_class_custom -%}
@@ -9,7 +11,7 @@
     <div class="product-card__header">
       <div class="product-card__image-container">
         <a href="#" class="product-card__image-link">
-          {%- render 'image', src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411' -%}
+          {%- render 'image', src: image_src -%}
         </a>
       </div>
       <div class="product-card__overlay js-overlay">
@@ -69,16 +71,10 @@
         </form>
       </div>
     </div>
-    <div class="product-card__infor">
-      <div class="b1 product-card__title">
-        Featured product title for each item
-      </div>
-      <div class="b1 product-card__review">
-        Review
-      </div>
-      <div class="h5 product-card__price">
-        $33
-      </div>
+    <div class="product-card__content">
+      <h4 class="b1 product-card__title">{{ title }}</h4>
+      <div class="b1 product-card__review">Review</div>
+      <p class="h5 product-card__price">{{ price }}</p>
     </div>
   </div>
 </section>

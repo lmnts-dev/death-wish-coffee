@@ -11,9 +11,22 @@
 {%- render 'grid' -%}
 <div class="container">
   <div class="grid-product">
-    {%- render 'product-card' -%}
-    {%- render 'product-card' -%}
-    {%- render 'product-card', class: 'product-card--large' -%}
+    {%- render 'product-card',
+      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
+      title: 'Featured product title for each item',
+      price: '$33'
+    -%}
+    {%- render 'product-card',
+      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
+      title: 'Featured product title for each item',
+      price: '$33'
+    -%}
+    {%- render 'product-card',
+      class: 'product-card--large'
+      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
+      title: 'Featured product title for each item',
+      price: '$33'
+    -%}
   </div>
 </div>
 
