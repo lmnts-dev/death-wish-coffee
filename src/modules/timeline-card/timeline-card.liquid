@@ -5,11 +5,14 @@
 {% assign copy = copy | default: blank %}
 {% assign reverse = reverse | default:false %}
 
-{% capture class %}timeline-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
-
+{%- capture class -%}
 {%- if reverse == true -%}
   {%- assign class = class | append: ' timeline-card--reverse' -%}
 {%- endif -%}
+timeline-card bg--black{% if class %} {{- class -}}{% endif %}
+{%- endcapture -%}
+
+
 
 <section class="{{ class }}" data-module="timeline-card">
   <div class="container timeline-card__container">

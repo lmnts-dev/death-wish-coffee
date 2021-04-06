@@ -1,7 +1,6 @@
 /* styles for the timeline-card module go in this file */
 
 .timeline-card {
-  background: var(--black);
   color: var(--white);
   text-align: center;
   padding-top: 42px;
@@ -51,6 +50,11 @@
       width: 120px;
       height: 5px;
       background: var(--ashe);
+
+      .timeline-card--reverse & {
+        right: 100%;
+        left: auto;
+      }
     }
 
     &::before {
@@ -63,6 +67,11 @@
       border-radius: 100%;
       background: var(--ashe);
       transform: translateY(-50%);
+
+      .timeline-card--reverse & {
+        right: calc(100% + 106px);
+        left: auto;
+      }
     }
   }
 
@@ -77,6 +86,10 @@
 
     &::before {
       left: calc(100% + 120px);
+
+      .timeline-card--reverse & {
+        right: calc(100% + 126px);
+      }
     }
 
     .timeline-card--reverse & {
@@ -91,22 +104,6 @@
     height: 100%;
     top: 0;
     left: 0;
-  }
-}
-
-.timeline-card--reverse {
-  .timeline-card__wrapper-image::before {
-    right: calc(100% + 106px);
-    left: auto;
-
-    @media (--xl) {
-      right: calc(100% + 126px);
-    }
-  }
-
-  .timeline-card__wrapper-image::after {
-    right: 100%;
-    left: auto;
   }
 }
 
