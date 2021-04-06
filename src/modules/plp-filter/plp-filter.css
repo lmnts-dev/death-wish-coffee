@@ -1,1 +1,11 @@
 /* styles for the plp-filter module go in this file */
+
+body {
+  margin-top: 200px;
+}
+
+.plp-filter__block-list {
+  .plp-filter__block:not(.active) & {
+    display: none;
+  }
+}
