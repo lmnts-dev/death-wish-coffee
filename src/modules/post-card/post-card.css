@@ -1,8 +1,6 @@
 /* styles for the post-card module go in this file */
 
 .post-card {
-  background: var(--black);
-
   &--test {
     width: 100%;
     max-width: 336px;
