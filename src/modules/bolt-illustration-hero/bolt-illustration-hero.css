@@ -2,7 +2,6 @@
   position: relative;
   padding: 42px 0 90px;
   color: var(--white);
-  background: var(--black);
 
   @media (--lg) {
     padding: 179px 0 255px;
@@ -37,8 +36,6 @@
 }
 
 .bolt-illustration-hero__title {
-  @extend .h1;
-
   padding-top: 42px;
   color: var(--blood);
 
@@ -80,7 +77,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 percentage(170/1920);
+    padding: 0 calc(100% * 170 / 1920);
   }
 }
 
@@ -95,7 +92,7 @@
   @media (--lg) {
     top: auto;
     bottom: 0;
-    width: percentage(785/1920);
+    width: calc(100% * 785 / 1920);
     max-width: 785px;
     transform: translate3d(0, 0, 0);
   }
@@ -103,10 +100,10 @@
   &::before {
     content: '';
     display: block;
-    padding-top: calc((300 / 175) * 100%);
+    padding-top: calc(100% * 300 / 175);
 
     @media (--lg) {
-      padding-top: calc((1187 / 785) * 100%);
+      padding-top: calc(100% * 1187 / 785);
     }
   }
 }
@@ -119,7 +116,7 @@
   z-index: 1;
 
   @media (--lg) {
-    width: percentage(348/1580);
+    width: calc(100% * 348 / 1580);
     max-width: 348px;
     margin-right: 40px;
   }
@@ -127,15 +124,11 @@
   &::before {
     content: '';
     display: block;
-    padding-top: calc((230 / 196) * 100%);
+    padding-top: calc(100% * 230 / 196);
 
     @media (--lg) {
-      padding-top: calc((408 / 348) * 100%);
+      padding-top: calc(100% * 408 / 348);
     }
-  }
-
-  & .image__img {
-    object-fit: contain;
   }
 }
 
@@ -144,6 +137,6 @@
 
   @media (--lg) {
     position: static;
-    width: percentage(650/1580);
+    width: calc(100% * 650 / 1580);
   }
 }

@@ -1,7 +1,21 @@
-{%- render 'bolt-illustration-hero',
-  blocks: section.blocks,
-  section: section.settings
--%}
+{%- assign blocks = section.blocks -%}
+{%- assign section = section.settings -%}
+{%- assign feature_image = section.feature_image | img_url: 'master' -%}
+{%- assign feature_image_mobile = section.feature_image_mobile | img_url: 'master' -%}
+
+{% for block in blocks  %}
+  {%- assign image = block.settings.image | img_url: 'master' -%}
+  {%- assign title = block.settings.title -%}
+  {%- assign description = block.settings.description -%}
+
+  {%- render 'bolt-illustration-hero',
+    feature_image: feature_image,
+    feature_image_mobile: feature_image_mobile,
+    image: image,
+    title: title,
+    description: description
+  -%}
+{% endfor %}
 
 {% schema %}
 {

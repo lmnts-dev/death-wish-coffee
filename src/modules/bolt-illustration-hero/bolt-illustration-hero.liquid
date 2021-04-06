@@ -1,41 +1,39 @@
-{%- assign desktop_image = section.feature_image | img_url: 'master' -%}
-{%- assign mobile_image = section.feature_image_mobile | img_url: 'master' -%}
+{%- assign feature_image = feature_image | default: false -%}
+{%- assign feature_image_mobile = feature_image_mobile | default: false -%}
+{%- assign image = image | default: false -%}
+{%- assign title = title | default: '' -%}
+{%- assign description = description | default: '' -%}
 
-{%- if blocks.size > 0 -%}
-  {%- for block in blocks -%}
-    <div class="bolt-illustration-hero">
-      <div class="bolt-illustration-hero__container">
-        <div class="bolt-illustration-hero__inner">
+<div class="bolt-illustration-hero bg--black">
+  <div class="bolt-illustration-hero__container">
+    <div class="bolt-illustration-hero__inner">
+      {%- if image -%}
+        <div class="bolt-illustration-hero__image">
+          {%- render 'image', class: 'image--contain', src: image -%}
+        </div>
+      {%- endif -%}
 
-          {%- if block.settings.image != blank -%}
-            <div class="bolt-illustration-hero__image">
-              {%- assign srouce = block.settings.image | img_url: 'master' -%}
-              {%- render 'image', src: srouce -%}
-            </div>
-          {%- endif -%}
+      <div class="bolt-illustration-hero__content">
+        {%- if title -%}
+          <h1 class="h1 bolt-illustration-hero__title">{{ title }}</h1>
+        {%- endif -%}
+        {%- if description -%}
+          <p class="bolt-illustration-hero__description">
+            {{ description }}
+          </p>
+        {%- endif -%}
 
-          <div class="bolt-illustration-hero__content">
-            {%- if block.settings.title != blank -%}
-              <h1 class="bolt-illustration-hero__title">{{ block.settings.title }}</h1>
+        {%- if feature_image or feature_image_mobile -%}
+          <div class="bolt-illustration-hero__feature">
+            {%- if feature_image -%}
+              {%- render 'image', src: feature_image, class: 'bolt-illustration-hero__desktop-image' -%}
             {%- endif -%}
-            {%- if block.settings.description != blank -%}
-              <p class="bolt-illustration-hero__description">
-                {{ block.settings.description }}
-              </p>
-            {%- endif -%}
-            {%- if desktop_image != blank or mobile_image != blank -%}
-              <div class="bolt-illustration-hero__feature">
-                {%- if desktop_image != blank -%}
-                  {%- render 'image', src: desktop_image, class: 'bolt-illustration-hero__desktop-image' -%}
-                {%- endif -%}
-                {%- if mobile_image != blank -%}
-                  {%- render 'image', src: mobile_image, class: 'bolt-illustration-hero__mobile-image' -%}
-                {%- endif -%}
-              </div>
+            {%- if feature_image_mobile -%}
+              {%- render 'image', src: feature_image_mobile, class: 'bolt-illustration-hero__mobile-image' -%}
             {%- endif -%}
           </div>
-        </div>
+        {%- endif -%}
       </div>
     </div>
-  {%- endfor -%}
-{%- endif -%}
+  </div>
+</div>
