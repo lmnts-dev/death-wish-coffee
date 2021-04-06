@@ -8,15 +8,19 @@ import { toggle } from 'lib/util'
 const productCard = el => {
   const buttonEl = el.querySelector('.js-button')
   const closeButton = el.querySelector('.js-close')
-  const overlay = el.querySelector('.product-card__overlay')
+  const overlay = el.querySelector('.js-overlay')
 
-  buttonEl.addEventListener('click', () => {
-    toggle(overlay, 'is-active')
-  })
+  if (buttonEl) {
+    buttonEl.addEventListener('click', () => {
+      toggle(overlay, 'is-active')
+    })
+  }
 
-  closeButton.addEventListener('click', () => {
-    toggle(overlay, 'is-active')
-  })
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      toggle(overlay, 'is-active')
+    })
+  }
 }
 
 export default productCard
