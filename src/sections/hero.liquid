@@ -1,5 +1,13 @@
+{%- assign section = section.settings -%}
+{%- assign desktop_image = section.image | img_url: 'master' -%}
+{%- assign mobile_image = section.mobile_image | img_url: 'master' -%}
+
 {%- render 'hero',
-  section: section.settings
+  video: section.video,
+  desktop_image: desktop_image,
+  mobile_image: mobile_image,
+  title: section.title,
+  description: section.description
 -%}
 
 {% schema %}
@@ -20,11 +28,6 @@
       "type": "text",
       "id": "video",
       "label": "Video"
-    },
-    {
-      "type": "text",
-      "id": "video_mobile",
-      "label": "Video Mobile"
     },
     {
       "type": "text",

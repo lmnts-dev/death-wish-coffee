@@ -11,17 +11,11 @@
   &::before {
     content: '';
     display: block;
-    padding-top: calc((573/ 375) * 100%);
+    padding-top: calc(100% * 573 / 375);
 
     @media (--lg) {
-      padding-top: calc((979 / 1920) * 100%);
+      padding-top: calc(100% * 979 / 1920);
     }
-  }
-}
-
-.hero__video {
-  .hero__feature & {
-    box-shadow: none;
   }
 }
 
