@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}address-list{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="address-list">
+  <h2 class="module-name">address-list</h2>
+</section>

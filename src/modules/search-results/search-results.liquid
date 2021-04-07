@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}search-results{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="search-results">
+  <h2 class="module-name">search-results</h2>
+</section>
