@@ -1,7 +1,6 @@
 {%- layout 'theme' -%}
 {%- render 'pdp-hero' -%}
 {%- render 'section-title', title: 'MADE TO FIT YOUR LIFESTYLE', class: 'bg--black' -%}
-
 {%- section 'bolt-illustration-hero' -%}
 
 {% assign media_hero_grid_metafields = product.metafields.media-grid %}
@@ -14,9 +13,6 @@
     videos: videos
 -%}
 
-{%- if product.type == 'Coffee' -%}
-  {%- section 'bolt-illustration-hero' -%}
-{%- endif -%}
 {%- render 'media-hero-grid' -%}
 {%- render 'review-drawer' -%}
 
