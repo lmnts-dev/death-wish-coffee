@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}title-copy{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="title-copy">
+  <h2 class="module-name">title-copy</h2>
+</section>
