@@ -35,6 +35,10 @@
   &--yellow {
     background-color: var(--yellow);
   }
+
+  &--shadow {
+    background-color: var(--shadow);
+  }
 }
 
 .spacing {
@@ -56,4 +60,14 @@
   &--top-lg {
     padding-top: 50px;
   }
+}
+
+.account-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: var(--navbar-height);
+}
+
+.account-wrapper__right {
+  margin-left: 10px;
 }
