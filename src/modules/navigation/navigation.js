@@ -8,6 +8,7 @@ import { toggle } from 'lib/util'
 
 const navigation = el => {
   const hamburger = el.querySelector('.js-hamburger')
+  const closeButton = el.querySelector('.js-close')
   const mobileMenu = el.querySelector('.js-mobile-menu')
   const searchButton = el.querySelector('.navigation__action--search')
   const searchBar = el.querySelector('.navigation__search')
@@ -38,7 +39,13 @@ const navigation = el => {
 
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
-      console.log(mobileMenu)
+      toggle(hamburger, 'is-active')
+      toggle(mobileMenu, 'active')
+    })
+  }
+
+  if (closeButton && mobileMenu) {
+    closeButton.addEventListener('click', () => {
       toggle(hamburger, 'is-active')
       toggle(mobileMenu, 'active')
     })

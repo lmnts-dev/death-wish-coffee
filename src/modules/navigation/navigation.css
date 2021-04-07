@@ -25,7 +25,7 @@
 
 .navigation__logo {
   position: absolute;
-  bottom: -15px;
+  top: 13px;
   left: 50%;
   width: 106px;
   transform: translate(-50%, 0);
@@ -38,7 +38,8 @@
   }
 
   @media (--lg) {
-    display: none;
+    top: 0;
+    width: 144px;
   }
 }
 
@@ -109,6 +110,22 @@
     margin: 0;
     width: 100%;
     height: auto;
+  }
+
+  @media (--lg) {
+    width: fit-content;
+  }
+
+  &--left {
+    margin-left: auto;
+  }
+
+  &--right {
+    margin-right: auto;
+
+    @media (--lg-max) {
+      padding-top: 6px;
+    }
   }
 }
 
@@ -306,16 +323,29 @@
   overflow: auto;
 
   &.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   @media (--lg) {
     position: static;
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 154px;
+    align-items: center;
+    justify-content: center;
     padding: 0;
     height: 100%;
     border-bottom: none;
     overflow: visible;
+  }
+
+  @media (--xl) {
+    grid-gap: 214px;
+  }
+
+  @media (--xxl) {
+    grid-gap: 260px;
   }
 }
 
@@ -386,6 +416,13 @@
 .navigation__login-inner {
   display: flex;
   align-items: center;
+}
+
+.navigation__login,
+.navigation__menu {
+  @media (--lg-max) {
+    order: -1;
+  }
 }
 
 .navigation__login {

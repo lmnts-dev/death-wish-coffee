@@ -7,8 +7,13 @@
     },
     {
       "type": "link_list",
-      "id": "header_menu",
-      "label": "Header Menu"
+      "id": "menu_left",
+      "label": "Left Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_right",
+      "label": "Right Menu"
     }
   ]
 }

@@ -91,7 +91,7 @@
   position: relative;
 
   @media (--lg) {
-    margin: 44px 20px 0;
+    margin: 44px 10px 0;
     padding: 0 6px 30px;
   }
 
@@ -164,39 +164,6 @@
       z-index: -2;
       transition: all 0.5s;
       visibility: hidden;
-    }
-  }
-}
-
-.menu__logo {
-  position: relative;
-  display: none;
-  width: 144px;
-  margin: 0 20px;
-
-  &::before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
-
-  @media (--lg) {
-    display: block;
-  }
-
-  @media (--xl) {
-    margin: 0 35px;
-  }
-
-  @media (--xxl) {
-    margin: 0 58px;
-  }
-}
-
-.menu__logo-image {
-  &:hover {
-    &::after {
-      content: none;
     }
   }
 }
