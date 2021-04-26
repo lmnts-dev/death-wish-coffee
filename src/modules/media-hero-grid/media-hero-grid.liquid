@@ -1,6 +1,35 @@
-{% assign class = class | default:false %}
+{% assign class = class | default: '' %}
+{% assign types = types | default: '' %}
+{% assign images = images | default: '' %}
+{% assign videos = videos | default: '' %}
 {% capture class %}media-hero-grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="media-hero-grid">
-  <h2 class="module-name">media-hero-grid</h2>
-</section>
+{%- if types -%}
+  <section class="{{ class }}" data-module="media-hero-grid">
+    <div class="media-hero-grid__inner">
+      {%- for item in types -%}
+        {%- assign type = types[forloop.index0] -%}
+        <div class="media-hero-grid__item">
+          {% case type %}
+            {% when 'Image' %}
+              {%- if images -%}
+                {%- assign img_src = images[forloop.index0] | map: 'src' -%}
+                {%- render 'image',
+                    src: img_src,
+                    class: 'media-hero-grid__image'
+                -%}
+              {%- endif -%}
+            {% when 'Video' %}
+              {%- if videos -%}
+                {%- assign video_src = videos[forloop.index0] | default: '' %}
+                {%- render 'video',
+                    mod_src: video_src,
+                    mod_class: 'media-hero-grid__video video--media-hero-grid'
+                -%}
+              {%- endif -%}
+          {% endcase %}
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}

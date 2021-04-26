@@ -1,1 +1,44 @@
-/* styles for the media-hero-grid module go in this file */
+.media-hero-grid__inner {
+  display: grid;
+  grid-template:
+    'a b'
+    'c d'
+    'e e';
+
+  @media (--sm) {
+    grid-template:
+      'a b e e'
+      'c d e e';
+  }
+}
+
+.media-hero-grid__item {
+  position: relative;
+  height: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+
+  &:first-child {
+    grid-area: a;
+  }
+
+  &:nth-child(2) {
+    grid-area: b;
+  }
+
+  &:nth-child(3) {
+    grid-area: c;
+  }
+
+  &:nth-child(4) {
+    grid-area: d;
+  }
+
+  &:last-child {
+    grid-area: e;
+  }
+}
