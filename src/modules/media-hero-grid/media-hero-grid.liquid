@@ -29,6 +29,11 @@
               {%- endif -%}
           {% endcase %}
         </div>
+        {%- assign modulo = forloop.index | modulo: 5 -%}
+        {%- if modulo == 0 and forloop.index < types.size -%}
+          </div>
+          <div class="media-hero-grid__inner">
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </section>
