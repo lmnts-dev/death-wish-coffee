@@ -9,10 +9,6 @@
   @media (--lg) {
     padding-top: 128px;
     text-align: left;
-
-    &.timeline-card--reverse {
-      text-align: right;
-    }
   }
 
   & + .timeline-card {
@@ -21,6 +17,46 @@
 
     @media (--lg) {
       padding-bottom: 128px;
+    }
+  }
+}
+
+.timeline-card--reverse {
+  @media (--lg) {
+    text-align: right;
+
+    .timeline-card__wrapper-image {
+      margin-right: 0;
+      margin-left: 140px;
+
+      &::after {
+        right: 100%;
+        left: auto;
+      }
+
+      &::before {
+        right: calc(100% + 106px);
+        left: auto;
+      }
+    }
+
+    .timeline-card__wrapper {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-card__header {
+      flex-direction: row-reverse;
+    }
+  }
+
+  @media (--xl) {
+    .timeline-card__wrapper-image {
+      margin-right: 0;
+      margin-left: 168px;
+
+      &::before {
+        right: calc(100% + 126px);
+      }
     }
   }
 }
@@ -37,11 +73,6 @@
     margin: 0;
     margin-right: 140px;
 
-    .timeline-card--reverse & {
-      margin-right: 0;
-      margin-left: 140px;
-    }
-
     &::after {
       content: '';
       position: absolute;
@@ -50,11 +81,6 @@
       width: 120px;
       height: 5px;
       background: var(--ashe);
-
-      .timeline-card--reverse & {
-        right: 100%;
-        left: auto;
-      }
     }
 
     &::before {
@@ -67,11 +93,6 @@
       border-radius: 100%;
       background: var(--ashe);
       transform: translateY(-50%);
-
-      .timeline-card--reverse & {
-        right: calc(100% + 106px);
-        left: auto;
-      }
     }
   }
 
@@ -86,24 +107,7 @@
 
     &::before {
       left: calc(100% + 120px);
-
-      .timeline-card--reverse & {
-        right: calc(100% + 126px);
-      }
     }
-
-    .timeline-card--reverse & {
-      margin-right: 0;
-      margin-left: 168px;
-    }
-  }
-
-  img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
   }
 }
 
@@ -126,10 +130,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
-    .timeline-card--reverse & {
-      flex-direction: row-reverse;
-    }
   }
 }
 
@@ -143,10 +143,6 @@
   @media (--lg) {
     flex-direction: row;
     justify-content: space-between;
-
-    .timeline-card--reverse & {
-      flex-direction: row-reverse;
-    }
   }
 }
 
