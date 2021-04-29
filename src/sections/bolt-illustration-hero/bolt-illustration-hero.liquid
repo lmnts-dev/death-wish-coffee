@@ -13,7 +13,8 @@
     feature_image_mobile: feature_image_mobile,
     image: image,
     title: title,
-    description: description
+    description: description,
+    reverse_content: reverse_content
   -%}
 {% endfor %}
 
@@ -51,6 +52,12 @@
           "type": "textarea",
           "id": "description",
           "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_content",
+          "label": "Reverse",
+          "default": false
         }
       ]
     }

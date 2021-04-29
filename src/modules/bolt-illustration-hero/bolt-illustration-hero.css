@@ -7,7 +7,7 @@
     padding: 179px 0 255px;
   }
 
-  &:nth-child(even) {
+  &--reverse {
     & .bolt-illustration-hero__title,
     & .bolt-illustration-hero__description {
       text-align: right;
