@@ -1,6 +1,10 @@
 {%- layout 'theme' -%}
 {%- render 'hero' -%}
-{%- render 'bolt-header' -%}
+{% assign bolt_header_image = page.metafields.bolt-header.bolt_header_image | map: 'src'  %}
+{%- render 'bolt-header',
+  image: bolt_header_image,
+  title: page.metafields.bolt-header.bolt_header_text
+-%}
 {%- render 'timeline-card' -%}
 {%- render 'timeline-card' -%}
 {%- render 'timeline-card' -%}

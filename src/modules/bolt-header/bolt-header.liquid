@@ -1,6 +1,23 @@
 {% assign class = class | default:false %}
 {% capture class %}bolt-header{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- assign image = image | default: false -%}
+{%- assign title = title | default: '' -%}
 
-<section class="{{ class }} placeholder" data-module="bolt-header">
-  <h2 class="module-name">bolt-header</h2>
-</section>
+{%- if title != blank -%}
+  <section class="{{ class }}" data-module="bolt-header">
+    <div class="bolt-header__wrapper bg--black">
+      <div class="bolt-header__inner">
+        {%- if image -%}
+          {%- for i in (1..2) -%}
+            <div class="bolt-header__image">
+              {%- render 'image', class: 'image--contain', src: image -%}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+        <div class="bolt-header__content">
+          <h1 class="h1 bolt-header__title">{{ title }}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}

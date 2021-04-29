@@ -1,1 +1,61 @@
-/* styles for the bolt-header module go in this file */
+.bolt-header__inner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 272px;
+  overflow: hidden;
+
+  @media (--lg) {
+    min-height: 347px;
+  }
+}
+
+.bolt-header__image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 73%;
+
+  @media (--lg-max) {
+    transform: translateX(-50%);
+  }
+
+  @media (--lg) {
+    width: 39%;
+    max-width: 748px;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 101%;
+  }
+
+  & + & {
+    transform: scaleX(-1);
+    left: auto;
+    right: 0;
+
+    @media (--lg-max) {
+      transform: scaleX(-1) translateX(-50%);
+    }
+  }
+}
+
+.bolt-header__content {
+  position: relative;
+  z-index: 1;
+}
+
+.bolt-header__title {
+  max-width: 176px;
+  padding: 54% 0;
+  color: var(--white);
+  text-align: center;
+
+  @media (--md) {
+    max-width: 414px;
+    padding: 20% 0;
+  }
+}
