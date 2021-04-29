@@ -1,25 +1,28 @@
 {% assign class = class | default:false %}
-{% assign post = post | defailt: false %}
+{% assign post = post | default: false %}
+{% assign title = title | default: false %}
+{% assign url = url | default: false %}
+{% assign image_src = image_src | default: false %}
+{% assign image_alt = image_alt | default: false %}
+{% assign author = author | default: false %}
+{% assign published_date = published_date | default: false %}
 {% capture class %}post-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
-{% if post %}
+{% if title and url %}
   <section class="{{ class }}" data-module="post-card">
     <div class="post-card__container">
-      <a class="post-card__image-wrapper" href="{{ post.url }}">
-        {% if post.image %}
-          {% assign src = post.image.src | img_url: 'master' %}
-          {% render 'image', class: 'post-card__image', src: src, alt: post.image.alt %}
-        {% endif %}
+      <a class="post-card__image-wrapper" href="{{ url }}">
+        {% render 'image', class: 'post-card__image', src: image_src, alt: image_alt %}
         <div class="b2 post-card__viewed">Already<br>Viewed</div>
       </a>
       <div class="post-card__content">
         <h4 class="h5 post-card__title">
-          <a class="post-card__title-link" href="{{ post.url }}">{{ post.title }}</a>
+          <a class="post-card__title-link" href="{{ url }}">{{ title }}</a>
         </h4>
         <p class="post-card__description">
-          {% if post.author %}
-            <span>By {{ post.author }}</span> &mdash; 
+          {% if author %}
+            <span>By {{ author }}</span> &mdash; 
           {% endif %}
-          <span>{{ post.published_at | date: '%b %d, %Y' }}</span>
+          <span>{{ published_date }}</span>
         </p>
       </div>
     </div>
