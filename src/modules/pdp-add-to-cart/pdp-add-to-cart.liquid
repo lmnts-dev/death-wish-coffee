@@ -1,6 +1,15 @@
 {% assign class = class | default:false %}
 {% capture class %}pdp-add-to-cart{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="pdp-add-to-cart">
-  <h2 class="module-name">pdp-add-to-cart</h2>
+<section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
+  <div class="container pdp-add-to-cart__container">
+    <div class="pdp-add-to-cart__wrapper">
+      <div class="pdp-add-to-cart__header">
+        <h2 class="pdp-add-to-cart__title h2">{{product.title}}</h2>
+        <p class="pdp-add-to-cart__price b2">{{product.price | money}} (FREE SHIPPING)</p>
+        <p class="pdp-add-to-cart__review">Review</p>
+      </div>
+      <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart">{{product.description}}</div>
+    </div>
+  </div>
 </section>

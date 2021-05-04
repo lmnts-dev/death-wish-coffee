@@ -1,1 +1,15 @@
 /* styles for the pdp-add-to-cart module go in this file */
+
+.pdp-add-to-cart {
+  padding: 23px 0;
+  color: var(--white);
+  text-align: left;
+}
+
+.pdp-add-to-cart__title {
+  color: var(--blood);
+}
+
+.pdp-add-to-cart__header {
+  margin-bottom: 33px;
+}
