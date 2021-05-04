@@ -11,10 +11,16 @@
 {%- render 'grid' -%}
 <div class="container">
   <div class="grid-product">
+    {%- assign product = all_products['test-product-2'] -%}
+    {%- assign price = product.price | money -%}
     {%- render 'product-card',
+      product: product,
+      id: product.id,
       image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
-      title: 'Featured product title for each item',
-      price: '$33'
+      title: product.title,
+      price: price,
+      options: product.options,
+      options_by_name: product.options_by_name
     -%}
     {%- render 'product-card',
       image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',

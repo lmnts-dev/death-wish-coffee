@@ -39,34 +39,55 @@
   margin-top: 5px;
 }
 
-.product-card__choice {
-  &:last-child {
-    & .product-card__choice-label {
+.product-card__options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 29px;
+}
+
+.product-card__option {
+  width: 100%;
+  border: 1px solid var(--shadow);
+  background: var(--steel);
+
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+}
+
+.product-card__option-values {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card__option-value {
+  flex: 1 1 0;
+  min-width: 103px;
+}
+
+.product-card__option-value-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  cursor: pointer;
+  border-right: 1px solid var(--shadow);
+
+  .product-card__option-value {
+    &:last-child {
       border-right: none;
     }
   }
 }
 
-.product-card__choice-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 104px;
-  height: 64px;
-  background: var(--steel);
-  border-right: 1px solid var(--shadow);
-  cursor: pointer;
-
-  .product-card__variant-choices--material & {
-    width: 156px;
-  }
-}
-
-.product-card__choice-input {
+.product-card__option-value-input {
   display: none;
 
   &:checked {
-    & + .product-card__choice-label {
+    & + .product-card__option-value-label {
       position: relative;
       background: var(--slate);
       color: var(--white);
@@ -84,33 +105,11 @@
   }
 }
 
-.product-card__choice-icon {
+.product-card__option-value-icon {
   display: block;
   width: 40px;
   height: 40px;
   margin-right: 9px;
-}
-
-.product-card__variant-choices {
-  border: 1px solid var(--shadow);
-
-  &:not(:first-child) {
-    margin-top: -1px;
-  }
-}
-
-.product-card__variant-choices-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.product-card__variant-choices-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 29px;
 }
 
 .product-card__quick-shop {
@@ -128,6 +127,10 @@
   @media (--lg) {
     padding: 37px;
   }
+}
+
+.product-card__variants {
+  display: none;
 }
 
 .product-card__overlay {

@@ -1,12 +1,16 @@
 {% assign class = class | default: false %}
+{% assign id = id | default: false %}
+{% assign options = options | default: false %}
+{% assign options_by_name = options_by_name | default: false %}
 {% assign title = title | default: false %}
 {% assign price = price | default: false %}
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 {% if button_class_custom %}
   {%- assign button_class = button_class | append: ' ' | append: button_class_custom -%}
 {% endif %}
+{%- assign button_class = button_class | append: ' js-form-submit' -%}
 
-<section class="product-card{% if class %} {{ class }}{% endif %}" data-module="product-card">
+<section class="{{ class }}" data-module="product-card">
   <div class="product-card__inner">
     <div class="product-card__header">
       <div class="product-card__image-container">
@@ -22,52 +26,34 @@
           <button class="product-card__close js-close" type="button">
             {%- render 'svg', type: 'close', class: 'product-card__close-icon' -%}
           </button>
-          <div class="product-card__variant-choices-wrapper">
-            <div class="product-card__variant-choices product-card__variant-choices--weight">
-              <div class="product-card__variant-choices-inner">
-                <div class="product-card__choice">
-                  <input id="variant-1-size-1" type="radio" name="variant[Weight]" class="radio product-card__choice-input" value="1lb">
-                  <label for="variant-1-size-1" class="label label--radio product-card__choice-label">
-                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
-                    1LB
-                  </label>
-                </div>
-                <div class="product-card__choice">
-                  <input id="variant-1-size-2" type="radio" name="variant[Weight]" class="radio product-card__choice-input" value="2lb">
-                  <label for="variant-1-size-2" class="label label--radio product-card__choice-label">
-                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
-                    2LB
-                  </label>
-                </div>
-                <div class="product-card__choice">
-                  <input id="variant-1-size-3" type="radio" name="variant[Weight]" class="radio product-card__choice-input" value="5lb">
-                  <label for="variant-1-size-3" class="label label--radio product-card__choice-label">
-                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
-                    5LB
-                  </label>
+          <div class="product-card__options">
+            {%- for option in options -%}
+              {%- assign option_index = forloop.index -%}
+              <div class="product-card__option product-card__option--{{- option | handle -}}">
+                <div class="product-card__option-values">
+                  {%- for value in options_by_name[option].values -%}
+                    {%- capture input_name -%}product-{{- id -}}-option-{{- option | handle -}}{%- endcapture -%}
+                    {%- capture input_id -%}product-{{- id -}}-option-{{- option | handle -}}-value-{{- value | handle -}}{%- endcapture -%}
+                    <div class="product-card__option-value">
+                      <input id="{{- input_id -}}" type="radio" name="{{- input_name -}}" class="radio product-card__option-value-input js-product-input" value="{{- value -}}" data-option-index="{{- option_index -}}">
+                      <label for="{{- input_id -}}" class="label label--radio product-card__option-value-label">
+                        {% render 'svg', type: 'logo', class: 'product-card__option-value-icon' %}
+                        {{- value -}}
+                      </label>
+                    </div>
+                  {%- endfor -%}
                 </div>
               </div>
-            </div>
-            <div class="product-card__variant-choices product-card__variant-choices--material">
-              <div class="product-card__variant-choices-inner">
-                <div class="product-card__choice">
-                  <input id="variant-2-size-1" type="radio" name="variant[Material]" class="radio product-card__choice-input" value="1lb">
-                  <label for="variant-2-size-1" class="label label--radio product-card__choice-label">
-                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
-                    Ground
-                  </label>
-                </div>
-                <div class="product-card__choice">
-                  <input id="variant-2-size-2" type="radio" name="variant[Material]" class="radio product-card__choice-input" value="1lb">
-                  <label for="variant-2-size-2" class="label label--radio product-card__choice-label">
-                    {% render 'svg', type: 'logo', class: 'product-card__choice-icon' %}
-                    Whole Bean
-                  </label>
-                </div>
-              </div>
-            </div>
+            {%- endfor -%}
           </div>
-          {%- render 'button', button_url: button_url, button_value: 'Add To Cart', tag: 'button', custom_attrs: 'type="submit"' class: button_class -%}
+          <select name="id" class="product-card__variants js-product-variants">
+            <option value selected disabled>Variant</option>
+            {%- for variant in product.variants -%}
+              <option value="{{- variant.id -}}" data-title="{{- variant.title -}}">{{- variant.title -}}</option>
+            {%- endfor -%}
+          </select>
+          <input type="hidden" name="quantity" value="1">
+          {%- render 'button', button_url: button_url, button_value: 'Add To Cart', tag: 'button', custom_attrs: 'type="submit" disabled' class: button_class -%}
         </form>
       </div>
     </div>
