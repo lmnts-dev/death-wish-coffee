@@ -1,5 +1,6 @@
 {%- assign product = product | default: false -%}
 {%- assign button_class = button_class | default: false -%}
+{%- assign show_title = show_title | default: false -%}
 {%- assign class = class | default: false -%}
 {%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{%- endcapture -%}
 
@@ -10,6 +11,9 @@
         {%- for option in product.options -%}
           {%- assign option_index = forloop.index -%}
           <div class="product-form__option product-form__option--{{- option | handle -}}">
+            {%- if show_title -%}
+              <h4 class="product-form__option-title h4">{{- option -}}</h4>
+            {%- endif -%}
             <div class="product-form__option-values">
               {%- for value in product.options_by_name[option].values -%}
                 {%- capture input_name -%}product-{{- product.id -}}-option-{{- option | handle -}}{%- endcapture -%}

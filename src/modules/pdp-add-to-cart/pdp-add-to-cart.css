@@ -4,12 +4,24 @@
   padding: 23px 0;
   color: var(--white);
   text-align: left;
+
+  @media (--md) {
+    padding: 71px 0 0;
+  }
 }
 
 .pdp-add-to-cart__title {
   color: var(--blood);
+
+  @media (--md) {
+    margin-bottom: 4px;
+  }
 }
 
 .pdp-add-to-cart__header {
   margin-bottom: 33px;
+
+  @media (--md) {
+    margin-bottom: 25px;
+  }
 }
