@@ -16,6 +16,12 @@
 {%- render 'review-drawer' -%}
 
 {%- render 'carousel' -%}
-{%- render 'product-hero-card' -%}
+
+{%- assign list_products = 'broke-not-busted-charity|death-wish-6-feet-t-shirt|80s-ripper-pre-order|unearthed-by-odin-t-shirt|copy-of-80s-ripper-crop-top-t-shirt-preorder' | split: '|' -%}
+
+{%- render 'product-hero-card'
+  list_products: list_products,
+  title: 'DON’T SLEEP ON THESE PRODUCTS'
+-%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}

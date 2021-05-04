@@ -1,6 +1,36 @@
 {% assign class = class | default:false %}
+{% assign title = title | default:false %}
 {% capture class %}product-hero-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- assign list_products = list_products -%}
 
-<section class="{{ class }} placeholder" data-module="product-hero-card">
-  <h2 class="module-name">product-hero-card</h2>
-</section>
+{%- capture content_slides -%}
+  {% for handle in list_products %}
+    {%- assign product = all_products[handle] -%}
+
+    <div class="product-hero-card__item swiper-slide">
+      <div class="product-hero-card__inner">
+        {%- assign product_image = product.images[1] | img_url: 'master' -%}
+        
+        <a href="{{product.url}}" class="product-hero-card__image-wrapper">
+          {%- render 'image', src: product_image, class: 'product-hero-card__image no-hover' -%}
+        </a>
+        <div class="product-hero-card__content">
+          <a href="{{product.url}}" class="product-hero-card__item-title h2">{{ product.title }}</a>
+          <p class="product-hero-card__item-price b2">{{ product.price | money }} (Free shipping)</p>
+          <p class="product-hero-card__item-review b2">Review</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{%- endcapture -%}
+
+{%- if list_products.size > 0 -%}
+  <section class="{{ class }} bg--shadow" data-module="product-hero-card">
+    <div class="product-hero-card__wrapper">
+      {%- if title -%}
+        <h2 class="product-hero-card__title h2">{{- title -}}</h2>
+      {%- endif -%}
+      {%- render 'carousel', class: 'carousel--product-hero-card product-hero-card__contents', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+    </div>
+  </section>
+{%- endif -%}
