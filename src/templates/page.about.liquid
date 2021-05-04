@@ -12,5 +12,10 @@
 {%- render 'grid' -%}
 {%- render 'title-description-card' -%}
 {%- render 'mirror-image-hero' -%}
-{%- render 'section-cta' -%}
+{%- render 'section-cta',
+  title: page.metafields.about-us-section-cta.header,
+  description: page.metafields.about-us-section-cta.message,
+  cta_text: page.metafields.about-us-section-cta.button_text,
+  cta_url: page.metafields.about-us-section-cta.button_url
+-%}
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
