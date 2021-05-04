@@ -16,7 +16,7 @@
         </a>
         <div class="product-hero-card__content">
           <a href="{{product.url}}" class="product-hero-card__item-title h2">{{ product.title }}</a>
-          <p class="product-hero-card__item-price b2">{{ product.price | money }} (Free shipping)</p>
+          <p class="product-hero-card__item-price b2">{{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}</p>
           <p class="product-hero-card__item-review b2">Review</p>
         </div>
       </div>
