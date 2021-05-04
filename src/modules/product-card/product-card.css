@@ -33,6 +33,8 @@
 
 .product-card__title {
   margin-top: 8px;
+  color: var(--black);
+  text-decoration: none;
 }
 
 .product-card__price {

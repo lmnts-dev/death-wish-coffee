@@ -1,5 +1,6 @@
 {% assign class = class | default: false %}
 {% assign title = title | default: false %}
+{% assign link = link | default: false %}
 {% assign price = price | default: false %}
 {% assign quick_shop_form = quick_shop_form | default: false %}
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
@@ -8,7 +9,7 @@
   <div class="product-card__inner">
     <div class="product-card__header">
       <div class="product-card__image-container">
-        <a href="#" class="product-card__image-link">
+        <a href="{{ link }}" class="product-card__image-link">
           {%- render 'image', src: image_src -%}
         </a>
       </div>
@@ -27,7 +28,7 @@
       {%- endif -%}
     </div>
     <div class="product-card__content">
-      <h4 class="b1 product-card__title">{{ title }}</h4>
+      <a href="{{ link }}" class="b1 product-card__title">{{ title }}</a>
       <div class="b1 product-card__review">Review</div>
       <p class="h5 product-card__price">{{ price }}</p>
     </div>
