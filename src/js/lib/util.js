@@ -320,7 +320,7 @@ export const buildImageSrcset = (src, webpSrc, isSizedFromShopify = false, exclu
       })
     }
     originalSrc = `${filePath}.${fileExtension}`
-  } else if (webpSrc.indexOf('cdn.accentuate.io') && webpSrc.indexOf('.webp') !== -1) {
+  } else if (webpSrc && webpSrc.indexOf('cdn.accentuate.io') && webpSrc.indexOf('.webp') !== -1) {
     // Serve next-gen format
     for (const width of widths) {
       srcsets.push({
