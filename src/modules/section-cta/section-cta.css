@@ -1,1 +1,65 @@
 /* styles for the section-cta module go in this file */
+
+.section-cta__inner {
+  max-width: 1038px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  color: var(--white);
+
+  @media (--lg) {
+    padding: 172px 24px 173px;
+  }
+}
+
+.section-cta__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (--lg-max) {
+    padding: 13px 0 19px;
+  }
+}
+
+.section-cta__title {
+  @extend .h2;
+
+  color: var(--blood);
+
+  @media (--lg) {
+    @extend .h1;
+
+    color: var(--white);
+  }
+}
+
+.section-cta__description {
+  @extend .p1;
+
+  @media (--lg) {
+    @extend .h3;
+
+    margin-top: -5px;
+    text-transform: none;
+  }
+}
+
+.section-cta__button {
+  margin-top: 30px;
+
+  @media (--lg) {
+    margin-top: 42px;
+  }
+}
+
+.section-cta__partition {
+  width: 107px;
+  height: 93px;
+  margin: 0 auto;
+
+  @media (--lg) {
+    display: none;
+  }
+}

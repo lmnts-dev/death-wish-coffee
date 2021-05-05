@@ -9,10 +9,28 @@ If this comment is still here, please consult with the lead developer on the pro
 {%- render 'article-hero-card' -%}
 
 {%- render 'carousel' -%}
-{%- render 'post-card' -%}
+{%- assign post = blog.articles[0] -%}
+
+{%- assign image_src = post.image.src | img_url: 'master' -%}
+{%- assign published_date = post.published_at | date: '%b %d, %Y' -%}
+{%- render 'post-card',
+  title: post.title,
+  url: post.url,
+  image_src: image_src,
+  image_alt: post.image.alt,
+  author: post.author,
+  published_date: published_date
+  class: 'bg--black post-card--test' -%}
 
 {%- render 'grid' -%}
-{%- render 'post-card' -%}
+{%- render 'post-card',
+  title: post.title,
+  url: post.url,
+  image_src: image_src,
+  image_alt: post.image.alt,
+  author: post.author,
+  published_date: published_date,
+  class: 'bg--black post-card--test post-card--viewed' -%}
 
 {%- render 'pagination' -%}
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}

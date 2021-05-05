@@ -1,6 +1,42 @@
-{% assign class = class | default:false %}
-{% capture class %}timeline-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign class = class | default: false %}
+{% assign time = time | default: blank %}
+{% assign image_src = image_src | default: blank %}
+{% assign title = title | default: blank %}
+{% assign copy = copy | default: blank %}
+{% assign reverse = reverse | default:false %}
 
-<section class="{{ class }} placeholder" data-module="timeline-card">
-  <h2 class="module-name">timeline-card</h2>
+{%- capture class -%}
+{%- if reverse == true -%}
+  {%- assign class = class | append: ' timeline-card--reverse' -%}
+{%- endif -%}
+timeline-card bg--black{% if class %} {{- class -}}{% endif %}
+{%- endcapture -%}
+
+
+
+<section class="{{ class }}" data-module="timeline-card">
+  <div class="container timeline-card__container">
+    <div class="timeline-card__wrapper">
+      <div class="timeline-card__header">
+        {%- if time != blank -%}
+          <h3 class="h2 timeline-card__time">{{- time -}}</h3>
+        {%- endif -%}
+        {%- if image_src != blank -%}
+          <div class="timeline-card__wrapper-image">
+            {%- render 'image', src: image_src -%}
+          </div>  
+        {%- endif -%}
+      </div>
+      {%- if title != blank or copy != blank -%}
+        <div class="timeline-card__content">
+          {%- if title != blank -%}
+            <p class="h2 timeline-card__title">{{- title -}}</p>
+          {%- endif -%}
+          {% if copy != blank %}
+            <p class="timeline-card__copy p1">{{- copy -}}</p>
+          {% endif %}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
 </section>

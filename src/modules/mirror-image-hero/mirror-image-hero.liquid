@@ -1,6 +1,25 @@
+{% assign image = image | default: false %}
+{% assign title = title | default: false %}
+{% assign description = description | default: false %}
 {% assign class = class | default:false %}
 {% capture class %}mirror-image-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="mirror-image-hero">
-  <h2 class="module-name">mirror-image-hero</h2>
-</section>
+{%- if image and title -%}
+  <section class="{{ class }} bg--black" data-module="mirror-image-hero">
+    <div class="mirror-image-hero__wrapper">
+      {%- for i in (1..2) -%}
+        <div class="mirror-image-hero__item{% if i == 2 %} mirror-image-hero__item--reverse{% endif %}">
+          <div class="mirror-image-hero__image">
+            {%- render 'image', src: image, class: 'navigation__logo-image' -%}
+          </div>
+          <div class="mirror-image-hero__content">
+            <h1 class="h1 mirror-image-hero__title">{{ title[forloop.index0] }}</h1>
+            {%- if description -%}
+              <div class="p1 mirror-image-hero__description">{{ description[forloop.index0] }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{%- endif -%}

@@ -1,6 +1,50 @@
 {% assign class = class | default:false %}
+{%- assign video = video | default: false -%}
+{%- assign desktop_image = desktop_image | default: false -%}
+{%- assign mobile_image = mobile_image | default: false -%}
+{%- assign title = title | default: '' -%}
+{%- assign description = description | default: '' -%}
+
 {% capture class %}hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="hero">
-  <h2 class="module-name">hero</h2>
+<section class="{{ class }}" data-module="hero">
+  <div class="hero__inner">
+    <div class="hero__feature">
+      {%- if video != blank -%}
+        <div class="hero__video-wrapper">
+          {%- render 'video',
+            mod_src: video,
+            mod_class: 'video--hero'
+          -%}
+        </div>
+      {%- else -%}
+        {%- if desktop_image != blank or mobile_image != blank -%}
+          <div class="hero__image">
+            <div class="hero__image-wrapper">
+              {%- if desktop_image -%}
+                {%- render 'image', src: desktop_image, class: 'hero__image-desktop' -%}
+              {%- endif -%}
+              {%- if mobile_image -%}
+                {%- render 'image', src: mobile_image, class: 'hero__image-mobile' -%}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    {%- if title or description -%}
+      <div class="hero__content">
+        <div class="hero__container">
+          {%- if title -%}
+            <h1 class="h1 hero__title">{{ title }}</h1>
+          {%- endif -%}
+          {%- if description -%}
+            <p class="p1 hero__description">
+              {{ description }}
+            </p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
 </section>
