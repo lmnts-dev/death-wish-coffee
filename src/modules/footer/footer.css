@@ -1,7 +1,7 @@
 /* styles for footer */
 
 .footer {
-  background: var(--black);
+  width: 100%;
 }
 
 .footer__wrapper {
@@ -102,6 +102,10 @@
   color: var(--bone);
   text-decoration: none;
 
+  &:hover {
+    color: var(--blood);
+  }
+
   .footer--navigation & {
     padding: 3px 0;
     color: var(--white);
@@ -145,6 +149,10 @@
   color: var(--bone);
   text-decoration: none;
 
+  &:hover {
+    color: var(--blood);
+  }
+
   .footer--navigation & {
     padding: 3px 0;
     color: var(--white);
@@ -156,6 +164,11 @@
   align-items: center;
   justify-content: center;
   margin-top: 5px;
+
+  @media (--lg) {
+    justify-content: flex-start;
+    margin-left: -6px;
+  }
 
   .footer--navigation & {
     justify-content: flex-start;
@@ -174,6 +187,10 @@
   color: var(--black);
   background: var(--bone);
   border-radius: 50%;
+
+  &:hover {
+    background: var(--blood);
+  }
 
   .footer--navigation & {
     background: var(--white);

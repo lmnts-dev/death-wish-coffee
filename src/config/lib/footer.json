@@ -38,6 +38,20 @@
       "type": "link_list",
       "id": "footer_menu_3",
       "label": "Footer Menu #3"
+    },
+    {
+      "type": "header",
+      "content": "Footer Social"
+    },
+    {
+      "type": "text",
+      "id": "footer_social_title",
+      "label": "Footer Social Title"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_social_menu",
+      "label": "Footer Social Menu"
     }
   ]
 }
