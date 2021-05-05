@@ -4,8 +4,22 @@ body {
   margin-top: 200px;
 }
 
+.plp-filter {
+  &:not(.active) {
+    @media (--xl-max) {
+      display: none;
+    }
+  }
+}
+
 .plp-filter__block-list {
   .plp-filter__block:not(.active) & {
+    display: none;
+  }
+}
+
+.plp-filter__footer {
+  @media (--xl) {
     display: none;
   }
 }

@@ -344,3 +344,14 @@ export const buildImageSrcset = (src, webpSrc, isSizedFromShopify = false, exclu
     srcsets
   }
 }
+
+export const triggerCustomEvent = (el, eventName, options) => {
+  let event = null
+  if (window.CustomEvent) {
+    event = new CustomEvent(eventName, options)
+  } else {
+    event = document.createEvent('CustomEvent')
+    event.initCustomEvent(eventName, true, true, options)
+  }
+  el.dispatchEvent(event)
+}

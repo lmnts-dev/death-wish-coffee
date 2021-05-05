@@ -1,1 +1,7 @@
 /* styles for the plp-sort-header module go in this file */
+
+.plp-sort-header__filter {
+  @media (--xl) {
+    display: none;
+  }
+}

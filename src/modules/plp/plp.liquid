@@ -1,7 +1,7 @@
 <section class="plp" data-module="plp">
   <div class="plp__container">
-    {%- render 'plp-filter' -%}
+    {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+    {%- render 'plp-filter', class: 'js-filter' -%}
+    {%- comment -%}product-grid{%- endcomment -%}
   </div>
-  {%- comment -%}Product count: {%- endcomment -%}
-  {{ collection.products_count }} products
 </section>
