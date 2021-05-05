@@ -31,7 +31,11 @@
               {%- endfor -%}
             {%- endcapture -%}
             <div class="plp-filter__block js-filter-block">
-              <h4 class="plp-filter__block-title js-filter-block-title">{{- prefix -}}</h4>
+              <h4 class="plp-filter__block-title js-filter-block-title">
+                {{- prefix -}}
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--inactive">+</span>
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--active">&ndash;</span>
+              </h4>
               <div class="plp-filter__block-list">
                 {%- for matched_tag in matched_tags -%}
                   {%- assign matched_tag_handle = matched_tag | handle -%}

@@ -32,12 +32,33 @@ body {
 .plp-filter__block-title {
   @extend .h4;
 
-  color: var(--white);
+  position: relative;
   padding: 12px 0 8px;
+  color: var(--white);
   border-bottom: 1px solid var(--bone);
+  cursor: pointer;
 
   @media (--xl-max) {
     @extend .h5;
+  }
+}
+
+.plp-filter__block-title-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+
+  &--active {
+    .plp-filter__block:not(.active) & {
+      display: none;
+    }
+  }
+
+  &--inactive {
+    .plp-filter__block.active & {
+      display: none;
+    }
   }
 }
 
