@@ -1,7 +1,11 @@
-<section class="plp" data-module="plp">
-  <div class="plp__container">
-    {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-    {%- render 'plp-filter', class: 'js-filter' -%}
-    {%- comment -%}product-grid{%- endcomment -%}
+{%- assign class = class | default: false -%}
+{%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
+<section class="{{- class -}}" data-module="plp">
+  <div class="container plp__container js-container">
+    <div class="plp__inner">
+      {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+      {%- render 'plp-filter', class: 'js-filter' -%}
+      {%- comment -%}product-grid{%- endcomment -%}
+    </div>
   </div>
 </section>

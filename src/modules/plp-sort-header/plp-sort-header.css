@@ -1,7 +1,42 @@
 /* styles for the plp-sort-header module go in this file */
 
+.plp-sort-header__inner {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  border: solid var(--bone);
+  border-width: 1px 0;
+
+  @media (--lg) {
+    height: auto;
+  }
+}
+
 .plp-sort-header__filter {
-  @media (--xl) {
+  width: 38%;
+  height: 48px;
+  border-right: 1px solid var(--bone);
+
+  @media (--lg) {
+    display: none;
+  }
+}
+
+.plp-sort-header__filter-button {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px 22px;
+  color: var(--white);
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.plp-sort-header__count {
+  color: var(--white);
+
+  @media (--lg-max) {
     display: none;
   }
 }

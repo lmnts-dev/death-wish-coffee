@@ -3,7 +3,7 @@
  * @param {Object} el - The DOM Node containing the data-module="plp-filter" attribute.
  */
 
-import { toggle } from 'lib/util'
+import { toggle, triggerCustomEvent } from 'lib/util'
 
 const plpFilter = (el) => {
   const filterBlocks = el.querySelectorAll('.js-filter-block')
@@ -14,6 +14,7 @@ const plpFilter = (el) => {
       if (title) {
         title.addEventListener('click', () => {
           toggle(block, filterBlockActiveClass)
+          triggerCustomEvent(el, 'toggleFilterBlock')
         })
       }
     })
