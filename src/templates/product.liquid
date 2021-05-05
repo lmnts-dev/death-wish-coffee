@@ -1,7 +1,17 @@
 {%- layout 'theme' -%}
 {%- render 'pdp-hero' -%}
 {%- render 'section-title', title: 'MADE TO FIT YOUR LIFESTYLE', class: 'bg--black' -%}
-{%- render 'media-hero-grid' -%}
+
+{% assign media_hero_grid_metafields = product.metafields.media-grid %}
+{% assign types = media_hero_grid_metafields.type %}
+{% assign images = media_hero_grid_metafields.image %}
+{% assign videos = media_hero_grid_metafields.video %}
+{%- render 'media-hero-grid',
+    types: types,
+    images: images,
+    videos: videos
+-%}
+
 {%- render 'review-drawer' -%}
 
 {%- render 'carousel' -%}
