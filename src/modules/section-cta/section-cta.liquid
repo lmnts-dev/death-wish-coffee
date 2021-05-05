@@ -1,6 +1,29 @@
+{% assign title = title | default: false %}
+{% assign description = description |  default: false %}
+{% assign cta_text = cta_text |  default: false %}
+{% assign cta_url = cta_url |  default: false %}
 {% assign class = class | default:false %}
 {% capture class %}section-cta{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="section-cta">
-  <h2 class="module-name">section-cta</h2>
-</section>
+{%- if title and cta_text and cta_url -%}
+  <section class="{{ class }} bg--black" data-module="section-cta">
+    <div class="section-cta__inner">
+      {%- render 'svg', type: 'thunder', class: 'section-cta__partition' -%}
+      <div class="section-cta__content">
+        {%- if title -%}
+          <h1 class="section-cta__title">{{ title }}</h1>
+        {%- endif -%}
+        {%- if description -%}
+          <p class="section-cta__description">{{ description }}</p>
+        {%- endif -%}
+        {%- if cta_text and cta_url -%}
+          {%- capture custom_attrs -%}
+            href="{{ cta_url }}"
+          {%- endcapture -%}
+          {%- render 'button', custom_attrs: custom_attrs, button_value: cta_text, class: 'section-cta__button' -%}
+        {%- endif -%}
+      </div>
+      {%- render 'svg', type: 'thunder', class: 'section-cta__partition' -%}
+    </div>
+  </section>
+{%- endif -%}

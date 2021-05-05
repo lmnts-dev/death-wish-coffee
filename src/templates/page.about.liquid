@@ -11,11 +11,19 @@
 {%- render 'bolt-header' -%}
 {%- render 'grid' -%}
 {%- render 'title-description-card' -%}
+
 {% assign mirror_image = page.metafields.mirror-image-hero.mirror_image_hero_image | map: 'src' %}
 {%- render 'mirror-image-hero',
   image: mirror_image,
   title: page.metafields.mirror-image-hero.mirror_image_hero_header,
   description: page.metafields.mirror-image-hero.mirror_image_hero_copy
 -%}
-{%- render 'section-cta' -%}
+
+{%- render 'section-cta',
+  title: page.metafields.about-us-section-cta.header,
+  description: page.metafields.about-us-section-cta.message,
+  cta_text: page.metafields.about-us-section-cta.button_text,
+  cta_url: page.metafields.about-us-section-cta.button_url
+-%}
+
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
