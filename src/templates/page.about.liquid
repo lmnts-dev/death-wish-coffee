@@ -5,7 +5,11 @@
   desktop_image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/Death_Wish_575x.jpg?v=1617614373',
   mobile_image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
 -%}
-{%- render 'bolt-header' -%}
+{% assign bolt_header_image = page.metafields.bolt-header.bolt_header_image | map: 'src'  %}
+{%- render 'bolt-header',
+  image: bolt_header_image,
+  title: page.metafields.bolt-header.bolt_header_text
+-%}
 {%- render 'timeline-card',
   time: '2012',
   image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/img.png?v=1617002667',
