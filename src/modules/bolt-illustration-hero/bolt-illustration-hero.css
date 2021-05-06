@@ -6,33 +6,6 @@
   @media (--lg) {
     padding: 179px 0 255px;
   }
-
-  &--reverse {
-    & .bolt-illustration-hero__title,
-    & .bolt-illustration-hero__description {
-      text-align: right;
-    }
-
-    & .bolt-illustration-hero__inner {
-      align-items: flex-end;
-
-      @media (--lg) {
-        align-items: center;
-        flex-direction: row-reverse;
-      }
-    }
-
-    & .bolt-illustration-hero__feature {
-      left: 0;
-      right: auto;
-      transform: translate3d(-38px, -100%, 0) scaleX(-1);
-
-      @media (--lg) {
-        left: 0;
-        transform: translate3d(-38px, 0, 0) scaleX(-1);
-      }
-    }
-  }
 }
 
 .bolt-illustration-hero__title {
@@ -41,6 +14,10 @@
 
   @media (--lg) {
     padding-top: 0;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    text-align: right;
   }
 }
 
@@ -51,6 +28,10 @@
 
   @media (--lg) {
     padding-top: 0;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    text-align: right;
   }
 }
 
@@ -79,6 +60,15 @@
     justify-content: flex-start;
     padding: 0 calc(100% * 170 / 1920);
   }
+
+  .bolt-illustration-hero--reverse & {
+    align-items: flex-end;
+
+    @media (--lg) {
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+  }
 }
 
 .bolt-illustration-hero__feature {
@@ -104,6 +94,17 @@
 
     @media (--lg) {
       padding-top: calc(100% * 1187 / 785);
+    }
+  }
+
+  .bolt-illustration-hero--reverse & {
+    left: 0;
+    right: auto;
+    transform: translate3d(-38px, -100%, 0) scaleX(-1);
+
+    @media (--lg) {
+      left: 0;
+      transform: translate3d(-38px, 0, 0) scaleX(-1);
     }
   }
 }
