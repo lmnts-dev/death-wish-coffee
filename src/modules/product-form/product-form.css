@@ -66,6 +66,17 @@
   }
 }
 
+.product-form__option-value-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  & > * {
+    line-height: 1;
+  }
+}
+
 .product-form__option-value-icon {
   display: block;
   width: 40px;

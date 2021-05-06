@@ -7,6 +7,7 @@ const productform = el => {
   const inputEls = el.querySelectorAll('.js-product-input')
   const variantEl = el.querySelector('.js-product-variants')
   const submitButtonEl = el.querySelector('.js-form-submit')
+  const priceVariants = el.querySelectorAll('.js-variant-price')
   const options = {}
 
   if (inputEls.length && variantEl) {
@@ -28,6 +29,24 @@ const productform = el => {
 
           if (submitButtonEl) {
             submitButtonEl.removeAttribute('disabled')
+          }
+          for (const priceVariant of priceVariants) {
+            const variantTitle = priceVariant.getAttribute('data-variant-title')
+
+            console.log('variantTitle', variantTitle.split(' / '))
+
+            const titleContains = variantTitle.split(' / ').some(function (v) { return selectedTitle.indexOf(v) >= 0 })
+            const selectedContains = variantTitle === selectedTitle
+            const displayCondition = selectedContains ? variantTitle === selectedTitle : titleContains
+            console.log(titleContains)
+            console.log(selectedContains)
+            console.log(displayCondition)
+
+            if (titleContains) {
+              priceVariant.style.display = 'block'
+            } else {
+              priceVariant.style.display = 'none'
+            }
           }
         }
       })

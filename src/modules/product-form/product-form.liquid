@@ -22,7 +22,24 @@
                   <input id="{{- input_id -}}" type="radio" name="{{- input_name -}}" class="radio product-form__option-value-input js-product-input" value="{{- value -}}" data-option-index="{{- option_index -}}">
                   <label for="{{- input_id -}}" class="label label--radio product-form__option-value-label">
                     {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
-                    {{- value -}}
+                    <div class="product-form__option-value-text">
+                      <div class="product-form__option-value-name">
+                        {{- value -}}
+                      </div>
+                      
+                      <div class="product-form__option-prices" {% unless option contains 'Size' %} style="display: none;" {% endunless %}>
+                        {%- for variant in product.variants -%}
+                          {%- if variant.options contains value -%}  
+                            <span
+                              class="js-variant-price product-form__option-price b1"
+                              data-variant-title="{{- variant.title -}}"
+                              style="display: none;"
+                            >
+                            {{ variant.price | money }}</span>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    </div>
                   </label>
                 </div>
               {%- endfor -%}
