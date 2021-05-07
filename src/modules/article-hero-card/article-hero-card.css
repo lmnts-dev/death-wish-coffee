@@ -90,3 +90,9 @@
     display: none;
   }
 }
+
+.article-hero-card__item-blog {
+  @media (--md-max) {
+    display: none;
+  }
+}
