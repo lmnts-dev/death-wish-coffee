@@ -6,6 +6,14 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 29px;
+
+  .product-form--pdp-add-to-cart & {
+    margin-bottom: 16px;
+
+    @media (--md) {
+      margin-bottom: 32px;
+    }
+  }
 }
 
 .product-form__option {
@@ -13,6 +21,14 @@
 
   &:not(:first-child) {
     margin-top: -1px;
+  }
+
+  .product-form--pdp-add-to-cart & {
+    margin-top: 27px;
+
+    @media (--md) {
+      margin-top: 20px;
+    }
   }
 }
 
@@ -22,11 +38,38 @@
   align-items: center;
   border: 1px solid var(--shadow);
   background: var(--steel);
+
+  .product-form--pdp-add-to-cart & {
+    flex-direction: column;
+    align-items: flex-start;
+    background: none;
+    border: 0;
+
+    @media (--md) {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
 }
 
 .product-form__option-value {
   flex: 1 1 0;
   min-width: 103px;
+
+  .product-form--pdp-add-to-cart & {
+    background: var(--steel);
+    width: 100%;
+    max-width: 216px;
+
+    & + .product-form__option-value {
+      margin-top: 17px;
+
+      @media (--md) {
+        margin-top: 0;
+        margin-left: 8px;
+      }
+    }
+  }
 }
 
 .product-form__option-value-label {
@@ -40,6 +83,17 @@
   .product-form__option-value {
     &:last-child {
       border-right: none;
+    }
+  }
+
+  .product-form--pdp-add-to-cart & {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 16px;
+    color: var(--black);
+
+    @media (--md) {
+      @extend .b2;
     }
   }
 }
@@ -86,30 +140,18 @@
 
 .product-form__button {
   margin: 0 auto;
+
+  .product-form--pdp-add-to-cart & {
+    margin-left: 0;
+  }
 }
 
 .product-form__variants {
   display: none;
 }
 
-.product-form--pdp-add-to-cart {
-  .product-form__options {
-    margin-bottom: 16px;
-
-    @media (--md) {
-      margin-bottom: 32px;
-    }
-  }
-
-  .product-form__option {
-    margin-top: 27px;
-
-    @media (--md) {
-      margin-top: 20px;
-    }
-  }
-
-  .product-form__option-title {
+.product-form__option-title {
+  .product-form--pdp-add-to-cart & {
     margin-bottom: 20px;
 
     @media (--md) {
@@ -118,48 +160,6 @@
       margin-bottom: 12px;
       text-transform: capitalize;
     }
-  }
-
-  .product-form__option-values {
-    flex-direction: column;
-    align-items: flex-start;
-    background: none;
-    border: 0;
-
-    @media (--md) {
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-  }
-
-  .product-form__option-value {
-    background: var(--steel);
-    width: 100%;
-    max-width: 216px;
-
-    & + .product-form__option-value {
-      margin-top: 17px;
-
-      @media (--md) {
-        margin-top: 0;
-        margin-left: 8px;
-      }
-    }
-  }
-
-  .product-form__option-value-label {
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-left: 16px;
-    color: var(--black);
-
-    @media (--md) {
-      @extend .b2;
-    }
-  }
-
-  .product-form__button {
-    margin-left: 0;
   }
 }
 
