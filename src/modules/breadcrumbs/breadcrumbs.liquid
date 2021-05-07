@@ -1,6 +1,11 @@
 {% assign class = class | default:false %}
 {% capture class %}breadcrumbs{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="breadcrumbs">
-  <h2 class="module-name">breadcrumbs</h2>
+<section class="{{ class }} bg--black" data-module="breadcrumbs">
+  <div class="container breadcrumbs__container">
+    <div class="breadcrumbs__inner">
+      <a href="{{ routes.collections_url }}" class="b1 breadcrumbs__link">{{ routes.collections_url | split: '/' }}</a>
+      <p class="b1 breadcrumbs__text">/ {{ collection.title }}</p>
+    </div>
+  </div>
 </section>
