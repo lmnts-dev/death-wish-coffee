@@ -53,7 +53,7 @@
   }
 }
 
-.article-hero-card__item-title {
+.article-hero-card__title {
   display: block;
   overflow: hidden;
   text-decoration: none;
@@ -62,13 +62,25 @@
   @media (--md) {
     max-width: percentage(961/1285);
   }
+
+  &--mobile {
+    @media (--md) {
+      display: none;
+    }
+  }
+
+  &--desktop {
+    @media (--md-max) {
+      display: none;
+    }
+  }
 }
 
-.article-hero-card__item-info {
+.article-hero-card__info {
   text-transform: capitalize;
 }
 
-.article-hero-card__item-subtitle {
+.article-hero-card__subtitle {
   margin-top: 3px;
 
   @media (--md) {
@@ -91,7 +103,7 @@
   }
 }
 
-.article-hero-card__item-blog {
+.article-hero-card__blog {
   @media (--md-max) {
     display: none;
   }

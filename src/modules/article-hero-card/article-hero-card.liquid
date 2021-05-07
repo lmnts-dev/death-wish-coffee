@@ -16,11 +16,12 @@
           {%- render 'image', src: article_image, class: 'article-hero-card__image no-hover' -%}
         </a>
         <div class="article-hero-card__content">
-          <a href="{{article.url}}" class="article-hero-card__item-title h2">{{ article.title }}</a>
+          <a href="{{article.url}}" class="article-hero-card__title article-hero-card__title--mobile h2">{{ article.title | truncatewords: 4 }}</a>
+          <a href="{{article.url}}" class="article-hero-card__title article-hero-card__title--desktop h2">{{ article.title }}</a>
           {%- if article.excerpt != blank -%}
-            <p class="article-hero-card__item-subtitle h5">{{ article.excerpt }}</p>
+            <p class="article-hero-card__subtitle h5">{{ article.excerpt }}</p>
           {%- endif -%}
-          <p class="article-hero-card__item-info b1">By {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}<span class="article-hero-card__item-blog"> / {{ handle | split: '/' | first }}</span></p>
+          <p class="article-hero-card__info b1">By {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}<span class="article-hero-card__blog"> / {{ handle | split: '/' | first }}</span></p>
         </div>
       </div>
     </div>
