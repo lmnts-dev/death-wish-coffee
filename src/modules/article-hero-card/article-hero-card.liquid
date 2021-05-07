@@ -1,6 +1,36 @@
 {% assign class = class | default:false %}
 {% capture class %}article-hero-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- assign notice_title = notice_title | default: false -%}
+{%- assign list_article = list_article | default: false -%}
 
-<section class="{{ class }} placeholder" data-module="article-hero-card">
-  <h2 class="module-name">article-hero-card</h2>
-</section>
+{%- capture content_slides -%}
+  {%- for handle in list_article -%}
+    {%- assign article = articles[handle] -%}
+    <div class="article-hero-card__item swiper-slide">
+      <p class="article-hero-card__notice-title b1">
+        {{ notice_title[forloop.index0] }}
+      </p>
+      <div class="article-hero-card__inner">
+        {%- assign article_image = article.image.src | img_url: 'master' -%}
+        <a href="{{ article.url }}" class="article-hero-card__image-wrapper">
+          {%- render 'image', src: article_image, class: 'article-hero-card__image no-hover' -%}
+        </a>
+        <div class="article-hero-card__content">
+          <a href="{{article.url}}" class="article-hero-card__item-title h2">{{ article.title }}</a>
+          {%- if article.excerpt != blank -%}
+            <p class="article-hero-card__item-subtitle h5">{{ article.excerpt }}</p>
+          {%- endif -%}
+          <p class="article-hero-card__item-info b1">By {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }} / {{ handle | split: '/' | first }}</p>
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if list_article.size > 0 -%}
+  <section class="{{ class }} bg--black" data-module="article-hero-card">
+    <div class="article-hero-card__wrapper">
+      {%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+    </div>
+  </section>
+{%- endif -%}

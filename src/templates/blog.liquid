@@ -6,7 +6,10 @@ If this comment is still here, please consult with the lead developer on the pro
 {%- endcomment -%}
 
 {%- render 'carousel' -%}
-{%- render 'article-hero-card' -%}
+{%- render 'article-hero-card',
+  notice_title: blog.metafields.article_hero_card.notice_title,
+  list_article: blog.metafields.article_hero_card.article
+-%}
 
 {%- render 'carousel' -%}
 {%- assign post = blog.articles[0] -%}

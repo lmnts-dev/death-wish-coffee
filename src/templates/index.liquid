@@ -15,10 +15,10 @@
 {%- render 'super-hero-cta' -%}
 {%- render 'super-hero-cta' -%}
 
-{%- capture article_cards -%}
-  {%- render 'article-hero-card' -%}
-{%- endcapture -%}
-{%- render 'carousel', children: article_cards -%}
+{%- render 'article-hero-card',
+  notice_title: shop.metafields.article_hero_card.notice_title,
+  list_article: shop.metafields.article_hero_card.article
+-%}
 
 {%- render 'footer-cta' -%}
 

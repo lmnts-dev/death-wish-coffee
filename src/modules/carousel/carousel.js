@@ -19,7 +19,7 @@ const carousel = el => {
 
   const next = carousel.querySelector('.carousel-next')
   const prev = carousel.querySelector('.carousel-prev')
-  const navigation = !!carousel.dataset.navigation && { navigation: { nextEl: next, prevEl: prev } }
+  const navigation = next && prev ? { navigation: { nextEl: next, prevEl: prev } } : false
 
   const paginationEl = carousel.querySelector('.carousel-pagination')
   const pagination = !!carousel.dataset.pagination && { pagination: { el: paginationEl, clickable: true } }

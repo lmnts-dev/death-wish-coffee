@@ -266,3 +266,42 @@
   align-items: center;
   justify-content: center;
 }
+
+.carousel--article-hero-card {
+  padding: 0;
+
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 percentage(27/375);
+
+    @media (--md) {
+      padding: 0 percentage(228/1920);
+    }
+  }
+
+  .swiper-slide {
+    opacity: 0.5;
+
+    &-active {
+      opacity: 1;
+    }
+  }
+
+  .carousel-next,
+  .carousel-prev {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
+
+  .carousel-next {
+    right: 83px;
+  }
+
+  .carousel-prev {
+    left: 83px;
+  }
+}
