@@ -7,7 +7,9 @@
       <div class="pdp-add-to-cart__header">
         <h2 class="pdp-add-to-cart__title h2">{{product.title}}</h2>
         <p class="pdp-add-to-cart__price h5">{{product.price | money}}{% if customer %} (FREE SHIPPING){% endif %}</p>
-        <p class="pdp-add-to-cart__review">Review</p>
+        <div class="pdp-add-to-card__review js-review">
+          <p class="pdp-add-to-cart__review-content">Review</p>
+        </div>
       </div>
       <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart">{{product.description}}</div>
       {%- render 'product-form', class: 'product-form--pdp-add-to-cart', show_title: true -%}
