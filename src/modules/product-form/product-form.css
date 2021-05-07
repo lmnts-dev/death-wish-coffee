@@ -162,3 +162,11 @@
     margin-left: 0;
   }
 }
+
+.product-form__option-price {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
