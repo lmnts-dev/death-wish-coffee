@@ -1,6 +1,35 @@
+{%- assign header = header | default: false -%}
+{%- assign title = title | default: false -%}
+{%-assign description = description | default: false -%}
 {% assign class = class | default:false %}
 {% capture class %}title-description-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="title-description-card">
-  <h2 class="module-name">title-description-card</h2>
-</section>
+{%- if title and description -%}
+  <section class="{{ class }} bg--black" data-module="title-description-card">
+    <div class="title-description-card__wrapper">
+      {%- if header -%}
+        <div class="h4 title-description-card__header">
+          {{ header }}
+        </div>
+      {%- endif -%}
+      <div class="title-description-card__inner">
+        {%- for item in title -%}
+          {%- if title[forloop.index0] != blank -%}
+            <div class="title-description-card__item">
+              <div class="title-description-card__content">
+                <div class="h4 title-description-card__title">
+                  {{ title[forloop.index0] }}
+                </div>
+                {%- if description[forloop.index0] != blank -%}
+                  <div class="p1 title-description-card__description">
+                    {{ description[forloop.index0] }}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
