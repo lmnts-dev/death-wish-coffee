@@ -30,7 +30,7 @@ body {
 }
 
 .plp-filter__block-title {
-  @extend .h4;
+  @extend .h5;
 
   position: relative;
   padding: 12px 0 8px;
@@ -38,7 +38,7 @@ body {
   border-bottom: 1px solid var(--bone);
   cursor: pointer;
 
-  @media (--xl-max) {
+  @media (--md-max) {
     @extend .h5;
   }
 }
