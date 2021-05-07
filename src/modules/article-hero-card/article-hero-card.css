@@ -60,7 +60,7 @@
   color: var(--blood);
 
   @media (--md) {
-    max-width: percentage(961/1441);
+    max-width: percentage(961/1285);
   }
 }
 
@@ -72,6 +72,7 @@
   margin-top: 3px;
 
   @media (--md) {
+    max-width: percentage(961/1285);
     margin-top: 7px;
   }
 
