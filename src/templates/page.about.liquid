@@ -49,7 +49,14 @@
   reverse: true,
   copy: 'Death Wish Coffee unleashes the medium roast blend, providing the people with a lighter shade of bold.'
 -%}
-{%- render 'full-width-photo-hero' -%}
+
+{% assign full_width_image = page.metafields.full_width_hero.hero_image | map: 'src' %}
+{%- render 'full-width-photo-hero',
+  image: full_width_image,
+  title: page.metafields.full_width_hero.hero_header,
+  description: page.metafields.full_width_hero.hero_copy
+-%}
+
 {%- render 'bolt-header' -%}
 {%- render 'grid' -%}
 {%- render 'title-description-card' -%}
