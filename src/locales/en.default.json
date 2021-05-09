@@ -123,14 +123,15 @@
       "tags": "Tags"
     },
     "sorting": {
-      "title": "Sort by",
+      "title": "Sort By",
+      "aria_label": "Sort Order",
       "featured": "Featured",
       "best_selling": "Best Selling",
-      "az": "Alphabetically, A-Z",
-      "za": "Alphabetically, Z-A",
-      "price_ascending": "Price, low to high",
-      "price_descending": "Price, high to low",
-      "date_descending": "Date, new to old",
+      "az": "A-Z",
+      "za": "Z-A",
+      "price_ascending": "Price low to high",
+      "price_descending": "Price high to low",
+      "date_descending": "Newest",
       "date_ascending": "Date, old to new"
     },
     "onboarding": {

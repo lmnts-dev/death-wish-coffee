@@ -9,6 +9,9 @@
 
   @media (--lg) {
     height: auto;
+    border: none;
+    align-items: flex-end;
+    justify-content: space-between;
   }
 }
 
@@ -16,6 +19,7 @@
   width: 38%;
   height: 48px;
   border-right: 1px solid var(--bone);
+  flex: 1 0 auto;
 
   @media (--lg) {
     display: none;
@@ -38,5 +42,14 @@
 
   @media (--lg-max) {
     display: none;
+  }
+}
+
+.plp-sort-header__sort {
+  width: 100%;
+
+  @media (--lg) {
+    width: 216px;
+    order: 1;
   }
 }
