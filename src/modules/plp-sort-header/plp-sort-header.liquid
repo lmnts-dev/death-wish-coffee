@@ -20,11 +20,12 @@
         <button class="b1 plp-sort-header__filter-button js-filter-button">Filter</button>
       </div>
       {%- render 'input-select',
-        class: 'input-select--dark plp-sort-header__sort',
+        class: 'input-select--dark plp-sort-header__sort js-sort-select',
         options: sort_option_titles,
         option_values: sort_option_values,
         placeholder: sort_by_title,
-        custom_attrs: sort_by_aria_label
+        custom_attrs: sort_by_aria_label,
+        selected_value: collection.sort_by
       -%}
       <div class="plp-sort-header__count">
         {{ collection.products_count }} products

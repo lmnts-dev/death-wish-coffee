@@ -14,6 +14,20 @@ const plpSortHeader = (el) => {
       triggerCustomEvent(el, 'toggleFiter', { detail: { active: filterActive } })
     })
   }
+
+  const sortSelectEl = el.querySelector('.js-sort-select')
+  if (sortSelectEl) {
+    sortSelectEl.addEventListener('change', (e) => {
+      const queryVarPairs = new Map(
+        location.search.substr(1).split('&')
+          .map(pair => pair.split('='))
+          .filter(pair => pair.length > 1)
+      )
+
+      queryVarPairs.set('sort_by', e.target.value)
+      location.search = new URLSearchParams([...queryVarPairs]).toString()
+    })
+  }
 }
 
 export default plpSortHeader
