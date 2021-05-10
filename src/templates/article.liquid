@@ -1,5 +1,6 @@
 {%- layout 'theme' -%}
-{%- render 'post-hero' -%}
+{%- assign post_hero_image = article.metafields.post_hero.image | map: 'src' -%}
+{%- render 'post-hero', image: post_hero_image -%}
 {%- render 'post-header' -%}
 {%- render 'wysiwyg', content: article.content, class: 'bg--bone' -%}
 {%- render 'post-navigation' -%}
