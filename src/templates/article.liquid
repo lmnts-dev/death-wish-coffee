@@ -1,7 +1,7 @@
 {%- layout 'theme' -%}
 {%- render 'post-hero' -%}
 {%- render 'post-header' -%}
-{%- render 'wysiwyg' -%}
+{%- render 'wysiwyg', content: article.content, class: 'bg--bone' -%}
 {%- render 'post-navigation' -%}
 {%- render 'carousel', title: 'MORE TO EXPLORE' -%}
 {%- render 'category-card' -%}
