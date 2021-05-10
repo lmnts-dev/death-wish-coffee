@@ -134,9 +134,8 @@
 }
 
 .carousel-next, .carousel-prev {
-  width: 3rem;
-  height: 3rem;
-  color: var(--gray);
+  width: 50px;
+  height: 23px;
   top: 75%;
   transform: translateY(-75%);
 
@@ -298,10 +297,10 @@
   }
 
   .carousel-next {
-    right: 83px;
+    right: 4%;
   }
 
   .carousel-prev {
-    left: 83px;
+    left: 4%;
   }
 }
