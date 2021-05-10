@@ -4,6 +4,12 @@
 {% capture classes %}wysiwyg{% if class %} {{- class -}}{% endif %}{% endcapture %}
 <div class="{{- classes -}}" data-module="wysiwyg">
   {% if content %}
-    {{content}}
+    {%- if template == 'article' -%}
+      <div class="container container--post">
+    {%- endif -%}
+      {{content}}
+    {%- if template == 'article' -%}
+      </div>
+    {%- endif -%}
   {% endif %}
 </div>
