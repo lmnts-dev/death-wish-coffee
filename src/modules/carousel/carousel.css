@@ -101,6 +101,14 @@
       background-color: var(--gray);
     }
   }
+
+  &--pdp-hero {
+    padding: 0;
+
+    @media (--md) {
+      width: calc(50% + 9px);
+    }
+  }
 }
 
 .carousel-container {
@@ -111,6 +119,11 @@
 
   @media (--md-max) {
     padding: 0 1rem;
+  }
+
+  .carousel--pdp-hero & {
+    position: relative;
+    padding: 0;
   }
 }
 
@@ -138,6 +151,15 @@
   &::after {
     content: none;
   }
+
+  .carousel--pdp-hero & {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
 }
 
 .carousel-next {
@@ -153,6 +175,10 @@
       fill: var(--gray);
     }
   }
+
+  .carousel--pdp-hero & {
+    right: 26px;
+  }
 }
 
 .carousel-prev {
@@ -167,6 +193,10 @@
       opacity: 1;
       fill: var(--gray);
     }
+  }
+
+  .carousel--pdp-hero & {
+    left: 16px;
   }
 }
 
