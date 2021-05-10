@@ -1,1 +1,57 @@
 /* styles for the post-navigation module go in this file */
+
+.post-navigation {
+  padding: 12px 0 50px;
+
+  @media (--md) {
+    padding: 56px 0 74px;
+  }
+}
+
+.post-navigation__inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  min-height: 24px;
+}
+
+.post-navigation__link {
+  @extend .h4;
+
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: var(--shadow);
+
+  @media (--md) {
+    @extend .h5;
+  }
+
+  &:hover {
+    color: var(--blood);
+  }
+
+  &--previous {
+    left: 0;
+  }
+
+  &--next {
+    right: 0;
+  }
+}
+
+.post-navigation__arrow {
+  display: block;
+  margin: 2px 11px 0 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 11px solid currentColor;
+
+  .post-navigation__link--next & {
+    margin: 2px 0 0 11px;
+    transform: scaleX(-1);
+  }
+}
