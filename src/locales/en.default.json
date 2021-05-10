@@ -57,8 +57,8 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Posted by {{ author }} on {{ date }}",
-      "older_post": "Older Post",
-      "newer_post": "Newer Post",
+      "older_post": "Older Blogs",
+      "newer_post": "Newer Blogs",
       "tags": "Tags",
       "comment_meta_html": "{{ author }} on {{ date }}",
       "read_more": "Read more"

@@ -9,6 +9,12 @@
   @media (--lg-max) and (--md) {
     padding: 0 var(--container-padding-tablet);
   }
+
+  &--post {
+    max-width: 1038px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 }
 
 .right-container {
