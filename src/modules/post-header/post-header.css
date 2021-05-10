@@ -1,1 +1,16 @@
 /* styles for the post-header module go in this file */
+
+.post-header__wrapper {
+  max-width: 1038px;
+  margin: 0 auto;
+  padding: 0 24px;
+  color: var(--shadow);
+}
+
+.post-header__content {
+  padding: 29px 0;
+
+  @media (--md) {
+    padding: 49px 0;
+  }
+}

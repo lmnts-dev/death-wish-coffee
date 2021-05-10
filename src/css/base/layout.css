@@ -39,6 +39,10 @@
   &--shadow {
     background-color: var(--shadow);
   }
+
+  &--bone {
+    background-color: var(--bone);
+  }
 }
 
 .spacing {
