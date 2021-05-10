@@ -1,1 +1,143 @@
-/* styles for the bolt-illustration-hero module go in this file */
+.bolt-illustration-hero {
+  position: relative;
+  padding: 42px 0 90px;
+  color: var(--white);
+
+  @media (--lg) {
+    padding: 179px 0 255px;
+  }
+}
+
+.bolt-illustration-hero__title {
+  padding-top: 42px;
+  color: var(--blood);
+
+  @media (--lg) {
+    padding-top: 0;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    text-align: right;
+  }
+}
+
+.bolt-illustration-hero__description {
+  @extend .p1;
+
+  padding-top: 3px;
+
+  @media (--lg) {
+    padding-top: 0;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    text-align: right;
+  }
+}
+
+.bolt-illustration-hero__desktop-image {
+  @media (--lg-max) {
+    display: none;
+  }
+}
+
+.bolt-illustration-hero__mobile-image {
+  @media (--lg) {
+    display: none;
+  }
+}
+
+.bolt-illustration-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 38px;
+
+  @media (--lg) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 calc(100% * 170 / 1920);
+  }
+
+  .bolt-illustration-hero--reverse & {
+    align-items: flex-end;
+
+    @media (--lg) {
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.bolt-illustration-hero__feature {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 175px;
+  transform: translate3d(38px, -100%, 0);
+  z-index: 1;
+
+  @media (--lg) {
+    top: auto;
+    bottom: 0;
+    width: calc(100% * 785 / 1920);
+    max-width: 785px;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: calc(100% * 300 / 175);
+
+    @media (--lg) {
+      padding-top: calc(100% * 1187 / 785);
+    }
+  }
+
+  .bolt-illustration-hero--reverse & {
+    left: 0;
+    right: auto;
+    transform: translate3d(-38px, -100%, 0) scaleX(-1);
+
+    @media (--lg) {
+      left: 0;
+      transform: translate3d(-38px, 0, 0) scaleX(-1);
+    }
+  }
+}
+
+.bolt-illustration-hero__image {
+  position: relative;
+  bottom: 0;
+  right: 0;
+  width: 196px;
+  z-index: 1;
+
+  @media (--lg) {
+    width: calc(100% * 348 / 1580);
+    max-width: 348px;
+    margin-right: 40px;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: calc(100% * 230 / 196);
+
+    @media (--lg) {
+      padding-top: calc(100% * 408 / 348);
+    }
+  }
+}
+
+.bolt-illustration-hero__content {
+  position: relative;
+
+  @media (--lg) {
+    position: static;
+    width: calc(100% * 650 / 1580);
+  }
+}

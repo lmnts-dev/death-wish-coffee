@@ -1,0 +1,66 @@
+{%- assign blocks = section.blocks -%}
+{%- assign section = section.settings -%}
+{%- assign feature_image = section.feature_image | img_url: 'master' -%}
+{%- assign feature_image_mobile = section.feature_image_mobile | img_url: 'master' -%}
+
+{% for block in blocks  %}
+  {%- assign image = block.settings.image | img_url: 'master' -%}
+  {%- assign title = block.settings.title -%}
+  {%- assign description = block.settings.description -%}
+
+  {%- render 'bolt-illustration-hero',
+    feature_image: feature_image,
+    feature_image_mobile: feature_image_mobile,
+    image: image,
+    title: title,
+    description: description,
+    reverse_content: reverse_content
+  -%}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Bolt Illustration Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Feature Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image_mobile",
+      "label": "Feature Image (Mobile)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bolt-illustration-hero",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_content",
+          "label": "Reverse",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
