@@ -32,8 +32,6 @@
     .timeline-card__wrapper-image {
       margin-right: 0;
       margin-left: 140px;
-      padding-left: 0;
-      padding-right: 30px;
 
       &::after {
         right: 100%;
@@ -43,12 +41,6 @@
       &::before {
         right: calc(100% + 106px);
         left: auto;
-      }
-
-      .image {
-        left: 0;
-        right: auto;
-        width: calc(100% - 30px);
       }
     }
 
@@ -75,26 +67,41 @@
       }
     }
   }
+
+  .timeline-card__time {
+    margin-bottom: 9px;
+
+    @media (--lg) {
+      padding-right: 0;
+      padding-left: 20px;
+    }
+
+    @media (--xl) {
+      padding-right: 0;
+      padding-left: 79px;
+    }
+  }
+}
+
+.timeline-card__image-ratio {
+  width: 100%;
+  padding-top: 100%;
 }
 
 .timeline-card__wrapper-image {
   position: relative;
   width: 136px;
-  height: 136px;
+  height: 100%;
   margin-bottom: 32px;
+  background: var(--ashe);
+  border-radius: 100%;
 
   .image {
-    @media (--lg) {
-      left: auto;
-      right: 0;
-      width: calc(100% - 30px);
-    }
-
-    @media (--xxl) {
-      left: auto;
-      right: 0;
-      width: calc(100% - 80px);
-    }
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
   }
 
   .image__img {
@@ -102,11 +109,9 @@
   }
 
   @media (--lg) {
-    width: 294px;
-    height: 264px;
+    width: 200px;
     margin: 0;
     margin-right: 140px;
-    padding-left: 30px;
 
     &::after {
       content: '';
@@ -132,10 +137,8 @@
   }
 
   @media (--xxl) {
-    width: 344px;
-    height: 264px;
+    width: 264px;
     margin-right: 168px;
-    padding-left: 80px;
 
     &::after {
       width: 146px;
@@ -154,6 +157,14 @@
 
 .timeline-card__time {
   margin-bottom: 9px;
+
+  @media (--lg) {
+    padding-right: 20px;
+  }
+
+  @media (--xl) {
+    padding-right: 79px;
+  }
 }
 
 .timeline-card__wrapper {

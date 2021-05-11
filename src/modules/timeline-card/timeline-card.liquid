@@ -13,7 +13,6 @@ timeline-card bg--black{% if class %} {{- class -}}{% endif %}
 {%- endcapture -%}
 
 
-
 <section class="{{ class }}" data-module="timeline-card">
   <div class="container timeline-card__container">
     <div class="timeline-card__wrapper">
@@ -23,7 +22,8 @@ timeline-card bg--black{% if class %} {{- class -}}{% endif %}
         {%- endif -%}
         {%- if image_src != blank -%}
           <div class="timeline-card__wrapper-image">
-            {%- render 'image', src: image_src -%}
+            <div class="timeline-card__image-ratio"></div>
+            {%- render 'image', src: image_src, class: 'no-hover' -%}
           </div>  
         {%- endif -%}
       </div>
