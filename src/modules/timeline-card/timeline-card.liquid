@@ -19,7 +19,7 @@ timeline-card bg--black{% if class %} {{- class -}}{% endif %}
     <div class="timeline-card__wrapper">
       <div class="timeline-card__header">
         {%- if time != blank -%}
-          <h3 class="h2 timeline-card__time">{{- time -}}</h3>
+          <h3 class="h2 h2--large h2--fenomen h2--xl-max h2--semi-bold timeline-card__time">{{- time -}}</h3>
         {%- endif -%}
         {%- if image_src != blank -%}
           <div class="timeline-card__wrapper-image">
@@ -33,7 +33,7 @@ timeline-card bg--black{% if class %} {{- class -}}{% endif %}
             <p class="h2 timeline-card__title">{{- title -}}</p>
           {%- endif -%}
           {% if copy != blank %}
-            <p class="timeline-card__copy p1">{{- copy -}}</p>
+            <p class="timeline-card__copy p1 p1--large">{{- copy -}}</p>
           {% endif %}
         </div>
       {%- endif -%}

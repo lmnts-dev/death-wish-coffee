@@ -21,6 +21,10 @@
   }
 }
 
+.timeline-card__container {
+  max-width: 1484px;
+}
+
 .timeline-card--reverse {
   @media (--lg) {
     text-align: right;
@@ -28,6 +32,8 @@
     .timeline-card__wrapper-image {
       margin-right: 0;
       margin-left: 140px;
+      padding-left: 0;
+      padding-right: 30px;
 
       &::after {
         right: 100%;
@@ -37,6 +43,12 @@
       &::before {
         right: calc(100% + 106px);
         left: auto;
+      }
+
+      .image {
+        left: 0;
+        right: auto;
+        width: calc(100% - 30px);
       }
     }
 
@@ -49,13 +61,17 @@
     }
   }
 
-  @media (--xl) {
+  @media (--xxl) {
     .timeline-card__wrapper-image {
       margin-right: 0;
       margin-left: 168px;
 
       &::before {
         right: calc(100% + 126px);
+      }
+
+      .image {
+        width: calc(100% - 80px);
       }
     }
   }
@@ -67,11 +83,30 @@
   height: 136px;
   margin-bottom: 32px;
 
+  .image {
+    @media (--lg) {
+      left: auto;
+      right: 0;
+      width: calc(100% - 30px);
+    }
+
+    @media (--xxl) {
+      left: auto;
+      right: 0;
+      width: calc(100% - 80px);
+    }
+  }
+
+  .image__img {
+    object-fit: contain;
+  }
+
   @media (--lg) {
-    width: 170px;
-    height: 170px;
+    width: 294px;
+    height: 264px;
     margin: 0;
     margin-right: 140px;
+    padding-left: 30px;
 
     &::after {
       content: '';
@@ -96,10 +131,11 @@
     }
   }
 
-  @media (--xl) {
-    width: 264px;
+  @media (--xxl) {
+    width: 344px;
     height: 264px;
     margin-right: 168px;
+    padding-left: 80px;
 
     &::after {
       width: 146px;
