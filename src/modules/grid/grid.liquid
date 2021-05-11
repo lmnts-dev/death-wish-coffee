@@ -10,10 +10,11 @@ gutter = sm || md || lg || xl
 {% assign children = children | default: false %}
 {% assign gutter = gutter | default: 'md' %}
 {% assign use_margin = use_margin | default: false %}
+{% assign use_container = use_container | default: false %}
 {% capture class %}grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }}" data-module="grid">
-  <div class="container grid-content grid-content--{{- gutter -}}{% if title or tagline or copy %} grid-content--margin-top{% endif %}{% if use_margin != false %} grid-content--margin-system{% endif %}">
+  <div class="{% if use_container %} container{% endif %} grid-content grid-content--{{- gutter -}}{% if title or tagline or copy %} grid-content--margin-top{% endif %}{% if use_margin != false %} grid-content--margin-system{% endif %}">
     {{- children -}}
   </div>
 </section>
