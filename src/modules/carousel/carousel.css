@@ -134,9 +134,8 @@
 }
 
 .carousel-next, .carousel-prev {
-  width: 3rem;
-  height: 3rem;
-  color: var(--gray);
+  width: 50px;
+  height: 23px;
   top: 75%;
   transform: translateY(-75%);
 
@@ -265,4 +264,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.carousel--article-hero-card {
+  padding: 32px 0 37px;
+
+  @media (--md) {
+    padding: 66px 0 101px;
+  }
+
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 7%;
+
+    @media (--md) {
+      padding: 0 12%;
+    }
+  }
+
+  .carousel-next,
+  .carousel-prev {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
+
+  .carousel-next {
+    right: 4%;
+  }
+
+  .carousel-prev {
+    left: 4%;
+  }
 }
