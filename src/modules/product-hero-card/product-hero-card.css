@@ -1,34 +1,23 @@
 /* styles for the product-hero-card module go in this file */
 
 .product-hero-card {
-  padding: 70px 0 24px;
+  padding: 0 0 24px;
 
   @media (--md) {
-    padding: 138px 0 113px;
+    padding: 0 0 113px;
   }
-}
-
-.product-hero-card__title {
-  padding: 0 46px 61px;
-  color: var(--blood);
-  text-align: center;
-
-  @media (--md) {
-    @extend .h1;
-
-    padding-bottom: 121px;
-  }
-}
-
-.product-hero-card__contents {
-  padding: 0;
 }
 
 .product-hero-card__inner {
   position: relative;
+  opacity: 0.5;
+
+  .swiper-slide-active & {
+    opacity: 1;
+  }
 }
 
-.product-hero-card__item {
+.product-hero-card__wrapper {
   padding: 0 4px;
 
   @media (--md) {

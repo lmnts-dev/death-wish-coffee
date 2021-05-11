@@ -1,36 +1,28 @@
 {% assign class = class | default:false %}
 {% assign title = title | default:false %}
+{% assign image_url = image_url | default:false %}
+{% assign url = url | default:false %}
+{% assign description = description | default:false %}
+{% assign sub_description = sub_description | default:false %}
 {% capture class %}product-hero-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
-{%- assign list_products = list_products -%}
 
-{%- capture content_slides -%}
-  {% for handle in list_products %}
-    {%- assign product = all_products[handle] -%}
-
-    <div class="product-hero-card__item swiper-slide">
-      <div class="product-hero-card__inner">
-        {%- assign product_image = product.images[1] | img_url: 'master' -%}
-        
-        <a href="{{product.url}}" class="product-hero-card__image-wrapper">
-          {%- render 'image', src: product_image, class: 'product-hero-card__image no-hover' -%}
-        </a>
-        <div class="product-hero-card__content">
-          <a href="{{product.url}}" class="product-hero-card__item-title h2">{{ product.title }}</a>
-          <p class="product-hero-card__item-price b2">{{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}</p>
-          <p class="product-hero-card__item-review b2">Review</p>
-        </div>
+<section class="{{ class }} bg--shadow" data-module="product-hero-card">
+  <div class="product-hero-card__wrapper">
+    <div class="product-hero-card__inner">
+      <a href="{{ url }}" class="product-hero-card__image-wrapper">
+        {%- render 'image', src: image_url, class: 'product-hero-card__image no-hover' -%}
+      </a>
+      <div class="product-hero-card__content">
+        {% if title %}
+          <a href="{{ url }}" class="product-hero-card__item-title h2">{{ title }}</a>
+        {% endif %}
+        {%- if description -%}
+          <p class="product-hero-card__item-price b2">{{ description }}</p>
+        {%- endif -%}
+        {%- if sub_description -%}
+          <p class="product-hero-card__item-review">{{ sub_description }}</p>
+        {%- endif -%}
       </div>
     </div>
-  {% endfor %}
-{%- endcapture -%}
-
-{%- if list_products.size > 0 -%}
-  <section class="{{ class }} bg--shadow" data-module="product-hero-card">
-    <div class="product-hero-card__wrapper">
-      {%- if title -%}
-        <h2 class="product-hero-card__title h2">{{- title -}}</h2>
-      {%- endif -%}
-      {%- render 'carousel', class: 'carousel--product-hero-card product-hero-card__contents', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
-    </div>
-  </section>
-{%- endif -%}
+  </div>
+</section>
