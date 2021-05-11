@@ -1,37 +1,34 @@
 {% assign class = class | default:false %}
 {% capture class %}article-hero-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
-{%- assign notice_title = notice_title | default: false -%}
-{%- assign list_article = list_article | default: false -%}
+{%- assign title = title | default: '' -%}
+{%- assign notice = notice | default: '' -%}
+{%- assign image = image | default: '' -%}
+{%- assign url = url | default: '' -%}
+{%- assign description = description | default: '' -%}
+{%- assign info = info | default: '' -%}
+{%- assign blog = blog | default: '' -%}
 
-{%- capture content_slides -%}
-  {%- for handle in list_article -%}
-    {%- assign article = articles[handle] -%}
-    <div class="article-hero-card__item swiper-slide">
-      <p class="article-hero-card__notice-title b1">
-        {{ notice_title[forloop.index0] }}
-      </p>
-      <div class="article-hero-card__inner">
-        {%- assign article_image = article.image.src | img_url: 'master' -%}
-        <a href="{{ article.url }}" class="article-hero-card__image-wrapper">
-          {%- render 'image', src: article_image, class: 'article-hero-card__image no-hover' -%}
-        </a>
-        <div class="article-hero-card__content">
-          <a href="{{article.url}}" class="article-hero-card__title article-hero-card__title--mobile h2">{{ article.title | truncatewords: 4 }}</a>
-          <a href="{{article.url}}" class="article-hero-card__title article-hero-card__title--desktop h2">{{ article.title }}</a>
-          {%- if article.excerpt != blank -%}
-            <p class="article-hero-card__subtitle h5">{{ article.excerpt }}</p>
-          {%- endif -%}
-          <p class="article-hero-card__info b1">By {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}<span class="article-hero-card__blog"> / {{ handle | split: '/' | first }}</span></p>
-        </div>
-      </div>
-    </div>
-  {%- endfor -%}
-{%- endcapture -%}
-
-{%- if list_article.size > 0 -%}
+{%- if title -%}
   <section class="{{ class }} bg--black" data-module="article-hero-card">
     <div class="article-hero-card__wrapper">
-      {%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+      <p class="article-hero-card__notice-title b1">
+        {{ notice }}
+      </p>
+      <div class="article-hero-card__inner">
+        <a href="{{ url }}" class="article-hero-card__image-wrapper">
+          {%- render 'image', src: image, class: 'article-hero-card__image no-hover' -%}
+        </a>
+        <div class="article-hero-card__content">
+          <a href="{{ url }}" class="article-hero-card__title article-hero-card__title--mobile h2">{{ title | truncatewords: 4 }}</a>
+          <a href="{{ url }}" class="article-hero-card__title article-hero-card__title--desktop h2">{{ title }}</a>
+          {%- if description != blank -%}
+            <p class="article-hero-card__subtitle h5">{{ description }}</p>
+          {%- endif -%}
+          {%- if info -%}
+            <p class="article-hero-card__info b1">By {{ info }}{%- if blog -%}<span class="article-hero-card__blog"> / {{ blog }}</span>{%- endif -%}</p>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
   </section>
 {%- endif -%}

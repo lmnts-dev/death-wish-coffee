@@ -267,22 +267,18 @@
 }
 
 .carousel--article-hero-card {
-  padding: 0;
+  padding: 32px 0 37px;
+
+  @media (--md) {
+    padding: 66px 0 101px;
+  }
 
   .carousel-container {
     max-width: 100%;
-    padding: 0 percentage(27/375);
+    padding: 0 7%;
 
     @media (--md) {
-      padding: 0 percentage(228/1920);
-    }
-  }
-
-  .swiper-slide {
-    opacity: 0.5;
-
-    &-active {
-      opacity: 1;
+      padding: 0 12%;
     }
   }
 

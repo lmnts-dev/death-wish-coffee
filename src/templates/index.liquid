@@ -15,10 +15,34 @@
 {%- render 'super-hero-cta' -%}
 {%- render 'super-hero-cta' -%}
 
-{%- render 'article-hero-card',
-  notice_title: shop.metafields.article_hero_card.notice_title,
-  list_article: shop.metafields.article_hero_card.article
--%}
+{%- assign list_article = shop.metafields.article_hero_card.article -%}
+{%- capture content_slides -%}
+  {% for handle in list_article %}
+    {%- assign notice = shop.metafields.article_hero_card.notice_title[forloop.index0] -%}
+    {%- assign article = articles[handle] -%}
+    {% assign class = 'swiper-slide' %}
+    {% assign title = article.title %}
+    {% assign image = article.image.src | img_url: 'master' %}
+    {% assign url = article.url %}
+    {% assign description = article.excerpt %}
+    {% capture info %}
+      {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
+    {% endcapture %}
+    {% assign blog = handle | split: '/' | first %}
+
+    {%- render 'article-hero-card',
+      class: class,
+      notice: notice,
+      title: title,
+      image: image,
+      url: url,
+      description: description,
+      info: info,
+      blog: blog
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+{%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
 
 {%- render 'footer-cta' -%}
 
