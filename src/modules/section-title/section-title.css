@@ -5,7 +5,7 @@
   text-align: center;
 
   &--product-hero-card {
-    padding: 70px 46px 61px;
+    padding: 70px 46px 0;
     color: var(--blood);
     text-align: center;
 
@@ -13,7 +13,7 @@
       @extend .h1;
 
       padding-top: 138px;
-      padding-bottom: 121px;
+      padding-bottom: 60px;
     }
   }
 }

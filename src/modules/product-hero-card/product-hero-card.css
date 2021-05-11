@@ -1,13 +1,5 @@
 /* styles for the product-hero-card module go in this file */
 
-.product-hero-card {
-  padding: 0 0 24px;
-
-  @media (--md) {
-    padding: 0 0 113px;
-  }
-}
-
 .product-hero-card__inner {
   position: relative;
   opacity: 0.5;
