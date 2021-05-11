@@ -156,3 +156,17 @@
     margin-top: 50px;
   }
 }
+
+.wysiwyg--pdp-add-to-cart {
+  p {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    @extend .p1;
+
+    font-weight: 700;
+  }
+}

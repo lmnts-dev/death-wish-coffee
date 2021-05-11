@@ -3,8 +3,13 @@
  * @param {Object} el - The DOM Node containing the data-module="review-drawer" attribute.
  */
 
+import scrollToElement from 'scroll-to-element'
+
 const reviewDrawer = (el) => {
-  console.warn('initializing reviewDrawer module')
+  document.addEventListener('pdpReviewScroll', () => {
+    const offset = -104 // header height
+    scrollToElement(el, { offset })
+  })
 }
 
 export default reviewDrawer

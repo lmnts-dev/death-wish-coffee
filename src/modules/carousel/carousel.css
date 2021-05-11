@@ -125,6 +125,15 @@
     position: relative;
     padding: 0;
   }
+
+  .carousel--product-hero-card & {
+    max-width: 100%;
+    padding: 0 percentage(32/375);
+
+    @media (--md) {
+      padding: 0 percentage(240/1920);
+    }
+  }
 }
 
 .carousel-wrapper {
@@ -151,7 +160,8 @@
     content: none;
   }
 
-  .carousel--pdp-hero & {
+  .carousel--pdp-hero &,
+  .carousel--product-hero-card & {
     top: 50%;
     transform: translateY(-50%);
 
@@ -178,6 +188,10 @@
   .carousel--pdp-hero & {
     right: 26px;
   }
+
+  .carousel--product-hero-card & {
+    right: 83px;
+  }
 }
 
 .carousel-prev {
@@ -196,6 +210,10 @@
 
   .carousel--pdp-hero & {
     left: 16px;
+  }
+
+  .carousel--product-hero-card & {
+    left: 83px;
   }
 }
 

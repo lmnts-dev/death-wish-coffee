@@ -16,6 +16,39 @@
 {%- render 'review-drawer' -%}
 
 {%- render 'carousel' -%}
-{%- render 'product-hero-card' -%}
+
+{%- assign list_products = 'broke-not-busted-charity|death-wish-6-feet-t-shirt|80s-ripper-pre-order|unearthed-by-odin-t-shirt|copy-of-80s-ripper-crop-top-t-shirt-preorder' | split: '|' -%}
+{%- assign section_title_hero = 'DON’T SLEEP ON THESE PRODUCTS' -%}
+
+{%- capture content_slides -%}
+  {% for handle in list_products %}
+    {%- assign product = all_products[handle] -%}
+
+    {% assign class = 'swiper-slide' %}
+    {% assign title = product.title %}
+    {% assign image_url = product.images[1] | img_url: 'master' %}
+    {% assign url = product.url %}
+    {% assign sub_description = 'review' %}
+    {% capture description %}
+      {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+    {% endcapture %}
+
+    {%- render 'product-hero-card'
+      class: class,
+      title: title,
+      image_url: image_url,
+      url: url,
+      description: description,
+      sub_description: sub_description
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+
+{% if section_title_hero %}
+  {%- render 'section-title', title: section_title_hero, class: 'section-title--product-hero-card bg--shadow' -%}
+{% endif %}
+{%- render 'carousel', class: 'carousel--product-hero-card carousel--no-padding bg--shadow', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+
+
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
