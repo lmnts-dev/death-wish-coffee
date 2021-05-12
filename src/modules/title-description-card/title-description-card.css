@@ -1,38 +1,27 @@
 /* styles for the title-description-card module go in this file */
 
-.title-description-card__wrapper {
-  padding: 15px 24px 98px;
+.title-description-card {
+  width: 100%;
 
   @media (--md) {
-    max-width: 1132px;
-    margin: 0 auto;
-    padding: 64px 24px 130px;
+    flex: 1 1 50%;
+    margin-top: 3rem;
   }
 }
 
 .title-description-card__inner {
+  text-align: center;
+
   @media (--md) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 24px -66px 0;
-  }
-}
-
-.title-description-card__item {
-  margin-top: 36px;
-  text-align: center;
-
-  @media (--md) {
-    flex: 1 1 50%;
-    width: 100%;
-    margin-top: 26px;
-    padding: 0 66px;
+    max-width: 501px;
+    margin: 0 auto;
   }
 }
 
 .title-description-card__header {
-  max-width: 680px;
   margin: 0 auto;
   text-align: center;
   text-transform: none;
@@ -44,7 +33,6 @@
 }
 
 .title-description-card__content {
-  max-width: 501px;
   margin: 0 auto;
   color: var(--white);
 }
