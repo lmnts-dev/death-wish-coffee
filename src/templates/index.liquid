@@ -1,12 +1,12 @@
 {%- comment -%}Home Page{%- endcomment -%}
 {%- layout 'theme' -%}
 
-{%- assign home_hero_position = shop.metafields.homepage.hero_headline_position -%}
+{%- assign home_hero_position = shop.metafields.homepage.hero_headline_position | join: '' | handleize -%}
 {%- assign home_hero_headline = shop.metafields.hero.headline -%}
 {%- assign home_hero_subheading = shop.metafields.hero.subheading -%}
 {%- assign home_hero_video = shop.metafields.accentuate.homepage_hero_video -%}
 {%- assign home_hero_image = shop.metafields.accentuate.homepage_hero_fallback | map: 'src' | first | remove: 'https:' | remove: 'http:' -%}
-{%- assign home_hero_image_mobile = shop.metafields.accentuate.video_fallback_image_mobile | map: 'src' | first | remove: 'https:' | remove: 'http:' -%}
+{%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first | remove: 'https:' | remove: 'http:' -%}
 {%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
 {%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
 
@@ -14,10 +14,14 @@
   <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
 {%- endcapture -%}
 
+{%- assign hero_class = 'hero--homepage' -%}
 
+{% if home_hero_position %}
+  {% assign hero_class = hero_class | append: ' hero--content-' | append: home_hero_position %}
+{% endif %}
 
 {%- render 'hero',
-  class: class,
+  class: hero_class,
   video: home_hero_video,
   desktop_image: home_hero_image,
   mobile_image: home_hero_image_mobile,
