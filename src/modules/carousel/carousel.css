@@ -135,6 +135,7 @@
   }
 
   .carousel--product-hero-card & {
+    position: relative;
     max-width: 100%;
     padding: 0 percentage(32/375);
 
@@ -147,6 +148,10 @@
 .carousel-wrapper {
   &--margin-top {
     margin-top: 6rem;
+  }
+
+  .carousel--product-hero-card & {
+    margin-top: 0;
   }
 }
 

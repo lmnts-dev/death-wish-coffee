@@ -1,6 +1,10 @@
 /* styles for the pdp-hero module go in this file */
 
-.pdp-hero {
+.pdp-hero__container {
+  padding: 0;
+}
+
+.pdp-hero__wrapper {
   @media (--md) {
     display: flex;
   }

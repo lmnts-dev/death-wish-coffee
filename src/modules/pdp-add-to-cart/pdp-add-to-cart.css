@@ -10,11 +10,28 @@
   }
 }
 
+.pdp-add-to-cart__container {
+  @media (--md-max) {
+    padding: 0 39px;
+  }
+
+  @media (--lg) {
+    max-width: 806px;
+    padding: 0 71px;
+  }
+}
+
 .pdp-add-to-cart__title {
   color: var(--blood);
 
   @media (--md) {
     margin-bottom: 4px;
+  }
+}
+
+.pdp-add-to-cart__description {
+  @media (--md) {
+    margin-right: 24px;
   }
 }
 
