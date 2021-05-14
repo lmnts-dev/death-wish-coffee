@@ -4,6 +4,45 @@
 {%- render 'post-header' -%}
 {%- render 'wysiwyg', content: article.content, class: 'bg--bone' -%}
 {%- render 'post-navigation' -%}
-{%- render 'category-card-carousel' -%}
+{% capture category_cards %}
+  {%- render 'category-card',
+    class: 'category-card-carousel__item swiper-slide',
+    title: 'Coffee',
+    url: '/collections/coffee',
+    image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
+  -%}
+  {%- render 'category-card',
+    class: 'category-card-carousel__item swiper-slide',
+    title: 'My Library',
+    url: '/collections/coffee',
+    image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
+  -%}
+  {%- render 'category-card',
+    class: 'category-card-carousel__item swiper-slide',
+    title: "What's Cooking",
+    url: '/collections/coffee',
+    image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
+  -%}
+  {%- render 'category-card',
+    class: 'category-card-carousel__item swiper-slide',
+    title: 'The Buzz',
+    url: '/collections/coffee',
+    image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
+  -%}
+  {%- render 'category-card',
+    class: 'category-card-carousel__item swiper-slide',
+    title: 'Another One',
+    url: '/collections/coffee',
+    image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
+  -%}
+{% endcapture %}
+
+{%- render 'carousel',
+  class: 'bg--black',
+  title: 'MORE TO EXPLORE',
+  children: category_cards,
+  slides_per_view: 4,
+  spacing: 32
+-%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
