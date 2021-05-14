@@ -39,7 +39,7 @@ If this comment is still here, please consult with the lead developer on the pro
 {%- render 'carousel' -%}
 
 <div class="bg--black">
-  {% paginate blog.articles by 1 %}
+  {% paginate blog.articles by 16 %}
     {% capture grid_content %}
       {% for post in blog.articles %}
         {% comment %}
