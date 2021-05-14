@@ -161,6 +161,20 @@
 .hero__description {
   color: var(--white);
 
+  .hero--content-right & {
+    @media (--lg) {
+      max-width: 538px;
+      margin-right: 0;
+    }
+  }
+
+  .hero--content-left & {
+    @media (--lg) {
+      max-width: 538px;
+      margin-left: 0;
+    }
+  }
+
   p {
     font-size: inherit;
     line-height: inherit;
