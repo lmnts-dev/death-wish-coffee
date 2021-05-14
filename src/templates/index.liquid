@@ -5,8 +5,8 @@
 {%- assign home_hero_headline = shop.metafields.hero.headline -%}
 {%- assign home_hero_subheading = shop.metafields.hero.subheading -%}
 {%- assign home_hero_video = shop.metafields.accentuate.homepage_hero_video -%}
-{%- assign home_hero_image = shop.metafields.accentuate.homepage_hero_fallback | map: 'src' | first | remove: 'https:' | remove: 'http:' -%}
-{%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first | remove: 'https:' | remove: 'http:' -%}
+{%- assign home_hero_image = shop.metafields.accentuate.homepage_hero_fallback | map: 'src' | first -%}
+{%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first -%}
 {%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
 {%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
 
