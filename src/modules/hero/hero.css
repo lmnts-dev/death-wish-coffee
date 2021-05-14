@@ -40,7 +40,7 @@
   }
 }
 
-.hero__content {
+.hero__wrapper-content {
   background: var(--black);
   color: var(--blood);
 
