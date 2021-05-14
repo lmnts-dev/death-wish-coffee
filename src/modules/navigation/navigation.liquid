@@ -14,14 +14,14 @@
       </a>
     </div>
     <div class="navigation__utilities">
-      <div class="navigation__utilities-login">{%- render 'svg', type: 'login' -%}</div>
+      <div class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</div>
       <div class="navigation__utilities-cart">{%- render 'svg', type: 'cart' -%}</div>
       <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
     </div>
     <div class="navigation__main js-mobile-menu">
       <div class="navigation__login">
         <div class="navigation__login-inner">
-          {%- render 'svg', type: 'login', class: 'navigation__login-icon' -%}
+          {%- render 'svg', type: 'skull', class: 'navigation__login-icon' -%}
           Login
         </div>
         <button class="navigation__close js-close" type="button">
@@ -31,7 +31,7 @@
       {%- render 'menu', links: menu_left.links, class: 'navigation__menu navigation__menu--left' -%}
       <div class="navigation__partition">
         {%- assign banner = 'menu_slideout.png' | file_url -%}
-        {%- render 'image', src: banner, class: 'navigation__partition-image' -%}
+        {% render 'svg', type: 'thunder-small', class: 'navigation__partition-image' %}
       </div>
       {%- render 'menu', links: menu_right.links, class: 'navigation__menu navigation__menu--right' -%}
       {%- render 'footer', class: 'footer--navigation navigation__footer' -%}
