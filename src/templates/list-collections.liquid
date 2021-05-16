@@ -9,6 +9,28 @@
 {%- render 'plp-filter' -%}
 
 {%- render 'grid' -%}
-{%- render 'product-card' -%}
+<div class="container">
+  <div class="grid-product">
+    {%- assign product = all_products['test-product-2'] -%}
+    {%- assign price = product.price | money -%}
+    {%- capture product_form -%}
+      {%- render 'product-form', product: product -%}
+    {%- endcapture -%}
+    {%- render 'product-card',
+      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
+      title: product.title,
+      link: product.url,
+      price: price,
+      quick_shop_form: product_form
+    -%}
+    {%- render 'product-card',
+      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
+      title: product.title,
+      link: product.url,
+      price: price,
+      quick_shop_form: product_form
+    -%}
+  </div>
+</div>
 
 {%- render 'footer-cta', title: 'LETS DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE', enable_subscribe_form: true %}

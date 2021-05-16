@@ -1,6 +1,36 @@
-{% assign class = class | default:false %}
+{% assign class = class | default: false %}
+{% assign title = title | default: false %}
+{% assign link = link | default: false %}
+{% assign price = price | default: false %}
+{% assign quick_shop_form = quick_shop_form | default: false %}
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="product-card">
-  <h2 class="module-name">product-card</h2>
+<section class="{{ class }}" data-module="product-card">
+  <div class="product-card__inner">
+    <div class="product-card__header">
+      <div class="product-card__image-container">
+        <a href="{{ link }}" class="product-card__image-link">
+          {%- render 'image', src: image_src -%}
+        </a>
+      </div>
+      {%- if quick_shop_form -%}
+        <div class="product-card__overlay js-overlay">
+          <div class="product-card__quick-shop">
+            {%- render 'button', button_value: 'Quick Shop', tag: 'button', custom_attrs: 'type="submit"' class: 'product-card__quick-shop-btn button--light js-button' -%}
+          </div>
+          <div class="product-card__form">
+            <button class="product-card__close js-close" type="button">
+              {%- render 'svg', type: 'close', class: 'product-card__close-icon' -%}
+            </button>
+            {{- quick_shop_form -}}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="product-card__content">
+      <a href="{{ link }}" class="b1 product-card__title">{{ title }}</a>
+      <div class="b1 product-card__review">Review</div>
+      <p class="h5 product-card__price">{{ price }}</p>
+    </div>
+  </div>
 </section>

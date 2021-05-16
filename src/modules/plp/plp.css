@@ -1,0 +1,13 @@
+/* styles for plp */
+
+.plp {
+  padding: 100px 0;
+}
+
+.plp__inner {
+  position: relative;
+
+  @media (--lg) {
+    padding-left: 367px;
+  }
+}

@@ -25,6 +25,10 @@
     top: calc(50% - 3px);
     right: 16px;
     transform: translate(0, -50%);
+
+    .input-select--dark & {
+      color: var(--white);
+    }
   }
 }
 
@@ -39,6 +43,19 @@
   border-radius: 0;
   background-color: transparent;
   cursor: pointer;
+
+  .input-select--dark & {
+    color: var(--white);
+    border: none;
+
+    @media (--lg) {
+      border: 1px solid var(--bone);
+    }
+
+    option {
+      color: var(--black);
+    }
+  }
 }
 
 .input-select__chevron {

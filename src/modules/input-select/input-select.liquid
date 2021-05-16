@@ -10,6 +10,7 @@
 {% assign id = id | default: false %}
 {% assign name = name | default: id %}
 {% assign first_selected = first_selected | default: false %}
+{% assign selected_value = selected_value | default: false %}
 {% assign vue_options = vue_options | default: false %}
 {% capture class %}form-field form-field--select{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
@@ -35,19 +36,27 @@
       {% if use_country_tags %}
         {{- all_country_option_tags -}}
       {% else %}
-        <option class="input-select__option" disabled{% unless first_selected %} selected{% endunless %}>{{- placeholder -}}</option>
+        <option class="input-select__option" disabled{% unless first_selected or selected_value != false %} selected{% endunless %}>{{- placeholder -}}</option>
         {% if options %}
           {% for option in options %}
-            {% capture value %}
-              {% if option_values and option_values.size == options.size %}
-                {{ option_values[forloop.index0] }}
-              {% else %}
-                {{ option }}
-              {% endif %}
-            {% endcapture %}
-            <option class="input-select__option" value="{{- value | strip -}}"{% if first_selected and forloop.first %} selected{% endif %}>{{- option | strip -}}</option>
+            {%- capture value -%}
+              {%- if option_values and option_values.size == options.size -%}
+                {{- option_values[forloop.index0] -}}
+              {%- else -%}
+                {{- option -}}
+              {%- endif -%}
+            {%- endcapture -%}
+
+            {%- assign is_selected = false -%}
+            {%- if selected_value == false and first_selected and forloop.first -%}
+              {%- assign is_selected = true -%}
+            {%- elsif selected_value == value -%}
+              {%- assign is_selected = true -%}
+            {%- endif -%}
+
+            <option class="input-select__option" value="{{- value | strip -}}"{% if is_selected %} selected{% endif %}>{{- option | strip -}}</option>
           {% endfor %}
-        {% else if vue_options %}
+        {% elsif vue_options %}
           <!-- {% capture options_statement %}option in {{ vue_options }}{% endcapture %} -->
           <option class="input-select__option" v-for="option in {{ vue_options }}" v-bind:value="option.value">${option.text}</option>
         {% endif %}

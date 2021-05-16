@@ -1,5 +1,9 @@
 /* styles for product-form */
 
+.product-form {
+  max-width: 100%;
+}
+
 .product-form__options {
   display: flex;
   flex-direction: column;
@@ -36,6 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   border: 1px solid var(--shadow);
   background: var(--steel);
 
@@ -53,7 +58,7 @@
 }
 
 .product-form__option-value {
-  flex: 1 1 0;
+  flex: 1 1 33.33%;
   min-width: 103px;
 
   .product-form--pdp-add-to-cart & {
@@ -77,13 +82,17 @@
   justify-content: center;
   align-items: center;
   height: 64px;
+  padding: 0 10px;
   cursor: pointer;
   border-right: 1px solid var(--shadow);
 
-  .product-form__option-value {
-    &:last-child {
-      border-right: none;
-    }
+  .product-form__option-value:last-child &,
+  .product-form__option-value:nth-child(3n) & {
+    border-right: none;
+  }
+
+  .product-form__option-value:nth-child(n+4) & {
+    border-top: 1px solid var(--shadow);
   }
 
   .product-form--pdp-add-to-cart & {
