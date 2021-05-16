@@ -7,6 +7,7 @@ TODO: Need to fix pagination and navigation components
 {%- endcomment -%}
 
 {% assign class = class | default: false %}
+{% assign title_class = title_class | default: false %}
 {% assign children = children | default: false %}
 {% assign navigation = navigation | default: false %}
 {% assign pagination = pagination | default: false %}
@@ -32,7 +33,7 @@ You can see more about how options are privided as HTML attributes here.
 
 <div class="{{ class }}" data-module="carousel">
   {% if title %}
-    {%- render 'section-title', title: title -%}
+    {%- render 'section-title', class: title_class, title: title -%}
   {% endif %}
   <div 
     class="carousel-container container swiper-container{{- init_at_bp_class -}}"
