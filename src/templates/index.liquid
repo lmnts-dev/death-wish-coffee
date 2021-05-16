@@ -1,7 +1,35 @@
 {%- comment -%}Home Page{%- endcomment -%}
 {%- layout 'theme' -%}
 
-{%- render 'hero' -%}
+{%- assign home_hero_position = shop.metafields.homepage.hero_headline_position | join: '' | handleize -%}
+{%- assign home_hero_headline = shop.metafields.hero.headline -%}
+{%- assign home_hero_subheading = shop.metafields.hero.subheading -%}
+{%- assign home_hero_video = shop.metafields.accentuate.homepage_hero_video -%}
+{%- assign home_hero_image = shop.metafields.accentuate.homepage_hero_fallback | map: 'src' | first -%}
+{%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first -%}
+{%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
+{%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
+
+{%- capture after_content -%}
+  <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
+{%- endcapture -%}
+
+{%- assign hero_class = 'hero--homepage' -%}
+
+{% if home_hero_position %}
+  {% assign hero_class = hero_class | append: ' hero--content-' | append: home_hero_position %}
+{% endif %}
+
+{%- render 'hero',
+  class: hero_class,
+  video: home_hero_video,
+  desktop_image: home_hero_image,
+  mobile_image: home_hero_image_mobile,
+  title: home_hero_headline,
+  description: home_hero_subheading,
+  after_content: after_content
+-%}
+
 {%- render 'title-copy' -%}
 
 {%- capture product_cards -%}

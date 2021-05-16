@@ -3,8 +3,12 @@
 .navigation {
   position: fixed;
   width: 100vw;
-  height: 104px;
+  height: var(--navbar-height);
   top: 0;
+
+  @media (--xl-max) {
+    height: var(--navbar-height-mobile);
+  }
 }
 
 .navigation__container {
