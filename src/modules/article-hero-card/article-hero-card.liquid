@@ -6,7 +6,7 @@
 {%- assign url = url | default: '' -%}
 {%- assign description = description | default: '' -%}
 {%- assign info = info | default: '' -%}
-{%- assign blog = blog | default: '' -%}
+{%- assign blog_handle = blog_handle | default: '' -%}
 
 {%- if title -%}
   <section class="{{ class }} bg--black" data-module="article-hero-card">
@@ -25,7 +25,7 @@
             <p class="article-hero-card__subtitle h5">{{ description }}</p>
           {%- endif -%}
           {%- if info -%}
-            <p class="article-hero-card__info b1">By {{ info }}{%- if blog -%}<span class="article-hero-card__blog"> / {{ blog }}</span>{%- endif -%}</p>
+            <p class="article-hero-card__info b1">By {{ info }}{%- if blog_handle -%}<span class="article-hero-card__blog"> / {{ blog_handle }}</span>{%- endif -%}</p>
           {%- endif -%}
         </div>
       </div>

@@ -20,7 +20,7 @@ If this comment is still here, please consult with the lead developer on the pro
     {% capture info %}
       {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
     {% endcapture %}
-    {% assign blog = handle | split: '/' | first %}
+    {% assign blog_handle = handle | split: '/' | first %}
 
     {%- render 'article-hero-card',
         class: class,
@@ -30,35 +30,46 @@ If this comment is still here, please consult with the lead developer on the pro
         url: url,
         description: description,
         info: info,
-        blog: blog
+        blog_handle: blog_handle
     -%}
   {% endfor %}
 {%- endcapture -%}
 {%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
 
 {%- render 'carousel' -%}
-{%- assign post = blog.articles[0] -%}
 
-{%- assign image_src = post.image.src | img_url: 'master' -%}
-{%- assign published_date = post.published_at | date: '%b %d, %Y' -%}
-{%- render 'post-card',
-  title: post.title,
-  url: post.url,
-  image_src: image_src,
-  image_alt: post.image.alt,
-  author: post.author,
-  published_date: published_date
-  class: 'bg--black post-card--test' -%}
+<div class="bg--black">
+  {% paginate blog.articles by 16 %}
+    {% capture grid_content %}
+      {% for post in blog.articles %}
+        {% comment %}
+        TODO: Remove hard-coded post-card classes to replace with post-card--viewed JavaScript
+        {% endcomment %}
+        {% assign post_class = 'post-card--test' %}
+        {% if forloop.first %}
+          {% assign post_class = post_class | append: 'post-card--viewed' %}
+        {% endif %}
 
-{%- render 'grid' -%}
-{%- render 'post-card',
-  title: post.title,
-  url: post.url,
-  image_src: image_src,
-  image_alt: post.image.alt,
-  author: post.author,
-  published_date: published_date,
-  class: 'bg--black post-card--test post-card--viewed' -%}
+        {% assign post_image = post | img_url: 'master' %}
 
-{%- render 'pagination' -%}
+        {%- render 'post-card',
+          title: post.title,
+          url: post.url,
+          image_src: post_image,
+          image_alt: post.image.alt,
+          author: post.author,
+          published_date: published_date,
+          class: post_class -%}
+      {% endfor %}
+    {% endcapture %}
+
+    {%- render 'grid',
+      class: 'bg--black',
+      children: grid_content
+    -%}
+
+    {%- render 'pagination', paginate: paginate -%}
+  {% endpaginate %}
+</div>
+
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
