@@ -109,6 +109,14 @@
       width: calc(50% + 9px);
     }
   }
+
+  &--product-hero-card {
+    padding: 0 0 24px;
+
+    @media (--md) {
+      padding: 0 0 113px;
+    }
+  }
 }
 
 .carousel-container {

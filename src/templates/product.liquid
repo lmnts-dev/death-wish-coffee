@@ -1,6 +1,6 @@
 {%- layout 'theme' -%}
 {%- render 'pdp-hero' -%}
-{%- render 'section-title', title: 'MADE TO FIT YOUR LIFESTYLE', class: 'bg--black' -%}
+{%- render 'section-title', title: 'MADE TO FIT YOUR LIFESTYLE', class: 'section-title--product bg--black' -%}
 
 {% assign media_hero_grid_metafields = product.metafields.media-grid %}
 {% assign types = media_hero_grid_metafields.type %}
@@ -18,7 +18,6 @@
 {%- render 'carousel' -%}
 
 {%- assign list_products = 'broke-not-busted-charity|death-wish-6-feet-t-shirt|80s-ripper-pre-order|unearthed-by-odin-t-shirt|copy-of-80s-ripper-crop-top-t-shirt-preorder' | split: '|' -%}
-{%- assign section_title_hero = 'DON’T SLEEP ON THESE PRODUCTS' -%}
 
 {%- capture content_slides -%}
   {% for handle in list_products %}
@@ -44,10 +43,9 @@
   {% endfor %}
 {%- endcapture -%}
 
-{% if section_title_hero %}
-  {%- render 'section-title', title: section_title_hero, class: 'section-title--product-hero-card bg--shadow' -%}
-{% endif %}
-{%- render 'carousel', class: 'carousel--product-hero-card carousel--no-padding bg--shadow', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+{%- assign section_title_hero = 'DON’T SLEEP ON THESE PRODUCTS' -%}
+
+{%- render 'carousel', title: section_title_hero, title_class: 'section-title--product-hero-card'  class: 'carousel--product-hero-card carousel--no-padding bg--shadow', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
 
 
 

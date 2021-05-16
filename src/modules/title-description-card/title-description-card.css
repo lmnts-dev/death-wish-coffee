@@ -1,1 +1,38 @@
 /* styles for the title-description-card module go in this file */
+
+.title-description-card {
+  width: 100%;
+
+  @media (--md) {
+    flex: 1 1 50%;
+    margin-top: 3rem;
+  }
+}
+
+.title-description-card__inner {
+  text-align: center;
+
+  @media (--md) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 501px;
+    margin: 0 auto;
+  }
+}
+
+.title-description-card__header {
+  margin: 0 auto;
+  text-align: center;
+  text-transform: none;
+  color: var(--white);
+}
+
+.title-description-card__title {
+  text-transform: none;
+}
+
+.title-description-card__content {
+  margin: 0 auto;
+  color: var(--white);
+}
