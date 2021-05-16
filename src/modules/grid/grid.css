@@ -1,5 +1,15 @@
 /* styles for the grid module go in this file */
 
+.grid {
+  &--title-description-card {
+    padding-bottom: 98px;
+
+    @media (--md) {
+      padding-bottom: 130px;
+    }
+  }
+}
+
 .grid-container {
   display: flex;
   flex-direction: column;

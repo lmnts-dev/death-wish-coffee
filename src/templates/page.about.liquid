@@ -58,8 +58,20 @@
 -%}
 
 {%- render 'bolt-header' -%}
-{%- render 'grid' -%}
-{%- render 'title-description-card' -%}
+
+{%- render 'section-title', class: 'section-title--title-description-card bg--black', title: page.metafields.title-description.title_description_cards_header -%}
+
+{%- assign description_card_title = page.metafields.title-description.title_description_card -%}
+{%- assign description_card_content = page.metafields.title-description.card_copy -%}
+{%- capture title_description_card -%}
+  {%- for item in description_card_title -%}
+    {%- render 'title-description-card',
+        title: description_card_title[forloop.index0],
+        description: description_card_content[forloop.index0]
+    -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- render 'grid', class: 'grid--title-description-card bg--black', gutter: 'lg', children: title_description_card -%}
 
 {% assign mirror_image = page.metafields.mirror-image-hero.mirror_image_hero_image | map: 'src' %}
 {%- render 'mirror-image-hero',
