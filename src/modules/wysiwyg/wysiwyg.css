@@ -158,6 +158,16 @@
 }
 
 .wysiwyg--pdp-add-to-cart {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--white);
+  }
+
   p {
     &:last-of-type {
       margin-bottom: 0;
