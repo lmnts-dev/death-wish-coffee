@@ -4,7 +4,8 @@
  */
 
 const boltIllustrationHero = (el) => {
-  console.warn('initializing boltIllustrationHero module')
+  const breakpointLGMax = window.matchMedia('(max-width: 991px)')
+  console.log(breakpointLGMax)
 }
 
 export default boltIllustrationHero
