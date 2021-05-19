@@ -1,7 +1,22 @@
 {% assign class = class | default:false %}
 {% capture class %}pdp-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="pdp-hero">
-  {%- render 'carousel' -%}
-  {%- render 'pdp-add-to-cart' -%}
+<section class="{{ class }} bg--black" data-module="pdp-hero">
+  <div class="pdp-hero__wrapper">
+    {%- capture pdp_hero -%}
+      {% for media in product.media %}
+        {% assign media_url = media | img_url: 'master' %}
+          <div class="pdp-hero__item swiper-slide">
+            {%- render 'image', src: media_url, class: 'pdp-hero__image' -%}
+          </div>
+      {% endfor %}
+    {%- endcapture -%}
+    {%- render 'carousel',
+      class: 'carousel--pdp-hero',
+      children: pdp_hero,
+      slides_per_view: 1,
+      navigation: true
+    -%}
+    {%- render 'pdp-add-to-cart' -%}
+  </div>
 </section>

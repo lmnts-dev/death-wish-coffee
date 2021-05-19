@@ -1,1 +1,53 @@
 /* styles for the section-title module go in this file */
+
+.section-title {
+  padding: 80px 0;
+  text-align: center;
+
+  &--product-hero-card {
+    padding: 70px 46px 0;
+    color: var(--blood);
+    text-align: center;
+
+    @media (--md) {
+      @extend .h1;
+
+      padding-top: 138px;
+      padding-bottom: 60px;
+    }
+  }
+
+  &--title-description-card {
+    padding: 24px 0 52px;
+
+    @media (--md) {
+      padding: 65px 0 20px;
+    }
+  }
+}
+
+.section-title__container {
+  .section-title--product & {
+    max-width: 100%;
+  }
+}
+
+.section-title__title {
+  @extend .h2;
+
+  color: var(--blood);
+
+  @media (--lg) {
+    @extend .h1;
+  }
+
+  .section-title--title-description-card & {
+    @extend .h4;
+
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: none;
+    color: var(--white);
+  }
+}

@@ -1,6 +1,23 @@
+{% assign image = image | default: false %}
+{% assign title = title | default: false %}
+{% assign description = description | default: false %}
 {% assign class = class | default:false %}
 {% capture class %}full-width-photo-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="full-width-photo-hero">
-  <h2 class="module-name">full-width-photo-hero</h2>
-</section>
+{%- if image and title -%}
+  <section class="{{ class }} bg--black" data-module="full-width-photo-hero">
+    <div class="full-width-photo-hero__wrapper">
+      <div class="full-width-photo-hero__inner">
+        <div class="full-width-photo-hero__image">
+          {%- render 'image', src: image -%}
+        </div>
+        <div class="full-width-photo-hero__content">
+          <h1 class="full-width-photo-hero__title">{{ title }}</h1>
+          {%- if description -%}
+            <div class="p1 full-width-photo-hero__description">{{ description }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}

@@ -1,6 +1,14 @@
+{% assign image = image | default: false %}
 {% assign class = class | default:false %}
 {% capture class %}post-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="post-hero">
-  <h2 class="module-name">post-hero</h2>
-</section>
+{%- if image -%}
+  <section class="{{ class }}" data-module="post-hero">
+    <div class="post-hero__image">
+      {%- render 'image',
+        src: image,
+        srcset_exclude_small: true
+      -%}
+    </div>
+  </section>
+{%- endif -%}

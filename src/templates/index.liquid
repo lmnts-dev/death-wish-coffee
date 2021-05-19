@@ -1,17 +1,77 @@
 {%- comment -%}Home Page{%- endcomment -%}
 {%- layout 'theme' -%}
 
-{%- capture grid_items -%}
-  {% for i in (0...10) %}
-    {% render 'category-card', class: 'swiper-slide' %}
-  {% endfor %}
+{%- assign home_hero_position = shop.metafields.homepage.hero_headline_position | join: '' | handleize -%}
+{%- assign home_hero_headline = shop.metafields.hero.headline -%}
+{%- assign home_hero_subheading = shop.metafields.hero.subheading -%}
+{%- assign home_hero_video = shop.metafields.accentuate.homepage_hero_video -%}
+{%- assign home_hero_image = shop.metafields.accentuate.homepage_hero_fallback | map: 'src' | first -%}
+{%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first -%}
+{%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
+{%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
+
+{%- capture after_content -%}
+  <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
 {%- endcapture -%}
 
-{% render 'carousel', 
-  children: grid_items, 
-  class: 'spacing--lg',
-  slides_per_view: 3,
-  spacing: 30,
-  autoplay: 300,
-  pagination: true, 
-  navigation: true %}
+{%- assign hero_class = 'hero--homepage' -%}
+
+{% if home_hero_position %}
+  {% assign hero_class = hero_class | append: ' hero--content-' | append: home_hero_position %}
+{% endif %}
+
+{%- render 'hero',
+  class: hero_class,
+  video: home_hero_video,
+  desktop_image: home_hero_image,
+  mobile_image: home_hero_image_mobile,
+  title: home_hero_headline,
+  description: home_hero_subheading,
+  after_content: after_content
+-%}
+
+{%- render 'title-copy' -%}
+
+{%- capture product_cards -%}
+  {%- render 'alt-product-card' -%}
+{%- endcapture -%}
+{%- render 'carousel', children: product_cards -%}
+
+{%- render 'icon-title' -%}
+
+{%- render 'super-hero-cta' -%}
+{%- render 'super-hero-cta' -%}
+{%- render 'super-hero-cta' -%}
+
+{%- assign list_article = shop.metafields.article_hero_card.article -%}
+{%- capture content_slides -%}
+  {% for handle in list_article %}
+    {%- assign notice = shop.metafields.article_hero_card.notice_title[forloop.index0] -%}
+    {%- assign article = articles[handle] -%}
+    {% assign class = 'swiper-slide' %}
+    {% assign title = article.title %}
+    {% assign image = article.image.src | img_url: 'master' %}
+    {% assign url = article.url %}
+    {% assign description = article.excerpt %}
+    {% capture info %}
+      {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
+    {% endcapture %}
+    {% assign blog = handle | split: '/' | first %}
+
+    {%- render 'article-hero-card',
+      class: class,
+      notice: notice,
+      title: title,
+      image: image,
+      url: url,
+      description: description,
+      info: info,
+      blog: blog
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+{%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+
+{%- render 'footer-cta' -%}
+
+

@@ -101,6 +101,22 @@
       background-color: var(--gray);
     }
   }
+
+  &--pdp-hero {
+    padding: 0;
+
+    @media (--md) {
+      width: calc(50% + 9px);
+    }
+  }
+
+  &--product-hero-card {
+    padding: 0 0 24px;
+
+    @media (--md) {
+      padding: 0 0 113px;
+    }
+  }
 }
 
 .carousel-container {
@@ -112,18 +128,36 @@
   @media (--md-max) {
     padding: 0 1rem;
   }
+
+  .carousel--pdp-hero & {
+    position: relative;
+    padding: 0;
+  }
+
+  .carousel--product-hero-card & {
+    position: relative;
+    max-width: 100%;
+    padding: 0 percentage(32/375);
+
+    @media (--md) {
+      padding: 0 percentage(240/1920);
+    }
+  }
 }
 
 .carousel-wrapper {
   &--margin-top {
     margin-top: 6rem;
   }
+
+  .carousel--product-hero-card & {
+    margin-top: 0;
+  }
 }
 
 .carousel-next, .carousel-prev {
-  width: 3rem;
-  height: 3rem;
-  color: var(--gray);
+  width: 50px;
+  height: 23px;
   top: 75%;
   transform: translateY(-75%);
 
@@ -137,6 +171,16 @@
 
   &::after {
     content: none;
+  }
+
+  .carousel--pdp-hero &,
+  .carousel--product-hero-card & {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media (--md-max) {
+      display: none;
+    }
   }
 }
 
@@ -153,6 +197,14 @@
       fill: var(--gray);
     }
   }
+
+  .carousel--pdp-hero & {
+    right: 26px;
+  }
+
+  .carousel--product-hero-card & {
+    right: 83px;
+  }
 }
 
 .carousel-prev {
@@ -167,6 +219,14 @@
       opacity: 1;
       fill: var(--gray);
     }
+  }
+
+  .carousel--pdp-hero & {
+    left: 16px;
+  }
+
+  .carousel--product-hero-card & {
+    left: 83px;
   }
 }
 
@@ -235,4 +295,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.carousel--article-hero-card {
+  padding: 32px 0 37px;
+
+  @media (--md) {
+    padding: 66px 0 101px;
+  }
+
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 7%;
+
+    @media (--md) {
+      padding: 0 12%;
+    }
+  }
+
+  .carousel-next,
+  .carousel-prev {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
+
+  .carousel-next {
+    right: 4%;
+  }
+
+  .carousel-prev {
+    left: 4%;
+  }
 }

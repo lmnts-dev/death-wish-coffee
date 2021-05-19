@@ -1,6 +1,32 @@
-{% assign class = class | default:false %}
-{% capture class %}bolt-illustration-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- assign bolt_image = bolt_image | default: false -%}
+{%- assign image = image | default: false -%}
+{%- assign title = title | default: '' -%}
+{%- assign reverse_content = reverse_content | default: false -%}
+{%- assign description = description | default: '' -%}
 
-<section class="{{ class }} placeholder" data-module="bolt-illustration-hero">
-  <h2 class="module-name">bolt-illustration-hero</h2>
-</section>
+<div class="bolt-illustration-hero bg--black{% if reverse_content %} bolt-illustration-hero--reverse{% endif %}">
+  <div class="bolt-illustration-hero__container">
+    <div class="bolt-illustration-hero__inner">
+      {%- if image -%}
+        <div class="bolt-illustration-hero__image-block js-image-block">
+          <div class="bolt-illustration-hero__image-wrapper">
+            {%- render 'image', class: 'image--contain bolt-illustration-hero__image', src: image -%}
+          </div>
+          {%- if bolt_image -%}
+            <div class="bolt-illustration-hero__bolt js-bolt">
+              {%- render 'image', src: bolt_image, class: 'bolt-illustration-hero__bolt-image' -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="bolt-illustration-hero__content">
+        {%- if title -%}
+          <h1 class="h1 bolt-illustration-hero__title">{{ title }}</h1>
+        {%- endif -%}
+        {%- if description -%}
+          <p class="bolt-illustration-hero__description">{{ description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

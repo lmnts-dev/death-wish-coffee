@@ -1,10 +1,27 @@
 {%- layout 'theme' -%}
 {%- render 'pdp-hero' -%}
-{%- render 'bolt-illustration-hero' -%}
-{%- render 'bolt-illustration-hero' -%}
-{%- render 'bolt-illustration-hero' -%}
-{%- render 'section-title' -%}
-{%- render 'video' -%}
+{%- render 'bolt-illustration-hero',
+    bolt_image: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Path_35_3x_3fb6874b-909d-43a2-9868-b4ca1b5538b8.png?v=1620894588',
+    image: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Group_373_2x_acde76f9-c5ed-4313-a452-77c48030c622.png?v=1617245412',
+    title: 'THE WORLD’S STRONGEST COFFEE',
+    description: 'The World’s Strongest Coffee: We select the highest quality Arabica + Robusta beans, and then we roast them to dark, bold, DWC perfection. The result? Coffee that naturally brews double the strength of the average cup.'
+-%}
+{%- render 'bolt-illustration-hero',
+    bolt_image: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Path_219_2x_727f4c37-8760-4f6d-8c54-512dea4a7f7f.png?v=1619680770',
+    image: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Group_379_2x_becbcba0-835f-49be-8a0e-76faa77b4cdb.png?v=1617245477',
+    title: 'REAP WHAT YOU SOW',
+    description: 'We care about community, the earth + the farmers who work its soil (reminds us of the Grim Reaper). So, we source only USDA Organic and Fair Trade Certified ™ beans to support the livelihood of coffee farmers + sustainability for the planet.',
+    reverse_content: true
+-%}
+{%- render 'bolt-illustration-hero',
+    bolt_image: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Path_35_3x_3fb6874b-909d-43a2-9868-b4ca1b5538b8.png?v=1620894588',
+    feature_image_mobile: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Untitled-2.png?v=1617249518',
+    image: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Group_381_2x_d60981dd-9585-47d5-b667-9331d4e4c8f9.png?v=1617245543',
+    title: 'SMOOTH OPERATORS',
+    description: 'Naturally lower in acid than those other basic blends out there, our OG Dark Roast beans make a boldly balanced cup every time. Thanks to the DWC no-fail roasting process, you’ll taste all the sweetness, flavor + dimension without any burnt or bitter notes.'
+-%}
+{%- render 'section-title', title: 'MADE TO FUEL YOUR PASSIONS', class: 'bg--black' -%}
+{%- comment -%}{%- render 'video' -%}{%- endcomment -%}
 {%- render 'review-drawer' -%}
 {%- render 'carousel' -%}
 {%- render 'section-title' -%}

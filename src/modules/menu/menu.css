@@ -1,0 +1,169 @@
+.sub-menu {
+  padding-left: 16px;
+
+  @media (--lg) {
+    padding-left: 0;
+  }
+}
+
+.sub-menu__item-banner {
+  position: relative;
+  display: none;
+  width: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.sub-menu__item-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sub-menu--level-1 {
+  padding-bottom: 12px;
+
+  @media (--lg) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0 48px;
+    max-width: 1696px;
+    margin: 0 auto;
+    padding: 50px 24px 124px;
+  }
+}
+
+.sub-menu__item--level-1 {
+  @media (--lg) {
+    & > .sub-menu__item-link {
+      @extend .h5;
+
+      display: block;
+      padding: 20px 0 12px;
+      border-bottom: 1px solid var(--gray);
+      pointer-events: none;
+    }
+
+    & > .sub-menu__item-banner {
+      display: block;
+    }
+  }
+}
+
+.sub-menu--level-2 {
+  @media (--lg) {
+    padding-top: 13px;
+  }
+}
+
+.sub-menu__item-link {
+  @extend .b2;
+
+  display: inline-block;
+  padding: 4px 0;
+  text-decoration: none;
+  color: var(--white);
+
+  &.is-active,
+  &:hover {
+    color: var(--blood);
+  }
+
+  .sub-menu--level-2 & {
+    @media (--lg) {
+      @extend .b1;
+
+      padding: 0;
+    }
+  }
+}
+
+.menu__item {
+  position: relative;
+
+  @media (--lg) {
+    margin: 44px 10px 0;
+    padding: 0 6px 30px;
+  }
+
+  @media (--xl) {
+    margin: 44px 35px 0;
+  }
+
+  @media (--xxl) {
+    margin: 44px 52px 0;
+  }
+
+  &:last-child {
+    & .menu__item-link {
+      padding-bottom: 0;
+    }
+  }
+
+  &:hover {
+    & .menu__item-content {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.menu__item-link {
+  @extend .h5;
+
+  display: block;
+  padding: 6px 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--white);
+
+  @media (--md-max) {
+    @extend .h5;
+  }
+
+  @media (--lg) {
+    padding-bottom: 0;
+  }
+
+  &.is-active,
+  &:hover {
+    color: var(--blood);
+
+    @media (--lg) {
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 30px;
+        width: 100%;
+        height: 1px;
+        background: var(--blood);
+      }
+    }
+  }
+
+  & + .menu__item-content {
+    @media (--lg) {
+      position: fixed;
+      top: 104px;
+      left: 0;
+      width: 100%;
+      background: var(--black);
+      transform: translateY(-100%);
+      opacity: 0;
+      z-index: -2;
+      transition: all 0.5s;
+      visibility: hidden;
+    }
+  }
+}

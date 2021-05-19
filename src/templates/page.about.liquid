@@ -1,16 +1,75 @@
 {%- layout 'theme' -%}
-{%- render 'hero' -%}
+{%- render 'hero',
+  title: 'REBELS WITH CAUSES',
+  description: 'We lead with an alternative point of view, providing bold cups of the World’s Strongest Coffee to our people. We find fresh ways to enjoy coffee and we foster community along the way. Disrupting the status quo interests us, so we create edgy, sarcastic content. We live to rebel against blah beans—and a boring, lackluster life.',
+  desktop_image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/Death_Wish_575x.jpg?v=1617614373',
+  mobile_image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
+-%}
+{% assign bolt_header_image = page.metafields.bolt-header.bolt_header_image | map: 'src'  %}
+{%- render 'bolt-header',
+  image: bolt_header_image,
+  title: page.metafields.bolt-header.bolt_header_text
+-%}
+
+{%- assign timeline_card = page.metafields.timeline -%}
+{%- assign timeline_headers = timeline_card.card_header -%}
+{%- assign timeline_image = timeline_card.card_image -%}
+{%- assign timeline_year = timeline_card.card_year -%}
+{%- assign timeline_copy = timeline_card.card_copy -%}
+
+{% for timeline_header in timeline_headers %}
+  {%- assign image_src = timeline_image[forloop.index0] | map: 'src' -%}
+  {%- assign reverse = false -%}
+  {%- assign index = forloop.index | modulo: 2 -%}
+
+  {% if index == 0 %}
+    {%- assign reverse = true -%}
+  {% endif %}
+
+  {%- render 'timeline-card',
+    image_src: image_src,
+    title: timeline_header,
+    time: timeline_year[forloop.index0],
+    copy: timeline_copy[forloop.index0],
+    reverse: reverse
+  -%}
+{% endfor %}
+
+{% assign full_width_image = page.metafields.full_width_hero.hero_image | map: 'src' %}
+{%- render 'full-width-photo-hero',
+  image: full_width_image,
+  title: page.metafields.full_width_hero.hero_header,
+  description: page.metafields.full_width_hero.hero_copy
+-%}
+
 {%- render 'bolt-header' -%}
-{%- render 'timeline-card' -%}
-{%- render 'timeline-card' -%}
-{%- render 'timeline-card' -%}
-{%- render 'timeline-card' -%}
-{%- render 'timeline-card' -%}
-{%- render 'timeline-card' -%}
-{%- render 'full-width-photo-hero' -%}
-{%- render 'bolt-header' -%}
-{%- render 'grid' -%}
-{%- render 'title-description-card' -%}
-{%- render 'mirror-image-hero' -%}
-{%- render 'section-cta' -%}
+
+{%- render 'section-title', class: 'section-title--title-description-card bg--black', title: page.metafields.title-description.title_description_cards_header -%}
+
+{%- assign description_card_title = page.metafields.title-description.title_description_card -%}
+{%- assign description_card_content = page.metafields.title-description.card_copy -%}
+{%- capture title_description_card -%}
+  {%- for item in description_card_title -%}
+    {%- render 'title-description-card',
+        title: description_card_title[forloop.index0],
+        description: description_card_content[forloop.index0]
+    -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- render 'grid', class: 'grid--title-description-card bg--black', gutter: 'lg', children: title_description_card -%}
+
+{% assign mirror_image = page.metafields.mirror-image-hero.mirror_image_hero_image | map: 'src' %}
+{%- render 'mirror-image-hero',
+  image: mirror_image,
+  title: page.metafields.mirror-image-hero.mirror_image_hero_header,
+  description: page.metafields.mirror-image-hero.mirror_image_hero_copy
+-%}
+
+{%- render 'section-cta',
+  title: page.metafields.about-us-section-cta.header,
+  description: page.metafields.about-us-section-cta.message,
+  cta_text: page.metafields.about-us-section-cta.button_text,
+  cta_url: page.metafields.about-us-section-cta.button_url
+-%}
+
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}

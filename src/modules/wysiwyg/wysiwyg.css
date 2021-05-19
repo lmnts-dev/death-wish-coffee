@@ -1,8 +1,6 @@
 /* styles for wysiwyg */
 
 .wysiwyg {
-  max-width: 1100px;
-
   p,
   h1,
   h2,
@@ -12,6 +10,11 @@
   h6 {
     margin-top: 0;
     margin-bottom: 15px;
+    color: var(--shadow);
+
+    @media (--md) {
+      margin-bottom: 26px;
+    }
   }
 
   h1 {
@@ -28,10 +31,24 @@
 
   h4 {
     @extend .h4;
+
+    @media (--md) {
+      @extend .h3;
+
+      margin-bottom: 15px;
+      font-weight: var(--bold);
+    }
   }
 
   p, li, blockquote {
-    @extend .b1;
+    @extend .p1;
+  }
+
+  p {
+    &:last-of-type {
+      margin-bottom: 0;
+      padding-bottom: 24px;
+    }
   }
 
   ul, ol {
@@ -94,9 +111,17 @@
   /* responsive images to not break the page content if the image is top wide */
 
   img {
-    max-width: 100%;
+    position: relative;
+    left: -24px;
+    max-width: calc(100% + 48px);
     height: auto;
-    margin: 20px auto;
+    margin: 14px auto 10px;
+
+    @media (--md) {
+      position: static;
+      max-width: 100%;
+      margin-top: 2px;
+    }
   }
 
   li:not(:last-of-type) {
@@ -129,5 +154,29 @@
 
   @media (--md-max) {
     margin-top: 50px;
+  }
+}
+
+.wysiwyg--pdp-add-to-cart {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--white);
+  }
+
+  p {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    @extend .p1;
+
+    font-weight: 700;
   }
 }

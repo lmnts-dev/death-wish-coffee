@@ -1,6 +1,56 @@
 {% assign class = class | default:false %}
+{%- assign video = video | default: false -%}
+{%- assign desktop_image = desktop_image | default: false -%}
+{%- assign mobile_image = mobile_image | default: false -%}
+{%- assign title = title | default: false -%}
+{%- assign description = description | default: false -%}
+{%- assign after_content = after_content | default: false -%}
+
 {% capture class %}hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="hero">
-  <h2 class="module-name">hero</h2>
+<section class="{{ class }}" data-module="hero">
+  <div class="hero__inner">
+    <div class="hero__feature">
+      {%- if video != blank -%}
+        <div class="hero__video-wrapper">
+          {%- render 'video',
+            mod_src: video,
+            mod_class: 'video--hero'
+          -%}
+        </div>
+      {%- else -%}
+        {%- if desktop_image != blank or mobile_image != blank -%}
+          <div class="hero__image">
+            <div class="hero__image-wrapper">
+              {%- if desktop_image -%}
+                {%- render 'image', src: desktop_image, class: 'hero__image-desktop' -%}
+              {%- endif -%}
+              {%- if mobile_image -%}
+                {%- render 'image', src: mobile_image, class: 'hero__image-mobile' -%}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="hero__wrapper-content">
+      <div class="hero__container">
+      {%- if title or description -%}
+        <div class="hero__content">
+          {%- if title -%}
+            <h1 class="h1 hero__title">{{ title }}</h1>
+          {%- endif -%}
+          {%- if description -%}
+            <div class="p1 hero__description">
+              {{ description }}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+      {% if after_content %}
+        {{ after_content }}
+      {% endif %}
+      </div>
+    </div>
+  </div>
 </section>

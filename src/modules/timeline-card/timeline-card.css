@@ -1,1 +1,214 @@
 /* styles for the timeline-card module go in this file */
+
+.timeline-card {
+  color: var(--white);
+  text-align: center;
+  padding-top: 42px;
+  padding-bottom: 80px;
+
+  @media (--lg) {
+    padding-top: 128px;
+    text-align: left;
+  }
+
+  & + .timeline-card {
+    padding-top: 0;
+    padding-bottom: 80px;
+
+    @media (--lg) {
+      padding-bottom: 128px;
+    }
+  }
+}
+
+.timeline-card__container {
+  max-width: 1484px;
+}
+
+.timeline-card--reverse {
+  @media (--lg) {
+    text-align: right;
+
+    .timeline-card__wrapper-image {
+      margin-right: 0;
+      margin-left: 140px;
+
+      &::after {
+        right: 100%;
+        left: auto;
+      }
+
+      &::before {
+        right: calc(100% + 106px);
+        left: auto;
+      }
+    }
+
+    .timeline-card__wrapper {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-card__header {
+      flex-direction: row-reverse;
+    }
+  }
+
+  @media (--xxl) {
+    .timeline-card__wrapper-image {
+      margin-right: 0;
+      margin-left: 168px;
+
+      &::before {
+        right: calc(100% + 126px);
+      }
+
+      .image {
+        width: calc(100% - 80px);
+      }
+    }
+  }
+
+  .timeline-card__time {
+    margin-bottom: 9px;
+
+    @media (--lg) {
+      padding-right: 0;
+      padding-left: 20px;
+    }
+
+    @media (--xl) {
+      padding-right: 0;
+      padding-left: 79px;
+    }
+  }
+}
+
+.timeline-card__image-ratio {
+  width: 100%;
+  padding-top: 100%;
+}
+
+.timeline-card__wrapper-image {
+  position: relative;
+  width: 136px;
+  height: 100%;
+  margin-bottom: 32px;
+  background: var(--ashe);
+  border-radius: 100%;
+
+  .image {
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+  }
+
+  .image__img {
+    object-fit: contain;
+  }
+
+  @media (--lg) {
+    width: 200px;
+    margin: 0;
+    margin-right: 140px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 120px;
+      height: 5px;
+      background: var(--ashe);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 100px);
+      width: 39px;
+      height: 39px;
+      border-radius: 100%;
+      background: var(--ashe);
+      transform: translateY(-50%);
+    }
+  }
+
+  @media (--xxl) {
+    width: 264px;
+    margin-right: 168px;
+
+    &::after {
+      width: 146px;
+    }
+
+    &::before {
+      left: calc(100% + 120px);
+    }
+  }
+}
+
+.timeline-card__time,
+.timeline-card__title {
+  color: var(--blood);
+}
+
+.timeline-card__time {
+  margin-bottom: 9px;
+
+  @media (--lg) {
+    padding-right: 20px;
+  }
+
+  @media (--xl) {
+    padding-right: 79px;
+  }
+}
+
+.timeline-card__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (--lg) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.timeline-card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  @media (--lg) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.timeline-card__title {
+  max-width: 720px;
+}
+
+.timeline-card__copy {
+  max-width: 648px;
+  margin-top: 12px;
+
+  @media (--lg) {
+    margin-top: 0;
+  }
+}
+
+.timeline-card__header,
+.timeline-card__content {
+  @media (--lg) {
+    width: calc(50% - (92px / 2));
+  }
+}

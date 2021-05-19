@@ -1,4 +1,4 @@
-<section class="footer" data-module="footer">
+<section class="footer bg--black {{ class }}" data-module="footer">
   <div class="footer__wrapper">
     <div class="footer__inner">
       <div class="footer__block footer__block--logo">
@@ -52,20 +52,14 @@
           </div>
         </div>
         <div class="footer__social">
-          <p class="footer__social-text">Get wired with us</p>
+          <p class="footer__social-text">{{ settings.footer_social_title }}</p>
           <div class="footer__social-links">
-            <a href="#" target="_blank" class="footer__social-link footer__social-link--twitter">
-              {% render 'svg', type: 'twitter', class: 'footer__social-icon' %}
-            </a>
-            <a href="#" target="_blank" class="footer__social-link footer__social-link--facebook">
-              {% render 'svg', type: 'facebook', class: 'footer__social-icon' %}
-            </a>
-            <a href="#" target="_blank" class="footer__social-link footer__social-link--instagram">
-              {% render 'svg', type: 'instagram', class: 'footer__social-icon' %}
-            </a>
-            <a href="#" target="_blank" class="footer__social-link footer__social-link--youtube">
-              {% render 'svg', type: 'youtube', class: 'footer__social-icon' %}
-            </a>
+            {%- for link in linklists[settings.footer_social_menu].links -%}
+              {% assign title_handle = link.title | downcase %}
+              <a href="{{ link.url }}" target="_blank" class="footer__social-link footer__social-link--{{ title_handle }}">
+                {% render 'svg', type: title_handle, class: 'footer__social-icon' %}
+              </a>
+            {%- endfor -%}
           </div>
         </div>
       </div>

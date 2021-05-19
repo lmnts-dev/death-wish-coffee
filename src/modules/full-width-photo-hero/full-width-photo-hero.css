@@ -1,1 +1,56 @@
 /* styles for the full-width-photo-hero module go in this file */
+
+.full-width-photo-hero__inner {
+  @media (--lg) {
+    position: relative;
+    width: 100%;
+  }
+}
+
+.full-width-photo-hero__image {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 98%;
+
+    @media (--lg) {
+      padding-top: 49%;
+    }
+  }
+}
+
+.full-width-photo-hero__content {
+  padding: 36px 24px 30px;
+  color: var(--white);
+
+  @media (--lg) {
+    position: absolute;
+    right: 11%;
+    bottom: 6%;
+    max-width: 799px;
+    text-align: right;
+  }
+}
+
+.full-width-photo-hero__title {
+  @extend .h2;
+
+  color: var(--blood);
+
+  @media (--lg) {
+    @extend .h1;
+
+    color: var(--white);
+  }
+}
+
+.full-width-photo-hero__description {
+  margin-top: 8px;
+
+  @media (--lg) {
+    margin-top: 2px;
+    padding-left: 80px;
+  }
+}

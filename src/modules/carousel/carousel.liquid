@@ -7,6 +7,7 @@ TODO: Need to fix pagination and navigation components
 {%- endcomment -%}
 
 {% assign class = class | default: false %}
+{% assign title_class = title_class | default: false %}
 {% assign children = children | default: false %}
 {% assign navigation = navigation | default: false %}
 {% assign pagination = pagination | default: false %}
@@ -27,10 +28,13 @@ You can see more about how options are privided as HTML attributes here.
 {% assign slides_per_view = slides_per_view | default: 3 %}
 {% assign spacing = spacing | default: 10 %}
 {% assign loop = loop | default: true %}
+{% assign title = title | default: false %}
 {% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
 
 <div class="{{ class }}" data-module="carousel">
-  {%- render 'section-title' -%}
+  {% if title %}
+    {%- render 'section-title', class: title_class, title: title -%}
+  {% endif %}
   <div 
     class="carousel-container container swiper-container{{- init_at_bp_class -}}"
     data-slides-per-view="{{- slides_per_view -}}"
@@ -43,10 +47,10 @@ You can see more about how options are privided as HTML attributes here.
     </div>
     {% if navigation %}
       <div class="carousel-next swiper-button-next{{- init_at_bp_class -}}">
-        {% render 'svg', type: 'arrow-right' %}
+        {% render 'svg', type: 'chevron-right' %}
       </div>
       <div class="carousel-prev swiper-button-prev{{- init_at_bp_class -}}">
-        {% render 'svg', type: 'arrow-left' %}
+        {% render 'svg', type: 'chevron-left' %}
       </div>
     {% endif %}
     {% if pagination %}

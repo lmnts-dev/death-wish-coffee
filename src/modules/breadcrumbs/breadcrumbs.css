@@ -1,1 +1,29 @@
 /* styles for the breadcrumbs module go in this file */
+
+.breadcrumbs {
+  @media (--md-max) {
+    display: none;
+  }
+}
+
+.breadcrumbs__container {
+  max-width: 1474px;
+}
+
+.breadcrumbs__inner {
+  padding: 12px 0;
+}
+
+.breadcrumbs__link,
+.breadcrumbs__text {
+  display: inline-block;
+  color: var(--white);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.breadcrumbs__link {
+  &:hover {
+    color: var(--blood);
+  }
+}

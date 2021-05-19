@@ -1,1 +1,63 @@
 /* styles for the product-hero-card module go in this file */
+
+.product-hero-card__inner {
+  position: relative;
+  opacity: 0.5;
+
+  .swiper-slide-active & {
+    opacity: 1;
+  }
+}
+
+.product-hero-card__wrapper {
+  padding: 0 4px;
+
+  @media (--md) {
+    padding: 0 calc(23px / 2);
+  }
+}
+
+.product-hero-card__image-wrapper {
+  position: relative;
+  display: block;
+  padding-top: percentage(416/312);
+
+  @media (--md) {
+    padding-top: percentage(807/1441);
+  }
+}
+
+.product-hero-card__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 26px 14px 20px;
+  color: var(--white);
+  background: var(--transparent-black);
+  transition: opacity var(--transition-timing) var(--transition-easing), opacity var(--transition-timing) var(--transition-easing);
+  opacity: 0;
+  visibility: hidden;
+
+  @media (--md) {
+    padding: 46px 52px;
+  }
+
+  .swiper-slide-active & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.product-hero-card__item-title {
+  display: block;
+  max-width: percentage(468/965);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--blood);
+}
+
+.product-hero-card__item-price {
+  text-transform: uppercase;
+}

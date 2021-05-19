@@ -57,8 +57,8 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Posted by {{ author }} on {{ date }}",
-      "older_post": "Older Post",
-      "newer_post": "Newer Post",
+      "older_post": "Older Blogs",
+      "newer_post": "Newer Blogs",
       "tags": "Tags",
       "comment_meta_html": "{{ author }} on {{ date }}",
       "read_more": "Read more"
@@ -123,14 +123,15 @@
       "tags": "Tags"
     },
     "sorting": {
-      "title": "Sort by",
+      "title": "Sort By",
+      "aria_label": "Sort Order",
       "featured": "Featured",
       "best_selling": "Best Selling",
-      "az": "Alphabetically, A-Z",
-      "za": "Alphabetically, Z-A",
-      "price_ascending": "Price, low to high",
-      "price_descending": "Price, high to low",
-      "date_descending": "Date, new to old",
+      "az": "A-Z",
+      "za": "Z-A",
+      "price_ascending": "Price low to high",
+      "price_descending": "Price high to low",
+      "date_descending": "Newest",
       "date_ascending": "Date, old to new"
     },
     "onboarding": {

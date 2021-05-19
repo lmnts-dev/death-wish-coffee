@@ -1,1 +1,72 @@
 /* styles for the mirror-image-hero module go in this file */
+
+.mirror-image-hero__wrapper {
+  @media (--xl) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mirror-image-hero__item {
+  @media (--xl) {
+    position: relative;
+    width: 50%;
+  }
+}
+
+.mirror-image-hero__image {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 102%;
+  }
+
+  .mirror-image-hero__item--reverse & {
+    @media (--xl) {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.mirror-image-hero__content {
+  padding: 34px 24px 50px;
+  color: var(--white);
+
+  @media (--xl) {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: 694px;
+    padding: 0 10px 99px 76px;
+  }
+
+  .mirror-image-hero__item--reverse & {
+    @media (--xl) {
+      left: auto;
+      right: 0;
+      padding: 0 76px 99px 10px;
+      text-align: right;
+    }
+  }
+}
+
+.mirror-image-hero__title {
+  color: var(--blood);
+
+  @media (--xl) {
+    color: var(--white);
+  }
+}
+
+.mirror-image-hero__description {
+  @media (--xl) {
+    margin-top: -5px;
+  }
+
+  & p + p {
+    margin-top: 26px;
+  }
+}

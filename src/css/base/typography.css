@@ -54,6 +54,28 @@ h5 {
     font-size: 32px;
     line-height: 1.13;
   }
+
+  &--fenomen {
+    font-family: var(--fenomen);
+  }
+
+  &--large {
+    @media (--md) {
+      font-size: 77px;
+      line-height: 92px;
+    }
+  }
+
+  &--xl-max {
+    @media (--xl-max) {
+      font-size: 38px;
+      line-height: 45px;
+    }
+  }
+
+  &--semi-bold {
+    font-weight: var(--semi-bold);
+  }
 }
 
 .h3 {
@@ -100,6 +122,13 @@ h5 {
   line-height: 28px;
   letter-spacing: normal;
   font-weight: var(--normal);
+
+  &--large {
+    @media (--xl) {
+      font-size: 36px;
+      line-height: 48px;
+    }
+  }
 }
 
 .b1 {

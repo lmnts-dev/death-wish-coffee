@@ -320,7 +320,7 @@ export const buildImageSrcset = (src, webpSrc, isSizedFromShopify = false, exclu
       })
     }
     originalSrc = `${filePath}.${fileExtension}`
-  } else if (webpSrc.indexOf('cdn.accentuate.io') && webpSrc.indexOf('.webp') !== -1) {
+  } else if (webpSrc && webpSrc.indexOf('cdn.accentuate.io') && webpSrc.indexOf('.webp') !== -1) {
     // Serve next-gen format
     for (const width of widths) {
       srcsets.push({
@@ -343,4 +343,15 @@ export const buildImageSrcset = (src, webpSrc, isSizedFromShopify = false, exclu
     src: originalSrc,
     srcsets
   }
+}
+
+export const triggerCustomEvent = (el, eventName, options) => {
+  let event = null
+  if (window.CustomEvent) {
+    event = new CustomEvent(eventName, options)
+  } else {
+    event = document.createEvent('CustomEvent')
+    event.initCustomEvent(eventName, true, true, options)
+  }
+  el.dispatchEvent(event)
 }

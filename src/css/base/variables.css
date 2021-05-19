@@ -15,6 +15,7 @@
   --shamrock: #00793f;
   --bloom: #3d3385;
   --independance: #284196;
+  --gray: #707070;
 
   /* Transparent Colors */
   --transparent-purple: rgba(59, 56, 153, 0.75);
@@ -31,6 +32,6 @@
   --container-width: 1366px;
   --container-padding: 25px;
   --container-padding-tablet: 80px;
-  --navbar-height: 65px;
-  --navbar-height-mobile: 49px;
+  --navbar-height: 104px;
+  --navbar-height-mobile: 104px;
 }

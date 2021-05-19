@@ -1,6 +1,28 @@
 {% assign class = class | default:false %}
+{% assign title = title | default:false %}
+{% assign image_url = image_url | default:false %}
+{% assign url = url | default:false %}
+{% assign description = description | default:false %}
+{% assign sub_description = sub_description | default:false %}
 {% capture class %}product-hero-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="product-hero-card">
-  <h2 class="module-name">product-hero-card</h2>
+<section class="{{ class }} bg--shadow" data-module="product-hero-card">
+  <div class="product-hero-card__wrapper">
+    <div class="product-hero-card__inner">
+      <a href="{{ url }}" class="product-hero-card__image-wrapper">
+        {%- render 'image', src: image_url, class: 'product-hero-card__image no-hover' -%}
+      </a>
+      <div class="product-hero-card__content">
+        {% if title %}
+          <a href="{{ url }}" class="product-hero-card__item-title h2">{{ title }}</a>
+        {% endif %}
+        {%- if description -%}
+          <p class="product-hero-card__item-price b2">{{ description }}</p>
+        {%- endif -%}
+        {%- if sub_description -%}
+          <p class="product-hero-card__item-review">{{ sub_description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
 </section>

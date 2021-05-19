@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}icon-title{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="icon-title">
+  <h2 class="module-name">icon-title</h2>
+</section>

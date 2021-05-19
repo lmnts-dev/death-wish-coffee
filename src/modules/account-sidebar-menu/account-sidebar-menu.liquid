@@ -1,0 +1,6 @@
+{% assign class = class | default false %}
+{% capture class %}account-sidebar-menu{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} placeholder" data-module="account-sidebar-menu">
+  <h2 class="module-name">account-sidebar-menu</h2>
+</section>

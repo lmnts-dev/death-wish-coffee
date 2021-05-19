@@ -1,6 +1,34 @@
 {% assign class = class | default:false %}
 {% capture class %}article-hero-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- assign title = title | default: '' -%}
+{%- assign notice = notice | default: '' -%}
+{%- assign image = image | default: '' -%}
+{%- assign url = url | default: '' -%}
+{%- assign description = description | default: '' -%}
+{%- assign info = info | default: '' -%}
+{%- assign blog_handle = blog_handle | default: '' -%}
 
-<section class="{{ class }} placeholder" data-module="article-hero-card">
-  <h2 class="module-name">article-hero-card</h2>
-</section>
+{%- if title -%}
+  <section class="{{ class }} bg--black" data-module="article-hero-card">
+    <div class="article-hero-card__wrapper">
+      <p class="article-hero-card__notice-title b1">
+        {{ notice }}
+      </p>
+      <div class="article-hero-card__inner">
+        <a href="{{ url }}" class="article-hero-card__image-wrapper">
+          {%- render 'image', src: image, class: 'article-hero-card__image no-hover' -%}
+        </a>
+        <div class="article-hero-card__content">
+          <a href="{{ url }}" class="article-hero-card__title article-hero-card__title--mobile h2">{{ title | truncatewords: 4 }}</a>
+          <a href="{{ url }}" class="article-hero-card__title article-hero-card__title--desktop h2">{{ title }}</a>
+          {%- if description != blank -%}
+            <p class="article-hero-card__subtitle h5">{{ description }}</p>
+          {%- endif -%}
+          {%- if info -%}
+            <p class="article-hero-card__info b1">By {{ info }}{%- if blog_handle -%}<span class="article-hero-card__blog"> / {{ blog_handle }}</span>{%- endif -%}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}

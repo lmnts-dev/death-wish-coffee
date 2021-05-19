@@ -27,6 +27,10 @@
   transition-property: opacity, visibility;
   transition-timing-function: var(--transition-easing);
   visibility: hidden;
+
+  .video--media-hero-grid & {
+    width: 100%;
+  }
 }
 
 .video {
@@ -80,6 +84,10 @@
       top: auto;
       transform: translate(-50%, 0);
     }
+  }
+
+  &--hero {
+    box-shadow: none;
   }
 }
 

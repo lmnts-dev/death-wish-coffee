@@ -1,6 +1,69 @@
-{% assign class = class | default:false %}
+{%- assign class = class | default:false -%}
+{%- assign plp_filter_tags = settings.plp_filter_tags | default: '' -%}
+{%- assign prefix_tags = plp_filter_tags | split: ',' -%}
+{%- assign all_tags = collection.all_tags -%}
+
 {% capture class %}plp-filter{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="plp-filter">
-  <h2 class="module-name">plp-filter</h2>
+<section class="{{ class }}" data-module="plp-filter">
+  <div class="plp-filter__container">
+    <div class="plp-filter__wrapper">
+      <div class="plp-filter__inner">
+        {%- if prefix_tags.size > 0 -%}
+          {%- for prefix in prefix_tags -%}
+            {%- comment -%}Get matched tags{%- endcomment -%}
+            {%- capture matched_tags -%}
+              {%- for tag in all_tags -%}
+                {%- assign _prefix = tag | split: ':' | first -%}
+                {%- if prefix == _prefix -%}
+                  ,{{- tag -}}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            {%- assign matched_tags = matched_tags | remove_first: ',' | split: ',' -%}
+            {%- comment -%}Prepare tag url{%- endcomment -%}
+            {%- capture filter_url_params -%}
+              {%- for current_tag in current_tags -%}
+                {%- assign current_tag_prefix = current_tag | split: ':' | first -%}
+                {%- unless current_tag_prefix == prefix -%}
+                  +{{- current_tag | handle -}}
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            <div class="plp-filter__block js-filter-block">
+              <h4 class="plp-filter__block-title js-filter-block-title">
+                {{- prefix -}}
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--inactive">+</span>
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--active">&ndash;</span>
+              </h4>
+              <div class="plp-filter__block-list">
+                {%- for matched_tag in matched_tags -%}
+                  {%- assign matched_tag_handle = matched_tag | handle -%}
+                  {%- assign params = filter_url_params -%}
+                  {%- unless current_tags contains matched_tag -%}
+                    {%- assign params = filter_url_params | append: '+' | append: matched_tag_handle -%}
+                  {%- endunless -%}
+                  {%- capture filter_url -%}{{- collection.url -}}/{{- params | remove_first: '+' -}}{%- endcapture -%}
+                  <div class="plp-filter__block-item{% if current_tags contains matched_tag %} plp-filter__box-item--selected{% endif %}" data-tag="{{- matched_tag | handle -}}">
+                    <a href="{{- filter_url -}}" class="plp-filter__block-item__link">
+                      {%- render 'svg', type: matched_tag_handle, class: 'plp-filter__block-item__icon' -%}
+                      <span class="plp-filter__block-item__link-text">{{- matched_tag | remove: prefix | remove: ':' -}}</span>
+                    </a>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <div class="plp-filter__buttons">
+        <div class="plp-filter__buttons-item">
+          {% render 'button', class: 'plp-filter__button plp-filter__button--apply button--light button--small-w button--small-h', button_value: 'Apply' %}
+        </div>
+        <div class="plp-filter__buttons-item">
+          {% render 'button', class: 'plp-filter__button plp-filter__button--clear button--light button--small-w button--small-h', button_value: 'Clear' %}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
