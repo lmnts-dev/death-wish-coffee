@@ -1,6 +1,115 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.5 - 2021-05-19
+### CHANGED:
+- DIC-55 Fix style for variant select on PDP 
+- DIC-51 Fix max width for content pdp add to cart on PDP 
+- Fix code review for product hero card module 
+- DIC-13 Fix layout and style for bolt illustration hero 
+- DIC-54 Update max width for description hero on homepage 
+- Set pagination per page for blog 
+- DIC-54 Fix code for src image on hero homepage 
+- DIC-11 Update svg icons for navigation 
+- Fix error for pagination 
+- Add styling for pagination 
+- DIC-54 Update style for Hero homepage 
+- DIC-54 Update home hero (WIP) 
+- Fix code standard for category card module 
+- DIC-53 Update missing file 
+- DIC-53 Remove max-width for section title product page 
+- DIC-24 Fix code review 
+- DIC-24 Add title description card module 
+- DIC-4 Update logo for footer 
+- Fix code review for phc module 
+- Implement category-card module 
+- DIC-12 Integrate custom field to timeline card module 
+- DIC-12 Update typo for timeline card module 
+- DIC-15 Remove unused styling code 
+- DIC-15 Implement product cards inside plp 
+- DIC-15 Update link for product card module 
+- DIC-15 Split product form into separate module 
+- DIC-15 Fix quick shop button to show only when hovering to product card 
+- DIC-15 Integrate product data for product card 
+- DIC-15 Update markup for product card 
+- DIC-15 Fix code standard 
+- DIC-15 Fix code standard 
+- DIC-15 Fix style for product card 
+- DIC-15 Update style for product-card module (WIP) 
+- DIC-15 Update markup for product-card module (WIP) 
+- Update query var when sort option is updated 
+- Add pdp-sort-header 
+- DIC-15 Fix filter title typo 
+- DIC-15 Add filter active icon 
+- DIC-34 Add style for plp filter 
+- DIC-34 Update plp filter markup for mobile 
+- DIC-34 Add functionality for plp filter 
+- DIC-34 Add initial template for filter 
+- DIC-34 Add settings for filter 
+- Fix code review 
+- DIC-28 Update logic for free shipping message only shows up if user is logged in 
+- DIC-28 Update product-hero-card module 
+- DIC-17 Fix code reviews 
+- DIC-17 Add scroll to review drawer function for pdp 
+- DIC-17 Update price display on pdp 
+- DIC-17 Update price for each variant on pdp add to cart module (WIP) 
+- DIC-17 Update style for pdp add to cart module 
+- DIC-15 Create product form module 
+- DIC-17 Update markup for pdp add to cart module (WIP) 
+- DIC-20 Fix code review 
+- DIC-20 Fix code review 
+- DIC-41 Truncate title for article hero card on mobile 
+- DIC-42 Remove blog name in mobile for article hero card 
+- DIC-40 Increase max width of title for article hero card module 
+- DIC-20 Add article hero card module 
+- Remove bolt illustration section 
+- DIC-30 Fix typo for wysiwyg on article page 
+- DIC-31 Add post-navigation module 
+- DIC-32 Add post-hero module 
+- DIC-18 Add pdp-hero module 
+- DIC-33 Add post-header module 
+- DIC-38 Add breadcrumbs module 
+- DIC-25 Add full width photo hero module 
+- Remove section bolt-illustration-hero 
+- Fix code review 
+- Fix comment for illustration hero module 
+- DIC-13 Remove illustration hero section in product teamplate 
+- DIC-13 Update markup for illustration hero 
+- DIC-13 Fix code standard 
+- DIC-13 Update section for bolt illustration hero module 
+- DIC-13 Add bolt illustration hero 
+- Remove hero section 
+- DIC-26 Add mirror-image-hero module 
+- DIC-23 Add section-cta module 
+- Refactor post card module 
+- Fix code review 2 
+- Fix code review 
+- DIC-12 Fix typo for time text on timeline-card module 
+- DIC-12 Update style for timeline-card module 
+- DIC-12 Update markup for timeline-card module 
+- DIC-22 Add bolt-header module 
+- DIC-4 Add hover state and update social menu for footer 
+- DIC-7 Update post card background 
+- DIC-7 Update style for post card 
+- DIC-7 Add markup and style for post card 
+- Fix comment for about hero 
+- DIC-21 Fix bug missing mobile image 
+- DIC-21 Update code standard 
+- DIC-21 Add hero module for about us page 
+- DIC-29 Fix grid layout for media hero module 
+- DIC-29 Update media hero grid module 
+- Remove extra module 
+- Update templates and establish account layout 
+- Add new modules 
+- DIC-11 Update navigation module 
+- DIC-11 Fix code standard 
+- DIC-11 Update style for navigation 
+- DIC-11 Fix style for navigation (WIP) 
+- DIC-11 Add config for navigation 
+- DIC-11 Add markup for navigation 
+- DIC-9 Update background style for section title 
+- DIC-9 Add markup and style for section title 
+
 ## 0.0.4 - 2021-03-29
 ### CHANGED:
 - DIC-10 Add favicon 
