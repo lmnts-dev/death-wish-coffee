@@ -61,3 +61,8 @@
 .product-hero-card__item-price {
   text-transform: uppercase;
 }
+
+.product-hero-card--plp {
+  padding: 0;
+  background-color: var(--black);
+}

@@ -1,4 +1,13 @@
 {%- layout 'theme' -%}
-
+{% assign acf = collection.metafields %}
 {%- render 'breadcrumbs' -%}
-{%- render 'plp', class: 'bg--black' -%}
+{%- render 'products-carousel'
+  list_products: acf.accentuate.collection_hero_carou_product
+-%}
+{%- render 'plp',class: 'bg--black' -%}
+{%- if acf.collections.footer_cta_heading != blank -%}
+  {%- render 'footer-cta',
+    title: acf.collections.footer_cta_heading,
+    enable_subscribe_form: true 
+  -%}
+{%- endif -%}
