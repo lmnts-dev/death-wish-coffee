@@ -5,11 +5,54 @@
  */
 
 import { validateInput } from 'lib/util'
+import axios from 'axios'
 
 const formsubscribe = el => {
+  const provider = el.getAttribute('provider')
   const submitEl = el.querySelector('.js-submit')
-  const inputEls = el.querySelectorAll('.js-input-field input')
-  if (submitEl) {
+  const inputEls = el.querySelector('.js-input-field input')
+  const feedbackEl = el.querySelector('.js-response-message')
+
+  if (submitEl && provider === 'klaviyo') {
+    submitEl.addEventListener('click', (e) => {
+      e.preventDefault()
+      const params = new URLSearchParams()
+      params.append('g', 'HwmMcA')
+      params.append('email', inputEls.value)
+      params.append('source', 'Website Newsletter Form')
+
+      axios({
+        crossDomain: true,
+        method: 'post',
+        url: 'https://manage.kmail-lists.com/ajax/subscriptions/subscribe',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'cache-control': 'no-cache'
+        },
+        data: params
+      }).then(response => {
+        if (response.data.success) {
+          if (response.data.data.is_subscribed) {
+            updateFormFeedback('Looks like you are already subscribed to our mailing list.')
+          } else {
+            updateFormFeedback('Success! Please check your inbox to confirm your subscription.')
+            inputEls.value = ''
+          }
+        } else {
+          updateFormFeedback('An unexpected error occured - please try again later.', true)
+        }
+      }).catch(err => {
+        console.log(err)
+        updateFormFeedback('An unexpected error occured - please try again later.', true)
+      })
+    })
+
+    const updateFormFeedback = (message = false) => {
+      feedbackEl.innerHTML = message
+    }
+  }
+
+  if (submitEl && provider !== 'klaviyo') {
     submitEl.addEventListener('click', (e) => {
       let isValid = true
       if (inputEls.length) {
