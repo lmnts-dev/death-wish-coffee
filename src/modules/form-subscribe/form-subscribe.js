@@ -4,16 +4,14 @@
  * @param {Object} el - The site's formsubscribe container element.
  */
 
-import { validateInput } from 'lib/util'
 import axios from 'axios'
 
 const formsubscribe = el => {
-  const provider = el.getAttribute('provider')
   const submitEl = el.querySelector('.js-submit')
   const inputEls = el.querySelector('.js-input-field input')
   const feedbackEl = el.querySelector('.js-response-message')
 
-  if (submitEl && provider === 'klaviyo') {
+  if (submitEl) {
     submitEl.addEventListener('click', (e) => {
       e.preventDefault()
       const params = new URLSearchParams()
@@ -50,20 +48,6 @@ const formsubscribe = el => {
     const updateFormFeedback = (message = false) => {
       feedbackEl.innerHTML = message
     }
-  }
-
-  if (submitEl && provider !== 'klaviyo') {
-    submitEl.addEventListener('click', (e) => {
-      let isValid = true
-      if (inputEls.length) {
-        for (let i = 0; i < inputEls.length; i++) {
-          isValid = isValid && validateInput(inputEls[i])
-        }
-      }
-      if (!isValid) {
-        e.preventDefault()
-      }
-    })
   }
 }
 

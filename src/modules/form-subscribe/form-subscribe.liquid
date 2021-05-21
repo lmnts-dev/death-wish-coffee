@@ -1,41 +1,15 @@
-{%- assign provider = 'shopify' -%}
-{%- if is_klaviyo -%}
-  {%- assign provider = 'klaviyo' -%}
-{%- endif -%}
-
-<section class="form-subscribe" data-module="form-subscribe" provider="{{- provider -}}">
-  {%- if is_klaviyo -%}
-    <form class="form-subscribe__form form--alt">
-      <p class="form-subscribe__success js-response-message"></p>
-      <div class="form-subscribe__form-inner">
-        {%- render 'input-email',
-          class: 'form-fiel--error-alt form-field--borderless form-subscribe__field js-input-field',
-          name: 'email',
-          id: 'form-subscribe-email',
-          required: 'required',
-          placeholder: 'Enter Your Email Address',
-          label_top: true -%}
-        {%- render 'button', tag: 'button', class: 'form-subscribe__submit button--small-h button--dark js-submit', button_value: 'Sign Me Up', custom_attrs: 'type="submit"' -%}
-      </div>
-    </form>
-  {%- else -%}
-    {%- form 'customer', class: 'form-subscribe__form form--alt', ref: 'form', novalidate: true -%}
-      {%- assign form_success = form.posted_successfully? -%}
-      {%- if form_success -%}
-        <p class="form-subscribe__success">Thank you for your subscription. We will contact you later.</p>
-      {%- elsif form.errors -%}
-        {{ form.errors | default_errors }}
-      {%- endif -%}
-      <div class="form-subscribe__form-inner">
-        {%- render 'input-email',
-          class: 'form-fiel--error-alt form-field--borderless form-subscribe__field js-input-field',
-          name: 'contact[email]',
-          id: 'form-subscribe-email',
-          required: 'required',
-          placeholder: 'Enter Your Email Address',
-          label_top: true -%}
-        {%- render 'button', tag: 'button', class: 'form-subscribe__submit button--small-h button--dark js-submit', button_value: 'Sign Me Up', custom_attrs: 'type="submit"' -%}
-      </div>
-    {%- endform -%}
-  {%- endif -%}
+<section class="form-subscribe" data-module="form-subscribe">
+  <form class="form-subscribe__form form--alt">
+    <p class="form-subscribe__success js-response-message"></p>
+    <div class="form-subscribe__form-inner">
+      {%- render 'input-email',
+        class: 'form-fiel--error-alt form-field--borderless form-subscribe__field js-input-field',
+        name: 'email',
+        id: 'form-subscribe-email',
+        required: 'required',
+        placeholder: 'Enter Your Email Address',
+        label_top: true -%}
+      {%- render 'button', tag: 'button', class: 'form-subscribe__submit button--small-h button--dark js-submit', button_value: 'Sign Me Up', custom_attrs: 'type="submit"' -%}
+    </div>
+  </form>
 </section>
