@@ -173,3 +173,23 @@
 .grid-cta {
   margin-top: 50px;
 }
+
+.grid--plp {
+  margin-top: 25px;
+
+  .grid-content {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: 1fr 1fr;
+
+    @media (--md) {
+      grid-gap: 31px;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    & > * {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}

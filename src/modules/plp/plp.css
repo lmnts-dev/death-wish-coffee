@@ -8,6 +8,10 @@
   position: relative;
 
   @media (--lg) {
-    padding-left: 367px;
+    padding-left: 358px;
   }
+}
+
+.plp__container {
+  max-width: 1440px;
 }

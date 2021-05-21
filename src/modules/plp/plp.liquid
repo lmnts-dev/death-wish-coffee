@@ -1,27 +1,112 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
-<section class="{{- class -}}" data-module="plp">
-  <div class="container plp__container js-container">
-    <div class="plp__inner">
-      {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-      {%- render 'plp-filter', class: 'js-filter' -%}
-      {%- comment -%}product-grid{%- endcomment -%}
-      {%- capture product_cards -%}
-        {%- for product in collection.products -%}
-          {%- assign price = product.price | money -%}
-          {%- capture product_form -%}
-            {%- render 'product-form', product: product -%}
-          {%- endcapture -%}
-          {%- render 'product-card',
-            image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
-            title: product.title,
-            link: product.url,
-            price: price,
-            quick_shop_form: product_form
-          -%}
-        {%- endfor -%}
+{%- assign items = items | default: blank -%}
+{%- assign plp_order_selector = items.plp_order_selector | default: blank -%}
+{%- assign plp_featured_item_selector = items.plp_featured_item_selector | split: '|' -%}
+{%- assign product_handle_large_one = '' -%}
+{%- assign product_handle_large_two = '' -%}
+
+{%- for item in plp_featured_item_selector -%}
+  {%- if forloop.index == 1 -%}
+    {%- assign product_handle_large_one = product_handle_large_one | append: item -%}
+  {%- endif -%}
+  {%- if forloop.index == 2 -%}
+  {%- assign product_handle_large_two = product_handle_large_two | append: item -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- capture product_card_large_one -%}
+  {%- if product_handle_large_one != blank -%}
+    {%- assign product_handle_one = all_products[product_handle_large_one] -%}
+    {%- assign product_price_one = product_handle_one.price | money  -%}
+    {%- assign product_image_src_one = product_handle_one.featured_image | img_url: 'master' -%}
+    {%- assign product_link_one = product_handle_one.url -%}
+    {%- assign product_title_one = product_handle_one.title -%}
+    {%- if product_title_one != blank -%}
+      {%- capture product_form_one -%}
+        {%- render 'product-form', product: product_handle_one -%}
       {%- endcapture -%}
-      {%- render 'grid', use_container: false, gutter: 'sm', children: product_cards -%}
+      {%- render 'product-card',
+        class: 'product-card--plp product-card--row-1',
+        image_src: product_image_src_one,
+        title: product_title_one,
+        link: product_link_one,
+        price: product_price_one,
+        quick_shop_form: product_form_one
+      -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture product_card_large_two -%}
+  {%- if product_handle_large_two != blank -%}
+    {%- assign product_handle_two = all_products[product_handle_large_two] -%}
+    {%- assign product_price_two = product_handle_two.price | money  -%}
+    {%- assign product_image_src_two = product_handle_two.featured_image | img_url: 'master' -%}
+    {%- assign product_link_two = product_handle_two.url -%}
+    {%- assign product_title_two = product_handle_two.title -%}
+    {%- if product_title_two != blank -%}
+      {%- capture product_form_two -%}
+        {%- render 'product-form', product: product_handle_two -%}
+      {%- endcapture -%}
+      {%- render 'product-card',
+        class: 'product-card--plp product-card--row-4',
+        image_src: product_image_src_two,
+        title: product_title_two,
+        link: product_link_two,
+        price: product_price_two,
+        quick_shop_form: product_form_two
+      -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if plp_order_selector != blank  or plp_featured_item_selector != blank -%}
+  <section class="{{- class -}}" data-module="plp">
+    <div class="container plp__container js-container">
+      <div class="plp__inner">
+        {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+        {%- render 'plp-filter', class: 'js-filter' -%}
+        {%- comment -%}product-grid{%- endcomment -%}
+        {%- capture product_cards -%}
+          {%- assign count = 1 -%}
+          {%- assign plp_order_selector = plp_order_selector | split: '|' -%}
+          {%- for handle in plp_order_selector -%}
+            {%- assign product = all_products[handle] -%}
+            {%- assign price = product.price | money -%}
+            {%- assign image_src = product.featured_image | img_url: 'master' -%}
+            {%- assign link = product.url -%}
+            {%- assign title = product.title -%}
+
+            {%- if title != blank -%}
+              {%- if count == 3 and product_card_large_one != blank -%}
+                {{- product_card_large_one -}}
+              {%- endif -%}
+              {%- if count == 7 and product_card_large_two != blank -%}
+                {{- product_card_large_two -}}
+              {%- endif -%}
+              {%- capture product_form -%}
+                {%- render 'product-form', product: product -%}
+              {%- endcapture -%}
+              {%- render 'product-card',
+                class: 'product-card--plp',
+                image_src: image_src,
+                title: title,
+                link: link,
+                price: price,
+                quick_shop_form: product_form
+              -%}
+              {%- assign count = count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- render 'grid',
+          use_container: false,
+          class: 'grid--plp',
+          children: product_cards
+        -%}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+{%- endif -%}
