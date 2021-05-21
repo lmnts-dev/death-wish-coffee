@@ -1,8 +1,9 @@
 {%- layout 'theme' -%}
 {%- render 'pdp-hero' -%}
-{%- render 'section-title', title: 'MADE TO FIT YOUR LIFESTYLE', class: 'section-title--product bg--black' -%}
+{%- render 'section-title', title: 'MADE TO FIT YOUR LIFESTYLE', class: 'bg--black' -%}
+{%- assign product_acf = product.metafields -%}
 
-{% assign media_hero_grid_metafields = product.metafields.media-grid %}
+{% assign media_hero_grid_metafields = product_acf.media-grid %}
 {% assign types = media_hero_grid_metafields.type %}
 {% assign images = media_hero_grid_metafields.image %}
 {% assign videos = media_hero_grid_metafields.video %}
@@ -15,36 +16,60 @@
 {%- render 'media-hero-grid' -%}
 {%- render 'review-drawer' -%}
 
-{%- render 'carousel' -%}
+{%- assign list_products = product_acf.accentuate.pdp_featured_products_selector -%}
+{%- assign section_title_hero = product_acf.accentuate.pdp_featured_products_heading -%}
 
-{%- assign list_products = 'broke-not-busted-charity|death-wish-6-feet-t-shirt|80s-ripper-pre-order|unearthed-by-odin-t-shirt|copy-of-80s-ripper-crop-top-t-shirt-preorder' | split: '|' -%}
-
-{%- capture content_slides -%}
-  {% for handle in list_products %}
-    {%- assign product = all_products[handle] -%}
-
-    {% assign class = 'swiper-slide' %}
-    {% assign title = product.title %}
-    {% assign image_url = product.images[1] | img_url: 'master' %}
-    {% assign url = product.url %}
-    {% assign sub_description = 'review' %}
-    {% capture description %}
-      {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
-    {% endcapture %}
-
-    {%- render 'product-hero-card'
-      class: class,
-      title: title,
-      image_url: image_url,
-      url: url,
-      description: description,
-      sub_description: sub_description
-    -%}
+{%- if product_acf.accentuate.pdp_featured_products_selector == blank -%}
+  {%- assign count = 1 -%}
+  {% for item in collections.all.products %}
+    {%- if item.type == product.type and item.id != product.id -%}
+      {%- if count <= 8 -%}
+        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+      {%- endif -%}
+      {%- assign count = count | plus: 1 -%}
+    {%- endif -%}
   {% endfor %}
-{%- endcapture -%}
+{%- endif -%}
 
-{%- assign section_title_hero = 'DON’T SLEEP ON THESE PRODUCTS' -%}
+{%- if list_products != blank -%}
+  {%- capture content_slides -%}
+    {%- assign list_products = list_products | split: '|' -%}
+    {% for handle in list_products %}
+      {%- assign product = all_products[handle] -%}
+      {% assign title = product.title %}
+      {% assign image_url = product.images[1] | img_url: 'master' %}
+      {% assign url = product.url %}
+      {% assign reviews = 'Review' %}
+      {%- capture price %}
+        {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+      {%- endcapture -%}
+      {%- assign description = product.description | strip_html -%}
+      {%- assign cta_text = 'Take me There' -%}
+      {%- if title != blank -%}
+        {%- render 'product-hero-card'
+          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding',
+          title: title,
+          image_url: image_url,
+          url: url,
+          price: price,
+          description: description,
+          sub_description: sub_description,
+          reviews: reviews,
+          cta_text: cta_text
+        -%}
+      {%- endif -%}
+    {% endfor %}
+  {%- endcapture -%}
 
-{%- render 'carousel', title: section_title_hero, title_class: 'section-title--product-hero-card'  class: 'carousel--product-hero-card carousel--no-padding bg--shadow', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+  {%- render 'carousel',
+    title: section_title_hero,
+    title_class: 'section-title--product-hero-card'
+    class: 'carousel--product-hero-card carousel--no-padding bg--shadow',
+    children: content_slides,
+    spacing: 0,
+    slides_per_view: 1,
+    navigation: true 
+  -%}
+{%- endif -%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}

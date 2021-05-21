@@ -4,7 +4,8 @@
  */
 
 const productHeroCard = (el) => {
-  console.warn('initializing productHeroCard module')
+  const descriptionEl = el.querySelector('.js-description')
+  console.log(descriptionEl)
 }
 
 export default productHeroCard

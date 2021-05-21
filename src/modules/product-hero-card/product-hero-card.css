@@ -1,5 +1,13 @@
 /* styles for the product-hero-card module go in this file */
 
+.product-hero-card {
+  padding: 0 0 24px;
+
+  @media (--md) {
+    padding: 0 0 113px;
+  }
+}
+
 .product-hero-card__inner {
   position: relative;
   opacity: 0.5;
@@ -65,4 +73,42 @@
 .product-hero-card--plp {
   padding: 0;
   background-color: var(--black);
+}
+
+.product-hero-card--no-opacity {
+  .product-hero-card__inner {
+    opacity: 1;
+  }
+}
+
+.product-hero-card--hover {
+  &:hover {
+    .product-hero-card__content {
+      height: 100%;
+    }
+  }
+
+  .product-hero-card__content {
+    transition: all var(--transition-timing) var(--transition-easing);
+  }
+}
+
+.product-hero-card__item-description {
+  margin-top: 20px;
+
+  @media (--md) {
+    margin-top: 46px;
+  }
+}
+
+.product-hero-card__item-cta {
+  margin-top: 10px;
+
+  @media (--md) {
+    margin-top: 20px;
+  }
+}
+
+.product-hero-card--no-padding {
+  padding: 0;
 }
