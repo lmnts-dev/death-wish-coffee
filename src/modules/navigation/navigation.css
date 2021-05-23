@@ -2,7 +2,7 @@
 
 .navigation {
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: var(--navbar-height);
   top: 0;
 
@@ -311,8 +311,30 @@
 }
 
 .navigation__utilities-cart {
-  width: 32px;
+  position: relative;
   margin-right: 14px;
+  border: none;
+  width: 32px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+
+  &:focus-visible {
+    outline: auto 1px var(--white);
+  }
+
+  &.has-items::before {
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: var(--blood);
+    border-radius: 3px;
+    top: 0;
+    left: 50%;
+    transform: translate(0, -8px);
+  }
 }
 
 .navigation__utilities-search {
