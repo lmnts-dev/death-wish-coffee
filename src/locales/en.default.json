@@ -98,7 +98,9 @@
       "savings": "Discount",
       "keep_shopping": "Keep Shopping",
       "line_price": "Line Price:",
-      "free_shipping": "Free domestic shipping w/ account"
+      "free_shipping": "Free domestic shipping w/ account",
+      "empty": "There aren't any items in your cart.",
+      "shop_all": "Shop All"
     },
     "label": {
       "product": "Product",
