@@ -22,7 +22,7 @@
     position: absolute;
     z-index: 1;
     top: 5px;
-    right: 91px;
+    right: 68px;
     display: block;
     opacity: 0;
     visibility: hidden;
@@ -32,6 +32,10 @@
     border-color: transparent transparent var(--shadow) transparent;
     width: 0;
     height: 0;
+
+    @media (--lg) {
+      right: 101px;
+    }
   }
 
   &.is-active {
