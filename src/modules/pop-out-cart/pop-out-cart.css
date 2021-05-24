@@ -46,7 +46,6 @@
 }
 
 .pop-out-cart__inner {
-  overflow: auto;
   height: 100%;
   padding: 29px 39px 54px 41px;
   -webkit-overflow-scrolling: touch;
@@ -58,6 +57,11 @@
   padding-bottom: 11px;
   text-transform: uppercase;
   color: var(--steel);
+}
+
+.pop-out-cart__list {
+  max-height: 560px;
+  overflow: auto;
 }
 
 .pop-out-cart__item {

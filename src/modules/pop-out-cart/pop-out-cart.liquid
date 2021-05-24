@@ -13,6 +13,7 @@
 
     {% if cart.item_count > 0 %}
       <form action="/cart" method="post" novalidate>
+        <div class="pop-out-cart__list">
         {% for item in cart.items %}
           {% assign item_image = item.image | img_url: 'master' %}
           <div class="pop-out-cart__item">
@@ -53,6 +54,7 @@
             </a>
           </div>
         {% endfor %}
+        </div>
 
         <div class="pop-out-cart__footer">
           <p class="pop-out-cart__summary-row">
