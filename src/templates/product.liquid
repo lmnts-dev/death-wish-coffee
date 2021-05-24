@@ -32,9 +32,11 @@
 {%- endif -%}
 
 {%- if list_products != blank -%}
+  {%- assign count_carousel = 0 -%}
   {%- capture content_slides -%}
     {%- assign list_products = list_products | split: '|' -%}
     {% for handle in list_products %}
+      {%- assign count_carousel = count_carousel | plus: 1 -%}
       {%- assign product = all_products[handle] -%}
       {% assign title = product.title %}
       {% assign image_url = product.images[1] | img_url: 'master' %}
@@ -61,14 +63,22 @@
     {% endfor %}
   {%- endcapture -%}
 
+  {%- assign navigation_carousel = true -%}
+  {%- assign slides_per_view_carousel = 1 -%}
+
+  {%- if count_carousel == 1 -%}
+    {%- assign navigation_carousel = false -%}
+    {%- assign slides_per_view_carousel = 0 -%}
+  {%- endif -%}
+
   {%- render 'carousel',
     title: section_title_hero,
     title_class: 'section-title--product-hero-card'
     class: 'carousel--product-hero-card carousel--no-padding bg--shadow',
     children: content_slides,
     spacing: 0,
-    slides_per_view: 1,
-    navigation: true
+    slides_per_view: slides_per_view_carousel,
+    navigation: navigation_carousel
   -%}
 {%- endif -%}
 
