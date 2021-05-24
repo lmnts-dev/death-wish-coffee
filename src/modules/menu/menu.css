@@ -91,16 +91,16 @@
   position: relative;
 
   @media (--lg) {
-    margin: 44px 10px 0;
+    margin: 40px 10px 0;
     padding: 0 6px 30px;
   }
 
   @media (--xl) {
-    margin: 44px 35px 0;
+    margin: 40px 35px 0;
   }
 
   @media (--xxl) {
-    margin: 44px 52px 0;
+    margin: 40px 52px 0;
   }
 
   &:last-child {

@@ -286,6 +286,7 @@
   transform: translate(0, -50%);
 
   @media (--lg) {
+    margin-top: 10px;
     right: 58px;
   }
 }
