@@ -1,9 +1,43 @@
 {%- layout 'theme' -%}
 {% assign acf = collection.metafields %}
+{% assign list_products = acf.accentuate.collection_hero_carou_product | default: blank %}
+
 {%- render 'breadcrumbs' -%}
-{%- render 'products-carousel'
-  list_products: acf.accentuate.collection_hero_carou_product
--%}
+
+{%- if list_products != blank -%}
+  {%- capture content_slides -%}
+    {%- assign list_products = list_products  | split: '|' -%}
+    {% for handle in list_products %}
+      {%- assign product = all_products[handle] -%}
+      {% assign title = product.title %}
+      {% assign image_url = product.images[1] | img_url: 'master' %}
+      {% assign url = product.url %}
+      {% assign sub_description = 'Review' %}
+      {% capture description %}
+        {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+      {% endcapture %}
+      {%- if title != blank -%}
+        {%- render 'product-hero-card'
+          class: 'swiper-slide product-hero-card--plp',
+          title: title,
+          image_url: image_url,
+          url: url,
+          description: description,
+          sub_description: sub_description
+        -%}
+      {%- endif -%}
+    {% endfor %}
+  {%- endcapture -%}
+
+  {%- render 'carousel',
+    class: 'carousel--plp carousel--no-padding bg--black',
+    children: content_slides,
+    spacing: 0,
+    slides_per_view: 1,
+    navigation: true 
+  -%}
+{%- endif -%}
+
 {%- render 'plp',
   class: 'bg--black'
   items: acf.accentuate

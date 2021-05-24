@@ -134,6 +134,7 @@
     padding: 0;
   }
 
+  .carousel--plp &,
   .carousel--product-hero-card & {
     position: relative;
     max-width: 100%;
@@ -150,6 +151,7 @@
     margin-top: 6rem;
   }
 
+  .carousel--plp &,
   .carousel--product-hero-card & {
     margin-top: 0;
   }
@@ -173,6 +175,7 @@
     content: none;
   }
 
+  .carousel--plp &,
   .carousel--pdp-hero &,
   .carousel--product-hero-card & {
     top: 50%;
@@ -202,6 +205,7 @@
     right: 26px;
   }
 
+  .carousel--plp &,
   .carousel--product-hero-card & {
     right: 83px;
   }
@@ -225,6 +229,7 @@
     left: 16px;
   }
 
+  .carousel--plp &,
   .carousel--product-hero-card & {
     left: 83px;
   }
@@ -330,4 +335,8 @@
   .carousel-prev {
     left: 4%;
   }
+}
+
+.carousel--plp {
+  padding: 0;
 }
