@@ -4,7 +4,7 @@
       <div class="pagination__pages">
         {%- if paginate.previous -%}
           <a href="{{- paginate.previous.url -}}" class="pagination__nav pagination__nav--prev">
-            {% render 'svg', type: 'arrow-left', class: 'pagination__svg' %}
+            {% render 'svg', type: 'polygon-left', class: 'pagination__svg' %}
           </a>
         {%- endif -%}
         {%- for part in paginate.parts -%}
@@ -16,7 +16,7 @@
         {%- endfor -%}
         {%- if paginate.next -%}
           <a href="{{- paginate.next.url -}}" class="pagination__nav pagination__nav--next">
-            {%- render 'svg', type: 'arrow-right', class: 'pagination__svg' -%}
+            {%- render 'svg', type: 'polygon-right', class: 'pagination__svg' -%}
           </a>
         {%- endif -%}
       </div>
