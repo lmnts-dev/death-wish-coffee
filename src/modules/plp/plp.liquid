@@ -61,14 +61,14 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- if plp_order_selector != blank  or plp_featured_item_selector != blank -%}
-  <section class="{{- class -}}" data-module="plp">
-    <div class="container plp__container js-container">
-      <div class="plp__inner">
-        {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-        {%- render 'plp-filter', class: 'js-filter' -%}
-        {%- comment -%}product-grid{%- endcomment -%}
-        {%- capture product_cards -%}
+<section class="{{- class -}}" data-module="plp">
+  <div class="container plp__container js-container">
+    <div class="plp__inner">
+      {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+      {%- render 'plp-filter', class: 'js-filter' -%}
+      {%- comment -%}product-grid{%- endcomment -%}
+      {%- capture product_cards -%}
+        {%- if collection.handle == 'merch' or collection.handle == 'coffee' -%}
           {%- assign count = 1 -%}
           {%- assign plp_order_selector = plp_order_selector | split: '|' -%}
           {%- for handle in plp_order_selector -%}
@@ -99,14 +99,32 @@
               {%- assign count = count | plus: 1 -%}
             {%- endif -%}
           {%- endfor -%}
-        {%- endcapture -%}
+        {%- else -%}
+          {%- for product in collection.products -%}
+            {%- assign price = product.price | money -%}
+            {%- assign image_src = product.featured_image | img_url: 'master' -%}
+            {%- assign link = product.url -%}
+            {%- assign title = product.title -%}
+            {%- capture product_form -%}
+              {%- render 'product-form', product: product -%}
+            {%- endcapture -%}
+            {%- render 'product-card',
+              image_src: image_src,
+              class: 'product-card--plp',
+              title: title,
+              link: link,
+              price: price,
+              quick_shop_form: product_form
+            -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endcapture -%}
 
-        {%- render 'grid',
-          use_container: false,
-          class: 'grid--plp',
-          children: product_cards
-        -%}
-      </div>
+      {%- render 'grid',
+        use_container: false,
+        class: 'grid--plp',
+        children: product_cards
+      -%}
     </div>
-  </section>
-{%- endif -%}
+  </div>
+</section>
