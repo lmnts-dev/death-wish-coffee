@@ -1,12 +1,5 @@
 /* styles for the post-card module go in this file */
 
-.post-card {
-  &--test {
-    width: 100%;
-    max-width: 336px;
-  }
-}
-
 .post-card__image-wrapper {
   position: relative;
   display: block;
