@@ -4,26 +4,43 @@
 
 {%- render 'breadcrumbs' -%}
 
+{%- if acf.accentuate.collection_hero_carou_product == blank -%}
+  {%- assign count = 1 -%}
+  {% for item in collection.products %}
+    {%- if item.type == collection.title -%}
+      {%- if count <= 8 -%}
+        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+      {%- endif -%}
+      {%- assign count = count | plus: 1 -%}
+    {%- endif -%}
+  {% endfor %}
+{%- endif -%}
+
 {%- if list_products != blank -%}
   {%- capture content_slides -%}
-    {%- assign list_products = list_products  | split: '|' -%}
+    {%- assign list_products = list_products | split: '|' -%}
     {% for handle in list_products %}
       {%- assign product = all_products[handle] -%}
       {% assign title = product.title %}
       {% assign image_url = product.images[1] | img_url: 'master' %}
       {% assign url = product.url %}
-      {% assign sub_description = 'Review' %}
-      {% capture description %}
+      {% assign reviews = 'Review' %}
+      {%- capture price %}
         {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
-      {% endcapture %}
+      {%- endcapture -%}
+      {%- assign description = product.description | strip_html | truncate: 500, '' -%}
+      {%- assign cta_text = 'Take me There' -%}
       {%- if title != blank -%}
         {%- render 'product-hero-card'
-          class: 'swiper-slide product-hero-card--plp',
+          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
           title: title,
           image_url: image_url,
           url: url,
+          price: price,
           description: description,
-          sub_description: sub_description
+          sub_description: sub_description,
+          reviews: reviews,
+          cta_text: cta_text
         -%}
       {%- endif -%}
     {% endfor %}

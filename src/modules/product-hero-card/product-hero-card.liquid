@@ -15,35 +15,37 @@
       <a href="{{ url }}" class="product-hero-card__image-wrapper">
         {%- render 'image', src: image_url, class: 'product-hero-card__image no-hover' -%}
       </a>
-      <div class="product-hero-card__content">
-        {% if title %}
+      <div class="product-hero-card__content js-content">
+        <div class="product-hero-card__content-inner">
+          {% if title %}
           <a href="{{ url }}" class="product-hero-card__item-title h2">{{- title -}}</a>
-        {% endif %}
-        {%- if price -%}
-          <p class="product-hero-card__item-price b2">{{- price -}}</p>
-        {%- endif -%}
-        {%- if reviews -%}
-          <p class="product-hero-card__item-reviews p1">{{- reviews -}}</p>
-        {%- endif -%}
-        {%- if sub_description -%}
-          <p class="product-hero-card__item-sub-description">{{- sub_description -}}</p>
-        {%- endif -%}
-        {%- if description and cta_text -%}
-          <div class="product-hero-card__item-description js-description">
-            {%- if description -%}
-              <p class="p1">{{- description -}}</p>
-            {%- endif -%}
-            {%- if cta_text and url -%}
-              <div class="product-hero-card__item-cta ">
-                {%- render 'button',
-                  tag: 'a',
-                  button_value: cta_text,
-                  button_url: url
-                -%}
-              </div>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
+          {% endif %}
+          {%- if price -%}
+            <p class="product-hero-card__item-price b2">{{- price -}}</p>
+          {%- endif -%}
+          {%- if reviews -%}
+            <p class="product-hero-card__item-reviews p1">{{- reviews -}}</p>
+          {%- endif -%}
+          {%- if sub_description -%}
+            <p class="product-hero-card__item-sub-description">{{- sub_description -}}</p>
+          {%- endif -%}
+          {%- if description and cta_text -%}
+            <div class="product-hero-card__item-description js-description">
+              {%- if description -%}
+                <p class="p1 js-text">{{- description -}}</p>
+              {%- endif -%}
+              {%- if cta_text and url -%}
+                <div class="product-hero-card__item-cta ">
+                  {%- render 'button',
+                    tag: 'a',
+                    button_value: cta_text,
+                    button_url: url
+                  -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </div>

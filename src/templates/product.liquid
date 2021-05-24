@@ -43,11 +43,11 @@
       {%- capture price %}
         {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
       {%- endcapture -%}
-      {%- assign description = product.description | strip_html -%}
+      {%- assign description = product.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}
       {%- if title != blank -%}
         {%- render 'product-hero-card'
-          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding',
+          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
           title: title,
           image_url: image_url,
           url: url,
@@ -68,7 +68,7 @@
     children: content_slides,
     spacing: 0,
     slides_per_view: 1,
-    navigation: true 
+    navigation: true
   -%}
 {%- endif -%}
 
