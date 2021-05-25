@@ -40,7 +40,7 @@ const productHeroCard = (el) => {
           contentEl.setAttribute('style', `transform: translateY(${descriptionHeight})`)
         })
       }
-    })
+    }, 100)
   }
 
   sliceText()
