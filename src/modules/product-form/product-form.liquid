@@ -5,7 +5,8 @@
 {%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{%- endcapture -%}
 
 {%- if product -%}
-  <section class="{{- class -}}" data-module="product-form">
+  {%- assign first_variant_title = product.variants[0].title -%}
+  <section class="{{- class -}}" data-module="product-form" data-first-variant-title="{{- first_variant_title -}}">
     <form method="post" action="/cart/add" class="product-form__form">
       <div class="product-form__options">
         {%- for option in product.options -%}
