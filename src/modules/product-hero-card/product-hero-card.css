@@ -1,5 +1,13 @@
 /* styles for the product-hero-card module go in this file */
 
+.product-hero-card {
+  padding: 0 0 24px;
+
+  @media (--md) {
+    padding: 0 0 113px;
+  }
+}
+
 .product-hero-card__inner {
   position: relative;
   opacity: 0.5;
@@ -60,4 +68,65 @@
 
 .product-hero-card__item-price {
   text-transform: uppercase;
+}
+
+.product-hero-card--plp {
+  padding: 0;
+  background-color: var(--black);
+}
+
+.product-hero-card--no-opacity {
+  .product-hero-card__inner {
+    opacity: 1;
+  }
+}
+
+.product-hero-card--hover {
+  &:hover {
+    .product-hero-card__content {
+      height: 100%;
+      transform: none;
+    }
+  }
+
+  .product-hero-card__content {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 14px;
+    transform: translateY(354px);
+    transition: transform var(--transition-timing) var(--transition-easing);
+
+    @media (--xl) {
+      padding: 46px 52px;
+    }
+  }
+
+  .product-hero-card__item-description {
+    max-width: 668px;
+    padding-top: 20px;
+
+    @media (--xl) {
+      padding-top: 46px;
+    }
+  }
+
+  .product-hero-card__item-title {
+    max-width: 100%;
+
+    @media (--xl) {
+      max-width: percentage(468/965);
+    }
+  }
+}
+
+.product-hero-card__item-cta {
+  margin-top: 10px;
+
+  @media (--xl) {
+    margin-top: 20px;
+  }
+}
+
+.product-hero-card--no-padding {
+  padding: 0;
 }
