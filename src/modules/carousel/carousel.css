@@ -117,14 +117,6 @@
       padding: 0 0 113px;
     }
   }
-
-  &--article {
-    padding-bottom: 68px;
-
-    @media (--md) {
-      padding-bottom: 107px;
-    }
-  }
 }
 
 .carousel-container {
