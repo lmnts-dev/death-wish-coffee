@@ -85,23 +85,32 @@
   "cart": {
     "general": {
       "title": "Your Bag",
+      "pop_out_title": "All Your Stuff",
       "remove": "Remove",
       "note": "Special instructions for seller",
-      "subtotal": "Subtotal",
-      "shipping_at_checkout": "Shipping and taxes calculated at checkout",
-      "update": "Update Cart",
-      "checkout": "Checkout",
+      "subtotal": "SubTotal",
+      "shipping_at_checkout": "Shipping & taxes calculated at checkout",
+      "update": "Update",
+      "checkout": "Check out",
       "empty": "Your cart is empty.",
       "continue_browsing_html": "Continue browsing <a href=\"/collections/all\">here</a>.",
       "close_cart": "Close Cart",
-      "savings_html": "You're saving {{ price }}",
-      "keep_shopping": "Keep Shopping"
+      "savings": "Discount",
+      "keep_shopping": "Keep Shopping",
+      "line_price": "Line Price:",
+      "free_shipping": "Free domestic shipping w/ account",
+      "empty": "There aren't any items in your cart.",
+      "shop_all": "Shop All"
     },
     "label": {
       "product": "Product",
       "price": "Price",
       "quantity": "Quantity",
-      "total": "Total"
+      "total": "Total",
+      "aria_pop_out_toggle": "Shopping Cart",
+      "aria_quantity": "Quantity for {{ name }}",
+      "aria_decrement": "Decrement quantity by one unit",
+      "aria_increment": "Increment quantity by one unit"
     },
     "mini": {
       "submit": "{{ total_price }} - View Bag"
@@ -311,7 +320,6 @@
       "close_menu": "Close menu"
     },
     "cart": {
-      "title": "Cart",
       "items_count": {
         "one": "item",
         "other": "items"
