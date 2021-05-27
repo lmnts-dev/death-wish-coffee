@@ -1,1 +1,9 @@
 /* Form CSS */
+
+.form-field__input {
+  appearance: none;
+  border: solid 2px var(--steel);
+  padding: 1.5rem 2rem;
+  background: transparent;
+  color: var(--steel);
+}
