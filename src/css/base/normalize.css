@@ -47,8 +47,14 @@ img {
 
 #page {
   overflow-x: hidden;
-  min-height: 66.1vh;
+  min-height: calc((100vh - var(--navbar-height)) - var(--footer-height));
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media (--lg-max) {
+    min-height: calc((100vh - var(--navbar-height)) - var(--footer-height-mobile));
+  }
 }
 
 #preview-bar-iframe {
