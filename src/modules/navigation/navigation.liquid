@@ -9,14 +9,9 @@
       </div>
     </button>
     <div class="navigation__logo">
-      <a href="" class="naviation__logo-link">
+      <a href="{{ routes.root_url }}" class="naviation__logo-link">
         {%- render 'image', src: logo, class: 'navigation__logo-image' -%}
       </a>
-    </div>
-    <div class="navigation__utilities">
-      <div class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</div>
-      <div class="navigation__utilities-cart">{%- render 'svg', type: 'cart' -%}</div>
-      <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
     </div>
     <div class="navigation__main js-mobile-menu">
       <div class="navigation__login">
@@ -37,5 +32,16 @@
       {%- render 'footer', class: 'footer--navigation navigation__footer' -%}
       <div class="navigation__copyright">&copy; Death Wish Coffee Co. {{ 'now' | date: '%Y' }}. All Rights Reserved.</div>
     </div>
+
+    <div class="navigation__utilities">
+      <div class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</div>
+      <button class="navigation__utilities-cart js-pop-out-cart-toggle{% if cart.item_count > 0 %} has-items{% endif %}"
+              aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
+              aria-expanded="false"
+      >{%- render 'svg', type: 'cart' -%}</button>
+      <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
+    </div>
+
+    {% render 'pop-out-cart' %}
   </div>
 </header>

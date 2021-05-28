@@ -1,0 +1,25 @@
+{% assign class = class | default: false %}
+{% assign id_prefix = id_prefix | default: 'cart-item-control-' %}
+{% assign item = item | default: false %}
+{% capture class %}cart-item-control{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+{% if item %}
+  <div class="cart-item-control" data-module="cart-item-control">
+    <div class="cart-item-control__field">
+      <button class="cart-item-control__button cart-item-control__button--decrement js-cart-item-control-minus" type="button" aria-label="{{ 'cart.label.aria_decrement' | t }}">-</button>
+      {% assign input_id = id_prefix | append: item.key %}
+      {% assign input_label = 'cart.label.aria_quantity' | t: name: item.product.title %}
+      {% render 'input-text',
+        id: input_id,
+        class: 'form-field--quantity',
+        name: 'updates[]',
+        label: input_label,
+        type: 'number',
+        value: item.quantity,
+        custom_attrs: 'min="0" size="1"'
+      %}
+      <button class="cart-item-control__button cart-item-control__button--increment js-cart-item-control-plus" type="button" aria-label="{{ 'cart.label.aria_increment' | t }}">+</button>
+    </div>
+    <input type="submit" name="update" class="cart-item-control__update b3" value="{{ 'cart.general.update' | t }}">
+  </div>
+{% endif %}

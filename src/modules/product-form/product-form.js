@@ -11,7 +11,26 @@ const productform = el => {
   const variantEl = el.querySelector('.js-product-variants')
   const submitButtonEl = el.querySelector('.js-form-submit')
   const priceEls = el.querySelectorAll('.js-variant-price')
+  const firstVariantTitle = el.getAttribute('data-first-variant-title')
   const options = {}
+
+  // Toggle price display
+  const setPrice = variantTitle => {
+    if (!priceEls.length || !variantTitle) {
+      return
+    }
+    for (const priceEl of priceEls) {
+      const priceMatchOption = priceEl.getAttribute('data-match-option')
+      const isMatched = variantTitle.indexOf(priceMatchOption) >= 0
+      if (isMatched) {
+        addClass(priceEl, 'active')
+      } else {
+        removeClass(priceEl, 'active')
+      }
+    }
+  }
+
+  setPrice(firstVariantTitle)
 
   if (inputEls.length && variantEl) {
     for (const inputEl of inputEls) {
@@ -38,18 +57,7 @@ const productform = el => {
         } else {
           submitButtonEl.setAttribute('disabled', true)
         }
-        // Toggle price display
-        if (priceEls.length) {
-          for (const priceEl of priceEls) {
-            const priceMatchOption = priceEl.getAttribute('data-match-option')
-            const isMatched = selectedTitle.indexOf(priceMatchOption) >= 0
-            if (isMatched) {
-              addClass(priceEl, 'active')
-            } else {
-              removeClass(priceEl, 'active')
-            }
-          }
-        }
+        setPrice(selectedTitle)
       })
     }
   }

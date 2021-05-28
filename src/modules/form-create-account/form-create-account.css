@@ -1,29 +1,46 @@
 /* styles for the form-create-account module go in this file */
 
-.create-account-form {
-  width: 100%;
-  max-width: 500px;
-  margin-top: 15px;
+.form-create-account {
+  background-color: var(--black);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.form-create-account {
-  margin: 120px auto;
+.form-create-account__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  @media (--md-max) {
-    margin: 40px 0 100px;
+.create-account-header__title {
+  color: var(--blood);
+  text-align: center;
+}
+
+.form-create-account__field {
+  &:not(:first-of-type) {
+    margin-top: 2rem;
   }
 }
 
-.create-account-header__copy {
-  margin: 10px 0 23px;
+.form-create-account__form {
+  max-width: 336px;
+  width: 100%;
+  margin-top: 6em;
 
   @media (--md-max) {
-    margin: 5px 0 16px;
+    margin-top: 3rem;
   }
 }
 
 .create-account-form__submit {
-  @media (--md-max) {
-    margin-top: 18px;
-  }
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.form-create-account__checkbox {
+  margin-top: 2rem;
 }

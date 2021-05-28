@@ -34,4 +34,6 @@
   --container-padding-tablet: 80px;
   --navbar-height: 104px;
   --navbar-height-mobile: 104px;
+  --footer-height: 344px;
+  --footer-height-mobile: 255px;
 }

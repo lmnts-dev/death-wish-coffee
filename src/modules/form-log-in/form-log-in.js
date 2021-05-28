@@ -2,39 +2,33 @@
 * Initial javascript for the form-log-in module
 */
 
-import select from 'dom-select'
 import { toggle } from 'lib/util'
 
 const formLogIn = (el) => {
-  const loginWrapper = select('.login-wrapper')
-  const loginMessage = select('.form-login__message')
-  const forgotWrapper = select('.form-forgot')
-  const forgotSuccess = select('.form-forgot-form__success')
-  const forgotTrigger = select('.form-login-footer__forgot')
-  const backTrigger = select('.form-forgot-back')
-  const url = window.location.href
+  const forgotPasswordBtn = el.querySelector('.form-login-footer__account--password')
+  const loginForm = el.querySelector('.form-login__form')
+  const forgotForm = el.querySelector('.form-forgot')
+  const cancelBtn = el.querySelector('.form-forgot__cancel')
+  const successMsg = el.querySelector('.form-forgot-form__success')
+  const successMsgClone = el.querySelector('.form-login__success-msg')
 
-  const switchForms = () => {
-    toggle(loginWrapper, 'visible')
-    toggle(forgotWrapper, 'visible')
+  if (successMsg) {
+    successMsgClone.appendChild(successMsg)
+    toggle(successMsgClone, 'active')
   }
 
-  if (forgotSuccess) {
-    loginMessage.appendChild(forgotSuccess)
-  }
-
-  if (url.indexOf('recover') !== -1) {
-    switchForms()
-  }
-
-  forgotTrigger.addEventListener('click', (e) => {
-    e.preventDefault()
-    switchForms()
+  forgotPasswordBtn.addEventListener('click', () => {
+    swapForms()
   })
 
-  backTrigger.addEventListener('click', () => {
-    switchForms()
+  cancelBtn.addEventListener('click', () => {
+    swapForms()
   })
+
+  const swapForms = () => {
+    toggle(loginForm, 'visible')
+    toggle(forgotForm, 'visible')
+  }
 }
 
 export default formLogIn

@@ -113,5 +113,11 @@
 		],
     "description": "Print some data into a <pre> tag and exit the script",
     "scope": "php"
+	},
+  "Render Liquid Tag": {
+		"prefix": "render",
+		"body": ["{%- render '$0' -%}"],
+    "description": "Create render tag",
+    "scope": "html"
 	}
 }
