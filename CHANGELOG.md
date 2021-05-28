@@ -1,6 +1,52 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.6 - 2021-05-28
+### CHANGED:
+- Update svg viewbox for logo 
+- Building reset password form 
+- Adding form forgot 
+- Adding button reset class 
+- Finish styling form create account 
+- Updating login styles 
+- Conditionally rendering input-text 
+- Updating input-checkbox styling 
+- Updating margin prop in layout.css 
+- Adding account field to form styles 
+- Resolving global event error 
+- Setup activate_account form just in case 
+- Add render tag snippet 
+- Resolving form field css 
+- Styling form-login 
+- Updating min-height values and adding flex to page element 
+- Echoing placeholder in input password module 
+- Updating yarn lock 
+- Adding emmet to postcss 
+- Removing styles from form.css 
+- DIC-43 Fix code review 
+- DIC-43 Fix spacing for category card carousel 
+- DIC-15 Fix text color for product card 
+- Fix code reviews 
+- Removing carousel when only one product 
+- DIC-57 Update featured product carousel 
+- DIC-57 Add featured product carousel 
+- DIC-59 Update layout PLP 
+- Fix code reviews 
+- DIC-59 update layout for PLP 
+- DIC-59 Add featured products carousel and footer CTA module 
+- DIC-61 Fix spacing for navigation 
+- DIC-62 Add link for logo in navigation 
+- DIC-44 Fix spacing for pop-out-cart 
+- DIC-44 Fix style for pop-out-cart 
+- Add empty state and fix other issues 
+- Implement pop out cart 
+- DIC-64 Show price immediately on pdp 
+- DIC-53 Remove global max width for section title 
+- DIC-19 Update arrow icon for pagination 
+- DIC-7 Fix post card width on blog page 
+- Remoe provider in form subscribe 
+- DIC-16 Update form  subscribed 
+
 ## 0.0.5 - 2021-05-19
 ### CHANGED:
 - DIC-55 Fix style for variant select on PDP 
