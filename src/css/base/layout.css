@@ -70,6 +70,14 @@
   &--top-lg {
     padding-top: 50px;
   }
+
+  &--article {
+    padding-bottom: 68px;
+
+    @media (--md) {
+      padding-bottom: 107px;
+    }
+  }
 }
 
 .account-wrapper {
