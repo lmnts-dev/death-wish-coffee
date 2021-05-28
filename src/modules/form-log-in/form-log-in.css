@@ -24,6 +24,15 @@
 .form-login__form {
   width: 100%;
   max-width: 336px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+
+  &.visible {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .form-login__email .form-field__input {
@@ -53,4 +62,13 @@
 .form-login-footer__account {
   text-decoration: none;
   color: var(--white);
+}
+
+.form-login__success-msg {
+  display: none;
+  margin: 2rem 0;
+
+  &.active {
+    display: block;
+  }
 }
