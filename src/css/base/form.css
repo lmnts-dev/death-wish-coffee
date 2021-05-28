@@ -141,6 +141,14 @@
     color: var(--white);
   }
 
+  .form-field--email &, .form-field--password & {
+    appearance: none;
+    border: solid 2px var(--steel);
+    padding: 1.5rem 2rem;
+    background: transparent;
+    color: var(--steel);
+  }
+
   &.field-has-error,
   &.field-empty {
     box-shadow: inset 0 0 0 1px var(--blood);

@@ -29,12 +29,16 @@
     "source.fixAll.eslint": true
   },
   "emmet.includeLanguages": {
-    "liquid": "html"
+    "liquid": "html",
+    "postcss": "css"
   },
   "files.insertFinalNewline": true,
   "eslint.workingDirectories": [
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "emmet.syntaxProfiles": {
+    "postcss": "css"
+  }
 }
