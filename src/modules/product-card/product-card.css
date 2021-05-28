@@ -31,10 +31,23 @@
   height: 100%;
 }
 
+.product-card__content {
+  .product-card--bg-dark & {
+    color: var(--white);
+  }
+}
+
 .product-card__title {
   margin-top: 8px;
+}
+
+.product-card__title-link {
   color: var(--black);
   text-decoration: none;
+
+  .product-card--bg-dark & {
+    color: var(--white);
+  }
 }
 
 .product-card__price {
