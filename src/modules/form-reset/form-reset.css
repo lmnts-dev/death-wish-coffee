@@ -1,55 +1,45 @@
 /* styles for the form-reset module go in this file */
 
 .form-reset {
-  padding-top: 110px;
-  padding-bottom: 70px;
-  margin-top: 30px;
-  margin-bottom: 70px;
-  position: relative;
-}
-
-.form-reset-back {
-  position: absolute;
-  top: 0;
-  left: var(--container-padding);
+  background-color: var(--black);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: color var(--transition-timing) var(--transition-easing);
-
-  @media (--md) {
-    &:hover {
-      color: var(--yellow);
-    }
-  }
-
-  &:focus {
-    color: var(--yellow);
-  }
+  flex: 1;
 }
 
-.form-reset-back__svg {
-  width: 22px;
-  height: 25px;
-  margin-right: 15px;
+.form-reset__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-reset-header__copy {
   margin: 10px auto 0;
+  color: var(--white);
 }
 
 .form-reset-header {
   margin: 0 auto 25px;
+  text-align: center;
+}
+
+.form-reset__title {
+  color: var(--blood);
 }
 
 .form-reset-form {
-  max-width: 500px;
+  max-width: 336px;
+  width: 100%;
 }
 
 .form-reset-submit {
-  margin-top: 30px;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.form-reset__field {
+  &:last-of-type {
+    margin-top: 2rem;
+  }
 }

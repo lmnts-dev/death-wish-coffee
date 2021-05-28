@@ -1,18 +1,16 @@
-<section class="form-forgot container" data-module="form-forgot">
-    <button class="form-forgot-back b2">{%- render 'svg', type: 'arrow-left', class: 'form-forgot-back__svg' -%}Back</button>
-    <div class="form-forgot-header">
-        <h2 class="h3">FORGOT YOUR PASSWORD?</h2>
-        <p class="b2 form-forgot-header__copy">No worries. Let’s get it back.</p>
-    </div>
-    <div class="form-forgot-form">
-        {% form 'recover_customer_password' %}
-        {% if form.posted_successfully? %}
-            <p class="b1 form-forgot-form__success">Please check the email you provided for a link to reset your password.</p>
-        {% else %}
-            {{ form.errors | default_errors }}
-        {% endif %}
-        {%- render 'input-email', name: 'email', id: 'customer_email', label: 'Email' -%}
-        {% render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Send reset password link', class: 'button--light form-forgot-submit' %}
-        {% endform %}
-    </div>
-</section>
+<div class="form-forgot" data-module="form-forgot">
+  <div class="form-forgot-header">
+    <h2 class="h5">RESET YOUR PASSWORD</h2>
+    <p class="b1 form-forgot-header__copy">We will send you an email to reset your password.</p>
+  </div>
+  {% form 'recover_customer_password', class: 'form-forgot-form' %}
+    {% if form.posted_successfully? %}
+      <p class="b1 form-forgot-form__success">Please check the email you provided for a link to reset your password.</p>
+    {% else %}
+      {{ form.errors | default_errors }}
+    {% endif %}
+    {%- render 'input-email', name: 'email', id: 'customer_email', placeholder: 'Email' -%}
+    {% render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'SUBMIT', class: 'button--light form-forgot-submit' %}
+  {% endform %}
+  <button class="form-forgot__cancel button-reset b1">Cancel</button>
+</div>

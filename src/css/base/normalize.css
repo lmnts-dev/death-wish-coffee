@@ -89,3 +89,12 @@ ul, ol {
   margin: 0;
   padding-inline-start: 20px;
 }
+
+.button-reset {
+  appearance: none;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
