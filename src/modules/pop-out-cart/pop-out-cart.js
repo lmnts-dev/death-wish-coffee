@@ -37,7 +37,7 @@ const popOutCart = (el) => {
 
   // close when click outside
   document.addEventListener('click', function (e) {
-    if (!toggle.contains(e.target) && !el.contains(e.target)) {
+    if (!toggle.contains(e.target) && !el.contains(e.target) && toggle.classList.contains('is-active')) {
       setActiveState(false)
     }
   })
