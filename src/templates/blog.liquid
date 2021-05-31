@@ -7,14 +7,20 @@ If this comment is still here, please consult with the lead developer on the pro
 
 {%- render 'carousel' -%}
 
-{%- assign list_article = blog.metafields.article_hero_card.article -%}
+{%- assign blog_acf = blog.metafields -%}
+{%- assign list_article = blog_acf.article_hero_card.article -%}
+{%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+
 {%- capture content_slides -%}
   {% for handle in list_article %}
     {%- assign notice = blog.metafields.article_hero_card.notice_title[forloop.index0] -%}
     {%- assign article = articles[handle] -%}
     {% assign class = 'swiper-slide' %}
     {% assign title = article.title %}
-    {% assign image = article.image.src | img_url: 'master' %}
+    {%- assign image = fallback_images.src -%}
+    {%- if article.image.src != blank -%}
+      {% assign image = article.image.src | img_url: 'master' %}
+    {%- endif -%}
     {% assign url = article.url %}
     {% assign description = article.excerpt %}
     {% capture info %}
@@ -50,7 +56,13 @@ If this comment is still here, please consult with the lead developer on the pro
           {% assign post_class = post_class | append: ' post-card--viewed' %}
         {% endif %}
 
-        {% assign post_image = post | img_url: 'master' %}
+        {%- assign post_image = fallback_images.src -%}
+        {%- assign image_alt = fallback_images.alt -%}
+
+        {%- if post.image != blank -%}
+          {%- assign post_image = post | img_url: 'master' -%}
+          {%- assign image_alt = post.image.alt -%}
+        {%- endif -%}
 
         {%- render 'post-card',
           title: post.title,
