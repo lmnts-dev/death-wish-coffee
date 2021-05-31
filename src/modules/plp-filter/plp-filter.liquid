@@ -2,8 +2,19 @@
 {%- assign plp_filter_tags = settings.plp_filter_tags | default: '' -%}
 {%- assign prefix_tags = plp_filter_tags | split: ',' -%}
 {%- assign all_tags = collection.all_tags -%}
+{%- assign acf_filters = acf_filters | default: false -%}
 
 {% capture class %}plp-filter{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+{%- comment -%}Prepare tag url{%- endcomment -%}
+{%- capture filter_url_params -%}
+  {%- for current_tag in current_tags -%}
+    {%- assign current_tag_prefix = current_tag | split: ':' | first -%}
+    {%- unless current_tag_prefix == prefix -%}
+      +{{- current_tag | handle -}}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
 
 <section class="{{ class }}" data-module="plp-filter">
   <div class="plp-filter__container">
@@ -21,15 +32,6 @@
               {%- endfor -%}
             {%- endcapture -%}
             {%- assign matched_tags = matched_tags | remove_first: ',' | split: ',' -%}
-            {%- comment -%}Prepare tag url{%- endcomment -%}
-            {%- capture filter_url_params -%}
-              {%- for current_tag in current_tags -%}
-                {%- assign current_tag_prefix = current_tag | split: ':' | first -%}
-                {%- unless current_tag_prefix == prefix -%}
-                  +{{- current_tag | handle -}}
-                {%- endunless -%}
-              {%- endfor -%}
-            {%- endcapture -%}
             <div class="plp-filter__block js-filter-block">
               <h4 class="plp-filter__block-title js-filter-block-title">
                 {{- prefix -}}
@@ -44,10 +46,38 @@
                     {%- assign params = filter_url_params | append: '+' | append: matched_tag_handle -%}
                   {%- endunless -%}
                   {%- capture filter_url -%}{{- collection.url -}}/{{- params | remove_first: '+' -}}{%- endcapture -%}
-                  <div class="plp-filter__block-item{% if current_tags contains matched_tag %} plp-filter__box-item--selected{% endif %}" data-tag="{{- matched_tag | handle -}}">
+                  <div class="plp-filter__block-item{% if current_tags contains matched_tag %} plp-filter__block-item--selected{% endif %}" data-tag="{{- matched_tag | handle -}}">
                     <a href="{{- filter_url -}}" class="plp-filter__block-item__link">
                       {%- render 'svg', type: matched_tag_handle, class: 'plp-filter__block-item__icon' -%}
                       <span class="plp-filter__block-item__link-text">{{- matched_tag | remove: prefix | remove: ':' -}}</span>
+                    </a>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if acf_filters -%}
+          {%- assign acf_filters_array = acf_filters | split: '||' -%}
+          {%- for acf_filter in acf_filters_array -%}
+            {%- assign acf_filter_title = acf_filter | split: '|' | first -%}
+            {%- assign acf_filter_values = acf_filter | remove: acf_filter_title | remove_first: '|' | split: '|' -%}
+            <div class="plp-filter__block js-filter-block">
+              <h4 class="plp-filter__block-title js-filter-block-title">
+                {{- acf_filter_title | remove: 'Title:' -}}
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--inactive">+</span>
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--active">&ndash;</span>
+              </h4>
+              <div class="plp-filter__block-list">
+                {%- for value in acf_filter_values -%}
+                  {%- assign value_handle = value | handle -%}
+                  <div class="plp-filter__block-item" data-tag="{{- value_handle -}}">
+                    <a href="#" class="plp-filter__block-item__link">
+                      {%- assign icon = value_handle -%}
+                      {%- assign icon_selected = value_handle | append: '-selected' -%}
+                      {%- render 'svg', type: icon, class: 'plp-filter__block-item__icon' -%}
+                      {%- render 'svg', type: icon_selected, class: 'plp-filter__block-item__icon plp-filter__block-item__icon--selected' -%}
+                      <span class="plp-filter__block-item__link-text">{{- value -}}</span>
                     </a>
                   </div>
                 {%- endfor -%}

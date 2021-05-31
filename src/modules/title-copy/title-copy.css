@@ -1,1 +1,35 @@
-/* styles for the title-copy module go in this file */
+.title-copy__wrapper {
+  padding: 59px 25px;
+  text-align: center;
+
+  @media (--md) {
+    max-width: 1567px;
+    margin: 0 auto;
+    padding: 118px 25px 28px;
+  }
+
+  .title-copy--404 & {
+    padding: 40px 25px 112px;
+
+    @media (--md) {
+      padding: 85px 25px 0;
+    }
+  }
+}
+
+.title-copy__title {
+  color: var(--blood);
+}
+
+.title-copy__content {
+  margin-top: 6px;
+
+  @media (--md) {
+    margin-top: 0;
+    padding: 0 36px;
+  }
+}
+
+.title-copy__cta {
+  margin: 53px auto 0;
+}

@@ -5,11 +5,7 @@
   desktop_image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/Death_Wish_575x.jpg?v=1617614373',
   mobile_image: '//cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411'
 -%}
-{% assign bolt_header_image = page.metafields.bolt-header.bolt_header_image | map: 'src'  %}
-{%- render 'bolt-header',
-  image: bolt_header_image,
-  title: page.metafields.bolt-header.bolt_header_text
--%}
+{%- render 'bolt-header', title: page.metafields.bolt-header.bolt_header_text -%}
 
 {%- assign timeline_card = page.metafields.timeline -%}
 {%- assign timeline_headers = timeline_card.card_header -%}
@@ -42,7 +38,7 @@
   description: page.metafields.full_width_hero.hero_copy
 -%}
 
-{%- render 'bolt-header' -%}
+{%- render 'bolt-header', title: page.metafields.about.career_perks_headline_headline -%}
 
 {%- render 'section-title', class: 'section-title--title-description-card bg--black', title: page.metafields.title-description.title_description_cards_header -%}
 

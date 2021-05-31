@@ -10,13 +10,14 @@
 }
 
 .title-description-card__inner {
+  padding: 0 24px;
   text-align: center;
 
   @media (--md) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 501px;
+    max-width: 549px;
     margin: 0 auto;
   }
 }

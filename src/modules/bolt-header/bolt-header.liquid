@@ -1,19 +1,16 @@
 {% assign class = class | default:false %}
 {% capture class %}bolt-header{% if class %} {{- class -}}{% endif %}{% endcapture %}
-{%- assign image = image | default: false -%}
 {%- assign title = title | default: '' -%}
 
 {%- if title != blank -%}
   <section class="{{ class }}" data-module="bolt-header">
     <div class="bolt-header__wrapper bg--black">
       <div class="bolt-header__inner">
-        {%- if image -%}
-          {%- for i in (1..2) -%}
-            <div class="bolt-header__image">
-              {%- render 'image', class: 'image--contain', src: image -%}
-            </div>
-          {%- endfor -%}
-        {%- endif -%}
+        {%- for i in (1..2) -%}
+          <div class="bolt-header__image-wrapper">
+            {% render 'svg', type: 'thunder-large', class: 'bolt-header__image' %}
+          </div>
+        {%- endfor -%}
         <div class="bolt-header__content">
           <h1 class="h1 bolt-header__title">{{ title }}</h1>
         </div>

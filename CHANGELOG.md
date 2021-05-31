@@ -1,6 +1,18 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.7 - 2021-05-31
+### CHANGED:
+- DIC-71 Add fallback images for blogs 
+- DIC-69 Fix code review 
+- DIC-69 Add title copy 
+- DIC-68 Add icon title 
+- DIC-66 Add icons for apparel type filter for merch collection 
+- DIC-66 Add filter apparel for merch collection 
+- Fix code reviews 
+- Fix spacing for title description card 
+- DIC-67 Fix bug bolt header module not rendering 
+
 ## 0.0.6 - 2021-05-28
 ### CHANGED:
 - Update svg viewbox for logo 

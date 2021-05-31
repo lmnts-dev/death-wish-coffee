@@ -1,5 +1,13 @@
 {%- layout 'theme' -%}
-{%- assign post_hero_image = article.metafields.post_hero.image | map: 'src' -%}
+
+{%- assign blog_acf = blog.metafields.accentuate -%}
+{%- assign fallback_images = blog_acf.default_image | first -%}
+{%- assign post_hero_image = fallback_images.src -%}
+
+{%- if article.metafields.post_hero.image != blank -%}
+  {%- assign post_hero_image = article.metafields.post_hero.image | map: 'src' -%}
+{%- endif -%}
+
 {%- render 'post-hero', image: post_hero_image -%}
 {%- render 'post-header' -%}
 {%- render 'wysiwyg', content: article.content, class: 'bg--bone' -%}

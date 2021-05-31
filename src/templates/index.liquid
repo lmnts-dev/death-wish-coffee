@@ -30,14 +30,21 @@
   after_content: after_content
 -%}
 
-{%- render 'title-copy' -%}
+{%- render 'title-copy',
+  title: shop.metafields.accentuate.sub_hero_heading,
+  content: shop.metafields.accentuate.sub_hero_subheading
+-%}
 
 {%- capture product_cards -%}
   {%- render 'alt-product-card' -%}
 {%- endcapture -%}
 {%- render 'carousel', children: product_cards -%}
 
-{%- render 'icon-title' -%}
+{% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
+{%- render 'icon-title',
+  icon: icon_url,
+  content: shop.metafields.accentuate.fair_trade_description
+-%}
 
 {%- render 'super-hero-cta' -%}
 {%- render 'super-hero-cta' -%}
@@ -46,11 +53,17 @@
 {%- assign list_article = shop.metafields.article_hero_card.article -%}
 {%- capture content_slides -%}
   {% for handle in list_article %}
+    {%- assign blog_handle = handle | split: '/' | first -%}
+    {%- assign blog_acf = blogs[blog_handle].metafields -%}
+    {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
     {%- assign notice = shop.metafields.article_hero_card.notice_title[forloop.index0] -%}
     {%- assign article = articles[handle] -%}
     {% assign class = 'swiper-slide' %}
     {% assign title = article.title %}
-    {% assign image = article.image.src | img_url: 'master' %}
+    {%- assign image = fallback_images.src -%}
+    {%- if article.image != blank -%}
+      {% assign image = article.image.src | img_url: 'master' %}
+    {%- endif -%}
     {% assign url = article.url %}
     {% assign description = article.excerpt %}
     {% capture info %}

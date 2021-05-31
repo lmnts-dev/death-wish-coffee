@@ -103,6 +103,10 @@ h5 {
     line-height: 24px;
     text-transform: none;
   }
+
+  &--no-transform {
+    text-transform: none;
+  }
 }
 
 .h5 {
@@ -128,6 +132,10 @@ h5 {
       font-size: 36px;
       line-height: 48px;
     }
+  }
+
+  &--light {
+    font-weight: var(--light);
   }
 }
 
