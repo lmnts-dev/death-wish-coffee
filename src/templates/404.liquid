@@ -1,1 +1,9 @@
 {%- layout 'theme' -%}
+
+{%- render 'title-copy',
+  class: 'title-copy--404',
+  title: shop.metafields.404.header,
+  content: shop.metafields.404.message,
+  cta_text: shop.metafields.404.button_text,
+  cta_url: shop.metafields.404.button_url
+-%}

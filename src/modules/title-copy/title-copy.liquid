@@ -1,7 +1,25 @@
-{% assign class = class | default false %}
+{% assign class = class | default: false %}
+{% assign title = title | default: false %}
+{% assign content = content | default: false %}
+{% assign cta_text = cta_text | default: false %}
+{% assign cta_url = cta_url | default: false %}
 {% capture class %}title-copy{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="title-copy">
-  <h2 class="module-name">title-copy</h2>
-  {%- render 'wysiwyg' -%}
-</section>
+{% if title %}
+  <section class="{{ class }} bg--black" data-module="title-copy">
+    <div class="title-copy__wrapper">
+      <h2 class="h1 title-copy__title">
+        {{ title }}
+      </h2>
+      {% if content %}
+        {%- render 'wysiwyg', content: content, class: 'title-copy__content wysiwyg--title-copy' -%}
+      {% endif %}
+      {% if cta_text and cta_url %}
+        {%- capture custom_attrs -%}
+          href="{{ cta_url }}"
+        {%- endcapture -%}
+        {%- render 'button', button_value: cta_text, custom_attrs: custom_attrs, class: 'title-copy__cta' -%}
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
