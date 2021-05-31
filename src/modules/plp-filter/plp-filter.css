@@ -101,7 +101,8 @@
     z-index: -1;
   }
 
-  .plp-filter__box-item--selected & {
+  .plp-filter__block-item:hover &,
+  .plp-filter__block-item--selected & {
     color: var(--white);
     background: var(--slate);
 
@@ -119,10 +120,28 @@
   padding: 8px;
   width: 100%;
   height: 100%;
+  transition: opacity var(--transition-timing) var(--transition-easing);
 
   svg {
     width: 100%;
     height: 100%;
+  }
+
+  .plp-filter__block-item:hover &,
+  .plp-filter__block-item--selected & {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &--selected {
+    opacity: 0;
+    visibility: hidden;
+
+    .plp-filter__block-item:hover &,
+    .plp-filter__block-item--selected & {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 
