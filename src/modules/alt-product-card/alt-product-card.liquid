@@ -1,3 +1,25 @@
-<section class="alt-product-card placeholder" data-module="alt-product-card">
-  <h2 class="placeholder__title">alt-product-card</h2>
+{% assign class = class | default: false %}
+{% assign image_src = image_src | default: false %}
+{% assign title = title | default: false %}
+{% assign description = description | default: false %}
+{% assign link = link | default: false %}
+{% assign review = review | default: false %}
+{% assign price = price | default: false %}
+{% capture class %}alt-product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} bg--black" data-module="alt-product-card">
+  <div class="alt-product-card__inner">
+    <div class="alt-product-card__featured">
+      <a href="{{ link }}" class="alt-product-card__image">
+        {%- render 'image', src: image_src -%}
+      </a>
+    </div>
+    <div class="alt-product-card__content">
+      <a href="{{ link }}" class="h4 h4--uppercase alt-product-card__title">{{ title }}</a>
+      <p class="b1 alt-product-card__description">{{ description }}</p>
+      <div class="b1 alt-product-card__review">{{ review }}</div>
+      <p class="h5 alt-product-card__price">{{ price }}</p>
+      {% render 'button', button_value: 'Shop now', button_url: link, class: 'alt-product-card__button' %}
+    </div>
+  </div>
 </section>

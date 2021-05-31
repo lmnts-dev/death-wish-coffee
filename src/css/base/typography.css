@@ -107,6 +107,10 @@ h5 {
   &--no-transform {
     text-transform: none;
   }
+
+  &--uppercase {
+    text-transform: uppercase;
+  }
 }
 
 .h5 {
