@@ -15,10 +15,7 @@
         {%- render 'wysiwyg', content: content, class: 'title-copy__content wysiwyg--title-copy' -%}
       {% endif %}
       {% if cta_text and cta_url %}
-        {%- capture custom_attrs -%}
-          href="{{ cta_url }}"
-        {%- endcapture -%}
-        {%- render 'button', button_value: cta_text, custom_attrs: custom_attrs, class: 'title-copy__cta' -%}
+        {%- render 'button', button_value: cta_text, button_url: cta_url, class: 'title-copy__cta' -%}
       {% endif %}
     </div>
   </section>
