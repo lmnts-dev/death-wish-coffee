@@ -37,7 +37,11 @@
 {%- endcapture -%}
 {%- render 'carousel', children: product_cards -%}
 
-{%- render 'icon-title' -%}
+{% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
+{%- render 'icon-title',
+  icon: icon_url,
+  content: shop.metafields.accentuate.fair_trade_description
+-%}
 
 {%- render 'super-hero-cta' -%}
 {%- render 'super-hero-cta' -%}

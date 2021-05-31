@@ -1,1 +1,23 @@
-/* styles for the icon-title module go in this file */
+.icon-title__wrapper {
+  max-width: 1124px;
+  margin: 0 auto;
+  padding: 26px 24px 24px;
+
+  @media (--md) {
+    padding: 36px 24px 34px;
+  }
+}
+
+.icon-title__icon {
+  max-width: 159px;
+  margin: 0 auto 30px;
+
+  @media (--md) {
+    margin-bottom: 17px;
+  }
+}
+
+.icon-title__content {
+  color: var(--white);
+  text-align: center;
+}
