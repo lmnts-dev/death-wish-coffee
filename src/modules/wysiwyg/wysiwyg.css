@@ -180,3 +180,31 @@
     font-weight: 700;
   }
 }
+
+.wysiwyg--title-copy {
+  p {
+    @extend .p1;
+
+    @extend .p1--large;
+
+    @extend .p1--light;
+
+    margin-bottom: 8px;
+    color: var(--white);
+
+    @media (--md) {
+      margin-bottom: 14px;
+    }
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  strong {
+    @extend .h4;
+
+    text-transform: none;
+    color: var(--blood);
+  }
+}

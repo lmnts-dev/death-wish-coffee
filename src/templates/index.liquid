@@ -30,7 +30,10 @@
   after_content: after_content
 -%}
 
-{%- render 'title-copy' -%}
+{%- render 'title-copy',
+  title: shop.metafields.accentuate.sub_hero_heading,
+  content: shop.metafields.accentuate.sub_hero_subheading
+-%}
 
 {%- capture product_cards -%}
   {%- render 'alt-product-card' -%}
