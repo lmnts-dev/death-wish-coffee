@@ -1,1 +1,121 @@
 /* styles for the super-hero-cta module go in this file */
+
+.super-hero-cta {
+  background-color: var(--black);
+}
+
+.shc__container {
+  max-width: 1725px;
+  margin: 0 auto;
+}
+
+.shc__wrapper {
+  position: relative;
+
+  @media (--lg-max) {
+    padding-top: 25vw;
+  }
+}
+
+.shc__big-text {
+  color: var(--white);
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  font-size: calc(304 / 1725 * 100vw);
+
+  @media (--lg-max) {
+    position: relative;
+  }
+
+  .super-hero-cta--reverse & {
+    text-align: right;
+    right: 0;
+  }
+
+  @media (min-width: 1725px) {
+    font-size: 304px;
+  }
+}
+
+.shc__content {
+  display: flex;
+  flex-direction: column;
+  width: calc(600 / 1725 * 100vw);
+  margin-left: auto;
+
+  @media (--lg-max) {
+    width: 100%;
+    margin-left: initial;
+  }
+
+  .super-hero-cta--reverse & {
+    margin-left: initial;
+    margin-right: auto;
+    align-items: flex-end;
+
+    @media (--lg-max) {
+      margin-right: initial;
+    }
+  }
+
+  @media (min-width: 1725px) {
+    width: 600px;
+  }
+}
+
+.shc__image {
+  position: relative;
+  width: 100%;
+  top: 0;
+  right: 0;
+
+  @media (--lg-max) {
+    width: calc(1100 / 1725 * 100vw);
+    position: absolute;
+  }
+
+  .super-hero-cta--reverse & {
+    @media (--lg-max) {
+      right: initial;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+.shc__description {
+  color: var(--white);
+  margin-top: 7rem;
+
+  .super-hero-cta--reverse & {
+    text-align: right;
+  }
+
+  @media (--lg-max) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 1725px) and (--lg) {
+    margin-top: calc(70 / 1725 * 100vw);
+    font-size: calc(36 / 1725 * 100vw);
+  }
+}
+
+.shc__button {
+  margin-top: 7rem;
+
+  @media (--lg-max) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 1725px) and (--lg) {
+    margin-top: calc(70 / 1725 * 100vw);
+  }
+}
