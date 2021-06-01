@@ -50,7 +50,7 @@
     -%}
   {% endfor %}
 {%- endcapture -%}
-{%- render 'carousel', children: product_cards, class: 'bg--black' -%}
+{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true -%}
 
 {% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
 {%- render 'icon-title',
