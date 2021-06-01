@@ -1,6 +1,14 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.9 - 2021-06-01
+### CHANGED:
+- Reverting type size change as its handled in a different branch 
+- Building super-hero-cta 
+- Mobile responsive lin-height for h3 
+- responsive line-height 
+- Passing fields to super-hero-cta 
+
 ## 0.0.8 - 2021-06-01
 ### CHANGED:
 - Remove description 
