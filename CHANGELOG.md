@@ -1,6 +1,12 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.8 - 2021-06-01
+### CHANGED:
+- Remove description 
+- DIC-70 Add alt product card carousel 
+- DIC-70 Add alt product card 
+
 ## 0.0.7 - 2021-05-31
 ### CHANGED:
 - DIC-71 Add fallback images for blogs 
