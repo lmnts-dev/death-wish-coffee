@@ -58,9 +58,28 @@
   content: shop.metafields.accentuate.fair_trade_description
 -%}
 
-{%- render 'super-hero-cta' -%}
-{%- render 'super-hero-cta' -%}
-{%- render 'super-hero-cta' -%}
+{%- assign big_texts = shop.metafields.accentuate.big_text -%}
+{%- assign big_text_descriptions = shop.metafields.accentuate.big_text_description -%}
+{%- assign big_text_images = shop.metafields.accentuate.big_text_image %}
+{%- assign big_text_cta_texts = shop.metafields.accentuate.big_text_cta_text -%}
+{%- assign big_text_cta_links = shop.metafields.accentuate.big_text_cta_link -%}
+{% for big_text in big_texts %}
+  {%- assign image = big_text_images[forloop.index0] | map: 'src'-%}
+  {%- assign remainder = forloop.index0 | modulo: 2 -%}
+  {% if remainder != 0 %}
+    {% assign class = 'super-hero-cta--reverse' %}
+  {% else %}
+    {%- assign class = '' -%}
+  {% endif %}
+  {%- render 'super-hero-cta', 
+    class: class,
+    big_text: big_text, 
+    description: big_text_descriptions[forloop.index0] ,
+    image: image,
+    cta_text: big_text_cta_texts[forloop.index0],
+    cta_link: big_text_cta_links[forloop.index0]
+  -%}
+{% endfor %}
 
 {%- assign list_article = shop.metafields.article_hero_card.article -%}
 {%- capture content_slides -%}

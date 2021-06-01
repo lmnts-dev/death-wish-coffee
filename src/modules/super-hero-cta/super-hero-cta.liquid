@@ -1,6 +1,31 @@
-{% assign class = class | default false %}
-{% capture class %}super-hero-cta{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign class = class | default: false %}
+{% capture class %}super-hero-cta spacing--lg{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="super-hero-cta">
-  <h2 class="module-name">super-hero-cta</h2>
+{%- assign big_text = big_text | default: false -%}
+{%- assign description = description | default: false -%}
+{%- assign image = image | default: false -%}
+{%- assign cta_text = cta_text | default: false -%}
+{%- assign cta_link = cta_link | default: false -%}
+
+<section class="{{ class }}" data-module="super-hero-cta">
+  <div class="shc__container container">
+    <div class="shc__wrapper">
+      {% if big_text %}
+        <p class="shc__big-text h1">{{- big_text -}}</p>
+      {% endif %}
+      <div class="shc__content">
+        {% if image %}
+          <div class="shc__image">
+            {%- render 'image', src: image -%}
+          </div>
+        {% endif %}
+        {% if description %}
+          <div class="shc__description h3">{{- description -}}</div>
+        {% endif %}
+        {% if cta_link and cta_text %}
+          {%- render 'button', class: 'shc__button', button_value: cta_text, button_url: cta_link -%}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </section>
