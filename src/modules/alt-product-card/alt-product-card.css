@@ -1,1 +1,50 @@
-/* styles for alt-product-card */
+.alt-product-card__image {
+  position: relative;
+  display: block;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.alt-product-card__content {
+  color: var(--white);
+  text-align: center;
+}
+
+.alt-product-card__title {
+  display: block;
+  margin-top: 2px;
+  color: var(--white);
+  text-decoration: none;
+
+  @media (--md) {
+    margin-top: 20px;
+  }
+
+  &:hover {
+    color: var(--blood);
+  }
+}
+
+.alt-product-card__description {
+  @media (--md-max) {
+    margin-top: 2px;
+  }
+}
+
+.alt-product-card__price {
+  @media (--md) {
+    margin-top: 2px;
+  }
+}
+
+.alt-product-card__button {
+  margin: 22px auto 0;
+
+  @media (--md) {
+    margin-top: 24px;
+  }
+}

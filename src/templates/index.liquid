@@ -36,9 +36,21 @@
 -%}
 
 {%- capture product_cards -%}
-  {%- render 'alt-product-card' -%}
+  {% for product in collections['all'].products limit: 9 %}
+    {%- assign product_image = product.featured_image | img_url: 'master' -%}
+    {%- assign product_price = product.price | money -%}
+    {%- render 'alt-product-card',
+      class: 'swiper-slide',
+      image_src: product_image,
+      title: product.title,
+      description: 'Featured product title for each item',
+      link: product.url,
+      review: '2348 Reviews, 14 Q&As',
+      price: product_price
+    -%}
+  {% endfor %}
 {%- endcapture -%}
-{%- render 'carousel', children: product_cards -%}
+{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true -%}
 
 {% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
 {%- render 'icon-title',

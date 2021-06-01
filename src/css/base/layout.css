@@ -78,6 +78,15 @@
       padding-bottom: 107px;
     }
   }
+
+  &--alt-product-card {
+    padding-bottom: 135px;
+
+    @media (--md) {
+      padding-top: 50px;
+      padding-bottom: 114px;
+    }
+  }
 }
 
 .account-wrapper {
