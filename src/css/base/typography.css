@@ -80,7 +80,7 @@ h5 {
 
 .h3 {
   font-size: 36px;
-  line-height: 48px;
+  line-height: 1.33;
   letter-spacing: normal;
   font-weight: var(--light);
   text-transform: uppercase;
