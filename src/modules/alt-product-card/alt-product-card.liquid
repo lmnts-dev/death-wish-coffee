@@ -16,7 +16,9 @@
     </div>
     <div class="alt-product-card__content">
       <a href="{{ link }}" class="h4 h4--uppercase alt-product-card__title">{{ title }}</a>
+      {%- comment -%}
       <p class="b1 alt-product-card__description">{{ description }}</p>
+      {%- endcomment -%}
       <div class="b1 alt-product-card__review">{{ review }}</div>
       <p class="h5 alt-product-card__price">{{ price }}</p>
       {% render 'button', button_value: 'Shop now', button_url: link, class: 'alt-product-card__button' %}
