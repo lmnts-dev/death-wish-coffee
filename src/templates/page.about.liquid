@@ -1,5 +1,5 @@
 {%- layout 'theme' -%}
-{%- assign image_src = page.metafields.about.hero_image | map: 'src' -%}
+{%- assign image_src = page.metafields.about.hero_image | map: 'src' | first -%}
 {%- render 'hero',
   title: page.metafields.about.hero_headline,
   description: page.metafields.about.hero_description,
