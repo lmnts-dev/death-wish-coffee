@@ -36,4 +36,10 @@
   --navbar-height-mobile: 104px;
   --footer-height: 344px;
   --footer-height-mobile: 255px;
+
+  /**
+  * site was designed at 1920px wide rather than something more conventional, so text feels very large on desktop
+  * we'll use a resizing coefficient here to downsize all font from one single space as a method of trial-and-error resolution
+  */
+  --sizing-coef: 0.75;
 }
