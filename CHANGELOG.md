@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.10 - 2021-06-02
+### CHANGED:
+- Update type sizing
+
 ## 0.0.9 - 2021-06-01
 ### CHANGED:
 - Reverting type size change as its handled in a different branch 
