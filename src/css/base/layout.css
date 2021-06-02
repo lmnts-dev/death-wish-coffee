@@ -100,8 +100,16 @@
 
 .account-wrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
-  margin-top: var(--navbar-height);
+
+  @media (--md-max) {
+    padding: 0;
+  }
+
+  @media (--md) {
+    margin-top: var(--navbar-height);
+  }
 }
 
 .account-wrapper__right {
