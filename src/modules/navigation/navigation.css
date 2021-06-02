@@ -313,7 +313,6 @@
 
 .navigation__utilities-cart {
   position: relative;
-  margin-right: 14px;
   border: none;
   width: 32px;
   padding: 0;
@@ -340,6 +339,7 @@
 
 .navigation__utilities-search {
   width: 26px;
+  margin-right: 7px;
 }
 
 .navigation__main {
