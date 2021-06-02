@@ -1,6 +1,15 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.11 - 2021-06-02
+### CHANGED:
+- Add the scoop template 
+- Add padding on bottom 
+- Fix newsletter rendering and 404 
+- Swap navigation 
+- DIC-73 Fix code review 
+- DIC-73 Wire about us hero to ACF 
+
 ## 0.0.10 - 2021-06-02
 ### CHANGED:
 - Update type sizing
