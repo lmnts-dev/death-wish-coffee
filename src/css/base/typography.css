@@ -114,14 +114,14 @@ h5 {
 }
 
 .h5 {
-  font-size: 20px * var(--sizing-coef);
-  line-height: 24px * var(--sizing-coef);
+  font-size: 20px;
+  line-height: 24px;
   letter-spacing: normal;
   font-weight: var(--bold);
 
   @media (--md-max) {
-    font-size: 16px * var(--sizing-coef);
-    line-height: 24px * var(--sizing-coef);
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
@@ -144,32 +144,32 @@ h5 {
 }
 
 .b1 {
-  font-size: 16px * var(--sizing-coef);
-  line-height: 24px * var(--sizing-coef);
+  font-size: 16px;
+  line-height: 24px;
   font-weight: var(--normal);
 }
 
 .b2 {
-  font-size: 16px * var(--sizing-coef);
-  line-height: 24px * var(--sizing-coef);
+  font-size: 16px;
+  line-height: 24px;
   font-weight: var(--bold);
 }
 
 .b3 {
-  font-size: 12px * var(--sizing-coef);
-  line-height: 16px * var(--sizing-coef);
+  font-size: 12px;
+  line-height: 16px;
   font-weight: var(--light);
 }
 
 .b4 {
-  font-size: 12px * var(--sizing-coef);
-  line-height: 16px * var(--sizing-coef);
+  font-size: 12px;
+  line-height: 16px;
   font-weight: var(--bold);
 }
 
 .b5 {
-  font-size: 10px * var(--sizing-coef);
-  line-height: 16px * var(--sizing-coef);
+  font-size: 10px;
+  line-height: 16px;
   font-weight: var(--normal);
 }
 
