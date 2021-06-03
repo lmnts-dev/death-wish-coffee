@@ -113,7 +113,9 @@
 }
 
 .account-wrapper__right {
-  margin-left: 10px;
+  @media (--md) {
+    margin-left: 8px;
+  }
 }
 
 .sr-only {

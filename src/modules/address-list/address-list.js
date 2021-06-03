@@ -1,10 +1,17 @@
-/**
- * Initializes the javascript for the address-list module
- * @param {Object} el - The DOM Node containing the data-module="address-list" attribute.
- */
-
 const addressList = (el) => {
-  console.warn('initializing addressList module')
+  const removeForm = el.querySelectorAll('.address-list__remove-form')
+  removeForm.forEach(deleteForm => {
+    deleteForm.addEventListener('submit', event => {
+      const confirmMessage = event.target.getAttribute('data-confirm-message')
+      if (
+        !window.confirm(
+          confirmMessage || 'Are you sure you wish to delete this address?'
+        )
+      ) {
+        event.preventDefault()
+      }
+    })
+  })
 }
 
 export default addressList

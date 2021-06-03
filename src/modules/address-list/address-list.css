@@ -1,1 +1,43 @@
-/* styles for the address-list module go in this file */
+.address-list {
+  margin-bottom: 12px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--black);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.address-list__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.address-list__buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.address-list__add-btn {
+  margin-top: auto;
+}
+
+.address-list__button {
+  display: block;
+  color: var(--blood);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &--delete {
+    margin-left: 15px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}

@@ -1,1 +1,59 @@
-/* styles for the customer-addresses module go in this file */
+.customer-addresses {
+  @media (--md) {
+    padding: 16px 50px 16px 42px;
+    background: var(--bone);
+  }
+}
+
+.customer-addresses__title {
+  @media (--md) {
+    padding-top: 8px;
+  }
+}
+
+.customer-addresses__wrapper {
+  @media (--md) {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 40px;
+  }
+}
+
+.customer-addresses__container {
+  @media (--md-max) {
+    padding: 0 3.6rem;
+  }
+}
+
+.customer-addresses__list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 38px 42px 46px;
+  background: var(--bone);
+
+  @media (--md) {
+    max-width: 50%;
+    padding: 0;
+    background: none;
+  }
+}
+
+.customer-addresses__forms {
+  max-width: 394px;
+}
+
+.customer-addresses__form {
+  &.hidden {
+    display: none;
+  }
+}
+
+.customer-addresses__add-btn {
+  margin-top: 22px;
+
+  @media (--md) {
+    margin-top: auto;
+  }
+}
