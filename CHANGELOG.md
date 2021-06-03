@@ -1,6 +1,23 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.13 - 2021-06-03
+### CHANGED:
+- adjust account form spacing 
+- DIC-72 Fix style for address form 
+- DIC-80 Update nav to make main title and image clickable 
+- DIC-74 Fix max-width for account sidebar menu 
+- DIC-76 Fix layout account page 
+- DIC-29 Add fallback image for media hero grid 
+- DIC-74 Update content for account sidebar menu 
+- DIC-72 Add address list 
+- DIC-74 Add account sidebar menu 
+- reduce form submit button top margin 
+- update package-lock.json 
+- add form-reset cancel button 
+- adjust form input padding and margin 
+- reduce sign up/sign in form button height 
+
 ## 0.0.12 - 2021-06-02
 ### CHANGED:
 - Establish initial scoop page 
