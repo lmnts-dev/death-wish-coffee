@@ -50,7 +50,6 @@
       display: block;
       padding: 20px 0 12px;
       border-bottom: 1px solid var(--gray);
-      pointer-events: none;
     }
 
     & > .sub-menu__item-banner {
