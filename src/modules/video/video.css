@@ -62,6 +62,10 @@
       opacity: 0;
       visibility: hidden;
     }
+
+    .video__fallback {
+      display: none;
+    }
   }
 
   &.pos-center {
@@ -88,13 +92,5 @@
 
   &--hero {
     box-shadow: none;
-  }
-}
-
-.video__fallback {
-  display: block;
-
-  @media (--sm) {
-    display: none;
   }
 }
