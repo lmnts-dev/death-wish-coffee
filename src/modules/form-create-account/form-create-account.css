@@ -22,14 +22,14 @@
 
 .form-create-account__field {
   &:not(:first-of-type) {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
 }
 
 .form-create-account__form {
   max-width: 336px;
   width: 100%;
-  margin-top: 6em;
+  margin-top: 3em;
 
   @media (--md-max) {
     margin-top: 3rem;

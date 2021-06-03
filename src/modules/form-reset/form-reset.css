@@ -29,17 +29,24 @@
 }
 
 .form-reset-form {
+  display: flex;
+  flex-direction: column;
   max-width: 336px;
   width: 100%;
 }
 
 .form-reset-submit {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
 .form-reset__field {
   &:last-of-type {
-    margin-top: 2rem;
+    margin-top: 1.3rem;
   }
+}
+
+.form-forgot__cancel {
+  text-decoration: none;
+  margin: 20px auto 0;
 }
