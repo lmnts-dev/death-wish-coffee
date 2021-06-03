@@ -70,4 +70,8 @@
     max-width: 414px;
     padding: 20% 0;
   }
+
+  @media (--md-max) {
+    padding: 54% 0 31%;
+  }
 }
