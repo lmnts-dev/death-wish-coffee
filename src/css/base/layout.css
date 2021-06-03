@@ -52,6 +52,11 @@
 }
 
 .spacing {
+  &--xl {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
   &--lg {
     padding-top: 100px;
     padding-bottom: 100px;
@@ -69,6 +74,10 @@
 
   &--top-lg {
     padding-top: 50px;
+  }
+
+  &--bottom-lg {
+    padding-bottom: 50px;
   }
 
   &--article {
@@ -108,4 +117,10 @@
   height: 1px;
   padding: 0;
   clip-path: inset(50%);
+}
+
+.width {
+  &--25 {
+    width: 25%;
+  }
 }

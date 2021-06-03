@@ -8,7 +8,7 @@
 {% assign published_date = published_date | default: false %}
 {% capture class %}post-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 {% if title and url %}
-  <section class="{{ class }}" data-module="post-card">
+  <div class="{{ class }}" data-module="post-card">
     <div class="post-card__container">
       <a class="post-card__image-wrapper" href="{{ url }}">
         {% render 'image', class: 'post-card__image', src: image_src, alt: image_alt %}
@@ -26,5 +26,5 @@
         </p>
       </div>
     </div>
-  </section>
+  </div>
 {% endif %}
