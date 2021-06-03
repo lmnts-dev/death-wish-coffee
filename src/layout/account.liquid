@@ -35,12 +35,12 @@
 {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
   <main id="page" class="relative z0 bg--shadow" role="main">
     <div class="account-wrapper container">
+      {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
+      {%- assign account_title = account_title | upcase -%}
+      {%- render 'section-title', title: account_title, class: 'section-title--account'  -%}
       {%- render 'account-sidebar-menu' -%}
       <div class="account-wrapper__right">
-        {%- capture account_title -%}Hey, {{ customer.name }}{%- endcapture -%}
-        {%- assign account_title = account_title | upcase -%}
-        {%- render 'section-title', title: account_title  -%}
-        {{ content_for_layout }}  
+        {{ content_for_layout }}
       </div>
     </div>
   </main>

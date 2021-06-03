@@ -8,23 +8,21 @@
   {% endif %}
   {% form 'customer_address', form_tag %}
     {{ form.errors | default_errors }}
-    {%- render 'input-text', label: 'First Name', id: 'fName', name: 'address[first_name]', value: address.first_name -%}
-    {%- render 'input-text', label: 'Last Name', id: 'lName', name: 'address[last_name]', value: address.last_name  -%}
-    {%- render 'input-text', label: 'Company', id: 'company', name: 'address[company]', value: address.company -%}
-    {%- render 'input-text', label: 'Address 1', id: 'address1', name: 'address[address1]', value: address.address1 -%}
-    {%- render 'input-text', label: 'Address 2', id: 'address2', name: 'address[address2]', value: address.address2  -%}
-    {%- render 'input-text', label: 'City', id: 'city', name: 'address[city]', value: address.city -%}
-
+    {%- render 'input-text', placeholder: 'Address', id: 'address1', name: 'address[address1]', value: address.address1, required: 'required' -%}
+    {%- render 'input-text', placeholder: 'Apartment, suite, etc.', id: 'address2', name: 'address[address2]', value: address.address2, required: 'required'  -%}
+    {%- render 'input-text', placeholder: 'City', id: 'city', name: 'address[city]', value: address.city, required: 'required' -%}
     {% capture country_attr %}data-country="{{ address.country }}"{% endcapture %}
     {% capture province_attr %}data-province="{{ address.province }}"{% endcapture %}
 
-    {%- render 'input-select', label: 'Country', use_country_tags: true, id: 'country', name: 'address[country]', custom_attrs: country_attr -%}
-    {%- render 'input-select', label: 'State/Province', id: 'province', name: 'address[province]', custom_attrs: province_attr -%}
-    {%- render 'input-text', label: 'Zip/Postal Code', id: 'zip', name: 'address[zip]', value: address.zip -%}
-    {%- render 'input-tel', label: 'Phone Number', id: 'phone', name: 'address[phone]', value: address.phone -%}
-    <div class="grid-address-add-footer">
-      {%- render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Save Address', class: 'button--light' -%}
-      <button class="link grid-address-header__new-address grid-address-header__new-address--cancel b2 js-cancel-address-form" data-id="{{ address.id}}" type="button">Cancel</button>
+    {%- render 'input-select', use_country_tags: true, id: 'country', name: 'address[country]', custom_attrs: country_attr, class: 'input-select--shadow' -%}
+    {%- render 'input-select', id: 'province', name: 'address[province]', custom_attrs: province_attr, class: 'input-select--shadow' -%}
+    {%- render 'input-text', placeholder: 'ZIP/postal code', id: 'zip', name: 'address[zip]', value: address.zip, required: 'required' -%}
+    <div class="form-field--buttons">
+      {%- render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Save Address', class: 'form-field__button' -%}
+      {% capture data_id %}
+        data-id="{{ address.id}}"
+      {% endcapture %}
+      {%- render 'button', tag: 'button', custom_attrs: data_id, button_value: 'Cancel', class: 'button--light form-field__button js-cancel-address-form' -%}
     </div>
   {% endform %}
 </div>

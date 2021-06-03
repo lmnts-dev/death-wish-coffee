@@ -474,6 +474,9 @@
 
 .navigation__login-inner {
   @extend .b1;
+
+  color: var(--white);
+  text-decoration: none;
 }
 
 .navigation__login-icon {

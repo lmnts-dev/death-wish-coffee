@@ -8,10 +8,10 @@
   {%- for link in links -%}
     <div class="{{ prefix_class | append: '__item' }}{% if level > 0 %} {{ prefix_class | append: '__item' | append: '--level-' | append: level }}{% endif %}{% if link.active == true %} is-active{% endif %}">
       {% comment %}Hard code for mega menu banner{% endcomment %}
-        <div class="sub-menu__item-banner">
+        <a href="{{ link.url }}" class="sub-menu__item-banner">
           {%- assign banner = 'mega_banner.jpg' | file_url -%}
           {%- render 'image', src: banner, class: 'sub-menu__item-image' -%}
-        </div>
+        </a>
       {% comment %}End hard code{% endcomment %}
       <a class="{{ prefix_class | append: '__item-link' }}{% if link.active == true %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
       {%- if link.links.size > 0 -%}
