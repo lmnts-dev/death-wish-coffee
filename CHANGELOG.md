@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.12 - 2021-06-02
+### CHANGED:
+- Establish initial scoop page 
+
 ## 0.0.11 - 2021-06-02
 ### CHANGED:
 - Add the scoop template 
