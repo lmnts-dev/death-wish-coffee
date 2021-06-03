@@ -1,0 +1,17 @@
+{%- assign carousel_slides = carousel_slides | default: false -%}
+{%- assign class = class | default: false -%}
+{%- assign title = title | default: false -%}
+{%- assign view_all_url = view_all_url | default: false -%}
+{%- capture classes -%}{{ class }} posts-carousel{%- endcapture -%}
+
+<section class="{{ classes }}">
+  <div class="container">
+    <h2 class="h4 h4--no-transform posts-carousel__title">{{ title }}</h2>
+    {% render 'carousel', 
+      children: carousel_slides,
+      spacing: 30,
+      slides_per_view: 4,
+      navigation: true,
+      class: 'bg--black' %}
+    </div>
+</section>

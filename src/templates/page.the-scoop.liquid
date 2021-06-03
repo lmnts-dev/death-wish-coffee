@@ -1,7 +1,33 @@
 {%- layout 'theme' -%}
-{% for link in linklists.blogs.links %}
-  {% assign blog = link.object %}
-  {% for article in blog.articles %}
-    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-  {% endfor %} 
+{%- assign blog_titles = page.metafields.accentuate.title -%}
+{% assign scoop_articles = page.metafields.accentuate.articles %}
+{%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+
+{% for blog_articles in scoop_articles %}
+  {%- assign a = blog_articles | split: '|' -%}
+  {%- capture post_cards -%}
+    {% for post in a %}
+      {% assign p = articles[post] %}
+      {%- assign post_image = fallback_images.src -%}
+      {%- assign image_alt = fallback_images.alt -%}
+
+      {%- if p.image != blank -%}
+        {%- assign post_image = p | img_url: 'master' -%}
+        {%- assign image_alt = p.image.alt -%}
+      {%- endif -%}
+
+
+      {%- render 'post-card',
+          title: p.title,
+          url: p.url,
+          image_src: post_image,
+          image_alt: p.image.alt,
+          author: p.author,
+          published_date: p.published_date,
+          class: 'width--25' -%}
+    {% endfor %}
+  {%- endcapture -%}
+  
+  {%- render 'posts-carousel', class: 'bg--black spacing--bottom-lg', title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: '#' -%}
+  
 {% endfor %}
