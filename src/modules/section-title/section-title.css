@@ -40,7 +40,7 @@
   max-width: 100%;
 
   .section-title--account & {
-    width: calc(100% - 253px);
+    width: calc(100% - 248px);
     margin: 0 0 0 auto;
     padding: 0;
   }
