@@ -262,6 +262,7 @@
 .form-field__button {
   .form--customer-addresses & {
     width: calc(50% - 5px);
+    height: 48px;
 
     @media (--md) {
       width: calc(50% - 8px);

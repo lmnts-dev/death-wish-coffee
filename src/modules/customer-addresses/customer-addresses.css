@@ -34,7 +34,7 @@
   background: var(--bone);
 
   @media (--md) {
-    max-width: 50%;
+    max-width: 237px;
     padding: 0;
     background: none;
   }
