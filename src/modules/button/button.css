@@ -81,6 +81,10 @@
       margin: 10px auto 0;
     }
   }
+
+  &.form-login__button, &.form-reset-submit, &.form-forgot-submit, &.create-account-form__submit {
+    height: 50px;
+  }
 }
 
 .button-text {

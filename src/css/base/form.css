@@ -144,7 +144,7 @@
   .form-field--email &, .form-field--password &, .form-field--account & {
     appearance: none;
     border: solid 2px var(--steel);
-    padding: 1.5rem 2rem;
+    padding: 1.1rem 2rem;
     background: transparent;
     color: var(--steel);
   }
