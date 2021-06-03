@@ -102,18 +102,20 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-
-  @media (--md-max) {
-    padding: 0;
-  }
+  max-width: 1095px;
+  margin: 0 auto;
+  padding: 0;
 
   @media (--md) {
-    margin-top: var(--navbar-height);
+    padding-bottom: 155px;
   }
 }
 
 .account-wrapper__right {
+  width: 100%;
+
   @media (--md) {
+    width: calc(100% - 253px);
     margin-left: 8px;
   }
 }

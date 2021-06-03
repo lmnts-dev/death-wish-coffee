@@ -12,7 +12,7 @@
 }
 
 .customer-addresses__wrapper {
-  @media (--md) {
+  @media (--lg) {
     display: flex;
     justify-content: space-between;
     gap: 0 40px;
@@ -41,7 +41,9 @@
 }
 
 .customer-addresses__forms {
-  max-width: 394px;
+  @media (--md) {
+    max-width: 394px;
+  }
 }
 
 .customer-addresses__form {
@@ -55,5 +57,6 @@
 
   @media (--md) {
     margin-top: auto;
+    margin-bottom: 16px;
   }
 }
