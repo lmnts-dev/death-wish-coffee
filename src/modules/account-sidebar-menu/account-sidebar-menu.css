@@ -1,1 +1,112 @@
-/* styles for the account-sidebar-menu module go in this file */
+.account-sidebar-menu {
+  width: 100%;
+  padding: 21px 25px 40px;
+  background: var(--black);
+  color: var(--white);
+
+  @media (--md) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: 240px;
+    padding: 0;
+    background: var(--bone);
+  }
+}
+
+.account-sidebar-menu__wrapper {
+  position: relative;
+}
+
+.account-sidebar-menu__list {
+  padding: 0;
+}
+
+.account-sidebar-menu__item {
+  width: 100%;
+  list-style: none;
+  border-bottom: 1px solid var(--white);
+
+  @media (--md) {
+    border-bottom: 2px solid var(--shadow);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.account-sidebar-menu__item-link {
+  @extend .h4;
+
+  display: block;
+  padding: 15px 0 16px;
+  text-decoration: none;
+  color: var(--white);
+
+  @media (--md) {
+    @extend .b2;
+
+    padding: 18px 30px 20px;
+    text-transform: none;
+    color: var(--black);
+  }
+
+  &:hover {
+    color: var(--blood);
+
+    @media (--md) {
+      color: var(--black);
+      background: var(--steel);
+    }
+  }
+
+  .account-sidebar-menu__item--active & {
+    color: var(--blood);
+    pointer-events: none;
+
+    @media (--md) {
+      color: var(--black);
+      background: var(--steel);
+    }
+  }
+}
+
+.account-sidebar-menu__content {
+  margin: 0;
+  padding: 0;
+
+  @media (--md-max) {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-timing) var(--transition-easing);
+  }
+}
+
+.account-sidebar-menu__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 0 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--white);
+
+  &::after {
+    @extend .h4;
+
+    content: '+';
+    display: block;
+  }
+
+  @media (--md) {
+    display: none;
+  }
+}
+
+.account-sidebar-menu__icon {
+  width: 15px;
+  height: 15px;
+  color: var(--white);
+}

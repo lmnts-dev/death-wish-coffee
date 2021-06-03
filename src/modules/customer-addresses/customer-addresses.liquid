@@ -1,7 +1,41 @@
-{% assign class = class | default false %}
-{% capture class %}customer-addresses{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign address_cards = '' %}
+{% assign address_edit_forms = '' %}
+{% for address in customer.addresses %}
+  {% capture address_card %}
+    {% render 'address-list',
+      class: 'customer-addresses__item',
+      address: address
+    %}
+  {% endcapture %}
+  {% capture address_form %}
+    {% assign address_form_class = 'form--customer-addresses bg--shadow customer-addresses__form hidden js-address-form-edit js-address-form-edit-' | append: address.id %}
+    {% render 'form-address',
+      class: address_form_class,
+      address: address,
+      form_tag: address
+    %}
+  {% endcapture %}
+  {% assign address_cards = address_cards | append: address_card %}
+  {% assign address_edit_forms = address_edit_forms | append: address_form %}
+{% endfor %}
 
-<section class="{{ class }} placeholder" data-module="customer-addresses">
-  <h2 class="module-name">customer-addresses</h2>
-  {%- render 'address-list' -%}
+<section class="customer-addresses" data-module="customer-addresses">
+  <div class="customer-addresses__wrapper">
+    <div class="customer-addresses__list js-address-list">
+      <div class="customer-addresses__items">
+        <p class="b2 customer-addresses__title">{{ 'customer.addresses.title' | t }}</p>
+        {{ address_cards }}
+      </div>
+      <div class="customer-addresses__add-btn">
+        {%- render 'button', tag: 'button', class: 'button--small-w button--small-h button--dark customer-addresses__item-button js-add-new-button', button_value: 'Add Address' -%}
+      </div>
+    </div>
+    <div class="customer-addresses__forms">
+      {% render 'form-address',
+        form_tag: customer.new_address,
+        class: 'form--customer-addresses bg--shadow customer-addresses__form hidden js-address-form-add'
+      %}
+      {{ address_edit_forms }}
+    </div>
+  </div>
 </section>

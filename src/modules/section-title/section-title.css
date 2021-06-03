@@ -24,10 +24,26 @@
       padding: 65px 0 20px;
     }
   }
+
+  &--account {
+    width: 100%;
+    text-align: left;
+    padding: 114px 0 28px;
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
 }
 
 .section-title__container {
   max-width: 100%;
+
+  .section-title--account & {
+    width: calc(100% - 248px);
+    margin: 0 0 0 auto;
+    padding: 0;
+  }
 }
 
 .section-title__title {

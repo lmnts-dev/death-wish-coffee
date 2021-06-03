@@ -56,6 +56,12 @@
       color: var(--black);
     }
   }
+
+  .input-select--shadow & {
+    padding: 0 25px 0 15px;
+    color: var(--white);
+    border: 2px solid var(--steel);
+  }
 }
 
 .input-select__chevron {

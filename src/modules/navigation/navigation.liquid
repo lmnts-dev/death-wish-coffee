@@ -15,10 +15,10 @@
     </div>
     <div class="navigation__main js-mobile-menu">
       <div class="navigation__login">
-        <div class="navigation__login-inner">
+        <a href="{{ routes.account_url }}" class="navigation__login-inner">
           {%- render 'svg', type: 'skull', class: 'navigation__login-icon' -%}
           Login
-        </div>
+        </a>
         <button class="navigation__close js-close" type="button">
           {%- render 'svg', type: 'close', class: 'navigation__close-icon' -%}
         </button>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="navigation__utilities">
-      <div class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</div>
+      <a href="{{ routes.account_url }}" class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</a>
       <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
       <button class="navigation__utilities-cart js-pop-out-cart-toggle{% if cart.item_count > 0 %} has-items{% endif %}"
               aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
