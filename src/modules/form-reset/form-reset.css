@@ -22,6 +22,10 @@
 .form-reset-header {
   margin: 0 auto 25px;
   text-align: center;
+
+  @media (--lg-max) {
+    margin-bottom: 32px;
+  }
 }
 
 .form-reset__title {
