@@ -30,12 +30,11 @@
       {%- endcapture -%}
     {%- endif -%}
 
-    {%- include 'image',
-      mod_class: 'video__fallback',
-      mod_src: mod_fallback_mobile,
+    {%- render 'image',
+      class: 'video__fallback',
+      src: mod_fallback_mobile,
       mod_src_media: mod_fallback_src_media,
       mod_text: mod_text -%}
-
 
     {%- assign mod_fallback_src_media = nil -%}
   {%- endif -%}
