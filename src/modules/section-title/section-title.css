@@ -34,6 +34,14 @@
       display: none;
     }
   }
+
+  &--review-drawer {
+    padding: 69px 0 22px;
+
+    @media (--md) {
+      padding: 97px 0 19px;
+    }
+  }
 }
 
 .section-title__container {
@@ -53,6 +61,10 @@
 
   @media (--lg) {
     @extend .h1;
+  }
+
+  .section-title--review-drawer & {
+    color: var(--white);
   }
 
   .section-title--title-description-card & {

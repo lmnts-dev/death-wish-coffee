@@ -1,6 +1,25 @@
 {% assign class = class | default:false %}
+{% assign title = title | default:false %}
 {% capture class %}review-drawer{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="review-drawer">
-  <h2 class="module-name">review-drawer</h2>
+<section class="{{ class }} bg--black" data-module="review-drawer">
+  {% render 'section-title', title: title, class: 'section-title--review-drawer' %}
+  <div class="container review-drawer__container">
+    <div class="review-dawer__inner">
+      <div class="yotpo bottomLine js-yotpo-bottomline active"
+      data-product-id="{{ product.id }}">
+      </div>
+      <div class="review-drawer__button js-button-toggle-review"></div>
+      <div 
+        class="yotpo yotpo-main-widget js-yotpo-main" 
+        data-product-id="{{ product.id }}" 
+        data-name="{{ product.title | escape }}" 
+        data-url="{{ shop.url }}{{ product.url }}" 
+        data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}" 
+        data-price="{{ variant.price | money_without_currency }}"
+        data-currency="{{ shop.currency }}"
+      >
+      </div>
+    </div>
+  </div>
 </section>
