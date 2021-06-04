@@ -197,10 +197,13 @@
   }
 
   .form-field--white & {
-    padding: 12px 20px;
     border: none;
     background: var(--white);
     color: var(--shadow);
+  }
+
+  .form-field--subscribe & {
+    padding: 12px 20px;
   }
 }
 
