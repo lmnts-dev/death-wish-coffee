@@ -199,6 +199,16 @@
     background: var(--shadow);
     border: 2px solid var(--steel);
   }
+
+  .form-field--white & {
+    border: none;
+    background: var(--white);
+    color: var(--shadow);
+  }
+
+  .form-field--subscribe & {
+    padding: 12px 20px;
+  }
 }
 
 .button.form-submit {
