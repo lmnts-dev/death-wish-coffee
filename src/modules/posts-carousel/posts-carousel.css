@@ -12,6 +12,30 @@
   margin-left: 7.5rem;
 
   @media (--lg-max) {
+    display: flex;
+    justify-content: space-between;
     margin-left: 3.5rem;
+    margin-right: 3.5rem;
+  }
+}
+
+.posts-carousel__view {
+  opacity: 0;
+  color: var(--blood);
+  transition: opacity 0.5s ease-in-out;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-left: 6px;
+
+  @media (--lg-max) {
+    opacity: 1;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  .posts-carousel__container:hover & {
+    opacity: 1;
   }
 }

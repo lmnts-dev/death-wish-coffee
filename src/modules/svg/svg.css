@@ -1,1 +1,18 @@
 /* styles for svg */
+
+.svg {
+  &--404 {
+    background-color: var(--black);
+    padding-top: 115px;
+
+    svg {
+      display: block;
+      margin: 0 auto;
+      width: 67%;
+
+      @media (--lg-max) {
+        width: 85%;
+      }
+    }
+  }
+}

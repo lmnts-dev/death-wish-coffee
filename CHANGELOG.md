@@ -1,6 +1,14 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.15 - 2021-06-04
+### CHANGED:
+- Adjust styles 
+- adjust post card padding 
+- adjust super hero cta padding 
+- add 404 svg 
+- add blog listing view all link on carousel hover 
+
 ## 0.0.14 - 2021-06-04
 ### CHANGED:
 - Move review to product card 

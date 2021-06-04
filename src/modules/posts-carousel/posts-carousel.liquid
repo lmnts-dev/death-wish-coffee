@@ -6,7 +6,7 @@
 
 <section class="{{ classes }}">
   <div class="container posts-carousel__container">
-    <h2 class="h4 h4--no-transform posts-carousel__title">{{ title }}</h2>
+    <div class="h4 h4--no-transform posts-carousel__title">{{ title }} <a href="{{view_all_url}}" class="b4 posts-carousel__view">View All</a></div>
     {% render 'carousel', 
       children: carousel_slides,
       spacing: 30,

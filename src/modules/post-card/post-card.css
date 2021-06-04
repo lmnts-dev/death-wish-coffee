@@ -44,6 +44,10 @@
   @media (--lg) {
     @extend .b1;
   }
+
+  @media (--lg-max) {
+    margin-top: 5px;
+  }
 }
 
 .post-card__viewed {
