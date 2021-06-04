@@ -4,6 +4,10 @@
   @media (--lg-max) {
     padding: 0;
   }
+
+  &:hover .posts-carousel__view {
+    opacity: 1;
+  }
 }
 
 .posts-carousel__title {
@@ -12,6 +16,20 @@
   margin-left: 7.5rem;
 
   @media (--lg-max) {
+    display: flex;
+    justify-content: space-between;
     margin-left: 3.5rem;
+    margin-right: 3.5rem;
+  }
+}
+
+.posts-carousel__view {
+  opacity: 0;
+  color: var(--blood);
+  transition: opacity 0.5s ease-in-out;
+  text-decoration: none;
+
+  @media (--lg-max) {
+    opacity: 1;
   }
 }

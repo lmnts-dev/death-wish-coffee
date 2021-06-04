@@ -1,6 +1,7 @@
 {%- layout 'theme' -%}
 {%- assign blog_titles = page.metafields.accentuate.title -%}
 {% assign scoop_articles = page.metafields.accentuate.articles %}
+{%- assign view_all_urls = page.metafields.accentuate.blog_listings_url-%}
 {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
 {% assign scoop_featured_articles = page.metafields.accentuate.scoop_featured_articles %}
 
@@ -65,9 +66,11 @@
       -%}
     {% endfor %}
   {%- endcapture -%}
+  
+  {% assign view_all_url = view_all_urls[forloop.index0] | prepend: '/blogs/' %}
 
   {% capture carousel_class %}bg--black spacing--bottom-lg {% if forloop.first == true %}posts-carousel--first{% elsif forloop.last == true %}posts-carousel--last{% endif %}{% endcapture %}
-  
-  {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: '#' -%}
+
+  {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: view_all_url -%}
 {% endfor %}
 
