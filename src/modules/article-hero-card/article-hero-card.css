@@ -1,33 +1,37 @@
 /* styles for the article-hero-card module go in this file */
 
 .article-hero-card {
-  width: 100%;
-  padding: 0 4px;
+  padding: 0 0 24px;
 
   @media (--md) {
-    padding: 0 12px;
+    padding: 0 0 113px;
   }
 }
 
 .article-hero-card__inner {
   position: relative;
+  opacity: 0.5;
+
+  .swiper-slide-active & {
+    opacity: 1;
+  }
 }
 
-.article-hero-card__item {
+.article-hero-card__wrapper {
   padding: 0 4px;
 
   @media (--md) {
-    padding: 0 12px;
+    padding: 0 calc(23px / 2);
   }
 }
 
 .article-hero-card__image-wrapper {
   position: relative;
   display: block;
-  padding-top: 133%;
+  padding-top: percentage(428.5/312);
 
   @media (--md) {
-    padding-top: 56%;
+    padding-top: percentage(807/1441);
   }
 }
 
@@ -37,68 +41,47 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  padding: 24px 14px 15px;
+  padding: 26px 14px 20px;
   color: var(--white);
   background: var(--transparent-black);
   transition: opacity var(--transition-timing) var(--transition-easing), opacity var(--transition-timing) var(--transition-easing);
+  opacity: 0;
+  visibility: hidden;
 
-  @media (--md) {
-    padding: 46px 52px 40px;
+  @media (--lg) {
+    padding: 46px 52px;
+  }
+
+  @media (--lg-max) {
+    padding: 26px 14px;
+  }
+
+  .swiper-slide-active & {
+    opacity: 1;
+    visibility: visible;
   }
 }
 
-.article-hero-card__title {
+.article-hero-card__item-title {
   display: block;
+  max-width: percentage(468/965);
   overflow: hidden;
   text-decoration: none;
   color: var(--blood);
 
-  @media (--md) {
-    max-width: percentage(961/1285);
+  @media (--xxl-max) {
+    max-width: 75%;
   }
 
-  &--mobile {
-    @media (--md) {
-      display: none;
-    }
+  @media (--xl-max) {
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-
-  &--desktop {
-    @media (--md-max) {
-      display: none;
-    }
-  }
-}
-
-.article-hero-card__info {
-  text-transform: capitalize;
-}
-
-.article-hero-card__subtitle {
-  margin-top: 3px;
-
-  @media (--md) {
-    max-width: percentage(961/1285);
-    margin-top: 7px;
-  }
-
-  a {
-    color: var(--white);
-  }
-}
-
-.article-hero-card__notice-title {
-  min-height: 24px;
-  margin-bottom: 10px;
-  color: var(--white);
 
   @media (--md-max) {
-    display: none;
-  }
-}
-
-.article-hero-card__blog {
-  @media (--md-max) {
-    display: none;
+    max-width: 80%;
   }
 }

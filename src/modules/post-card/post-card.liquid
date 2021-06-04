@@ -5,7 +5,7 @@
 {% assign image_src = image_src | default: false %}
 {% assign image_alt = image_alt | default: false %}
 {% assign author = author | default: false %}
-{% assign published_date = published_date | default: false %}
+{% assign published_date = date | date: "%b %d, %Y" %}
 {% capture class %}post-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 {% if title and url %}
   <div class="{{ class }}" data-module="post-card">

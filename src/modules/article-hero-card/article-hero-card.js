@@ -1,10 +1,10 @@
 /**
- * Initializes the javascript for the article-hero-card module
- * @param {Object} el - The DOM Node containing the data-module="article-hero-card" attribute.
+ * Initializes the site's articleherocard module.
+ * @constructor
+ * @param {Object} el - The site's articleherocard container element.
  */
 
-const articleHeroCard = (el) => {
-  console.warn('initializing articleHeroCard module')
+const articleherocard = el => {
 }
 
-export default articleHeroCard
+export default articleherocard
