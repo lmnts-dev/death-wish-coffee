@@ -12,7 +12,7 @@
     padding: 40px 25px 112px;
 
     @media (--md) {
-      padding: 150px 25px;
+      padding: 65px 25px 150px;
     }
   }
 }
