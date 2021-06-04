@@ -1,1 +1,142 @@
-/* styles for the review-drawer module go in this file */
+.review-drawer {
+  padding-bottom: 60px;
+
+  .yotpo,
+  .yotpo.yotpo-main-widget {
+    width: 100%;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    div,
+    span:not(.yotpo-icon),
+    p,
+    a,
+    img,
+    i,
+    strong,
+    form,
+    label,
+    h2 {
+      color: var(--white);
+      font-family: var(--fenomen);
+    }
+
+    .y-label,
+    span.y-label {
+      font-size: 16px;
+    }
+
+    input,
+    .y-input {
+      border-color: var(--white);
+    }
+
+    .rating-star {
+      font-size: 14px !important;
+    }
+
+    .yotpo-regular-box {
+      margin: 0;
+      padding-top: 0;
+    }
+
+    .primary-color-btn,
+    input[type="button"].primary-color-btn {
+      @extend .button;
+
+      font-weight: 600 !important;
+      padding: 0 15px;
+    }
+
+    .yotpo-label-container {
+      border-top: 0;
+      display: none;
+    }
+
+    .new-yotpo-small-box {
+      margin: 35px 0 0;
+    }
+
+    .yotpo-default-button,
+    input[type="button"].yotpo-default-button {
+      margin-bottom: 15px;
+    }
+
+    .write-review .yotpo-header .yotpo-header-title {
+      padding-top: 15px;
+    }
+  }
+
+  .main-widget .yotpo-reviews-header,
+  .main-widget .yotpo-reviews-filters {
+    margin: 10px 0 0;
+  }
+
+  .yotpo-bottomline,
+  .bottom-line-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .avg-score {
+    display: none;
+    width: 100% !important;
+  }
+
+  .yotpo-stars,
+  .bottom-line-items-container .bottom-line-items .yotpo-filter-stars,
+  .main-widget .rating-stars-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-widget .rating-stars-container,
+  .main-widget .reviews-qa-labels-container {
+    margin: 0;
+  }
+
+  .main-widget .reviews-qa-labels-container {
+    position: relative;
+    padding-top: 0;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .yotpo-bottomline .text-m,
+  .bottom-line-items-container .reviews-qa-labels-container .reviews-qa-label {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: var(--bold);
+    font-family: var(--fenomen);
+    width: 100%;
+    height: auto;
+    color: var(--white);
+    text-align: center;
+  }
+}
+
+.review-drawer__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.review-drawer__button {
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 20px solid var(--blood);
+  margin: 14px auto 0;
+
+  &.disable {
+    display: none;
+  }
+}

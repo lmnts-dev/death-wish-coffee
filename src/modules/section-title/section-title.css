@@ -34,6 +34,14 @@
       display: none;
     }
   }
+
+  &--review-drawer {
+    padding: 69px 0 22px;
+
+    @media (--md) {
+      padding: 97px 0 19px;
+    }
+  }
 }
 
 .section-title__container {
@@ -44,6 +52,10 @@
     margin: 0 0 0 auto;
     padding: 0;
   }
+
+  .section-title--review-drawer & {
+    max-width: 936px;
+  }
 }
 
 .section-title__title {
@@ -53,6 +65,12 @@
 
   @media (--lg) {
     @extend .h1;
+  }
+
+  .section-title--review-drawer & {
+    @extend .h2;
+
+    color: var(--white);
   }
 
   .section-title--title-description-card & {
