@@ -1,6 +1,29 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.14 - 2021-06-04
+### CHANGED:
+- Move review to product card 
+- Fix footer CTA on home page 
+- Remove extra footer cta 
+- adjust scoop page component spacing 
+- add mobile footer-cta and article date 
+- add date to hero card 
+- adjust carousel card height, limit lines of title 
+- adjust posts-carousel spacing 
+- add email input background color 
+- add scoop page components 
+- modify scoop page carousel styles 
+- add article hero card module 
+- DIC-81 Fix code review 
+- DIC-85 Add yotpo for alt-product-cart module 
+- DIC-81 Fix code review 
+- DIC-81 Fix style for footer cta 
+- Fix code standard for title section review 
+- DIC-27 Integrate review widget on product page. 
+- DIC-83 Add customer info 
+- reduce bolt header text bottom padding 
+
 ## 0.0.13 - 2021-06-03
 ### CHANGED:
 - adjust account form spacing 

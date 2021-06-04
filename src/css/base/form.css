@@ -172,6 +172,10 @@
     padding: 1.1rem 2rem;
     background: transparent;
     color: var(--steel);
+
+    &.form-field__input {
+      background: var(--white);
+    }
   }
 
   &.field-has-error,
@@ -194,6 +198,16 @@
     box-shadow: none;
     background: var(--shadow);
     border: 2px solid var(--steel);
+  }
+
+  .form-field--white & {
+    border: none;
+    background: var(--white);
+    color: var(--shadow);
+  }
+
+  .form-field--subscribe & {
+    padding: 12px 20px;
   }
 }
 

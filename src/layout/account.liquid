@@ -38,7 +38,10 @@
       {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
       {%- assign account_title = account_title | upcase -%}
       {%- render 'section-title', title: account_title, class: 'section-title--account'  -%}
-      {%- render 'account-sidebar-menu' -%}
+      <div class="account-wrapper__left">
+        {%- render 'account-sidebar-menu' -%}
+        {%- render 'customer-info' -%}
+      </div>
       <div class="account-wrapper__right">
         {{ content_for_layout }}
       </div>

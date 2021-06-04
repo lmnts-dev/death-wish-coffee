@@ -2,6 +2,44 @@
 {%- assign blog_titles = page.metafields.accentuate.title -%}
 {% assign scoop_articles = page.metafields.accentuate.articles %}
 {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+{% assign scoop_featured_articles = page.metafields.accentuate.scoop_featured_articles %}
+
+{% for blog_articles in scoop_featured_articles %}
+  {%- assign a = blog_articles | split: '|' -%}
+  {%- capture content_slides -%}
+    {% for post in a %}
+      {% assign p = articles[post] %}
+      {%- assign post_image = fallback_images.src -%}
+      {%- assign image_alt = fallback_images.alt -%}
+
+      {%- if p.image != blank -%}
+        {%- assign post_image = p | img_url: 'master' -%}
+        {%- assign image_alt = p.image.alt -%}
+      {%- endif -%}
+
+      {%- render 'article-hero-card'
+      class: 'swiper-slide product-hero-card--scoop product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
+      title: p.title,
+      image_url: post_image,
+      url: p.url,
+      excerpt: p.excerpt,
+      author: p.author,
+      date: p.published_at,
+      cta_text: 'Read More'
+    -%}
+    {% endfor %}
+  {%- endcapture -%}
+{% endfor %}
+  
+{%- render 'carousel',
+  class: 'carousel--plp carousel--no-padding bg--black carousel--scoop',
+  children: content_slides,
+  spacing: 0,
+  slides_per_view: 1,
+  navigation: true
+-%}
+
+{%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
 
 {% for blog_articles in scoop_articles %}
   {%- assign a = blog_articles | split: '|' -%}
@@ -15,19 +53,21 @@
         {%- assign post_image = p | img_url: 'master' -%}
         {%- assign image_alt = p.image.alt -%}
       {%- endif -%}
-
-
+        
       {%- render 'post-card',
           title: p.title,
           url: p.url,
           image_src: post_image,
           image_alt: p.image.alt,
           author: p.author,
-          published_date: p.published_date,
-          class: 'width--25' -%}
+          date: p.published_at,
+          class: 'width--25 swiper-slide' 
+      -%}
     {% endfor %}
   {%- endcapture -%}
+
+  {% capture carousel_class %}bg--black spacing--bottom-lg {% if forloop.first == true %}posts-carousel--first{% elsif forloop.last == true %}posts-carousel--last{% endif %}{% endcapture %}
   
-  {%- render 'posts-carousel', class: 'bg--black spacing--bottom-lg', title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: '#' -%}
-  
+  {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: '#' -%}
 {% endfor %}
+

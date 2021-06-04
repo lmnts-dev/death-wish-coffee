@@ -37,8 +37,8 @@ const carousel = el => {
 
   const carouselBreakpoints = !!carousel.dataset.initAtBreakpoint || {
     breakpoints: {
-      576: {
-        slidesPerView: slidesPerView > 1 ? slidesPerView - 3 : slidesPerView,
+      320: {
+        slidesPerView: slidesPerView > 1 ? slidesPerView - 2 : slidesPerView,
         spaceBetween: spaceBetween / 1.75
       },
       768: {
