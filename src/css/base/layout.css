@@ -141,6 +141,16 @@
   }
 }
 
+.account-wrapper__left {
+  width: 100%;
+  background: var(--black);
+
+  @media (--md) {
+    max-width: 240px;
+    background: transparent;
+  }
+}
+
 .account-wrapper__right {
   width: 100%;
 

@@ -187,7 +187,10 @@
       "quantity_colon": "Quantity: ",
       "sku_colon": "SKU: ",
       "track_colon": "Track: ",
-      "tax": "Tax"
+      "tax": "Tax",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email"
     },
     "activate_account": {
       "title": "Activate Account",
