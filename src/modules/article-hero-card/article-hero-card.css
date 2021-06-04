@@ -28,7 +28,7 @@
 .article-hero-card__image-wrapper {
   position: relative;
   display: block;
-  padding-top: percentage(416/312);
+  padding-top: percentage(428.5/312);
 
   @media (--md) {
     padding-top: percentage(807/1441);
@@ -48,8 +48,12 @@
   opacity: 0;
   visibility: hidden;
 
-  @media (--md) {
+  @media (--lg) {
     padding: 46px 52px;
+  }
+
+  @media (--lg-max) {
+    padding: 26px 14px;
   }
 
   .swiper-slide-active & {
@@ -64,4 +68,20 @@
   overflow: hidden;
   text-decoration: none;
   color: var(--blood);
+
+  @media (--xxl-max) {
+    max-width: 75%;
+  }
+
+  @media (--xl-max) {
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (--md-max) {
+    max-width: 80%;
+  }
 }
