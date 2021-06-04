@@ -24,6 +24,7 @@
       url: p.url,
       excerpt: p.excerpt,
       author: p.author,
+      date: p.published_at,
       cta_text: 'Read More'
     -%}
     {% endfor %}
@@ -38,7 +39,7 @@
   navigation: true
 -%}
 
-{%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
+{%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
 
 {% for blog_articles in scoop_articles %}
   {%- assign a = blog_articles | split: '|' -%}
@@ -52,19 +53,22 @@
         {%- assign post_image = p | img_url: 'master' -%}
         {%- assign image_alt = p.image.alt -%}
       {%- endif -%}
-
+        
       {%- render 'post-card',
           title: p.title,
           url: p.url,
           image_src: post_image,
           image_alt: p.image.alt,
           author: p.author,
-          published_date: p.published_date,
+          date: p.published_at,
           class: 'width--25 swiper-slide' 
       -%}
     {% endfor %}
   {%- endcapture -%}
+
+  {% capture carousel_class %}bg--black spacing--bottom-lg {% if forloop.first == true %}posts-carousel--first{% elsif forloop.last == true %}posts-carousel--last{% endif %}{% endcapture %}
   
-  {%- render 'posts-carousel', class: 'bg--black spacing--bottom-lg', title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: '#' -%}
-  
+  {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: '#' -%}
 {% endfor %}
+
+{%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true, class: 'footer-cta--scoop-mobile' %}
