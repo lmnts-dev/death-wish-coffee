@@ -1,5 +1,11 @@
 /* styles for posts-carousel */
 
+.posts-carousel__container {
+  @media (--lg-max) {
+    padding: 0;
+  }
+}
+
 .posts-carousel__title {
   color: var(--white);
   margin-bottom: 17px;

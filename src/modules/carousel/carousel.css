@@ -210,6 +210,14 @@
       width: 40px;
     }
   }
+
+  .posts-carousel & {
+    top: 45%;
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
 }
 
 .carousel-next {
@@ -380,4 +388,8 @@
 
 .carousel--plp {
   padding: 0;
+}
+
+.carousel--scoop {
+  padding-bottom: 50px;
 }

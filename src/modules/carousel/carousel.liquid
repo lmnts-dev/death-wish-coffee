@@ -27,7 +27,7 @@ You can see more about how options are privided as HTML attributes here.
 {%- endcomment -%}
 {% assign slides_per_view = slides_per_view | default: 3 %}
 {% assign spacing = spacing | default: 10 %}
-{% assign loop = loop | default: true %}
+{% assign loop = loop | default: false %}
 {% assign title = title | default: false %}
 {% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
 

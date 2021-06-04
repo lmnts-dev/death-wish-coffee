@@ -84,6 +84,10 @@
 
   &--bottom-lg {
     padding-bottom: 50px;
+
+    &.posts-carousel {
+      padding: 50px 0 0;
+    }
   }
 
   &--article {
