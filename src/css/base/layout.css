@@ -86,7 +86,27 @@
     padding-bottom: 50px;
 
     &.posts-carousel {
-      padding: 50px 0 0;
+      padding: 43px 0 0;
+
+      @media (--lg-max) {
+        padding: 0;
+      }
+    }
+
+    &.posts-carousel--first {
+      @media (--lg) {
+        padding-top: 65px;
+      }
+    }
+
+    &.posts-carousel--last {
+      @media (--lg) {
+        padding-bottom: 70px;
+      }
+
+      @media (--lg-max) {
+        padding-bottom: 120px;
+      }
     }
   }
 

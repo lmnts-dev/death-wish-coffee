@@ -10,4 +10,8 @@
   color: var(--white);
   margin-bottom: 17px;
   margin-left: 7.5rem;
+
+  @media (--lg-max) {
+    margin-left: 3.5rem;
+  }
 }
