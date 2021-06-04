@@ -39,13 +39,16 @@
   {% for product in collections['all'].products limit: 9 %}
     {%- assign product_image = product.featured_image | img_url: 'master' -%}
     {%- assign product_price = product.price | money -%}
+    {%- capture product_review -%}
+      <div class="yotpo bottomLine" style="display:inline-block" data-product-id="{{ product.id }}">
+    {%- endcapture -%}
     {%- render 'alt-product-card',
       class: 'swiper-slide',
       image_src: product_image,
       title: product.title,
       description: 'Featured product title for each item',
       link: product.url,
-      review: '2348 Reviews, 14 Q&As',
+      review: product_review,
       price: product_price
     -%}
   {% endfor %}

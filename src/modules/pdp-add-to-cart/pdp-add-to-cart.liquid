@@ -8,7 +8,9 @@
         <h2 class="pdp-add-to-cart__title h2">{{product.title}}</h2>
         <p class="pdp-add-to-cart__price h5">{{product.price | money}}{% if customer %} (FREE SHIPPING){% endif %}</p>
         <div class="pdp-add-to-card__review js-review">
-          <p class="pdp-add-to-cart__review-content">Review</p>
+          <p class="pdp-add-to-cart__review-content">
+            <span class="yotpo bottomLine" style="display:inline-block" data-product-id="{{ product.id }}"></span>
+          </p>
         </div>
       </div>
       <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart">{{product.description}}</div>
