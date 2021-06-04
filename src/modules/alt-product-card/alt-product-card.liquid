@@ -3,7 +3,7 @@
 {% assign title = title | default: false %}
 {% assign description = description | default: false %}
 {% assign link = link | default: false %}
-{% assign review = review | default: false %}
+{% assign product_id = product_id | default: true %}
 {% assign price = price | default: false %}
 {% capture class %}alt-product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
@@ -19,7 +19,11 @@
       {%- comment -%}
       <p class="b1 alt-product-card__description">{{ description }}</p>
       {%- endcomment -%}
-      <div class="b1 alt-product-card__review">{{ review }}</div>
+      {% if product_id %}
+        <div class="b1 alt-product-card__review">
+          <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+        </div>
+      {% endif %}
       <p class="h5 alt-product-card__price">{{ price }}</p>
       {% render 'button', button_value: 'Shop now', button_url: link, class: 'alt-product-card__button' %}
     </div>
