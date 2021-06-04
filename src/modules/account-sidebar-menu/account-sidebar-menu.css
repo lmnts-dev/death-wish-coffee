@@ -1,14 +1,12 @@
 .account-sidebar-menu {
   width: 100%;
-  padding: 21px 25px 40px;
-  background: var(--black);
+  padding: 21px 25px 30px;
   color: var(--white);
 
   @media (--md) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    max-width: 240px;
     padding: 0;
     background: var(--bone);
   }

@@ -1,6 +1,22 @@
 {% assign class = class | default false %}
 {% capture class %}customer-info{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="customer-info">
-  <h2 class="module-name">customer-info</h2>
+<section class="{{ class }}" data-module="customer-info">
+  <div class="customer-info__content">
+    <p class="b2 customer-info__title">Customer Info</p>
+    <div class="customer-info__item">
+      <p class="b4">{{ 'customer.account.name' | t }}</p>
+      <p class="b3">{{ customer.name }}</p>
+    </div>
+    {% if customer.phone %}
+      <div class="customer-info__item">
+        <p class="b4">{{ 'customer.account.phone' | t }}</p>
+        <p class="b3">{{ customer.phone }}</p>
+      </div>
+    {% endif %}
+    <div class="customer-info__item">
+      <p class="b4">{{ 'customer.account.email' | t }}</p>
+      <p class="b3">{{ customer.email }}</p>
+    </div>
+  </div>
 </section>
