@@ -10,6 +10,20 @@
   @media (--lg) {
     padding: 54px 0 60px;
   }
+
+  &--scoop-desktop {
+    @media (--lg-max) {
+      display: none;
+    }
+  }
+
+  &--scoop-mobile {
+    padding-top: 47px;
+
+    @media (--lg) {
+      display: none;
+    }
+  }
 }
 
 .footer-cta__container {

@@ -69,6 +69,7 @@
   max-width: 230px;
   margin: 0 auto;
   color: var(--blood);
+  padding-top: 43px;
 
   @media (--md) {
     max-width: 400px;

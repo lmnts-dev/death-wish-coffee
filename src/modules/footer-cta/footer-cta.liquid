@@ -9,9 +9,11 @@
 {%- if buttons_url.size > 0 or enable_subscribe_form -%}
   {%- assign has_cta = true -%}
 {%- endif -%}
+{% capture class %}footer-cta {% if class %} {{- class -}}{% endif %}{% endcapture %}
+
 
 {% if title and has_cta %}
-  <section class="footer-cta" data-module="footer-cta">
+  <section class="{{class}}" data-module="footer-cta">
     {% if desktop_image or mobile_image %}
       <div class="footer-cta__img-box z1">
         {% if desktop_image %}
