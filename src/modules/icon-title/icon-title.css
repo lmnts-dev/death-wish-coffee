@@ -1,3 +1,9 @@
+.icon-title {
+  @media (--md-max) {
+    padding-bottom: 15px;
+  }
+}
+
 .icon-title__wrapper {
   max-width: 1124px;
   margin: 0 auto;

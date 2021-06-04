@@ -66,6 +66,12 @@
         padding-top: 50px;
       }
     }
+
+    &.super-hero-cta {
+      @media (--md-max) {
+        padding-bottom: 30px;
+      }
+    }
   }
 
   &--md {
