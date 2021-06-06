@@ -1,6 +1,12 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.16 - 2021-06-06
+### CHANGED:
+- add margin between footer and store locator 
+- add store locator page template and script 
+- fix pop out cart spacing 
+
 ## 0.0.15 - 2021-06-04
 ### CHANGED:
 - Adjust styles 
