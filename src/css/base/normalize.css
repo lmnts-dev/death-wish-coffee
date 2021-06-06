@@ -98,3 +98,13 @@ ul, ol {
   cursor: pointer;
   padding: 0;
 }
+
+#destini {
+  @media (--lg) {
+    margin-bottom: 75px;
+  }
+
+  @media (--md-max) {
+    height: 125vh !important;
+  }
+}
