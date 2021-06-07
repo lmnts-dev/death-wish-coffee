@@ -4,6 +4,7 @@
 {% assign price = price | default: false %}
 {% assign quick_shop_form = quick_shop_form | default: false %}
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign product_id = product_id | default: false %}
 
 <section class="{{ class }}" data-module="product-card">
   <div class="product-card__inner">
@@ -31,7 +32,11 @@
       <h4 class="product-card__title">
         <a href="{{ link }}" class="b1 product-card__title-link">{{ title }}</a>
       </h4>
-      <div class="b1 product-card__review">Review</div>
+      {%- if product_id -%}
+        <div class="b1 product-card__review">
+          <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+        </div>
+      {%- endif -%}
       <p class="h5 product-card__price">{{ price }}</p>
     </div>
   </div>
