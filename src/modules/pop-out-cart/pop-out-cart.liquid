@@ -12,7 +12,7 @@
     <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
 
     {% if cart.item_count > 0 %}
-      <form action="/cart" method="post" novalidate>
+      <form action="/cart" class="pop-out-cart__form" method="post" novalidate>
         <div class="pop-out-cart__list">
         {% for item in cart.items %}
           {% assign item_image = item.image | img_url: 'master' %}
