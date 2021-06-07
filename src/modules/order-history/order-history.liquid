@@ -3,4 +3,8 @@
 
 <section class="{{ class }} placeholder" data-module="order-history">
   <h2 class="module-name">order-history</h2>
+  {% for order in customer.orders %}
+  {{ order.id | link_to: order.customer_url }}
+  {% endfor %}
+
 </section>

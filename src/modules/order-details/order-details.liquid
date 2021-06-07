@@ -1,6 +1,120 @@
 {% assign class = class | default false %}
 {% capture class %}order-details{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="order-details">
-  <h2 class="module-name">order-details</h2>
+<section class="{{ class }}" data-module="order-details">
+  <div class="container order-details__container">
+    <div class="order-details__inner bg--bone">
+      {% render 'button',
+        tag: 'button',
+        class:'order-details__btn-back js-back-button',
+        button_value: 'Take me back'
+      %}
+      <div class="order-details__content">
+        <div class="order-details__header">
+          <div class="order-details__header-left">
+            <div class="order-details__name">
+              <div class="order-details__header-label">Order#</div>1234567
+            </div>
+            <div class="order-details__date">
+              <div class="order-details__header-label">Order Date:</div> 10/10/20
+            </div>
+          </div>
+          <div class="order-details__header-right">
+            <div class="order-details__order-status">Order Status: Shipped</div>
+          </div>
+        </div>
+        <div class="order-details__body">
+          <div class="order-details__list-items">
+            <div class="order-details__item order-details__item--header">
+              <div class="b2 order-details__product">Product</div>
+              <div class="b2 order-details__qty">Qty</div>
+              <div class="b2 order-details__price">Price</div>
+            </div>
+            <div class="order-details__item">
+              <div class="b1 order-details__product">blah fucking blah blah</div>
+              <div class="b1 order-details__qty">1</div>
+              <div class="b1 order-details__price">$27.00</div>
+            </div>
+            <div class="order-details__item">
+              <div class="b1 order-details__product">blah fucking blah blah</div>
+              <div class="b1 order-details__qty">1</div>
+              <div class="b1 order-details__price">$27.00</div>
+            </div>
+            <div class="order-details__item">
+              <div class="b1 order-details__product">blah fucking blah blah</div>
+              <div class="b1 order-details__qty">1</div>
+              <div class="b1 order-details__price">$27.00</div>
+            </div>
+          </div>
+          <div class="order-details__discount">
+            <div class="b2 order-details__discount-name">Discount: TeamDWCC2021</div>
+            <div class="b2 order-details__discount-price">-$10.00</div>
+          </div>
+          <div class="order-details__summary">
+            <div class="order-details__summary-wrapper">
+              <div class="order-details__summary-item order-details__summary-item--header">
+                <div class="b2 order-details__summary-label">Order Details:</div>
+              </div>
+              <div class="order-details__summary-item">
+                <div class="order-details__summary-label">Subtotal:</div>
+                <div class="order-details__summary-price">$91.00</div>
+              </div>
+              <div class="order-details__summary-item">
+                <div class="order-details__summary-label">Discount:</div>
+                <div class="order-details__summary-price">-$10.00</div>
+              </div>
+              <div class="order-details__summary-item">
+                <div class="order-details__summary-label">Shipping:</div>
+                <div class="order-details__summary-price">$0.00</div>
+              </div>
+              <div class="order-details__summary-item">
+                <div class="b2 order-details__summary-label">Total:</div>
+                <div class="b2 order-details__summary-price">$81.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="order-details__info">
+          <div class="order-details__info-left">
+            <div class="order-details__shipping">
+              <div class="b2 order-details__shipping-label">Shipped To:</div>
+              <div class="order-details__shipping-content">
+                <p>Rick Ferrari</p>
+                <p>97 Firebird Ally</p>
+                <p>Santa Monica, CA 12567</p>
+              </div>
+            </div>
+            <div class="order-details__billing">
+              <div class="b2 aa">Billing Address:</div>
+              <div class="order-details__billing-content">
+                <p>Rick Ferrari</p>
+                <p>97 Firebird Ally</p>
+                <p>Santa Monica, CA 12567</p>
+              </div>
+            </div>
+          </div>
+          <div class="order-details__info-right">
+            <div class="order-details__payment">
+              <div class="b2 order-details__payment-label">Payment Method </div>
+              <div class="order-details__payment-content">
+                MasterCard ************1487
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="order-details__btns">
+          {%- render 'button',
+            tag: 'button', 
+            button_value: 'Tracking', 
+            class: 'styleguide-button button--small-h button--small-w button--dark' 
+          -%}
+          {%- render 'button', 
+            tag: 'button', 
+            button_value: 'Reorder', 
+            class: 'styleguide-button button--small-h button--small-w button--dark' 
+          -%}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
