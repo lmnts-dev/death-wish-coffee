@@ -164,10 +164,6 @@
   }
 }
 
-.product-form__variants {
-  display: none;
-}
-
 .product-form__option-title {
   .product-form--pdp-add-to-cart & {
     margin-bottom: 20px;
@@ -182,8 +178,6 @@
 }
 
 .product-form__option-price {
-  display: none;
-
   &.active {
     display: block;
   }
