@@ -21,14 +21,16 @@
 
 {%- if product_acf.accentuate.pdp_featured_products_selector == blank -%}
   {%- assign count = 1 -%}
-  {% for item in collections.all.products %}
-    {%- if item.type == product.type and item.id != product.id -%}
-      {%- if count <= 8 -%}
-        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+  {%- paginate collections.all.products by 9999 -%}
+    {% for item in collections.all.products %}
+      {%- if item.type == product.type and item.id != product.id -%}
+        {%- if count <= 8 -%}
+          {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+        {%- endif -%}
+        {%- assign count = count | plus: 1 -%}
       {%- endif -%}
-      {%- assign count = count | plus: 1 -%}
-    {%- endif -%}
-  {% endfor %}
+    {% endfor %}
+  {%- endpaginate -%}
 {%- endif -%}
 
 {%- if list_products != blank -%}
