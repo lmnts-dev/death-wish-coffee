@@ -57,7 +57,7 @@
 
 {%- if is_vue_component -%}
   <div is="product-form" inline-template {{ custom_attrs }}>
-    <div v-if="product" class="product-card">
+    <div v-if="product" class="{{- class -}}">
       {{ content }}
     </div>
   </div>
@@ -66,7 +66,7 @@
     {%- render 'product-json', product: product -%}
   {%- endcapture -%}
 
-  <div data-module="product-form" {{ custom_attrs }}>
+  <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
     <div is="product-form"
          :product="{{- product_json | escape -}}"
          inline-template
