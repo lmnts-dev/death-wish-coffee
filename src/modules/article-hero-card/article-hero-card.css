@@ -35,6 +35,20 @@
   }
 }
 
+.article-hero-card__image {
+  @media (--lg-max) {
+    display: none;
+  }
+
+  &--mobile {
+    display: block;
+
+    @media (--lg) {
+      display: none;
+    }
+  }
+}
+
 .article-hero-card__content {
   position: absolute;
   left: 0;

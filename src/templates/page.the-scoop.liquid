@@ -2,32 +2,38 @@
 {%- assign blog_titles = page.metafields.accentuate.title -%}
 {% assign scoop_articles = page.metafields.accentuate.articles %}
 {%- assign view_all_urls = page.metafields.accentuate.blog_listings_url-%}
-{%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
 {% assign scoop_featured_articles = page.metafields.accentuate.scoop_featured_articles %}
 
 {% for blog_articles in scoop_featured_articles %}
   {%- assign a = blog_articles | split: '|' -%}
   {%- capture content_slides -%}
     {% for post in a %}
+      {%- assign blog_handle = post | split: '/' | first -%}
+      {%- assign blog_acf = blogs[blog_handle].metafields -%}
+      {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+      {%- assign fallback_images_mobile = blog_acf.accentuate.default_image_mobile | first -%}
       {% assign p = articles[post] %}
       {%- assign post_image = fallback_images.src -%}
+      {%- assign post_image_mobile = fallback_images_mobile.src | default: post_image -%}
       {%- assign image_alt = fallback_images.alt -%}
 
       {%- if p.image != blank -%}
         {%- assign post_image = p | img_url: 'master' -%}
+        {%- assign post_image_mobile = post_image -%}
         {%- assign image_alt = p.image.alt -%}
       {%- endif -%}
 
       {%- render 'article-hero-card'
-      class: 'swiper-slide product-hero-card--scoop product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
-      title: p.title,
-      image_url: post_image,
-      url: p.url,
-      excerpt: p.excerpt,
-      author: p.author,
-      date: p.published_at,
-      cta_text: 'Read More'
-    -%}
+        class: 'swiper-slide product-hero-card--scoop product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
+        title: p.title,
+        image_url: post_image,
+        image_url_mobile: post_image_mobile,
+        url: p.url,
+        excerpt: p.excerpt,
+        author: p.author,
+        date: p.published_at,
+        cta_text: 'Read More'
+      -%}
     {% endfor %}
   {%- endcapture -%}
 {% endfor %}
@@ -73,4 +79,3 @@
 
   {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: view_all_url -%}
 {% endfor %}
-

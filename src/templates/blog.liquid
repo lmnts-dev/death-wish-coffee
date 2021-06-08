@@ -5,38 +5,41 @@ This template has some complicated version depending on which type of blog we're
 If this comment is still here, please consult with the lead developer on the project before proceeding.
 {%- endcomment -%}
 
-{%- render 'carousel' -%}
-
 {%- assign blog_acf = blog.metafields -%}
-{%- assign list_article = blog_acf.article_hero_card.article -%}
+{%- assign list_article = blog_acf.accentuate.articles_selection | split: '|' -%}
 {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
 
 {%- capture content_slides -%}
   {% for handle in list_article %}
     {%- assign notice = blog.metafields.article_hero_card.notice_title[forloop.index0] -%}
+    {%- assign current_blog_handle = handle | split: '/' | first -%}
+    {%- assign current_blog_acf = blogs[current_blog_handle].metafields -%}
+    {%- assign current_fallback_images = current_blog_acf.accentuate.default_image | first -%}
+    {%- assign current_fallback_images_mobile = current_blog_acf.accentuate.default_image_mobile | first -%}
     {%- assign article = articles[handle] -%}
     {% assign class = 'swiper-slide' %}
     {% assign title = article.title %}
-    {%- assign image = fallback_images.src -%}
-    {%- if article.image.src != blank -%}
-      {% assign image = article.image.src | img_url: 'master' %}
+    {%- assign image_url = current_fallback_images.src -%}
+    {%- assign image_url_mobile = current_fallback_images_mobile.src | default: image_url -%}
+    {%- if article.image != blank -%}
+      {% assign image_url = article | img_url: 'master' %}
+      {% assign image_url_mobile = image_url %}
     {%- endif -%}
     {% assign url = article.url %}
     {% assign description = article.excerpt %}
     {% capture info %}
       {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
     {% endcapture %}
-    {% assign blog_handle = handle | split: '/' | first %}
 
     {%- render 'article-hero-card',
         class: class,
         notice: notice,
         title: title,
-        image: image,
+        image_url: image_url,
+        image_url_mobile: image_url_mobile,
         url: url,
         description: description,
-        info: info,
-        blog_handle: blog_handle
+        info: info
     -%}
   {% endfor %}
 {%- endcapture -%}
