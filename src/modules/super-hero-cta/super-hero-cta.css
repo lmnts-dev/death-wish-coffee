@@ -1,6 +1,7 @@
 /* styles for the super-hero-cta module go in this file */
 
 .super-hero-cta {
+  position: relative;
   background-color: var(--black);
 }
 
@@ -11,6 +12,7 @@
 
 .shc__wrapper {
   position: relative;
+  z-index: 1;
 
   @media (--lg-max) {
     padding-top: 25vw;
@@ -118,4 +120,42 @@
   @media (max-width: 1725px) and (--lg) {
     margin-top: calc(70 / 1725 * 100vw);
   }
+}
+
+.shc__bolts-wrapper {
+  position: absolute;
+  bottom: 94px;
+  right: 8%;
+  width: 137%;
+
+  @media (--md) {
+    right: 49%;
+    bottom: 100px;
+    width: 77%;
+    max-width: 1481px;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 101%;
+  }
+
+  .super-hero-cta--reverse & {
+    right: auto;
+    left: 8%;
+    transform: scaleX(-1);
+
+    @media (--md) {
+      left: 49%;
+    }
+  }
+}
+
+.shc__bolts {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
