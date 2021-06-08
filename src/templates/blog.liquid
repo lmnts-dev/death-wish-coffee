@@ -45,8 +45,6 @@ If this comment is still here, please consult with the lead developer on the pro
 {%- endcapture -%}
 {%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
 
-{%- render 'carousel' -%}
-
 <div class="bg--black">
   {% paginate blog.articles by 16 %}
     {% capture grid_content %}
@@ -59,8 +57,9 @@ If this comment is still here, please consult with the lead developer on the pro
           {% assign post_class = post_class | append: ' post-card--viewed' %}
         {% endif %}
 
-        {%- assign post_image = fallback_images.src -%}
-        {%- assign image_alt = fallback_images.alt -%}
+        {%- assign card_fallback_image = blog_acf.accentuate.default_image_square | first -%}
+        {%- assign post_image = card_fallback_image.src -%}
+        {%- assign image_alt = card_fallback_image.alt -%}
 
         {%- if post.image != blank -%}
           {%- assign post_image = post | img_url: 'master' -%}

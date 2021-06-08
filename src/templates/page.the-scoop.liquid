@@ -52,6 +52,9 @@
   {%- assign a = blog_articles | split: '|' -%}
   {%- capture post_cards -%}
     {% for post in a %}
+      {%- assign blog_handle = post | split: '/' | first -%}
+      {%- assign blog_acf = blogs[blog_handle].metafields -%}
+      {%- assign fallback_images = blog_acf.accentuate.default_image_square | first -%}
       {% assign p = articles[post] %}
       {%- assign post_image = fallback_images.src -%}
       {%- assign image_alt = fallback_images.alt -%}
