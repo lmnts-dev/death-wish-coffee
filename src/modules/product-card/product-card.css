@@ -92,7 +92,7 @@
     visibility: visible;
   }
 
-  &.is-active {
+  &:hover {
     & .product-card__form {
       opacity: 1;
       visibility: visible;

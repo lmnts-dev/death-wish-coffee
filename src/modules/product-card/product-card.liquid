@@ -15,13 +15,7 @@
       </div>
       {%- if quick_shop_form -%}
         <div class="product-card__overlay js-overlay">
-          <div class="product-card__quick-shop">
-            {%- render 'button', button_value: 'Quick Shop', tag: 'button', custom_attrs: 'type="submit"' class: 'product-card__quick-shop-btn button--light js-button' -%}
-          </div>
           <div class="product-card__form">
-            <button class="product-card__close js-close" type="button">
-              {%- render 'svg', type: 'close', class: 'product-card__close-icon' -%}
-            </button>
             {{- quick_shop_form -}}
           </div>
         </div>
