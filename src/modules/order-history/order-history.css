@@ -12,6 +12,7 @@
 
 .order-history__title {
   display: none;
+  text-transform: none;
 
   @media (--lg) {
     display: block;
