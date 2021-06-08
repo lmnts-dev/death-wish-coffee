@@ -1,0 +1,17 @@
+{%- comment -%}
+    Extract just the necessary data from product for Vue components, including:
+    - Product Cards
+    - Product Forms
+    - PLP Filter
+{%- endcomment -%}
+{
+    "title": {{ product.title | json }},
+    "id": {{ product.id | json }},
+    "handle": {{ product.handle | json }},
+    "url": {{ product.url | json }},
+    "options": {{ product.options | json }},
+    "options_by_name": {{ product.options_by_name | json }},
+    "variants": {{ product.variants | json }},
+    "price": {{ product.price | json }},
+    "featured_image": {{ product.featured_image | img_url: 'master' | json }}
+}
