@@ -92,3 +92,61 @@
     enable_subscribe_form: true 
   -%}
 {%- endif -%}
+
+{%- paginate collection.products by 50 -%}
+  {%- capture product_json -%}
+    {%- for product in collection.products -%}
+      ,{% render 'product-json', product: product %}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {% assign product_json = product_json | remove_first: ',' %}
+<script>
+  window.DWC_PLP = {
+    definitions: [
+      {
+        name: 'Roast',
+        type: 'tag',
+        options: [
+          'Dark',
+          'Medium',
+          'Light'
+        ]
+      },
+      {
+        name: 'Style',
+        type: 'option',
+        options: [
+          'Ground',
+          'Whole Bean',
+          'Cold Brew',
+          'Espresso'
+        ]
+      },
+      {
+        name: 'Format',
+        type: 'tag',
+        options: [
+          'Single Serve',
+          'Pour Over',
+          'Canned',
+          'Bagged'
+        ]
+      },
+      {
+        name: 'Size',
+        type: 'option',
+        options: [
+          '1 bag',
+          '5 bags',
+          '12-pack',
+          '24-pack',
+          '1 Pound',
+          '2 Pound',
+          '5 Pound'
+        ]
+      }
+    ],
+    products: {{ product_json | escape }}
+  }
+</script>
+{%- endpaginate -%}

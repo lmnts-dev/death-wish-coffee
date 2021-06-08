@@ -71,6 +71,7 @@
     "stylelint-use-nesting": "^2.0.0",
     "stylelint-webpack-plugin": "^1.2.3",
     "url-loader": "^1.1.2",
+    "vuex": "^3.6.2",
     "webpack": "^4.41.5"
   },
   "dependencies": {

@@ -1,10 +1,11 @@
+import { addClass, removeClass, getHeight } from 'lib/util'
+import store from 'lib/store'
+
 /**
  * Initializes the site's plp module.
  * @constructor
  * @param {Object} el - The site's plp container element.
  */
-import { addClass, removeClass, getHeight } from 'lib/util'
-
 const plp = el => {
   const filterEl = el.querySelector('.js-filter')
   const sortHeaderEl = el.querySelector('.js-sort-header')
@@ -31,6 +32,8 @@ const plp = el => {
       setContainerMinHeight()
     })
   }
+
+  store.dispatch('plp/init')
 }
 
 export default plp
