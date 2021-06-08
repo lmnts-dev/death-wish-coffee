@@ -33,7 +33,7 @@
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
 {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
-  <main id="page" class="relative z0 bg--shadow " role="main">
+  <main id="page" class="relative z0 bg--shadow" role="main">
     <div class="account-wrapper container">
       {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
       {%- assign account_title = account_title | upcase -%}
