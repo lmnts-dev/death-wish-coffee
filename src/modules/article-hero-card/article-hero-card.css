@@ -6,6 +6,11 @@
   @media (--md) {
     padding: 0 0 113px;
   }
+
+  &--home {
+    padding: 0;
+    background: transparent;
+  }
 }
 
 .article-hero-card__inner {
@@ -32,6 +37,20 @@
 
   @media (--md) {
     padding-top: percentage(807/1441);
+  }
+}
+
+.article-hero-card__image {
+  @media (--lg-max) {
+    display: none;
+  }
+
+  &--mobile {
+    display: block;
+
+    @media (--lg) {
+      display: none;
+    }
   }
 }
 
