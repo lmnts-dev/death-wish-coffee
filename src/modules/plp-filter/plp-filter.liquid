@@ -6,7 +6,7 @@
 <div is="plp-filter"
      inline-template
 >
-  <section class="{{ class }}">
+  <section :class="['{{ class | escape }}', { active: isManualFilter }]">
     <div class="plp-filter__container">
       <div class="plp-filter__wrapper">
         <div class="plp-filter__inner">

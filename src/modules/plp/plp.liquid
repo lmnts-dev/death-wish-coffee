@@ -15,10 +15,7 @@
     <div class="container plp__container js-container">
       <div class="plp__inner">
         {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-        {%- render 'plp-filter',
-          class: 'js-filter',
-          acf_filters: acf_filters
-        -%}
+        {%- render 'plp-filter' -%}
         {%- capture product_cards -%}
           <template v-for="(product, productIndex) in displayedProducts">
             {%- render 'product-card',
@@ -44,7 +41,7 @@
 
         {%- render 'grid',
           use_container: false,
-          class: 'grid--plp',
+          class: 'plp__grid grid--plp',
           children: product_cards
         -%}
       </div>

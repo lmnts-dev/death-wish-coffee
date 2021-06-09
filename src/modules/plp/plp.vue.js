@@ -1,11 +1,13 @@
 import ProductCard from '../product-card/product-card.vue'
 import PlpFilter from '../plp-filter/plp-filter.vue'
+import PlpSortHeader from '../plp-sort-header/plp-sort-header.vue'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
     ProductCard,
-    PlpFilter
+    PlpFilter,
+    PlpSortHeader
   },
   computed: {
     ...mapState('plp', ['products']),

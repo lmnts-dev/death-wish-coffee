@@ -1,4 +1,4 @@
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
   data () {
@@ -10,11 +10,9 @@ export default {
     // Two-way binding with Vuex state via mutations
     selectedOptions: {
       get () {
-        const checked = Object.entries(this.filterValues).map(
+        return Object.entries(this.filterValues).map(
           ([key, values]) => values.map(value => `${key}|${value}`)
         ).flat()
-
-        return checked
       },
       set (pairs) {
         if (pairs.length === 0) {
@@ -39,7 +37,7 @@ export default {
         this.mutateFilterValues(filterValues)
       }
     },
-    ...mapState('plp', ['filterDefinitions', 'filterValues']),
+    ...mapState('plp', ['filterDefinitions', 'filterValues', 'isManualFilter']),
     ...mapGetters('plp', ['filterAvailableValues'])
   },
   methods: {

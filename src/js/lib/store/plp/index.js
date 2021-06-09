@@ -1,3 +1,5 @@
+import { filterByTypes, sortFunctions } from './helpers'
+
 export default {
   namespaced: true,
   state () {
@@ -6,7 +8,9 @@ export default {
       filterValues: {},
       products: [],
       featuredProducts: [],
-      isFiltering: false
+      sortOrder: '',
+      isFiltering: false,
+      isManualFilter: false
     }
   },
   getters: {
@@ -40,22 +44,14 @@ export default {
         {}
       )
     },
-    displayedFeaturedProducts ({ featuredProducts, isFiltering }) {
-      return isFiltering ? [] : featuredProducts
+    displayedFeaturedProducts ({ featuredProducts, isFiltering, sortOrder }) {
+      return isFiltering || sortOrder ? [] : featuredProducts
     },
     displayedFeaturedProductIds (state, { displayedFeaturedProducts }) {
       return displayedFeaturedProducts.map(product => product.id)
     },
-    displayedProducts ({ products, filterValues, filterDefinitions }, { displayedFeaturedProductIds }) {
+    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }, { displayedFeaturedProductIds }) {
       let filteredProducts = products.filter(product => !displayedFeaturedProductIds.includes(product.id))
-
-      const areIntersected = (array1, array2) => array1.some(value => array2.includes(value))
-
-      const filterByTypes = {
-        tag: (filterName, filterTags) => product => areIntersected(filterTags, product.tags),
-        option: (filterName, filterOptions) => product =>
-          areIntersected(filterOptions, product.options_by_name[filterName] ? product.options_by_name[filterName].option.values : [])
-      }
 
       for (const filter of filterDefinitions) {
         if (!filterValues[filter.name] || filterValues[filter.name].length === 0) {
@@ -64,6 +60,10 @@ export default {
 
         const criteria = filterByTypes[filter.type](filter.name, filterValues[filter.name])
         filteredProducts = filteredProducts.filter(criteria)
+      }
+
+      if (sortOrder) {
+        filteredProducts.sort(sortFunctions[sortOrder])
       }
 
       return filteredProducts
@@ -84,6 +84,12 @@ export default {
     },
     mutateIsFiltering (state, isFiltering) {
       state.isFiltering = isFiltering
+    },
+    toggleManualFilter (state) {
+      state.isManualFilter = !state.isManualFilter
+    },
+    mutateSortOrder (state, sortOrder) {
+      state.sortOrder = sortOrder
     }
   },
   actions: {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import PlpModule from './plp.vuex'
+import PlpModule from './plp'
 
 Vue.use(Vuex)
 
