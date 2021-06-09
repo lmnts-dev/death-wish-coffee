@@ -72,6 +72,10 @@
   padding-right: 20px;
   overflow: auto;
   height: 60%;
+
+  .cart-container__wrapper & {
+    height: 100%;
+  }
 }
 
 .pop-out-cart__item {
