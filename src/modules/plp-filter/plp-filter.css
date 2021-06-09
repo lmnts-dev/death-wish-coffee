@@ -4,8 +4,9 @@
   width: 100%;
 
   @media (--lg) {
+    flex: 1 0 auto;
     margin-right: 40px;
-    max-width: 327px;
+    width: 327px;
   }
 
   &:not(.active) {

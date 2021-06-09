@@ -170,7 +170,8 @@
       ],
       products: {{ product_json }},
       featuredProducts: {{ featured_products_json }},
-      totalCount: {{ collection.all_products_count }}
+      totalCount: {{ collection.all_products_count }},
+      totalPages: {{ paginate.pages }}
     }
   </script>
 {%- endpaginate -%}

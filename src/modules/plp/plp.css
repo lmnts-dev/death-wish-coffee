@@ -19,7 +19,7 @@
 }
 
 .plp__grid {
-  flex: 1 0 auto;
+  flex: 1;
 }
 
 .plp__empty {

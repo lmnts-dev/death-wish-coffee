@@ -1,4 +1,4 @@
-import { filterByTypes, sortFunctions } from './helpers'
+import { filterByTypes, sortFunctions, loadProductsForPage } from './helpers'
 
 export default {
   namespaced: true,
@@ -96,10 +96,13 @@ export default {
     },
     mutateTotalCount (state, totalCount) {
       state.totalCount = totalCount
+    },
+    concatProducts (state, products) {
+      state.products = state.products.concat(products)
     }
   },
   actions: {
-    init ({ commit }) {
+    async init ({ commit }) {
       if (typeof window.DWC_PLP === 'undefined') {
         return
       }
@@ -118,6 +121,17 @@ export default {
 
       if (typeof window.DWC_PLP.totalCount !== 'undefined') {
         commit('mutateTotalCount', window.DWC_PLP.totalCount)
+      }
+
+      if (typeof window.DWC_PLP.totalPages !== 'undefined' && window.DWC_PLP.totalPages > 1) {
+        const promises = []
+
+        for (let page = 2; page <= window.DWC_PLP.totalPages; page++) {
+          promises.push(loadProductsForPage(page))
+        }
+
+        const allPages = await Promise.all(promises)
+        commit('concatProducts', allPages.flat())
       }
     }
   }

@@ -1,3 +1,5 @@
+import nanoajax from 'nanoajax'
+
 const areIntersected = (array1, array2) => array1.some(value => array2.includes(value))
 
 const filterByTypes = {
@@ -14,7 +16,24 @@ const sortFunctions = {
   'date-descending': (product1, product2) => Date.parse(product2.published_at) - Date.parse(product1.published_at)
 }
 
+const loadProductsForPage = async (page) => {
+  const url = location.href + (location.search ? '&' : '?') + `view=ajax&page=${page}`
+  return new Promise(resolve => {
+    nanoajax.ajax(
+      {
+        url,
+        method: 'get'
+      },
+      (code, responseText) => {
+        const products = JSON.parse(responseText)
+        resolve(products)
+      }
+    )
+  })
+}
+
 export {
   filterByTypes,
-  sortFunctions
+  sortFunctions,
+  loadProductsForPage
 }
