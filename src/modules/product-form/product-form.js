@@ -54,10 +54,10 @@ const productform = el => {
         // Toggle button in case of variant available or not
         if (selectedValue) {
           submitButtonEl.removeAttribute('disabled')
+          setPrice(selectedTitle)
         } else {
           submitButtonEl.setAttribute('disabled', true)
         }
-        setPrice(selectedTitle)
       })
     }
   }
