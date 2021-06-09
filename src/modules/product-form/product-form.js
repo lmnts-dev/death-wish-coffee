@@ -61,6 +61,12 @@ const productform = el => {
       })
     }
   }
+
+  submitButtonEl.addEventListener('click', () => {
+    for (const inputEl of inputEls) {
+      inputEl.checked = false
+    }
+  })
 }
 
 export default productform
