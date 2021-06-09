@@ -1,10 +1,58 @@
 {% assign class = class | default false %}
 {% capture class %}order-history{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="order-history">
-  <h2 class="module-name">order-history</h2>
-  {% for order in customer.orders %}
-  {{ order.id | link_to: order.customer_url }}
-  {% endfor %}
-
+<section class="{{ class }}" data-module="order-history">
+  <div class="order-history__wrapper">
+    <h4 class="h4 order-history__title">{{- 'customer.orders.title' | t -}}</h4>
+    {%- paginate customer.orders by 10 -%}
+      {%- if customer.orders.size > 0 -%}
+        <div class="order-history__items">
+          {%- for order in customer.orders -%}
+            <div class="order-history__item">
+              <div class="order-history__item-date">
+                <p class="b2 order-history_item-lable">{{- 'customer.orders.date' | t -}}</p>
+                <p class="b1">{{- order.created_at | date: '%m/%d/%Y' -}}</p>
+              </div>
+              <div class="order-history__item-order">
+                <p class="b2 order-history_item-lable">{{- 'customer.orders.order_number' | t -}}</p>
+                <p class="b1">{{- order.name | replace: '#', '' -}}</p>
+                <p class="b1 order-history__item-created-at">{{- order.created_at | date: '%m/%d/%Y' -}}</p>
+              </div>
+              <div class="order-history__item-total">
+                <p class="b2 order-history_item-lable">{{- 'customer.orders.total' | t -}}</p>
+                <p class="b1">{{- order.total_price | money -}}</p>
+              </div>
+              <div class="order-history__item-description">
+                <p class="b2 order-history_item-lable">{{- 'customer.orders.description' | t -}}</p>
+                <p class="b1">
+                  {%- for line_item in order.line_items -%}
+                    <span class="order-history__item-title">{{- line_item.title -}}</span>
+                  {%- endfor -%}
+                </p>
+              </div>
+              <div class="order-history__item-status">
+                <p class="b2 order-history_item-lable">{{- 'customer.orders.payment_status' | t -}}</p>
+                <p class="b1">{{- order.financial_status_label -}}</p>
+              </div>
+              <div class="order-history__item-btn">
+                {%- render 'button',
+                  tag: 'a',
+                  button_url: order.customer_url,
+                  class: 'button--small-w button--small-h button--dark',
+                  button_value: 'View Order'
+                -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          {%- render 'pagination',
+            class: 'pagination--account',
+            paginate: paginate -%}
+        {%- endif -%}
+      {%- else -%}
+        <p class="b2 order-history__empty">{{- 'customer.orders.none' | t -}}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
 </section>
