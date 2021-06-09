@@ -62,6 +62,27 @@
   }
 }
 
+.article-hero-card__item-excerpt {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @extend .b2;
+  }
+
+  a {
+    color: var(--white);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .article-hero-card__item-title {
   display: block;
   max-width: percentage(468/965);
