@@ -1,6 +1,7 @@
 {%- layout 'theme' -%}
 {% assign acf = collection.metafields.accentuate %}
 {% assign list_products = acf.collection_hero_carou_product | default: blank %}
+{% assign list_products_images = acf.collection_carou_feat_media | map: 'src' | default: blank %}
 
 {%- render 'breadcrumbs' -%}
 
@@ -29,8 +30,13 @@
       {%- assign count_carousel = count_carousel | plus: 1 -%}
       {%- assign product = all_products[handle] -%}
       {% assign title = product.title %}
-      {% assign image_url = product.images[1] | img_url: 'master' %}
       {% assign url = product.url %}
+      {% assign reviews = 'Review' %}
+      {% if list_products_images != blank %}
+        {% assign image_url = list_products_images[forloop.index0]%}
+      {% else %}
+        {% assign image_url = product.images[0] | img_url: 'master' %}
+      {% endif %}
       {%- capture price %}
         {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
       {%- endcapture -%}
