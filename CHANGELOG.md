@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.18 - 2021-06-09
+### CHANGED:
+- increase post-navigation padding top 
+
 ## 0.0.17 - 2021-06-09
 ### CHANGED:
 - DIC-91 Fix bug data do not render for featured articles on homepage 
