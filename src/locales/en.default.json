@@ -379,6 +379,7 @@
     }
   },
   "date_formats": {
-    "month_day_year": "%B %d, %Y"
+    "month_day_year": "%B %d, %Y",
+    "month_day_year_minus": "%m/%d/%y"
   }
 }

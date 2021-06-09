@@ -155,6 +155,12 @@
     max-width: 240px;
     background: transparent;
   }
+
+  .template-customers-order & {
+    @media (--md) {
+      display: none;
+    }
+  }
 }
 
 .account-wrapper__right {
@@ -163,6 +169,11 @@
   @media (--md) {
     width: calc(100% - 248px);
     margin-left: 8px;
+  }
+
+  .template-customers-order & {
+    width: 100%;
+    margin: 0;
   }
 }
 

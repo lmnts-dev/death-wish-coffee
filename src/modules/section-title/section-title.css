@@ -33,6 +33,12 @@
     @media (--md-max) {
       display: none;
     }
+
+    .template-customers-order & {
+      @media (--md) {
+        display: none;
+      }
+    }
   }
 
   &--review-drawer {

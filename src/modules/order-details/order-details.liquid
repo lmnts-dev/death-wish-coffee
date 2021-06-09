@@ -1,6 +1,134 @@
 {% assign class = class | default false %}
 {% capture class %}order-details{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="order-details">
-  <h2 class="module-name">order-details</h2>
+<section class="{{ class }}" data-module="order-details">
+  <div class="container order-details__container">
+    <div class="order-details__inner bg--bone">
+      {% render 'button',
+        tag: 'button',
+        class:'order-details__btn-back js-back-button',
+        button_value: 'Take me back'
+      %}
+      <div class="order-details__content">
+        <div class="order-details__header">
+          <div class="order-details__header-left">
+            <div class="order-details__name">
+              <span class="order-details__header-label">Order#</span><span>{{ order.order_number }}</span>
+            </div>
+            <div class="b1 order-details__date">
+              <span class="order-details__header-label">Order Date:</span><span>{{ order.created_at | date: format: 'month_day_year_minus' }}</span>
+            </div>
+          </div>
+          <div class="order-details__header-right">
+            <div class="order-details__order-status">Order Status: {{ order.financial_status | capitalize }}</div>
+          </div>
+        </div>
+        <div class="order-details__body">
+          <div class="order-details__list-items">
+            <div class="order-details__wrapper-items">
+              <div class="order-details__item order-details__item--header">
+                <div class="b2 order-details__product">Product</div>
+                <div class="order-details__group">
+                  <div class="b2 order-details__qty">Qty</div>
+                  <div class="b2 order-details__price">Price</div>
+                </div>
+              </div>
+              
+              {% for line_item in order.line_items %}
+                <div class="order-details__item">
+                  <a href="{{ line_item.product.url }}" class="b1 order-details__product">{{ line_item.product.title }}</a>
+                  <div class="order-details__group">
+                    <div class="b1 order-details__qty">{{ line_item.quantity }}</div>
+                    <div class="b1 order-details__price">{{ line_item.original_line_price | money }}</div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            {% if order.discount_applications.size > 0 %}
+              {% for discount_application in order.discount_applications %}
+                <div class="order-details__discount">
+                  <div class="b2 order-details__discount-name">Discount: {{ discount_application.title }}</div>
+                  <div class="b2 order-details__discount-price"><span></span>-{{ discount_application.total_allocated_amount | money }}</div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="order-details__summary">
+            <div class="order-details__summary-list">
+              <div class="order-details__summary-wrapper">
+                <div class="order-details__summary-item order-details__summary-item--header">
+                  <div class="b2 order-details__summary-label">Order Details:</div>
+                </div>
+                <div class="order-details__summary-item">
+                  <div class="order-details__summary-label">Subtotal:</div>
+                  <div class="order-details__summary-price"><span></span>{{ order.subtotal_price | plus: order.total_discounts | money }}</div>
+                </div>
+                <div class="order-details__summary-item">
+                  <div class="order-details__summary-label">Discount:</div>
+                  <div class="order-details__summary-price"><span></span>-{{ order.total_discounts | money }}</div>
+                </div>
+                <div class="order-details__summary-item">
+                  <div class="order-details__summary-label">Shipping:</div>
+                  <div class="order-details__summary-price"><span></span>{{ order.shipping_price | money }}</div>
+                </div>
+              </div>
+              <div class="order-details__summary-total">
+                <div class="b2 order-details__summary-label">Total:</div>
+                <div class="b2 order-details__summary-price"><span></span>{{ order.total_price | money }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="order-details__info">
+          <div class="order-details__info-left">
+            
+            <div class="order-details__shipping">
+              <div class="b2 order-details__shipping-label">Shipped To:</div>
+              <div class="order-details__shipping-content">
+                <p>{{order.shipping_address.first_name }} {{order.shipping_address.last_name }}</p>
+                <p>{{order.shipping_address.address1 }}</p>
+                <p>{{order.shipping_address.city }}{% if order.shipping_address.country_code or order.shipping_address.country_code %}{% if order.shipping_address.city %}, {% endif %}{{order.shipping_address.country_code }} {{order.shipping_address.zip }}{% endif %}</p>
+              </div>
+            </div>
+            <div class="order-details__billing">
+              <div class="b2 aa">Billing Address:</div>
+              <div class="order-details__billing-content">
+                <p>{{order.billing_address.first_name }} {{order.billing_address.last_name }}</p>
+                <p>{{order.billing_address.address1 }}</p>
+                <p>{{order.billing_address.city }}{% if order.billing_address.country_code or order.billing_address.country_code %}{% if order.billing_address.city %}, {% endif %}{{order.billing_address.country_code }} {{order.billing_address.zip }}{% endif %}</p>
+              </div>
+            </div>
+          </div>
+          <div class="order-details__info-right">
+            <div class="order-details__payment">
+              <div class="b2 order-details__payment-label">Payment Method </div>
+              {% for transaction in order.transactions %}
+                <div class="order-details__payment-content">
+                  {{ transaction.payment_details.credit_card_company }} {{ transaction.payment_details.credit_card_number | replace: '•', '*' | replace: ' ', ''}}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="order-details__btns">
+          <span></span>
+          <div class="order-details__wrapper-btn">
+            {%- capture custom_attrs -%}target="__blank"{%- endcapture -%}
+            {%- render 'button',
+              tag: 'a',
+              button_url: order.order_status_url,
+              custom_attrs: custom_attrs,
+              button_value: 'Tracking', 
+              class: 'order-details__btn button--small-h button--small-w button--dark' 
+            -%}
+            {%- render 'button', 
+              tag: 'a', 
+              button_value: 'Reorder', 
+              class: 'order-details__btn button--small-h button--small-w button--dark' 
+            -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
