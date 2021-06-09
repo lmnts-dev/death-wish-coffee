@@ -36,7 +36,7 @@
           selected_value: collection.sort_by
         -%}
         <div class="plp-sort-header__count">
-          {{ collection.products_count }} products
+          ${ productsCount } ${ productsCount <= 1 ? 'product' : 'products' }
         </div>
       </div>
     </div>

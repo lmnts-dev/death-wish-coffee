@@ -10,7 +10,8 @@ export default {
       featuredProducts: [],
       sortOrder: '',
       isFiltering: false,
-      isManualFilter: false
+      isManualFilter: false,
+      totalCount: 0
     }
   },
   getters: {
@@ -67,6 +68,9 @@ export default {
       }
 
       return filteredProducts
+    },
+    productsCount ({ totalCount, sortOrder, isFiltering }, { displayedProducts }) {
+      return (isFiltering || sortOrder) ? displayedProducts.length : totalCount
     }
   },
   mutations: {
@@ -90,6 +94,9 @@ export default {
     },
     mutateSortOrder (state, sortOrder) {
       state.sortOrder = sortOrder
+    },
+    mutateTotalCount (state, totalCount) {
+      state.totalCount = totalCount
     }
   },
   actions: {
@@ -108,6 +115,10 @@ export default {
 
       if (typeof window.DWC_PLP.featuredProducts !== 'undefined') {
         commit('mutateFeaturedProducts', window.DWC_PLP.featuredProducts)
+      }
+
+      if (typeof window.DWC_PLP.totalCount !== 'undefined') {
+        commit('mutateTotalCount', window.DWC_PLP.totalCount)
       }
     }
   }

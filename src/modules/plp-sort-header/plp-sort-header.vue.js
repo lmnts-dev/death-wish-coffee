@@ -1,4 +1,4 @@
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -9,9 +9,10 @@ export default {
       set (value) {
         this.mutateSortOrder(value)
       }
-    }
+    },
+    ...mapGetters('plp', ['productsCount'])
   },
   methods: {
-    ...mapMutations('plp', ['toggleManualFilter', 'mutateSortOrder'])
+    ...mapMutations('plp', ['toggleManualFilter', 'mutateSortOrder']),
   }
 }

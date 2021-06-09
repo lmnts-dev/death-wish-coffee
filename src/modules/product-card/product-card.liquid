@@ -39,11 +39,9 @@
           <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
         </h4>
         <div class="b1 product-card__review">
-          <div class="yotpo bottomLine" :data-product-id="product.id">
-            Review
-          </div>
+          <div class="yotpo bottomLine" :data-product-id="product.id"></div>
         </div>
-        <p class="h5 product-card__price">$${ formatPrice(product.price) }</p>
+        <p class="h5 product-card__price">$${formatPrice(product.price)}</p>
       </div>
     </div>
 {%- endcapture -%}

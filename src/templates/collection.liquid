@@ -169,7 +169,8 @@
         {%- endcase -%}
       ],
       products: {{ product_json }},
-      featuredProducts: {{ featured_products_json }}
+      featuredProducts: {{ featured_products_json }},
+      totalCount: {{ collection.all_products_count }}
     }
   </script>
 {%- endpaginate -%}
