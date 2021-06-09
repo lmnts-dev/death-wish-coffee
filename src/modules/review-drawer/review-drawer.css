@@ -136,7 +136,7 @@
   border-top: 20px solid var(--blood);
   margin: 14px auto 0;
 
-  &.disable {
-    display: none;
+  &.rotate {
+    transform: rotate(180deg);
   }
 }

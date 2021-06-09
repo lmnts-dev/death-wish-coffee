@@ -1,6 +1,6 @@
 /* styles for the post-hero module go in this file */
 
-.post-hero__image {
+.post-hero__image-wrapper {
   position: relative;
   width: 100%;
   max-height: 80vh;
@@ -12,6 +12,20 @@
 
     @media (--md) {
       padding-top: 42%;
+    }
+  }
+}
+
+.post-hero__image {
+  @media (--lg-max) {
+    display: none;
+  }
+
+  &--mobile {
+    display: block;
+
+    @media (--lg) {
+      display: none;
     }
   }
 }

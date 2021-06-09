@@ -1,3 +1,9 @@
+.customer-info {
+  .template-customers-order & {
+    display: none;
+  }
+}
+
 .customer-info__content {
   padding: 0 25px 46px;
   color: var(--white);

@@ -4,7 +4,13 @@
  */
 
 const orderDetails = (el) => {
-  console.warn('initializing orderDetails module')
+  const backButton = el.querySelector('.js-back-button')
+
+  if (backButton) {
+    backButton.addEventListener('click', () => {
+      window.history.back()
+    })
+  }
 }
 
 export default orderDetails

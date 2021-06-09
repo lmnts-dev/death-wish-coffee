@@ -22,7 +22,7 @@
     position: absolute;
     z-index: 1;
     top: 5px;
-    right: 68px;
+    right: 27px;
     display: block;
     opacity: 0;
     visibility: hidden;
@@ -34,7 +34,7 @@
     height: 0;
 
     @media (--lg) {
-      right: 101px;
+      right: 60px;
     }
   }
 

@@ -33,6 +33,12 @@
     @media (--md-max) {
       display: none;
     }
+
+    .template-customers-order & {
+      @media (--md) {
+        display: none;
+      }
+    }
   }
 
   &--review-drawer {
@@ -40,6 +46,14 @@
 
     @media (--md) {
       padding: 97px 0 19px;
+    }
+  }
+
+  &--article-hero-card {
+    padding: 60px 0;
+
+    @media (--md) {
+      padding: 203px 0 40px;
     }
   }
 }
@@ -80,6 +94,10 @@
     margin: 0 auto;
     text-align: center;
     text-transform: none;
+    color: var(--white);
+  }
+
+  .section-title--article-hero-card & {
     color: var(--white);
   }
 }
