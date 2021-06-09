@@ -26,7 +26,7 @@
               -%}
             </div>
             <div class="product-card__form">
-              <button class="product-card__close js-close" type="button">
+              <button class="product-card__close" type="button" @click="isOverlayActive = false">
                 {%- render 'svg', type: 'close', class: 'product-card__close-icon' -%}
               </button>
               {{- quick_shop_form -}}
@@ -43,7 +43,7 @@
             Review
           </div>
         </div>
-        <p class="h5 product-card__price">${ product.price }</p>
+        <p class="h5 product-card__price">$${ formatPrice(product.price) }</p>
       </div>
     </div>
 {%- endcapture -%}

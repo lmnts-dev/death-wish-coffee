@@ -3,6 +3,11 @@
  * @param {Object} el - The DOM Node containing the data-module="plp-filter" attribute.
  */
 
+// import Vue from 'vue'
+// import store from 'lib/store'
+// import PlpFilter from './plp-filter.vue'
+
+/*
 import { toggle, triggerCustomEvent } from 'lib/util'
 
 const plpFilter = (el) => {
@@ -20,5 +25,14 @@ const plpFilter = (el) => {
     })
   }
 }
+ */
 
-export default plpFilter
+// const plpFilter = el => new Vue({
+//   el,
+//   store,
+//   components: {
+//     PlpFilter
+//   }
+// })
+
+export default () => {}

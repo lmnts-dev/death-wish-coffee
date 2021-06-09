@@ -1,77 +1,53 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
 {%- assign acf_filters = acf_filters | default: false -%}
-{%- assign plp_featured_item_selector = plp_featured_item_selector | split: '|' -%}
-{%- assign product_handle_large_one = '' -%}
-{%- assign product_handle_large_two = '' -%}
-
-{%- for item in plp_featured_item_selector -%}
-  {%- if forloop.index == 1 -%}
-    {%- assign product_handle_large_one = product_handle_large_one | append: item -%}
-  {%- endif -%}
-  {%- if forloop.index == 2 -%}
-    {%- assign product_handle_large_two = product_handle_large_two | append: item -%}
-  {%- endif -%}
-{%- endfor -%}
 
 {%- capture product_form -%}
   {%- render 'product-form', is_vue_component: true, custom_attrs: ':product="product"' -%}
 {%- endcapture -%}
 
-{%- capture product_card_large_one -%}
-  {%- if product_handle_large_one != blank -%}
-    {%- render 'product-card',
-      class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',
-      product: all_products[product_handle_large_one],
-      quick_shop_form: product_form
-    -%}
-  {%- endif -%}
-{%- endcapture -%}
-
-{%- capture product_card_large_two -%}
-  {%- if product_handle_large_two != blank -%}
-    {%- render 'product-card',
-      class: 'product-card--bg-dark product-card--plp product-card--row-4-plp',
-      product: all_products[product_handle_large_two],
-      quick_shop_form: product_form
-    -%}
-  {%- endif -%}
-{%- endcapture -%}
-
 <section class="{{- class -}}"
          data-module="plp"
 >
-  <div class="container plp__container js-container">
-    <div class="plp__inner">
-      {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-      {%- render 'plp-filter',
-        class: 'js-filter',
-        acf_filters: acf_filters
-      -%}
-      {%- comment -%}product-grid{%- endcomment -%}
-      {%- capture product_cards -%}
-        {%- assign count = 1 -%}
-        {%- for product in collection.products -%}
-          {%- if count == 3 and product_card_large_one != blank -%}
-            {{- product_card_large_one -}}
-          {%- endif -%}
-          {%- if count == 7 and product_card_large_two != blank -%}
-            {{- product_card_large_two -}}
-          {%- endif -%}
-          {%- render 'product-card',
-            class: 'product-card--bg-dark product-card--plp',
-            product: product,
-            quick_shop_form: product_form
-          -%}
-          {%- assign count = count | plus: 1 -%}
-        {%- endfor -%}
-      {%- endcapture -%}
+  <div is="plp"
+       inline-template
+  >
+    <div class="container plp__container js-container">
+      <div class="plp__inner">
+        {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+        {%- render 'plp-filter',
+          class: 'js-filter',
+          acf_filters: acf_filters
+        -%}
+        {%- capture product_cards -%}
+          <template v-for="(product, productIndex) in displayedProducts">
+            {%- render 'product-card',
+              class: 'product-card--bg-dark product-card--plp',
+              is_vue_component: true,
+              custom_attrs: ':product="product" :key="product.id"',
+              quick_shop_form: product_form
+            -%}
 
-      {%- render 'grid',
-        use_container: false,
-        class: 'grid--plp',
-        children: product_cards
-      -%}
+            {%- capture featured_product_attrs -%}
+              v-if="(productIndex === 2 || productIndex === 6) && getFeaturedProductForIndex(productIndex)"
+              :product="getFeaturedProductForIndex(productIndex)"
+              :class="['product-card--bg-dark product-card--plp', getFeaturedProductClass(productIndex)]"
+            {%- endcapture -%}
+            {%- render 'product-card',
+              class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',
+              is_vue_component: true,
+              custom_attrs: featured_product_attrs,
+              quick_shop_form: product_form
+            -%}
+          </template>
+        {%- endcapture -%}
+
+        {%- render 'grid',
+          use_container: false,
+          class: 'grid--plp',
+          children: product_cards
+        -%}
+      </div>
     </div>
   </div>
 </section>

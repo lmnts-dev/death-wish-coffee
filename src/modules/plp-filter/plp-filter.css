@@ -26,9 +26,8 @@
 }
 
 .plp-filter__block-title {
-  @extend .h5;
-
   position: relative;
+  display: block;
   padding: 12px 0 8px;
   color: var(--white);
   border-bottom: 1px solid var(--bone);
@@ -37,6 +36,10 @@
   @media (--md-max) {
     @extend .h5;
   }
+}
+
+.plp-filter__block-state {
+  display: none;
 }
 
 .plp-filter__block-title-icon {
@@ -79,6 +82,7 @@
   color: var(--black);
   background: var(--steel);
   z-index: 1;
+  cursor: pointer;
 
   &::before {
     content: '';
@@ -102,7 +106,7 @@
   }
 
   .plp-filter__block-item:hover &,
-  .plp-filter__block-item--selected & {
+  &.is-selected {
     color: var(--white);
     background: var(--slate);
 
@@ -145,8 +149,19 @@
   }
 }
 
-.plp-filter__block-item__link-text {
+.plp-filter__block-item__state {
   display: none;
+}
+
+.plp-filter__block-item__link-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--black);
 }
 
 .plp-filter__buttons {

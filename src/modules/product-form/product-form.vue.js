@@ -1,7 +1,6 @@
-import Vue from 'vue'
 import { formatPrice } from 'lib/util'
 
-Vue.component('product-form', {
+export default {
   props: {
     product: {
       type: Object,
@@ -65,4 +64,4 @@ Vue.component('product-form', {
       return formatPrice(matchedVariant ? matchedVariant.price : this.product.variants[0].price)
     }
   }
-})
+}

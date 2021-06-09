@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import ProductCard from './product-card.vue'
 
 /**
  * Initializes the javascript for the product-card module
@@ -7,6 +8,9 @@ import Vue from 'vue'
 const productCardRoot = el => {
   return new Vue({
     el,
+    components: {
+      ProductCard
+    },
     name: 'ProductCardRoot',
     delimiters: ['${', '}']
   })

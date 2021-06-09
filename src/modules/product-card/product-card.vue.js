@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import { debounce } from 'lib/util'
+import ProductForm from '../product-form/product-form.vue'
+import VImage from '../v-image/v-image.vue'
+import { formatPrice, debounce } from 'lib/util'
 
 let yotpoApi = null
 let yotpoRetries = 0
@@ -28,7 +29,11 @@ const refreshYotpo = debounce(() => {
   yotpoApi.refreshWidgets()
 })
 
-Vue.component('product-card', {
+export default {
+  components: {
+    ProductForm,
+    VImage
+  },
   props: {
     product: {
       type: Object,
@@ -43,7 +48,6 @@ Vue.component('product-card', {
   watch: {
     product () {
       this.renderReviews()
-      console.log('updated!')
     }
   },
   methods: {
@@ -51,9 +55,10 @@ Vue.component('product-card', {
       this.$nextTick(() => {
         refreshYotpo()
       })
-    }
+    },
+    formatPrice
   },
   mounted () {
     this.renderReviews()
   }
-})
+}

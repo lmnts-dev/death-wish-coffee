@@ -1,7 +1,6 @@
-import Vue from 'vue'
 import { buildImageSrcset } from 'lib/util'
 
-Vue.component('v-image', {
+export default {
   props: {
     imageSrc: {
       type: String,
@@ -23,4 +22,4 @@ Vue.component('v-image', {
     this.srcsets = srcsetData.srcsets
     this.src = srcsetData.src
   }
-})
+}

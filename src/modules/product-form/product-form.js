@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import ProductForm from './product-form.vue'
 
 /**
  * Initializes the site's productform module.
@@ -8,6 +9,9 @@ import Vue from 'vue'
 const productFormRoot = el => {
   return new Vue({
     el,
+    components: {
+      ProductForm
+    },
     name: 'ProductFormRoot',
     delimiters: ['${', '}']
   })
