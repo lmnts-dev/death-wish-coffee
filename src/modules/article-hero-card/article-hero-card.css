@@ -6,6 +6,11 @@
   @media (--md) {
     padding: 0 0 113px;
   }
+
+  &--home {
+    padding: 0;
+    background: transparent;
+  }
 }
 
 .article-hero-card__inner {

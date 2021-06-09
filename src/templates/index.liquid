@@ -91,7 +91,7 @@
     {%- assign fallback_images_mobile = blog_acf.accentuate.default_image_mobile | first -%}
     {%- assign notice = shop.metafields.article_hero_card.notice_title[forloop.index0] -%}
     {%- assign article = articles[handle] -%}
-    {% assign class = 'swiper-slide' %}
+    {% assign class = 'article-hero-card--home swiper-slide ' %}
     {% assign title = article.title %}
     {%- assign image_url = fallback_images.src -%}
     {%- assign image_url_mobile = fallback_images_mobile.src | default: image_url -%}
@@ -117,6 +117,6 @@
     -%}
   {% endfor %}
 {%- endcapture -%}
-{%- render 'carousel', title: list_article_title, class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+{%- render 'carousel', title: list_article_title, title_class: 'section-title--article-hero-card', class: 'carousel--home-article-hero-card carousel--article-hero-card p article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
