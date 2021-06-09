@@ -21,3 +21,12 @@
 .plp__grid {
   flex: 1 0 auto;
 }
+
+.plp__empty {
+  color: var(--white);
+  margin-top: 15px;
+
+  @media (--lg) {
+    flex: 1 0 auto;
+  }
+}

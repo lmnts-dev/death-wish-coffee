@@ -3,24 +3,25 @@ import { mapGetters, mapMutations, mapState } from 'vuex'
 export default {
   data () {
     return {
-      expandedFilters: []
+      expandedFilters: [],
+      localFilterState: {}
     }
   },
   computed: {
-    // Two-way binding with Vuex state via mutations
+    /**
+     * Conditionally bind the individual filter options to either local state or vuex state based on whether
+     * the user needs to manually click Apply (on mobile) or not.
+     */
     selectedOptions: {
       get () {
-        return Object.entries(this.filterValues).map(
+        const filterState = this.isManualFilter ? this.localFilterState : this.filterValues
+
+        return Object.entries(filterState).map(
           ([key, values]) => values.map(value => `${key}|${value}`)
         ).flat()
       },
       set (pairs) {
-        if (pairs.length === 0) {
-          this.mutateIsFiltering(false)
-        } else {
-          this.mutateIsFiltering(true)
-        }
-
+        // Otherwise on desktop, construct the state object and mutate the filters immediately
         const filterValues = pairs.reduce(
           (result, pair) => {
             const [key, value] = pair.split('|')
@@ -34,13 +35,27 @@ export default {
           {}
         )
 
-        this.mutateFilterValues(filterValues)
+        this.localFilterState = filterValues
+
+        if (!this.isManualFilter) {
+          this.applyFilters()
+        }
       }
+    },
+    filterCount () {
+      const count = Object.entries(this.localFilterState).length
+      return count > 0 ? ` (${count})` : ''
     },
     ...mapState('plp', ['filterDefinitions', 'filterValues', 'isManualFilter']),
     ...mapGetters('plp', ['filterAvailableValues'])
   },
   methods: {
-    ...mapMutations('plp', ['mutateFilterValues', 'mutateIsFiltering'])
+    applyFilters () {
+      this.mutateFilterValues(this.localFilterState)
+    },
+    clearFilters () {
+      this.localFilterState = {}
+    },
+    ...mapMutations('plp', ['mutateFilterValues'])
   }
 }

@@ -39,11 +39,14 @@
           </template>
         {%- endcapture -%}
 
-        {%- render 'grid',
-          use_container: false,
-          class: 'plp__grid grid--plp',
-          children: product_cards
-        -%}
+        <template v-if="displayedProducts.length > 0">
+          {%- render 'grid',
+            use_container: false,
+            class: 'plp__grid grid--plp',
+            children: product_cards
+          -%}
+        </template>
+        <p class="plp__empty" v-else>No products found</p>
       </div>
     </div>
   </div>

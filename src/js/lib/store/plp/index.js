@@ -9,7 +9,6 @@ export default {
       products: [],
       featuredProducts: [],
       sortOrder: '',
-      isFiltering: false,
       isManualFilter: false,
       totalCount: 0
     }
@@ -45,7 +44,7 @@ export default {
         {}
       )
     },
-    displayedFeaturedProducts ({ featuredProducts, isFiltering, sortOrder }) {
+    displayedFeaturedProducts ({ featuredProducts, sortOrder }, { isFiltering }) {
       return isFiltering || sortOrder ? [] : featuredProducts
     },
     displayedFeaturedProductIds (state, { displayedFeaturedProducts }) {
@@ -69,8 +68,11 @@ export default {
 
       return filteredProducts
     },
-    productsCount ({ totalCount, sortOrder, isFiltering }, { displayedProducts }) {
+    productsCount ({ totalCount, sortOrder }, { displayedProducts, isFiltering }) {
       return (isFiltering || sortOrder) ? displayedProducts.length : totalCount
+    },
+    isFiltering ({ filterValues }) {
+      return Object.entries(filterValues).length > 0
     }
   },
   mutations: {
@@ -85,9 +87,6 @@ export default {
     },
     mutateFilterValues (state, filterValues) {
       state.filterValues = filterValues
-    },
-    mutateIsFiltering (state, isFiltering) {
-      state.isFiltering = isFiltering
     },
     toggleManualFilter (state) {
       state.isManualFilter = !state.isManualFilter

@@ -13,6 +13,6 @@ export default {
     ...mapGetters('plp', ['productsCount'])
   },
   methods: {
-    ...mapMutations('plp', ['toggleManualFilter', 'mutateSortOrder']),
+    ...mapMutations('plp', ['toggleManualFilter', 'mutateSortOrder'])
   }
 }

@@ -44,12 +44,26 @@
             </div>
           </div>
         </div>
-        <div class="plp-filter__buttons">
+        <div class="plp-filter__buttons" v-if="isManualFilter">
           <div class="plp-filter__buttons-item">
-            {% render 'button', class: 'plp-filter__button plp-filter__button--apply button--light button--small-w button--small-h', button_value: 'Apply' %}
+            {%- capture apply_custom_attributes -%}
+              @click="applyFilters"
+            {%- endcapture -%}
+            {%- render 'button',
+              class: 'plp-filter__button plp-filter__button--apply button--light button--small-w button--small-h',
+              button_value: 'Apply${filterCount}',
+              custom_attrs: apply_custom_attributes
+            -%}
           </div>
           <div class="plp-filter__buttons-item">
-            {% render 'button', class: 'plp-filter__button plp-filter__button--clear button--light button--small-w button--small-h', button_value: 'Clear' %}
+            {%- capture clear_custom_attributes -%}
+              @click="clearFilters"
+            {%- endcapture -%}
+            {%- render 'button',
+              class: 'plp-filter__button plp-filter__button--clear button--light button--small-w button--small-h',
+              button_value: 'Clear',
+              custom_attrs: clear_custom_attributes
+            -%}
           </div>
         </div>
       </div>
