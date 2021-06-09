@@ -138,12 +138,12 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  max-width: 1090px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0;
 
   @media (--md) {
-    padding-bottom: 155px;
+    padding: 0 25px 155px;
   }
 }
 
