@@ -43,8 +43,8 @@
       {%- assign description = product.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}
       {%- if title != blank -%}
-        {%- render 'product-hero-card'
-        class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
+        {%- render 'product-hero-card',
+          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
           title: title,
           image_url: image_url,
           url: url,
