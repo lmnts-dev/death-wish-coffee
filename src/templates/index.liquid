@@ -100,11 +100,10 @@
       {% assign image_url_mobile = image_url %}
     {%- endif -%}
     {% assign url = article.url %}
-    {% assign description = article.excerpt %}
-    {% capture info %}
-      {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
-    {% endcapture %}
-
+    {% assign excerpt = article.excerpt %}
+    {% assign author = article.author %}
+    {% assign date = article.published_at %}
+    
     {%- render 'article-hero-card',
       class: class,
       notice: notice,
@@ -112,8 +111,9 @@
       image_url: image_url,
       image_url_mobile: image_url_mobile,
       url: url,
-      description: description,
-      info: info
+      excerpt: excerpt,
+      author: author,
+      date: date
     -%}
   {% endfor %}
 {%- endcapture -%}
