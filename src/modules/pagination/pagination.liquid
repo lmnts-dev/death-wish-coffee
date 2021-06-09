@@ -1,4 +1,6 @@
-<div class="pagination" data-module="pagination">
+{%- assign class = class | default: blank -%}
+
+<div class="pagination{% if class != blank %} {{ class }}{% endif %}" data-module="pagination">
   <div class="pagination__container{% if paginate == blank %} container{% endif %}">
     {% if paginate.pages > 1 %}
       <div class="pagination__pages">

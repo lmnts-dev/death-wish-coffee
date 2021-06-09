@@ -19,6 +19,19 @@
   }
 }
 
+.posts-carousel__title-anchor {
+  text-decoration: none;
+}
+
+.posts-carousel__title-link {
+  color: var(--white);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .posts-carousel__view {
   opacity: 0;
   color: var(--blood);

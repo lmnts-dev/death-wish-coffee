@@ -3,24 +3,17 @@
  * @param {Object} el - The DOM Node containing the data-module="product-card" attribute.
  */
 
-import { toggle } from 'lib/util'
+import select from 'select-dom'
 
 const productCard = el => {
-  const buttonEl = el.querySelector('.js-button')
-  const closeButton = el.querySelector('.js-close')
-  const overlay = el.querySelector('.js-overlay')
+  const overlay = select('.js-overlay', el)
+  const options = select('.product-form__options', el)
 
-  if (buttonEl) {
-    buttonEl.addEventListener('click', () => {
-      toggle(overlay, 'is-active')
-    })
-  }
-
-  if (closeButton) {
-    closeButton.addEventListener('click', () => {
-      toggle(overlay, 'is-active')
-    })
-  }
+  overlay.addEventListener('click', e => {
+    if (!options.contains(e.target)) {
+      window.location.href = overlay.dataset.url
+    }
+  })
 }
 
 export default productCard

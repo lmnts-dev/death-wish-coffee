@@ -32,7 +32,8 @@
         title: product_title_one,
         link: product_link_one,
         price: product_price_one,
-        quick_shop_form: product_form_one
+        quick_shop_form: product_form_one,
+        product_id: product_handle_one.id
       -%}
     {%- endif -%}
   {%- endif -%}
@@ -55,7 +56,8 @@
         title: product_title_two,
         link: product_link_two,
         price: product_price_two,
-        quick_shop_form: product_form_two
+        quick_shop_form: product_form_two,
+        product_id: product_handle_two.id
       -%}
     {%- endif -%}
   {%- endif -%}
@@ -97,7 +99,8 @@
                 title: title,
                 link: link,
                 price: price,
-                quick_shop_form: product_form
+                quick_shop_form: product_form,
+                product_id: product.id
               -%}
               {%- assign count = count | plus: 1 -%}
             {%- endif -%}
@@ -117,7 +120,8 @@
               title: title,
               link: link,
               price: price,
-              quick_shop_form: product_form
+              quick_shop_form: product_form,
+              product_id: product.id
             -%}
           {%- endfor -%}
         {%- endif -%}

@@ -240,12 +240,13 @@
       "reset_password": "Reset password"
     },
     "orders": {
-      "title": "Your Order History",
-      "order_number": "Order Number",
+      "title": "Order History",
+      "order_number": "Order #",
       "date": "Date",
-      "payment_status": "Payment Status",
+      "payment_status": "Order Status",
       "shipping_status": "Shipping Status",
-      "total": "Total",
+      "total": "Order Total",
+      "description": "Description",
       "none": "You haven't placed any orders yet."
     },
     "order": {
@@ -378,6 +379,7 @@
     }
   },
   "date_formats": {
-    "month_day_year": "%B %d, %Y"
+    "month_day_year": "%B %d, %Y",
+    "month_day_year_minus": "%m/%d/%y"
   }
 }

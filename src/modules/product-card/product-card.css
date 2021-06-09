@@ -86,13 +86,14 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--transition-timing) var(--transition-easing);
+  cursor: pointer;
 
   .product-card:hover & {
     opacity: 1;
     visibility: visible;
   }
 
-  &.is-active {
+  &:hover {
     & .product-card__form {
       opacity: 1;
       visibility: visible;
