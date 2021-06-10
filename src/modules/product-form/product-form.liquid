@@ -14,7 +14,7 @@
           <h4 class="product-form__option-title h4">${option}</h4>
         {%- endif -%}
         <div class="product-form__option-values">
-          <div v-for="(value) in product.options_by_name[option].option.values" :key="option + ':' + value"
+          <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
                class="product-form__option-value">
             <input :id="optionInputId(option, value)"
                    :name="option + value"
@@ -31,10 +31,10 @@
                 <div class="product-form__option-value-name">
                   ${value}
                 </div>
-                <div v-if="optionIndex === product.options.length - 1"
+                <div v-if="option === priceDecidingFactor"
                      class="product-form__option-price b1"
                 >
-                  $${getPriceForLastOptionValue(value)}
+                  $${getPriceForOptionValue(optionIndex, value)}
                 </div>
               </div>
             </label>
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <form method="post" action="/cart/add">
+    <form method="post" action="/cart/add" @submit.prevent="resetSelectedOptions">
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
       {%- render 'button',

@@ -8,8 +8,7 @@ export default {
     }
   },
   data () {
-    // Prime product options to make this reactive
-    const selectedOptions = this.product.options.reduce(
+    const initialSelectedOptions = this.product.options.reduce(
       (result, option) => {
         // Initially, none of the option has any selected value
         result[option] = null
@@ -19,7 +18,8 @@ export default {
     )
 
     return {
-      selectedOptions
+      initialSelectedOptions,
+      selectedOptions: { ...initialSelectedOptions }
     }
   },
   computed: {
@@ -30,6 +30,33 @@ export default {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
 
       return variant ? variant.id : ''
+    },
+    priceDecidingFactor () {
+      // Find out which variant option affects pricing
+      for (const option of this.product.options) {
+        const availableValues = this.product.options_by_name[option].option.values
+        const pricesContainingOption = {}
+
+        for (const variant of this.product.variants) {
+          for (const value of variant.options) {
+            if (!availableValues.includes(value)) {
+              continue
+            }
+
+            if (!pricesContainingOption[value]) {
+              pricesContainingOption[value] = []
+            } else if (pricesContainingOption[value].includes(variant.price)) {
+              // if multiple variants with the same option value has the same price then this is the
+              // option we're looking for
+              return option
+            }
+
+            pricesContainingOption[value].push(variant.price)
+          }
+        }
+      }
+
+      return this.product.options[0]
     }
   },
   methods: {
@@ -49,7 +76,7 @@ export default {
         variant => this.isVariantMatchingOptions(variant, options)
       )
     },
-    getPriceForLastOptionValue (value) {
+    getPriceForOptionValue (optionIndex, value) {
       const options = []
 
       // In case user hasn't actually selected anything, default to the first
@@ -57,11 +84,17 @@ export default {
       for (const [option, value] of Object.entries(this.selectedOptions)) {
         options.push(value || this.product.options_by_name[option].option.values[0])
       }
-      options[options.length - 1] = value
+      options[optionIndex] = value
 
       const matchedVariant = this.getVariantMatchingOptions(options)
 
       return formatPrice(matchedVariant ? matchedVariant.price : this.product.variants[0].price)
+    },
+    resetSelectedOptions (e) {
+      e.target.submit()
+      this.$nextTick(() => {
+        this.selectedOptions = { ...this.initialSelectedOptions }
+      })
     }
   }
 }
