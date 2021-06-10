@@ -97,6 +97,10 @@ h5 {
     font-size: 24px * var(--sizing-coef);
     line-height: 36px * var(--sizing-coef);
   }
+
+  .cart-container & {
+    font-weight: var(--medium);
+  }
 }
 
 .h4 {
