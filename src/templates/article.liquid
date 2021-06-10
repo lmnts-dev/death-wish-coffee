@@ -6,10 +6,17 @@
 {%- assign post_hero_image = fallback_images.src -%}
 {%- assign post_hero_image_mobile = fallback_images_mobile.src -%}
 
-{%- if article.metafields.post_hero.image != blank -%}
-  {%- assign post_hero_image = article.metafields.post_hero.image | map: 'src' | first -%}
-  {%- assign post_hero_image_mobile = post_hero_image -%}
-{%- endif -%}
+ {% assign featured_image = article.image.src | img_url: 'master' %}
+
+{% capture post_hero_image %}
+  {% if featured_image contains 'no-image' -%}
+    {{post_hero_image}}
+  {% else %}
+    {{featured_image}}
+  {% endif %}
+{% endcapture %}
+
+{%- assign post_hero_image_mobile = post_hero_image -%}
 
 {%- render 'post-hero', image: post_hero_image, image_mobile: post_hero_image_mobile -%}
 {%- render 'post-header' -%}
