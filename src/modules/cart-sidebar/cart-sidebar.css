@@ -15,15 +15,6 @@
   }
 }
 
-.cart-sidebar__free-shipping-banner-container {
-  height: 50px;
-  border-radius: 4px;
-  background: var(--gray);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .cart-sidebar__summary {
   margin-top: 5px;
   width: 100%;
@@ -32,6 +23,13 @@
 
   @media (--lg-max) {
     padding: 20px;
+  }
+
+  .shopify-cleanslate {
+    ul {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
