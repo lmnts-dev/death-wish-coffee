@@ -5,7 +5,12 @@ const areIntersected = (array1, array2) => array1.some(value => array2.includes(
 const filterByTypes = {
   tag: (filterName, filterTags) => product => areIntersected(filterTags, product.tags),
   option: (filterName, filterOptions) => product =>
-    areIntersected(filterOptions, product.options_by_name[filterName] ? product.options_by_name[filterName].option.values : [])
+    areIntersected(
+      filterOptions,
+      product.options_by_name[filterName]
+        ? product.options_by_name[filterName].option.values.map(v => v.toLowerCase())
+        : []
+    )
 }
 
 const sortFunctions = {

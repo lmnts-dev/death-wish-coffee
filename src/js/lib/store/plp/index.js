@@ -19,7 +19,8 @@ export default {
 
       for (const product of products) {
         for (const [option, item] of Object.entries(product.options_by_name)) {
-          allValues[option] = (allValues[option] || []).concat(item.option.values)
+          const values = item.option.values.map(v => v.toLowerCase())
+          allValues[option] = (allValues[option] || []).concat(values)
         }
       }
       // De-duplicate
