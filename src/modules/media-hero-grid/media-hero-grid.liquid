@@ -1,11 +1,15 @@
-{% assign class = class | default: '' %}
-{% assign types = types | default: '' %}
-{% assign images = images | default: '' %}
-{% assign videos = videos | default: '' %}
+{% assign class = class | default: false %}
+{% assign types = types | default: false %}
+{% assign types = types | default: false %}
+{% assign images = images | default: false %}
+{% assign title = title | default: false %}
 {% capture class %}media-hero-grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-{%- if types -%}
+{%- if types and types.size >= 5 -%}
   <section class="{{ class }}" data-module="media-hero-grid">
+    {%- if title -%}
+      {%- render 'section-title', title: title, class: 'section-title--media-hero-grid bg--black' -%}
+    {%- endif -%}
     <div class="media-hero-grid__inner">
       {%- for item in types -%}
         {%- assign type = types[forloop.index0] -%}
