@@ -1,0 +1,98 @@
+{%- layout 'theme' -%}
+{%- assign product_acf = product.metafields.accentuate -%}
+
+{%- comment -%}PDP Hero{%- endcomment -%}
+{%- render 'pdp-hero' -%}
+
+{%- comment -%}Bolt Illustration Hero{%- endcomment -%}
+{%- assign bolt_titles = product_acf.coffee_detail_title -%}
+{%- assign bolt_descriptions = product_acf.coffee_detail_description -%}
+{%- assign bolt_icons = product_acf.coffee_detail_icon -%}
+{%- assign bolt_src = 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Path_35_3x_3fb6874b-909d-43a2-9868-b4ca1b5538b8.png?v=1620894588' -%}
+{%- assign reverse_bolt_src = 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Path_219_2x_727f4c37-8760-4f6d-8c54-512dea4a7f7f.png?v=1619680770' -%}
+{%- if bolt_titles.size > 0 -%}
+  {%- for title in bolt_titles -%}
+    {% capture bolt_image %}{% cycle bolt_src, reverse_bolt_src %}{% endcapture %}
+    {% capture is_reverse %}{% cycle '', 'true' %}{% endcapture %}
+    {% assign bolt_icon = bolt_icons[forloop.index0] | map: 'src' | first %}
+    {%- render 'bolt-illustration-hero',
+      bolt_image: bolt_image,
+      title: title,
+      image: bolt_icon,
+      description: bolt_descriptions[forloop.index0]
+      reverse_content: is_reverse
+    -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%}Video Section{%- endcomment -%}
+{%- assign video_section_url = product_acf.coffee_detail_hero_video_video -%}
+{%- assign video_section_title = product_acf.coffee_detail_hero_video_title -%}
+{%- if video_section_url != blank -%}
+  {%- render 'section-title', title: video_section_title, class: 'bg--black' -%}
+  {%- comment -%}
+  {%- render 'video', mod_src: video_section_url -%}
+  {%- endcomment -%}
+{%- endif -%}
+
+{%- comment -%}Review Drawer{%- endcomment -%}
+{%- render 'review-drawer', title: product_acf.pdp_review_heading -%}
+
+{%- comment -%}Featured Product Carousel{%- endcomment -%}
+{%- assign featured_products = product_acf.pdp_featured_products_selector | split: '|' -%}
+{%- assign featured_slides_count = 0 -%}
+{%- if featured_products.size > 0 -%}
+  {%- comment -%}Featured Product Slides{%- endcomment -%}
+  {%- capture featured_slides -%}
+    {%- for handle in featured_products -%}
+      {%- assign featured_product = all_products[handle] -%}
+      {%- if featured_product != blank -%}
+        {%- assign featured_slides_count = featured_slides_count | plus: 1 -%}
+        {% assign title = featured_product.title %}
+        {% assign image_url = featured_product.images[1] | img_url: 'master' %}
+        {% assign url = featured_product.url %}
+        {%- capture price %}
+          {{ featured_product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+        {%- endcapture -%}
+        {%- assign description = featured_product.description | strip_html | truncate: 500, '' -%}
+        {%- assign cta_text = 'Take me There' -%}
+        {%- render 'product-hero-card'
+          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
+          title: title,
+          image_url: image_url,
+          url: url,
+          price: price,
+          description: description,
+          sub_description: sub_description,
+          cta_text: cta_text,
+          product_id: featured_product.id
+        -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- comment -%}End:Featured Product Slides{%- endcomment -%}
+
+  {%- assign featured_navigation = true -%}
+  {%- assign featured_slides_per_view = 1 -%}
+  {%- assign featured_disable_swipe = false -%}
+
+  {%- if featured_slides_count == 1 -%}
+    {%- assign featured_navigation = false -%}
+    {%- assign featured_slides_per_view = 0 -%}
+    {%- assign featured_disable_swipe = true -%}
+  {%- endif -%}
+
+  {%- render 'carousel',
+    title: product_acf.pdp_featured_products_heading,
+    title_class: 'section-title--product-hero-card'
+    class: 'carousel--product-hero-card carousel--no-padding bg--shadow',
+    children: featured_slides,
+    spacing: 0,
+    slides_per_view: featured_slides_per_view,
+    navigation: featured_navigation,
+    disable_swipe: featured_disable_swipe
+  -%}
+{%- endif -%}
+
+{%- comment -%}Footer CTA{%- endcomment -%}
+{%- render 'footer-cta', title: product_acf.pdp_footer_cta_heading, enable_subscribe_form: true %}
