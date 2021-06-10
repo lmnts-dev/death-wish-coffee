@@ -40,11 +40,6 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      isOverlayActive: false
-    }
-  },
   watch: {
     product () {
       this.renderReviews()

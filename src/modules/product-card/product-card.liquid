@@ -12,25 +12,12 @@
       <div class="product-card__header">
         <div class="product-card__image-container">
           <a :href="product.url" class="product-card__image-link">
-            {%- render 'image', vue_attrs: ':image-src="product.featured_image"' -%}
+            {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
           </a>
         </div>
         {%- if quick_shop_form -%}
-          <div :class="{'product-card__overlay': true, 'is-active': isOverlayActive}">
-            <div class="product-card__quick-shop">
-              {%- render 'button',
-                button_value: 'Quick Shop',
-                tag: 'button',
-                custom_attrs: 'type="submit" @click="isOverlayActive = !isOverlayActive"',
-                class: 'product-card__quick-shop-btn button--light'
-              -%}
-            </div>
-            <div class="product-card__form">
-              <button class="product-card__close" type="button" @click="isOverlayActive = false">
-                {%- render 'svg', type: 'close', class: 'product-card__close-icon' -%}
-              </button>
-              {{- quick_shop_form -}}
-            </div>
+          <div class="product-card__form">
+            {{- quick_shop_form -}}
           </div>
         {%- endif -%}
       </div>
