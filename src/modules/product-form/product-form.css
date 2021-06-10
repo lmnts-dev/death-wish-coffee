@@ -30,6 +30,17 @@
 
   & + .product-form__option {
     border-top: 1px solid var(--shadow);
+
+    @media (--xl-max) {
+      margin-top: 10px;
+      border-top: 0;
+    }
+  }
+
+  .product-card--row-1-plp & {
+    @media (--xl-max) {
+      margin-top: 0;
+    }
   }
 
   .product-form--pdp-add-to-cart & {
@@ -105,6 +116,25 @@
   cursor: pointer;
   background: var(--steel);
   border-right: 1px solid var(--shadow);
+
+  @media (--xl-max) {
+    border-bottom: 1px solid var(--shadow);
+    border-left: 1px solid var(--shadow);
+  }
+
+  .product-form__option-value:first-child & {
+    @media (--xl-max) {
+      border-top: 1px solid var(--shadow);
+    }
+  }
+
+  .product-card--row-1-plp & {
+    @media (--xl-max) {
+      margin-top: 0;
+      border-top: 0 !important;
+      border-left: 0;
+    }
+  }
 
   .product-form__option-value:last-child &,
   .product-form__option-value:nth-child(2n) & {
@@ -188,6 +218,8 @@
 }
 
 .product-form__button {
+  width: 100%;
+  max-width: 216px;
   margin: 0 auto;
 
   .product-form--pdp-add-to-cart & {
