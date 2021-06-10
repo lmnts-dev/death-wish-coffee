@@ -10,39 +10,41 @@
     <div class="plp-filter__container">
       <div class="plp-filter__wrapper">
         <div class="plp-filter__inner">
-          <div v-for="filter in filterDefinitions"
-               :class="['plp-filter__block', { 'active': expandedFilters.includes(filter.name) }]"
-          >
-            <label class="plp-filter__block-title h5">
-              <input class="plp-filter__block-state"
-                     type="checkbox"
-                     v-model="expandedFilters"
-                     :value="filter.name"
-              >
-              ${filter.title || filter.name}
-              <span class="plp-filter__block-title-icon plp-filter__block-title-icon--inactive">+</span>
-              <span class="plp-filter__block-title-icon plp-filter__block-title-icon--active">&ndash;</span>
-            </label>
+          <template v-for="filter in filterDefinitions">
+            <div v-if="filterAvailableValues[filter.name] && filterAvailableValues[filter.name].length"
+                :class="['plp-filter__block', { 'active': expandedFilters.includes(filter.name) }]"
+            >
+              <label class="plp-filter__block-title h5">
+                <input class="plp-filter__block-state"
+                      type="checkbox"
+                      v-model="expandedFilters"
+                      :value="filter.name"
+                >
+                ${filter.title || filter.name}
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--inactive">+</span>
+                <span class="plp-filter__block-title-icon plp-filter__block-title-icon--active">&ndash;</span>
+              </label>
 
-            <div class="plp-filter__block-list">
-              <div v-for="option in filterAvailableValues[filter.name]"
-                   class="plp-filter__block-item"
-              >
-                <label :class="['plp-filter__block-item__link', {'is-selected': selectedOptions.includes(filter.name + '|' + option)}]">
-                  <input class="plp-filter__block-item__state"
-                         type="checkbox"
-                         v-model="selectedOptions"
-                         :value="filter.name + '|' + option"
-                  >
-                  {% comment %}
-                  TODO: Need svg assets of all available options
-                  {%- render 'svg', type: matched_tag_handle, class: 'plp-filter__block-item__icon' -%}
-                  {% endcomment %}
-                  <span class="plp-filter__block-item__link-text b1">${option}</span>
-                </label>
+              <div class="plp-filter__block-list">
+                <div v-for="option in filterAvailableValues[filter.name]"
+                    class="plp-filter__block-item"
+                >
+                  <label :class="['plp-filter__block-item__link', {'is-selected': selectedOptions.includes(filter.name + '|' + option)}]">
+                    <input class="plp-filter__block-item__state"
+                          type="checkbox"
+                          v-model="selectedOptions"
+                          :value="filter.name + '|' + option"
+                    >
+                    {% comment %}
+                    TODO: Need svg assets of all available options
+                    {%- render 'svg', type: matched_tag_handle, class: 'plp-filter__block-item__icon' -%}
+                    {% endcomment %}
+                    <span class="plp-filter__block-item__link-text b1">${option}</span>
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
+          </template>
         </div>
         <div class="plp-filter__buttons" v-if="isManualFilter">
           <div class="plp-filter__buttons-item">
