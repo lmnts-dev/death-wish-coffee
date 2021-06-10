@@ -230,6 +230,14 @@
     }
   }
 
+  .carousel--article & {
+    top: 63%;
+
+    @media (--md-max) {
+      display: none;
+    }
+  }
+
   .carousel--alt-product-card & {
     top: 35%;
     transform: translateY(-35%);
@@ -291,6 +299,10 @@
   .carousel--article-hero-card & {
     right: 4%;
   }
+
+  .carousel--article & {
+    right: 85px;
+  }
 }
 
 .carousel-prev {
@@ -326,6 +338,10 @@
 
   .carousel--article-hero-card & {
     left: 4%;
+  }
+
+  .carousel--article & {
+    left: 85px;
   }
 }
 
