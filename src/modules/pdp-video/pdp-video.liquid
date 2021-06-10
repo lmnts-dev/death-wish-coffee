@@ -1,0 +1,12 @@
+{%- assign title = title | default: false -%}
+{%- assign video_src = video_src | default: false -%}
+{%- if video_src -%}
+  <section class="pdp-video" data-module="pdp-video">
+    {%- if title -%}
+      {%- render 'section-title', title: title, class: 'pdp-video__title bg--black' -%}
+    {%- endif -%}
+    <div class="pdp-video__inner">
+      {%- render 'video', mod_class: 'pdp-video__video', mod_src: video_src -%}
+    </div>
+  </section>
+{%- endif -%}
