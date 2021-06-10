@@ -3,57 +3,57 @@
 
 <section role="dialog"
          class="{{ class }} z1"
-         data-toggle-selector=".js-pop-out-cart-toggle"
          data-module="pop-out-cart"
          aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
-         aria-hidden="true"
+         :class="{ 'is-active': this.isPopOutCartActive }"
+         :aria-hidden="!this.isPopOutCartActive"
 >
   <div class="pop-out-cart__inner bg--shadow">
     <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
 
-    {% if cart.item_count > 0 %}
+    <template v-if="itemCount">
       <form action="/cart" class="pop-out-cart__form" method="post" novalidate>
         <div class="pop-out-cart__list">
-        {% for item in cart.items %}
-          {% assign item_image = item.image | img_url: 'master' %}
-          <div class="pop-out-cart__item">
-            <a class="pop-out-cart__item-image" href="{{ item.url | within: collections.all }}">
-              {% render 'image', src: item_image, alt: item.title %}
-            </a>
-            <div class="pop-out-cart__item-details">
-              <a href="{{ item.url | within: collections.all }}"
-                 class="pop-out-cart__item-title b2">{{ item.product.title }}</a>
+          <template v-for="item in items">
+            {% assign item_image = item.image | img_url: 'master' %}
+            <div class="pop-out-cart__item">
+              <a class="pop-out-cart__item-image" :href="item.url">
+                {% render 'image', vue_attrs: ':image-src="item.image" :alt="item.title"' %}
+              </a>
+              <div class="pop-out-cart__item-details">
+                <a href="{{ item.url | within: collections.all }}"
+                  class="pop-out-cart__item-title b2">{{ item.product.title }}</a>
 
-              {% assign options = item.variant.options | join: ' / ' %}
-              <p class="pop-out-cart__item-subtext b3">{{ options }}</p>
+                {% assign options = item.variant.options | join: ' / ' %}
+                <p class="pop-out-cart__item-subtext b3">{{ options }}</p>
 
-              {%- assign item_property_size = item.properties | size -%}
-              {% if item_property_size > 0 %}
-                {% for p in item.properties %}
-                  {% unless p.last == blank %}
-                    <p class="pop-out-cart__item-subtext b3">
-                      {{ p.first }}: {{ p.last }}
-                    </p>
-                  {% endunless %}
-                {% endfor %}
-              {% endif %}
+                {%- assign item_property_size = item.properties | size -%}
+                {% if item_property_size > 0 %}
+                  {% for p in item.properties %}
+                    {% unless p.last == blank %}
+                      <p class="pop-out-cart__item-subtext b3">
+                        {{ p.first }}: {{ p.last }}
+                      </p>
+                    {% endunless %}
+                  {% endfor %}
+                {% endif %}
 
-              <div class="pop-out-cart__item-controls">
-                {% render 'cart-item-control',
-                  item: item,
-                  class: 'pop-out-cart__item-quantity',
-                  id_prefix: 'pop-out-cart-'
-                %}
+                <div class="pop-out-cart__item-controls">
+                  {% render 'cart-item-control',
+                    item: item,
+                    class: 'pop-out-cart__item-quantity',
+                    id_prefix: 'pop-out-cart-'
+                  %}
 
-                <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
+                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
+                </div>
               </div>
-            </div>
 
-            <a class="pop-out-cart__item-remove b2" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="{{ 'cart.general.remove' | t }}">
-              X
-            </a>
-          </div>
-        {% endfor %}
+              <a class="pop-out-cart__item-remove b2" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="{{ 'cart.general.remove' | t }}">
+                X
+              </a>
+            </div>
+          </template>
         </div>
 
         <div class="pop-out-cart__footer">
@@ -76,11 +76,12 @@
           <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
         </div>
       </form>
-    {% else %}
+    </template>
+    <template v-else>
       <p class="pop-out-cart__empty">{{ 'cart.general.empty' | t }}</p>
       <div class="pop-out-cart__footer">
         <a href="/collections/all" class="button button--small-h button--full">{{ 'cart.general.shop_all' | t }}</a>
       </div>
-    {% endif %}
+    </template>
   </div>
 </section>
