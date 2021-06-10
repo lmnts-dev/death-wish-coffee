@@ -36,6 +36,18 @@
 {%- comment -%}Featured Product Carousel{%- endcomment -%}
 {%- assign featured_products = product_acf.pdp_featured_products_selector | split: '|' -%}
 {%- assign featured_slides_count = 0 -%}
+{%- if featured_products.size < 0 -%}
+  {%- assign matched_count = 1 -%}
+  {%- paginate collections.all.products by 1000 -%}
+    {%- for item in collections.all.products -%}
+      {%- if item.type == product.type and item.id != product.id and matched_count <= 8 -%}
+        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+        {%- assign matched_count = matched_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endpaginate -%}
+  {%- assign featured_products = list_products | split: '|' -%}
+{%- endif -%}
 {%- if featured_products.size > 0 -%}
   {%- comment -%}Featured Product Slides{%- endcomment -%}
   {%- capture featured_slides -%}
