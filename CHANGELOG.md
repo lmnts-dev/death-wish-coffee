@@ -1,6 +1,40 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.18 - 2021-06-09
+### CHANGED:
+- increase post-navigation padding top 
+
+## 0.0.17 - 2021-06-09
+### CHANGED:
+- DIC-91 Fix bug data do not render for featured articles on homepage 
+- DIC-91 Fix style for Featured Articles on Homepage 
+- DIC-84 Fix spacing for customer addresses 
+- remove checked property of radio inputs on button click 
+- add pdp link to product card image overlay 
+- add cursor pointer to pdp card overlay 
+- add product hero card ACF image field 
+- remove quickshop and close buttons 
+- add reivew drawer toggle function 
+- increase signup signin title font size 
+- pass product reference from ACF to carousel 
+- DIC-89 Add bolts for super hero cta 
+- DIC-82 Remove style uppercase from title on order history 
+- DIC-78 Update style for order details 
+- DIC-90 Redirect to forgot password form after submitting 
+- DIC-71 Update fallback images for post hero 
+- DIC-71 Update fallback images for post card 
+- DIC-71 Update fallback images for article hero card 
+- configure accentuate field in sub her carousel 
+- add href to carousel cateogry titles 
+- adjust position of pop out cart arrow 
+- contain elements and styles from excerpt object 
+- DIC-78 Update style for order details (WIP) 
+- DIC-57 Fix featured product carousel not show same type 
+- DIC-64 Fix bug pricing not display on PDP 
+- DIC-82 Add order history 
+- DIC-86 Add yotpo reviews for product card and product hero card module 
+
 ## 0.0.16 - 2021-06-06
 ### CHANGED:
 - add margin between footer and store locator 

@@ -1,12 +1,19 @@
 {% assign image = image | default: false %}
+{% assign image_mobile = image_mobile | default: false %}
 {% assign class = class | default:false %}
 {% capture class %}post-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 {%- if image -%}
   <section class="{{ class }}" data-module="post-hero">
-    <div class="post-hero__image">
+    <div class="post-hero__image-wrapper">
       {%- render 'image',
+        class: 'post-hero__image'
         src: image,
+        srcset_exclude_small: true
+      -%}
+      {%- render 'image',
+        class: 'post-hero__image post-hero__image--mobile'
+        src: image_mobile,
         srcset_exclude_small: true
       -%}
     </div>

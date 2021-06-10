@@ -54,13 +54,19 @@ const productform = el => {
         // Toggle button in case of variant available or not
         if (selectedValue) {
           submitButtonEl.removeAttribute('disabled')
+          setPrice(selectedTitle)
         } else {
           submitButtonEl.setAttribute('disabled', true)
         }
-        setPrice(selectedTitle)
       })
     }
   }
+
+  submitButtonEl.addEventListener('click', () => {
+    for (const inputEl of inputEls) {
+      inputEl.checked = false
+    }
+  })
 }
 
 export default productform

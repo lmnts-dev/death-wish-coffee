@@ -1,6 +1,7 @@
 {% assign class = class | default: false %}
 {% assign title = title | default: false %}
 {% assign image_url = image_url | default: false %}
+{% assign image_url_mobile = image_url_mobile | default: false %}
 {% assign url = url | default: false %}
 {% assign author = author | default: false %}
 {% assign date = date | date: "%b %d, %Y" %}
@@ -12,6 +13,7 @@
     <div class="article-hero-card__inner">
       <a href="{{ url }}" class="article-hero-card__image-wrapper">
         {%- render 'image', src: image_url, class: 'article-hero-card__image' -%}
+        {%- render 'image', src: image_url_mobile, class: 'article-hero-card__image article-hero-card__image--mobile' -%}
       </a>
       <div class="article-hero-card__content">
         <div class="article-hero-card__content-inner">
@@ -19,7 +21,9 @@
           <a href="{{ url }}" class="article-hero-card__item-title h2">{{- title -}}</a>
           {% endif %}
           {%- if excerpt -%}
-            <p class="article-hero-card__item-excerpt b2">{{- excerpt -}}</p>
+          <div class='article-hero-card__item-excerpt b2'>
+            <p class="">{{- excerpt -}}</p>
+          </div>
           {%- endif -%}
           {%- if author -%}
             <p class="article-hero-card__item-author">{{ author }}{% if date %} &mdash; {{ date }}{% endif %}</p>

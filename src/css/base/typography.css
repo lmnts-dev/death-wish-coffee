@@ -41,6 +41,14 @@ h5 {
   @media (--md-max) {
     font-size: 40px * var(--sizing-coef);
   }
+
+  &.form-login__header, &.create-account-header__title {
+    font-size: 8.8rem;
+
+    @media (--md-max) {
+      font-size: 4rem;
+    }
+  }
 }
 
 .h2 {
