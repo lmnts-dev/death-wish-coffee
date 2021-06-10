@@ -24,6 +24,8 @@ const carousel = el => {
   const paginationEl = carousel.querySelector('.carousel-pagination')
   const pagination = !!carousel.dataset.pagination && { pagination: { el: paginationEl, clickable: true } }
 
+  const enableSwipe = carousel.getAttribute('data-disable-swipe') === null
+
   const breakpoints = {
     xl: '1199',
     lg: '991',
@@ -61,6 +63,7 @@ const carousel = el => {
     spaceBetween: spaceBetween / 2,
     loop: loop,
     loopedSlides: totalSlides,
+    allowTouchMove: enableSwipe,
     ...navigation,
     ...pagination,
     ...carouselBreakpoints
