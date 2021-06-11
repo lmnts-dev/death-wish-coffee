@@ -1,4 +1,5 @@
 import Cart from 'lib/cart'
+import { formatPrice } from 'lib/util'
 
 export default {
   namespaced: true,
@@ -6,6 +7,31 @@ export default {
     cart: {},
     isPopOutCartActive: false,
     addToCartErrorMessage: ''
+  },
+  getters: {
+    items ({ cart }) {
+      return (cart.items || []).map(item => Object.assign({}, item, {
+        formatted_line_price: `$${formatPrice(item.line_price)}`
+      }))
+    },
+    itemCount ({ cart }) {
+      return cart.item_count || 0
+    },
+    totalPrice ({ cart }) {
+      return cart.total_price || 0
+    },
+    formattedTotalPrice (state, { totalPrice }) {
+      return totalPrice ? `$${formatPrice(totalPrice)}` : ''
+    },
+    totalDiscount ({ cart }) {
+      return cart.total_discount || 0
+    },
+    formattedTotalDiscount (state, { totalDiscount }) {
+      return totalDiscount ? `$${formatPrice(totalDiscount)}` : ''
+    },
+    hasItems (state, { itemCount }) {
+      return itemCount > 0
+    }
   },
   mutations: {
     mutateCart (state, cart) {
@@ -41,6 +67,12 @@ export default {
           dispatch('setAddToCartErrorMessage', '')
         }, 5000)
       } else {
+        await dispatch('getCart')
+      }
+    },
+    async updateCart ({ dispatch }, { id, quantity }) {
+      const response = await Cart.update({ id, quantity })
+      if (!response.errors) {
         await dispatch('getCart')
       }
     }

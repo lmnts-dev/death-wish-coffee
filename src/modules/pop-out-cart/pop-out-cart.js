@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import store from 'lib/store'
 import VImage from '../v-image/v-image.vue'
 
@@ -56,12 +56,12 @@ const popOutCart = (el) => {
       VImage
     },
     computed: {
-      ...mapState('cart', ['cart', 'isPopOutCartActive']),
-      itemCount () {
-        return this.cart.item_count
-      },
-      items () {
-        return this.cart.items
+      ...mapState('cart', ['isPopOutCartActive']),
+      ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount'])
+    },
+    methods: {
+      removeItem (item) {
+        store.dispatch('cart/updateCart', { id: item.id, quantity: 0 })
       }
     }
   })

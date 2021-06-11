@@ -6,7 +6,7 @@
 
 import Vue from 'vue'
 import store from 'lib/store'
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 const popoutcarttrigger = el => {
   return new Vue({
@@ -15,7 +15,8 @@ const popoutcarttrigger = el => {
     name: 'PopOutCartTriggerRoot',
     store,
     computed: {
-      ...mapState('cart', ['cart', 'isPopOutCartActive'])
+      ...mapState('cart', ['isPopOutCartActive']),
+      ...mapGetters('cart', ['hasItems'])
     },
     methods: {
       togglePopOutCart () {
