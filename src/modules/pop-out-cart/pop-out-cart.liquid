@@ -35,7 +35,8 @@
 
                 <div class="pop-out-cart__item-controls">
                   {% render 'cart-item-control',
-                    item: item,
+                    is_vue: true,
+                    vue_attrs: ':item="item" id-prefix="pop-out-cart-"',
                     class: 'pop-out-cart__item-quantity',
                     id_prefix: 'pop-out-cart-'
                   %}

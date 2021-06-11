@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 import store from 'lib/store'
 import VImage from '../v-image/v-image.vue'
+import CartItemControl from '../cart-item-control/cart-item-control.vue'
 
 // const TRANSITION_DURATION = 300
 
@@ -53,7 +54,8 @@ const popOutCart = (el) => {
     name: 'PopOutCartRoot',
     store,
     components: {
-      VImage
+      VImage,
+      CartItemControl
     },
     computed: {
       ...mapState('cart', ['isPopOutCartActive']),
