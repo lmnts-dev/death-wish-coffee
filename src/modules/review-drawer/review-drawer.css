@@ -1,5 +1,10 @@
 .review-drawer {
+  padding-top: 70px;
   padding-bottom: 60px;
+
+  @media (--md) {
+    padding-top: 96px;
+  }
 
   .yotpo,
   .yotpo.yotpo-main-widget {
