@@ -1,0 +1,9 @@
+/* styles for cart */
+
+.cart__empty {
+  padding: 35px 55px;
+
+  @media (--lg-max) {
+    padding: 40px 10px;
+  }
+}
