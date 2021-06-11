@@ -121,11 +121,15 @@
               button_value: 'Tracking', 
               class: 'order-details__btn button--small-h button--small-w button--dark' 
             -%}
-            {%- render 'button', 
-              tag: 'a', 
-              button_value: 'Reorder', 
-              class: 'order-details__btn button--small-h button--small-w button--dark' 
-            -%}
+            {% for order in customer.orders %}
+              {% assign reorder_url = "" %}
+                {% for line_item in order.line_items %}
+                  {% capture reorder_url %}{{ reorder_url | append: line_item.variant_id | append: ':' | append: line_item.quantity | append: ',' }}{% endcapture %}
+              {% endfor %}
+              {% if forloop.first %}
+              <a href="{{ '/cart/' | append: reorder_url }}" class="button order-details__btn button--small-h button--small-w button--dark">reorder</a>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
       </div>
