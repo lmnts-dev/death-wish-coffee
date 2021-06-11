@@ -26,9 +26,15 @@
 {%- endif -%}
 
 {%- comment -%}Video Section{%- endcomment -%}
+{%- assign video_section_image = product_acf.coffee_detail_hero_video_image | map: 'src' -%}
 {%- assign video_section_url = product_acf.coffee_detail_hero_video_video -%}
 {%- assign video_section_title = product_acf.coffee_detail_hero_video_title -%}
-{%- render 'pdp-video', title: video_section_title, video_src: video_section_url -%}
+{%- render 'pdp-video',
+  title: video_section_title, 
+  video_src: video_section_url,
+  mod_fallback_image: video_section_image,
+  button_play: true
+-%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}
 {%- render 'review-drawer', title: product_acf.pdp_review_heading -%}
