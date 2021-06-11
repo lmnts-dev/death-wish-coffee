@@ -14,7 +14,7 @@
       <p class="cart-sidebar__cost b1">{{ cart.total_price | money }}</p>
     </div>
     <p class="cart-sidebar__label b2">Shipping & taxes calculated at checkout</p>
-    {% render 'button', button_url: '#', button_value: 'Checkout', class: 'cart-sidebar__checkout-button', tag: 'button' %}
+    <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button button--full">
     <div class='cart-sidebar__payment-method-button-container'>
       {%- comment -%}requires shopify payments account setup{%- endcomment -%}
       {% if additional_checkout_buttons %}
