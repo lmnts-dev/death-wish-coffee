@@ -11,7 +11,7 @@
       {%- render 'section-title', title: title, class: 'section-title--media-hero-grid bg--black' -%}
     {%- endif -%}
     <div class="media-hero-grid__inner">
-      {%- for item in types -%}
+      {%- for item in types limit: 5 -%}
         {%- assign type = types[forloop.index0] -%}
         {%- assign img_src = images[forloop.index0] | map: 'src' -%}
         <div class="media-hero-grid__item">
