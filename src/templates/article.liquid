@@ -5,8 +5,7 @@
 {%- assign fallback_images_mobile = blog_acf.default_image_mobile | first -%}
 {%- assign post_hero_image = fallback_images.src -%}
 {%- assign post_hero_image_mobile = fallback_images_mobile.src -%}
-
- {% assign featured_image = article.image.src | img_url: 'master' %}
+{%- assign featured_image = article.image.src | img_url: 'master' -%}
 
 {% capture post_hero_image %}
   {% if featured_image contains 'no-image' -%}
