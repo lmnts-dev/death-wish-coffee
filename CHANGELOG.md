@@ -1,6 +1,43 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.19 - 2021-06-11
+### CHANGED:
+- Update matched button color for merch template 
+- Remove unused template 
+- DIC-97 Update product form for merch product 
+- DIC-97 Update render condition for media hero grid 
+- DIC-97 Add coffee and coffee-lto template for product 
+- DIC-100 Update style and function for video module on PDP 
+- DIC-97 Add merch template for product 
+- DIC-97 Add related featured products in case of blank ACF field 
+- DIC-97 Add module video for product page 
+- DIC-97 Update undraggable option for carousel when there is one item 
+- DIC-97 Add bolt template for product 
+- DIC-104 Update featured products on plp 
+- Hide filter if no options available 
+- DIC-101 Fix case sensitive for plp filter options 
+- Reset product options when adding to cart and display price on the correct option 
+- Remove quick shop, click on product card overlay now goes to PDP 
+- Fix indent 
+- Fix collection filter vs grid width 
+- Load products via AJAX 
+- Prevent flash of unrendered content 
+- Implement mobile filtering 
+- Fix incorrect product count when filtering 
+- DIC-96 Update filter title spacing on plp 
+- DIC-95 Update plp container 
+- Fix missing new line 
+- Implement sorting 
+- Refactor PLP into Vue and implement basic filtering on desktop 
+- Convert product card into Vue instance 
+- Remove redundant code in product form 
+- Update package.json 
+- Scaffold collection vuex store 
+- Add missing product json module 
+- Convert product form module to Vue 
+- Optimize logo svg to remove style tag 
+
 ## 0.0.18 - 2021-06-09
 ### CHANGED:
 - increase post-navigation padding top 
