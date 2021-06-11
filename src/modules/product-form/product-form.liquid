@@ -1,63 +1,90 @@
+{%- assign is_vue_component = is_vue_component | default: false -%}
+{%- assign custom_attrs = custom_attrs | default: '' -%}
+{%- assign form_type = form_type | default: 'button' -%}
+{%- capture button_class -%}product-form__button js-form-submit{% if form_type != 'button' %} button--light{% endif %}{%- endcapture -%}
 {%- assign product = product | default: false -%}
 {%- assign button_class = button_class | default: false -%}
 {%- assign show_title = show_title | default: false -%}
 {%- assign class = class | default: false -%}
 {%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{%- endcapture -%}
 
-{%- if product -%}
-  {%- assign first_variant_title = product.variants[0].title -%}
-  <section class="{{- class -}}" data-module="product-form" data-first-variant-title="{{- first_variant_title -}}">
-    <form method="post" action="/cart/add" class="product-form__form">
-      <div class="product-form__options">
-        {%- for option in product.options -%}
-          {%- assign option_index = forloop.index -%}
-          <div class="product-form__option product-form__option--{{- option | handle -}}">
-            {%- if show_title -%}
-              <h4 class="product-form__option-title h4">{{- option -}}</h4>
-            {%- endif -%}
-            <div class="product-form__option-values">
-              {%- for value in product.options_by_name[option].values -%}
-                {%- capture input_name -%}product-{{- product.id -}}-option-{{- option | handle -}}{%- endcapture -%}
-                {%- capture input_id -%}product-{{- product.id -}}-option-{{- option | handle -}}-value-{{- value | handle -}}{%- endcapture -%}
-                <div class="product-form__option-value">
-                  <input id="{{- input_id -}}" type="radio" name="{{- input_name -}}" class="radio product-form__option-value-input js-product-input" value="{{- value -}}" data-option-index="{{- option_index -}}">
-                  <label for="{{- input_id -}}" class="label label--radio product-form__option-value-label">
-                    {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
-                    <div class="product-form__option-value-text">
-                      <div class="product-form__option-value-name">
-                        {{- value -}}
-                      </div>
-                      {%- if option contains 'Size' -%}
-                        <div class="product-form__option-prices">
-                          {%- for variant in product.variants -%}
-                            {%- if variant.options contains value -%}
-                              {%- assign match_option = variant.options | join: '' | replace: value, '' -%}
-                              <span
-                                class="js-variant-price product-form__option-price b1"
-                                data-match-option="{{- match_option -}}"
-                              >
-                                {{ variant.price | money }}
-                              </span>
-                            {%- endif -%}
-                          {%- endfor -%}
-                        </div>
-                      {%- endif -%}
-                    </div>
-                  </label>
+{%- capture content -%}
+  <div class="product-form__form">
+    <div class="product-form__options">
+      <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
+        {%- if show_title -%}
+          <h4 class="product-form__option-title h4">${option}</h4>
+        {%- endif -%}
+        {%- if form_type == 'button' -%}
+          <div class="product-form__option-values">
+            <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
+                class="product-form__option-value">
+              <input :id="optionInputId(option, value)"
+                    :name="option + value"
+                    :value="value"
+                    v-model="selectedOptions[option]"
+                    class="radio product-form__option-value-input js-product-input"
+                    type="radio"
+              >
+              <label :for="optionInputId(option, value)"
+                    class="label label--radio product-form__option-value-label"
+              >
+                {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
+                <div class="product-form__option-value-text">
+                  <div class="product-form__option-value-name">
+                    ${value}
+                  </div>
+                  <div v-if="option === priceDecidingFactor"
+                      class="product-form__option-price b1"
+                  >
+                    $${getPriceForOptionValue(optionIndex, value)}
+                  </div>
                 </div>
-              {%- endfor -%}
+              </label>
             </div>
           </div>
-        {%- endfor -%}
+        {%- else -%}
+          <div class="product-form__select">
+            <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
+              <option value selected>Select Field</option>
+              <template v-for="variant in product.variants">
+                <option :key="variant.id" :value="variant.id">${variant.title}</option>
+              </template>
+            </select>
+          </div>
+        {%- endif -%}
       </div>
-      <select name="id" class="product-form__variants js-product-variants">
-        <option value selected disabled>Variant</option>
-        {%- for variant in product.variants -%}
-          <option value="{{- variant.id -}}" data-title="{{- variant.title -}}">{{- variant.title -}}</option>
-        {%- endfor -%}
-      </select>
+    </div>
+    <form method="post" action="/cart/add" @submit.prevent="resetSelectedOptions">
+      <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
-      {%- render 'button', button_value: 'Add To Cart', tag: 'button', custom_attrs: 'type="submit" disabled' class: 'product-form__button js-form-submit' -%}
+      {%- render 'button',
+        button_value: 'Add To Cart',
+        tag: 'button',
+        custom_attrs: 'type="submit" :disabled="!selectedVariantId"',
+        class: button_class
+      -%}
     </form>
-  </section>
+  </div>
+{%- endcapture -%}
+
+{%- if is_vue_component -%}
+  <div is="product-form" inline-template {{ custom_attrs }}>
+    <div v-if="product" class="{{- class -}}">
+      {{ content }}
+    </div>
+  </div>
+{%- elsif product -%}
+  {%- capture product_json -%}
+    {%- render 'product-json', product: product -%}
+  {%- endcapture -%}
+
+  <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
+    <div is="product-form"
+         :product="{{- product_json | escape -}}"
+         inline-template
+    >
+      {{ content }}
+    </div>
+  </div>
 {%- endif -%}

@@ -42,10 +42,10 @@
   }
 
   &--review-drawer {
-    padding: 69px 0 22px;
+    padding: 0 0 22px;
 
     @media (--md) {
-      padding: 97px 0 19px;
+      padding: 0 0 19px;
     }
   }
 

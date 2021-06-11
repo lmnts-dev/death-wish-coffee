@@ -15,8 +15,8 @@
       {%- assign count = count | plus: 1 -%}
     {%- elsif collection.handle == 'all' -%}
       {%- if count <= 8 -%}
-          {%- assign list_products = list_products | append: item.handle | append: '|' -%}
-        {%- endif -%}
+        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+      {%- endif -%}
       {%- assign count = count | plus: 1 -%}
     {%- endif -%}
   {% endfor %}
@@ -43,7 +43,7 @@
       {%- assign description = product.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}
       {%- if title != blank -%}
-        {%- render 'product-hero-card'
+        {%- render 'product-hero-card',
           class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
           title: title,
           image_url: image_url,
@@ -71,24 +71,96 @@
     children: content_slides,
     spacing: 0,
     slides_per_view: slides_per_view_carousel,
-    navigation: navigation_carousel 
+    navigation: navigation_carousel
   -%}
 {%- endif -%}
 
-{%- capture acf_filters -%}
-  {%- if acf.apparel_type_selector != blank -%}
-    Title:Apparel Type|{{- acf.apparel_type_selector -}}
-  {%- endif -%}
-{%- endcapture -%}
-{%- render 'plp',
-  class: 'bg--black',
-  acf_filters: acf_filters,
-  plp_order_selector: acf.plp_order_selector,
-  plp_featured_item_selector: acf.plp_featured_item_selector
--%}
+{%- render 'plp', class: 'bg--black' -%}
 {%- if collection.metafields.collections.footer_cta_heading != blank -%}
   {%- render 'footer-cta',
     title: collection.metafields.collections.footer_cta_heading,
-    enable_subscribe_form: true 
+    enable_subscribe_form: true
   -%}
 {%- endif -%}
+
+{%- paginate collection.products by 50 -%}
+  {%- capture product_json -%}
+    [
+    {%- for product in collection.products -%}
+      ,{%- render 'product-json', product: product -%}
+    {%- endfor -%}
+    ]
+  {%- endcapture -%}
+  {% assign product_json = product_json | remove_first: ',' %}
+  <script>
+    window.DWC_PLP = {
+      definitions: [
+        {%- case collection.handle -%}
+          {%- when 'coffee' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium',
+                'light'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+          {%- when 'merch' -%}
+            {
+              name: 'Category',
+              type: 'tag',
+              options: [
+                'Apparel',
+                'Mug',
+                'At Home',
+                'Active',
+                'Oddities',
+                'Collab'
+              ]
+            },
+            {
+              name: 'Type',
+              type: 'option'
+            },
+            {
+              name: 'Gender',
+              type: 'tag',
+              options: [
+                'Male',
+                'Female',
+                'Unisex'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+        {%- endcase -%}
+      ],
+      products: {{ product_json }},
+      featuredIndexes: [2, 6],
+      totalCount: {{ collection.all_products_count }},
+      totalPages: {{ paginate.pages }}
+    }
+  </script>
+{%- endpaginate -%}

@@ -1,37 +1,55 @@
+{%- assign is_vue_component = is_vue_component | default: false -%}
+{%- assign custom_attrs = custom_attrs | default: '' -%}
 {% assign class = class | default: false %}
 {% assign title = title | default: false %}
 {% assign link = link | default: false %}
 {% assign price = price | default: false %}
 {% assign quick_shop_form = quick_shop_form | default: false %}
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
-{% assign product_id = product_id | default: false %}
 
-<section class="{{ class }}" data-module="product-card">
-  <div class="product-card__inner">
-    <div class="product-card__header">
-      <div class="product-card__image-container">
-        <a href="{{ link }}" class="product-card__image-link">
-          {%- render 'image', src: image_src -%}
-        </a>
-      </div>
-      {%- if quick_shop_form -%}
-        <div class="product-card__overlay js-overlay" data-url="{{ link }}">
+{%- capture content -%}
+    <div class="product-card__inner">
+      <div class="product-card__header">
+        <div class="product-card__image-container">
+          <a :href="product.url" class="product-card__image-link">
+            {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
+          </a>
+        </div>
+        {%- if quick_shop_form -%}
           <div class="product-card__form">
             {{- quick_shop_form -}}
           </div>
-        </div>
-      {%- endif -%}
-    </div>
-    <div class="product-card__content">
-      <h4 class="product-card__title">
-        <a href="{{ link }}" class="b1 product-card__title-link">{{ title }}</a>
-      </h4>
-      {%- if product_id -%}
+        {%- endif -%}
+      </div>
+      <div class="product-card__content">
+        <h4 class="product-card__title">
+          <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
+        </h4>
         <div class="b1 product-card__review">
-          <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+          <div class="yotpo bottomLine" :data-product-id="product.id"></div>
         </div>
-      {%- endif -%}
-      <p class="h5 product-card__price">{{ price }}</p>
+        <p class="h5 product-card__price">$${formatPrice(product.price)}</p>
+      </div>
+    </div>
+{%- endcapture -%}
+
+{%- if is_vue_component -%}
+  <div class="{{- class -}}" is="product-card" inline-template {{ custom_attrs }}>
+    <div v-if="product" class="{{- class -}}">
+      {{ content }}
     </div>
   </div>
-</section>
+{%- elsif product -%}
+  {%- capture product_json -%}
+    {% render 'product-json', product: product %}
+  {%- endcapture -%}
+
+  <div class="{{- class -}}" data-module="product-card" {{ custom_attrs }}>
+    <div is="product-card"
+         :product="{{- product_json | escape }}"
+         inline-template
+    >
+      {{ content }}
+    </div>
+  </div>
+{%- endif -%}

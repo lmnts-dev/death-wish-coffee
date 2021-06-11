@@ -1,4 +1,4 @@
-{% assign placeholder = placeholder | default: 'Placeholder' %}
+{% assign placeholder = placeholder | default: false %}
 {% assign options = options | default: false %}
 {% assign option_values = option_values | default: false %}
 {% assign label = label | default: false %}
@@ -36,7 +36,9 @@
       {% if use_country_tags %}
         {{- all_country_option_tags -}}
       {% else %}
-        <option class="input-select__option" disabled{% unless first_selected or selected_value != false %} selected{% endunless %}>{{- placeholder -}}</option>
+        {% if placeholder %}
+          <option class="input-select__option" disabled{% unless first_selected or selected_value != false %} selected{% endunless %}>{{- placeholder -}}</option>
+        {% endif %}
         {% if options %}
           {% for option in options %}
             {%- capture value -%}

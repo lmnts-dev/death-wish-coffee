@@ -8,10 +8,25 @@
   position: relative;
 
   @media (--lg) {
-    padding-left: 358px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 48px;
   }
 }
 
 .plp__container {
-  max-width: 1440px;
+  max-width: 1490px;
+}
+
+.plp__grid {
+  flex: 1;
+}
+
+.plp__empty {
+  color: var(--white);
+  margin-top: 15px;
+
+  @media (--lg) {
+    flex: 1 0 auto;
+  }
 }

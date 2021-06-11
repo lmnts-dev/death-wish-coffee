@@ -1,137 +1,53 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
-{%- assign acf_filters = acf_filters | default: false -%}
-{%- assign plp_order_selector = plp_order_selector | default: blank -%}
-{%- assign plp_featured_item_selector = plp_featured_item_selector | split: '|' -%}
-{%- assign product_handle_large_one = '' -%}
-{%- assign product_handle_large_two = '' -%}
 
-{%- for item in plp_featured_item_selector -%}
-  {%- if forloop.index == 1 -%}
-    {%- assign product_handle_large_one = product_handle_large_one | append: item -%}
-  {%- endif -%}
-  {%- if forloop.index == 2 -%}
-  {%- assign product_handle_large_two = product_handle_large_two | append: item -%}
-  {%- endif -%}
-{%- endfor -%}
-
-{%- capture product_card_large_one -%}
-  {%- if product_handle_large_one != blank -%}
-    {%- assign product_handle_one = all_products[product_handle_large_one] -%}
-    {%- assign product_price_one = product_handle_one.price | money  -%}
-    {%- assign product_image_src_one = product_handle_one.featured_image | img_url: 'master' -%}
-    {%- assign product_link_one = product_handle_one.url -%}
-    {%- assign product_title_one = product_handle_one.title -%}
-    {%- if product_title_one != blank -%}
-      {%- capture product_form_one -%}
-        {%- render 'product-form', product: product_handle_one -%}
-      {%- endcapture -%}
-      {%- render 'product-card',
-        class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',
-        image_src: product_image_src_one,
-        title: product_title_one,
-        link: product_link_one,
-        price: product_price_one,
-        quick_shop_form: product_form_one,
-        product_id: product_handle_one.id
-      -%}
-    {%- endif -%}
-  {%- endif -%}
+{%- capture product_form -%}
+  {%- render 'product-form', is_vue_component: true, custom_attrs: ':product="product"' -%}
 {%- endcapture -%}
 
-{%- capture product_card_large_two -%}
-  {%- if product_handle_large_two != blank -%}
-    {%- assign product_handle_two = all_products[product_handle_large_two] -%}
-    {%- assign product_price_two = product_handle_two.price | money  -%}
-    {%- assign product_image_src_two = product_handle_two.featured_image | img_url: 'master' -%}
-    {%- assign product_link_two = product_handle_two.url -%}
-    {%- assign product_title_two = product_handle_two.title -%}
-    {%- if product_title_two != blank -%}
-      {%- capture product_form_two -%}
-        {%- render 'product-form', product: product_handle_two -%}
-      {%- endcapture -%}
-      {%- render 'product-card',
-        class: 'product-card--bg-dark product-card--plp product-card--row-4-plp',
-        image_src: product_image_src_two,
-        title: product_title_two,
-        link: product_link_two,
-        price: product_price_two,
-        quick_shop_form: product_form_two,
-        product_id: product_handle_two.id
-      -%}
-    {%- endif -%}
-  {%- endif -%}
-{%- endcapture -%}
+<section class="{{- class -}}"
+         data-module="plp"
+         v-cloak
+>
+  <div is="plp"
+       inline-template
+  >
+    <div class="container plp__container">
+      <div class="plp__inner">
+        {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+        {%- render 'plp-filter' -%}
+        {%- capture product_cards -%}
+          <template v-for="(product, productIndex) in displayedProducts">
+            {%- render 'product-card',
+              class: 'product-card--bg-dark product-card--plp',
+              is_vue_component: true,
+              custom_attrs: ':product="product" :key="product.id"',
+              quick_shop_form: product_form
+            -%}
 
-<section class="{{- class -}}" data-module="plp">
-  <div class="container plp__container js-container">
-    <div class="plp__inner">
-      {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-      {%- render 'plp-filter',
-        class: 'js-filter',
-        acf_filters: acf_filters
-      -%}
-      {%- comment -%}product-grid{%- endcomment -%}
-      {%- capture product_cards -%}
-        {%- if collection.handle == 'merch' or collection.handle == 'coffee' -%}
-          {%- assign count = 1 -%}
-          {%- assign plp_order_selector = plp_order_selector | split: '|' -%}
-          {%- for handle in plp_order_selector -%}
-            {%- assign product = all_products[handle] -%}
-            {%- assign price = product.price | money -%}
-            {%- assign image_src = product.featured_image | img_url: 'master' -%}
-            {%- assign link = product.url -%}
-            {%- assign title = product.title -%}
-
-            {%- if title != blank -%}
-              {%- if count == 3 and product_card_large_one != blank -%}
-                {{- product_card_large_one -}}
-              {%- endif -%}
-              {%- if count == 7 and product_card_large_two != blank -%}
-                {{- product_card_large_two -}}
-              {%- endif -%}
-              {%- capture product_form -%}
-                {%- render 'product-form', product: product -%}
-              {%- endcapture -%}
-              {%- render 'product-card',
-                class: 'product-card--bg-dark product-card--plp',
-                image_src: image_src,
-                title: title,
-                link: link,
-                price: price,
-                quick_shop_form: product_form,
-                product_id: product.id
-              -%}
-              {%- assign count = count | plus: 1 -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          {%- for product in collection.products -%}
-            {%- assign price = product.price | money -%}
-            {%- assign image_src = product.featured_image | img_url: 'master' -%}
-            {%- assign link = product.url -%}
-            {%- assign title = product.title -%}
-            {%- capture product_form -%}
-              {%- render 'product-form', product: product -%}
+            {%- capture featured_product_attrs -%}
+              v-if="(productIndex === 2 || productIndex === 6) && getFeaturedProductForIndex(productIndex)"
+              :product="getFeaturedProductForIndex(productIndex)"
+              :class="['product-card--bg-dark product-card--plp', getFeaturedProductClass(productIndex)]"
             {%- endcapture -%}
             {%- render 'product-card',
-              image_src: image_src,
-              class: 'product-card--bg-dark product-card--plp',
-              title: title,
-              link: link,
-              price: price,
-              quick_shop_form: product_form,
-              product_id: product.id
+              class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',
+              is_vue_component: true,
+              custom_attrs: featured_product_attrs,
+              quick_shop_form: product_form
             -%}
-          {%- endfor -%}
-        {%- endif -%}
-      {%- endcapture -%}
+          </template>
+        {%- endcapture -%}
 
-      {%- render 'grid',
-        use_container: false,
-        class: 'grid--plp',
-        children: product_cards
-      -%}
+        <template v-if="displayedProducts.length > 0">
+          {%- render 'grid',
+            use_container: false,
+            class: 'plp__grid grid--plp',
+            children: product_cards
+          -%}
+        </template>
+        <p class="plp__empty" v-else>No products found</p>
+      </div>
     </div>
   </div>
 </section>
