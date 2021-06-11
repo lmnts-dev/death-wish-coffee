@@ -48,3 +48,8 @@
     margin-top: 24px;
   }
 }
+
+.standalone-bottomline {
+  display: flex;
+  justify-content: center;
+}
