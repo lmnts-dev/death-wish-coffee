@@ -1,5 +1,9 @@
+{% assign form_type = 'button' %}
 {% assign class = class | default:false %}
 {% capture class %}pdp-add-to-cart{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{%- if template.suffix == 'merch' -%}
+  {% assign form_type = 'dropdown' %}
+{%- endif -%}
 
 <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
   <div class="container pdp-add-to-cart__container">
@@ -14,7 +18,7 @@
         </div>
       </div>
       <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart">{{product.description}}</div>
-      {%- render 'product-form', class: 'product-form--pdp-add-to-cart', show_title: true, product: product -%}
+      {%- render 'product-form', class: 'product-form--pdp-add-to-cart', form_type: form_type, show_title: true, product: product -%}
     </div>
   </div>
 </section>

@@ -1,5 +1,6 @@
 {%- assign is_vue_component = is_vue_component | default: false -%}
 {%- assign custom_attrs = custom_attrs | default: '' -%}
+{%- assign form_type = form_type | default: 'button' -%}
 {%- assign product = product | default: false -%}
 {%- assign button_class = button_class | default: false -%}
 {%- assign show_title = show_title | default: false -%}
@@ -13,33 +14,44 @@
         {%- if show_title -%}
           <h4 class="product-form__option-title h4">${option}</h4>
         {%- endif -%}
-        <div class="product-form__option-values">
-          <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
-               class="product-form__option-value">
-            <input :id="optionInputId(option, value)"
-                   :name="option + value"
-                   :value="value"
-                   v-model="selectedOptions[option]"
-                   class="radio product-form__option-value-input js-product-input"
-                   type="radio"
-            >
-            <label :for="optionInputId(option, value)"
-                   class="label label--radio product-form__option-value-label"
-            >
-              {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
-              <div class="product-form__option-value-text">
-                <div class="product-form__option-value-name">
-                  ${value}
+        {%- if form_type == 'button' -%}
+          <div class="product-form__option-values">
+            <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
+                class="product-form__option-value">
+              <input :id="optionInputId(option, value)"
+                    :name="option + value"
+                    :value="value"
+                    v-model="selectedOptions[option]"
+                    class="radio product-form__option-value-input js-product-input"
+                    type="radio"
+              >
+              <label :for="optionInputId(option, value)"
+                    class="label label--radio product-form__option-value-label"
+              >
+                {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
+                <div class="product-form__option-value-text">
+                  <div class="product-form__option-value-name">
+                    ${value}
+                  </div>
+                  <div v-if="option === priceDecidingFactor"
+                      class="product-form__option-price b1"
+                  >
+                    $${getPriceForOptionValue(optionIndex, value)}
+                  </div>
                 </div>
-                <div v-if="option === priceDecidingFactor"
-                     class="product-form__option-price b1"
-                >
-                  $${getPriceForOptionValue(optionIndex, value)}
-                </div>
-              </div>
-            </label>
+              </label>
+            </div>
           </div>
-        </div>
+        {%- else -%}
+          <div class="product-form__select">
+            <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
+              <option value selected>Select Field</option>
+              <template v-for="variant in product.variants">
+                <option :key="variant.id" :value="variant.id">${variant.title}</option>
+              </template>
+            </select>
+          </div>
+        {%- endif -%}
       </div>
     </div>
     <form method="post" action="/cart/add" @submit.prevent="resetSelectedOptions">
