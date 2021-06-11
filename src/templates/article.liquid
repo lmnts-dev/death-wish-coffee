@@ -55,11 +55,12 @@
 {% endcapture %}
 
 {%- render 'carousel',
-  class: 'bg--black spacing--article',
+  class: 'bg--black spacing--article carousel--article',
   title: 'MORE TO EXPLORE',
   children: category_cards,
   slides_per_view: 4,
-  spacing: 32
+  spacing: 32,
+  navigation: true,
 -%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}
