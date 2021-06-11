@@ -1,6 +1,22 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.20 - 2021-06-11
+### CHANGED:
+- DIC-99 Fix style for variant select on small desktop 
+- DIC-99 Fix style for variant select on PLP tablet 
+- DIC-99 Fix style for variant select on product card module 
+- DIC-103 Update border red when hover for featured carousel 
+- set article featured image as default image 
+- override fallback image if featured img present 
+- wire-up reorder button in order details page 
+- add navigation arrows 
+- show next & prev slide edges on mobile 
+- remove free shipping header from cart sidebar 
+- modify cart title font weight 
+- DIC-98 Fix background color for feature carousel on PLP 
+- add /cart module components 
+
 ## 0.0.19 - 2021-06-11
 ### CHANGED:
 - Update matched button color for merch template 

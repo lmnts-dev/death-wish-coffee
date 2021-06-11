@@ -36,6 +36,10 @@
   list-style: none;
   padding: 0;
 
+  @media (--md-max) {
+    overflow: initial;
+  }
+
   /* Fix of Webkit flickering */
   z-index: 1;
 }

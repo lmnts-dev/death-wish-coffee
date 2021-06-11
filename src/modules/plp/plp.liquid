@@ -2,7 +2,7 @@
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
 
 {%- capture product_form -%}
-  {%- render 'product-form', is_vue_component: true, custom_attrs: ':product="product"' -%}
+  {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: ':product="product"' -%}
 {%- endcapture -%}
 
 <section class="{{- class -}}"

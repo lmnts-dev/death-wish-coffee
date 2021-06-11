@@ -1,0 +1,53 @@
+<section class="cart-container">
+  <form action="/cart" method="post" class="cart-container__form container" data-module="cart-container">
+    <div class="cart__header">
+      <h2 class="cart__title h3">Shopping Bag</h2>
+    </div>
+    <div class='cart-container__wrapper-container'>
+      <div class="cart-container__wrapper">
+        <div class="pop-out-cart__list">
+          {% for item in cart.items %}
+            {% assign item_image = item.image | img_url: 'master' %}
+            <div class="pop-out-cart__item">
+              <a class="pop-out-cart__item-image" href="{{ item.url | within: collections.all }}">
+                {% render 'image', src: item_image, alt: item.title %}
+              </a>
+              <div class="pop-out-cart__item-details">
+                <a href="{{ item.url | within: collections.all }}"
+                  class="pop-out-cart__item-title b2">{{ item.product.title }}</a>
+
+                {% assign options = item.variant.options | join: ' / ' %}
+                <p class="pop-out-cart__item-subtext b3">{{ options }}</p>
+
+                {%- assign item_property_size = item.properties | size -%}
+                {% if item_property_size > 0 %}
+                  {% for p in item.properties %}
+                    {% unless p.last == blank %}
+                      <p class="pop-out-cart__item-subtext b3">
+                        {{ p.first }}: {{ p.last }}
+                      </p>
+                    {% endunless %}
+                  {% endfor %}
+                {% endif %}
+
+                <div class="pop-out-cart__item-controls">
+                  {% render 'cart-item-control',
+                    item: item,
+                    class: 'pop-out-cart__item-quantity',
+                    id_prefix: 'pop-out-cart-'
+                  %}
+
+                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
+                </div>
+              </div>
+
+              <a class="pop-out-cart__item-remove b2" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="{{ 'cart.general.remove' | t }}">
+                X
+              </a>
+            </div>
+          {% endfor %}
+          </div>    </div>
+      {% render 'cart-sidebar' %}
+    </div>
+  </form>
+</section>
