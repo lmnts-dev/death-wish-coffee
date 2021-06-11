@@ -35,6 +35,10 @@
   }
 }
 
+.alt-product-card__review {
+  margin-top: 5px;
+}
+
 .alt-product-card__price {
   @media (--md) {
     margin-top: 2px;
