@@ -1,6 +1,5 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
-{%- assign acf_filters = acf_filters | default: false -%}
 
 {%- capture product_form -%}
   {%- render 'product-form', is_vue_component: true, custom_attrs: ':product="product"' -%}

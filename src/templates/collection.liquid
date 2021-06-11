@@ -92,17 +92,6 @@
     ]
   {%- endcapture -%}
   {% assign product_json = product_json | remove_first: ',' %}
-
-  {%- assign featured_product_handles = acf.plp_featured_item_selector | split: '|' -%}
-  {%- capture featured_products_json -%}
-    [
-    {%- for handle in featured_product_handles -%}
-      ,{%- render 'product-json', product: all_products[handle] -%}
-    {%- endfor -%}
-    ]
-  {%- endcapture -%}
-  {%- assign featured_products_json = featured_products_json | remove_first: ',' -%}
-
   <script>
     window.DWC_PLP = {
       definitions: [
@@ -169,7 +158,7 @@
         {%- endcase -%}
       ],
       products: {{ product_json }},
-      featuredProducts: {{ featured_products_json }},
+      featuredIndexes: [2, 6],
       totalCount: {{ collection.all_products_count }},
       totalPages: {{ paginate.pages }}
     }

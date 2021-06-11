@@ -7,7 +7,7 @@ export default {
       filterDefinitions: [],
       filterValues: {},
       products: [],
-      featuredProducts: [],
+      featuredIndexes: [],
       sortOrder: '',
       isManualFilter: false,
       totalCount: 0
@@ -45,8 +45,8 @@ export default {
         {}
       )
     },
-    displayedFeaturedProducts ({ featuredProducts, sortOrder }, { isFiltering }) {
-      return isFiltering || sortOrder ? [] : featuredProducts
+    displayedFeaturedProducts ({ products, sortOrder, featuredIndexes }, { isFiltering }) {
+      return isFiltering || sortOrder ? [] : products.filter((product, index) => featuredIndexes.findIndex(i => i === index) >= 0)
     },
     displayedFeaturedProductIds (state, { displayedFeaturedProducts }) {
       return displayedFeaturedProducts.map(product => product.id)
@@ -83,8 +83,8 @@ export default {
     mutateProducts (state, products) {
       state.products = products
     },
-    mutateFeaturedProducts (state, products) {
-      state.featuredProducts = products
+    mutateFeaturedIndexes (state, indexes) {
+      state.featuredIndexes = indexes
     },
     mutateFilterValues (state, filterValues) {
       state.filterValues = filterValues
@@ -116,8 +116,8 @@ export default {
         commit('mutateProducts', window.DWC_PLP.products)
       }
 
-      if (typeof window.DWC_PLP.featuredProducts !== 'undefined') {
-        commit('mutateFeaturedProducts', window.DWC_PLP.featuredProducts)
+      if (typeof window.DWC_PLP.featuredIndexes !== 'undefined') {
+        commit('mutateFeaturedIndexes', window.DWC_PLP.featuredIndexes)
       }
 
       if (typeof window.DWC_PLP.totalCount !== 'undefined') {
