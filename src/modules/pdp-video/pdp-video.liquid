@@ -1,0 +1,19 @@
+{%- assign title = title | default: false -%}
+{%- assign video_src = video_src | default: false -%}
+{%- assign mod_fallback_image = mod_fallback_image | default: false -%}
+{%- if video_src -%}
+  <section class="pdp-video" data-module="pdp-video">
+    {%- if title -%}
+      {%- render 'section-title', title: title, class: 'pdp-video__title bg--black' -%}
+    {%- endif -%}
+    <div class="pdp-video__inner">
+      {%- render 'video', 
+        mod_class: 'pdp-video__video',
+        mod_src: video_src, 
+        mod_fallback_mobile: mod_fallback_image, 
+        button_play: button_play, 
+        mod_disable_scroll_activate: true 
+      -%}
+    </div>
+  </section>
+{%- endif -%}

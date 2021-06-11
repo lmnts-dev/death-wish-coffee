@@ -94,3 +94,30 @@
     box-shadow: none;
   }
 }
+
+.video__icon-play {
+  width: 45px;
+  height: 45px;
+  fill: var(--blood);
+
+  @media (--lg) {
+    width: 118px;
+    height: 118px;
+  }
+}
+
+.video__button {
+  z-index: 9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  color: var(--blood);
+  border: 0;
+  box-shadow: none;
+
+  .video.active & {
+    display: none;
+  }
+}

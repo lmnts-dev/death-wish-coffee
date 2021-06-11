@@ -1,0 +1,9 @@
+<section class="cart" data-module="cart">
+  {% if cart.item_count < 1 %}
+  <p class="cart__empty b1">Your cart is currently empty.</p>  
+  {% elsif cart.item_count > 0 %}
+  <div class="cart__items">
+    {% render 'cart-items' %}
+  </div>
+  {% endif %}
+</section>

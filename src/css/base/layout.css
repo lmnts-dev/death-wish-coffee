@@ -193,3 +193,7 @@
     width: 25%;
   }
 }
+
+[v-cloak] {
+  display: none;
+}

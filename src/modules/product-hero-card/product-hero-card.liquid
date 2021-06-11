@@ -9,7 +9,7 @@
 {%- assign cta_text = cta_text | default: false -%}
 {%- capture class -%}product-hero-card{% if class %} {{ class }}{% endif %}{% endcapture -%}
 
-<section class="{{ class }} bg--shadow" data-module="product-hero-card">
+<section class="{{ class }}" data-module="product-hero-card">
   <div class="product-hero-card__wrapper">
     <div class="product-hero-card__inner">
       <a href="{{ url }}" class="product-hero-card__image-wrapper">

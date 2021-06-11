@@ -1,0 +1,13 @@
+{% layout none %}
+{%- paginate collection.products by 50 -%}
+  {%- capture product_json -%}
+    [
+    {%- for product in collection.products -%}
+      ,{%- render 'product-json', product: product -%}
+    {%- endfor -%}
+    ]
+  {%- endcapture -%}
+  {%- assign product_json = product_json | remove_first: ',' -%}
+
+  {{- product_json -}}
+{%- endpaginate -%}

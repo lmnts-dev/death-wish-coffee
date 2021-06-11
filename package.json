@@ -1,6 +1,6 @@
 {
   "name": "shopify-base-theme",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "A base shopify theme for custom theme development at Ruckus.",
   "main": "webpack.config.js",
   "scripts": {
@@ -107,6 +107,7 @@
     "vanilla-lazyload": "^16.1.0",
     "vue": "^2.6.11",
     "vue-quick-search": "0.0.2",
-    "vue-scrollto": "^2.13.0"
+    "vue-scrollto": "^2.13.0",
+    "vuex": "^3.6.2"
   }
 }
