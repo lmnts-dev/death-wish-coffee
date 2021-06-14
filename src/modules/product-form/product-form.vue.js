@@ -1,3 +1,4 @@
+import store from 'lib/store'
 import { formatPrice } from 'lib/util'
 
 export default {
@@ -97,11 +98,18 @@ export default {
 
       return formatPrice(matchedVariant ? matchedVariant.price : this.product.variants[0].price)
     },
-    resetSelectedOptions (e) {
-      e.target.submit()
+    async handleAddToCart () {
+      if (!this.selectedVariantId) {
+        return
+      }
+      await store.dispatch('cart/addToCart', { id: this.selectedVariantId, quantity: 1 })
       this.$nextTick(() => {
-        this.selectedOptions = { ...this.initialSelectedOptions }
+        this.resetSelectedOptions()
+        store.dispatch('cart/setIsPopOutCartActive', true)
       })
+    },
+    resetSelectedOptions () {
+      this.selectedOptions = { ...this.initialSelectedOptions }
     },
     handleVariantSelecting (e) {
       const variantId = parseInt(e.target.value)
