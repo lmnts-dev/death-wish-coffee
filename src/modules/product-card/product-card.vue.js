@@ -1,5 +1,6 @@
 import ProductForm from '../product-form/product-form.vue'
 import VImage from '../v-image/v-image.vue'
+import VVideo from '../v-video/v-video.vue'
 import { formatPrice, debounce } from 'lib/util'
 
 let yotpoApi = null
@@ -32,13 +33,15 @@ const refreshYotpo = debounce(() => {
 export default {
   components: {
     ProductForm,
-    VImage
+    VImage,
+    VVideo
   },
   props: {
     product: {
       type: Object,
       required: true
-    }
+    },
+    isFeatured: Boolean
   },
   watch: {
     product () {

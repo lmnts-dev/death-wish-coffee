@@ -29,6 +29,7 @@
               v-if="(productIndex === 2 || productIndex === 6) && getFeaturedProductForIndex(productIndex)"
               :product="getFeaturedProductForIndex(productIndex)"
               :class="['product-card--bg-dark product-card--plp', getFeaturedProductClass(productIndex)]"
+              :is-featured="true"
             {%- endcapture -%}
             {%- render 'product-card',
               class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',
