@@ -14,8 +14,8 @@ const carousel = el => {
   const slidesPerView = !isNaN(parseFloat(carousel.dataset.slidesPerView)) ? parseFloat(carousel.dataset.slidesPerView) : 1
   const spaceBetween = !isNaN(parseFloat(carousel.dataset.spacing)) ? parseFloat(carousel.dataset.spacing) : 0
 
-  const loop = !!carousel.dataset.loop
-  const totalSlides = carousel.querySelectorAll('.carousel-slide').length
+  const loop = carousel.dataset.loop === 'true'
+  const totalSlides = carousel.querySelectorAll('.swiper-slide').length
 
   const next = carousel.querySelector('.carousel-next')
   const prev = carousel.querySelector('.carousel-prev')
@@ -24,7 +24,7 @@ const carousel = el => {
   const paginationEl = carousel.querySelector('.carousel-pagination')
   const pagination = !!carousel.dataset.pagination && { pagination: { el: paginationEl, clickable: true } }
 
-  const enableSwipe = carousel.getAttribute('data-disable-swipe') === null
+  const allowTouchMove = totalSlides > 1
 
   const breakpoints = {
     xl: '1199',
@@ -63,7 +63,7 @@ const carousel = el => {
     spaceBetween: spaceBetween / 2,
     loop: loop,
     loopedSlides: totalSlides,
-    allowTouchMove: enableSwipe,
+    allowTouchMove,
     ...navigation,
     ...pagination,
     ...carouselBreakpoints

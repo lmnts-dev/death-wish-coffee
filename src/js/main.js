@@ -1,8 +1,9 @@
 import init from 'lib/init'
 import LazyLoad from 'vanilla-lazyload'
 import { contains, addClass, buildImageSrcset } from 'lib/util'
+import store from 'lib/store'
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   init().mount()
 
   const loadImg = new LazyLoad({
@@ -32,4 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addClass(elParent, 'img-loaded')
     }
   })
+
+  // Get cart data for Vuex state
+  await store.dispatch('cart/getCart')
 })

@@ -30,12 +30,21 @@ export default {
 
       return allValues
     },
-    filterAvailableValues ({ filterDefinitions }, { allProductOptionValues }) {
+    allProductTypeValues ({ products }) {
+      const allValues = []
+      for (const product of products) {
+        allValues.push(product.type.toLowerCase())
+      }
+      return [...new Set(allValues)]
+    },
+    filterAvailableValues ({ filterDefinitions }, { allProductOptionValues, allProductTypeValues }) {
       return filterDefinitions.reduce(
         (result, filter) => {
           // Generate all available options from the products in current collection
           if (filter.type === 'option' && allProductOptionValues[filter.name]) {
             result[filter.name] = allProductOptionValues[filter.name]
+          } else if (filter.type === 'type') {
+            result[filter.name] = allProductTypeValues
           } else {
             result[filter.name] = filter.options
           }
