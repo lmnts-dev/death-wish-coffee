@@ -3,8 +3,9 @@
 {% assign title = title | default: false %}
 {% assign description = description | default: false %}
 {% assign link = link | default: false %}
-{% assign product_id = product_id | default: true %}
+{% assign product_id = product_id | default: false %}
 {% assign price = price | default: false %}
+{% assign product_url = product_url | default: false %}
 {% capture class %}alt-product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }} bg--black" data-module="alt-product-card">
@@ -21,10 +22,12 @@
       {%- endcomment -%}
       {% if product_id %}
         <div class="b1 alt-product-card__review">
-          <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+          <a href="{{ link }}">
+            <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+          </a>
         </div>
       {% endif %}
-      <p class="h5 alt-product-card__price">{{ price }}</p>
+     <p class="h5 alt-product-card__price">{{ price }}</p>
       {% render 'button', button_value: 'Shop now', button_url: link, class: 'alt-product-card__button' %}
     </div>
   </div>
