@@ -7,7 +7,7 @@
 
 {% if is_vue %}
   <div is="cart-item-control" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif%}>
-    <div class="{{- class -}}" :class="{ 'is-updated': isUpdated }">
+    <div class="{{- class -}}" :class="{ 'is-updated': isUpdated }" :key="inputId">
       <div class="cart-item-control__field">
         <button class="cart-item-control__button cart-item-control__button--decrement" type="button" aria-label="{{ 'cart.label.aria_decrement' | t }}" @click="decrease">-</button>
         {% assign input_id = id_prefix | append: item.key %}
@@ -19,7 +19,7 @@
           label: input_label,
           type: 'number',
           value: item.quantity,
-          custom_attrs: ':min="min" size="1" :id="inputId" :initial-quantity="item.quantity" v-model="quantity"'
+          custom_attrs: ':min="min" size="1" :id="inputId" v-model="quantity"'
         %}
         <button class="cart-item-control__button cart-item-control__button--increment" type="button" aria-label="{{ 'cart.label.aria_increment' | t }}" @click="increase">+</button>
       </div>

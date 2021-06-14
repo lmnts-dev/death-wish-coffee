@@ -37,11 +37,11 @@ export default {
   methods: {
     decrease () {
       this.quantity = Math.max(this.quantity - 1, this.min)
-      this.isUpdated = true
+      this.isUpdated = this.quantity !== this.initialQuantity
     },
     increase () {
       this.quantity = Math.min(this.quantity + 1, this.max)
-      this.isUpdated = true
+      this.isUpdated = this.quantity !== this.initialQuantity
     },
     async submitUpdating () {
       await store.dispatch('cart/updateCart', { id: this.item.id, quantity: this.quantity })
