@@ -29,7 +29,6 @@ You can see more about how options are privided as HTML attributes here.
 {% assign spacing = spacing | default: 10 %}
 {% assign loop = loop | default: false %}
 {% assign title = title | default: false %}
-{% assign disable_swipe = disable_swipe | default: false %}
 {% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
 
 <div class="{{ class }}" data-module="carousel">
@@ -41,7 +40,6 @@ You can see more about how options are privided as HTML attributes here.
     data-slides-per-view="{{- slides_per_view -}}"
     data-spacing="{{- spacing -}}"  
     data-loop="{{- loop -}}"
-    {% if disable_swipe %}data-disable-swipe{% endif %}
     {% if autoplay %}data-autoplay="{{- autoplay -}}"{% endif %}
     {% if custom_params %} {{- custom_params -}}{% endif %}>
     <div class="carousel-wrapper{% if title or tagline or copy %} carousel-wrapper--margin-top{% endif %} swiper-wrapper">

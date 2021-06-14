@@ -87,12 +87,10 @@
 
   {%- assign featured_navigation = true -%}
   {%- assign featured_slides_per_view = 1 -%}
-  {%- assign featured_disable_swipe = false -%}
 
   {%- if featured_slides_count == 1 -%}
     {%- assign featured_navigation = false -%}
     {%- assign featured_slides_per_view = 0 -%}
-    {%- assign featured_disable_swipe = true -%}
   {%- endif -%}
 
   {%- render 'carousel',
@@ -102,8 +100,7 @@
     children: featured_slides,
     spacing: 0,
     slides_per_view: featured_slides_per_view,
-    navigation: featured_navigation,
-    disable_swipe: featured_disable_swipe
+    navigation: featured_navigation
   -%}
 {%- endif -%}
 
