@@ -10,14 +10,22 @@
       {% comment %}Hard code for mega menu banner{% endcomment %}
         <a href="{{ link.url }}" class="sub-menu__item-banner">
           {%- assign banner = 'mega_banner.jpg' | file_url -%}
-          {%- render 'image', src: banner, class: 'sub-menu__item-image' -%}
+          {%- capture image_url -%}
+            {% cycle 
+              'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Death_Wish_Coffee_Coffee_Products_Menu.jpg?v=1623655012',
+              'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Death_Wish_Coffee_Coffee_Merchandise_Menu.jpg?v=1623654999',
+              'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/Death_Wish_Coffee_Coffee_Subscription_Menu.jpg?v=1623655028',
+              banner
+            %}
+          {%- endcapture -%}
+          {%- render 'image', src: image_url, class: 'sub-menu__item-image' -%}
         </a>
       {% comment %}End hard code{% endcomment %}
       <a class="{{ prefix_class | append: '__item-link' }}{% if link.active == true %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
-      {%- if link.links.size > 0 -%}
-        <div class="menu__item-content">
-          {%- assign sub_level = level | plus: 1 -%}
-          {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
+        {%- if link.links.size > 0 -%}
+          <div class="menu__item-content">
+            {%- assign sub_level = level | plus: 1 -%}
+            {%- render 'menu', links: link.links, is_sub: true, level: sub_level -%}
         </div>
       {%- endif -%}
     </div>
