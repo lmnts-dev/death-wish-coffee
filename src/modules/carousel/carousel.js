@@ -14,7 +14,7 @@ const carousel = el => {
   const slidesPerView = !isNaN(parseFloat(carousel.dataset.slidesPerView)) ? parseFloat(carousel.dataset.slidesPerView) : 1
   const spaceBetween = !isNaN(parseFloat(carousel.dataset.spacing)) ? parseFloat(carousel.dataset.spacing) : 0
 
-  const loop = !!carousel.dataset.loop
+  const loop = carousel.dataset.loop === 'true'
   const totalSlides = carousel.querySelectorAll('.swiper-slide').length
 
   const next = carousel.querySelector('.carousel-next')
