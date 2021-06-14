@@ -1,3 +1,5 @@
+{%- assign mod_is_vue = mod_is_vue | default: false -%}
+{%- assign mod_vue_attrs = mod_vue_attrs | default: false -%}
 {%- assign mod_class = mod_class | default: blank -%}
 {%- assign mod_text = mod_text | default: blank -%}
 {%- assign mod_pos = mod_pos | default: 'center' -%}
@@ -13,42 +15,56 @@
   video pos-{{ mod_pos }} js-video-module {% if mod_src_mobile %}no-fallback{% endif %} {{ mod_class }}
 {%- endcapture -%}
 
-<div class="{{- mod_css -}}" data-module="video" {%if mod_disable_scroll_activate %}data-disable-scroll-activate{% endif%}>
-  <video
-    class="video__el js-video"
-    data-src="{{- mod_src -}}"
-    {% if mod_autoplay %}
-      autoplay="true"
-    {% endif %}
-    loop="true"
-    muted="true"
-    playsinline></video>
+{%- if mod_is_vue -%}
+  <div is="v-video" inline-template{% if mod_vue_attrs %} {{ mod_vue_attrs }}{% endif %}>
+    <div class="{{- mod_css -}}" {%if mod_disable_scroll_activate %}data-disable-scroll-activate{% endif%}>
+      <video
+        class="video__el js-video"
+        :data-src="src"
+        autoplay="true"
+        loop="true"
+        muted="true"
+        playsinline></video>
+    </div>
+  </div>
+{%- else -%}
+  <div class="{{- mod_css -}}" data-module="video" {%if mod_disable_scroll_activate %}data-disable-scroll-activate{% endif%}>
+    <video
+      class="video__el js-video"
+      data-src="{{- mod_src -}}"
+      {% if mod_autoplay %}
+        autoplay="true"
+      {% endif %}
+      loop="true"
+      muted="true"
+      playsinline></video>
 
-  {%- if mod_fallback_mobile -%}
-    {%- if mod_fallback_intermediate -%}
-      {%- capture mod_fallback_src_media -%}
-        <source media="(max-width: 444px)" data-srcset="{{- mod_fallback_mobile -}}">
-        <source media="(min-width: 445px)" data-srcset="{{- mod_fallback_intermediate -}}">
-      {%- endcapture -%}
+    {%- if mod_fallback_mobile -%}
+      {%- if mod_fallback_intermediate -%}
+        {%- capture mod_fallback_src_media -%}
+          <source media="(max-width: 444px)" data-srcset="{{- mod_fallback_mobile -}}">
+          <source media="(min-width: 445px)" data-srcset="{{- mod_fallback_intermediate -}}">
+        {%- endcapture -%}
+      {%- endif -%}
+
+      {%- render 'image',
+        class: 'video__fallback',
+        src: mod_fallback_mobile,
+        mod_src_media: mod_fallback_src_media,
+        mod_text: mod_text -%}
+
+      {%- assign mod_fallback_src_media = nil -%}
     {%- endif -%}
 
-    {%- render 'image',
-      class: 'video__fallback',
-      src: mod_fallback_mobile,
-      mod_src_media: mod_fallback_src_media,
-      mod_text: mod_text -%}
+    {% if button_play %}
+      <button class="video__button js-play">{% render 'svg' type: 'play', class: 'video__icon-play'%}</button>
+    {% endif %}
 
-    {%- assign mod_fallback_src_media = nil -%}
-  {%- endif -%}
-
-  {% if button_play %}
-    <button class="video__button js-play">{% render 'svg' type: 'play', class: 'video__icon-play'%}</button>
-  {% endif %}
-
-  {%- if mod_loader -%}
-    <i class="video__loader"></i>
-  {%- endif -%}
-  {% if mod_text %}
-    <h2 class="h3 ambient-video__title z5">{{- mod_text -}}</h2>
-  {% endif %}
-</div>
+    {%- if mod_loader -%}
+      <i class="video__loader"></i>
+    {%- endif -%}
+    {% if mod_text %}
+      <h2 class="h3 ambient-video__title z5">{{- mod_text -}}</h2>
+    {% endif %}
+  </div>
+{%- endif -%}
