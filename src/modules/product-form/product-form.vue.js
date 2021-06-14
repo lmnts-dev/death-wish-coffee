@@ -59,6 +59,13 @@ export default {
       return this.product.options[0]
     }
   },
+  watch: {
+    selectedVariantId (newValue) {
+      if (newValue) {
+        this.$emit('update-variant-id', newValue)
+      }
+    }
+  },
   methods: {
     sanitize (name) {
       return name.replace(/[^\w-]+/g, '')

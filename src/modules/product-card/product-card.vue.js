@@ -40,6 +40,19 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      selectedVariantId: null
+    }
+  },
+  computed: {
+    selectedVariant () {
+      return this.product.variants.find(v => v.id === this.selectedVariantId)
+    },
+    price () {
+      return this.selectedVariant ? this.selectedVariant.price : this.product.price
+    }
+  },
   watch: {
     product () {
       this.renderReviews()
@@ -51,7 +64,10 @@ export default {
         refreshYotpo()
       })
     },
-    formatPrice
+    formatPrice,
+    handleSelectedVariant (variantId) {
+      this.selectedVariantId = variantId
+    }
   },
   mounted () {
     this.renderReviews()
