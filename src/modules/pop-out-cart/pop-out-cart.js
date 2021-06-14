@@ -59,7 +59,24 @@ const popOutCart = (el) => {
     },
     computed: {
       ...mapState('cart', ['isPopOutCartActive']),
-      ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount'])
+      ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount', 'isClickedOutside'])
+    },
+    watch: {
+      isClickedOutside (newValue) {
+        if (newValue) {
+          store.dispatch('cart/setIsPopOutCartActive', false)
+        }
+      }
+    },
+    mounted () {
+      document.addEventListener('click', e => {
+        if (!this.$el.contains(e.target)) {
+          store.dispatch('cart/updateIsClickedOutsidePopOutCart', true)
+          setTimeout(() => {
+            store.dispatch('cart/updateIsClickedOutsidePopOutCart', false)
+          }, 10)
+        }
+      })
     },
     methods: {
       removeItem (item) {

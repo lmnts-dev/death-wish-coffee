@@ -6,7 +6,9 @@ export default {
   state: {
     cart: {},
     isPopOutCartActive: false,
-    addToCartErrorMessage: ''
+    addToCartErrorMessage: '',
+    isClickedOutsidePopOutCart: false,
+    isClickedOutsidePopOutCartTrigger: false
   },
   getters: {
     items ({ cart }) {
@@ -31,6 +33,9 @@ export default {
     },
     hasItems (state, { itemCount }) {
       return itemCount > 0
+    },
+    isClickedOutside ({ isClickedOutsidePopOutCart, isClickedOutsidePopOutCartTrigger }) {
+      return isClickedOutsidePopOutCart && isClickedOutsidePopOutCartTrigger
     }
   },
   mutations: {
@@ -42,11 +47,18 @@ export default {
     },
     mutateIsPopOutCartActive (state, value) {
       state.isPopOutCartActive = value
+    },
+    mutateIsClickedOutsidePopOutCart (state, value) {
+      state.isClickedOutsidePopOutCart = value
+    },
+    mutateIsClickedOutsidePopOutCartTrigger (state, value) {
+      state.isClickedOutsidePopOutCartTrigger = value
     }
   },
   actions: {
-    setIsPopOutCartActive ({ commit }, value) {
+    setIsPopOutCartActive ({ commit, dispatch }, value) {
       commit('mutateIsPopOutCartActive', value)
+      dispatch('resetClickedOutside')
     },
     setAddToCartErrorMessage ({ commit }, message) {
       commit('mutateAddToCartErrorMessage', message)
@@ -75,6 +87,16 @@ export default {
       if (!response.errors) {
         await dispatch('getCart')
       }
+    },
+    resetClickedOutside ({ dispatch }) {
+      dispatch('updateIsClickedOutsidePopOutCart', false)
+      dispatch('updateIsClickedOutsidePopOutCartTrigger', false)
+    },
+    updateIsClickedOutsidePopOutCart ({ commit }, value) {
+      commit('mutateIsClickedOutsidePopOutCart', value)
+    },
+    updateIsClickedOutsidePopOutCartTrigger ({ commit }, value) {
+      commit('mutateIsClickedOutsidePopOutCartTrigger', value)
     }
   }
 }

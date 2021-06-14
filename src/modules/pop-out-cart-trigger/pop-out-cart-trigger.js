@@ -18,6 +18,16 @@ const popoutcarttrigger = el => {
       ...mapState('cart', ['isPopOutCartActive']),
       ...mapGetters('cart', ['hasItems'])
     },
+    mounted () {
+      document.addEventListener('click', e => {
+        if (!this.$el.contains(e.target)) {
+          store.dispatch('cart/updateIsClickedOutsidePopOutCartTrigger', true)
+          setTimeout(() => {
+            store.dispatch('cart/updateIsClickedOutsidePopOutCartTrigger', false)
+          }, 10)
+        }
+      })
+    },
     methods: {
       togglePopOutCart () {
         const state = !this.isPopOutCartActive
