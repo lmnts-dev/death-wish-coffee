@@ -1,9 +1,15 @@
 {% assign class = class | default:false %}
+{%- assign product_acf = product.metafields.accentuate -%}
 {% capture class %}pdp-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }} bg--black" data-module="pdp-hero">
   <div class="pdp-hero__wrapper">
     {%- capture pdp_hero -%}
+      {%- if product_acf.video_loop_url != blank -%}
+        <div class="pdp-hero__item js-video-slide swiper-slide">
+          {%- render 'video', mod_src: product_acf.video_loop_url, mod_class: 'pdp-hero__video js-video' -%}
+        </div>
+      {%- endif -%}
       {% for media in product.media %}
         {% assign media_url = media | img_url: 'master' %}
           <div class="pdp-hero__item swiper-slide">
@@ -12,7 +18,7 @@
       {% endfor %}
     {%- endcapture -%}
     {%- render 'carousel',
-      class: 'carousel--pdp-hero',
+      class: 'carousel--pdp-hero js-carousel',
       children: pdp_hero,
       slides_per_view: 1,
       navigation: true
