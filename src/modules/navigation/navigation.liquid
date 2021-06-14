@@ -36,6 +36,16 @@
     <div class="navigation__utilities">
       <a href="{{ routes.account_url }}" class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</a>
       <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
+      <form action="/search" method="get" class="input-group search-bar {{ search_bar_location }}" role="search">
+        {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
+        <span class="input-group-btn">
+          <button type="submit" class="{{ search_btn_style }} icon-fallback-text">
+            <span class="icon icon-search" aria-hidden="true"></span>
+            <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+        </span>
+      </form>
       <button class="navigation__utilities-cart js-pop-out-cart-toggle{% if cart.item_count > 0 %} has-items{% endif %}"
               aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
               aria-expanded="false"

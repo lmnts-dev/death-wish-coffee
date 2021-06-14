@@ -25,6 +25,10 @@
   @media (--lg) {
     padding: 0;
   }
+
+  &.hide {
+    display: none;
+  }
 }
 
 .navigation__logo {
@@ -516,4 +520,21 @@
   @media (--lg) {
     display: none;
   }
+}
+
+.search-bar {
+  display: none;
+  max-width: 100%;
+
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.input-group .btn,
+.input-group .btn--secondary,
+.input-group .input-group-field {
+  height: 45px;
 }
