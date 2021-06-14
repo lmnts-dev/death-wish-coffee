@@ -35,6 +35,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   })
 
   // Get cart data for Vuex state
-  console.log(store)
   await store.dispatch('cart/getCart')
 })
