@@ -10,7 +10,7 @@ const pdpHero = (el) => {
   let swiper = null
   const customizeSwiper = swiper => {
     const videoEls = swiper.slides
-      .map(slide => slide.querySelector('.js-video'))
+      .map(slide => slide.querySelector('.js-video-module'))
       .filter(videoEl => videoEl && !contains(videoEl, 'is-loaded'))
     if (videoEls.length) {
       videoEls.map(videoEl => Video(videoEl))

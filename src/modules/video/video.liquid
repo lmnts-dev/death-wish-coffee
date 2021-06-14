@@ -10,7 +10,7 @@
 {%- assign mod_disable_scroll_activate = mod_disable_scroll_activate | default: false -%}
 
 {%- capture mod_css -%}
-  video pos-{{ mod_pos }} js-video {% if mod_src_mobile %}no-fallback{% endif %} {{ mod_class }}
+  video pos-{{ mod_pos }} js-video-module {% if mod_src_mobile %}no-fallback{% endif %} {{ mod_class }}
 {%- endcapture -%}
 
 <div class="{{- mod_css -}}" data-module="video" {%if mod_disable_scroll_activate %}data-disable-scroll-activate{% endif%}>
