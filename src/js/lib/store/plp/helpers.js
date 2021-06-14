@@ -3,6 +3,7 @@ import nanoajax from 'nanoajax'
 const areIntersected = (array1, array2) => array1.some(value => array2.includes(value))
 
 const filterByTypes = {
+  type: (filterName, filterTypes) => product => filterTypes.some(value => value === product.type.toLowerCase()),
   tag: (filterName, filterTags) => product => areIntersected(filterTags, product.tags.map(t => t.toLowerCase())),
   option: (filterName, filterOptions) => product =>
     areIntersected(
