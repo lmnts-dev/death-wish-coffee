@@ -1,0 +1,10 @@
+{%- assign class = class | default: false -%}
+{%- capture class -%}pop-out-cart-trigger{% if class %} {{ class }}{% endif %}{%- endcapture -%}
+<button
+  class="{{- class -}}"
+  :class="{ 'has-items': hasItems }"
+  aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
+  :aria-expanded="isPopOutCartActive"
+  @click="togglePopOutCart"
+  data-module="pop-out-cart-trigger"
+>{%- render 'svg', type: 'cart' -%}</button>
