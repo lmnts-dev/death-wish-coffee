@@ -208,3 +208,8 @@
     color: var(--white);
   }
 }
+
+.product-card__message {
+  margin-top: 5px;
+  color: var(--blood);
+}

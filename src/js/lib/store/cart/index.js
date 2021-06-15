@@ -6,7 +6,8 @@ export default {
   state: {
     cart: {},
     isPopOutCartActive: false,
-    addToCartErrorMessage: '',
+    addedToCartErrorMessage: '',
+    addedToCartSuccessfully: false,
     isClickedOutsidePopOutCart: false,
     isClickedOutsidePopOutCartTrigger: false
   },
@@ -42,8 +43,11 @@ export default {
     mutateCart (state, cart) {
       state.cart = Object.assign({}, cart)
     },
-    mutateAddToCartErrorMessage (state, message) {
-      state.addToCartErrorMessage = message
+    mutateAddedToCartErrorMessage (state, message) {
+      state.addedToCartErrorMessage = message
+    },
+    mutateAddedToCartSuccessfully (state, value) {
+      state.addedToCartSuccessfully = value
     },
     mutateIsPopOutCartActive (state, value) {
       state.isPopOutCartActive = value
@@ -60,27 +64,35 @@ export default {
       commit('mutateIsPopOutCartActive', value)
       dispatch('resetClickedOutside')
     },
-    setAddToCartErrorMessage ({ commit }, message) {
-      commit('mutateAddToCartErrorMessage', message)
+    setAddedToCartErrorMessage ({ commit }, message) {
+      commit('mutateAddedToCartErrorMessage', message)
+    },
+    setAddedToCartSuccessfully ({ commit }, value) {
+      commit('mutateAddedToCartSuccessfully', value)
     },
     setCart ({ commit }, cart) {
       commit('mutateCart', cart)
+    },
+    resetAddedToCart ({ dispatch }) {
+      dispatch('setAddedToCartErrorMessage', '')
+      dispatch('setAddedToCartSuccessfully', false)
     },
     async getCart ({ dispatch }) {
       const cart = await Cart.get()
       dispatch('setCart', cart)
     },
     async addToCart ({ dispatch }, { id, quantity }) {
-      dispatch('setAddToCartErrorMessage', '')
+      dispatch('resetAddedToCart')
       const result = await Cart.add({ id, quantity })
-      if (result.status) {
-        dispatch('setAddToCartErrorMessage', result.description)
-        setTimeout(() => {
-          dispatch('setAddToCartErrorMessage', '')
-        }, 5000)
+      if (result.errors) {
+        dispatch('setAddedToCartErrorMessage', result.description)
       } else {
         await dispatch('getCart')
+        dispatch('setAddedToCartSuccessfully', true)
       }
+      setTimeout(() => {
+        dispatch('resetAddedToCart')
+      }, 5000)
     },
     async updateCart ({ dispatch }, { id, quantity }) {
       const response = await Cart.update({ id, quantity })
