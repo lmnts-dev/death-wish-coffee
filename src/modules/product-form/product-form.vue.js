@@ -26,6 +26,9 @@ export default {
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
+    productName () {
+      return this.product.title
+    },
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
     },

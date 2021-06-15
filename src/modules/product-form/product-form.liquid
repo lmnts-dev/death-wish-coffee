@@ -32,7 +32,8 @@
                 {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
                 <div class="product-form__option-value-text">
                   <div class="product-form__option-value-name">
-                    ${value}
+                    <template v-if="value === 'Default Title'">${ productName }</template>
+                    <template v-else >${value}</template>
                   </div>
                   <div v-if="option === priceDecidingFactor"
                       class="product-form__option-price b1"
