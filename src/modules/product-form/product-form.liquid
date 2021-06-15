@@ -55,6 +55,9 @@
         {%- endif -%}
       </div>
     </div>
+    {%- unless is_vue_component -%}
+      <div v-if="!addedToCartSuccessfully && addedToCartErrorMessage" class="b1 product-form__message">${addedToCartErrorMessage}</div>
+    {%- endunless -%}
     <form method="post" action="/cart/add" @submit.prevent="handleAddToCart">
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">

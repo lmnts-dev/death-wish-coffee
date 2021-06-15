@@ -14,10 +14,10 @@
               </a>
               <div class="pop-out-cart__item-details">
                 <a href="{{ item.url | within: collections.all }}"
-                  class="pop-out-cart__item-title b2">{{ item.product.title }}</a>
+                  class="pop-out-cart__item-title h5">{{ item.product.title }}</a>
 
                 {% assign options = item.variant.options | join: ' / ' %}
-                <p class="pop-out-cart__item-subtext b3">{{ options }}</p>
+                <p class="pop-out-cart__item-subtext b1">{{ options }}</p>
 
                 {%- assign item_property_size = item.properties | size -%}
                 {% if item_property_size > 0 %}
