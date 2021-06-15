@@ -29,17 +29,17 @@
                 <div v-for="option in filterAvailableValues[filter.name]"
                     class="plp-filter__block-item"
                 >
-                  <label :class="['plp-filter__block-item__link', {'is-selected': selectedOptions.includes(filter.name + '|' + option)}]">
+                  <label :class="['plp-filter__block-item__link', {'is-selected': selectedOptions.includes(filter.name + '|' + option.value)}]">
                     <input class="plp-filter__block-item__state"
                           type="checkbox"
                           v-model="selectedOptions"
-                          :value="filter.name + '|' + option"
+                          :value="filter.name + '|' + option.value"
                     >
                     {% comment %}
                     TODO: Need svg assets of all available options
                     {%- render 'svg', type: matched_tag_handle, class: 'plp-filter__block-item__icon' -%}
                     {% endcomment %}
-                    <span class="plp-filter__block-item__link-text b1">${option}</span>
+                    <span class="plp-filter__block-item__link-text b1">${option.label}</span>
                   </label>
                 </div>
               </div>

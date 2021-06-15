@@ -19,23 +19,31 @@ export default {
 
       for (const product of products) {
         for (const [option, item] of Object.entries(product.options_by_name)) {
-          const values = item.option.values.map(v => v.toLowerCase())
+          const values = item.option.values.map(v => ({ value: v.toLowerCase(), label: v }))
           allValues[option] = (allValues[option] || []).concat(values)
         }
       }
       // De-duplicate
       for (const [option, values] of Object.entries(allValues)) {
-        allValues[option] = [...new Set(values)]
+        allValues[option] = values.reduce((result, v) => {
+          if (!result.some(r => r.value === v.value)) {
+            result.push(v)
+          }
+          return result
+        }, [])
       }
 
       return allValues
     },
     allProductTypeValues ({ products }) {
-      const allValues = []
-      for (const product of products) {
-        allValues.push(product.type.toLowerCase())
-      }
-      return [...new Set(allValues)]
+      const allValues = products.reduce((result, product) => {
+        const type = product.type
+        if (!result.some(r => r.value === type.toLowerCase())) {
+          result.push({ value: type.toLowerCase(), label: type })
+        }
+        return result
+      }, [])
+      return allValues
     },
     filterAvailableValues ({ filterDefinitions }, { allProductOptionValues, allProductTypeValues }) {
       return filterDefinitions.reduce(
@@ -46,7 +54,7 @@ export default {
           } else if (filter.type === 'type') {
             result[filter.name] = allProductTypeValues
           } else {
-            result[filter.name] = filter.options
+            result[filter.name] = filter.options.map(o => ({ value: o.toLowerCase(), label: o }))
           }
 
           return result
