@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from 'lib/store'
 import ProductForm from './product-form.vue'
 
 /**
@@ -12,6 +13,7 @@ const productFormRoot = el => {
     components: {
       ProductForm
     },
+    store,
     name: 'ProductFormRoot',
     delimiters: ['${', '}']
   })

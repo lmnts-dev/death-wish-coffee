@@ -1,6 +1,8 @@
 import Cart from 'lib/cart'
 import { formatPrice } from 'lib/util'
 
+let timeout = null
+
 export default {
   namespaced: true,
   state: {
@@ -83,6 +85,7 @@ export default {
     },
     async addToCart ({ dispatch }, { id, quantity }) {
       dispatch('resetAddedToCart')
+      clearTimeout(timeout)
       const result = await Cart.add({ id, quantity })
       if (result.errors) {
         dispatch('setAddedToCartErrorMessage', result.description)
@@ -90,7 +93,7 @@ export default {
         await dispatch('getCart')
         dispatch('setAddedToCartSuccessfully', true)
       }
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         dispatch('resetAddedToCart')
       }, 5000)
     },
