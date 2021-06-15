@@ -1,6 +1,16 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.22 - 2021-06-15
+### CHANGED:
+- DIC-102 Update message for product detail page after adding to cart with errors 
+- DIC-102 Update message for product card after adding to cart with errors 
+- DIC-92 Update filter options to match product correctly 
+- fix product hero card overlay bug 
+- change checkout input to button module 
+- wire up checkout button 
+- update cart item font sizes 
+
 ## 0.0.21 - 2021-06-14
 ### CHANGED:
 - Fix bug break layout for carousel single item 
