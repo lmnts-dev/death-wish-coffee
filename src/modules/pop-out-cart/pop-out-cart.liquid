@@ -1,3 +1,28 @@
+{% assign upscribe_total = 0 %}
+{% assign subscription_in_cart = false %}
+
+{% assign cart_has_subscription_item = 'false' %}
+{% for i in cart.items %}
+	{% for p in i.properties %}
+		{% if p.first == 'Subscription' %}
+			{% assign cart_has_subscription_item = 'true' %}
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+{% if cart_has_subscription_item == 'true' %}
+	<style>
+  .extra-checkout-buttons,
+  .additional-checkout-button,
+  .additional-checkout-buttons,
+  .amazon-payments-pay-button,
+  .google-wallet-button-holder,
+  #additional-checkout-buttons,
+  #a_p_c {
+    display: none !important;
+  }
+	</style>
+{% endif %}
+
 {% assign class = class | default: false %}
 {% capture class %}pop-out-cart{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
@@ -15,6 +40,30 @@
       <form action="/cart" class="pop-out-cart__form" method="post" novalidate>
         <div class="pop-out-cart__list">
         {% for item in cart.items %}
+
+          {% for p in item.properties %}
+            {% if p.first == 'Subscription Product Title' %}
+              {%- assign subscription_title = p.last -%}
+            {% endif %}
+
+            {% if p.first == 'Subscription Amount' %}
+              {%- assign subscription_amount = p.last -%}
+            {% endif %}
+
+            {% if p.first == 'Discount Amount' %}
+              {%- assign discount_amount = p.last -%}
+            {% endif %}
+          {% endfor %}
+
+          {% if subscription_amount %}
+            {% assign subscription_in_cart = true %}
+            {% assign subscription_line_price_total = subscription_amount | times: item.quantity %}
+          {% else %}
+            {% assign subscription_line_price_total = item.discounted_price | times: item.quantity %}
+          {% endif %}
+
+          {% assign upscribe_total = upscribe_total | plus: subscription_line_price_total %}
+
           {% assign item_image = item.image | img_url: 'master' %}
           <div class="pop-out-cart__item">
             <a class="pop-out-cart__item-image" href="{{ item.url | within: collections.all }}">
@@ -22,7 +71,13 @@
             </a>
             <div class="pop-out-cart__item-details">
               <a href="{{ item.url | within: collections.all }}"
-                 class="pop-out-cart__item-title b2">{{ item.product.title }}</a>
+                 class="pop-out-cart__item-title b2">
+                {%- if subscription_title -%}
+                  {{ subscription_title }}
+                {%- else -%}
+                  {{ item.product.title }}
+                {%- endif -%}
+                </a>
 
               {% assign options = item.variant.options | join: ' / ' %}
               <p class="pop-out-cart__item-subtext b3">{{ options }}</p>
@@ -30,7 +85,16 @@
               {%- assign item_property_size = item.properties | size -%}
               {% if item_property_size > 0 %}
                 {% for p in item.properties %}
-                  {% unless p.last == blank %}
+                  {% unless p.last == blank or
+                    p.first == 'Subscription Product Title' or
+                    p.first == 'Subscription Amount' or
+                    p.first == 'Discount Amount' or
+                    p.first == 'Recurring Discount Amount' or
+                    p.first == 'Recurring Discount After Order' or
+                    p.first == 'Interval Frequency' or
+                    p.first == 'Interval Unit' or
+                    p.first == 'Charge Limit'
+                  %}
                     <p class="pop-out-cart__item-subtext b3">
                       {{ p.first }}: {{ p.last }}
                     </p>
@@ -45,7 +109,11 @@
                   id_prefix: 'pop-out-cart-'
                 %}
 
-                <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
+                {% if subscription_amount and subscription_line_price_total %}
+                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ subscription_line_price_total | money }}</p>
+                {% else %}
+                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
+                {% endif %}
               </div>
             </div>
 
@@ -53,13 +121,25 @@
               X
             </a>
           </div>
+
+
+          {%- assign subscription_amount = false -%}
+          {%- assign subscription_title = false -%}
+          {%- assign discount_amount = false -%}
+
         {% endfor %}
         </div>
 
         <div class="pop-out-cart__footer">
           <p class="pop-out-cart__summary-row">
             <span>{{ 'cart.general.subtotal' | t }}</span>
-            <span>{{ cart.total_price | money }}</span>
+
+            {% if subscription_in_cart %}
+              <span>{{ upscribe_total | money }}</span>
+            {% else %}
+              <span>{{ cart.total_price | money }}</span>
+            {% endif %}
+
           </p>
 
           {% if cart.total_discounts > 0 %}
@@ -73,7 +153,13 @@
 
           <p class="b3">{{ 'cart.general.shipping_at_checkout' | t }}</p>
 
-          <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
+
+
+          {% if subscription_in_cart %}
+            <button onclick="window.upscribeBuildCheckout()" class="upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
+          {% else %}
+            <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
+          {% endif %}
         </div>
       </form>
     {% else %}

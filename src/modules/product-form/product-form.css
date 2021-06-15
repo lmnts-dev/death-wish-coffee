@@ -100,7 +100,7 @@
     border-right: none;
   }
 
-  .product-form__option-value:nth-child(n+4) & {
+  .product-form__option-value:nth-child(n + 4) & {
     border-top: 1px solid var(--shadow);
   }
 

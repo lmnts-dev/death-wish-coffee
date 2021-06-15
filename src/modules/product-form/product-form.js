@@ -22,6 +22,7 @@ const productform = el => {
     for (const priceEl of priceEls) {
       const priceMatchOption = priceEl.getAttribute('data-match-option')
       const isMatched = variantTitle.indexOf(priceMatchOption) >= 0
+
       if (isMatched) {
         addClass(priceEl, 'active')
       } else {
@@ -44,6 +45,12 @@ const productform = el => {
           if (optionEl.getAttribute('data-title') === selectedTitle) {
             selectedValue = optionEl.value
             optionEl.selected = true
+            const variant = optionEl.getAttribute('data-variant')
+            if (variant) {
+              window.dispatchEvent(new CustomEvent('upscribeVariantUpdate', {
+                detail: JSON.parse(variant)
+              }))
+            }
           } else {
             optionEl.selected = false
           }

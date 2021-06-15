@@ -40,8 +40,9 @@
               aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
               aria-expanded="false"
       >{%- render 'svg', type: 'cart' -%}</button>
-      
+
     </div>
+    {%- render 'upscribe-cart-logic -%}
 
     {% render 'pop-out-cart' %}
   </div>

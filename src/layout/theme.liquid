@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
   <link rel="canonical" href="{{- canonical_url -}}">
-  
+
   {%- include 'alternate-urls' -%}
 
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -43,6 +43,8 @@
     {{ content_for_layout }}
   </main>
   {%- render 'footer' -%}
+
+  {% include 'upscribe-cart-logic' %}
 
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}

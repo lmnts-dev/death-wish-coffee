@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
   <link rel="canonical" href="{{- canonical_url -}}">
-  
+
   {%- include 'alternate-urls' -%}
 
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -39,6 +39,17 @@
       {%- assign account_title = account_title | upcase -%}
       {%- render 'section-title', title: account_title, class: 'section-title--account'  -%}
       <div class="account-wrapper__left">
+
+      {%- for tag in customer.tags -%}
+          {%- if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'-%}
+              {% assign is_upscribe_customer = true %}
+          {%- endif -%}
+      {%- endfor -%}
+
+        {%- if is_upscribe_customer -%}
+            <a href="https://{{ shop.domain }}/account?view=subscriptions#/">Your Subscription</a>
+        {%- endif -%}
+
         {%- render 'account-sidebar-menu' -%}
         {%- render 'customer-info' -%}
       </div>
