@@ -1,3 +1,4 @@
+import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
 
@@ -24,6 +25,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
     },
@@ -105,7 +107,11 @@ export default {
       await store.dispatch('cart/addToCart', { id: this.selectedVariantId, quantity: 1 })
       this.$nextTick(() => {
         this.resetSelectedOptions()
-        store.dispatch('cart/setIsPopOutCartActive', true)
+        if (this.addedToCartSuccessfully) {
+          store.dispatch('cart/setIsPopOutCartActive', true)
+        } else {
+          this.$emit('added-to-cart-error')
+        }
       })
     },
     resetSelectedOptions () {

@@ -58,6 +58,9 @@ class Cart {
         },
         (code, responseText) => {
           const cart = JSON.parse(responseText)
+          if (Number(code) !== 200) {
+            cart.errors = [cart.description]
+          }
           resolve(cart)
         }
       )

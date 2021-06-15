@@ -1,3 +1,4 @@
+import { mapState } from 'vuex'
 import ProductForm from '../product-form/product-form.vue'
 import VImage from '../v-image/v-image.vue'
 import VVideo from '../v-video/v-video.vue'
@@ -45,10 +46,12 @@ export default {
   },
   data () {
     return {
+      shouldShowMessage: false,
       selectedVariantId: null
     }
   },
   computed: {
+    ...mapState('cart', ['addedToCartErrorMessage']),
     selectedVariant () {
       return this.product.variants.find(v => v.id === this.selectedVariantId)
     },
@@ -59,6 +62,11 @@ export default {
   watch: {
     product () {
       this.renderReviews()
+    },
+    addedToCartErrorMessage (newValue) {
+      if (!newValue) {
+        this.shouldShowMessage = false
+      }
     }
   },
   methods: {
@@ -70,6 +78,9 @@ export default {
     formatPrice,
     handleSelectedVariant (variantId) {
       this.selectedVariantId = variantId
+    },
+    handleAddedToCartError () {
+      this.shouldShowMessage = true
     }
   },
   mounted () {
