@@ -1,4 +1,11 @@
-/* styles for the plp-sort-header module go in this file */
+.plp-sort-header {
+  @media (--lg) {
+    position: absolute;
+    top: 0;
+    left: 367px;
+    right: 0;
+  }
+}
 
 .plp-sort-header__inner {
   display: flex;

@@ -1,6 +1,136 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.22 - 2021-06-15
+### CHANGED:
+- DIC-102 Update message for product detail page after adding to cart with errors 
+- DIC-102 Update message for product card after adding to cart with errors 
+- DIC-92 Update filter options to match product correctly 
+- fix product hero card overlay bug 
+- change checkout input to button module 
+- wire up checkout button 
+- update cart item font sizes 
+
+## 0.0.21 - 2021-06-14
+### CHANGED:
+- Fix bug break layout for carousel single item 
+- Remove debug code 
+- Remove unused codes 
+- Handle click outside to close pop out cart 
+- Show update button for cart item only when there is quantity change 
+- Handle cart update on pop out cart 
+- Scaffold cart item quantity 
+- Show pop out cart after adding to cart 
+- DIC-106 Update logic for featured carousel single item 
+- Wire pop out cart with vue data 
+- Scaffold cart vuex 
+- DIC-105 Fix product json data 
+- DIC-105 Add video for featured product card 
+- DIC-107 Change image for Shop drop down menu 
+- DIC-105 Update video module class 
+- DIC-105 Add video loop for pdp 
+- DIC-92 Update filter Type for merch collection 
+- DIC-108 Update price change for product card after selecting variant 
+- DIC-87 Fix Roast filter on coffee collection 
+- reduce bottom padding 
+- reduce plp padding on mobile 
+- add carousel product card title and image ACF fields 
+- Merge branch 'develop' into feature/review-stars 
+- add margin between price and review stars 
+- pass product url down to card module 
+- add margin top to review stars 
+- pass product object to review drawer 
+- fix class name typo 
+- link review stars to pdp 
+- center review stars 
+
+## 0.0.20 - 2021-06-11
+### CHANGED:
+- DIC-99 Fix style for variant select on small desktop 
+- DIC-99 Fix style for variant select on PLP tablet 
+- DIC-99 Fix style for variant select on product card module 
+- DIC-103 Update border red when hover for featured carousel 
+- set article featured image as default image 
+- override fallback image if featured img present 
+- wire-up reorder button in order details page 
+- add navigation arrows 
+- show next & prev slide edges on mobile 
+- remove free shipping header from cart sidebar 
+- modify cart title font weight 
+- DIC-98 Fix background color for feature carousel on PLP 
+- add /cart module components 
+
+## 0.0.19 - 2021-06-11
+### CHANGED:
+- Update matched button color for merch template 
+- Remove unused template 
+- DIC-97 Update product form for merch product 
+- DIC-97 Update render condition for media hero grid 
+- DIC-97 Add coffee and coffee-lto template for product 
+- DIC-100 Update style and function for video module on PDP 
+- DIC-97 Add merch template for product 
+- DIC-97 Add related featured products in case of blank ACF field 
+- DIC-97 Add module video for product page 
+- DIC-97 Update undraggable option for carousel when there is one item 
+- DIC-97 Add bolt template for product 
+- DIC-104 Update featured products on plp 
+- Hide filter if no options available 
+- DIC-101 Fix case sensitive for plp filter options 
+- Reset product options when adding to cart and display price on the correct option 
+- Remove quick shop, click on product card overlay now goes to PDP 
+- Fix indent 
+- Fix collection filter vs grid width 
+- Load products via AJAX 
+- Prevent flash of unrendered content 
+- Implement mobile filtering 
+- Fix incorrect product count when filtering 
+- DIC-96 Update filter title spacing on plp 
+- DIC-95 Update plp container 
+- Fix missing new line 
+- Implement sorting 
+- Refactor PLP into Vue and implement basic filtering on desktop 
+- Convert product card into Vue instance 
+- Remove redundant code in product form 
+- Update package.json 
+- Scaffold collection vuex store 
+- Add missing product json module 
+- Convert product form module to Vue 
+- Optimize logo svg to remove style tag 
+
+## 0.0.18 - 2021-06-09
+### CHANGED:
+- increase post-navigation padding top 
+
+## 0.0.17 - 2021-06-09
+### CHANGED:
+- DIC-91 Fix bug data do not render for featured articles on homepage 
+- DIC-91 Fix style for Featured Articles on Homepage 
+- DIC-84 Fix spacing for customer addresses 
+- remove checked property of radio inputs on button click 
+- add pdp link to product card image overlay 
+- add cursor pointer to pdp card overlay 
+- add product hero card ACF image field 
+- remove quickshop and close buttons 
+- add reivew drawer toggle function 
+- increase signup signin title font size 
+- pass product reference from ACF to carousel 
+- DIC-89 Add bolts for super hero cta 
+- DIC-82 Remove style uppercase from title on order history 
+- DIC-78 Update style for order details 
+- DIC-90 Redirect to forgot password form after submitting 
+- DIC-71 Update fallback images for post hero 
+- DIC-71 Update fallback images for post card 
+- DIC-71 Update fallback images for article hero card 
+- configure accentuate field in sub her carousel 
+- add href to carousel cateogry titles 
+- adjust position of pop out cart arrow 
+- contain elements and styles from excerpt object 
+- DIC-78 Update style for order details (WIP) 
+- DIC-57 Fix featured product carousel not show same type 
+- DIC-64 Fix bug pricing not display on PDP 
+- DIC-82 Add order history 
+- DIC-86 Add yotpo reviews for product card and product hero card module 
+
 ## 0.0.16 - 2021-06-06
 ### CHANGED:
 - add margin between footer and store locator 

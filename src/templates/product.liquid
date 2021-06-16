@@ -14,21 +14,23 @@
 -%}
 
 {%- render 'media-hero-grid' -%}
-{%- render 'review-drawer', title: 'DON’T TAKE OUR WORD FOR IT, TAKE THEIRS.' -%}
+{%- render 'review-drawer', title: 'DON’T TAKE OUR WORD FOR IT, TAKE THEIRS.', product: product -%}
 
 {%- assign list_products = product_acf.accentuate.pdp_featured_products_selector -%}
 {%- assign section_title_hero = product_acf.accentuate.pdp_featured_products_heading -%}
 
 {%- if product_acf.accentuate.pdp_featured_products_selector == blank -%}
   {%- assign count = 1 -%}
-  {% for item in collections.all.products %}
-    {%- if item.type == product.type and item.id != product.id -%}
-      {%- if count <= 8 -%}
-        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+  {%- paginate collections.all.products by 9999 -%}
+    {% for item in collections.all.products %}
+      {%- if item.type == product.type and item.id != product.id -%}
+        {%- if count <= 8 -%}
+          {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+        {%- endif -%}
+        {%- assign count = count | plus: 1 -%}
       {%- endif -%}
-      {%- assign count = count | plus: 1 -%}
-    {%- endif -%}
-  {% endfor %}
+    {% endfor %}
+  {%- endpaginate -%}
 {%- endif -%}
 
 {%- if list_products != blank -%}
@@ -41,7 +43,6 @@
       {% assign title = product.title %}
       {% assign image_url = product.images[1] | img_url: 'master' %}
       {% assign url = product.url %}
-      {% assign reviews = 'Review' %}
       {%- capture price %}
         {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
       {%- endcapture -%}
@@ -56,19 +57,19 @@
           price: price,
           description: description,
           sub_description: sub_description,
-          reviews: reviews,
-          cta_text: cta_text
+          cta_text: cta_text,
+          product_id: product.id
         -%}
       {%- endif -%}
     {% endfor %}
   {%- endcapture -%}
 
   {%- assign navigation_carousel = true -%}
-  {%- assign slides_per_view_carousel = 1 -%}
+  {%- assign carousel_loop = true -%}
 
   {%- if count_carousel == 1 -%}
     {%- assign navigation_carousel = false -%}
-    {%- assign slides_per_view_carousel = 0 -%}
+    {%- assign carousel_loop = false -%}
   {%- endif -%}
 
   {%- render 'carousel',
@@ -78,6 +79,7 @@
     children: content_slides,
     spacing: 0,
     slides_per_view: slides_per_view_carousel,
+    loop: carousel_loop,
     navigation: navigation_carousel
   -%}
 {%- endif -%}

@@ -28,86 +28,43 @@
 
 <section role="dialog"
          class="{{ class }} z1"
-         data-toggle-selector=".js-pop-out-cart-toggle"
          data-module="pop-out-cart"
          aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
-         aria-hidden="true"
+         :class="{ 'is-active': isPopOutCartActive }"
+         :aria-hidden="!isPopOutCartActive"
 >
   <div class="pop-out-cart__inner bg--shadow">
     <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
 
-    {% if cart.item_count > 0 %}
+    <template v-if="items.length">
       <form action="/cart" class="pop-out-cart__form" method="post" novalidate>
         <div class="pop-out-cart__list">
-        {% for item in cart.items %}
+          <template v-for="(item, index) in items">
+            {% assign item_image = item.image | img_url: 'master' %}
+            <div class="pop-out-cart__item" :key="item.key">
+              <a class="pop-out-cart__item-image" :href="item.url">
+                {% render 'image', vue_attrs: ':image-src="item.image" :alt="item.title"' %}
+              </a>
+              <div class="pop-out-cart__item-details">
+                <a :href="item.url" class="pop-out-cart__item-title b2">${item.product_title}</a>
 
-          {% for p in item.properties %}
-            {% if p.first == 'Subscription Product Title' %}
-              {%- assign subscription_title = p.last -%}
-            {% endif %}
+                <p class="pop-out-cart__item-subtext b3">${item.variant_title}</p>
 
-            {% if p.first == 'Subscription Amount' %}
-              {%- assign subscription_amount = p.last -%}
-            {% endif %}
-
-            {% if p.first == 'Discount Amount' %}
-              {%- assign discount_amount = p.last -%}
-            {% endif %}
-          {% endfor %}
-
-          {% if subscription_amount %}
-            {% assign subscription_in_cart = true %}
-            {% assign subscription_line_price_total = subscription_amount | times: item.quantity %}
-          {% else %}
-            {% assign subscription_line_price_total = item.discounted_price | times: item.quantity %}
-          {% endif %}
-
-          {% assign upscribe_total = upscribe_total | plus: subscription_line_price_total %}
-
-          {% assign item_image = item.image | img_url: 'master' %}
-          <div class="pop-out-cart__item">
-            <a class="pop-out-cart__item-image" href="{{ item.url | within: collections.all }}">
-              {% render 'image', src: item_image, alt: item.title %}
-            </a>
-            <div class="pop-out-cart__item-details">
-              <a href="{{ item.url | within: collections.all }}"
-                 class="pop-out-cart__item-title b2">
-                {%- if subscription_title -%}
-                  {{ subscription_title }}
-                {%- else -%}
-                  {{ item.product.title }}
-                {%- endif -%}
-                </a>
-
-              {% assign options = item.variant.options | join: ' / ' %}
-              <p class="pop-out-cart__item-subtext b3">{{ options }}</p>
-
-              {%- assign item_property_size = item.properties | size -%}
-              {% if item_property_size > 0 %}
-                {% for p in item.properties %}
-                  {% unless p.last == blank or
-                    p.first == 'Subscription Product Title' or
-                    p.first == 'Subscription Amount' or
-                    p.first == 'Discount Amount' or
-                    p.first == 'Recurring Discount Amount' or
-                    p.first == 'Recurring Discount After Order' or
-                    p.first == 'Interval Frequency' or
-                    p.first == 'Interval Unit' or
-                    p.first == 'Charge Limit'
-                  %}
-                    <p class="pop-out-cart__item-subtext b3">
-                      {{ p.first }}: {{ p.last }}
+                <template v-if="item.properties && item.properties.length">
+                  <template v-for="property in item.properties">
+                    <p v-if="property.length > 1" class="pop-out-cart__item-subtext b3">
+                      ${property[0]}: ${property[1]}
                     </p>
-                  {% endunless %}
-                {% endfor %}
-              {% endif %}
+                  </template>
+                </template>
 
-              <div class="pop-out-cart__item-controls">
-                {% render 'cart-item-control',
-                  item: item,
-                  class: 'pop-out-cart__item-quantity',
-                  id_prefix: 'pop-out-cart-'
-                %}
+                <div class="pop-out-cart__item-controls">
+                  {% render 'cart-item-control',
+                    is_vue: true,
+                    vue_attrs: ':item="item" id-prefix="pop-out-cart-" :min="1" :initial-quantity="item.quantity"',
+                    class: 'pop-out-cart__item-quantity',
+                    id_prefix: 'pop-out-cart-'
+                  %}
 
                 {% if subscription_amount and subscription_line_price_total %}
                   <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ subscription_line_price_total | money }}</p>
@@ -115,39 +72,24 @@
                   <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
                 {% endif %}
               </div>
+
+              <a class="pop-out-cart__item-remove b2" href="#" aria-label="{{ 'cart.general.remove' | t }}" @click.prevent="removeItem(item)">
+                X
+              </a>
             </div>
-
-            <a class="pop-out-cart__item-remove b2" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="{{ 'cart.general.remove' | t }}">
-              X
-            </a>
-          </div>
-
-
-          {%- assign subscription_amount = false -%}
-          {%- assign subscription_title = false -%}
-          {%- assign discount_amount = false -%}
-
-        {% endfor %}
+          </template>
         </div>
 
         <div class="pop-out-cart__footer">
           <p class="pop-out-cart__summary-row">
             <span>{{ 'cart.general.subtotal' | t }}</span>
-
-            {% if subscription_in_cart %}
-              <span>{{ upscribe_total | money }}</span>
-            {% else %}
-              <span>{{ cart.total_price | money }}</span>
-            {% endif %}
-
+            <span>${formattedTotalPrice}</span>
           </p>
 
-          {% if cart.total_discounts > 0 %}
-            <p class="pop-out-cart__summary-row">
-              <span>{{ 'cart.general.savings' | t }}</span>
-              <span>{{ cart.total_discounts | money }}</span>
-            </p>
-          {% endif %}
+          <p v-if="totalDiscount" class="pop-out-cart__summary-row">
+            <span>{{ 'cart.general.savings' | t }}</span>
+            <span>${formattedTotalDiscount}</span>
+          </p>
 
           <p class="pop-out-cart__free-shipping b4">{{ 'cart.general.free_shipping' | t }}</p>
 
@@ -162,11 +104,12 @@
           {% endif %}
         </div>
       </form>
-    {% else %}
+    </template>
+    <template v-else>
       <p class="pop-out-cart__empty">{{ 'cart.general.empty' | t }}</p>
       <div class="pop-out-cart__footer">
         <a href="/collections/all" class="button button--small-h button--full">{{ 'cart.general.shop_all' | t }}</a>
       </div>
-    {% endif %}
+    </template>
   </div>
 </section>

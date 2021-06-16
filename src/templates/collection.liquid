@@ -1,6 +1,7 @@
 {%- layout 'theme' -%}
 {% assign acf = collection.metafields.accentuate %}
 {% assign list_products = acf.collection_hero_carou_product | default: blank %}
+{% assign list_products_images = acf.collection_carou_feat_media | map: 'src' | default: blank %}
 
 {%- render 'breadcrumbs' -%}
 
@@ -14,8 +15,8 @@
       {%- assign count = count | plus: 1 -%}
     {%- elsif collection.handle == 'all' -%}
       {%- if count <= 8 -%}
-          {%- assign list_products = list_products | append: item.handle | append: '|' -%}
-        {%- endif -%}
+        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+      {%- endif -%}
       {%- assign count = count | plus: 1 -%}
     {%- endif -%}
   {% endfor %}
@@ -29,16 +30,20 @@
       {%- assign count_carousel = count_carousel | plus: 1 -%}
       {%- assign product = all_products[handle] -%}
       {% assign title = product.title %}
-      {% assign image_url = product.images[1] | img_url: 'master' %}
       {% assign url = product.url %}
       {% assign reviews = 'Review' %}
+      {% if list_products_images != blank %}
+        {% assign image_url = list_products_images[forloop.index0]%}
+      {% else %}
+        {% assign image_url = product.images[0] | img_url: 'master' %}
+      {% endif %}
       {%- capture price %}
         {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
       {%- endcapture -%}
       {%- assign description = product.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}
       {%- if title != blank -%}
-        {%- render 'product-hero-card'
+        {%- render 'product-hero-card',
           class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
           title: title,
           image_url: image_url,
@@ -46,8 +51,8 @@
           price: price,
           description: description,
           sub_description: sub_description,
-          reviews: reviews,
-          cta_text: cta_text
+          cta_text: cta_text,
+          product_id: product.id
         -%}
       {%- endif -%}
     {% endfor %}
@@ -55,10 +60,11 @@
 
   {%- assign navigation_carousel = true -%}
   {%- assign slides_per_view_carousel = 1 -%}
+  {%- assign carousel_loop = true -%}
 
   {%- if count_carousel == 1 -%}
     {%- assign navigation_carousel = false -%}
-    {%- assign slides_per_view_carousel = 0 -%}
+    {%- assign carousel_loop = false -%}
   {%- endif -%}
 
   {%- render 'carousel',
@@ -66,24 +72,97 @@
     children: content_slides,
     spacing: 0,
     slides_per_view: slides_per_view_carousel,
-    navigation: navigation_carousel 
+    loop: carousel_loop,
+    navigation: navigation_carousel
   -%}
 {%- endif -%}
 
-{%- capture acf_filters -%}
-  {%- if acf.apparel_type_selector != blank -%}
-    Title:Apparel Type|{{- acf.apparel_type_selector -}}
-  {%- endif -%}
-{%- endcapture -%}
-{%- render 'plp',
-  class: 'bg--black',
-  acf_filters: acf_filters,
-  plp_order_selector: acf.plp_order_selector,
-  plp_featured_item_selector: acf.plp_featured_item_selector
--%}
+{%- render 'plp', class: 'bg--black' -%}
 {%- if collection.metafields.collections.footer_cta_heading != blank -%}
   {%- render 'footer-cta',
     title: collection.metafields.collections.footer_cta_heading,
-    enable_subscribe_form: true 
+    enable_subscribe_form: true
   -%}
 {%- endif -%}
+
+{%- paginate collection.products by 50 -%}
+  {%- capture product_json -%}
+    [
+    {%- for product in collection.products -%}
+      ,{%- render 'product-json', product: product -%}
+    {%- endfor -%}
+    ]
+  {%- endcapture -%}
+  {% assign product_json = product_json | remove_first: ',' %}
+  <script>
+    window.DWC_PLP = {
+      definitions: [
+        {%- case collection.handle -%}
+          {%- when 'coffee' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium',
+                'light'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+          {%- when 'merch' -%}
+            {
+              name: 'Category',
+              type: 'tag',
+              options: [
+                'Apparel',
+                'Mug',
+                'At Home',
+                'Active',
+                'Oddities',
+                'Collab'
+              ]
+            },
+            {
+              name: 'Type',
+              type: 'type'
+            },
+            {
+              name: 'Gender',
+              type: 'tag',
+              options: [
+                'Male',
+                'Female',
+                'Unisex'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+        {%- endcase -%}
+      ],
+      products: {{ product_json }},
+      featuredIndexes: [2, 6],
+      totalCount: {{ collection.all_products_count }},
+      totalPages: {{ paginate.pages }}
+    }
+  </script>
+{%- endpaginate -%}

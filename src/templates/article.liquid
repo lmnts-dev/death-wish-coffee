@@ -2,13 +2,22 @@
 
 {%- assign blog_acf = blog.metafields.accentuate -%}
 {%- assign fallback_images = blog_acf.default_image | first -%}
+{%- assign fallback_images_mobile = blog_acf.default_image_mobile | first -%}
 {%- assign post_hero_image = fallback_images.src -%}
+{%- assign post_hero_image_mobile = fallback_images_mobile.src -%}
+{%- assign featured_image = article.image.src | img_url: 'master' -%}
 
-{%- if article.metafields.post_hero.image != blank -%}
-  {%- assign post_hero_image = article.metafields.post_hero.image | map: 'src' -%}
-{%- endif -%}
+{% capture post_hero_image %}
+  {% if featured_image contains 'no-image' -%}
+    {{post_hero_image}}
+  {% else %}
+    {{featured_image}}
+  {% endif %}
+{% endcapture %}
 
-{%- render 'post-hero', image: post_hero_image -%}
+{%- assign post_hero_image_mobile = post_hero_image -%}
+
+{%- render 'post-hero', image: post_hero_image, image_mobile: post_hero_image_mobile -%}
 {%- render 'post-header' -%}
 {%- render 'wysiwyg', content: article.content, class: 'bg--bone' -%}
 {%- render 'post-navigation' -%}
@@ -46,11 +55,12 @@
 {% endcapture %}
 
 {%- render 'carousel',
-  class: 'bg--black spacing--article',
+  class: 'bg--black spacing--article carousel--article',
   title: 'MORE TO EXPLORE',
   children: category_cards,
   slides_per_view: 4,
-  spacing: 32
+  spacing: 32,
+  navigation: true,
 -%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true %}

@@ -1,35 +1,44 @@
-{% assign class = class | default:false %}
+{% assign class = class | default: false %}
 {% assign sort_by_title = 'collections.sorting.title' | t %}
 {% assign sort_by_aria_label = 'collections.sorting.aria_label' | t | escape | prepend: 'aria-label="' | append: '"' %}
 
-{% assign sort_option_values = 'price-ascending|price-descending|created-descending|title-ascending|title-descending' | split: '|' %}
+{% assign sort_option_values = '|price-ascending|price-descending|created-descending|title-ascending|title-descending' | split: '|' %}
 {% capture sort_option_titles %}
-  {{- 'collections.sorting.price_ascending' | t -}} |
-  {{- 'collections.sorting.price_descending' | t -}} |
-  {{- 'collections.sorting.date_descending' | t -}} |
-  {{- 'collections.sorting.az' | t -}} |
+  {{- sort_by_title -}}|
+  {{- 'collections.sorting.price_ascending' | t -}}|
+  {{- 'collections.sorting.price_descending' | t -}}|
+  {{- 'collections.sorting.date_descending' | t -}}|
+  {{- 'collections.sorting.az' | t -}}|
   {{- 'collections.sorting.za' | t -}}
 {% endcapture %}
 {% assign sort_option_titles = sort_option_titles | split: '|' %}
 {% capture class %}plp-sort-header{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }}" data-module="plp-sort-header">
-  <div class="plp-sort-header__container">
-    <div class="plp-sort-header__inner">
-      <div class="plp-sort-header__filter">
-        <button class="b1 plp-sort-header__filter-button js-filter-button">Filter</button>
-      </div>
-      {%- render 'input-select',
-        class: 'input-select--dark plp-sort-header__sort js-sort-select',
-        options: sort_option_titles,
-        option_values: sort_option_values,
-        placeholder: sort_by_title,
-        custom_attrs: sort_by_aria_label,
-        selected_value: collection.sort_by
-      -%}
-      <div class="plp-sort-header__count">
-        {{ collection.products_count }} products
+<div is="plp-sort-header"
+     inline-template
+>
+  <section class="{{ class }}">
+    <div class="plp-sort-header__container">
+      <div class="plp-sort-header__inner">
+        <div class="plp-sort-header__filter">
+          <button class="b1 plp-sort-header__filter-button" @click="toggleManualFilter">Filter</button>
+        </div>
+
+        {%- capture select_custom_attrs -%}
+          {{ sort_by_aria_label }}
+          v-model="sortOrder"
+        {%- endcapture -%}
+        {%- render 'input-select',
+          class: 'input-select--dark plp-sort-header__sort js-sort-select',
+          options: sort_option_titles,
+          option_values: sort_option_values,
+          custom_attrs: select_custom_attrs,
+          selected_value: collection.sort_by
+        -%}
+        <div class="plp-sort-header__count">
+          ${ productsCount } ${ productsCount <= 1 ? 'product' : 'products' }
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

@@ -1,0 +1,27 @@
+{% assign class = class | default false %}
+{% capture class %}cart-sidebar{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }}" data-module="cart-sidebar">
+  <div class="cart-sidebar__summary">
+    <p class="cart-sidebar__summary-title h8">Order Summary</p>
+    <div class="cart-sidebar__item">
+      <p class="cart-sidebar__label b2">Total</p>
+      <p class="cart-sidebar__cost b1">{{ cart.items_subtotal_price | money }}
+    </div>
+    <div class="cart-sidebar__separator"></div>
+    <div class="cart-sidebar__item">
+      <p class="cart-sidebar__label b1">Subtotal</p>
+      <p class="cart-sidebar__cost b1">{{ cart.total_price | money }}</p>
+    </div>
+    <p class="cart-sidebar__label b2">Shipping & taxes calculated at checkout</p>
+    {%- render 'button' tag: 'button' class: 'pop-out-cart__checkout-button button button button--full' custom_attrs: 'type="submit" name="checkout"' button_value: "Check Out" -%}
+    <div class='cart-sidebar__payment-method-button-container'>
+      {%- comment -%}requires shopify payments account setup{%- endcomment -%}
+      {% if additional_checkout_buttons %}
+      <div class="cart-sidebar__payment-method-button">
+        {{ content_for_additional_checkout_buttons }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

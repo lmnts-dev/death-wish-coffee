@@ -9,6 +9,7 @@
 {%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first -%}
 {%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
 {%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
+{%- assign sub_hero_products = shop.metafields.sub_hero_carousel -%}
 
 {%- capture after_content -%}
   <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
@@ -36,20 +37,39 @@
 -%}
 
 {%- capture product_cards -%}
-  {% for product in collections['all'].products limit: 9 %}
-    {%- assign product_image = product.featured_image | img_url: 'master' -%}
+  {% for handle in sub_hero_products.carousel_product | split: '|' limit: 9 %}
+  {% assign product = all_products[handle] %}
+  
+  {% capture title %}
+    {% if sub_hero_products.featured_product_title[forloop.index0] == blank %}
+      {{product.title}}
+    {% else %}
+      {{sub_hero_products.featured_product_title[forloop.index0]}}  
+    {% endif %}
+  {% endcapture %}
+
+  {% capture product_image %}
+    {% if sub_hero_products.featured_product_image[forloop.index0] == blank %}
+      {{product.featured_image | img_url: 'master' }}
+    {% else %}
+      {{sub_hero_products.featured_product_image[forloop.index0] | map: 'src'}}  
+    {% endif %}
+  {% endcapture %}
+  
     {%- assign product_price = product.price | money -%}
     {%- render 'alt-product-card',
       class: 'swiper-slide',
       image_src: product_image,
-      title: product.title,
+      title: title,
       description: 'Featured product title for each item',
       link: product.url,
       price: product_price,
-      product_id: product.id
+      product_id: product.id,
+      product_url: product.url
     -%}
   {% endfor %}
 {%- endcapture -%}
+
 {%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true -%}
 
 {% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
@@ -81,41 +101,42 @@
   -%}
 {% endfor %}
 
-{%- assign list_article = shop.metafields.article_hero_card.article -%}
+{%- assign list_article_title = shop.metafields.homepage.featured_articles_heading -%}
+{%- assign list_article = shop.metafields.homepage.featured_article | split: '|' -%}
 {%- capture content_slides -%}
   {% for handle in list_article %}
     {%- assign blog_handle = handle | split: '/' | first -%}
     {%- assign blog_acf = blogs[blog_handle].metafields -%}
     {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+    {%- assign fallback_images_mobile = blog_acf.accentuate.default_image_mobile | first -%}
     {%- assign notice = shop.metafields.article_hero_card.notice_title[forloop.index0] -%}
     {%- assign article = articles[handle] -%}
-    {% assign class = 'swiper-slide' %}
+    {% assign class = 'article-hero-card--home swiper-slide ' %}
     {% assign title = article.title %}
-    {%- assign image = fallback_images.src -%}
+    {%- assign image_url = fallback_images.src -%}
+    {%- assign image_url_mobile = fallback_images_mobile.src | default: image_url -%}
     {%- if article.image != blank -%}
-      {% assign image = article.image.src | img_url: 'master' %}
+      {% assign image_url = article | img_url: 'master' %}
+      {% assign image_url_mobile = image_url %}
     {%- endif -%}
     {% assign url = article.url %}
-    {% assign description = article.excerpt %}
-    {% capture info %}
-      {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
-    {% endcapture %}
-    {% assign blog = handle | split: '/' | first %}
-
+    {% assign excerpt = article.excerpt %}
+    {% assign author = article.author %}
+    {% assign date = article.published_at %}
+    
     {%- render 'article-hero-card',
       class: class,
       notice: notice,
       title: title,
-      image: image,
+      image_url: image_url,
+      image_url_mobile: image_url_mobile,
       url: url,
-      description: description,
-      info: info,
-      blog: blog
+      excerpt: excerpt,
+      author: author,
+      date: date
     -%}
   {% endfor %}
 {%- endcapture -%}
-{%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+{%- render 'carousel', title: list_article_title, title_class: 'section-title--article-hero-card', class: 'carousel--home-article-hero-card carousel--article-hero-card p article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
-
-

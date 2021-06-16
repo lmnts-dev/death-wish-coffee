@@ -1,7 +1,7 @@
 /* styles for the post-navigation module go in this file */
 
 .post-navigation {
-  padding: 12px 0 50px;
+  padding: 45px 0;
 
   @media (--md) {
     padding: 56px 0 74px;

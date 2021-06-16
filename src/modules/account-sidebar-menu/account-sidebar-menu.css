@@ -68,6 +68,10 @@
       background: var(--steel);
     }
   }
+
+  .template-customers-order & {
+    @extend .h4;
+  }
 }
 
 .account-sidebar-menu__content {

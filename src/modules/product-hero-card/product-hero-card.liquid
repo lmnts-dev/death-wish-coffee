@@ -5,11 +5,11 @@
 {% assign description = description | default: false -%}
 {%- assign price = price | default: false -%}
 {% assign sub_description = sub_description | default: false -%}
-{%- assign reviews = reviews | default: false -%}
+{% assign product_id = product_id | default: false %}
 {%- assign cta_text = cta_text | default: false -%}
 {%- capture class -%}product-hero-card{% if class %} {{ class }}{% endif %}{% endcapture -%}
 
-<section class="{{ class }} bg--shadow" data-module="product-hero-card">
+<section class="{{ class }}" data-module="product-hero-card">
   <div class="product-hero-card__wrapper">
     <div class="product-hero-card__inner">
       <a href="{{ url }}" class="product-hero-card__image-wrapper">
@@ -23,8 +23,10 @@
           {%- if price -%}
             <p class="product-hero-card__item-price b2">{{- price -}}</p>
           {%- endif -%}
-          {%- if reviews -%}
-            <p class="product-hero-card__item-reviews p1">{{- reviews -}}</p>
+          {%- if product_id -%}
+            <p class="product-hero-card__item-reviews p1">
+              <span class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></span>
+            </p>
           {%- endif -%}
           {%- if sub_description -%}
             <p class="product-hero-card__item-sub-description">{{- sub_description -}}</p>

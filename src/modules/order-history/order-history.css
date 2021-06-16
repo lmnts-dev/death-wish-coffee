@@ -1,1 +1,154 @@
 /* styles for the order-history module go in this file */
+
+.order-history {
+  margin: 0;
+  padding: 32px 24px 16px;
+  background: var(--bone);
+
+  @media (--lg) {
+    padding: 20px 0 10px 0;
+  }
+}
+
+.order-history__title {
+  display: none;
+  text-transform: none;
+
+  @media (--lg) {
+    display: block;
+    padding: 0 28px 24px 38px;
+  }
+}
+
+.order-history__item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--black);
+
+  @media (--lg) {
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 0;
+    padding: 24px 28px 29px 38px;
+    border: none;
+    border-top: 1px solid var(--shadow);
+  }
+}
+
+.order-history__item-description {
+  width: 100%;
+  padding-bottom: 21px;
+  padding-top: 10px;
+  order: 1;
+
+  @media (--lg) {
+    width: 156px;
+    padding: 0 5px 0 0;
+  }
+}
+
+.order-history__item-title {
+  display: block;
+}
+
+.order-history__item-date {
+  display: none;
+
+  @media (--lg) {
+    display: block;
+    padding-right: 5px;
+  }
+}
+
+.order-history__item-order {
+  display: flex;
+  align-items: center;
+  margin: 0 -16px;
+  padding: 0 16px 16px;
+  border-bottom: 1px solid var(--shadow);
+
+  @media (--lg) {
+    display: block;
+    margin: 0;
+    padding: 0 5px 0 0;
+    border-bottom: none;
+  }
+}
+
+.order-history__item-total {
+  padding-bottom: 21px;
+  order: 2;
+
+  @media (--lg) {
+    padding: 0 5px 0 0;
+    order: 1;
+  }
+}
+
+.order-history__item-status {
+  padding-bottom: 29px;
+  order: 2;
+
+  @media (--lg) {
+    padding: 0 5px 0 0;
+    order: 1;
+  }
+}
+
+.order-history__item-btn {
+  margin: 0;
+  padding-bottom: 16px;
+  order: 2;
+
+  @media (--lg) {
+    margin: auto 0;
+    padding-bottom: 0;
+    order: 1;
+  }
+
+  .button {
+    @media (--lg) {
+      width: 0;
+      height: 0;
+      border-bottom: 5px solid transparent;
+      border-top: 5px solid transparent;
+      border-left: 8px solid var(--black);
+      background: transparent;
+    }
+  }
+
+  .button-text {
+    @media (--lg) {
+      display: none;
+    }
+  }
+}
+
+.order-history_item-lable {
+  margin-bottom: 5px;
+
+  .order-history__item-order & {
+    margin-bottom: 0;
+
+    @media (--lg) {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.order-history__item-created-at {
+  display: block;
+  margin-left: auto;
+
+  @media (--lg) {
+    display: none;
+  }
+}
+
+.order-history__empty {
+  padding: 10px;
+  text-align: center;
+}
