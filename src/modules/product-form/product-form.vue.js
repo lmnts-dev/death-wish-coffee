@@ -31,6 +31,13 @@ export default {
     },
     selectedVariantId () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
+      // upscribe
+      console.log(variant)
+      if (variant) {
+        window.dispatchEvent(new CustomEvent('upscribeVariantUpdate', {
+          detail: JSON.parse(variant)
+        }))
+      }
 
       return variant ? variant.id : ''
     },
