@@ -32,10 +32,19 @@ export default {
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
     },
+    hasVariantDefault () {
+      return this.product.variants.find(item => item.title === 'Default Title')
+    },
     selectedVariantId () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
 
-      return variant ? variant.id : ''
+      if (this.hasVariantDefault) {
+        return this.hasVariantDefault.id
+      } else if (variant) {
+        return variant.id
+      } else {
+        return ''
+      }
     },
     priceDecidingFactor () {
       // Find out which variant option affects pricing
