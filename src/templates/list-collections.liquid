@@ -1,38 +1,30 @@
 {%- layout 'theme' -%}
 
-{%- render 'carousel' -%}
-{%- render 'product-hero-card' -%}
+{%- assign shop_all_acf = pages['shop-all'].metafields.accentuate -%}
+{%- assign titles = shop_all_acf.shop_all_card_title -%}
+{%- assign links = shop_all_acf.shop_all_card_link -%}
+{%- assign images = shop_all_acf.shop_all_card_image -%}
+{%- assign images_mobile = shop_all_acf.shop_all_card_image_mobile -%}
 
-{%- comment -%}we'll likely need som wrapper modules to do this properly{%- endcomment -%}
-{%- render 'breadcrumbs' -%}
-{%- render 'plp-sort-header' -%}
-{%- render 'plp-filter' -%}
+{%- if titles.size > 0 -%}
+  {%- for title in titles -%}
 
-{%- render 'grid' -%}
-<div class="container">
-  <div class="grid-product">
-    {%- assign product = all_products['test-product-2'] -%}
-    {%- assign price = product.price | money -%}
-    {%- capture product_form -%}
-      {%- render 'product-form', product: product -%}
+    {%- assign image = images[forloop.index0] | map: 'src' -%}
+    {%- assign image_mobile = images_mobile[forloop.index0] | map: 'src' -%}
+    {%- assign link = links[forloop.index0] | prepend: 'collections/' -%}
+
+    {%- capture after_content -%}
+      <a class="hero_cta button" href="{{ link }}">Shop Now</a>
     {%- endcapture -%}
-    {%- render 'product-card',
-      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
-      title: product.title,
-      link: product.url,
-      price: price,
-      quick_shop_form: product_form,
-      product_id: product.id
+
+    {%- render 'hero',
+      class: 'hero--list-collections hero--content-center bg--black',
+      title: title,
+      mobile_image: mobile_image,
+      image: image,
+      after_content: after_content
     -%}
-    {%- render 'product-card',
-      image_src: 'https://cdn.shopify.com/s/files/1/0506/4183/0047/files/mega_banner.jpg?v=1617163411',
-      title: product.title,
-      link: product.url,
-      price: price,
-      quick_shop_form: product_form,
-      product_id: product.id
-    -%}
-  </div>
-</div>
+  {%- endfor -%}
+{%- endif -%}
 
 {%- render 'footer-cta', title: 'LETS DRINK COFFEE AND THROW THINGS AT HAPPY PEOPLE', enable_subscribe_form: true %}
