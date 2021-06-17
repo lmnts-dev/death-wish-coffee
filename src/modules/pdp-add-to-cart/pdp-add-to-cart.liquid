@@ -4,6 +4,7 @@
 {%- if template.suffix == 'merch' -%}
   {% assign form_type = 'dropdown' %}
 {%- endif -%}
+{% assign product_acf = product.metafields.accentuate %}
 
 <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
   <div class="container pdp-add-to-cart__container">
@@ -19,6 +20,13 @@
       </div>
       <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart">{{product.description}}</div>
       {%- render 'product-form', class: 'product-form--pdp-add-to-cart', form_type: form_type, show_title: true, product: product -%}
+      {%- if product_acf.extra_content != blank -%}
+        <div class="pdp-add-to-cart__extra-contents">
+          {%- for extra_content in product_acf.extra_content -%}
+            <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents">{{- extra_content -}}</div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
