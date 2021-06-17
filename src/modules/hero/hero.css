@@ -42,14 +42,14 @@
     padding-top: calc(100% * 573 / 375);
 
     @media (--lg) {
-      padding-top: calc(100% * 979 / 1920);
+      padding-top: 50%;
     }
 
-    &--homepage {
-      padding-top: calc(100% * 425 / 375);
+    .hero--homepage & {
+      padding-top: 88%;
 
-      @media (--lg) {
-        padding-top: calc(100% * 969 / 1920);
+      @media (--md) {
+        padding-top: 50%;
       }
     }
   }
