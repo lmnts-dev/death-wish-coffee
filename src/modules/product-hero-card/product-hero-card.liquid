@@ -7,6 +7,7 @@
 {% assign sub_description = sub_description | default: false -%}
 {% assign product_id = product_id | default: false %}
 {%- assign cta_text = cta_text | default: false -%}
+{%- assign cta_class = cta_class | default: false -%}
 {%- capture class -%}product-hero-card{% if class %} {{ class }}{% endif %}{% endcapture -%}
 
 <section class="{{ class }}" data-module="product-hero-card">
@@ -40,6 +41,7 @@
                 <div class="product-hero-card__item-cta ">
                   {%- render 'button',
                     tag: 'a',
+                    class: cta_class,
                     button_value: cta_text,
                     button_url: url
                   -%}

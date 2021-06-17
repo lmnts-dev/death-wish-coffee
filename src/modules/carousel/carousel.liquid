@@ -47,10 +47,10 @@ You can see more about how options are privided as HTML attributes here.
     </div>
     {% if navigation %}
       <div class="carousel-next swiper-button-next{{- init_at_bp_class -}}">
-        {% render 'svg', type: 'chevron-right' %}
+        {% render 'svg', type: 'chevron-right', class: 'carousel-next-icon' %}
       </div>
       <div class="carousel-prev swiper-button-prev{{- init_at_bp_class -}}">
-        {% render 'svg', type: 'chevron-left' %}
+        {% render 'svg', type: 'chevron-left', class: 'carousel-prev-icon' %}
       </div>
     {% endif %}
     {% if pagination %}

@@ -70,8 +70,14 @@
         {%- endcapture -%}
         {%- assign description = featured_product.description | strip_html | truncate: 500, '' -%}
         {%- assign cta_text = 'Take me There' -%}
+        {%- capture card_class -%}
+          swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding{% if palette != blank %} product-hero-card--palette-{{ palette }}{% endif %} js-product-hero-card
+        {%- endcapture -%}
+        {%- capture cta_class -%}
+          button--palette-{{ palette }}
+        {%- endcapture -%}
         {%- render 'product-hero-card'
-          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
+          class: card_class,
           title: title,
           image_url: image_url,
           url: url,
@@ -79,6 +85,7 @@
           description: description,
           sub_description: sub_description,
           cta_text: cta_text,
+          cta_class: cta_class,
           product_id: featured_product.id
         -%}
       {%- endif -%}
@@ -94,10 +101,17 @@
     {%- assign featured_slides_per_view = 0 -%}
   {%- endif -%}
 
+  {%- capture carousel_class -%}
+    carousel--product-hero-card carousel--no-padding bg--shadow{% if palette != blank %} carousel--palette-{{ palette }}{% endif %}
+  {%- endcapture -%}
+  {%- capture carousel_title_class -%}
+    section-title--product-hero-card{% if palette != blank %} section-title--palette-{{ palette }}{% endif %}
+  {%- endcapture -%}
+
   {%- render 'carousel',
     title: product_acf.pdp_featured_products_heading,
-    title_class: 'section-title--product-hero-card'
-    class: 'carousel--product-hero-card carousel--no-padding bg--shadow',
+    title_class: carousel_title_class,
+    class: carousel_class,
     children: featured_slides,
     spacing: 0,
     slides_per_view: featured_slides_per_view,
