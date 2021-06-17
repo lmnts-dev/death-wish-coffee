@@ -49,13 +49,8 @@
           {% render 'svg' type: 'close' %}
         </div>
       </form>
-      <button class="navigation__utilities-cart js-pop-out-cart-toggle{% if cart.item_count > 0 %} has-items{% endif %}"
-              aria-label="{{ 'cart.label.aria_pop_out_toggle' | t }}"
-              aria-expanded="false"
-      >{%- render 'svg', type: 'cart' -%}</button>
       {%- render 'pop-out-cart-trigger', class: 'navigation__utilities-cart' -%}
     </div>
-
     {% render 'pop-out-cart' %}
   </div>
 </header>
