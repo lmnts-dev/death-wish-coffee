@@ -10,8 +10,10 @@
 {%- comment -%}Video Section{%- endcomment -%}
 {%- assign video_section_embed_code = product_acf.coffee_detail_video_embed_code -%}
 {%- assign video_section_title = product_acf.coffee_detail_hero_video_title -%}
+{%- capture video_section_title_class -%}{% if palette != blank %}section-title--palette-{{ palette }}{% endif %}{%- endcapture -%}
 {%- render 'pdp-video',
-  title: video_section_title, 
+  title: video_section_title,
+  title_class: video_section_title_class,
   embed_code: video_section_embed_code
 -%}
 

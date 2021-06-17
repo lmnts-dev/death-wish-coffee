@@ -1,9 +1,11 @@
 {%- assign title = title | default: false -%}
+{%- assign title_class = title_class | default: false -%}
+{%- capture title_class -%}pdp-video__title bg--black{% if title_class %} {{- title_class -}}{% endif %}{%- endcapture -%}
 {%- assign embed_code = embed_code | default: false -%}
 {%- if embed_code -%}
   <section class="pdp-video bg--black" data-module="pdp-video">
     {%- if title -%}
-      {%- render 'section-title', title: title, class: 'pdp-video__title bg--black' -%}
+      {%- render 'section-title', title: title, class: title_class -%}
     {%- endif -%}
     <div class="pdp-video__inner">
       {{- embed_code -}}
