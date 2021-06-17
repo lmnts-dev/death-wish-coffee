@@ -278,3 +278,8 @@
   color: var(--steel);
   appearance: none;
 }
+
+.product-form__message {
+  margin-bottom: 32px;
+  color: var(--blood);
+}

@@ -9,7 +9,7 @@
 {%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first -%}
 {%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
 {%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
-{%- assign sub_hero_products = shop.metafields.accentuate.sub_hero_carousel | split: '|' -%}
+{%- assign sub_hero_products = shop.metafields.sub_hero_carousel -%}
 
 {%- capture after_content -%}
   <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
@@ -37,18 +37,35 @@
 -%}
 
 {%- capture product_cards -%}
-  {% for handle in sub_hero_products | limit: 9 %}
+  {% for handle in sub_hero_products.carousel_product | split: '|' limit: 9 %}
   {% assign product = all_products[handle] %}
-    {%- assign product_image = product.featured_image | img_url: 'master' -%}
+  
+  {% capture title %}
+    {% if sub_hero_products.featured_product_title[forloop.index0] == blank %}
+      {{product.title}}
+    {% else %}
+      {{sub_hero_products.featured_product_title[forloop.index0]}}  
+    {% endif %}
+  {% endcapture %}
+
+  {% capture product_image %}
+    {% if sub_hero_products.featured_product_image[forloop.index0] == blank %}
+      {{product.featured_image | img_url: 'master' }}
+    {% else %}
+      {{sub_hero_products.featured_product_image[forloop.index0] | map: 'src'}}  
+    {% endif %}
+  {% endcapture %}
+  
     {%- assign product_price = product.price | money -%}
     {%- render 'alt-product-card',
       class: 'swiper-slide',
       image_src: product_image,
-      title: product.title,
+      title: title,
       description: 'Featured product title for each item',
       link: product.url,
       price: product_price,
-      product_id: product.id
+      product_id: product.id,
+      product_url: product.url
     -%}
   {% endfor %}
 {%- endcapture -%}

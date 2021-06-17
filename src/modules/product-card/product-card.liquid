@@ -10,7 +10,10 @@
 {%- capture content -%}
     <div class="product-card__inner">
       <div class="product-card__header">
-        <div class="product-card__image-container">
+        <a v-if="isFeatured && product.video" :href="product.url" class="product-card__video-container">
+          {%- render 'video', mod_class: 'product-card__video', mod_is_vue: true, mod_vue_attrs: ':src="product.video"' -%}
+        </a>
+        <div v-else class="product-card__image-container">
           <a :href="product.url" class="product-card__image-link">
             {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
           </a>
@@ -28,7 +31,8 @@
         <div class="b1 product-card__review">
           <div class="yotpo bottomLine" :data-product-id="product.id"></div>
         </div>
-        <p class="h5 product-card__price">$${formatPrice(product.price)}</p>
+        <p class="h5 product-card__price">$${formatPrice(price)}</p>
+        <p v-if="shouldShowMessage && addedToCartErrorMessage" class="b1 product-card__message">${addedToCartErrorMessage}</p>
       </div>
     </div>
 {%- endcapture -%}

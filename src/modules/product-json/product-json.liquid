@@ -15,5 +15,7 @@
     "price": {{ product.price | json }},
     "featured_image": {{ product.featured_image | img_url: 'master' | json }},
     "tags": {{ product.tags | json }},
-    "published_at": {{ product.published_at | json }}
+    "published_at": {{ product.published_at | json }},
+    "video": {{ product.metafields.accentuate.video_loop_url | json }},
+    "type": {{ product.type | json }}
 }

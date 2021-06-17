@@ -29,6 +29,10 @@
   }
 }
 
+.pdp-add-to-cart__price {
+  margin-bottom: 5px;
+}
+
 .pdp-add-to-cart__description {
   @media (--md) {
     margin-right: 24px;

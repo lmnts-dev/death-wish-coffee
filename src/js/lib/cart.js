@@ -8,7 +8,7 @@ class Cart {
           url: '/cart.js',
           method: 'get'
         },
-        (code, responseText, request) => {
+        (code, responseText) => {
           const cart = JSON.parse(responseText)
           resolve(cart)
         }
@@ -21,14 +21,14 @@ class Cart {
   }
 
   update (data) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       nanoajax.ajax(
         {
           url: '/cart/update.js',
           method: 'post',
           body: this.generateShopifyCartUpdateBody(data)
         },
-        (code, responseText, request) => {
+        (code, responseText) => {
           const cart = JSON.parse(responseText)
           if (Number(code) !== 200) {
             cart.errors = [cart.description]
@@ -56,8 +56,11 @@ class Cart {
           method: 'post',
           body: this.generateShopifyCartAddBody(data)
         },
-        (code, responseText, request) => {
+        (code, responseText) => {
           const cart = JSON.parse(responseText)
+          if (Number(code) !== 200) {
+            cart.errors = [cart.description]
+          }
           resolve(cart)
         }
       )

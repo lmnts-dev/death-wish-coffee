@@ -2,7 +2,7 @@
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
 
 {%- capture product_form -%}
-  {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: ':product="product"' -%}
+  {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: ':product="product" @update-variant-id="handleSelectedVariant" @added-to-cart-error="handleAddedToCartError"' -%}
 {%- endcapture -%}
 
 <section class="{{- class -}}"
@@ -29,6 +29,7 @@
               v-if="(productIndex === 2 || productIndex === 6) && getFeaturedProductForIndex(productIndex)"
               :product="getFeaturedProductForIndex(productIndex)"
               :class="['product-card--bg-dark product-card--plp', getFeaturedProductClass(productIndex)]"
+              :is-featured="true"
             {%- endcapture -%}
             {%- render 'product-card',
               class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',

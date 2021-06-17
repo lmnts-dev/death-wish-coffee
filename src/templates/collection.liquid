@@ -60,10 +60,11 @@
 
   {%- assign navigation_carousel = true -%}
   {%- assign slides_per_view_carousel = 1 -%}
+  {%- assign carousel_loop = true -%}
 
   {%- if count_carousel == 1 -%}
     {%- assign navigation_carousel = false -%}
-    {%- assign slides_per_view_carousel = 0 -%}
+    {%- assign carousel_loop = false -%}
   {%- endif -%}
 
   {%- render 'carousel',
@@ -71,6 +72,7 @@
     children: content_slides,
     spacing: 0,
     slides_per_view: slides_per_view_carousel,
+    loop: carousel_loop,
     navigation: navigation_carousel
   -%}
 {%- endif -%}
@@ -140,7 +142,7 @@
             },
             {
               name: 'Type',
-              type: 'option'
+              type: 'type'
             },
             {
               name: 'Gender',

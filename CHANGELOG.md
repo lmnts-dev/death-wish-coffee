@@ -1,6 +1,49 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.22 - 2021-06-15
+### CHANGED:
+- DIC-102 Update message for product detail page after adding to cart with errors 
+- DIC-102 Update message for product card after adding to cart with errors 
+- DIC-92 Update filter options to match product correctly 
+- fix product hero card overlay bug 
+- change checkout input to button module 
+- wire up checkout button 
+- update cart item font sizes 
+
+## 0.0.21 - 2021-06-14
+### CHANGED:
+- Fix bug break layout for carousel single item 
+- Remove debug code 
+- Remove unused codes 
+- Handle click outside to close pop out cart 
+- Show update button for cart item only when there is quantity change 
+- Handle cart update on pop out cart 
+- Scaffold cart item quantity 
+- Show pop out cart after adding to cart 
+- DIC-106 Update logic for featured carousel single item 
+- Wire pop out cart with vue data 
+- Scaffold cart vuex 
+- DIC-105 Fix product json data 
+- DIC-105 Add video for featured product card 
+- DIC-107 Change image for Shop drop down menu 
+- DIC-105 Update video module class 
+- DIC-105 Add video loop for pdp 
+- DIC-92 Update filter Type for merch collection 
+- DIC-108 Update price change for product card after selecting variant 
+- DIC-87 Fix Roast filter on coffee collection 
+- reduce bottom padding 
+- reduce plp padding on mobile 
+- add carousel product card title and image ACF fields 
+- Merge branch 'develop' into feature/review-stars 
+- add margin between price and review stars 
+- pass product url down to card module 
+- add margin top to review stars 
+- pass product object to review drawer 
+- fix class name typo 
+- link review stars to pdp 
+- center review stars 
+
 ## 0.0.20 - 2021-06-11
 ### CHANGED:
 - DIC-99 Fix style for variant select on small desktop 

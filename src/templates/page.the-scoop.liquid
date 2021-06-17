@@ -78,7 +78,7 @@
   
   {% assign view_all_url = view_all_urls[forloop.index0] | prepend: '/blogs/' %}
 
-  {% capture carousel_class %}bg--black spacing--bottom-lg {% if forloop.first == true %}posts-carousel--first{% elsif forloop.last == true %}posts-carousel--last{% endif %}{% endcapture %}
+  {% capture carousel_class %}bg--black spacing--bottom-lg carousel--scoop {% if forloop.first == true %}posts-carousel--first{% elsif forloop.last == true %}posts-carousel--last{% endif %}{% endcapture %}
 
   {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], carousel_slides: post_cards, view_all_url: view_all_url -%}
 {% endfor %}

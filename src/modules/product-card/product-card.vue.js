@@ -1,5 +1,7 @@
+import { mapState } from 'vuex'
 import ProductForm from '../product-form/product-form.vue'
 import VImage from '../v-image/v-image.vue'
+import VVideo from '../v-video/v-video.vue'
 import { formatPrice, debounce } from 'lib/util'
 
 let yotpoApi = null
@@ -32,17 +34,39 @@ const refreshYotpo = debounce(() => {
 export default {
   components: {
     ProductForm,
-    VImage
+    VImage,
+    VVideo
   },
   props: {
     product: {
       type: Object,
       required: true
+    },
+    isFeatured: Boolean
+  },
+  data () {
+    return {
+      shouldShowMessage: false,
+      selectedVariantId: null
+    }
+  },
+  computed: {
+    ...mapState('cart', ['addedToCartErrorMessage']),
+    selectedVariant () {
+      return this.product.variants.find(v => v.id === this.selectedVariantId)
+    },
+    price () {
+      return this.selectedVariant ? this.selectedVariant.price : this.product.price
     }
   },
   watch: {
     product () {
       this.renderReviews()
+    },
+    addedToCartErrorMessage (newValue) {
+      if (!newValue) {
+        this.shouldShowMessage = false
+      }
     }
   },
   methods: {
@@ -51,7 +75,13 @@ export default {
         refreshYotpo()
       })
     },
-    formatPrice
+    formatPrice,
+    handleSelectedVariant (variantId) {
+      this.selectedVariantId = variantId
+    },
+    handleAddedToCartError () {
+      this.shouldShowMessage = true
+    }
   },
   mounted () {
     this.renderReviews()
