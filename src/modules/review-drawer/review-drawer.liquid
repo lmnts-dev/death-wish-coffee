@@ -2,7 +2,7 @@
 {% assign title = title | default: false %}
 {% capture class %}review-drawer{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} bg--black" data-module="review-drawer">
+<section id="review-drawer" class="{{ class }} bg--black" data-module="review-drawer">
   {% render 'section-title', title: title, class: 'section-title--review-drawer' %}
   <div class="container review-drawer__container">
     <div class="review-drawer__inner">

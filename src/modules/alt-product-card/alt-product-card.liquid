@@ -22,8 +22,9 @@
       {%- endcomment -%}
       {% if product_id %}
         <div class="b1 alt-product-card__review">
-          <a href="{{ link }}">
+          <a href="{{ link }}#review-drawer" class="alt-product-card__review-link">
             <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+            <div class="yotpo QABottomLine" data-product-id="{{ product_id }}"></div>
           </a>
         </div>
       {% endif %}

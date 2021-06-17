@@ -29,7 +29,10 @@
           <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
         </h4>
         <div class="b1 product-card__review">
-          <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+          <a :href="product.url + '#review-drawer'" class="product-card__review-link">
+            <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+            <div class="yotpo QABottomLine" :data-product-id="product.id"></div>
+          </a>
         </div>
         <p class="h5 product-card__price">$${formatPrice(price)}</p>
         <p v-if="shouldShowMessage && addedToCartErrorMessage" class="b1 product-card__message">${addedToCartErrorMessage}</p>
