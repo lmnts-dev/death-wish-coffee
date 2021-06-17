@@ -1,9 +1,13 @@
+{%- assign is_input_with_border = is_input_with_border | default: false -%}
+{%- capture input_class -%}
+  form-fiel--error-alt form-subscribe__field{% unless is_input_with_border %} form-field--borderless{% endunless %} form-field--white form-field--subscribe js-input-field
+{%- endcapture -%}
 <section class="form-subscribe" data-module="form-subscribe">
   <form class="form-subscribe__form form--alt">
     <p class="form-subscribe__success js-response-message"></p>
     <div class="form-subscribe__form-inner">
       {%- render 'input-email',
-        class: 'form-fiel--error-alt form-field--borderless form-subscribe__field form-field--white form-field--subscribe js-input-field',
+        class: input_class,
         name: 'email',
         id: 'form-subscribe-email',
         required: 'required',

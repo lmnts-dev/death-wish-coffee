@@ -5,6 +5,7 @@
 {%- assign buttons_url = buttons_url | default: false -%}
 {%- assign buttons_value = buttons_value | default: false -%}
 {%- assign enable_subscribe_form = enable_subscribe_form | default: false -%}
+{%- assign is_input_with_border = is_input_with_border | default: false -%}
 {%- assign has_cta = false -%}
 {%- if buttons_url.size > 0 or enable_subscribe_form -%}
   {%- assign has_cta = true -%}
@@ -60,7 +61,7 @@
         </div>
       {%- endif -%}
       {%- if enable_subscribe_form -%}
-        {%- render 'form-subscribe' -%}
+        {%- render 'form-subscribe', is_input_with_border: is_input_with_border -%}
       {%- endif -%}
     </div>
   </section>

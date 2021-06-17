@@ -1,6 +1,7 @@
 {%- layout 'theme' -%}
 {%- assign product_metafields = product.metafields -%}
 {%- assign product_acf = product_metafields.accentuate -%}
+{%- assign palette = product_acf.palette_selection | handle -%}
 
 {%- comment -%}PDP Hero{%- endcomment -%}
 {%- render 'pdp-hero' -%}
@@ -93,4 +94,9 @@
 {%- endif -%}
 
 {%- comment -%}Footer CTA{%- endcomment -%}
-{%- render 'footer-cta', title: product_acf.pdp_footer_cta_heading, enable_subscribe_form: true %}
+{%- assign is_input_with_border = false -%}
+{%- if palette == 'white' -%}
+  {%- assign is_input_with_border = true -%}
+{%- endif -%}
+{%- capture footer_cta_class -%}{% if palette != blank %}footer-cta--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- render 'footer-cta', is_input_with_border: is_input_with_border, class: footer_cta_class, title: product_acf.pdp_footer_cta_heading, enable_subscribe_form: true %}

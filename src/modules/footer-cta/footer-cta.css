@@ -24,6 +24,12 @@
       display: none;
     }
   }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    &--palette-$(color) {
+      background-color: var(--$color);
+    }
+  }
 }
 
 .footer-cta__container {
