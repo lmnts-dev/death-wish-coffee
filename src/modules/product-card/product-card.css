@@ -213,3 +213,8 @@
   margin-top: 5px;
   color: var(--blood);
 }
+
+.product-card__compare {
+  color: var(--blood);
+  text-decoration: line-through;
+}
