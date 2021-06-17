@@ -19,6 +19,14 @@
       text-align: center;
     }
   }
+
+  &--list-collections {
+    & + .hero--list-collections {
+      @media (--lg) {
+        padding-top: 40px;
+      }
+    }
+  }
 }
 
 .hero__inner {
@@ -45,7 +53,8 @@
       padding-top: calc(100% * 979 / 1920);
     }
 
-    &--homepage {
+    .hero--homepage &,
+    .hero--list-collections & {
       padding-top: calc(100% * 425 / 375);
 
       @media (--lg) {
@@ -151,6 +160,8 @@
 
 .hero__title {
   .hero--content-center & {
+    text-align: center;
+
     @media (--lg) {
       max-width: 558px;
       margin: 0 auto;
