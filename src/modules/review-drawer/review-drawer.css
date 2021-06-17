@@ -124,16 +124,6 @@
     color: var(--white);
     text-align: center;
   }
-
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
-    &--palette-$(color) {
-      .yotpo .yotpo-bottomline .yotpo-icon-star,
-      .yotpo .yotpo-bottomline .yotpo-icon-half-star,
-      .yotpo .yotpo-bottomline .yotpo-icon-empty-star {
-        color: var(--$color);
-      }
-    }
-  }
 }
 
 .review-drawer__inner {
@@ -152,12 +142,22 @@
   margin: 14px auto 0;
 
   @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
-    .review-drawer--palette-$(color) & {
+    .review--palette-$(color) & {
       border-top-color: var(--$color);
     }
   }
 
   &.rotate {
     transform: rotate(180deg);
+  }
+}
+
+.yotpo .yotpo-bottomline .yotpo-icon-star,
+.yotpo .yotpo-bottomline .yotpo-icon-half-star,
+.yotpo .yotpo-bottomline .yotpo-icon-empty-star {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .review--palette-$(color) & {
+      color: var(--$color);
+    }
   }
 }

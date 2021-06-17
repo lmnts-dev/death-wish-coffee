@@ -23,7 +23,7 @@
 -%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}
-{%- capture review_class -%}{% if palette != blank %}review-drawer--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- capture review_class -%}{% if palette != blank %}review--palette-{{ palette }}{% endif %}{%- endcapture -%}
 {%- render 'review-drawer', class: review_class, title: product_acf.pdp_review_heading -%}
 
 {%- comment -%}Featured Product Carousel{%- endcomment -%}
