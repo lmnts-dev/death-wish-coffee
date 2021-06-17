@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html{% unless template contains 'password' or template contains 'access-denied' or cart.attributes.age_gate == '1' %} class="js-age-gate"{% endunless %} data-scroll="0">
 <head>
-  <script src="//assets.findify.io/deathwishcoffee.myshopify.com.min.js" async defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
@@ -34,6 +33,7 @@
     (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/EmlyH22Rv4gaBBcp1acP56ctxXacWhYtche9agiF/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
   </script>
   <!-- End of Yotpo JavaScript -->
+  <script src="//assets.findify.io/deathwishcoffee.myshopify.com.min.js" async defer></script>
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
