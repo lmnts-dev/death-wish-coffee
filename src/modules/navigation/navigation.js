@@ -7,8 +7,10 @@
 import { toggle } from 'lib/util'
 
 const navigation = el => {
+  const navigation = el
   const hamburger = el.querySelector('.js-hamburger')
   const closeButton = el.querySelector('.js-close')
+  const close = el.querySelector('.navigation__search-close')
   const mobileMenu = el.querySelector('.js-mobile-menu')
   const searchButton = el.querySelector('.navigation__utilities-search')
   const searchBar = el.querySelector('.search-bar')
@@ -36,6 +38,8 @@ const navigation = el => {
     searchButton.addEventListener('click', () => {
       toggle(searchBar, 'active')
       toggle(navContainer, 'hide')
+      toggle(navigation, 'flex')
+      toggle(navigation, 'bg--shadow')
     })
   }
 
@@ -52,6 +56,14 @@ const navigation = el => {
       toggle(mobileMenu, 'active')
     })
   }
+
+  close.addEventListener('click', () => {
+    console.log('test')
+    toggle(searchBar, 'active')
+    toggle(navContainer, 'hide')
+    toggle(navigation, 'flex')
+    toggle(navigation, 'bg--shadow')
+  })
 }
 
 export default navigation
