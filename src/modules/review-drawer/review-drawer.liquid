@@ -1,6 +1,7 @@
 {% assign class = class | default: false %}
 {% assign title = title | default: false %}
-{% capture class %}review-drawer{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign palette = palette | default: false %}
+{% capture class %}review-drawer{% if class %} {{- class -}}{% endif %}{% if palette != blank %} review--palette-{{ palette }}{% endif %}{% endcapture %}
 
 <section id="review-drawer" class="{{ class }} bg--black" data-module="review-drawer">
   {% render 'section-title', title: title, class: 'section-title--review-drawer' %}

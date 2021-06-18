@@ -41,8 +41,7 @@
 -%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}
-{%- capture review_class -%}{% if palette != blank %}review--palette-{{ palette }}{% endif %}{%- endcapture -%}
-{%- render 'review-drawer', class: review_class, title: product_acf.pdp_review_heading -%}
+{%- render 'review-drawer', palette: palette, title: product_acf.pdp_review_heading -%}
 
 {%- comment -%}Featured Product Carousel{%- endcomment -%}
 {%- assign featured_products = product_acf.pdp_featured_products_selector | split: '|' -%}
