@@ -18,23 +18,16 @@
         {%- render 'plp-filter' -%}
         {%- capture product_cards -%}
           <template v-for="(product, productIndex) in displayedProducts">
+            {%- capture product_attrs -%}
+              :product="product"
+              :key="product.id"
+              :class="[checkIfProductFeatured(product) ? getFeaturedProductClass(productIndex) : '']"
+              :is-featured="checkIfProductFeatured(product)"
+            {%- endcapture -%}
             {%- render 'product-card',
               class: 'product-card--bg-dark product-card--plp',
               is_vue_component: true,
-              custom_attrs: ':product="product" :key="product.id"',
-              quick_shop_form: product_form
-            -%}
-
-            {%- capture featured_product_attrs -%}
-              v-if="(productIndex === 2 || productIndex === 6) && getFeaturedProductForIndex(productIndex)"
-              :product="getFeaturedProductForIndex(productIndex)"
-              :class="['product-card--bg-dark product-card--plp', getFeaturedProductClass(productIndex)]"
-              :is-featured="true"
-            {%- endcapture -%}
-            {%- render 'product-card',
-              class: 'product-card--bg-dark product-card--plp product-card--row-1-plp',
-              is_vue_component: true,
-              custom_attrs: featured_product_attrs,
+              custom_attrs: product_attrs,
               quick_shop_form: product_form
             -%}
           </template>
