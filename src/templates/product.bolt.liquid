@@ -31,13 +31,12 @@
 {%- assign video_section_image = product_acf.coffee_detail_hero_video_image | map: 'src' -%}
 {%- assign video_section_url = product_acf.coffee_detail_hero_video_video -%}
 {%- assign video_section_title = product_acf.coffee_detail_hero_video_title -%}
-{%- capture video_section_title_class -%}{% if palette != blank %}section-title--palette-{{ palette }}{% endif %}{%- endcapture -%}
 {%- render 'pdp-video',
   title: video_section_title, 
-  title_class: video_section_title_class,
   video_src: video_section_url,
   mod_fallback_image: video_section_image,
-  button_play: true
+  button_play: true,
+  palette: palette
 -%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}

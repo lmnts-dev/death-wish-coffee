@@ -1,6 +1,6 @@
 {%- assign title = title | default: false -%}
-{%- assign title_class = title_class | default: false -%}
-{%- capture title_class -%}pdp-video__title bg--black{% if title_class %} {{- title_class -}}{% endif %}{%- endcapture -%}
+{%- assign palette = palette | default: false -%}
+{%- capture title_class -%}pdp-video__title bg--black{% if palette %} section-title--palette-{{ palette }}{% endif %}{%- endcapture -%}
 {%- assign embed_code = embed_code | default: false -%}
 {%- if embed_code -%}
   <section class="pdp-video bg--black" data-module="pdp-video">
