@@ -160,7 +160,9 @@
 
   .grid--mirror-image-hero & {
     & > * {
-      flex: 1 1 50%;
+      @media (--md) {
+        flex: 1 1 50%;
+      }
     }
   }
 }

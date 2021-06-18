@@ -83,7 +83,7 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- render 'grid', class: 'grid--mirror-image-hero', children: mirror_image_hero -%}
+{%- render 'grid', class: 'grid--mirror-image-hero', children: mirror_image_hero, no_gutter: true -%}
 
 {%- render 'section-cta',
   title: page.metafields.about-us-section-cta.header,
