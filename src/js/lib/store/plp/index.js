@@ -36,13 +36,17 @@ export default {
       return allValues
     },
     allProductTypeValues ({ products }) {
-      const allValues = products.reduce((result, product) => {
-        const type = product.type
-        if (!result.some(r => r.value === type.toLowerCase())) {
-          result.push({ value: type.toLowerCase(), label: type })
-        }
-        return result
-      }, [])
+      const allValues = products
+        .reduce(
+          (result, product) => {
+            const type = product.type
+            if (!result.some(r => r.value === type.toLowerCase())) {
+              result.push({ value: type.toLowerCase(), label: type })
+            }
+            return result
+          },
+          [])
+        .sort((type1, type2) => type1.value > type2.value ? 1 : -1)
       return allValues
     },
     filterAvailableValues ({ filterDefinitions }, { allProductOptionValues, allProductTypeValues }) {
