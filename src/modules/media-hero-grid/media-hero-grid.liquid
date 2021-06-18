@@ -3,9 +3,9 @@
 {% assign types = types | default: false %}
 {% assign images = images | default: false %}
 {% assign title = title | default: false %}
-{% assign title_class = title_class | default: false %}
+{% assign palette = palette | default: false %}
 {% capture class %}media-hero-grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
-{% capture title_class %}section-title--media-hero-grid bg--black{% if title_class %} {{- title_class -}}{% endif %}{% endcapture %}
+{% capture title_class %}section-title--media-hero-grid bg--black{% if palette %} section-title--palette-{{ palette }}{% endif %}{% endcapture %}
 
 {%- if types and types.size >= 5 -%}
   <section class="{{ class }}" data-module="media-hero-grid">

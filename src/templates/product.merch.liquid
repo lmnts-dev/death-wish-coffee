@@ -12,14 +12,13 @@
 {%- assign types = media_hero_grid_metafields.type -%}
 {%- assign images = media_hero_grid_metafields.image -%}
 {%- assign videos = media_hero_grid_metafields.video -%}
-{%- capture media_hero_title_class -%}{% if palette != blank %}section-title--palette-{{ palette }}{% endif %}{%- endcapture -%}
 {%- render 'media-hero-grid',
   class: 'bg--black',
-  title: media_hero_grid_title,
-  title_class: media_hero_title_class,
+  title: media_hero_grid_title
   types: types,
   images: images,
-  videos: videos
+  videos: videos,
+  palette: palette
 -%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}
