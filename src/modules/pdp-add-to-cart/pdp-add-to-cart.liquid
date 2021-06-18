@@ -1,19 +1,19 @@
 {% assign form_type = 'button' %}
 {% assign class = class | default:false %}
-{% assign find_in_store = find_in_store | default: false %}
+{% assign product_upc = product_upc | default: false %}
 {% capture class %}pdp-add-to-cart{% if class %} {{- class -}}{% endif %}{% endcapture %}
 {%- if template.suffix == 'merch' -%}
   {% assign form_type = 'dropdown' %}
 {%- endif -%}
 
 <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
-  <div class="container pdp-add-to-cart__container">
+    <div class="container pdp-add-to-cart__container">
     <div class="pdp-add-to-cart__wrapper">
       <div class="pdp-add-to-cart__header">
         <h2 class="pdp-add-to-cart__title h2">{{product.title}}</h2>
         <p class="pdp-add-to-cart__price h5">{{product.price | money}}{% if customer %} (FREE SHIPPING) {% endif %}
-          {% if find_in_store != false %}
-          or <a href="/pages/store-locator" class='h5'>FIND IN STORE</a>
+          {% if product_upc != false %}
+          or <a href="/pages/store-locator?MM=panel2&PROD={{product_upc}}" class='h5'>FIND IN STORE</a>
           {% endif %}
         </p>
         <div class="pdp-add-to-card__review js-review">
