@@ -14,7 +14,9 @@ TODO: Need to fix pagination and navigation components
 {% assign custom_params = custom_params | default: false %}
 {% assign cta_title = cta_title | default: false %}
 {% assign cta_link = cta_link | default: false %}
-{% capture class %}carousel{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign palette = palette | default: false %}
+{% capture class %}carousel{% if class %} {{- class -}}{% endif %}{% if palette != blank %} carousel--palette-{{ palette }}{% endif %}{% endcapture %}
+{% capture title_class %}{% if title_class %}{{- title_class -}}{% endif %}{% if palette != blank %} section-title--palette-{{ palette }}{% endif %}{% endcapture %}
 {% assign init_at_breakpoint = init_at_breakpoint | default: false %}
 {% capture init_at_bp_class %}{% if init_at_bp_class %} carousel-bp carousel-bp--{{init_at_breakpoint}}{% endif %}{% endcapture %}
 

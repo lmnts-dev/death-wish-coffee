@@ -8,7 +8,8 @@
 {% assign product_id = product_id | default: false %}
 {%- assign cta_text = cta_text | default: false -%}
 {%- assign cta_class = cta_class | default: false -%}
-{%- capture class -%}product-hero-card{% if class %} {{ class }}{% endif %}{% endcapture -%}
+{%- assign palette = palette | default: false -%}
+{%- capture class -%}product-hero-card{% if class %} {{ class }}{% endif %}{% if palette %} product-hero-card--palette-{{ palette }}{% endif %}{% endcapture -%}
 
 <section class="{{ class }}" data-module="product-hero-card">
   <div class="product-hero-card__wrapper">
@@ -39,6 +40,7 @@
               {%- endif -%}
               {%- if cta_text and url -%}
                 <div class="product-hero-card__item-cta ">
+                  {%- capture cta_class -%}product-hero-card__item-cta-button{% if cta_class %} {{ cta_class }}{% endif %}{% if palette %} button--palette-{{ palette }}{% endif %}{% endcapture -%}
                   {%- render 'button',
                     tag: 'a',
                     class: cta_class,
