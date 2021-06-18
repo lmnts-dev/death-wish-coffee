@@ -35,7 +35,7 @@ export default {
       console.log(variant)
       if (variant) {
         window.dispatchEvent(new CustomEvent('upscribeVariantUpdate', {
-          detail: JSON.parse(variant)
+          detail: variant
         }))
       }
 
