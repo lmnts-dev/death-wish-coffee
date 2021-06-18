@@ -126,6 +126,14 @@ export default {
         }),
         {}
       )
+    },
+    toggleOption (option, value) {
+      console.log(option, value)
+      if (this.selectedOptions[option] && this.selectedOptions[option] === value) {
+        this.selectedOptions[option] = null
+      } else {
+        this.selectedOptions[option] = value
+      }
     }
   }
 }

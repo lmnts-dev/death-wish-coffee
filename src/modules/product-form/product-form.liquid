@@ -25,6 +25,7 @@
                     v-model="selectedOptions[option]"
                     class="radio product-form__option-value-input js-product-input"
                     type="radio"
+                    @click="toggleOption(option, value)"
               >
               <label :for="optionInputId(option, value)"
                     class="label label--radio product-form__option-value-label"
