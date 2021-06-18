@@ -157,6 +157,12 @@
       margin-right: 0;
     }
   }
+
+  .grid--mirror-image-hero & {
+    & > * {
+      flex: 1 1 50%;
+    }
+  }
 }
 
 .grid-description {
