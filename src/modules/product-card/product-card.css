@@ -229,3 +229,41 @@
   margin-top: 5px;
   color: var(--blood);
 }
+
+.product-card__review-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .yotpo {
+    pointer-events: none;
+
+    .star-clickable {
+      align-items: center;
+    }
+
+    .yotpo-icon-star,
+    .yotpo-icon-half-star,
+    .yotpo-icon-empty-star {
+      font-size: 15px !important;
+    }
+
+    .yotpo-stars {
+      margin-right: 7px;
+    }
+
+    a,
+    .text-m {
+      @extend .b1;
+    }
+
+    .yotpo-icon-double-bubble {
+      display: none;
+    }
+
+    .pull-left.ask-question {
+      display: none;
+    }
+  }
+}
