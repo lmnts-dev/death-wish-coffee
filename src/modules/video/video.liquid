@@ -19,10 +19,11 @@
   <div is="v-video" inline-template{% if mod_vue_attrs %} {{ mod_vue_attrs }}{% endif %}>
     <div class="{{- mod_css -}}" {%if mod_disable_scroll_activate %}data-disable-scroll-activate{% endif%}>
       <video
+        ref="video"
         class="video__el js-video"
         :data-src="src"
-        autoplay="true"
-        loop="true"
+        :loop="loop"
+        :autoplay="autoplay"
         muted="true"
         playsinline></video>
     </div>

@@ -47,7 +47,8 @@ export default {
   data () {
     return {
       shouldShowMessage: false,
-      selectedVariantId: null
+      selectedVariantId: null,
+      isHovered: false
     }
   },
   computed: {
@@ -81,6 +82,12 @@ export default {
     },
     handleAddedToCartError () {
       this.shouldShowMessage = true
+    },
+    handleHover () {
+      this.isHovered = true
+    },
+    handleVideoEnded () {
+      this.isHovered = false
     }
   },
   mounted () {
