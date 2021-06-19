@@ -135,6 +135,15 @@ h5 {
     font-size: 16px;
     line-height: 24px;
   }
+
+  .pdp-add-to-cart__price & {
+    color: var(--white);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--blood);
+    }
+  }
 }
 
 .p1 {
