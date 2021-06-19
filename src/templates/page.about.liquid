@@ -55,12 +55,35 @@
 {%- endcapture -%}
 {%- render 'grid', class: 'grid--title-description-card bg--black', gutter: 'lg', children: title_description_card -%}
 
-{% assign mirror_image = page.metafields.mirror-image-hero.mirror_image_hero_image | map: 'src' %}
-{%- render 'mirror-image-hero',
-  image: mirror_image,
-  title: page.metafields.mirror-image-hero.mirror_image_hero_header,
-  description: page.metafields.mirror-image-hero.mirror_image_hero_copy
--%}
+{%- capture mirror_image_hero -%}
+  {%- assign mirror_image_acf = page.metafields.mirror-image-hero -%}
+  {%- assign images = mirror_image_acf.mirror_image_hero_image -%}
+  {%- assign titles = mirror_image_acf.mirror_image_hero_header -%}
+  {%- assign descriptions = mirror_image_acf.mirror_image_hero_copy -%}
+
+  {%- if images.size > 0 -%}
+    {%- for image in images limit: 2 -%}
+      {%- assign image_src = image | map: 'src' -%}
+
+      {%- unless forloop.first == true -%}
+        {% assign class = class | append: ' mirror-image-hero--reverse' %}
+      {%- endunless -%}
+
+      {% if images.size == 1 %}
+        {% assign class = class | append: ' mirror-image-hero--single' %}
+      {% endif %}
+
+      {%- render 'mirror-image-hero',
+        class: class,
+        image: image_src,
+        title: titles[forloop.index0],
+        description: descriptions[forloop.index0]
+      -%} 
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- render 'grid', class: 'grid--mirror-image-hero', children: mirror_image_hero, no_gutter: true -%}
 
 {%- render 'section-cta',
   title: page.metafields.about-us-section-cta.header,
