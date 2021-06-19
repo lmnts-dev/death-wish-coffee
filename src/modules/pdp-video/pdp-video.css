@@ -1,15 +1,1 @@
 /* styles for pdp-video */
-
-.pdp-video__inner {
-  position: relative;
-
-  &::before {
-    content: '';
-    display: block;
-    padding-top: 62%;
-
-    @media (--lg) {
-      padding-top: 56.25%;
-    }
-  }
-}
