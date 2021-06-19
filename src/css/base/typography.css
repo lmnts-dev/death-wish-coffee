@@ -123,6 +123,11 @@ h5 {
   &--uppercase {
     text-transform: uppercase;
   }
+
+  .search-results & {
+    text-align: center;
+    color: var(--white);
+  }
 }
 
 .h5 {
