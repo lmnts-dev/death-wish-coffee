@@ -1,1 +1,140 @@
 /* styles for the search-results module go in this file */
+
+#search-results {
+  background-color: var(--black);
+}
+
+.search-results {
+  padding-top: 50px;
+}
+
+.search-results__border {
+  width: 68px;
+  height: 0;
+  margin: 39.5px auto 71px;
+  border: solid 1px var(--white);
+}
+
+#findify_results {
+  max-width: 1050px;
+  margin: 0 auto;
+  background-color: var(--black);
+  color: var(--white);
+
+  @media (--xl-max) {
+    max-width: 768px;
+  }
+
+  /* @media (--xl-max) {
+    max-width: 600px;
+  } */
+
+  .findify-components-search--desktop-facets__header {
+    .findify-components--text {
+      @extend .b2;
+    }
+  }
+
+  .findify-components--text {
+    @extend .b1;
+
+    color: var(--white);
+
+    .findify-components--text__primary-uppercase {
+      @extend .b2;
+    }
+  }
+
+  .findify-components--cards--product--rating__count {
+    color: var(--white) !important;
+  }
+
+  .findify-components--cards--product--price__price {
+    color: var(--white);
+  }
+
+  .findify-components--dropdown__select {
+    .findify-components--text__primary-lowercase {
+      color: var(--black);
+    }
+  }
+
+  .findify-components--dropdown__option, .findify-components--dropdown__highlighted {
+    .findify-components--text.findify-components--text__primary-lowercase {
+      color: var(--black);
+    }
+  }
+
+  .findify-components--sorting__icon {
+    display: none;
+  }
+
+  .react-numeric-input {
+    .findify-components--range-facet__input {
+      color: var(--white);
+    }
+  }
+
+  .findify-components--icon {
+    path {
+      fill: var(--white);
+    }
+  }
+
+  .findify-components--dropdown__arrow {
+    path {
+      fill: var(--black);
+    }
+  }
+
+  .findify-component-spinner,.findify-component-spinner::after {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+
+  .findify-component-spinner {
+    margin: 60px auto 0 !important;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: findify-component-spinner-animation 0.7s infinite cubic-bezier(0.67, 0.35, 0.7, 0.8);
+    animation: findify-component-spinner-animation 0.7s infinite cubic-bezier(0.67, 0.35, 0.7, 0.8);
+    -ms-transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    border-top: 3px solid #eaeaea;
+    border-right: 3px solid #eaeaea;
+    border-bottom: 3px solid #eaeaea;
+    border-left: 3px solid #c6c6c6;
+  }
+
+  @-webkit-keyframes findify-component-spinner-animation {
+    0% {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+  }
+
+  @keyframes findify-component-spinner-animation {
+    0% {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+  }
+
+  .findify-components-search--desktop-facets__icon {
+    margin-top: 5px;
+  }
+}

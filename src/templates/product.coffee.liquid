@@ -1,17 +1,16 @@
 {%- layout 'theme' -%}
 
+{%- assign product_acf = product.metafields.accentuate -%}
+
 {%- comment -%}PDP Hero{%- endcomment -%}
 {%- render 'pdp-hero' -%}
 
 {%- comment -%}Video Section{%- endcomment -%}
-{%- assign video_section_image = product_acf.coffee_detail_hero_video_image | map: 'src' -%}
-{%- assign video_section_url = product_acf.coffee_detail_hero_video_video -%}
+{%- assign video_section_embed_code = product_acf.coffee_detail_video_embed_code -%}
 {%- assign video_section_title = product_acf.coffee_detail_hero_video_title -%}
 {%- render 'pdp-video',
   title: video_section_title, 
-  video_src: video_section_url,
-  mod_fallback_image: video_section_image,
-  button_play: true
+  embed_code: video_section_embed_code
 -%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}

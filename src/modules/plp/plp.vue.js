@@ -14,11 +14,11 @@ export default {
     ...mapGetters('plp', ['displayedProducts', 'displayedFeaturedProducts'])
   },
   methods: {
+    checkIfProductFeatured (product) {
+      return this.displayedFeaturedProducts.findIndex(featuredProduct => product.id === featuredProduct.id) >= 0
+    },
     getFeaturedProductIndexForPosition (index) {
       return Math.ceil(index / 3) - 1
-    },
-    getFeaturedProductForIndex (index) {
-      return this.displayedFeaturedProducts[this.getFeaturedProductIndexForPosition(index)]
     },
     getFeaturedProductClass (index) {
       const classes = [

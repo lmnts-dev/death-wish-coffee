@@ -100,11 +100,13 @@ ul, ol {
 }
 
 #destini {
+  background-color: var(--black) !important;
+
   @media (--lg) {
-    margin-bottom: 75px;
+    height: 970px !important;
   }
 
-  @media (--md-max) {
-    height: 125vh !important;
+  @media (--lg-max) {
+    height: 121vh !important;
   }
 }
