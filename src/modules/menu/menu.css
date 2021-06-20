@@ -32,10 +32,21 @@
 .sub-menu--level-1 {
   padding-bottom: 12px;
 
+  .sub-menu__item {
+    @media (--lg) {
+      width: 275px;
+
+      &:not(:last-of-type) {
+        margin-right: 48px;
+      }
+    }
+  }
+
   @media (--lg) {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 0 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
     max-width: 1696px;
     margin: 0 auto;
     padding: 50px 24px 124px;
