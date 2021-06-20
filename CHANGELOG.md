@@ -1,6 +1,44 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.23 - 2021-06-19
+### CHANGED:
+- Remove shop all page template 
+- adjust store locator styles 
+- add store locator product ACF field 
+- DIC-111 Update logic for video play when hover on PLP 
+- DIC-123 Change gender filter options to Men and Women 
+- Fix code review 
+- DIC-104 Fix product grid to show correctly with the presence of featured products 
+- DIC-120 Update extra contents ACF section into two HTML fields 
+- DIC-117 Deselect variant when clicking on an already-selected option 
+- DIC-119 Update mirrored section on About Us page 
+- DIC-118 Sort type filter alphabetically 
+- move findify script to bottom of head tag 
+- resolve navigation merge conflict 
+- change search icon color 
+- add findify container to search-results module 
+- modify search result page typography 
+- add nav bar search input toggle 
+- move findify styles to search results module 
+- compare price 
+- Update video module for product coffee lto template 
+- DIC-113 Update style for yotpo review on product cards 
+- DIC-114 Update style for list collection page 
+- DIC-114 Create Shop All Page and update markup for list collection page 
+- DIC-97 Add extra contents for product page 
+- DIC-100 Update markup for video module on PDP Coffee 
+- home hero aspect ratio 
+- menu center on desktop 
+- config 
+- add link to store locator on PDP 
+- add find in store ACF toggle 
+- DIC-109 Update logic for product form has only variant default 
+- DIC-110 Fix style for large square in collection 
+- DIC-109 Update name variant when product has only default variant 
+- add search input 
+- add findify components 
+
 ## 0.0.22 - 2021-06-15
 ### CHANGED:
 - DIC-102 Update message for product detail page after adding to cart with errors 
