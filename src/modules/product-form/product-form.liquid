@@ -1,4 +1,4 @@
-`{%- assign is_vue_component = is_vue_component | default: false -%}
+{%- assign is_vue_component = is_vue_component | default: false -%}
 {%- assign custom_attrs = custom_attrs | default: '' -%}
 {%- assign form_type = form_type | default: 'button' -%}
 {%- capture button_class -%}product-form__button js-form-submit{% if form_type != 'button' %} button--light{% endif %}{%- endcapture -%}
@@ -59,7 +59,7 @@
       <div v-if="!addedToCartSuccessfully && addedToCartErrorMessage" class="b1 product-form__message">${addedToCartErrorMessage}</div>
     {%- endunless -%}
 
-    {%- render 'upscribe-product-options' -%}
+    {%- render 'upscribe-product-options' product: product -%}
 
     <form method="post" action="/cart/add" @submit.prevent="handleAddToCart">
       <input type="hidden" name="id" :value="selectedVariantId">

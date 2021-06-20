@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import store from 'lib/store'
 import ProductForm from './product-form.vue'
+import VOption from '../upscribe-product-options/upscribe-product-options-select.vue'
+import UpscribeForm from '../upscribe-product-options/upscribe-product-options'
 
 /**
  * Initializes the site's productform module.
@@ -11,7 +13,17 @@ const productFormRoot = el => {
   return new Vue({
     el,
     components: {
-      ProductForm
+      ProductForm,
+      VOption,
+      UpscribeForm
+    },
+    data: {
+      product: '',
+      addedToCartSuccessfully: '',
+      addedToCartErrorMessage: '',
+      selectedVariantId: '',
+      componentMounted: false,
+      initialSelectedOptions: ''
     },
     store,
     name: 'ProductFormRoot',
