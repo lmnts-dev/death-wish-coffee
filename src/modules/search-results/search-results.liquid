@@ -1,6 +1,10 @@
-{% assign class = class | default false %}
+{% assign class = class | default: false %}
 {% capture class %}search-results{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
-<section class="{{ class }} placeholder" data-module="search-results">
-  <h2 class="module-name">search-results</h2>
-</section>
+<section class="{{ class }}" data-module="search-results">
+  <h1 class="search-results__header h4">Search Results</h1>
+  <div class='search-results__border'></div>
+  <div id="findify_results" style="min-height: 400px;">
+    <div class="findify-component-spinner"></div>
+  </div>
+  </section>

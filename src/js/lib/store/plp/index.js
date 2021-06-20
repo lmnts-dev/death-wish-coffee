@@ -36,13 +36,17 @@ export default {
       return allValues
     },
     allProductTypeValues ({ products }) {
-      const allValues = products.reduce((result, product) => {
-        const type = product.type
-        if (!result.some(r => r.value === type.toLowerCase())) {
-          result.push({ value: type.toLowerCase(), label: type })
-        }
-        return result
-      }, [])
+      const allValues = products
+        .reduce(
+          (result, product) => {
+            const type = product.type
+            if (!result.some(r => r.value === type.toLowerCase())) {
+              result.push({ value: type.toLowerCase(), label: type })
+            }
+            return result
+          },
+          [])
+        .sort((type1, type2) => type1.value > type2.value ? 1 : -1)
       return allValues
     },
     filterAvailableValues ({ filterDefinitions }, { allProductOptionValues, allProductTypeValues }) {
@@ -65,11 +69,8 @@ export default {
     displayedFeaturedProducts ({ products, sortOrder, featuredIndexes }, { isFiltering }) {
       return isFiltering || sortOrder ? [] : products.filter((product, index) => featuredIndexes.findIndex(i => i === index) >= 0)
     },
-    displayedFeaturedProductIds (state, { displayedFeaturedProducts }) {
-      return displayedFeaturedProducts.map(product => product.id)
-    },
-    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }, { displayedFeaturedProductIds }) {
-      let filteredProducts = products.filter(product => !displayedFeaturedProductIds.includes(product.id))
+    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }) {
+      let filteredProducts = [...products]
 
       for (const filter of filterDefinitions) {
         if (!filterValues[filter.name] || filterValues[filter.name].length === 0) {

@@ -33,6 +33,7 @@
     (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/EmlyH22Rv4gaBBcp1acP56ctxXacWhYtche9agiF/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
   </script>
   <!-- End of Yotpo JavaScript -->
+  <script src="//assets.findify.io/deathwishcoffee.myshopify.com.min.js" async defer></script>
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
@@ -45,5 +46,6 @@
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}
   {%- endunless -%}
+  {% include 'findify-tagging' %}
 </body>
 </html>

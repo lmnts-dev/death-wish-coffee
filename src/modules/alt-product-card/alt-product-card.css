@@ -39,6 +39,50 @@
   margin-top: 5px;
 }
 
+.alt-product-card__review-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .yotpo {
+    pointer-events: none;
+
+    .star-clickable {
+      align-items: center;
+    }
+
+    .yotpo-icon-star,
+    .yotpo-icon-half-star,
+    .yotpo-icon-empty-star {
+      font-size: 15px !important;
+    }
+
+    .yotpo-stars {
+      margin-right: 7px;
+    }
+
+    a,
+    .text-m {
+      @extend .b1;
+    }
+
+    .yotpo-icon-double-bubble {
+      display: none;
+
+      & + .questions {
+        &::before {
+          content: ',';
+          color: var(--white);
+        }
+      }
+    }
+
+    .pull-left.ask-question {
+      display: none;
+    }
+  }
+}
+
 .alt-product-card__price {
   @media (--md) {
     margin-top: 2px;
