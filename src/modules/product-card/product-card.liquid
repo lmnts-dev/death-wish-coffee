@@ -8,10 +8,10 @@
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 {%- capture content -%}
-    <div class="product-card__inner">
+    <div class="product-card__inner" @mouseover="handleHover">
       <div class="product-card__header">
-        <a v-if="isFeatured && product.video" :href="product.url" class="product-card__video-container">
-          {%- render 'video', mod_class: 'product-card__video', mod_is_vue: true, mod_vue_attrs: ':src="product.video"' -%}
+        <a v-if="isHovered && isFeatured && product.video" :href="product.url" class="product-card__video-container">
+          {%- render 'video', mod_class: 'product-card__video', mod_is_vue: true, mod_vue_attrs: ':src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
         </a>
         <div v-else class="product-card__image-container">
           <a :href="product.url" class="product-card__image-link">
@@ -29,9 +29,15 @@
           <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
         </h4>
         <div class="b1 product-card__review">
-          <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+          <a :href="product.url + '#review-drawer'" class="product-card__review-link">
+            <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+            <div class="yotpo QABottomLine" :data-product-id="product.id"></div>
+          </a>
         </div>
-        <p class="h5 product-card__price">$${formatPrice(price)}</p>
+        <p class="h5 product-card__price">
+          <span v-if="comparePrice" class="product-card__compare">$${ comparePrice }</span>
+          <span class="product-card__original">$${formatPrice(price)}</span>
+        </p>
         <p v-if="shouldShowMessage && addedToCartErrorMessage" class="b1 product-card__message">${addedToCartErrorMessage}</p>
       </div>
     </div>

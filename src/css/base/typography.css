@@ -123,6 +123,11 @@ h5 {
   &--uppercase {
     text-transform: uppercase;
   }
+
+  .search-results & {
+    text-align: center;
+    color: var(--white);
+  }
 }
 
 .h5 {
@@ -134,6 +139,15 @@ h5 {
   @media (--md-max) {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .pdp-add-to-cart__price & {
+    color: var(--white);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--blood);
+    }
   }
 }
 

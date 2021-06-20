@@ -47,7 +47,8 @@ export default {
   data () {
     return {
       shouldShowMessage: false,
-      selectedVariantId: null
+      selectedVariantId: null,
+      isHovered: false
     }
   },
   computed: {
@@ -57,6 +58,9 @@ export default {
     },
     price () {
       return this.selectedVariant ? this.selectedVariant.price : this.product.price
+    },
+    comparePrice () {
+      return this.product.options_by_name.Size.selected_variant_drop.compare_at_price ? this.product.options_by_name.Size.selected_variant_drop.compare_at_price : ''
     }
   },
   watch: {
@@ -81,6 +85,12 @@ export default {
     },
     handleAddedToCartError () {
       this.shouldShowMessage = true
+    },
+    handleHover () {
+      this.isHovered = true
+    },
+    handleVideoEnded () {
+      this.isHovered = false
     }
   },
   mounted () {

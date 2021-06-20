@@ -10,7 +10,10 @@
 
 {%- capture content -%}
   <div class="product-form__form">
-    <div class="product-form__options">
+    <div 
+      class="product-form__options"
+      :class="{'product-form__options--default': hasVariantDefault}"
+    >
       <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
         {%- if show_title -%}
           <h4 class="product-form__option-title h4">${option}</h4>
@@ -18,13 +21,15 @@
         {%- if form_type == 'button' -%}
           <div class="product-form__option-values">
             <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
-                class="product-form__option-value">
+                class="product-form__option-value"
+            >
               <input :id="optionInputId(option, value)"
                     :name="option + value"
                     :value="value"
                     v-model="selectedOptions[option]"
                     class="radio product-form__option-value-input js-product-input"
                     type="radio"
+                    @click="toggleOption(option, value)"
               >
               <label :for="optionInputId(option, value)"
                     class="label label--radio product-form__option-value-label"
