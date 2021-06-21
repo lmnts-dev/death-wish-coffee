@@ -27,20 +27,13 @@ upscribe_exclude_vue_cdn_in_snippet = Whether or not to load the vue.js script f
 {% assign upscribe_keep_component_in_sync = true %}
 {% endif %}
 
-{%- capture product_json -%}
-    {%- render 'product-json', product: product -%}
-  {%- endcapture -%}
-  <script>
-  const product = {{product_json}}
-  console.log(product.options)
-</script>
-  <section :product='{{product_json | escape}}' :shop='{{shop.metafields | json}}' :product-id="{{product.id}}" v-if="product"  
+  <section inline-template :product-id="{{product.id}}" v-if="product"  
   class="cu-upscribe" data-module="upscribe-product-options">
-  <div inline-template is="upscribe-product-options" class="cu-upscribe__inner" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
+  <div class="cu-upscribe__inner" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
     :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
     :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
     :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}">
-
+    <div>
     <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
       <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
         name="properties[Subscription]">
@@ -93,6 +86,7 @@ upscribe_exclude_vue_cdn_in_snippet = Whether or not to load the vue.js script f
           class="cu-option" v-on:click-option="setFrequency"></v-option>
       </div>
     </div>
+  </div>
   </div>
 </section>
 {% endif %}
