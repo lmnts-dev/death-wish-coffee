@@ -362,11 +362,11 @@ export default {
     },
     clickOption () {
       this.$emit('click-option', this.index)
-      if (this.upscribeKeepComponentInSync !== false) { // Upscribe Frequency Update
-        window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
-          detail: this.index
-        }))
-      }
+
+      // Upscribe Frequency Update
+      window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
+        detail: this.index
+      }))
     },
     getParameterByName (name, url = window.location.href) {
       name = name.replace(/[\]]/g, '\\$&')
@@ -595,6 +595,7 @@ export default {
         'upscribeFrequencyIndexUpdate',
         function (event) {
           vm.setFrequency(event.detail)
+          console.log(event.detail, 'event')
         },
         false
       )

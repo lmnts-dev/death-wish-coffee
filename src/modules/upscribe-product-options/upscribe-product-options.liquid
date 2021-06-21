@@ -88,6 +88,7 @@ upscribe_exclude_vue_cdn_in_snippet = Whether or not to load the vue.js script f
           :class="{'is-active': isActive}"
           @click="clickOption"
       >
+      ${option.value}
           <span class="cu-option__mainText"
               v-if="option.mainText"
           >{{ option.mainText }}</span>
