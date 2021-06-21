@@ -84,13 +84,14 @@
   {%- capture product_json -%}
     {%- render 'product-json', product: product -%}
   {%- endcapture -%}
-
   <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
     <div is="product-form"
          :product="{{- product_json | escape -}}"
+         :shop='{{shop.metafields.sf_upscribe | json}}' 
          inline-template
     >
       {{ content }}
     </div>
   </div>
+
 {%- endif -%}
