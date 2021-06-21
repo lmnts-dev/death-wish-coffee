@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.24 - 2021-06-20
+### CHANGED:
+- DIC-112 Update video for Large Text BG Image module 
+
 ## 0.0.23 - 2021-06-19
 ### CHANGED:
 - Remove shop all page template 
