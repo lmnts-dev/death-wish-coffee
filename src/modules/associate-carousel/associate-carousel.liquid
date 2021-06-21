@@ -1,3 +1,4 @@
+{%- assign class = class | default: false -%}
 {%- assign item_titles = item_titles | default: false -%}
 {%- assign item_descriptions = item_descriptions | default: false -%}
 {%- assign item_images = item_images | default: false -%}
@@ -5,8 +6,9 @@
 {%- assign column_number = column_number | default: 1 -%}
 {%- assign row_number = row_number | default: 1 -%}
 {%- assign item_per_view = column_number | times: row_number -%}
+{%- capture class -%}associate-carousel bg--black{% if class %} {{ class }}{% endif %} associate-carousel--column-{{ column_number }}{%- endcapture -%}
 {%- if item_titles and item_titles.size > 0 -%}
-  <section class="associate-carousel bg--black" data-module="associate-carousel" data-item-per-view="{{- item_per_view -}}">
+  <section class="{{- class -}}" data-module="associate-carousel" data-item-per-view="{{- item_per_view -}}">
     <div class="swiper-container associate-carousel__container js-swiper">
       <div class="swiper-wrapper associate-carousel__wrapper">
         {%- for title in item_titles -%}
