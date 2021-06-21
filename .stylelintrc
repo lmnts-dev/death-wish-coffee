@@ -32,7 +32,8 @@
           "for",
           "extend",
           "mixin",
-          "define-mixin"
+          "define-mixin",
+          "each"
         ]
       }
     ],

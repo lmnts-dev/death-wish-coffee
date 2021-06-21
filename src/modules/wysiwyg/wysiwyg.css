@@ -135,6 +135,12 @@
   &--article {
     margin-top: 2rem;
   }
+
+  &--text-white {
+    & p {
+      color: var(--white);
+    }
+  }
 }
 
 .terms-container {
@@ -237,5 +243,15 @@
 
     text-transform: none;
     color: var(--blood);
+  }
+}
+
+.wysiwyg--associate-carousel {
+  p {
+    text-transform: uppercase;
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
   }
 }

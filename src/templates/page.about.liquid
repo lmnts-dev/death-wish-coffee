@@ -39,6 +39,20 @@
   description: page.metafields.full_width_hero.hero_copy
 -%}
 
+{%- assign member_names = page.metafields.accentuate.team_member_name -%}
+{%- assign member_positions = page.metafields.accentuate.team_member_position -%}
+{%- assign member_images = page.metafields.accentuate.team_member_image | map: 'src' -%}
+{%- assign member_blurbs = page.metafields.accentuate.team_member_blurb -%}
+{%- assign column_number = 6 -%}
+{%- assign row_number = page.metafields.accentuate.team_cards_row_number -%}
+{%- render 'associate-carousel',
+  column_number: column_number,
+  row_number: row_number,
+  item_titles: member_names,
+  item_descriptions: member_positions,
+  item_images: member_images,
+  item_blurbs: member_blurbs -%}
+
 {%- render 'bolt-header', title: page.metafields.about.career_perks_headline_headline -%}
 
 {%- render 'section-title', class: 'section-title--title-description-card bg--black', title: page.metafields.title-description.title_description_cards_header -%}
