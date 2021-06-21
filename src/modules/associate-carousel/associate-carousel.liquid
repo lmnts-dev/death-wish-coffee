@@ -12,24 +12,26 @@
         {%- for title in item_titles -%}
           {%- assign index0 = forloop.index0 -%}
           <div class="swiper-slide associate-carousel__item js-item">
-            <div class="associate-carousel__item-main">
-              <div class="associate-carousel__item-image-wrapper">
-                {%- if item_images[index0] != blank -%}
-                  {%- render 'image', src: item_images[index0], class: 'associate-carousel__item-image' -%}
-                {%- endif -%}
+            <div class="associate-carousel__inner">
+              <div class="associate-carousel__item-main">
+                <div class="associate-carousel__item-image-wrapper">
+                  {%- if item_images[index0] != blank -%}
+                    {%- render 'image', src: item_images[index0], class: 'associate-carousel__item-image' -%}
+                  {%- endif -%}
+                </div>
+                <div class="associate-carousel__item-content">
+                  <h4 class="b1 associate-carousel__item-title">{{- title -}}</h4>
+                  {%- if item_descriptions[index0] != blank -%}
+                    <p class="b1 associate-carousel__item-description">{{- item_descriptions[index0] -}}</p>
+                  {%- endif -%}
+                </div>
               </div>
-              <div class="associate-carousel__item-content">
-                <h4 class="b1 associate-carousel__item-title">{{- title -}}</h4>
-                {%- if item_descriptions[index0] != blank -%}
-                  <p class="b1 associate-carousel__item-description">{{- item_descriptions[index0] -}}</p>
-                {%- endif -%}
-              </div>
+              {%- if item_blurbs[index0] != blank -%}
+                <div class="associate-carousel__item-blurb">
+                  <div class="associate-carousel__item-blurb-wysiwyg wysiwyg wysiwyg--associate-carousel wysiwyg--text-white">{{- item_blurbs[index0] -}}</div>
+                </div>
+              {%- endif -%}
             </div>
-            {%- if item_blurbs[index0] != blank -%}
-              <div class="associate-carousel__item-blurb">
-                <div class="associate-carousel__item-blurb-wysiwyg wysiwyg wysiwyg--associate-carousel wysiwyg--text-white">{{- item_blurbs[index0] -}}</div>
-              </div>
-            {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
