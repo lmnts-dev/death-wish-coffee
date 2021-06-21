@@ -80,6 +80,7 @@
 
 {%- assign big_texts = shop.metafields.accentuate.big_text -%}
 {%- assign big_text_descriptions = shop.metafields.accentuate.big_text_description -%}
+{%- assign big_text_videos = shop.metafields.accentuate.large_text_bg_video -%}
 {%- assign big_text_images = shop.metafields.accentuate.big_text_image %}
 {%- assign big_text_cta_texts = shop.metafields.accentuate.big_text_cta_text -%}
 {%- assign big_text_cta_links = shop.metafields.accentuate.big_text_cta_link -%}
@@ -95,6 +96,7 @@
     class: class,
     big_text: big_text, 
     description: big_text_descriptions[forloop.index0] ,
+    video: big_text_videos[forloop.index0],
     image: image,
     cta_text: big_text_cta_texts[forloop.index0],
     cta_link: big_text_cta_links[forloop.index0]
