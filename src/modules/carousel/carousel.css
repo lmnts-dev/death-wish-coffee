@@ -305,6 +305,16 @@
   }
 }
 
+.carousel-next-icon {
+  color: var(--blood);
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .carousel--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
+}
+
 .carousel-prev {
   left: -1.2rem;
 
@@ -342,6 +352,16 @@
 
   .carousel--article & {
     left: 85px;
+  }
+}
+
+.carousel-prev-icon {
+  color: var(--blood);
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .carousel--palette-$(color) & {
+      color: var(--$color);
+    }
   }
 }
 

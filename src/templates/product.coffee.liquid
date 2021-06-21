@@ -1,4 +1,6 @@
 {%- layout 'theme' -%}
+{%- assign product_acf = product.metafields.accentuate -%}
+{%- assign palette = product_acf.palette_selection | handle -%}
 
 {%- assign product_acf = product.metafields.accentuate -%}
 
@@ -11,10 +13,11 @@
 {%- render 'pdp-video',
   title: video_section_title, 
   embed_code: video_section_embed_code
+  palette: palette
 -%}
 
 {%- comment -%}Review Drawer{%- endcomment -%}
-{%- render 'review-drawer', title: product_acf.pdp_review_heading -%}
+{%- render 'review-drawer', palette: palette, title: product_acf.pdp_review_heading -%}
 
 {%- comment -%}Featured Product Carousel{%- endcomment -%}
 {%- assign featured_products = product_acf.pdp_featured_products_selector | split: '|' -%}
@@ -55,7 +58,8 @@
           description: description,
           sub_description: sub_description,
           cta_text: cta_text,
-          product_id: featured_product.id
+          product_id: featured_product.id,
+          palette: palette
         -%}
       {%- endif -%}
     {%- endfor -%}
@@ -72,14 +76,15 @@
 
   {%- render 'carousel',
     title: product_acf.pdp_featured_products_heading,
-    title_class: 'section-title--product-hero-card'
+    title_class: 'section-title--product-hero-card',
     class: 'carousel--product-hero-card carousel--no-padding bg--shadow',
     children: featured_slides,
     spacing: 0,
     slides_per_view: featured_slides_per_view,
-    navigation: featured_navigation
+    navigation: featured_navigation,
+    palette: palette
   -%}
 {%- endif -%}
 
 {%- comment -%}Footer CTA{%- endcomment -%}
-{%- render 'footer-cta', title: product_acf.pdp_footer_cta_heading, enable_subscribe_form: true %}
+{%- render 'footer-cta', palette: palette, title: product_acf.pdp_footer_cta_heading, enable_subscribe_form: true %}

@@ -100,4 +100,10 @@
   .section-title--article-hero-card & {
     color: var(--white);
   }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .section-title--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
 }

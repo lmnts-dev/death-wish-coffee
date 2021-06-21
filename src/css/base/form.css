@@ -98,6 +98,10 @@
     display: flex;
     flex-direction: column-reverse;
   }
+
+  .form-field--subscribe & {
+    height: 100%;
+  }
 }
 
 .form-field__input {
@@ -201,13 +205,18 @@
   }
 
   .form-field--white & {
-    border: none;
+    border-width: 0;
     background: var(--white);
     color: var(--shadow);
   }
 
   .form-field--subscribe & {
+    height: 100%;
     padding: 12px 20px;
+
+    .product-palette-white & {
+      border-width: 2px;
+    }
   }
 }
 
