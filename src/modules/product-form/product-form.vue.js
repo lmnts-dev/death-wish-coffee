@@ -37,32 +37,32 @@ export default {
     return {
       selectedOptions: { ...this.initialSelectedOptions },
       // activeVariantId: this.product.variants[0].id,
-      // initialApplicableVariants: this.product.metafields
-      //   ? this.product.metafields.applicable_variants
+      // initialApplicableVariants: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.applicable_variants
       //   : '',
-      // subscriptionProductTitle: this.product.metafields
-      //   ? this.product.metafields.subscription_product_title
+      // subscriptionProductTitle: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.subscription_product_title
       //   : '',
-      // intervalFrequncyMetafield: this.product.metafields
-      //   ? this.product.metafields.interval_frequency
+      // intervalFrequncyMetafield: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.interval_frequency
       //   : '',
-      // intervalUnitMetafield: this.product.metafields
-      //   ? this.product.metafields.interval_unit
+      // intervalUnitMetafield: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.interval_unit
       //   : '',
       // defaultGlobalDiscountAmount: this.shop.default_discount_amount
       //   ? this.shop.default_discount_amount
       //   : '',
-      // discountAmount: this.product.metafields
-      //   ? this.product.metafields.discount_amount
+      // discountAmount: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.discount_amount
       //   : '',
-      // initialChargeLimit: this.product.metafields
-      //   ? this.product.metafields.charge_limit
+      // initialChargeLimit: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.charge_limit
       //   : '',
-      // recurringDiscountAmount: this.product.metafields
-      //   ? this.product.metafields.recurring_discount_amount
+      // recurringDiscountAmount: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.recurring_discount_amount
       //   : '',
-      // recurringDiscountAfterOrder: this.product.metafields
-      //   ? this.product.metafields.recurring_discount_after_order
+      // recurringDiscountAfterOrder: this.product.sf_upscribe
+      //   ? this.product.sf_upscribe.recurring_discount_after_order
       //   : '',
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
@@ -224,23 +224,23 @@ export default {
     //   return this.product ? this.product.variants[0].id : ''
     // },
     initialApplicableVariants () {
-      return this.product.metafields
-        ? this.product.metafields.applicable_variants
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.applicable_variants
         : ''
     },
     subscriptionProductTitle () {
-      return this.product.metafields
-        ? this.product.metafields.subscription_product_title
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.subscription_product_title
         : ''
     },
     intervalFrequncyMetafield () {
-      return this.product.metafields
-        ? this.product.metafields.interval_frequency
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.interval_frequency
         : ''
     },
     intervalUnitMetafield () {
-      return this.product.metafields
-        ? this.product.metafields.interval_unit
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.interval_unit
         : ''
     },
     defaultGlobalDiscountAmount () {
@@ -249,23 +249,23 @@ export default {
         : ''
     },
     discountAmount () {
-      return this.product.metafields
-        ? this.product.metafields.discount_amount
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.discount_amount
         : ''
     },
     initialChargeLimit () {
-      return this.product.metafields
-        ? this.product.metafields.charge_limit
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.charge_limit
         : ''
     },
     recurringDiscountAmount () {
-      return this.product.metafields
-        ? this.product.metafields.recurring_discount_amount
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.recurring_discount_amount
         : ''
     },
     recurringDiscountAfterOrder () {
-      return this.product.metafields
-        ? this.product.metafields.recurring_discount_after_order
+      return this.product.sf_upscribe
+        ? this.product.sf_upscribe.recurring_discount_after_order
         : ''
     },
     activeSubsriptionDisplayPrice () {
@@ -600,7 +600,7 @@ export default {
     }
   },
   mounted () {
-    console.log('test', this.product, this.shop)
+    console.log('test', this.product.sf_upscribe, this.shop)
     this.activeVariantId = this.product.variants[0].id
 
     // reset
