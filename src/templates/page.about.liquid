@@ -44,7 +44,7 @@
 {%- assign member_images = page.metafields.accentuate.team_member_image | map: 'src' -%}
 {%- assign member_blurbs = page.metafields.accentuate.team_member_blurb -%}
 {%- assign column_number = 6 -%}
-{%- assign row_number = 4 -%}
+{%- assign row_number = page.metafields.accentuate.team_cards_row_number -%}
 {%- render 'associate-carousel',
   column_number: column_number,
   row_number: row_number,
