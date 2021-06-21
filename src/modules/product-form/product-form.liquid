@@ -48,7 +48,7 @@
             <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
               <option value selected>Select Field</option>
               <template v-for="variant in product.variants">
-                <option :key="variant.id" :value="variant.id">${variant.title}</option>
+                <option :key="variant.id" value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}</option>
               </template>
             </select>
           </div>
