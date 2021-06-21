@@ -18,5 +18,6 @@
     "tags": {{ product.tags | json }},
     "published_at": {{ product.published_at | json }},
     "video": {{ product.metafields.accentuate.video_loop_url | json }},
-    "type": {{ product.type | json }}
+    "type": {{ product.type | json }},
+    "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }}
 }
