@@ -5,10 +5,8 @@
  */
 
 import Vue from 'vue'
-
 const upscribeproductoptions = el => {
-  const UpscribeForm = Vue.component('UpscribeForm', {
-    el: '#upscribe-subscription-product',
+  Vue.component('upscribe-product-options', {
     props: {
       product: {
         type: Object,
@@ -17,6 +15,26 @@ const upscribeproductoptions = el => {
       shop: {
         type: Object,
         required: true
+      },
+      option: {
+        type: [Object, Boolean],
+        default: false
+      },
+      index: {
+        type: Number,
+        required: true
+      },
+      selectedIndex: {
+        type: Number,
+        required: true
+      },
+      selectFrequencyOptions: {
+        type: Array,
+        required: true
+      },
+      upscribeKeepComponentInSync: {
+        type: Boolean,
+        default: false
       }
     },
     delimiters: ['${', '}'],
@@ -24,7 +42,7 @@ const upscribeproductoptions = el => {
       selectedOptions: { ...this.initialSelectedOptions },
       initialSelectedOptions: () => {
         this.product.options.reduce((result, option) => {
-          // Initially, none of the option has any selected value
+        // Initially, none of the option has any selected value
           result[option] = null
           return result
         })
@@ -78,6 +96,7 @@ const upscribeproductoptions = el => {
       componentMounted: !1
     },
     mounted () {
+      console.log('test')
       this.activeVariantId = this.product.variants[0].id
 
       // reset
@@ -128,7 +147,7 @@ const upscribeproductoptions = el => {
         let comparePrice
         // if one time
         if (newVal === 'onetime') {
-          // use stored non-discount prices from previous changes
+        // use stored non-discount prices from previous changes
           originalPrice = this.activeSubsriptionDisplayPrice || false
           comparePrice = this.activeSubsriptionDisplayComparePrice || false
 
@@ -139,8 +158,8 @@ const upscribeproductoptions = el => {
           // replace pricing elements with new vals
           this.setPricingDisplayEls(formatOriginalPrice, formatComparePrice)
         } else {
-          // if subscription
-          // use stored non-discount prices from previous changes
+        // if subscription
+        // use stored non-discount prices from previous changes
           originalPrice = this.activeSubsriptionDisplayPrice || false
           comparePrice = this.activeSubsriptionDisplayComparePrice || false
 
@@ -155,7 +174,7 @@ const upscribeproductoptions = el => {
         return this.initialApplicableVariants.split(',')
       },
       activeVariantIsApplicableVariant () {
-        // all are applicable
+      // all are applicable
 
         if (!this.activeVariantId) {
           this.productPurchaseType = 'onetime'
@@ -171,7 +190,9 @@ const upscribeproductoptions = el => {
           return false
         }
       },
-
+      isActive () {
+        return this.selectedIndex === this.index
+      },
       // helper for if current state is subscription
       subscriptionSelected () {
         return this.productPurchaseType === 'subscription'
@@ -271,10 +292,10 @@ const upscribeproductoptions = el => {
         var calcDiscountAmount = 0
 
         if (discountType === '$') {
-          // fixed
+        // fixed
           calcDiscountAmount = discountAmount
         } else if (discountType === '%') {
-          // percentage
+        // percentage
           calcDiscountAmount = (total * discountAmount) / 100
         }
         return total - calcDiscountAmount
@@ -338,8 +359,8 @@ const upscribeproductoptions = el => {
         // store values if subscription isn't currently selected
         this.activeSubsriptionDisplayPrice = originalPrice
         this.activeSubsriptionDisplayComparePrice = originalPrice
-        // this.activeSubsriptionDisplayComparePrice = originalComparePrice
-        // this.activeSubsriptionDisplayComparePrice = originalComparePrice
+      // this.activeSubsriptionDisplayComparePrice = originalComparePrice
+      // this.activeSubsriptionDisplayComparePrice = originalComparePrice
       },
       getFinalCurrencyRate (amount) {
         return parseInt(amount)
@@ -359,7 +380,7 @@ const upscribeproductoptions = el => {
         var displayDiscountComparePrice = false
 
         if (originalPrice) {
-          // var originalPriceEl = document.querySelector('.upscribe-price-item-regular')
+        // var originalPriceEl = document.querySelector('.upscribe-price-item-regular')
           var discountPrice =
             originalPrice - this.discountCalculatedValue(originalPrice)
 
@@ -388,7 +409,7 @@ const upscribeproductoptions = el => {
             displayDiscountComparePrice
           )
         } else {
-          // if onetime selected, store to use if selected next
+        // if onetime selected, store to use if selected next
           this.activeSubsriptionDisplayPrice = displayDiscountPrice
           this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
         }
@@ -444,6 +465,15 @@ const upscribeproductoptions = el => {
         }
 
         return formatString.replace(placeholderRegex, value)
+      },
+      clickOption () {
+        this.$emit('click-option', this.index)
+
+        if (this.upscribeKeepComponentInSync !== false) { // Upscribe Frequency Update
+          window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
+            detail: this.index
+          }))
+        }
       }
     },
     destroyed () {
@@ -452,7 +482,6 @@ const upscribeproductoptions = el => {
       window.removeEventListener('upscribeFrequencyIndexUpdate', this.setFrequency)
     }
   })
-  return UpscribeForm
 }
 
 export default upscribeproductoptions
