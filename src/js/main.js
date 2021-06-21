@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   })
 
+  window.addEventListener('resize', () => {
+    loadImg.update()
+  })
+
   if (window.location.hash) {
     requestAnimationFrame(() => {
       const hashEl = select(window.location.hash)

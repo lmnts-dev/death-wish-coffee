@@ -1,12 +1,13 @@
 {%- assign is_vue_component = is_vue_component | default: false -%}
 {%- assign custom_attrs = custom_attrs | default: '' -%}
 {%- assign form_type = form_type | default: 'button' -%}
-{%- capture button_class -%}product-form__button js-form-submit{% if form_type != 'button' %} button--light{% endif %}{%- endcapture -%}
-{%- assign product = product | default: false -%}
+{%- assign palette = palette | default: false -%}
 {%- assign button_class = button_class | default: false -%}
+{%- capture button_class -%}product-form__button js-form-submit{% if button_class %} {{ button_class }}{% endif %}{% if form_type != 'button' %} button--light{% elsif palette %} button--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- assign product = product | default: false -%}
 {%- assign show_title = show_title | default: false -%}
 {%- assign class = class | default: false -%}
-{%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{%- endcapture -%}
+{%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
 {%- capture content -%}
   <div class="product-form__form">

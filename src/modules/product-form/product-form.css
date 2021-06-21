@@ -196,6 +196,12 @@
         width: calc(100% - 2px);
         height: calc(100% - 1px);
         border: 1px solid var(--blood);
+
+        @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+          .product-form--palette-$(color) & {
+            border-color: var(--$color);
+          }
+        }
       }
     }
   }
