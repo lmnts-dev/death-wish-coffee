@@ -41,7 +41,8 @@ const associatecarousel = el => {
   if (swiperEl) {
     const swiper = new Swiper(swiperEl, {
       slidesPerView: 1,
-      loop: true
+      loop: true,
+      spaceBetween: 10
     })
     updateSlides(swiper, mobileBreakpoints.matches)
     mobileBreakpoints.addEventListener('change', e => {

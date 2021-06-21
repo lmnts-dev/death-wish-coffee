@@ -6,7 +6,7 @@
 {%- assign row_number = row_number | default: 1 -%}
 {%- assign item_per_view = column_number | times: row_number -%}
 {%- if item_titles and item_titles.size > 0 -%}
-  <section class="associate-carousel" data-module="associate-carousel" data-item-per-view="{{- item_per_view -}}">
+  <section class="associate-carousel bg--black" data-module="associate-carousel" data-item-per-view="{{- item_per_view -}}">
     <div class="swiper-container associate-carousel__container js-swiper">
       <div class="swiper-wrapper associate-carousel__wrapper">
         {%- for title in item_titles -%}
@@ -19,14 +19,16 @@
                 {%- endif -%}
               </div>
               <div class="associate-carousel__item-content">
-                <h4 class="associate-carousel__item-title">{{- title -}}</h4>
+                <h4 class="b1 associate-carousel__item-title">{{- title -}}</h4>
                 {%- if item_descriptions[index0] != blank -%}
-                  <p class="associate-carousel__item-description">{{- item_descriptions[index0] -}}</p>
+                  <p class="b1 associate-carousel__item-description">{{- item_descriptions[index0] -}}</p>
                 {%- endif -%}
               </div>
             </div>
             {%- if item_blurbs[index0] != blank -%}
-              <div class="associate-carousel__item-blurb">{{- item_blurbs[index0] -}}</div>
+              <div class="associate-carousel__item-blurb">
+                <div class="associate-carousel__item-blurb-wysiwyg wysiwyg wysiwyg--associate-carousel wysiwyg--text-white">{{- item_blurbs[index0] -}}</div>
+              </div>
             {%- endif -%}
           </div>
         {%- endfor -%}
