@@ -137,7 +137,7 @@
   }
 
   &--text-white {
-    & * {
+    & p {
       color: var(--white);
     }
   }
@@ -247,7 +247,11 @@
 }
 
 .wysiwyg--associate-carousel {
-  p:last-of-type {
-    padding-bottom: 0;
+  p {
+    text-transform: uppercase;
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
   }
 }

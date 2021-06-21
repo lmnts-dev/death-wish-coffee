@@ -34,7 +34,9 @@ const associatecarousel = el => {
     : []
   const updateSlides = (swiper, isMobileMatches) => {
     swiper.removeAllSlides()
+    console.log(swiper)
     const newSlides = (isMobileMatches ? originalSlideEls : groupedSlideEls).map(slide => slide.cloneNode(true))
+    swiper.params.loop = newSlides.length > 1
     swiper.appendSlide(newSlides)
     swiper.slideToLoop(0, 0)
   }
