@@ -17,17 +17,13 @@ export default {
       default: false
     },
     index: {
-      type: Number
-      // required: true
+      type: Number,
+      required: true
     },
     selectedIndex: {
-      type: Number
-      // required: true
+      type: Number,
+      required: true
     },
-    // selectFrequencyOptions: {
-    //   type: Array,
-    //   required: true
-    // },
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
@@ -35,35 +31,8 @@ export default {
   },
   data () {
     return {
+      // moneyFormat: '${{amount}}',
       selectedOptions: { ...this.initialSelectedOptions },
-      // activeVariantId: this.product.variants[0].id,
-      // initialApplicableVariants: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.applicable_variants
-      //   : '',
-      // subscriptionProductTitle: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.subscription_product_title
-      //   : '',
-      // intervalFrequncyMetafield: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.interval_frequency
-      //   : '',
-      // intervalUnitMetafield: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.interval_unit
-      //   : '',
-      // defaultGlobalDiscountAmount: this.shop.default_discount_amount
-      //   ? this.shop.default_discount_amount
-      //   : '',
-      // discountAmount: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.discount_amount
-      //   : '',
-      // initialChargeLimit: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.charge_limit
-      //   : '',
-      // recurringDiscountAmount: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.recurring_discount_amount
-      //   : '',
-      // recurringDiscountAfterOrder: this.product.sf_upscribe
-      //   ? this.product.sf_upscribe.recurring_discount_after_order
-      //   : '',
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
       subscriptionPrice: null,
@@ -175,6 +144,11 @@ export default {
     chargeLimit () {
       return this.initialChargeLimit ? this.initialChargeLimit : 0
     },
+    intervalFrequency () {
+      return this.intervalFrequncyMetafield
+        ? this.intervalFrequncyMetafield
+        : '15,30,45,60'
+    },
     // build frequency options for select boxes
     selectFrequencyOptions () {
       var intervalFrequency = this.intervalFrequency
@@ -208,21 +182,14 @@ export default {
     intervalUnit () {
       return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
     },
-    intervalFrequency () {
-      return this.intervalFrequncyMetafield
-        ? this.intervalFrequncyMetafield
-        : '15,30,45,60'
-    },
     initialSelectedOptions: () => {
+      console.log(this.product.options, 'test')
       this.product.options.reduce((result, option) => {
       // Initially, none of the option has any selected value
         result[option] = null
         return result
       })
     },
-    // activeVariantId () {
-    //   return this.product ? this.product.variants[0].id : ''
-    // },
     initialApplicableVariants () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.applicable_variants
@@ -304,7 +271,8 @@ export default {
       }
     },
     productPurchaseType (newVal) {
-      if (this.upscribeKeepComponentInSync) { // Upscribe Product Purchase Type Update
+      if (this.upscribeKeepComponentInSync) {
+        // Upscribe Product Purchase Type Update
         window.dispatchEvent(new CustomEvent('upscribeProductPurchaseTypeUpdate', {
           detail: newVal
         }))
@@ -600,7 +568,7 @@ export default {
     }
   },
   mounted () {
-    console.log('test', this.product.sf_upscribe, this.shop)
+    console.log('test', this.product, this.selectFrequencyOptions)
     this.activeVariantId = this.product.variants[0].id
 
     // reset
