@@ -42,7 +42,7 @@
   </main>
   {%- render 'footer' -%}
 
-  {% include 'upscribe-cart-logic' %}
+  {% render 'upscribe-cart-logic' %}
 
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}
