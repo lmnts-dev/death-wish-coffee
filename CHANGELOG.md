@@ -1,6 +1,34 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.25 - 2021-06-21
+### CHANGED:
+- DIC-121 Add row configure for associate carousel 
+- DIC-121 Update dynamic grid items for associate carousel 
+- DIC-115 Update styleint to allow postcss each at-rule 
+- DIC-121 Integrate associate carousel with ACF fields 
+- DIC-121 Add image handler when resize 
+- DIC-121 Fix image load function 
+- DIC-121 Add style for associate carousel on desktop 
+- DIC-121 Add style for associate carousel on mobile 
+- DIC-121 Scaffold associate carousel module 
+- DIC-115 Update color palette for input selected state on product form 
+- DIC-115 Fix color palette handler on video section 
+- DIC-115 Fix color palette handler on media hero grid 
+- DIC-115 Fix color palette handler on review drawer 
+- DIC-115 Fix color palette handler on featured product carousel 
+- DIC-115 Fix color palette handler on footer cta 
+- DIC-115 Update color palette for video title on bolt product template 
+- DIC-115 Update palette style for bolt illustration hero on pdp 
+- DIC-115 Update palette style for pdp hero on pdp 
+- DIC-115 Update palette style for video on pdp 
+- DIC-115 Update palette style for media hero grid on pdp 
+- DIC-115 Update palette style for review drawer on pdp 
+- DIC-115 Update palette style for featured product carousel on pdp 
+- DIC-115 Refactor product hero card style 
+- DIC-115 Update palette style for footer cta 
+- DIC-115 Update styleint to allow postcss each at-rule 
+
 ## 0.0.24 - 2021-06-20
 ### CHANGED:
 - DIC-112 Update video for Large Text BG Image module 
