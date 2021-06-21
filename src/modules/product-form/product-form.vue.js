@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      // moneyFormat: '${{amount}}',
+      moneyFormat: 'amount',
       selectedOptions: { ...this.initialSelectedOptions },
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
@@ -183,7 +183,7 @@ export default {
       return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
     },
     initialSelectedOptions: () => {
-      console.log(this.product.options, 'test')
+      console.log(this.product)
       this.product.options.reduce((result, option) => {
       // Initially, none of the option has any selected value
         result[option] = null
@@ -542,8 +542,7 @@ export default {
 
         return dollarsAmount + centsAmount
       }
-
-      switch (formatString.match(placeholderRegex)[1]) {
+      switch (formatString.match(placeholderRegex)) {
         case 'amount':
           value = formatWithDelimiters(cents, 2)
           break
@@ -563,12 +562,13 @@ export default {
           value = formatWithDelimiters(cents, 2, "'")
           break
       }
+      console.log(value)
 
       return formatString.replace(placeholderRegex, value)
     }
   },
   mounted () {
-    console.log('test', this.product, this.selectFrequencyOptions)
+    console.log('test', this.product, this.activeSubsriptionDisplayPrice)
     this.activeVariantId = this.product.variants[0].id
 
     // reset
