@@ -15,4 +15,11 @@
       }
     }
   }
+
+  &--skull2 {
+    width: 47%;
+    max-width: 336px;
+    margin: 0 auto;
+    color: var(--white);
+  }
 }
