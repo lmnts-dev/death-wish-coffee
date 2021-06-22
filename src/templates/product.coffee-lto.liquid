@@ -42,7 +42,11 @@
       {%- if featured_product != blank -%}
         {%- assign featured_slides_count = featured_slides_count | plus: 1 -%}
         {% assign title = featured_product.title %}
-        {% assign image_url = featured_product.images[1] | img_url: 'master' %}
+        {% assign default_image_url = featured_product.images[0] | img_url: 'master' %}
+        {% assign image_url = featured_product.metafields.accentuate.featured_product_image_plp | map: 'src' | first %}
+        {% if image_url == blank %}
+          {% assign image_url = default_image_url %}
+        {% endif %}
         {% assign url = featured_product.url %}
         {%- capture price %}
           {{ featured_product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
