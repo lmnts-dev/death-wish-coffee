@@ -150,8 +150,6 @@
 }
 
 .bolt-illustration-hero__description {
-  @extend .p1;
-
   padding-top: 3px;
 
   @media (--lg) {

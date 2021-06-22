@@ -179,6 +179,10 @@ h5 {
   &--bold {
     font-weight: var(--bold);
   }
+
+  .bolt-illustration-hero__content & {
+    font-size: 20px;
+  }
 }
 
 .b1 {
