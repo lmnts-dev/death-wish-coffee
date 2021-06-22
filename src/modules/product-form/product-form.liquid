@@ -13,7 +13,7 @@
   <div class="product-form__form">
     <div 
       class="product-form__options"
-      :class="{'product-form__options--default': hasVariantDefault}"
+      :class="{'product-form__options--single': hasSingleVariant}"
     >
       <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
         {%- if show_title -%}
