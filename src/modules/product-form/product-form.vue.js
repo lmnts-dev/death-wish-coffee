@@ -1,6 +1,7 @@
 import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
+import iconData from './product-icons'
 
 export default {
   props: {
@@ -21,7 +22,8 @@ export default {
 
     return {
       initialSelectedOptions,
-      selectedOptions: { ...initialSelectedOptions }
+      selectedOptions: { ...initialSelectedOptions },
+      optionIcons: iconData
     }
   },
   computed: {

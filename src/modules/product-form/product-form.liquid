@@ -35,7 +35,8 @@
               <label :for="optionInputId(option, value)"
                     class="label label--radio product-form__option-value-label"
               >
-                {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
+                <div class="option-icon" v-if="optionIcons[value]" v-html="optionIcons[value]"></div>
+                <!-- {% render 'variant-icons', type: svg_unselected, class: 'product-form__option-value-icon' %} -->
                 <div class="product-form__option-value-text">
                   <div class="product-form__option-value-name">
                     ${value}

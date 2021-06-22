@@ -292,3 +292,19 @@
   margin-bottom: 32px;
   color: var(--blood);
 }
+
+.option-icon {
+  width: 50px;
+  height: 50px;
+
+  svg {
+    height: 100%;
+    max-width: 40px;
+
+    path, circle {
+      .product-form__option-value-input:checked + .product-form__option-value-label & {
+        fill: var(--white);
+      }
+    }
+  }
+}
