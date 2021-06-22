@@ -35,7 +35,8 @@
           <div class="shc__description h3 h3--no-transform">{{- description -}}</div>
         {% endif %}
         {% if cta_link and cta_text %}
-          {%- render 'button', class: 'shc__button', button_value: cta_text, button_url: cta_link -%}
+          {% capture cta_url %}/collections/{{cta_link}}{% endcapture %}
+          {%- render 'button', class: 'shc__button', button_value: cta_text, button_url: cta_url -%}
         {% endif %}
       </div>
     </div>
