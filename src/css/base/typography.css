@@ -49,6 +49,10 @@ h5 {
       font-size: 4rem;
     }
   }
+
+  &--no-transform {
+    text-transform: none;
+  }
 }
 
 .h2 {
@@ -100,6 +104,10 @@ h5 {
 
   .cart-container & {
     font-weight: var(--medium);
+  }
+
+  &--no-transform {
+    text-transform: none;
   }
 }
 

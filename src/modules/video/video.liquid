@@ -6,7 +6,8 @@
 {%- assign mod_src = mod_src | default: false -%}
 {%- assign mod_fallback_mobile = mod_fallback_mobile | default: false -%}
 {%- assign mod_fallback_intermediate = mod_fallback_intermediate | default: false -%}
-{%- assign mod_autoplay = mod_autoplay | default: true -%}
+{%- assign mod_autoplay = mod_autoplay | default: false -%}
+{%- assign mod_loop = mod_loop | default: false -%}
 {%- assign mod_loader = mod_loader | default: false -%}
 {%- assign button_play = button_play | default: false -%}
 {%- assign mod_disable_scroll_activate = mod_disable_scroll_activate | default: false -%}
@@ -22,8 +23,12 @@
         ref="video"
         class="video__el js-video"
         :data-src="src"
-        :loop="loop"
-        :autoplay="autoplay"
+        {% if mod_loop %}
+          :loop="loop"
+        {% endif %}
+        {% if mod_autoplay %}
+          :autoplay="autoplay"
+        {% endif %}
         muted="true"
         playsinline></video>
     </div>
@@ -36,7 +41,9 @@
       {% if mod_autoplay %}
         autoplay="true"
       {% endif %}
-      loop="true"
+      {% if mod_loop %}
+        loop="true"
+      {% endif %}
       muted="true"
       playsinline></video>
 

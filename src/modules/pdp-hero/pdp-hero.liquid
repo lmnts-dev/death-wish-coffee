@@ -8,7 +8,7 @@
     {%- capture pdp_hero -%}
       {%- if product_acf.video_loop_url != blank -%}
         <div class="pdp-hero__item js-video-slide swiper-slide">
-          {%- render 'video', mod_src: product_acf.video_loop_url, mod_class: 'pdp-hero__video' -%}
+          {%- render 'video', mod_src: product_acf.video_loop_url, mod_autoplay: true, mod_class: 'pdp-hero__video' -%}
         </div>
       {%- endif -%}
       {% for media in product.media %}

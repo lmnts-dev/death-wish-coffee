@@ -19,6 +19,8 @@
           <div class="shc__video">
             {%- render 'video',
               mod_src: video,
+              mod_loop: true,
+              mod_autoplay: true,
               mod_class: 'video--super-hero-cta'
             -%}
           </div>
@@ -30,7 +32,7 @@
           {% endif %}
         {%- endif -%}
         {% if description %}
-          <div class="shc__description h3">{{- description -}}</div>
+          <div class="shc__description h3 h3--no-transform">{{- description -}}</div>
         {% endif %}
         {% if cta_link and cta_text %}
           {%- render 'button', class: 'shc__button', button_value: cta_text, button_url: cta_link -%}
