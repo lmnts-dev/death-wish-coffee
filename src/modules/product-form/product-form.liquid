@@ -88,8 +88,7 @@
     {%- endunless -%}
 
     {% if product.metafields.sf_upscribe.enable_subscription == 1 %}
-
-    {%- render 'upscribe-product-options' upscribe_component_uid: upscribe_component_uid-%}
+      {%- render 'upscribe-product-options' upscribe_component_uid: upscribe_component_uid-%}
     {% endif %}
 
     <form method="post" action="/cart/add" @submit.prevent="handleAddToCart">

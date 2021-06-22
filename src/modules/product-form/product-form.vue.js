@@ -16,10 +16,10 @@ export default {
       type: Object,
       required: true
     },
-    option: {
-      type: [Object, Boolean],
-      default: false
-    },
+    // option: {
+    //   type: [Object, Boolean],
+    //   default: false
+    // },
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
@@ -31,23 +31,90 @@ export default {
     upscribeRegularPriceQuerySelector: {
       type: Boolean,
       default: false
-    },
-    index: {
-      type: Number,
-      default: ''
     }
   },
   data () {
     return {
       moneyFormat: 'amount',
-      index: '',
-      selectedIndex: '',
       selectedOptions: { ...this.initialSelectedOptions },
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
       subscriptionPrice: null,
       subscriptionAmount: null,
       componentMounted: !1
+    }
+  },
+  mounted () {
+    this.activeVariantId = this.product.variants[0].id
+
+    // reset
+    this.index = ''
+    this.selectedFrequencyIndex = 0
+    this.productPurchaseType = 'onetime'
+    this.subscriptionPrice = null
+
+    // add listener for variant update, set in variant_selection.js
+    // this listener could be different depeneding on if the theme uses the same base setup
+    var vm = this
+    window.addEventListener('upscribeVariantUpdate', function (event) {
+      vm.handleVariantUpdateEvent(event)
+    }, false)
+
+    // if (this.upscribeKeepComponentInSync === true) {
+    window.addEventListener(
+      'upscribeProductPurchaseTypeUpdate',
+      function (event) {
+        vm.setProductPurchaseType(event.detail)
+      },
+      false
+    )
+
+    window.addEventListener(
+      'upscribeFrequencyIndexUpdate',
+      function (event) {
+        vm.setFrequency(event.detail)
+      },
+      false
+    )
+    // }
+    this.componentMounted = 1
+  },
+  watch: {
+    selectedVariantId (newValue) {
+      if (newValue) {
+        this.$emit('update-variant-id', newValue)
+      }
+    },
+    productPurchaseType (newVal) {
+      // if (this.upscribeKeepComponentInSync) {
+      // Upscribe Product Purchase Type Update
+      window.dispatchEvent(new CustomEvent('upscribeProductPurchaseTypeUpdate', {
+        detail: newVal
+      }))
+      // }
+      let originalPrice
+      let comparePrice
+      // if one time
+      if (newVal === 'onetime') {
+      // use stored non-discount prices from previous changes
+        originalPrice = this.activeSubsriptionDisplayPrice || false
+        comparePrice = this.activeSubsriptionDisplayComparePrice || false
+
+        // put into money format
+        var formatOriginalPrice = originalPrice ? this.formatMoney(originalPrice) : false
+        var formatComparePrice = comparePrice ? this.formatMoney(comparePrice) : false
+
+        // replace pricing elements with new vals
+        this.setPricingDisplayEls(formatOriginalPrice, formatComparePrice)
+      } else {
+      // if subscription
+      // use stored non-discount prices from previous changes
+        originalPrice = this.activeSubsriptionDisplayPrice || false
+        comparePrice = this.activeSubsriptionDisplayComparePrice || false
+
+        // calculate subscription discount and replace pricing elements with new vals
+        this.calculateVariantPrices(originalPrice, comparePrice)
+      }
     }
   },
   computed: {
@@ -58,7 +125,6 @@ export default {
     selectedVariantId () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
       // upscribe
-      console.log(variant)
       if (variant) {
         window.dispatchEvent(new CustomEvent('upscribeVariantUpdate', {
           detail: variant
@@ -114,9 +180,6 @@ export default {
         this.productPurchaseType = 'onetime'
         return false
       }
-    },
-    isActive () {
-      return this.selectedIndex === this.index
     },
 
     // helper for if current state is subscription
@@ -251,44 +314,10 @@ export default {
     },
     howItWorksText () {
       return this.shop ? this.shop.how_it_works_text : ''
-    }
-  },
-  watch: {
-    selectedVariantId (newValue) {
-      if (newValue) {
-        this.$emit('update-variant-id', newValue)
-      }
     },
-    productPurchaseType (newVal) {
-      if (this.upscribeKeepComponentInSync) {
-        // Upscribe Product Purchase Type Update
-        window.dispatchEvent(new CustomEvent('upscribeProductPurchaseTypeUpdate', {
-          detail: newVal
-        }))
-      }
-      let originalPrice
-      let comparePrice
-      // if one time
-      if (newVal === 'onetime') {
-      // use stored non-discount prices from previous changes
-        originalPrice = this.activeSubsriptionDisplayPrice || false
-        comparePrice = this.activeSubsriptionDisplayComparePrice || false
-
-        // put into money format
-        var formatOriginalPrice = originalPrice ? this.formatMoney(originalPrice) : false
-        var formatComparePrice = comparePrice ? this.formatMoney(comparePrice) : false
-
-        // replace pricing elements with new vals
-        this.setPricingDisplayEls(formatOriginalPrice, formatComparePrice)
-      } else {
-      // if subscription
-      // use stored non-discount prices from previous changes
-        originalPrice = this.activeSubsriptionDisplayPrice || false
-        comparePrice = this.activeSubsriptionDisplayComparePrice || false
-
-        // calculate subscription discount and replace pricing elements with new vals
-        this.calculateVariantPrices(originalPrice, comparePrice)
-      }
+    isActive (index) {
+      console.log(this.selectedFrequencyIndex, index, this.selectedFrequencyIndex === index)
+      return this.selectedFrequencyIndex === index
     }
   },
   methods: {
@@ -363,9 +392,17 @@ export default {
         {}
       )
     },
-    clickOption () {
-      this.$emit('click-option', this.index)
+    setFrequency (val) {
+      this.selectedFrequencyIndex = val
+    },
 
+    clickOption (index, option) {
+      // console.log(this.selectedFrequency === this.index)
+      this.index = index
+      this.option = option
+      // console.log(index, this.option)
+      this.$emit('click-option', this.index)
+      console.log(this.index)
       // Upscribe Frequency Update
       window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
         detail: this.index
@@ -379,8 +416,9 @@ export default {
       if (!results[2]) return ''
       return decodeURIComponent(results[2].replace(/\+/g, ' '))
     },
-    setFrequency (val) {
-      this.selectedFrequencyIndex = val
+    getIndex (index) {
+      console.log(index)
+      this.index = index
     },
     setProductPurchaseType (val) {
       if (!val) return
@@ -576,40 +614,6 @@ export default {
         return result
       })
     }
-  },
-  mounted () {
-    console.log('test', this.product.options)
-    this.activeVariantId = this.product.variants[0].id
-
-    // reset
-    this.selectedFrequencyIndex = 0
-    this.productPurchaseType = 'onetime'
-    this.subscriptionPrice = null
-
-    // add listener for variant update, set in variant_selection.js
-    // this listener could be different depeneding on if the theme uses the same base setup
-    var vm = this
-    window.addEventListener('upscribeVariantUpdate', function (event) {
-      vm.handleVariantUpdateEvent(event)
-    }, false)
-    if (this.upscribeKeepComponentInSync === true) {
-      window.addEventListener(
-        'upscribeProductPurchaseTypeUpdate',
-        function (event) {
-          vm.setProductPurchaseType(event.detail)
-        },
-        false
-      )
-
-      window.addEventListener(
-        'upscribeFrequencyIndexUpdate',
-        function (event) {
-          vm.setFrequency(event.detail)
-        },
-        false
-      )
-    }
-    this.componentMounted = 1
   },
   destroyed () {
     window.removeEventListener('upscribeVariantUpdate', this.handleVariantUpdateEvent)
