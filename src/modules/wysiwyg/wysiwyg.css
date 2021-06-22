@@ -248,6 +248,8 @@
 
 .wysiwyg--associate-carousel {
   p {
+    @extend .p1--bold;
+
     text-transform: uppercase;
 
     &:last-of-type {
