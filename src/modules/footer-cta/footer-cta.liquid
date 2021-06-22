@@ -5,12 +5,12 @@
 {%- assign buttons_url = buttons_url | default: false -%}
 {%- assign buttons_value = buttons_value | default: false -%}
 {%- assign enable_subscribe_form = enable_subscribe_form | default: false -%}
+{%- assign palette = palette | default: false -%}
 {%- assign has_cta = false -%}
 {%- if buttons_url.size > 0 or enable_subscribe_form -%}
   {%- assign has_cta = true -%}
 {%- endif -%}
-{% capture class %}footer-cta {% if class %} {{- class -}}{% endif %}{% endcapture %}
-
+{% capture class %}footer-cta {% if class %} {{- class -}}{% endif %}{% if palette %} footer-cta--palette-{{ palette }}{% endif %}{% endcapture %}
 
 {% if title and has_cta %}
   <section class="{{class}}" data-module="footer-cta">
@@ -60,7 +60,11 @@
         </div>
       {%- endif -%}
       {%- if enable_subscribe_form -%}
-        {%- render 'form-subscribe' -%}
+        {%- assign is_input_with_border = false -%}
+        {%- if palette == 'white' -%}
+          {%- assign is_input_with_border = true -%}
+        {%- endif -%}
+        {%- render 'form-subscribe', is_input_with_border: is_input_with_border -%}
       {%- endif -%}
     </div>
   </section>

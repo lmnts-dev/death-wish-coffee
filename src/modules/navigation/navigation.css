@@ -9,6 +9,10 @@
   @media (--xl-max) {
     height: var(--navbar-height-mobile);
   }
+
+  &.flex {
+    display: flex;
+  }
 }
 
 .navigation__container {
@@ -24,6 +28,10 @@
 
   @media (--lg) {
     padding: 0;
+  }
+
+  &.hide {
+    display: none;
   }
 }
 
@@ -515,5 +523,109 @@
 
   @media (--lg) {
     display: none;
+  }
+}
+
+.navigation__search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation__search-close {
+  width: 13px;
+  position: relative;
+  margin-left: 10px;
+}
+
+.navigation__search-btn {
+  width: 13px;
+  position: relative;
+  margin: 0 auto;
+
+  .svg--search {
+    svg {
+      path {
+        fill: var(--white);
+      }
+    }
+  }
+}
+
+.search-bar {
+  display: none;
+  width: 67%;
+  margin: 0 auto;
+
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.input-group {
+  position: relative;
+  border-collapse: separate;
+
+  .input-group-field:first-child,
+  .input-group-btn:first-child,
+  .input-group-btn:first-child > .btn,
+  input[type="hidden"]:first-child + .input-group-field,
+  input[type="hidden"]:first-child + .input-group-btn > .btn {
+    border-radius: $radius 0 0 $radius;
+  }
+
+  .input-group-field:last-child,
+  .input-group-btn:last-child > .btn {
+    border-radius: 0 $radius $radius 0;
+  }
+
+  input {
+    &::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+  }
+
+  & .btn {
+    background-color: var(--steel);
+    border: none;
+  }
+
+  & .btn,
+  & .btn--secondary,
+  & .input-group-field {
+    height: 45px;
+  }
+}
+
+.input-group-field,
+.input-group-btn {
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.input-group .btn,
+.input-group .input-group-field {
+  height: 37px;
+}
+
+.input-group .input-group-field {
+  width: 100%;
+  display: block;
+  z-index: 999;
+}
+
+.input-group-btn {
+  position: relative;
+  padding: 0;
+  background-color: var(--steel);
+
+  & .btn {
+    width: 45px;
   }
 }

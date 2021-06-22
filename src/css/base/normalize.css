@@ -38,6 +38,15 @@ body {
   &.template-search {
     background-color: var(--black);
   }
+
+  &.template-page-under-construction {
+    padding-top: 50px;
+    background-color: var(--black);
+
+    @media (--lg) {
+      padding-top: 140px;
+    }
+  }
 }
 
 img {
@@ -100,11 +109,13 @@ ul, ol {
 }
 
 #destini {
+  background-color: var(--black) !important;
+
   @media (--lg) {
-    margin-bottom: 75px;
+    height: 970px !important;
   }
 
-  @media (--md-max) {
-    height: 125vh !important;
+  @media (--lg-max) {
+    height: 121vh !important;
   }
 }

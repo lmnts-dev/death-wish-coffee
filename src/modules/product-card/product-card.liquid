@@ -8,30 +8,51 @@
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 {%- capture content -%}
-    <div class="product-card__inner">
+    <div 
+      class="product-card__inner" 
+      :class="{ 'product-card__inner--active': showProductForm }"
+      @mouseenter="handleHover"
+      @mouseleave="handleHover"
+    >
       <div class="product-card__header">
-        <a v-if="isFeatured && product.video" :href="product.url" class="product-card__video-container">
-          {%- render 'video', mod_class: 'product-card__video', mod_is_vue: true, mod_vue_attrs: ':src="product.video"' -%}
+        <a :href="product.url" v-if="product.video" class="product-card__video-container" :class="{'product-card__video-container--showing' : isHovered && isFeatured && product.video}">
+          {%- render 'video', mod_class: 'product-card__video', mod_loop: true, mod_is_vue: true, mod_vue_attrs: 'ref="videoComp" :src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
         </a>
-        <div v-else class="product-card__image-container">
+        <div class="product-card__image-container">
           <a :href="product.url" class="product-card__image-link">
             {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
           </a>
         </div>
         {%- if quick_shop_form -%}
-          <div class="product-card__form">
+          <div
+            class="product-card__form"
+          >
             {{- quick_shop_form -}}
           </div>
         {%- endif -%}
+        <div class="product-card__toggle-button" @click="showProductForm = !showProductForm">
+          <template v-if="!showProductForm">
+            {%- render 'svg', type: 'quick-shop', class: 'product-card__quick-shop' %}
+          </template>
+          <template v-else>
+            {%- render 'svg', type: 'close', class: 'product-card__close' -%}
+          </template>
+        </div>
       </div>
       <div class="product-card__content">
         <h4 class="product-card__title">
           <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
         </h4>
         <div class="b1 product-card__review">
-          <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+          <a :href="product.url + '#review-drawer'" class="product-card__review-link">
+            <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+            <div class="yotpo QABottomLine" :data-product-id="product.id"></div>
+          </a>
         </div>
-        <p class="h5 product-card__price">$${formatPrice(price)}</p>
+        <p class="h5 product-card__price">
+          <span v-if="comparePrice" class="product-card__compare">$${ comparePrice }</span>
+          <span class="product-card__original">$${formatPrice(price)}</span>
+        </p>
         <p v-if="shouldShowMessage && addedToCartErrorMessage" class="b1 product-card__message">${addedToCartErrorMessage}</p>
       </div>
     </div>

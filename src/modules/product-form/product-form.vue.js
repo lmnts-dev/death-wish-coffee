@@ -1,6 +1,7 @@
 import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
+import iconData from './product-icons'
 
 export default {
   props: {
@@ -37,6 +38,7 @@ export default {
       productPurchaseType: 'onetime',
       subscriptionPrice: null,
       subscriptionAmount: null,
+      optionIcons: iconData,
       componentMounted: !1
     }
   },
@@ -114,8 +116,14 @@ export default {
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
+    productName () {
+      return this.product.title
+    },
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
+    },
+    hasSingleVariant () {
+      return this.product.variants.length === 1
     },
     selectedVariantId () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
@@ -126,7 +134,13 @@ export default {
         }))
       }
 
-      return variant ? variant.id : ''
+      if (this.hasSingleVariant) {
+        return this.product.variants[0].id
+      } else if (variant) {
+        return variant.id
+      } else {
+        return ''
+      }
     },
     priceDecidingFactor () {
       // Find out which variant option affects pricing
@@ -605,10 +619,18 @@ export default {
     },
     initialSelectedOptions: () => {
       this.product.options.reduce((result, option) => {
-      // Initially, none of the option has any selected value
+        // Initially, none of the option has any selected value
         result[option] = null
         return result
       })
+    },
+    toggleOption (option, value) {
+      console.log(option, value)
+      if (this.selectedOptions[option] && this.selectedOptions[option] === value) {
+        this.selectedOptions[option] = null
+      } else {
+        this.selectedOptions[option] = value
+      }
     }
   },
   destroyed () {

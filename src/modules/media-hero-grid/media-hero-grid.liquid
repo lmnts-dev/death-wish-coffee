@@ -3,12 +3,14 @@
 {% assign types = types | default: false %}
 {% assign images = images | default: false %}
 {% assign title = title | default: false %}
+{% assign palette = palette | default: false %}
 {% capture class %}media-hero-grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% capture title_class %}section-title--media-hero-grid bg--black{% if palette %} section-title--palette-{{ palette }}{% endif %}{% endcapture %}
 
 {%- if types and types.size >= 5 -%}
   <section class="{{ class }}" data-module="media-hero-grid">
     {%- if title -%}
-      {%- render 'section-title', title: title, class: 'section-title--media-hero-grid bg--black' -%}
+      {%- render 'section-title', title: title, class: title_class -%}
     {%- endif -%}
     <div class="media-hero-grid__inner">
       {%- for item in types limit: 5 -%}
@@ -28,6 +30,8 @@
                 {%- assign video_src = videos[forloop.index0] | default: '' %}
                 {%- render 'video',
                   mod_src: video_src,
+                  mod_loop: true,
+                  mod_autoplay: true,
                   mod_fallback_mobile: img_src,
                   mod_class: 'media-hero-grid__video video--media-hero-grid'
                 -%}

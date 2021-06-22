@@ -1,15 +1,18 @@
 {% assign class = class | default:false %}
 {%- assign product_acf = product.metafields.accentuate -%}
+{%- assign palette = product_acf.palette_selection | handle -%}
 {% capture class %}pdp-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }} bg--black" data-module="pdp-hero">
   <div class="pdp-hero__wrapper">
     {%- capture pdp_hero -%}
+      {%- comment -%}
       {%- if product_acf.video_loop_url != blank -%}
         <div class="pdp-hero__item js-video-slide swiper-slide">
-          {%- render 'video', mod_src: product_acf.video_loop_url, mod_class: 'pdp-hero__video' -%}
+          {%- render 'video', mod_src: product_acf.video_loop_url, mod_autoplay: true, mod_class: 'pdp-hero__video' -%}
         </div>
       {%- endif -%}
+      {%- endcomment -%}
       {% for media in product.media %}
         {% assign media_url = media | img_url: 'master' %}
           <div class="pdp-hero__item swiper-slide">
@@ -17,12 +20,13 @@
           </div>
       {% endfor %}
     {%- endcapture -%}
+    {%- capture carousel_class -%}carousel--pdp-hero js-carousel{% if palette != blank %} carousel--palette-{{ palette }}{% endif %}{%- endcapture -%}
     {%- render 'carousel',
-      class: 'carousel--pdp-hero js-carousel',
+      class: carousel_class,
       children: pdp_hero,
       slides_per_view: 1,
       navigation: true
     -%}
-    {%- render 'pdp-add-to-cart' -%}
+    {%- render 'pdp-add-to-cart', class: add_to_cart_class, palette: palette, product_upc: product_acf.product_upc -%}
   </div>
 </section>

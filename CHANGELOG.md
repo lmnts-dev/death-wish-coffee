@@ -1,6 +1,110 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.29 - 2021-06-22
+### CHANGED:
+- Init icon mapping system 
+
+## 0.0.28 - 2021-06-22
+### CHANGED:
+- remove horizontal line in pdp 
+- increase bolt illustration hero font size 
+- increase button z-index 
+- wire up super hero buttons 
+
+## 0.0.27 - 2021-06-22
+### CHANGED:
+- Fix z-index issues on product card 
+- Update video defaults 
+- Update hover event for video playback on plp 
+- change bronze color 
+- Update h3 for super hero cta 
+
+## 0.0.26 - 2021-06-22
+### CHANGED:
+- DIC-128 Update style for button quickshop 
+- DIC-130 Fix spacing for under construction page 
+- DIC-127 Fix findify script loading 
+- Fix style for product card large 
+- DIC-130 Add under construction template 
+- DIC-128 Quickshop Iconography Feature Addtion 
+- DIC-125 Update button hover states 
+- DIC-129 Update image src for product hero card on featured carousel 
+- DIC-134 Fix style for alt product card on Homepage 
+- DIC-109 Update logic for product form when product has single variant 
+- DIC-121 Fix animation style for associate carousel 
+- DIC-133 Update style for hero on shop all page mobile 
+
+## 0.0.25 - 2021-06-21
+### CHANGED:
+- DIC-121 Add row configure for associate carousel 
+- DIC-121 Update dynamic grid items for associate carousel 
+- DIC-115 Update styleint to allow postcss each at-rule 
+- DIC-121 Integrate associate carousel with ACF fields 
+- DIC-121 Add image handler when resize 
+- DIC-121 Fix image load function 
+- DIC-121 Add style for associate carousel on desktop 
+- DIC-121 Add style for associate carousel on mobile 
+- DIC-121 Scaffold associate carousel module 
+- DIC-115 Update color palette for input selected state on product form 
+- DIC-115 Fix color palette handler on video section 
+- DIC-115 Fix color palette handler on media hero grid 
+- DIC-115 Fix color palette handler on review drawer 
+- DIC-115 Fix color palette handler on featured product carousel 
+- DIC-115 Fix color palette handler on footer cta 
+- DIC-115 Update color palette for video title on bolt product template 
+- DIC-115 Update palette style for bolt illustration hero on pdp 
+- DIC-115 Update palette style for pdp hero on pdp 
+- DIC-115 Update palette style for video on pdp 
+- DIC-115 Update palette style for media hero grid on pdp 
+- DIC-115 Update palette style for review drawer on pdp 
+- DIC-115 Update palette style for featured product carousel on pdp 
+- DIC-115 Refactor product hero card style 
+- DIC-115 Update palette style for footer cta 
+- DIC-115 Update styleint to allow postcss each at-rule 
+
+## 0.0.24 - 2021-06-20
+### CHANGED:
+- DIC-112 Update video for Large Text BG Image module 
+
+## 0.0.23 - 2021-06-19
+### CHANGED:
+- Remove shop all page template 
+- adjust store locator styles 
+- add store locator product ACF field 
+- DIC-111 Update logic for video play when hover on PLP 
+- DIC-123 Change gender filter options to Men and Women 
+- Fix code review 
+- DIC-104 Fix product grid to show correctly with the presence of featured products 
+- DIC-120 Update extra contents ACF section into two HTML fields 
+- DIC-117 Deselect variant when clicking on an already-selected option 
+- DIC-119 Update mirrored section on About Us page 
+- DIC-118 Sort type filter alphabetically 
+- move findify script to bottom of head tag 
+- resolve navigation merge conflict 
+- change search icon color 
+- add findify container to search-results module 
+- modify search result page typography 
+- add nav bar search input toggle 
+- move findify styles to search results module 
+- compare price 
+- Update video module for product coffee lto template 
+- DIC-113 Update style for yotpo review on product cards 
+- DIC-114 Update style for list collection page 
+- DIC-114 Create Shop All Page and update markup for list collection page 
+- DIC-97 Add extra contents for product page 
+- DIC-100 Update markup for video module on PDP Coffee 
+- home hero aspect ratio 
+- menu center on desktop 
+- config 
+- add link to store locator on PDP 
+- add find in store ACF toggle 
+- DIC-109 Update logic for product form has only variant default 
+- DIC-110 Fix style for large square in collection 
+- DIC-109 Update name variant when product has only default variant 
+- add search input 
+- add findify components 
+
 ## 0.0.22 - 2021-06-15
 ### CHANGED:
 - DIC-102 Update message for product detail page after adding to cart with errors 

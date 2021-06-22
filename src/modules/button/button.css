@@ -25,13 +25,12 @@
     outline: none;
   }
 
-  &:hover, &:focus {
-    background-color: var(--bronze);
-  }
-
   &:disabled {
     cursor: default;
-    opacity: 0.5;
+
+    &:not(:hover) {
+      background: var(--steel);
+    }
   }
 
   &--small-h {
@@ -52,6 +51,10 @@
 
   &--light {
     background: var(--steel);
+
+    &:hover {
+      background: var(--blood);
+    }
   }
 
   &--light-alt {
@@ -69,6 +72,12 @@
 
   &--text-dark {
     color: var(--dark);
+  }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    &--palette-$(color) {
+      background-color: var(--$color);
+    }
   }
 
   &.form-submit {

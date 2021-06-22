@@ -1,7 +1,6 @@
 {%- layout 'theme' -%}
 {% assign acf = collection.metafields.accentuate %}
 {% assign list_products = acf.collection_hero_carou_product | default: blank %}
-{% assign list_products_images = acf.collection_carou_feat_media | map: 'src' | default: blank %}
 
 {%- render 'breadcrumbs' -%}
 
@@ -32,10 +31,10 @@
       {% assign title = product.title %}
       {% assign url = product.url %}
       {% assign reviews = 'Review' %}
-      {% if list_products_images != blank %}
-        {% assign image_url = list_products_images[forloop.index0]%}
-      {% else %}
-        {% assign image_url = product.images[0] | img_url: 'master' %}
+      {% assign default_image_url = product.images[0] | img_url: 'master' %}
+      {% assign image_url = product.metafields.accentuate.featured_product_image_plp | map: 'src' | first %}
+      {% if image_url == blank %}
+        {% assign image_url = default_image_url %}
       {% endif %}
       {%- capture price %}
         {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
@@ -148,8 +147,8 @@
               name: 'Gender',
               type: 'tag',
               options: [
-                'Male',
-                'Female',
+                'Men',
+                'Women',
                 'Unisex'
               ]
             },

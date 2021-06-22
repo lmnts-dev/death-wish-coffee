@@ -1,12 +1,13 @@
 {%- assign is_vue_component = is_vue_component | default: false -%}
 {%- assign custom_attrs = custom_attrs | default: '' -%}
 {%- assign form_type = form_type | default: 'button' -%}
-{%- capture button_class -%}product-form__button js-form-submit{% if form_type != 'button' %} button--light{% endif %}{%- endcapture -%}
-{%- assign product = product | default: false -%}
+{%- assign palette = palette | default: false -%}
 {%- assign button_class = button_class | default: false -%}
+{%- capture button_class -%}product-form__button js-form-submit{% if button_class %} {{ button_class }}{% endif %}{% if form_type != 'button' %} button--light{% elsif palette %} button--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- assign product = product | default: false -%}
 {%- assign show_title = show_title | default: false -%}
 {%- assign class = class | default: false -%}
-{%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{%- endcapture -%}
+{%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
 <!-- Upscribe -->
   {% comment %}
@@ -38,7 +39,10 @@
 
 {%- capture content -%}
   <div class="product-form__form">
-    <div class="product-form__options">
+    <div 
+      class="product-form__options"
+      :class="{'product-form__options--single': hasSingleVariant}"
+    >
       <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
         {%- if show_title -%}
           <h4 class="product-form__option-title h4">${option}</h4>
@@ -46,18 +50,21 @@
         {%- if form_type == 'button' -%}
           <div class="product-form__option-values">
             <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
-                class="product-form__option-value">
+                class="product-form__option-value"
+            >
               <input :id="optionInputId(option, value)"
                     :name="option + value"
                     :value="value"
                     v-model="selectedOptions[option]"
                     class="radio product-form__option-value-input js-product-input"
                     type="radio"
+                    @click="toggleOption(option, value)"
               >
               <label :for="optionInputId(option, value)"
                     class="label label--radio product-form__option-value-label"
               >
-                {% render 'svg', type: 'logo', class: 'product-form__option-value-icon' %}
+                <div class="option-icon" v-if="optionIcons[value]" v-html="optionIcons[value]"></div>
+                <!-- {% render 'variant-icons', type: svg_unselected, class: 'product-form__option-value-icon' %} -->
                 <div class="product-form__option-value-text">
                   <div class="product-form__option-value-name">
                     ${value}

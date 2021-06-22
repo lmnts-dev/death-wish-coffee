@@ -1,0 +1,141 @@
+/* styles for associate-carousel */
+
+.associate-carousel {
+  .swiper-slide {
+    @media (--lg) {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 5px;
+    }
+  }
+}
+
+.associate-carousel__container.swiper-container {
+  padding: 0 24px;
+
+  @media (--lg) {
+    padding: 0 3.75%;
+  }
+}
+
+.associate-carousel__inner {
+  @media (--lg) {
+    position: relative;
+    transition: transform 1s var(--transition-easing);
+    transform-style: preserve-3d;
+  }
+
+  &::before {
+    @media (--lg) {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+
+  .swiper-slide-active .associate-carousel__item--animated:hover & {
+    @media (--lg) {
+      transform: rotateY(180deg);
+    }
+  }
+}
+
+.associate-carousel__item-main {
+  position: relative;
+
+  @media (--lg) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    z-index: 1;
+  }
+}
+
+.associate-carousel__item-image-wrapper {
+  position: relative;
+  background: var(--steel);
+
+  @media (--lg) {
+    position: static;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+
+    @media (--lg) {
+      content: none;
+    }
+  }
+}
+
+.associate-carousel__item-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 11px;
+  color: var(--white);
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--black);
+    opacity: 0.75;
+    z-index: -1;
+  }
+}
+
+.associate-carousel__item-blurb {
+  position: relative;
+  margin-top: 10px;
+  overflow: hidden;
+
+  @media (--lg) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    z-index: 2;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+
+    @media (--lg) {
+      content: none;
+    }
+  }
+}
+
+.associate-carousel__item-blurb-wysiwyg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  color: var(--white);
+  background: var(--black);
+  border: 4px solid var(--gray);
+  text-align: center;
+}

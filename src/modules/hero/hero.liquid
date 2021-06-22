@@ -1,12 +1,12 @@
 {% assign class = class | default:false %}
 {%- assign video = video | default: false -%}
-{%- assign desktop_image = desktop_image | default: false -%}
+{%- assign image = image | default: false -%}
 {%- assign mobile_image = mobile_image | default: false -%}
 {%- assign title = title | default: false -%}
 {%- assign description = description | default: false -%}
 {%- assign after_content = after_content | default: false -%}
 
-{% capture class %}hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% capture class %}hero{% if class %} {{ class }}{% endif %}{% endcapture %}
 
 <section class="{{ class }}" data-module="hero">
   <div class="hero__inner">
@@ -16,14 +16,20 @@
           {%- render 'video',
             mod_src: video,
             mod_class: 'video--hero'
+            mod_loop: true,
+            mod_autoplay: true,
           -%}
         </div>
       {%- else -%}
-        {%- if desktop_image != blank or mobile_image != blank -%}
+        {%- if image != blank or mobile_image != blank -%}
           <div class="hero__image">
             <div class="hero__image-wrapper">
-              {%- if desktop_image -%}
-                {%- render 'image', src: desktop_image, class: 'hero__image-desktop' -%}
+              {%- if image -%}
+                {% if mobile_image %}
+                  {%- assign class_image = 'hero__image-desktop' -%}
+                {% endif %}
+                {%- render 'image', src: image, class: class_image -%}
+
               {%- endif -%}
               {%- if mobile_image -%}
                 {%- render 'image', src: mobile_image, class: 'hero__image-mobile' -%}

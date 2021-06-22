@@ -47,7 +47,9 @@ export default {
   data () {
     return {
       shouldShowMessage: false,
-      selectedVariantId: null
+      selectedVariantId: null,
+      isHovered: false,
+      showProductForm: false
     }
   },
   computed: {
@@ -57,6 +59,12 @@ export default {
     },
     price () {
       return this.selectedVariant ? this.selectedVariant.price : this.product.price
+    },
+    comparePrice () {
+      return this.product.options_by_name.Size && this.product.options_by_name.Size.selected_variant_drop.compare_at_price ? this.product.options_by_name.Size.selected_variant_drop.compare_at_price : ''
+    },
+    videoComponent () {
+      return this.$refs.videoComp instanceof Array ? this.$refs.videoComp[0] : this.$refs.videoComp
     }
   },
   watch: {
@@ -81,6 +89,19 @@ export default {
     },
     handleAddedToCartError () {
       this.shouldShowMessage = true
+    },
+    handleHover (e) {
+      if (this.videoComponent) {
+        this.isHovered = e.type === 'mouseenter'
+        if (e.type === 'mouseenter') {
+          this.videoComponent.play()
+        } else {
+          this.videoComponent.reset()
+        }
+      }
+    },
+    handleVideoEnded () {
+      this.isHovered = false
     }
   },
   mounted () {

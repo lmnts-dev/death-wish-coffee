@@ -135,6 +135,12 @@
   &--article {
     margin-top: 2rem;
   }
+
+  &--text-white {
+    & p {
+      color: var(--white);
+    }
+  }
 }
 
 .terms-container {
@@ -181,6 +187,37 @@
   }
 }
 
+.wysiwyg--pdp-extra-contents {
+  p {
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    position: relative;
+    padding-left: 15px;
+
+    &:not(:last-of-type) {
+      margin: 0;
+    }
+
+    &::before {
+      content: '•';
+      position: absolute;
+      top: 10px;
+      left: 0;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
 .wysiwyg--title-copy {
   p {
     @extend .p1;
@@ -206,5 +243,17 @@
 
     text-transform: none;
     color: var(--blood);
+  }
+}
+
+.wysiwyg--associate-carousel {
+  p {
+    @extend .p1--bold;
+
+    text-transform: uppercase;
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
   }
 }

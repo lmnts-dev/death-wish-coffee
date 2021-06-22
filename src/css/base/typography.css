@@ -49,6 +49,10 @@ h5 {
       font-size: 4rem;
     }
   }
+
+  &--no-transform {
+    text-transform: none;
+  }
 }
 
 .h2 {
@@ -101,6 +105,10 @@ h5 {
   .cart-container & {
     font-weight: var(--medium);
   }
+
+  &--no-transform {
+    text-transform: none;
+  }
 }
 
 .h4 {
@@ -123,6 +131,11 @@ h5 {
   &--uppercase {
     text-transform: uppercase;
   }
+
+  .search-results & {
+    text-align: center;
+    color: var(--white);
+  }
 }
 
 .h5 {
@@ -134,6 +147,15 @@ h5 {
   @media (--md-max) {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .pdp-add-to-cart__price & {
+    color: var(--white);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--blood);
+    }
   }
 }
 
@@ -152,6 +174,14 @@ h5 {
 
   &--light {
     font-weight: var(--light);
+  }
+
+  &--bold {
+    font-weight: var(--bold);
+  }
+
+  .bolt-illustration-hero__content & {
+    font-size: 20px;
   }
 }
 

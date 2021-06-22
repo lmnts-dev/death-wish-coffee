@@ -27,6 +27,12 @@
   @media (--md) {
     margin-bottom: 4px;
   }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .pdp-add-to-cart--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
 }
 
 .pdp-add-to-cart__price {
@@ -49,4 +55,36 @@
 
 .pdp-add-to-cart__review {
   cursor: pointer;
+}
+
+.pdp-add-to-cart__extra-contents {
+  position: relative;
+  margin-top: 40px;
+  padding-top: 32px;
+
+  @media (--xl) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    padding-top: 43px;
+  }
+}
+
+.pdp-add-to-cart__extra-content {
+  margin-top: 20px;
+
+  @media (--xl) {
+    width: calc(50% - 10px);
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:nth-child(-n+2) {
+    @media (--xl) {
+      margin-top: 0;
+    }
+  }
 }

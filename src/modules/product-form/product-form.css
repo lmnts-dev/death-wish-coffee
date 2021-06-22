@@ -11,6 +11,10 @@
   align-items: center;
   margin-bottom: 29px;
 
+  &--single {
+    display: none;
+  }
+
   .product-form--pdp-add-to-cart & {
     margin-bottom: 16px;
     align-items: flex-start;
@@ -59,7 +63,6 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background: var(--steel);
 
   .product-form--pdp-add-to-cart & {
     flex-direction: column;
@@ -193,6 +196,12 @@
         width: calc(100% - 2px);
         height: calc(100% - 1px);
         border: 1px solid var(--blood);
+
+        @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+          .product-form--palette-$(color) & {
+            border-color: var(--$color);
+          }
+        }
       }
     }
   }
@@ -282,4 +291,20 @@
 .product-form__message {
   margin-bottom: 32px;
   color: var(--blood);
+}
+
+.option-icon {
+  width: 50px;
+  height: 50px;
+
+  svg {
+    height: 100%;
+    max-width: 40px;
+
+    path, circle {
+      .product-form__option-value-input:checked + .product-form__option-value-label & {
+        fill: var(--white);
+      }
+    }
+  }
 }

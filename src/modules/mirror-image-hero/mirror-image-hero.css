@@ -1,18 +1,9 @@
-/* styles for the mirror-image-hero module go in this file */
-
-.mirror-image-hero__wrapper {
-  @media (--xl) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.mirror-image-hero {
+  margin: 0;
 }
 
-.mirror-image-hero__item {
-  @media (--xl) {
-    position: relative;
-    width: 50%;
-  }
+.mirror-image-hero__wrapper {
+  position: relative;
 }
 
 .mirror-image-hero__image {
@@ -24,9 +15,9 @@
     padding-top: 102%;
   }
 
-  .mirror-image-hero__item--reverse & {
-    @media (--xl) {
-      transform: scaleX(-1);
+  .mirror-image-hero--single & {
+    &::before {
+      padding-top: 54%;
     }
   }
 }
@@ -43,7 +34,7 @@
     padding: 0 10px 99px 76px;
   }
 
-  .mirror-image-hero__item--reverse & {
+  .mirror-image-hero--reverse & {
     @media (--xl) {
       left: auto;
       right: 0;

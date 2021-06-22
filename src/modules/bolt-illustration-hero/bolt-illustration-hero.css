@@ -104,6 +104,21 @@
   }
 }
 
+.bolt-illustration-hero__bolt-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--blood);
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .bolt-illustration-hero--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
+}
+
 .bolt-illustration-hero__content {
   position: relative;
   padding: 0 38px;
@@ -126,11 +141,15 @@
   .bolt-illustration-hero--reverse & {
     text-align: right;
   }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    .bolt-illustration-hero--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
 }
 
 .bolt-illustration-hero__description {
-  @extend .p1;
-
   padding-top: 3px;
 
   @media (--lg) {
