@@ -30,7 +30,6 @@
   position: relative;
   overflow: hidden;
   padding-bottom: 100%;
-  height: 100%;
 
   &::before {
     content: '';
@@ -63,7 +62,8 @@
     }
   }
 
-  .product-card--row-1-plp & {
+  .product-card--row-1-plp &,
+  .product-card--row-4-plp & {
     @media (--lg) {
       width: 100%;
       height: 100%;
