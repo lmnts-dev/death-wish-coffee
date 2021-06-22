@@ -69,20 +69,6 @@
     margin-top: 48px;
     padding-top: 43px;
   }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    max-width: 216px;
-    border-top: 1px solid var(--bone);
-
-    @media (--xl) {
-      max-width: none;
-    }
-  }
 }
 
 .pdp-add-to-cart__extra-content {
