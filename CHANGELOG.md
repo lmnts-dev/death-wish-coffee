@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+##  - 2021-06-22
+### CHANGED:
+- Init icon mapping system 
+
 ## 0.0.28 - 2021-06-22
 ### CHANGED:
 - remove horizontal line in pdp 
