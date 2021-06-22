@@ -30,6 +30,8 @@
                 {%- assign video_src = videos[forloop.index0] | default: '' %}
                 {%- render 'video',
                   mod_src: video_src,
+                  mod_loop: true,
+                  mod_autoplay: true,
                   mod_fallback_mobile: img_src,
                   mod_class: 'media-hero-grid__video video--media-hero-grid'
                 -%}

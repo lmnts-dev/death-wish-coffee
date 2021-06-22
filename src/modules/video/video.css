@@ -70,6 +70,7 @@
     .video__el {
       top: 50%;
       transform: translate(-50%, -50%);
+      object-fit: cover;
     }
   }
 
