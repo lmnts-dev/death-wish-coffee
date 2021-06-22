@@ -15,6 +15,15 @@
       padding: 65px 25px 150px;
     }
   }
+
+  .title-copy--under-construction & {
+    padding: 34px 24px 70px;
+
+    @media (--lg) {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+  }
 }
 
 .title-copy__title {
@@ -27,6 +36,14 @@
   @media (--md) {
     margin-top: 0;
     padding: 0 36px;
+  }
+
+  .title-copy--under-construction & {
+    @media (--lg) {
+      max-width: 585px;
+      margin: 0 auto;
+      padding: 0;
+    }
   }
 }
 
