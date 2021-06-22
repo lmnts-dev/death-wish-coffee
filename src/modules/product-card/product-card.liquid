@@ -11,13 +11,14 @@
     <div 
       class="product-card__inner" 
       :class="{ 'product-card__inner--active': showProductForm }"
-      @mouseover="handleHover"
+      @mouseenter="handleHover"
+      @mouseleave="handleHover"
     >
       <div class="product-card__header">
-        <a v-if="isHovered && isFeatured && product.video" :href="product.url" class="product-card__video-container">
-          {%- render 'video', mod_class: 'product-card__video', mod_is_vue: true, mod_vue_attrs: ':src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
+        <a :href="product.url" v-if="product.video" class="product-card__video-container" :class="{'product-card__video-container--showing' : isHovered && isFeatured && product.video}">
+          {%- render 'video', mod_class: 'product-card__video', mod_autoplay: false, mod_is_vue: true, mod_vue_attrs: 'ref="videoComp" :src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
         </a>
-        <div v-else class="product-card__image-container">
+        <div class="product-card__image-container">
           <a :href="product.url" class="product-card__image-link">
             {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
           </a>

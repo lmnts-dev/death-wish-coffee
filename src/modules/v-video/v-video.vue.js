@@ -16,9 +16,24 @@ export default {
   },
   mounted () {
     Video(this.$el)
-    const videoEl = this.$refs.video instanceof Array ? this.$refs.video[0] : this.$refs.video
-    videoEl.addEventListener('ended', () => {
+    this.video.addEventListener('ended', () => {
       this.$emit('video-ended')
     })
+  },
+  computed: {
+    video () {
+      return this.$refs.video instanceof Array ? this.$refs.video[0] : this.$refs.video
+    }
+  },
+  methods: {
+    play () {
+      this.video && this.video.play()
+    },
+    reset () {
+      this.video && setTimeout(() => {
+        this.video.currentTime = 0
+        this.video.pause()
+      }, 180)
+    }
   }
 }

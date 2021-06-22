@@ -23,7 +23,9 @@
         class="video__el js-video"
         :data-src="src"
         :loop="loop"
-        :autoplay="autoplay"
+        {% if mod_autoplay %}
+          :autoplay="autoplay"
+        {% endif %}
         muted="true"
         playsinline></video>
     </div>
