@@ -1,6 +1,21 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.26 - 2021-06-22
+### CHANGED:
+- DIC-128 Update style for button quickshop 
+- DIC-130 Fix spacing for under construction page 
+- DIC-127 Fix findify script loading 
+- Fix style for product card large 
+- DIC-130 Add under construction template 
+- DIC-128 Quickshop Iconography Feature Addtion 
+- DIC-125 Update button hover states 
+- DIC-129 Update image src for product hero card on featured carousel 
+- DIC-134 Fix style for alt product card on Homepage 
+- DIC-109 Update logic for product form when product has single variant 
+- DIC-121 Fix animation style for associate carousel 
+- DIC-133 Update style for hero on shop all page mobile 
+
 ## 0.0.25 - 2021-06-21
 ### CHANGED:
 - DIC-121 Add row configure for associate carousel 
