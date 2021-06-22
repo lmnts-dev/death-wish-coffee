@@ -31,6 +31,10 @@ export default {
     upscribeRegularPriceQuerySelector: {
       type: Boolean,
       default: false
+    },
+    index: {
+      type: Number,
+      default: ''
     }
   },
   data () {
@@ -188,13 +192,6 @@ export default {
     intervalUnit () {
       return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
     },
-    initialSelectedOptions: () => {
-      this.product.options.reduce((result, option) => {
-      // Initially, none of the option has any selected value
-        result[option] = null
-        return result
-      })
-    },
     initialApplicableVariants () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.applicable_variants
@@ -238,19 +235,6 @@ export default {
     recurringDiscountAfterOrder () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.recurring_discount_after_order
-        : null
-    },
-    activeSubsriptionDisplayPrice () {
-      return this.product
-        .selected_or_first_available_variant
-        ? this.product.selected_or_first_available_variant.price
-        : null
-    },
-    activeSubsriptionDisplayComparePrice () {
-      return this.product
-        .selected_or_first_available_variant
-        ? this.product.selected_or_first_available_variant
-          .compare_at_price
         : null
     },
     oneTimeMessage () {
@@ -308,6 +292,20 @@ export default {
     }
   },
   methods: {
+    activeSubsriptionDisplayPrice () {
+      return this.product
+        .selected_or_first_available_variant
+        ? this.product.selected_or_first_available_variant.price
+        : null
+    },
+    activeSubsriptionDisplayComparePrice () {
+      return this.product
+        .selected_or_first_available_variant
+        ? this.product.selected_or_first_available_variant
+          .compare_at_price
+        : null
+    },
+
     sanitize (name) {
       return name.replace(/[^\w-]+/g, '')
     },
@@ -366,7 +364,6 @@ export default {
       )
     },
     clickOption () {
-      console.log(this.selectFrequencyOptions, this.index)
       this.$emit('click-option', this.index)
 
       // Upscribe Frequency Update
@@ -571,10 +568,17 @@ export default {
       console.log(value)
 
       return formatString.replace(placeholderRegex, value)
+    },
+    initialSelectedOptions: () => {
+      this.product.options.reduce((result, option) => {
+      // Initially, none of the option has any selected value
+        result[option] = null
+        return result
+      })
     }
   },
   mounted () {
-    console.log('test', this.index)
+    console.log('test', this.product.options)
     this.activeVariantId = this.product.variants[0].id
 
     // reset
@@ -601,7 +605,6 @@ export default {
         'upscribeFrequencyIndexUpdate',
         function (event) {
           vm.setFrequency(event.detail)
-          console.log(event.detail, 'event')
         },
         false
       )

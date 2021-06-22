@@ -3,7 +3,6 @@
 <section class="cu-upscribe" data-module="upscribe-product-options">
   <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
     v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}">
-    <span @click="clickOption">testing click</span>
     <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
       <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
         name="properties[Subscription]">
@@ -54,7 +53,8 @@
       <div class="cu-optionsGrid">
         <div v-for="(option, index) in selectFrequencyOptions" 
           :select-frequency-options="selectFrequencyOptions"
-          :key="option.frequency" :index="index" 
+          :key="option.frequency" 
+          :index="index" 
           :option="option" 
           :selected-index="selectedFrequencyIndex"
           class="cu-option" v-on:click-option="setFrequency">
