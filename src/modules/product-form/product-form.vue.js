@@ -16,14 +16,6 @@ export default {
       type: [Object, Boolean],
       default: false
     },
-    index: {
-      type: Number,
-      required: true
-    },
-    selectedIndex: {
-      type: Number,
-      required: true
-    },
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
@@ -32,6 +24,8 @@ export default {
   data () {
     return {
       moneyFormat: 'amount',
+      index: 0,
+      selectedIndex: 0,
       selectedOptions: { ...this.initialSelectedOptions },
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
@@ -193,32 +187,32 @@ export default {
     initialApplicableVariants () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.applicable_variants
-        : ''
+        : null
     },
     subscriptionProductTitle () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.subscription_product_title
-        : ''
+        : null
     },
     intervalFrequncyMetafield () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.interval_frequency
-        : ''
+        : null
     },
     intervalUnitMetafield () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.interval_unit
-        : ''
+        : null
     },
     defaultGlobalDiscountAmount () {
       return this.shop.default_discount_amount
         ? this.shop.default_discount_amount
-        : ''
+        : null
     },
     discountAmount () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.discount_amount
-        : ''
+        : null
     },
     initialChargeLimit () {
       return this.product.sf_upscribe
@@ -228,25 +222,25 @@ export default {
     recurringDiscountAmount () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.recurring_discount_amount
-        : ''
+        : null
     },
     recurringDiscountAfterOrder () {
       return this.product.sf_upscribe
         ? this.product.sf_upscribe.recurring_discount_after_order
-        : ''
+        : null
     },
     activeSubsriptionDisplayPrice () {
       return this.product
         .selected_or_first_available_variant
         ? this.product.selected_or_first_available_variant.price
-        : ''
+        : null
     },
     activeSubsriptionDisplayComparePrice () {
       return this.product
         .selected_or_first_available_variant
         ? this.product.selected_or_first_available_variant
           .compare_at_price
-        : ''
+        : null
     },
     oneTimeMessage () {
       return this.shop ? this.shop.one_time_message : ''
@@ -568,7 +562,7 @@ export default {
     }
   },
   mounted () {
-    console.log('test', this.product, this.activeSubsriptionDisplayPrice)
+    console.log('test', this.product, this.index)
     this.activeVariantId = this.product.variants[0].id
 
     // reset
@@ -600,7 +594,7 @@ export default {
         false
       )
     }
-    this.componentMounted = true
+    this.componentMounted = 1
   },
   destroyed () {
     window.removeEventListener('upscribeVariantUpdate', this.handleVariantUpdateEvent)
