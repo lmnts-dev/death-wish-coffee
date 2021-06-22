@@ -167,6 +167,10 @@ h5 {
   &--light {
     font-weight: var(--light);
   }
+
+  &--bold {
+    font-weight: var(--bold);
+  }
 }
 
 .b1 {

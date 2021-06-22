@@ -13,7 +13,8 @@
       <div class="swiper-wrapper associate-carousel__wrapper">
         {%- for title in item_titles -%}
           {%- assign index0 = forloop.index0 -%}
-          <div class="swiper-slide associate-carousel__item js-item">
+          {%- assign blurb = item_blurbs[index0] -%}
+          <div class="swiper-slide associate-carousel__item js-item{% if blurb != blank %} associate-carousel__item--animated{% endif %}">
             <div class="associate-carousel__inner">
               <div class="associate-carousel__item-main">
                 <div class="associate-carousel__item-image-wrapper">
@@ -28,9 +29,9 @@
                   {%- endif -%}
                 </div>
               </div>
-              {%- if item_blurbs[index0] != blank -%}
+              {%- if blurb != blank -%}
                 <div class="associate-carousel__item-blurb">
-                  <div class="associate-carousel__item-blurb-wysiwyg wysiwyg wysiwyg--associate-carousel wysiwyg--text-white">{{- item_blurbs[index0] -}}</div>
+                  <div class="associate-carousel__item-blurb-wysiwyg wysiwyg wysiwyg--associate-carousel wysiwyg--text-white">{{- blurb -}}</div>
                 </div>
               {%- endif -%}
             </div>
