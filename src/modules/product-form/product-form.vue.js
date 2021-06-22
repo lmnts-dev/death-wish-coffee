@@ -16,10 +16,6 @@ export default {
       type: Object,
       required: true
     },
-    // option: {
-    //   type: [Object, Boolean],
-    //   default: false
-    // },
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
@@ -46,7 +42,6 @@ export default {
   },
   mounted () {
     this.activeVariantId = this.product.variants[0].id
-
     // reset
     this.index = ''
     this.selectedFrequencyIndex = 0
@@ -315,9 +310,9 @@ export default {
     howItWorksText () {
       return this.shop ? this.shop.how_it_works_text : ''
     },
-    isActive (index) {
-      console.log(this.selectedFrequencyIndex, index, this.selectedFrequencyIndex === index)
-      return this.selectedFrequencyIndex === index
+    isActive () {
+      console.log(this.selectedFrequencyIndex, this.index)
+      return this.selectedFrequencyIndex === this.index
     }
   },
   methods: {
@@ -400,6 +395,7 @@ export default {
       // console.log(this.selectedFrequency === this.index)
       this.index = index
       this.option = option
+      // this.isActive(index)
       // console.log(index, this.option)
       this.$emit('click-option', this.index)
       console.log(this.index)
@@ -448,7 +444,7 @@ export default {
       let strikethroughPrice
       if (this.upscribeRegularPriceQuerySelector === true) {
         regularEl = document.querySelector(
-          '{{upscribe_regular_price_query_selector}}'
+          this.upscribeRegularPriceQuerySelector
         )
       } else {
         regularEl = document.querySelector('.upscribe-price-item-regular')
@@ -456,7 +452,7 @@ export default {
 
       if (this.upscribeSalePriceQuerySelector) {
         saleEl = document.querySelector(
-          '{{upscribe_sale_price_query_selector}}'
+          this.upscribeSalePriceQuerySelector
         )
       } else {
         saleEl = document.querySelector('.upscribe-price-item-sale')
