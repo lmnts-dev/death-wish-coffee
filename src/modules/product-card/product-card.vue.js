@@ -48,7 +48,8 @@ export default {
     return {
       shouldShowMessage: false,
       selectedVariantId: null,
-      isHovered: false
+      isHovered: false,
+      showProductForm: false
     }
   },
   computed: {
