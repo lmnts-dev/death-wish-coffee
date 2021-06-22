@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import store from 'lib/store'
 import ProductForm from './product-form.vue'
+import VOption from './product-form-option.vue'
 
 /**
  * Initializes the site's productform module.
@@ -12,6 +13,7 @@ const productFormRoot = el => {
     el,
     components: {
       ProductForm
+      // VOption
     },
     store,
     name: 'ProductFormRoot',

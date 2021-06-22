@@ -17,13 +17,18 @@
 {% comment %} Reset snippet variables{% endcomment %}
 {% assign upscribe_include_vue_cdn_in_snippet = true %}
   {% comment %} Used in case there are multiple Upscribe blocks loaded per page {% endcomment %}
-{% assign upscribe_component_uid = false %}
+{%- comment -%}
+  {% assign upscribe_component_uid = false %}
+{%- endcomment -%}
+{% assign upscribe_component_uid = product.id %}
 {% assign upscribe_keep_component_in_sync = false %}
 {% assign upscribe_regular_price_query_selector = false %}
 {% assign upscribe_sale_price_query_selector = false %}
+{%- comment -%}
 {% unless upscribe_component_uid %}
   {% assign upscribe_component_uid = product.id %}
 {% endunless %}
+{%- endcomment -%}
 {% if upscribe_include_vue_cdn_in_snippet != false %}
   {% assign upscribe_include_vue_cdn_in_snippet = true %}
 {% endif %}
@@ -84,7 +89,7 @@
 
     {% if product.metafields.sf_upscribe.enable_subscription == 1 %}
 
-    {%- render 'upscribe-product-options' product: product -%}
+    {%- render 'upscribe-product-options' upscribe_component_uid: upscribe_component_uid-%}
     {% endif %}
 
     <form method="post" action="/cart/add" @submit.prevent="handleAddToCart">

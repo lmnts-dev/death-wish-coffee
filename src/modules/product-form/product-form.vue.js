@@ -32,14 +32,6 @@ export default {
       type: Boolean,
       default: false
     }
-    // index: {
-    //   type: Number,
-    //   required: true
-    // },
-    // selectedIndex: {
-    //   type: Number,
-    //   required: true
-    // }
   },
   data () {
     return {
@@ -582,7 +574,7 @@ export default {
     }
   },
   mounted () {
-    console.log('test', this.selectedOptions)
+    console.log('test', this.index)
     this.activeVariantId = this.product.variants[0].id
 
     // reset

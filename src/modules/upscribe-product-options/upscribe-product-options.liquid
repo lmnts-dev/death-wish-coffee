@@ -1,5 +1,7 @@
+{% assign upscribe_component_uid = upscribe_component_uid | default: blank %}
+
 <section class="cu-upscribe" data-module="upscribe-product-options">
-  <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{product.id}}"
+  <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
     v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}">
     <span @click="clickOption">testing click</span>
     <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
@@ -31,7 +33,8 @@
       <div class="cu-productTypeSelect__itemWrap">
         <label class="cu-productTypeSelect__itemLabel" for="onetime-{{upscribe_component_uid}}">
           <input type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
-          <span class="cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }</span>
+          <span class="cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }
+          </span>
         </label>
       </div>
 
@@ -49,8 +52,11 @@
       <span class="cu-optionsTitle">Frequency (${ intervalUnit }s)</span>
 
       <div class="cu-optionsGrid">
-        <div v-for="(option, index) in selectFrequencyOptions" :select-frequency-options="selectFrequencyOptions"
-          :key="option.frequency" v-bind:index="index" :option="option" :selected-index="selectedFrequencyIndex"
+        <div v-for="(option, index) in selectFrequencyOptions" 
+          :select-frequency-options="selectFrequencyOptions"
+          :key="option.frequency" :index="index" 
+          :option="option" 
+          :selected-index="selectedFrequencyIndex"
           class="cu-option" v-on:click-option="setFrequency">
           <div class="cu-option__option" v-if="option" :class="{'is-active': isActive}" @click="clickOption">
             <span class="cu-option__mainText" v-if="option.mainText">${ option.mainText }</span>
