@@ -1,7 +1,7 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
-##  - 2021-06-22
+## 0.0.29 - 2021-06-22
 ### CHANGED:
 - Init icon mapping system 
 
