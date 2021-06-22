@@ -32,14 +32,14 @@ export default {
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
     },
-    hasVariantDefault () {
-      return this.product.variants.find(item => item.title === 'Default Title')
+    hasSingleVariant () {
+      return this.product.variants.length === 1
     },
     selectedVariantId () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
 
-      if (this.hasVariantDefault) {
-        return this.hasVariantDefault.id
+      if (this.hasSingleVariant) {
+        return this.product.variants[0].id
       } else if (variant) {
         return variant.id
       } else {
