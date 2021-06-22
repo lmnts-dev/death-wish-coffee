@@ -60,7 +60,7 @@ export default {
       return this.selectedVariant ? this.selectedVariant.price : this.product.price
     },
     comparePrice () {
-      return this.product.options_by_name.Size.selected_variant_drop.compare_at_price ? this.product.options_by_name.Size.selected_variant_drop.compare_at_price : ''
+      return this.product.options_by_name.Size && this.product.options_by_name.Size.selected_variant_drop.compare_at_price ? this.product.options_by_name.Size.selected_variant_drop.compare_at_price : ''
     }
   },
   watch: {
