@@ -1,6 +1,13 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.28 - 2021-06-22
+### CHANGED:
+- remove horizontal line in pdp 
+- increase bolt illustration hero font size 
+- increase button z-index 
+- wire up super hero buttons 
+
 ## 0.0.27 - 2021-06-22
 ### CHANGED:
 - Fix z-index issues on product card 

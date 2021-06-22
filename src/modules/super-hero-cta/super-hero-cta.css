@@ -113,6 +113,7 @@
 
 .shc__button {
   margin-top: 7rem;
+  z-index: 2;
 
   @media (--lg-max) {
     margin-top: 2rem;
