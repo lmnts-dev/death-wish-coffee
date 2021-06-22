@@ -1,6 +1,14 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.27 - 2021-06-22
+### CHANGED:
+- Fix z-index issues on product card 
+- Update video defaults 
+- Update hover event for video playback on plp 
+- change bronze color 
+- Update h3 for super hero cta 
+
 ## 0.0.26 - 2021-06-22
 ### CHANGED:
 - DIC-128 Update style for button quickshop 
