@@ -8,7 +8,11 @@
 {% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 {%- capture content -%}
-    <div class="product-card__inner" @mouseover="handleHover">
+    <div 
+      class="product-card__inner" 
+      :class="{ 'product-card__inner--active': showProductForm }"
+      @mouseover="handleHover"
+    >
       <div class="product-card__header">
         <a v-if="isHovered && isFeatured && product.video" :href="product.url" class="product-card__video-container">
           {%- render 'video', mod_class: 'product-card__video', mod_is_vue: true, mod_vue_attrs: ':src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
@@ -19,10 +23,20 @@
           </a>
         </div>
         {%- if quick_shop_form -%}
-          <div class="product-card__form">
+          <div
+            class="product-card__form"
+          >
             {{- quick_shop_form -}}
           </div>
         {%- endif -%}
+        <div class="product-card__toggle-button" @click="showProductForm = !showProductForm">
+          <template v-if="!showProductForm">
+            {%- render 'svg', type: 'quick-shop', class: 'product-card__quick-shop' %}
+          </template>
+          <template v-else>
+            {%- render 'svg', type: 'close', class: 'product-card__close' -%}
+          </template>
+        </div>
       </div>
       <div class="product-card__content">
         <h4 class="product-card__title">

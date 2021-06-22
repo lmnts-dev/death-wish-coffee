@@ -1,3 +1,7 @@
+.alt-product-card {
+  background: transparent;
+}
+
 .alt-product-card__image {
   position: relative;
   display: block;
