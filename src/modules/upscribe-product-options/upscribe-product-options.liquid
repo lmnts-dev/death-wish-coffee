@@ -1,95 +1,64 @@
-<!-- Upscribe -->
-{% if product.metafields.sf_upscribe.enable_subscription == 1 %}
-{% comment %} Reset snippet variables{% endcomment %}
-  {% assign upscribe_include_vue_cdn_in_snippet = true %}
-  {% assign upscribe_component_uid = false %}
-  {% assign upscribe_keep_component_in_sync = false %}
-  {% assign upscribe_regular_price_query_selector = false %}
-  {% assign upscribe_sale_price_query_selector = false %}
-  {% comment %}
-  Snippet variables that can be passed
-  upscribe_exclude_vue_cdn_in_snippet = Whether or not to load the vue.js script from CDN
-  (excluded if loaded globally, defaults to true)
-  {% endcomment %}
+<section class="cu-upscribe" data-module="upscribe-product-options">
+  <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{product.id}}"
+    v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}">
+    <span @click="clickOption">testing click</span>
+    <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
+      <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
+        name="properties[Subscription]">
 
-  {% comment %} Used in case there are multiple Upscribe blocks loaded per page {% endcomment %}
-  {% unless upscribe_component_uid %}
-    {% assign upscribe_component_uid = product.id %}
-  {% endunless %}
+      <input v-if="subscriptionProductTitleDisplay" type="hidden" :value="subscriptionProductTitleDisplay"
+        name="properties[Subscription Product Title]">
 
-  {% if upscribe_include_vue_cdn_in_snippet != false %}
-    {% assign upscribe_include_vue_cdn_in_snippet = true %}
-  {% endif %}
+      <input v-if="subscriptionAmount" type="hidden" :value="subscriptionAmount" name="properties[Subscription Amount]">
 
-  {% if upscribe_keep_component_in_sync != false %}
-    {% assign upscribe_keep_component_in_sync = true %}
-  {% endif %}
+      <input v-if="activeDiscountAmount" type="hidden" :value="activeDiscountAmount" name="properties[Discount Amount]">
 
-  <section class="cu-upscribe" data-module="upscribe-product-options">
-    <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{product.id}}" :product-id="{{product.id}}"
-      v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
-      :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
-      :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
-      :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}">
-      <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
-        <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
-          name="properties[Subscription]">
+      <input v-if="chargeLimit" type="hidden" :value="chargeLimit" name="properties[Charge Limit]">
 
-        <input v-if="subscriptionProductTitleDisplay" type="hidden" :value="subscriptionProductTitleDisplay"
-          name="properties[Subscription Product Title]">
+      <input v-if="recurringDiscountAmount" type="hidden" :value="recurringDiscountAmount"
+        name="properties[Recurring Discount Amount]">
 
-        <input v-if="subscriptionAmount" type="hidden" :value="subscriptionAmount" name="properties[Subscription Amount]">
+      <input v-if="recurringDiscountAfterOrder" type="hidden" :value="recurringDiscountAfterOrder"
+        name="properties[Recurring Discount After Order]">
 
-        <input v-if="activeDiscountAmount" type="hidden" :value="activeDiscountAmount" name="properties[Discount Amount]">
+      <input v-if="intervalFrequency" type="hidden" :value="intervalFrequency" name="properties[Interval Frequency]">
 
-        <input v-if="chargeLimit" type="hidden" :value="chargeLimit" name="properties[Charge Limit]">
+      <input v-if="intervalUnit" type="hidden" :value="intervalUnit" name="properties[Interval Unit]">
 
-        <input v-if="recurringDiscountAmount" type="hidden" :value="recurringDiscountAmount"
-          name="properties[Recurring Discount Amount]">
+    </div>
 
-        <input v-if="recurringDiscountAfterOrder" type="hidden" :value="recurringDiscountAfterOrder"
-          name="properties[Recurring Discount After Order]">
-
-        <input v-if="intervalFrequency" type="hidden" :value="intervalFrequency" name="properties[Interval Frequency]">
-
-        <input v-if="intervalUnit" type="hidden" :value="intervalUnit" name="properties[Interval Unit]">
-
+    <div class="cu-productTypeSelect js-upscribe-product-type" :data-upscribe-product-type="productPurchaseType">
+      <div class="cu-productTypeSelect__itemWrap">
+        <label class="cu-productTypeSelect__itemLabel" for="onetime-{{upscribe_component_uid}}">
+          <input type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
+          <span class="cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }</span>
+        </label>
       </div>
 
-      <div class="cu-productTypeSelect js-upscribe-product-type" :data-upscribe-product-type="productPurchaseType">
-        <div class="cu-productTypeSelect__itemWrap">
-          <label class="cu-productTypeSelect__itemLabel" for="onetime-{{upscribe_component_uid}}">
-            <input type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
-            <span class="cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }</span>
-          </label>
-        </div>
-
-        <div class="cu-productTypeSelect__itemLabel">
-          <label class="cu-productTypeSelect__itemWrap" for="subscription-{{upscribe_component_uid}}">
-            <input type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
-              v-model="productPurchaseType">
-            <span class="cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
-              activeDiscountAmount }</span>
-          </label>
-        </div>
-      </div>
-
-      <div v-if="selectFrequencyOptions && subscriptionSelected" class="cu-options cu-options--frequency">
-        <span class="cu-optionsTitle">Frequency (${ intervalUnit }s)</span>
-
-        <div class="cu-optionsGrid">
-          <div v-for="(option, index) in selectFrequencyOptions" :select-frequency-options="selectFrequencyOptions"
-            :key="option.frequency" v-bind:index="index" :option="option" :selected-index="selectedFrequencyIndex"
-            class="cu-option" v-on:click-option="setFrequency">
-            <div class="cu-option__option" v-if="option" :class="{'is-active': isActive}" @click="clickOption">
-              ${option.value}
-              <span class="cu-option__mainText" v-if="option.mainText">{{ option.mainText }}</span>
-              <span class="cu-option__subText" v-if="option.subText">{{ option.subText }}</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="cu-productTypeSelect__itemLabel">
+        <label class="cu-productTypeSelect__itemWrap" for="subscription-{{upscribe_component_uid}}">
+          <input type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
+            v-model="productPurchaseType">
+          <span class="cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
+            activeDiscountAmount }</span>
+        </label>
       </div>
     </div>
-  </section>
-{% endif %}
+
+    <div v-if="selectFrequencyOptions && subscriptionSelected" class="cu-options cu-options--frequency">
+      <span class="cu-optionsTitle">Frequency (${ intervalUnit }s)</span>
+
+      <div class="cu-optionsGrid">
+        <div v-for="(option, index) in selectFrequencyOptions" :select-frequency-options="selectFrequencyOptions"
+          :key="option.frequency" v-bind:index="index" :option="option" :selected-index="selectedFrequencyIndex"
+          class="cu-option" v-on:click-option="setFrequency">
+          <div class="cu-option__option" v-if="option" :class="{'is-active': isActive}" @click="clickOption">
+            <span class="cu-option__mainText" v-if="option.mainText">${ option.mainText }</span>
+            <span class="cu-option__subText" v-if="option.subText">${ option.subText }</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -8,6 +8,29 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{%- endcapture -%}
 
+<!-- Upscribe -->
+  {% comment %}
+  Snippet variables that can be passed
+  upscribe_exclude_vue_cdn_in_snippet = Whether or not to load the vue.js script from CDN
+  (excluded if loaded globally, defaults to true)
+  {% endcomment %}
+{% comment %} Reset snippet variables{% endcomment %}
+{% assign upscribe_include_vue_cdn_in_snippet = true %}
+  {% comment %} Used in case there are multiple Upscribe blocks loaded per page {% endcomment %}
+{% assign upscribe_component_uid = false %}
+{% assign upscribe_keep_component_in_sync = false %}
+{% assign upscribe_regular_price_query_selector = false %}
+{% assign upscribe_sale_price_query_selector = false %}
+{% unless upscribe_component_uid %}
+  {% assign upscribe_component_uid = product.id %}
+{% endunless %}
+{% if upscribe_include_vue_cdn_in_snippet != false %}
+  {% assign upscribe_include_vue_cdn_in_snippet = true %}
+{% endif %}
+{% if upscribe_keep_component_in_sync != false %}
+  {% assign upscribe_keep_component_in_sync = true %}
+{% endif %}
+
 {%- capture content -%}
   <div class="product-form__form">
     <div class="product-form__options">
@@ -59,7 +82,10 @@
       <div v-if="!addedToCartSuccessfully && addedToCartErrorMessage" class="b1 product-form__message">${addedToCartErrorMessage}</div>
     {%- endunless -%}
 
+    {% if product.metafields.sf_upscribe.enable_subscription == 1 %}
+
     {%- render 'upscribe-product-options' product: product -%}
+    {% endif %}
 
     <form method="post" action="/cart/add" @submit.prevent="handleAddToCart">
       <input type="hidden" name="id" :value="selectedVariantId">
@@ -88,6 +114,10 @@
     <div is="product-form"
          :product="{{- product_json | escape -}}"
          :shop='{{shop.metafields.sf_upscribe | json}}' 
+         :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
+         :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
+         :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}"
+         :product-id="{{product.id}}"
          inline-template
     >
       {{ content }}

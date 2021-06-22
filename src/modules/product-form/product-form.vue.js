@@ -8,6 +8,10 @@ export default {
       type: Object,
       required: true
     },
+    productId: {
+      type: Number,
+      required: true
+    },
     shop: {
       type: Object,
       required: true
@@ -19,13 +23,29 @@ export default {
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
+    },
+    upscribeSalePriceQuerySelector: {
+      type: Boolean,
+      default: false
+    },
+    upscribeRegularPriceQuerySelector: {
+      type: Boolean,
+      default: false
     }
+    // index: {
+    //   type: Number,
+    //   required: true
+    // },
+    // selectedIndex: {
+    //   type: Number,
+    //   required: true
+    // }
   },
   data () {
     return {
       moneyFormat: 'amount',
-      index: 0,
-      selectedIndex: 0,
+      index: '',
+      selectedIndex: '',
       selectedOptions: { ...this.initialSelectedOptions },
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
@@ -177,7 +197,6 @@ export default {
       return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
     },
     initialSelectedOptions: () => {
-      console.log(this.product)
       this.product.options.reduce((result, option) => {
       // Initially, none of the option has any selected value
         result[option] = null
@@ -355,6 +374,7 @@ export default {
       )
     },
     clickOption () {
+      console.log(this.selectFrequencyOptions, this.index)
       this.$emit('click-option', this.index)
 
       // Upscribe Frequency Update
@@ -562,7 +582,7 @@ export default {
     }
   },
   mounted () {
-    console.log('test', this.product, this.index)
+    console.log('test', this.selectedOptions)
     this.activeVariantId = this.product.variants[0].id
 
     // reset
