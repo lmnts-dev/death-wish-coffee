@@ -128,6 +128,100 @@
               type: 'option'
             }
             {%- endcomment -%}
+          {%- when 'bagged' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium',
+                'light'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {%- comment -%}
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            
+            {
+              name: 'Size',
+              type: 'option'
+            }
+            {%- endcomment -%}
+          {%- when 'single-serve' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium',
+                'light'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {%- comment -%}
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+            {%- endcomment -%}
+          {%- when 'canned' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium',
+                'light'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {%- comment -%}
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+            {%- endcomment -%}
           {%- when 'merch' -%}
             {
               name: 'Category',
