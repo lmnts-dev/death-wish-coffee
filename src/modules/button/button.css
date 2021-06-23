@@ -55,28 +55,52 @@
     &:hover {
       background: var(--blood);
     }
+
+    .button-icon {
+      display: none;
+    }
   }
 
   &--light-alt {
     background: var(--bronze);
+
+    .button-icon {
+      display: none;
+    }
   }
 
   &--dark {
     background: var(--shadow);
     color: var(--white);
+
+    .button-icon {
+      display: none;
+    }
   }
 
   &--text-light {
     color: var(--white);
+
+    .button-icon {
+      display: none;
+    }
   }
 
   &--text-dark {
     color: var(--dark);
+
+    .button-icon {
+      display: none;
+    }
   }
 
   @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
     &--palette-$(color) {
       background-color: var(--$color);
+
+      .button-icon {
+        display: none;
+      }
     }
   }
 
@@ -97,8 +121,26 @@
 }
 
 .button-text {
+  transition: all var(--transition-timing) ease;
+
   .button.submitting & {
     display: none;
+  }
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0;
+  height: 100%;
+  opacity: 0;
+  transition: all var(--transition-timing) ease;
+
+  .button:hover & {
+    width: 27px;
+    margin-left: 8px;
+    opacity: 1;
   }
 }
 

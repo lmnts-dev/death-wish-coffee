@@ -5,13 +5,13 @@
 {% assign use_loader = use_loader | default: false %}
 {% assign class = class | default: false %}
 {% capture button_class %}button{% if class %} {{ class }}{% endif %}{% endcapture %}
-
 {% if button_value %}
 <{{ tag }}
   {% if button_url %}href="{{ button_url }}"{% endif %}
   {% if custom_attrs %}{{ custom_attrs  }}{% endif %}
   class="{{ button_class }}">
   <span class="button-text">{{ button_value }}</span>
+  {%- render 'svg', type: 'chevron-right', class: 'button-icon' -%}
   {% if use_loader %}
     {% render 'loading-animation' %}
   {% endif %}

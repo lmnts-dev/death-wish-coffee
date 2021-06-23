@@ -18,12 +18,12 @@
       <div class="article-hero-card__content">
         <div class="article-hero-card__content-inner">
           {% if title %}
-          <a href="{{ url }}" class="article-hero-card__item-title h2">{{- title -}}</a>
+            <a href="{{ url }}" class="article-hero-card__item-title h2">{{- title -}}</a>
           {% endif %}
           {%- if excerpt -%}
-          <div class='article-hero-card__item-excerpt b2'>
-            <p class="">{{- excerpt -}}</p>
-          </div>
+            <div class="article-hero-card__item-excerpt b2">
+              <p class="article-card__exerpt">{{- excerpt -}}</p>
+            </div>
           {%- endif -%}
           {%- if author -%}
             <p class="article-hero-card__item-author">{{ author }}{% if date %} &mdash; {{ date }}{% endif %}</p>
