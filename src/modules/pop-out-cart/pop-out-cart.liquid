@@ -47,12 +47,12 @@
               </a>
               <div class="pop-out-cart__item-details">
                 <a :href="item.url" class="pop-out-cart__item-title b2">
-                  <span v-if="!!item.properties['Subscription Product Title']">${item.properties['Subscription Product Title']} boots</span>
-                  <span v-else>${item.product_title} tits</span>
+                  <span v-if="!!item.properties && typeof item.properties['Subscription Product Title'] !== 'undefined'">${item.properties['Subscription Product Title']}</span>
+                  <span v-else>${item.product_title}</span>
                 </a>
 
                 <p class="pop-out-cart__item-subtext b3">${item.variant_title}</p>
-                <p v-if="!!item.properties['Subscription']" class="b3">Subscription: ${item.properties['Subscription']}</p>
+                <p v-if="!!item.properties && typeof item.properties['Subscription'] !== 'undefined'" class="b3">Subscription: ${item.properties['Subscription']}</p>
 
                 <template v-if="item.properties && item.properties.length">
                   <template v-for="property in item.properties">
@@ -70,11 +70,14 @@
                     id_prefix: 'pop-out-cart-'
                   %}
 
-                {% if subscription_amount and subscription_line_price_total %}
-                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ subscription_line_price_total | money }}</p>
-                {% else %}
-                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
-                {% endif %}
+                  {%- comment -%}
+                  TODO: Add subtotals to line items
+                  
+                  <p v-else class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>
+                    <span v-if="item.properties instanceof Object && typeof item.properties['Subscription Amount'] !== 'undefined'" class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>${item.properties['Subscription Amount'] / 100}</span>
+                    <span v-else>${item.price}</span></p>
+                  {%- endcomment -%}
+
               </div>
 
               <a class="pop-out-cart__item-remove b2" href="#" aria-label="{{ 'cart.general.remove' | t }}" @click.prevent="removeItem(item)">
@@ -87,7 +90,7 @@
         <div class="pop-out-cart__footer">
           <p class="pop-out-cart__summary-row">
             <span>{{ 'cart.general.subtotal' | t }}</span>
-            <span>${formattedTotalPrice}</span>
+            <span>$${totalCartPrice}</span>
           </p>
 
           <p v-if="totalDiscount" class="pop-out-cart__summary-row">
@@ -99,7 +102,7 @@
 
           <p class="b3">{{ 'cart.general.shipping_at_checkout' | t }}</p>
 
-          <button v-if="cartHasSubscriptionItem" onclick="window.upscribeBuildCheckout()" class="upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
+          <button v-if="cartHasSubscriptionItem" onclick="window.upscribeBuildCheckout()" class="pop-out-cart__checkout-button upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
           <input v-else type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
 
         </div>

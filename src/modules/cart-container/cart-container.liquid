@@ -8,13 +8,38 @@
         <div class="pop-out-cart__list">
           {% for item in cart.items %}
             {% assign item_image = item.image | img_url: 'master' %}
+
+            {% for p in item.properties %}
+              {% if p.first == 'Subscription Product Title' %}
+                {%- assign subscription_title = p.last -%}
+              {% endif %}
+
+              {% if p.first == 'Subscription Amount' %}
+                {%- assign subscription_amount = p.last -%}
+              {% endif %}
+
+              {% if p.first == 'Discount Amount' %}
+                {%- assign discount_amount = p.last -%}
+              {% endif %}
+            {% endfor %}
+
+            {% if subscription_amount %}
+              {% assign subscription_in_cart = true %}
+              {% assign subscription_line_price_total = subscription_amount | times: item.quantity %}
+            {% else %}
+              {% assign subscription_line_price_total = item.discounted_price | times: item.quantity %}
+            {% endif %}
+
+            {% assign upscribe_total = upscribe_total | plus: subscription_line_price_total %}
+
+
             <div class="pop-out-cart__item">
               <a class="pop-out-cart__item-image" href="{{ item.url | within: collections.all }}">
                 {% render 'image', src: item_image, alt: item.title %}
               </a>
               <div class="pop-out-cart__item-details">
                 <a href="{{ item.url | within: collections.all }}"
-                  class="pop-out-cart__item-title h5">{{ item.product.title }}</a>
+                  class="pop-out-cart__item-title h5">{%- if subscription_title -%}{{ subscription_title }}{%- else -%}{{ item.product.title }}{%- endif -%}</a>
 
                 {% assign options = item.variant.options | join: ' / ' %}
                 <p class="pop-out-cart__item-subtext b1">{{ options }}</p>
@@ -37,7 +62,7 @@
                     id_prefix: 'pop-out-cart-'
                   %}
 
-                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ item.line_price | money }}</p>
+                  <p class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>{{ subscription_line_price_total | money }}</p>
                 </div>
               </div>
 
@@ -45,9 +70,14 @@
                 X
               </a>
             </div>
+            
+            {%- assign subscription_amount = false -%}
+            {%- assign subscription_title = false -%}
+            {%- assign discount_amount = false -%}
+  
           {% endfor %}
           </div>    </div>
-      {% render 'cart-sidebar' %}
+      {% render 'cart-sidebar', upscribe_total: upscribe_total, subscription_in_cart: subscription_in_cart %}
     </div>
   </form>
 </section>

@@ -22,7 +22,19 @@ const popOutCart = (el) => {
       ...mapState('cart', ['isPopOutCartActive']),
       ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount', 'isClickedOutside']),
       cartHasSubscriptionItem () {
-        return this.items.length > 0 ? this.items.some(item => Object.keys(item.properties).includes('Subscription')) : false
+        if (this.items.length > 0) {
+          return this.items.some(item => {
+            return item.properties instanceof Object ? Object.keys(item.properties).includes('Subscription') : false
+          })
+        }
+        return false
+      },
+      totalCartPrice () {
+        const price = this.items.reduce((a, b) => {
+          const itemPrice = b.properties instanceof Object && typeof b.properties['Subscription Amount'] !== 'undefined' ? parseInt(b.properties['Subscription Amount']) : b.price
+          return a + itemPrice
+        }, 0)
+        return price / 100
       }
     },
     watch: {

@@ -159,7 +159,8 @@
   text-transform: uppercase;
 }
 
-.pop-out-cart__checkout-button {
+.pop-out-cart__checkout-button,
+.upscribe-checkout-button {
   margin-top: 20px;
 }
 

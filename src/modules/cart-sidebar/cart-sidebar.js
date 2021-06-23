@@ -17,7 +17,12 @@ const cartsidebar = (el) => {
     computed: {
       ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount', 'isClickedOutside']),
       cartHasSubscriptionItem () {
-        return this.items.length > 0 ? this.items.some(item => Object.keys(item.properties).includes('Subscription')) : false
+        if (this.items.length > 0) {
+          return this.items.some(item => {
+            return item.properties instanceof Object ? Object.keys(item.properties).includes('Subscription') : false
+          })
+        }
+        return false
       }
     }
   })
