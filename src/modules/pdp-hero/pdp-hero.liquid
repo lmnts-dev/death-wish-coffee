@@ -20,12 +20,19 @@
           </div>
       {% endfor %}
     {%- endcapture -%}
+    {%- assign loop = false -%}
+    {%- assign navigation = false -%}
+    {%- if product.media.size > 1 -%}
+      {%- assign loop = true -%}
+      {%- assign navigation = true -%}
+    {%- endif -%}
     {%- capture carousel_class -%}carousel--pdp-hero js-carousel{% if palette != blank %} carousel--palette-{{ palette }}{% endif %}{%- endcapture -%}
     {%- render 'carousel',
       class: carousel_class,
       children: pdp_hero,
       slides_per_view: 1,
-      navigation: true
+      navigation: navigation,
+      loop: loop
     -%}
     {%- render 'pdp-add-to-cart', class: add_to_cart_class, palette: palette, product_upc: product_acf.product_upc -%}
   </div>

@@ -95,10 +95,11 @@
 
   {%- assign featured_navigation = true -%}
   {%- assign featured_slides_per_view = 1 -%}
+  {%- assign featured_carousel_loop = true -%}
 
   {%- if featured_slides_count == 1 -%}
     {%- assign featured_navigation = false -%}
-    {%- assign featured_slides_per_view = 0 -%}
+    {%- assign featured_carousel_loop = false -%}
   {%- endif -%}
 
   {%- render 'carousel',
@@ -109,6 +110,7 @@
     spacing: 0,
     slides_per_view: featured_slides_per_view,
     navigation: featured_navigation,
+    loop: featured_carousel_loop,
     palette: palette
   -%}
 {%- endif -%}

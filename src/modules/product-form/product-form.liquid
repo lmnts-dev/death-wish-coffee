@@ -38,7 +38,7 @@
 {% endif %}
 
 {%- capture content -%}
-  <div class="product-form__form">
+  <div class="product-form__form-wrapper">
     <div 
       class="product-form__options"
       :class="{'product-form__options--single': hasSingleVariant}"
@@ -98,7 +98,7 @@
     TODO:
     Need to re-add @submit.prevent="handleAddToCart" to form tag once we can properly pass line item props through to cart.js
     {%- endcomment -%}
-    <form method="post" action="/cart/add">
+    <form method="post" action="/cart/add" class="product-form__form">
 
       {% if product.metafields.sf_upscribe.enable_subscription == 1 %}
       

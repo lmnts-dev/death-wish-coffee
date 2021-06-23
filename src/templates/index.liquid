@@ -70,7 +70,7 @@
   {% endfor %}
 {%- endcapture -%}
 
-{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true -%}
+{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true, loop: true -%}
 
 {% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
 {%- render 'icon-title',
@@ -105,6 +105,7 @@
 
 {%- assign list_article_title = shop.metafields.homepage.featured_articles_heading -%}
 {%- assign list_article = shop.metafields.homepage.featured_article | split: '|' -%}
+{%- assign list_article_count = 0 -%}
 {%- capture content_slides -%}
   {% for handle in list_article %}
     {%- assign blog_handle = handle | split: '/' | first -%}
@@ -125,6 +126,7 @@
     {% assign excerpt = article.excerpt %}
     {% assign author = article.author %}
     {% assign date = article.published_at %}
+    {%- assign list_article_count = list_article_count | plus: 1 -%}
     
     {%- render 'article-hero-card',
       class: class,
@@ -139,6 +141,20 @@
     -%}
   {% endfor %}
 {%- endcapture -%}
-{%- render 'carousel', title: list_article_title, title_class: 'section-title--article-hero-card', class: 'carousel--home-article-hero-card carousel--article-hero-card p article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+{%- assign navigation = false -%}
+{%- assign loop = false -%}
+{%- if list_article_count > 1 -%}
+  {%- assign navigation = true -%}
+  {%- assign loop = true -%}
+{%- endif -%}
+{%- render 'carousel',
+  title: list_article_title,
+  title_class: 'section-title--article-hero-card',
+  class: 'carousel--home-article-hero-card carousel--article-hero-card p article-hero-card__contents bg--black',
+  children: content_slides,
+  spacing: 0,
+  slides_per_view: 1,
+  navigation: navigation,
+  loop: loop -%}
 
 {%- render 'footer-cta', title: 'MISSING OUT NEW STUFF TOTALLY SUCKS. SO, DON’T MISS OUT.', enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}

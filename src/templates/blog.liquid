@@ -8,6 +8,7 @@ If this comment is still here, please consult with the lead developer on the pro
 {%- assign blog_acf = blog.metafields -%}
 {%- assign list_article = blog_acf.accentuate.articles_selection | split: '|' -%}
 {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+{%- assign slides_count = 0 -%}
 
 {%- capture content_slides -%}
   {% for handle in list_article %}
@@ -30,6 +31,7 @@ If this comment is still here, please consult with the lead developer on the pro
     {% capture info %}
       {{ article.author }} - {{ article.created_at | time_tag: format: 'month_day_year' }}
     {% endcapture %}
+    {%- assign slides_count = slides_count | plus: 1 -%}
 
     {%- render 'article-hero-card',
         class: class,
@@ -43,7 +45,13 @@ If this comment is still here, please consult with the lead developer on the pro
     -%}
   {% endfor %}
 {%- endcapture -%}
-{%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: true -%}
+{%- assign slides_navigation = false -%}
+{%- assign slides_loop = false -%}
+{%- if slides_count > 1 -%}
+  {%- assign slides_navigation = true -%}
+  {%- assign slides_loop = true -%}
+{%- endif -%}
+{%- render 'carousel', class: 'carousel--article-hero-card article-hero-card__contents bg--black', children: content_slides, spacing: 0, slides_per_view: 1, navigation: slides_navigation, loop: slides_loop -%}
 
 <div class="bg--black">
   {% paginate blog.articles by 16 %}
