@@ -95,13 +95,9 @@
 
           <p class="b3">{{ 'cart.general.shipping_at_checkout' | t }}</p>
 
+          <button v-if="cartHasSubscriptionItem" onclick="window.upscribeBuildCheckout()" class="upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
+          <input v-else type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
 
-
-          {% if subscription_in_cart %}
-            <button onclick="window.upscribeBuildCheckout()" class="upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
-          {% else %}
-            <input type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
-          {% endif %}
         </div>
       </form>
     </template>

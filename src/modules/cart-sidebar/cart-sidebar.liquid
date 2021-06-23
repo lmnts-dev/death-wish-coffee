@@ -14,7 +14,10 @@
       <p class="cart-sidebar__cost b1">{{ cart.total_price | money }}</p>
     </div>
     <p class="cart-sidebar__label b2">Shipping & taxes calculated at checkout</p>
-    {%- render 'button' tag: 'button' class: 'pop-out-cart__checkout-button button button button--full' custom_attrs: 'type="submit" name="checkout"' button_value: "Check Out" -%}
+
+    <button v-if="cartHasSubscriptionItem" onclick="window.upscribeBuildCheckout()" class="upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
+    {%- render 'button' tag: 'button' class: 'pop-out-cart__checkout-button button button button--full' custom_attrs: 'v-else type="submit" name="checkout"' button_value: "Check Outsss" -%}
+
     <div class='cart-sidebar__payment-method-button-container'>
       {%- comment -%}requires shopify payments account setup{%- endcomment -%}
       {% if additional_checkout_buttons %}

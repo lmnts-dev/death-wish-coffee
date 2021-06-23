@@ -20,7 +20,10 @@ const popOutCart = (el) => {
     },
     computed: {
       ...mapState('cart', ['isPopOutCartActive']),
-      ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount', 'isClickedOutside'])
+      ...mapGetters('cart', ['items', 'totalPrice', 'totalDiscount', 'formattedTotalPrice', 'formattedTotalDiscount', 'isClickedOutside']),
+      cartHasSubscriptionItem () {
+        return this.items.length > 0 ? this.items.some(item => Object.keys(item.properties).includes('Subscription')) : false
+      }
     },
     watch: {
       isClickedOutside (newValue) {

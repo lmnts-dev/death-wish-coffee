@@ -42,7 +42,6 @@ export default {
 
     return {
       moneyFormat: 'amount',
-      initialSelectedOptions,
       selectedOptions: { ...initialSelectedOptions },
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
@@ -507,7 +506,7 @@ export default {
       var originalPrice = variant.price || false
       var originalComparePrice = variant.compare_at_price || false
 
-      console.log({ variant })
+      // console.log({ variant })
 
       this.activeVariantId = variant.id
 
@@ -623,7 +622,7 @@ export default {
           value = formatWithDelimiters(cents, 2, "'")
           break
       }
-      console.log(value)
+      // console.log(value)
 
       return formatString.replace(placeholderRegex, value)
     },
@@ -635,7 +634,7 @@ export default {
       })
     },
     toggleOption (option, value) {
-      console.log(option, value)
+      // console.log(option, value)
       if (this.selectedOptions[option] && this.selectedOptions[option] === value) {
         this.selectedOptions[option] = null
       } else {
