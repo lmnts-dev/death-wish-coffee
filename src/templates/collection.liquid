@@ -139,10 +139,12 @@
                 'Collab'
               ]
             },
+            {%- comment -%}
             {
               name: 'Type',
               type: 'type'
             },
+            {%- endcomment -%}
             {
               name: 'Gender',
               type: 'tag',
@@ -152,10 +154,12 @@
                 'Unisex'
               ]
             },
+            {%- comment -%}
             {
               name: 'Size',
               type: 'option'
             }
+            {%- endcomment -%}
         {%- endcase -%}
       ],
       products: {{ product_json }},
