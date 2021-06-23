@@ -294,7 +294,7 @@
     .star-clickable {
       align-items: center;
 
-      @media (--sm-max) {
+      @media (--md-max) {
         display: flex;
         flex-direction: column;
       }
