@@ -63,8 +63,8 @@
   text-align: center;
 
   &:active, &:hover, &:focus, &.is-active {
-    border-color: #7fc464;
-    color: #7fc464;
+    border-color: var(--blood);
+    color: var(--blood);
   }
 
   &.is-active .cu-option__check {
