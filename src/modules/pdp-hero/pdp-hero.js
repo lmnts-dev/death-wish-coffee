@@ -4,6 +4,7 @@
  */
 
 import Vue from 'vue'
+import store from 'lib/store'
 import PdpHero from '../pdp-hero/pdp-hero.vue'
 
 const pdpHero = (el) => {
@@ -13,7 +14,8 @@ const pdpHero = (el) => {
     delimiters: ['${', '}'],
     components: {
       PdpHero
-    }
+    },
+    store
   })
 }
 

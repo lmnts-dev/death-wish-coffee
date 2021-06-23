@@ -23,4 +23,11 @@
   {%- if include_media == true -%}
   ,"media": {{ product.media | json }}
   {%- endif -%}
+  {%- if include_extra_contents == true -%}
+  ,"extra_description_1": {{ product.metafields.accentuate.extra_description_1 | json }}
+  ,"extra_description_2": {{ product.metafields.accentuate.extra_description_2 | json }}
+  {%- endif -%}
+  {%- if include_description == true -%}
+  ,"description": {{ product.description | json }}
+  {%- endif -%}
 }

@@ -1,11 +1,13 @@
 import { contains } from 'lib/util'
 import VImage from '../v-image/v-image.vue'
+import PdpAddToCart from '../pdp-add-to-cart/pdp-add-to-cart.vue'
 import Carousel from '../carousel/carousel'
 import Video from '../video/video'
 
 export default {
   components: {
-    VImage
+    VImage,
+    PdpAddToCart
   },
   props: {
     product: {
