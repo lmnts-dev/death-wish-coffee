@@ -83,7 +83,7 @@
             <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
               <option value selected>Select Field</option>
               <template v-for="variant in product.variants">
-                <option :key="variant.id" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}</option>
+                <option :key="variant.id" :disabled="!variant.available" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}<span v-if="!variant.available">(Sold Out)</span></option>
               </template>
             </select>
           </div>
