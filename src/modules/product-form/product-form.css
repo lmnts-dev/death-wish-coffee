@@ -233,7 +233,7 @@
 
   @media (--lg) {
     width: calc(33.3333333333% - 4px);
-    max-width: 100%;
+    max-width: none;
   }
 
   .product-form--pdp-add-to-cart & {
