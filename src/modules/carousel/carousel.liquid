@@ -31,9 +31,11 @@ You can see more about how options are privided as HTML attributes here.
 {% assign spacing = spacing | default: 10 %}
 {% assign loop = loop | default: false %}
 {% assign title = title | default: false %}
+{% assign custom_attrs = custom_attrs | default: false %}
+{% assign custom_params = custom_params | default: false %}
 {% assign autoplay = autoplay | default: false %} {%- comment -%}This should be supplied as a number to set autplay delay in ms{%- endcomment -%}
 
-<div class="{{ class }}" data-module="carousel">
+<div class="{{ class }}" data-module="carousel"{% if custom_attrs %} {{ custom_attrs }}{% endif %}>
   {% if title %}
     {%- render 'section-title', class: title_class, title: title -%}
   {% endif %}

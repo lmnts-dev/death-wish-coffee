@@ -98,6 +98,7 @@ const carousel = el => {
   } else {
     swiper = new Swiper(carousel, carouselArgs)
   }
+  return swiper
 }
 
 export default carousel
