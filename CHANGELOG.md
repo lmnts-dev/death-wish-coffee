@@ -1,6 +1,18 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.31 - 2021-06-23
+### CHANGED:
+- DIC-147 Fix style for button add to cart button 
+- Fix style for product form on PLP 
+- Fix code review 
+- DIC-140 Remove required from address field 
+- DIC-147 Fix style add to cart button 
+- DIC-145 Fix line height for content bolt illustration hero 
+- DIC-144 Comment out Type and Size filters on merch collection page 
+- DIC-142 Enabel all carousel loop 
+- DIC-139 Remove header and footer for under construction page 
+
 ## 0.0.30 - 2021-06-23
 ### CHANGED:
 - Update options color 
