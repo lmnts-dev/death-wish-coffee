@@ -7,7 +7,6 @@
 {%- if template.suffix == 'merch' -%}
   {% assign form_type = 'dropdown' %}
 {%- endif -%}
-{% assign product_acf = product.metafields.accentuate %}
 
 <div is="pdp-add-to-cart" inline-template {{ vue_attrs }}>
   <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
@@ -27,7 +26,19 @@
           </div>
         </div>
         <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart" v-html="productDescription"></div>
-        {%- render 'product-form', class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, product: product -%}
+
+        {%- capture form_attrs -%}
+          {% assign upscribe_keep_component_in_sync = false %}
+          {% assign upscribe_regular_price_query_selector = false %}
+          {% assign upscribe_sale_price_query_selector = false %}
+          :product="product"
+          :shop='{{shop.metafields.sf_upscribe | json}}' 
+          :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
+          :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
+          :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}"
+        {%- endcapture -%}
+        {%- render 'product-form', is_vue_component: true, class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, custom_attrs: form_attrs -%}
+
         <template v-if="productExtraDescriptions.length">
           <template v-for="description in productExtraDescriptions">
             <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents" v-html="descirption"></div>

@@ -100,7 +100,7 @@
     {%- endcomment -%}
     <form method="post" action="/cart/add" class="product-form__form">
 
-      {% if product.metafields.sf_upscribe.enable_subscription == 1 %}
+      <template v-if="isEnableUpscribe">
       
         {%- comment -%}
         {%- render 'upscribe-product-options' upscribe_component_uid: upscribe_component_uid-%}
@@ -109,7 +109,8 @@
 
         <section class="cu-upscribe" data-module="upscribe-product-options">
           <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
-            v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}">
+            v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
+          >
             <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
               
               <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
@@ -179,7 +180,7 @@
           </div>
         </section>
 
-      {% endif %}
+      </template>
 
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">

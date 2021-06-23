@@ -335,6 +335,9 @@ export default {
     isActive () {
       console.log(this.selectedFrequencyIndex, this.index)
       return this.selectedFrequencyIndex === this.index
+    },
+    isEnableUpscribe () {
+      return this.product.sf_upscribe.enable_subscription
     }
   },
   methods: {
