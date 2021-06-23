@@ -1,13 +1,7 @@
 {
-  "extends": [
-    "stylelint-config-standard"
-  ],
-  "plugins": [
-    "stylelint-use-nesting"
-  ],
-  "ignoreFiles": [
-    "./src/css/lib/*.css"
-  ],
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-use-nesting"],
+  "ignoreFiles": ["./src/css/lib/*.css", "src/assets/upscribe*"],
   "rules": {
     "max-empty-lines": 1,
     "rule-empty-line-before": [
@@ -19,9 +13,7 @@
     "at-rule-empty-line-before": [
       "always",
       {
-        "except": [
-          "first-nested"
-        ]
+        "except": ["first-nested"]
       }
     ],
     "selector-list-comma-newline-after": "always-multi-line",

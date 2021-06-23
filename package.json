@@ -107,6 +107,10 @@
     "vanilla-lazyload": "^16.1.0",
     "vue": "^2.6.11",
     "vue-quick-search": "0.0.2",
+    "vuex": "^3.6.2"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4",
     "vue-scrollto": "^2.13.0",
     "vuex": "^3.6.2"
   }
