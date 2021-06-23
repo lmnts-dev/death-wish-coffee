@@ -77,9 +77,9 @@
 {%- endif -%}
 
 {%- render 'plp', class: 'bg--black' -%}
-{%- if collection.metafields.collections.footer_cta_heading != blank -%}
+{%- if shop.metafields.globals.footer_cta_title != blank -%}
   {%- render 'footer-cta',
-    title: collection.metafields.collections.footer_cta_heading,
+    title: shop.metafields.globals.footer_cta_title,
     enable_subscribe_form: true
   -%}
 {%- endif -%}
