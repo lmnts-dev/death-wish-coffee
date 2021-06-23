@@ -231,6 +231,11 @@
   max-width: 216px;
   margin: 0 auto;
 
+  @media (--lg) {
+    width: calc(33.3333333333% - 4px);
+    max-width: 100%;
+  }
+
   .product-form--pdp-add-to-cart & {
     margin-left: 0;
   }
