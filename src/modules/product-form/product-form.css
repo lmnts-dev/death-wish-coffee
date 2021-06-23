@@ -52,8 +52,15 @@
     border-top: 0;
 
     @media (--md) {
-      max-width: 664px;
       margin-top: 12px;
+    }
+  }
+}
+
+.product-form__form-wrapper {
+  .product-form--pdp-add-to-cart & {
+    @media (--md) {
+      max-width: 664px;
     }
   }
 }
@@ -236,7 +243,7 @@
 
     @media (--lg) {
       width: calc(33.3333333333% - 4px);
-      max-width: none;
+      max-width: 208px;
     }
   }
 }
