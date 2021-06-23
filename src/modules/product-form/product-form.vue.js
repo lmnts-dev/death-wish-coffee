@@ -85,6 +85,7 @@ export default {
     selectedVariantId (newValue) {
       if (newValue) {
         this.$emit('update-variant-id', newValue)
+        store.dispatch('pdp/setSelectedVariantId', { id: newValue })
       }
     },
     productPurchaseType (newVal) {
