@@ -1,16 +1,11 @@
 {
-  "ignorePatterns": [
-    "dist/assets",
-    "src/data"
-  ],
+  "ignorePatterns": ["dist/assets", "src/data", "src/assets/upscribe*"],
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
-  "extends": [
-    "standard"
-  ],
+  "extends": ["standard"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"

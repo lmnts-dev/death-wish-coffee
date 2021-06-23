@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
   <link rel="canonical" href="{{- canonical_url -}}">
-  
+
   {%- include 'alternate-urls' -%}
 
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -28,6 +28,7 @@
   {%- else -%}
     {{- 'main.min.css' | asset_url | stylesheet_tag -}}
   {%- endif -%}
+  {%- render 'upscribe-cart-logic' -%}
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
@@ -39,6 +40,17 @@
       {%- assign account_title = account_title | upcase -%}
       {%- render 'section-title', title: account_title, class: 'section-title--account'  -%}
       <div class="account-wrapper__left">
+
+      {%- for tag in customer.tags -%}
+          {%- if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'-%}
+              {% assign is_upscribe_customer = true %}
+          {%- endif -%}
+      {%- endfor -%}
+
+        {%- if is_upscribe_customer -%}
+            <a href="https://{{ shop.domain }}/account?view=subscriptions#/">Your Subscription</a>
+        {%- endif -%}
+
         {%- render 'account-sidebar-menu' -%}
         {%- render 'customer-info' -%}
       </div>
