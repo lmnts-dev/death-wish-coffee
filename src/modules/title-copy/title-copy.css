@@ -39,10 +39,13 @@
   }
 
   .title-copy--under-construction & {
+    color: var(--white);
+
     @media (--lg) {
       max-width: 585px;
       margin: 0 auto;
       padding: 0;
+      color: var(--white);
     }
   }
 }
