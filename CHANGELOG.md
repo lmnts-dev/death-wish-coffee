@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.0.0 - 2021-06-23
+### CHANGED:
+- Initial theme launch
+
 ## 0.0.32 - 2021-06-23
 ### CHANGED:
 - Update footer ctas 
