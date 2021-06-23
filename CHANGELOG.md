@@ -1,6 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.32 - 2021-06-23
+### CHANGED:
+- Update footer ctas 
+- Update footer cta field 
+
 ## 0.0.31 - 2021-06-23
 ### CHANGED:
 - DIC-147 Fix style for button add to cart button 
