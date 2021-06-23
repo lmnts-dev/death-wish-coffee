@@ -46,9 +46,13 @@
                 {% render 'image', vue_attrs: ':image-src="item.image" :alt="item.title"' %}
               </a>
               <div class="pop-out-cart__item-details">
-                <a :href="item.url" class="pop-out-cart__item-title b2">${item.product_title}</a>
+                <a :href="item.url" class="pop-out-cart__item-title b2">
+                  <span v-if="!!item.properties['Subscription Product Title']">${item.properties['Subscription Product Title']} boots</span>
+                  <span v-else>${item.product_title} tits</span>
+                </a>
 
                 <p class="pop-out-cart__item-subtext b3">${item.variant_title}</p>
+                <p v-if="!!item.properties['Subscription']" class="b3">Subscription: ${item.properties['Subscription']}</p>
 
                 <template v-if="item.properties && item.properties.length">
                   <template v-for="property in item.properties">
