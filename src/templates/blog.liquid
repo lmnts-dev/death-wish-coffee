@@ -59,11 +59,12 @@ If this comment is still here, please consult with the lead developer on the pro
       {% for post in blog.articles %}
         {% comment %}
         TODO: Remove hard-coded post-card classes to replace with post-card--viewed JavaScript
-        {% endcomment %}
+        
         {% assign post_class = '' %}
         {% if forloop.first %}
           {% assign post_class = post_class | append: ' post-card--viewed' %}
         {% endif %}
+        {% endcomment %}
 
         {%- assign card_fallback_image = blog_acf.accentuate.default_image_square | first -%}
         {%- assign post_image = card_fallback_image.src -%}
