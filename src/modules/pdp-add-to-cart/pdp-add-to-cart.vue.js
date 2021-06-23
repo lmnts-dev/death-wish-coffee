@@ -1,4 +1,5 @@
 import { formatPrice } from 'lib/util'
+import { mapState } from 'vuex'
 import ProductForm from '../product-form/product-form.vue'
 
 export default {
@@ -12,6 +13,10 @@ export default {
     }
   },
   computed: {
+    ...mapState('pdp', ['selectedVariantId']),
+    selectedVariant () {
+      return this.selectedVariantId && this.product.variants.find(v => v.id === this.selectedVariantId)
+    },
     productId () {
       return this.product.id
     },
@@ -19,7 +24,7 @@ export default {
       return this.product.title
     },
     productPrice () {
-      return this.product.price
+      return this.selectedVariant ? this.selectedVariant.price : this.product.price
     },
     formattedProductPrice () {
       return this.productPrice ? '$' + formatPrice(this.productPrice) : ''
