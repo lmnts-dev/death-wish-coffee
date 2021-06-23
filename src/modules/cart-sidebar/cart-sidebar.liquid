@@ -25,7 +25,7 @@
     <div class='cart-sidebar__payment-method-button-container'>
       {%- comment -%}requires shopify payments account setup{%- endcomment -%}
       {% if additional_checkout_buttons %}
-      <div class="cart-sidebar__payment-method-button">
+      <div v-if="!cartHasSubscriptionItem" class="cart-sidebar__payment-method-button">
         {{ content_for_additional_checkout_buttons }}
       </div>
       {% endif %}

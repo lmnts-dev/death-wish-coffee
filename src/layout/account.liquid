@@ -47,9 +47,11 @@
           {%- endif -%}
       {%- endfor -%}
 
+      {%- comment -%}
         {%- if is_upscribe_customer -%}
             <a href="https://{{ shop.domain }}/account?view=subscriptions#/">Your Subscription</a>
         {%- endif -%}
+      {%- endcomment -%}
 
         {%- render 'account-sidebar-menu' -%}
         {%- render 'customer-info' -%}
