@@ -28,6 +28,7 @@
   {%- else -%}
     {{- 'main.min.css' | asset_url | stylesheet_tag -}}
   {%- endif -%}
+  {%- render 'upscribe-cart-logic' -%}
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
