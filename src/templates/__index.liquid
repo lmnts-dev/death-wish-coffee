@@ -1,0 +1,160 @@
+{%- comment -%}Home Page{%- endcomment -%}
+{%- layout 'theme' -%}
+
+{%- assign home_hero_position = shop.metafields.homepage.hero_headline_position | join: '' | handleize -%}
+{%- assign home_hero_headline = shop.metafields.hero.headline -%}
+{%- assign home_hero_subheading = shop.metafields.hero.subheading -%}
+{%- assign home_hero_video = shop.metafields.accentuate.homepage_hero_video -%}
+{%- assign home_hero_image = shop.metafields.accentuate.homepage_hero_fallback | map: 'src' | first -%}
+{%- assign home_hero_image_mobile = shop.metafields.accentuate.homepage_hero_fallback_mobile | map: 'src' | first -%}
+{%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
+{%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
+{%- assign sub_hero_products = shop.metafields.sub_hero_carousel -%}
+
+{%- capture after_content -%}
+  <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
+{%- endcapture -%}
+
+{%- assign hero_class = 'hero--homepage' -%}
+
+{% if home_hero_position %}
+  {% assign hero_class = hero_class | append: ' hero--content-' | append: home_hero_position %}
+{% endif %}
+
+{%- render 'hero',
+  class: hero_class,
+  video: home_hero_video,
+  image: home_hero_image,
+  mobile_image: home_hero_image_mobile,
+  title: home_hero_headline,
+  description: home_hero_subheading,
+  after_content: after_content
+-%}
+
+{%- render 'title-copy',
+  title: shop.metafields.accentuate.sub_hero_heading,
+  content: shop.metafields.accentuate.sub_hero_subheading
+-%}
+
+{%- capture product_cards -%}
+  {% for handle in sub_hero_products.carousel_product | split: '|' limit: 9 %}
+  {% assign product = all_products[handle] %}
+  
+  {% capture title %}
+    {% if sub_hero_products.featured_product_title[forloop.index0] == blank %}
+      {{product.title}}
+    {% else %}
+      {{sub_hero_products.featured_product_title[forloop.index0]}}  
+    {% endif %}
+  {% endcapture %}
+
+  {% capture product_image %}
+    {% if sub_hero_products.featured_product_image[forloop.index0] == blank %}
+      {{product.featured_image | img_url: 'master' }}
+    {% else %}
+      {{sub_hero_products.featured_product_image[forloop.index0] | map: 'src'}}  
+    {% endif %}
+  {% endcapture %}
+  
+    {%- assign product_price = product.price | money -%}
+    {%- render 'alt-product-card',
+      class: 'swiper-slide',
+      image_src: product_image,
+      title: title,
+      description: 'Featured product title for each item',
+      link: product.url,
+      price: product_price,
+      product_id: product.id,
+      product_url: product.url
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+
+{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true, loop: true -%}
+
+{% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
+{%- render 'icon-title',
+  icon: icon_url,
+  content: shop.metafields.accentuate.fair_trade_description
+-%}
+
+{%- assign big_texts = shop.metafields.accentuate.big_text -%}
+{%- assign big_text_descriptions = shop.metafields.accentuate.big_text_description -%}
+{%- assign big_text_videos = shop.metafields.accentuate.large_text_bg_video -%}
+{%- assign big_text_images = shop.metafields.accentuate.big_text_image %}
+{%- assign big_text_cta_texts = shop.metafields.accentuate.big_text_cta_text -%}
+{%- assign big_text_cta_links = shop.metafields.accentuate.big_text_cta_link -%}
+{% for big_text in big_texts %}
+  {%- assign image = big_text_images[forloop.index0] | map: 'src'-%}
+  {%- assign remainder = forloop.index0 | modulo: 2 -%}
+  {% if remainder != 0 %}
+    {% assign class = 'super-hero-cta--reverse' %}
+  {% else %}
+    {%- assign class = '' -%}
+  {% endif %}
+  {%- render 'super-hero-cta', 
+    class: class,
+    big_text: big_text, 
+    description: big_text_descriptions[forloop.index0] ,
+    video: big_text_videos[forloop.index0],
+    image: image,
+    cta_text: big_text_cta_texts[forloop.index0],
+    cta_link: big_text_cta_links[forloop.index0]
+  -%}
+{% endfor %}
+
+{%- assign list_article_title = shop.metafields.homepage.featured_articles_heading -%}
+{%- assign list_article = shop.metafields.homepage.featured_article | split: '|' -%}
+{%- assign list_article_count = 0 -%}
+{%- capture content_slides -%}
+  {% for handle in list_article %}
+    {%- assign blog_handle = handle | split: '/' | first -%}
+    {%- assign blog_acf = blogs[blog_handle].metafields -%}
+    {%- assign fallback_images = blog_acf.accentuate.default_image | first -%}
+    {%- assign fallback_images_mobile = blog_acf.accentuate.default_image_mobile | first -%}
+    {%- assign notice = shop.metafields.article_hero_card.notice_title[forloop.index0] -%}
+    {%- assign article = articles[handle] -%}
+    {% assign class = 'article-hero-card--home swiper-slide ' %}
+    {% assign title = article.title %}
+    {%- assign image_url = fallback_images.src -%}
+    {%- assign image_url_mobile = fallback_images_mobile.src | default: image_url -%}
+    {%- if article.image != blank -%}
+      {% assign image_url = article | img_url: 'master' %}
+      {% assign image_url_mobile = image_url %}
+    {%- endif -%}
+    {% assign url = article.url %}
+    {% assign excerpt = article.excerpt %}
+    {% assign author = article.author %}
+    {% assign date = article.published_at %}
+    {%- assign list_article_count = list_article_count | plus: 1 -%}
+    
+    {%- render 'article-hero-card',
+      class: class,
+      notice: notice,
+      title: title,
+      image_url: image_url,
+      image_url_mobile: image_url_mobile,
+      url: url,
+      excerpt: excerpt,
+      author: author,
+      date: date
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+{%- assign navigation = false -%}
+{%- assign loop = false -%}
+{%- if list_article_count > 1 -%}
+  {%- assign navigation = true -%}
+  {%- assign loop = true -%}
+{%- endif -%}
+{%- render 'carousel',
+  title: list_article_title,
+  title_class: 'section-title--article-hero-card',
+  class: 'carousel--home-article-hero-card carousel--article-hero-card p article-hero-card__contents bg--black',
+  children: content_slides,
+  spacing: 0,
+  slides_per_view: 1,
+  navigation: navigation,
+  loop: loop -%}
+
+{%- render 'footer-cta', title: shop.metafields.globals.footer_cta_title, enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
