@@ -31,9 +31,19 @@ export default {
     }
   },
   data () {
+    const initialSelectedOptions = this.product.options.reduce(
+      (result, option) => {
+        // Initially, none of the option has any selected value
+        result[option] = null
+        return result
+      },
+      {}
+    )
+
     return {
       moneyFormat: 'amount',
-      selectedOptions: { ...this.initialSelectedOptions },
+      initialSelectedOptions,
+      selectedOptions: { ...initialSelectedOptions },
       selectedFrequencyIndex: 0,
       productPurchaseType: 'onetime',
       subscriptionPrice: null,
