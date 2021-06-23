@@ -1,6 +1,42 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.30 - 2021-06-23
+### CHANGED:
+- Update options color 
+- Update pricing and checkout button spacing 
+- Update subscription options 
+- Update line item details 
+- Refactor add to cart and checkout logic 
+- Fix product option init 
+- Remove endif 
+- Replace upscribe cart logic 
+- save progress 
+- troubleshoot frequency option module 
+- remove voption component 
+- add voption component 
+- save progress 
+- replace props with data values 
+- format liquid file 
+- add option value 
+- debug moneyFormat method 
+- add property to product obj 
+- update select option tag 
+- remove upscribe component 
+- remove inline-template from child component 
+- pass shop metafield object prop 
+- remove script tag 
+- pass upscribe metafield object 
+- move data values to computed 
+- add product object and vue attributes 
+- add upscribe method and compute options 
+- integrate upscribe product options props 
+- begin upscribe refactor 
+- Abstract optoins to module 
+- Fix vuex dep 
+- Add upscribe logic to product form 
+- Integrate Upscribe 
+
 ## 0.0.29 - 2021-06-22
 ### CHANGED:
 - Init icon mapping system 
