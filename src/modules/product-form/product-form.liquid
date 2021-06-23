@@ -161,12 +161,13 @@
               <div class="cu-optionsGrid">
                 <div v-for="(option, index) in selectFrequencyOptions" 
                     :key="option.frequency" 
+                    :class="{'is-active': selectedFrequencyIndex === index}" 
+                    @click="clickOption(index, option)"
                     class="cu-option" 
                     >
                   <div class="cu-option__option" 
                     v-if="option" 
-                    :class="{'is-active': isActive}" 
-                    @click="clickOption(index, option)"
+                    
                     >
                     <span class="cu-option__mainText" v-if="option.mainText">${ option.mainText }</span>
                     <span class="cu-option__subText" v-if="option.subText">${ option.subText }</span>
