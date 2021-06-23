@@ -293,6 +293,11 @@
 
     .star-clickable {
       align-items: center;
+
+      @media (--sm-max) {
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     .yotpo-icon-star,
