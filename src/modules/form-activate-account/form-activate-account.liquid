@@ -3,7 +3,7 @@
     <div class="form-activate-account__header">
       <h1 class="form-activate-account__title h1">Activate Account</h1>
     </div>
-    {% form 'activate_customer_password', class: 'form-activate-account__form' %} 
+    {% form 'activate_customer_password', class: 'form-activate-account__form js-form' %} 
       {{ form.errors | default_errors }}
       {%- render 'input-password',
         name: 'customer[password]',
@@ -20,7 +20,7 @@
         confirmation_ref: '#user_password',
         is_required: true -%}
       <div class="form-activate-account__actions">
-        {%- render 'button', class: 'button--full button--small-h form-activate-account__submit js-submit', tag: 'button', custom_attrs: 'type="button"', button_value: 'Activate Account' -%}
+        {%- render 'button', class: 'button--full button--small-h form-activate-account__submit js-submit', tag: 'button', custom_attrs: 'type="submit"', button_value: 'Activate Account' -%}
         {%- render 'button', class: 'button--full button--small-h button--light form-activate-account__decline', tag: 'button', custom_attrs: 'type="submit" name="decline"', button_value: 'Decline Invitation' -%}
       </div>
     {% endform %}

@@ -327,6 +327,17 @@ export const monitorFieldValue = (field) => {
   })
 }
 
+export const validateForm = formEl => {
+  let isValid = true
+  const inputEls = formEl.querySelectorAll('.form-field__input')
+  if (inputEls.length) {
+    inputEls.forEach(inputEl => {
+      isValid = isValid && validateInput(inputEl)
+    })
+  }
+  return isValid
+}
+
 export const buildImageSrcset = (src, webpSrc, isSizedFromShopify = false, excludeSmallWidths = false) => {
   const smallWidths = excludeSmallWidths ? [] : [575]
   const widths = [...smallWidths, 767, 1199]
