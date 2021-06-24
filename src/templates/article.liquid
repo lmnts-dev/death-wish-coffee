@@ -54,6 +54,7 @@
   -%}
 {% endcapture %}
 
+{%- comment -%}
 {%- render 'carousel',
   class: 'bg--black spacing--article carousel--article',
   title: ' ',
@@ -63,5 +64,6 @@
   navigation: true,
   loop: true
 -%}
+{%- endcomment -%}
 
 {%- render 'footer-cta', title: shop.metafields.globals.footer_cta_title, enable_subscribe_form: true %}
