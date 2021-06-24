@@ -5,6 +5,7 @@
  */
 
 import axios from 'axios'
+import select from 'dom-select'
 
 const formsubscribe = el => {
   const submitEl = el.querySelector('.js-submit')
@@ -47,6 +48,18 @@ const formsubscribe = el => {
 
     const updateFormFeedback = (message = false) => {
       feedbackEl.innerHTML = message
+
+      const errorFocusField = select('.form-field__error')
+
+      inputEls.addEventListener('focusout', () => {
+        if (message) {
+          feedbackEl.innerHTML = ''
+        }
+      })
+
+      if (message) {
+        errorFocusField.innerHTML = ''
+      }
     }
   }
 }
