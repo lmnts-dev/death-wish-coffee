@@ -92,7 +92,7 @@
   
   {% assign view_all_url = view_all_urls[forloop.index0] | prepend: '/blogs/' %}
 
-  {% capture carousel_class %}bg--black spacing--bottom-lg carousel--scoop {% if forloop.first == true %}posts-carousel--first{% elsif forloop.last == true %}posts-carousel--last{% endif %}{% endcapture %}
+  {% capture carousel_class %}bg--black{% if forloop.first %} posts-carousel--first{% endif %}{% if forloop.last %} posts-carousel--last{% endif %}{% endcapture %}
 
-  {%- render 'posts-carousel', class: carousel_class, title: blog_titles[forloop.index0], total_slides: posts_count, carousel_slides: post_cards, view_all_url: view_all_url -%}
+  {%- render 'posts-carousel', class: carousel_class, spacing_class: 'spacing--bottom-md-secondary', title: blog_titles[forloop.index0], total_slides: posts_count, carousel_slides: post_cards, view_all_url: view_all_url -%}
 {% endfor %}
