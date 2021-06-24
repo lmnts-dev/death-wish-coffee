@@ -1,5 +1,21 @@
 /* styles for posts-carousel */
 
+.posts-carousel {
+  &--first {
+    @media (--lg) {
+      padding-top: 60px;
+    }
+  }
+
+  &--last {
+    padding-bottom: 56px;
+
+    @media (--lg) {
+      padding-bottom: 24px;
+    }
+  }
+}
+
 .posts-carousel__container {
   @media (--lg-max) {
     padding: 0;

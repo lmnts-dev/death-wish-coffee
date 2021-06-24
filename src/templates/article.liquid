@@ -54,14 +54,16 @@
   -%}
 {% endcapture %}
 
+{%- comment -%}
 {%- render 'carousel',
   class: 'bg--black spacing--article carousel--article',
-  title: 'MORE TO EXPLORE',
+  title: ' ',
   children: category_cards,
   slides_per_view: 4,
   spacing: 32,
   navigation: true,
   loop: true
 -%}
+{%- endcomment -%}
 
 {%- render 'footer-cta', title: shop.metafields.globals.footer_cta_title, enable_subscribe_form: true %}

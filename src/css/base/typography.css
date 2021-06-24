@@ -42,7 +42,9 @@ h5 {
     font-size: 40px * var(--sizing-coef);
   }
 
-  &.form-login__header, &.create-account-header__title {
+  &.form-activate-account__title,
+  &.form-login__header,
+  &.create-account-header__title {
     font-size: 8.8rem;
 
     @media (--md-max) {
@@ -180,7 +182,7 @@ h5 {
     font-weight: var(--bold);
   }
 
-  .bolt-illustration-hero__content & {
+  .bolt-illustration-hero__content &, .full-width-photo-hero__content &, .hero__content &, .title-description-card__content &, .mirror-image-hero__content & {
     font-size: 20px;
     line-height: 28px;
   }

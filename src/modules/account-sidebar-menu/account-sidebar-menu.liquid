@@ -14,11 +14,11 @@
         <li class="account-sidebar-menu__item{% if template.name == 'addresses' %} account-sidebar-menu__item--active{% endif %}">
           <a href="{{ routes.account_addresses_url }}" class="account-sidebar-menu__item-link">Addresses</a>
         </li>
-        {%- comment -%}
+
         <li class="account-sidebar-menu__item">
-          <a href="{{ routes.account_url }}" class="account-sidebar-menu__item-link">Subscription</a>
+          <a href="{{ routes.account_url }}?view=subscriptions#/" class="account-sidebar-menu__item-link">Subscription</a>
         </li>
-        {%- endcomment -%}
+
         <li class="account-sidebar-menu__item">
           <a href="{{ routes.account_logout_url }}" class="account-sidebar-menu__item-link">Log Out</a>
         </li>
