@@ -9,6 +9,10 @@
   }
 }
 
+.form-subscribe__form {
+  position: relative;
+}
+
 .form-subscribe__form-inner {
   @media (--lg) {
     display: flex;
@@ -36,5 +40,8 @@
 
 .form-subscribe__success {
   text-align: center;
-  margin-bottom: 12px;
+  position: absolute;
+  bottom: -4px;
+  width: 100%;
+  transform: translateY(100%);
 }
