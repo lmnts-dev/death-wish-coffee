@@ -202,8 +202,8 @@
 }
 
 .carousel-next, .carousel-prev {
-  width: 50px;
-  height: 23px;
+  width: 75px;
+  height: 75px;
   top: 75%;
   transform: translateY(-75%);
 
@@ -241,10 +241,6 @@
   .carousel--alt-product-card & {
     top: 35%;
     transform: translateY(-35%);
-
-    @media (--md-max) {
-      width: 40px;
-    }
   }
 
   .posts-carousel & {
@@ -266,7 +262,7 @@
 }
 
 .carousel-next {
-  right: -1.2rem;
+  right: -15px;
 
   @media (--xl-max) {
     right: 0;
@@ -280,19 +276,19 @@
   }
 
   .carousel--pdp-hero & {
-    right: 26px;
+    right: 10px;
   }
 
   .carousel--plp &,
   .carousel--product-hero-card & {
-    right: 83px;
+    right: 71px;
   }
 
   .carousel--alt-product-card & {
-    right: 0;
+    right: -17px;
 
     @media (--md) {
-      right: 10px;
+      right: 0;
     }
   }
 
@@ -301,22 +297,12 @@
   }
 
   .carousel--article & {
-    right: 85px;
-  }
-}
-
-.carousel-next-icon {
-  color: var(--blood);
-
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
-    .carousel--palette-$(color) & {
-      color: var(--$color);
-    }
+    right: 73px;
   }
 }
 
 .carousel-prev {
-  left: -1.2rem;
+  left: -15px;
 
   @media (--xl-max) {
     left: 0;
@@ -330,19 +316,19 @@
   }
 
   .carousel--pdp-hero & {
-    left: 16px;
+    left: 0;
   }
 
   .carousel--plp &,
   .carousel--product-hero-card & {
-    left: 83px;
+    left: 71px;
   }
 
   .carousel--alt-product-card & {
-    left: 0;
+    left: -17px;
 
     @media (--md) {
-      left: 10px;
+      left: 0;
     }
   }
 
@@ -351,12 +337,25 @@
   }
 
   .carousel--article & {
-    left: 85px;
+    left: 73px;
   }
 }
 
+.carousel-next-icon,
 .carousel-prev-icon {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  padding-top: 3px;
   color: var(--blood);
+
+  .carousel--alt-product-card & {
+    @media (--md-max) {
+      width: 40px;
+      height: 40px;
+    }
+  }
 
   @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
     .carousel--palette-$(color) & {
