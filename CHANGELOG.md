@@ -1,6 +1,19 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.1.0 - 2021-06-24
+### CHANGED:
+- Enable initial subscriptions page in account
+- Address [PLP (mobile) > Review Styling bug](https://app.asana.com/0/0/1200495266673889/f)
+- Address [Semi-urgent please remove the "Light" from coffee roast filters](https://app.asana.com/0/0/1200512951352087/f)
+- Address [Blog - Article > Remove "More to Explore"](https://app.asana.com/0/0/1200495266673914/f)
+- Address [Shop All > Global Hover Affect not Applied](https://app.asana.com/0/0/1200512877874475/f)
+- Address [The Scoop (mobile) > Styling bug](https://app.asana.com/0/0/1200495266673900/f)
+- Address [PLP > Add hover state video playback support to ](https://app.asana.com/0/0/1200512877874502/f)
+- Address [Newsletter Signup Module > Module grows when fa](https://app.asana.com/0/0/1200512877874486/f)
+- Address [About Page > Increase text size](https://app.asana.com/0/0/1200495266673718/f)
+- Address [Global Carousel > increase click area](https://app.asana.com/0/0/1200495266673878/f)
+
 ## 1.0.1 - 2021-06-23
 ### CHANGED:
 - Fix variant selector 
