@@ -1,0 +1,28 @@
+<section class="form-activate-account spacing--lg bg--black" data-module="form-activate-account">
+  <div class="container form-activate-account__container">
+    <div class="form-activate-account__header">
+      <h1 class="form-activate-account__title h1">Activate Account</h1>
+    </div>
+    {% form 'activate_customer_password', class: 'form-activate-account__form' %} 
+      {{ form.errors | default_errors }}
+      {%- render 'input-password',
+        name: 'customer[password]',
+        id: 'user_password',
+        placeholder: 'Password',
+        class: 'form-activate-account__password',
+        is_required: true -%}
+      {%- render 'input-password',
+        name: 'customer[password_confirmation]',
+        id: 'user_password_confirmation',
+        placeholder: 'Password Confirmation',
+        class: 'form-activate-account__password-confirmation',
+        is_check_confirmation: true,
+        confirmation_ref: '#user_password',
+        is_required: true -%}
+      <div class="form-activate-account__actions">
+        {%- render 'button', class: 'button--full button--small-h form-activate-account__submit js-submit', tag: 'button', custom_attrs: 'type="button"', button_value: 'Activate Account' -%}
+        {%- render 'button', class: 'button--full button--small-h button--light form-activate-account__decline', tag: 'button', custom_attrs: 'type="submit" name="decline"', button_value: 'Decline Invitation' -%}
+      </div>
+    {% endform %}
+  </div>
+</section>

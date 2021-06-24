@@ -42,7 +42,9 @@ h5 {
     font-size: 40px * var(--sizing-coef);
   }
 
-  &.form-login__header, &.create-account-header__title {
+  &.form-activate-account__title,
+  &.form-login__header,
+  &.create-account-header__title {
     font-size: 8.8rem;
 
     @media (--md-max) {

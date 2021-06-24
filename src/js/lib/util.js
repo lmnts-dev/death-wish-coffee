@@ -267,6 +267,7 @@ export const validateInput = input => {
   removeClass(input, errorClass)
 
   if (validator.isEmpty(input.value) === true) {
+    // Input empty
     if (input.required) {
       isValid = false
       addClass(input, emptyClass)
@@ -277,14 +278,38 @@ export const validateInput = input => {
       return isValid
     }
   } else {
+    // Input has value
     addClass(input, hasValueClass)
+
+    // Validate email input
     if (input.type === 'email' && validator.isEmail(input.value) === false) {
       errorMessage = 'Please enter a valid email'
       isValid = false
     }
+
+    // Validate phone input
     if (input.type === 'tel' && validator.isMobilePhone(input.value) === false) {
       errorMessage = 'Please enter a valid phone number'
       isValid = false
+    }
+
+    // Validate password confimation matches (if confirmation available)
+    if (input.type === 'password') {
+      if (input.getAttribute('data-confirmation-ref') !== null) {
+        const confirmationRefId = input.getAttribute('data-confirmation-ref')
+        const confirmationRefEl = document.querySelector(confirmationRefId)
+        if (confirmationRefEl.value !== input.value) {
+          errorMessage = 'Please enter the correct confirmation password'
+          isValid = false
+        }
+      } else {
+        const confirmationInputEls = input.closest('form').querySelectorAll('[data-confirmation-ref]')
+        if (confirmationInputEls.length) {
+          for (const confirmationInputEl of confirmationInputEls) {
+            validateInput(confirmationInputEl)
+          }
+        }
+      }
     }
   }
   if (!isValid) {
