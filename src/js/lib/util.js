@@ -267,6 +267,7 @@ export const validateInput = input => {
   removeClass(input, errorClass)
 
   if (validator.isEmpty(input.value) === true) {
+    // Input empty
     if (input.required) {
       isValid = false
       addClass(input, emptyClass)
@@ -277,14 +278,52 @@ export const validateInput = input => {
       return isValid
     }
   } else {
+    // Input has value
     addClass(input, hasValueClass)
+
+    // Validate email input
     if (input.type === 'email' && validator.isEmail(input.value) === false) {
       errorMessage = 'Please enter a valid email'
       isValid = false
     }
+
+    // Validate phone input
     if (input.type === 'tel' && validator.isMobilePhone(input.value) === false) {
       errorMessage = 'Please enter a valid phone number'
       isValid = false
+    }
+
+    // Validate password confimation matches (if confirmation available)
+    if (input.type === 'password') {
+      if (input.getAttribute('data-confirmation-ref') !== null) {
+        /**
+         * If the password input is the confirmation element itself,
+         * it will have the reference to the original password element.
+         * The ref is stored in `data-confirmation-ref` attribute.
+         * We can query to the original element,
+         * and then compare the original value and confirmation value
+         */
+        const confirmationRefId = input.getAttribute('data-confirmation-ref')
+        const confirmationRefEl = document.querySelector(confirmationRefId)
+        if (confirmationRefEl.value !== input.value) {
+          errorMessage = 'Please enter the correct confirmation password'
+          isValid = false
+        }
+      } else {
+        /**
+         * If the input is the original password element,
+         * we will check if there is any other confirmation element.
+         */
+        const confirmationInputEls = input.closest('form').querySelectorAll('[data-confirmation-ref]')
+        if (confirmationInputEls.length) {
+          /**
+           * If confirmation element exists, simply validate it
+           */
+          for (const confirmationInputEl of confirmationInputEls) {
+            validateInput(confirmationInputEl)
+          }
+        }
+      }
     }
   }
   if (!isValid) {
@@ -300,6 +339,17 @@ export const monitorFieldValue = (field) => {
   field.addEventListener('focusout', () => {
     validateInput(field)
   })
+}
+
+export const validateForm = formEl => {
+  let isValid = true
+  const inputEls = formEl.querySelectorAll('.form-field__input')
+  if (inputEls.length) {
+    inputEls.forEach(inputEl => {
+      isValid = isValid && validateInput(inputEl)
+    })
+  }
+  return isValid
 }
 
 export const buildImageSrcset = (src, webpSrc, isSizedFromShopify = false, excludeSmallWidths = false) => {

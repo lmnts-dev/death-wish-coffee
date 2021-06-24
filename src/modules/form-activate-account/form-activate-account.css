@@ -1,0 +1,38 @@
+/* styles for form-activate-account */
+
+.form-activate-account {
+  flex: 1 0 auto;
+}
+
+.form-activate-account__header {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto 2rem;
+
+  @media (--lg) {
+    margin-bottom: 3rem;
+  }
+}
+
+.form-activate-account__title {
+  color: var(--blood);
+  text-align: center;
+}
+
+.form-activate-account__form {
+  width: 100%;
+  max-width: 336px;
+  margin: 0 auto;
+}
+
+.form-activate-account__password-confirmation {
+  margin-top: 1.5rem;
+}
+
+.form-activate-account__actions {
+  margin-top: 1.5rem;
+}
+
+.form-activate-account__decline {
+  margin-top: 1.5rem;
+}
