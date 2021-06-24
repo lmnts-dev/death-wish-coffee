@@ -56,7 +56,9 @@
   {% render 'upscribe-cart-logic' %}
 
   {%- unless settings.is_dev_mode -%}
-    {{- 'main.js' | asset_url | script_tag -}}
+    {%- unless template.name == 'account' and template.suffix == 'subscriptions' -%}
+      {{- 'main.js' | asset_url | script_tag -}}
+    {%- endunless -%}
   {%- endunless -%}
   {% include 'findify-tagging' %}
 </body>
