@@ -296,6 +296,13 @@ export const validateInput = input => {
     // Validate password confimation matches (if confirmation available)
     if (input.type === 'password') {
       if (input.getAttribute('data-confirmation-ref') !== null) {
+        /**
+         * If the password input is the confirmation element itself,
+         * it will have the reference to the original password element.
+         * The ref is stored in `data-confirmation-ref` attribute.
+         * We can query to the original element,
+         * and then compare the original value and confirmation value
+         */
         const confirmationRefId = input.getAttribute('data-confirmation-ref')
         const confirmationRefEl = document.querySelector(confirmationRefId)
         if (confirmationRefEl.value !== input.value) {
@@ -303,8 +310,15 @@ export const validateInput = input => {
           isValid = false
         }
       } else {
+        /**
+         * If the input is the original password element,
+         * we will check if there is any other confirmation element.
+         */
         const confirmationInputEls = input.closest('form').querySelectorAll('[data-confirmation-ref]')
         if (confirmationInputEls.length) {
+          /**
+           * If confirmation element exists, simply validate it
+           */
           for (const confirmationInputEl of confirmationInputEls) {
             validateInput(confirmationInputEl)
           }
