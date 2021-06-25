@@ -70,7 +70,22 @@
   {% endfor %}
 {%- endcapture -%}
 
-{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 77, slides_per_view: 3, navigation: true, loop: true -%}
+{% assign total_slides = sub_hero_products.carousel_product | size  %}
+
+{% if total_slides > 1 %}
+  {% if total_slides == 4 %}
+    {% assign init_bp = 'xl' %}
+  {% elsif total_slides == 3 %}
+    {% assign init_bp = 'lg' %}
+  {% elsif total_slides == 3 %}
+    {% assign init_bp = 'md' %}
+  {% endif %}
+  {%- render 'product-carousel', children: product_cards, init_at_breakpoint: init_bp -%}
+{% endif %}
+
+{%- comment -%}
+{%- render 'carousel', children: product_cards, class: 'carousel--alt-product-card bg--black spacing--alt-product-card', spacing: 20, slides_per_view: 4, navigation: true, loop: true -%}
+{%- endcomment -%}
 
 {% assign icon_url = shop.metafields.accentuate.fair_trade_icon | map: 'src' %}
 {%- render 'icon-title',
