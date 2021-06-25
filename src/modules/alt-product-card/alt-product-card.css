@@ -54,7 +54,8 @@
 }
 
 .alt-product-card__review {
-  margin-top: 5px;
+  padding-top: 5px;
+  margin-top: auto;
 }
 
 .alt-product-card__review-link {
@@ -105,8 +106,6 @@
   @media (--md) {
     margin-top: 2px;
   }
-
-  margin-bottom: auto;
 }
 
 .alt-product-card__button {

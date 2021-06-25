@@ -44,8 +44,8 @@
 
 .product-carousel[data-init-at-breakpoint="lg"] {
   @media (--lg) {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: var(--container-padding);
+    padding-left: var(--container-padding);
   }
 
   .alt-product-card {
@@ -67,8 +67,8 @@
 
 .product-carousel[data-init-at-breakpoint="md"] {
   @media (--md) {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: var(--container-padding);
+    padding-left: var(--container-padding);
   }
 
   .alt-product-card {
