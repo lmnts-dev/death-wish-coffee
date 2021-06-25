@@ -15,7 +15,6 @@ const navigation = el => {
   const searchButton = el.querySelector('.navigation__utilities-search')
   const searchBar = el.querySelector('.search-bar')
   const breakpointXLMax = window.matchMedia('(max-width: 1199px)')
-  // const menuContainer = el.querySelector('.navigation__menu-container')
   const navContainer = el.querySelector('.navigation__container')
 
   console.log('test', navContainer)
