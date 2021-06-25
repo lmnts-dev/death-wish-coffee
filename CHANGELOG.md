@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.2.0 - 2021-06-25
+### CHANGED:
+- Address [Gift_card.liquid file deleted](https://app.asana.com/0/1187243774580389/1200522833493028/f)
+
 ## 1.1.0 - 2021-06-24
 ### CHANGED:
 - Enable initial subscriptions page in account
