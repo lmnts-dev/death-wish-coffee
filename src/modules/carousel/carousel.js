@@ -66,7 +66,21 @@ const carousel = el => {
     allowTouchMove,
     ...navigation,
     ...pagination,
-    ...carouselBreakpoints
+    ...carouselBreakpoints,
+    on: {
+      slideChangeTransitionStart: function () {
+        const $wrapperEl = this.$wrapperEl
+        const params = this.params
+        $wrapperEl.children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass)))
+          .each(function () {
+            const idx = this.getAttribute('data-swiper-slide-index')
+            this.innerHTML = $wrapperEl.children('.' + params.slideClass + '[data-swiper-slide-index="' + idx + '"]:not(.' + params.slideDuplicateClass + ')').html()
+          })
+      },
+      slideChangeTransitionEnd: function () {
+        this.slideToLoop(this.realIndex, 0, false)
+      }
+    }
   }
 
   const breakpointMatch = () => {
