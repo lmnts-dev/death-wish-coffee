@@ -1,9 +1,5 @@
 /* styles for upscribe-wrapper */
 
-.upscribe-wrapper {
-  /* display: none; */
-}
-
 #nuxt-loading {
   background: #fff;
   visibility: hidden;
