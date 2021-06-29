@@ -1,4 +1,4 @@
-<section id="upscribe-portal" class="upscribe-wrapper" data-module="upscribe-wrapper">
+<section class="upscribe-wrapper" data-module="upscribe-wrapper">
   <script>window.upscribeStoreDomain = '{{ shop.permanent_domain }}'; window.upscribeCustomerId = '{{ customer.id }}'; window.customer = '{{ customer | json }}'; window.customerMetafieldAccessToken = {% if customer.metafields.customer['upscribe-access-token'] %}"{{ customer.metafields.customer['upscribe-access-token'] }}"{% else %} false{% endif %};</script>
   {{ 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' | asset_url | stylesheet_tag }}{{
   'upscribe_8f6cc6aa17623d5b0fe6.css' | asset_url | stylesheet_tag }}{{ 'upscribe_25c5779741da7019e2eb.css' | asset_url
