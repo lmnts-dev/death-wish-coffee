@@ -18,13 +18,6 @@ const upscribewrapper = el => {
         this.showPortal = true
         console.log('show', this.show)
       }
-    },
-
-    // mounted: {
-
-    // }
-    mounted () {
-      console.log('upscribe', el)
     }
   })
 
