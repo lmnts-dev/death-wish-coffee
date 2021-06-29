@@ -35,7 +35,7 @@
 {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
 
 <div id="subscription-wrapper">
-<d  iv id="shopify-account-portal-wrapper">
+<div id="shopify-account-portal-wrapper">
     <main id="page" class="relative z0 bg--shadow" role="main" v-show="showPortal === false">
       <div class="account-wrapper container">
         {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
@@ -57,20 +57,15 @@
         </div>
       </div>
     </main>
-  </d>
-  
-    {%- unless settings.is_dev_mode -%}
-      {{- 'main.js' | asset_url | script_tag -}}
-    {%- endunless -%}
-  
-    {% render 'upscribe-wrapper' %}
-  </div>  
-
-  {%- render 'footer' -%}
+  </div>
 
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}
   {%- endunless -%}
+  
+    {% render 'upscribe-wrapper' %}
+
+  {%- render 'footer' -%}
 
 </body>
 </html>
