@@ -36,7 +36,7 @@
 
 <div id="subscription-wrapper">
 <div id="shopify-account-portal-wrapper">
-    <main id="page" class="relative z0 bg--shadow" role="main" v-show="showPortal === false">
+    <main id="page" class="relative z0 bg--shadow" role="main" v-if="showPortal === false">
       <div class="account-wrapper container">
         {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
         {%- assign account_title = account_title | upcase -%}
@@ -58,14 +58,18 @@
       </div>
     </main>
   </div>
-
-  {%- unless settings.is_dev_mode -%}
-    {{- 'main.js' | asset_url | script_tag -}}
-  {%- endunless -%}
   
-    {% render 'upscribe-wrapper' %}
+  {%- unless settings.is_dev_mode -%}
+      {{- 'main.js' | asset_url | script_tag -}}
+    {%- endunless -%}
+
+
+  {% render 'upscribe-wrapper' %}
 
   {%- render 'footer' -%}
+
+</div>
+
 
 </body>
 </html>

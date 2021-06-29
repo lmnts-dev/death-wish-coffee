@@ -16,7 +16,6 @@ const upscribewrapper = el => {
     methods: {
       showUpscribe: function () {
         this.showPortal = true
-        console.log('show', this.show)
       }
     }
   })

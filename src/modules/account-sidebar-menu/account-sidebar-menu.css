@@ -41,6 +41,7 @@
   padding: 15px 0 16px;
   text-decoration: none;
   color: var(--white);
+  cursor: pointer;
 
   @media (--md) {
     @extend .b2;
