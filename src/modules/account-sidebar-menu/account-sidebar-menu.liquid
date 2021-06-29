@@ -16,7 +16,7 @@
           <a href="{{ routes.account_addresses_url }}" class="account-sidebar-menu__item-link">Addresses</a>
         </li>
         {%- if is_upscribe_customer != false -%}
-        <li class="account-sidebar-menu__item" v-on:click="showUpscribe">
+        <li class="account-sidebar-menu__item" id="upscribe-btn">
           <span class="account-sidebar-menu__item-link">Subscription</span>
         </li>
         {%- endif -%}

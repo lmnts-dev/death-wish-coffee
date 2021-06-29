@@ -4,23 +4,15 @@
  * @param {Object} el - The site's upscribewrapper container element.
  */
 
-import Vue from 'vue'
-
 const upscribewrapper = el => {
-  const vue = new Vue({
-    el: '#subscription-wrapper',
-    delimiters: ['${', '}'],
-    data: {
-      showPortal: false
-    },
-    methods: {
-      showUpscribe: function () {
-        this.showPortal = true
-      }
-    }
+  const upscribeBtn = document.getElementById('upscribe-btn')
+  const portalWrapper = document.getElementById('upscribe-portal-wrapper')
+  const accountWrapper = document.getElementById('account-parent')
+  console.log('test', upscribeBtn)
+  upscribeBtn.addEventListener('click', () => {
+    accountWrapper.style.display = 'none'
+    portalWrapper.style.display = 'block'
   })
-
-  return vue
 }
 
 export default upscribewrapper
