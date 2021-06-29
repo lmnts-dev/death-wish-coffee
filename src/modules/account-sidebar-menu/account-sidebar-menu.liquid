@@ -1,4 +1,5 @@
 {% assign class = class | default: false %}
+{% assign is_upscribe_customer = is_upscribe_customer | default: false %}
 {% capture class %}account-sidebar-menu{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }}" data-module="account-sidebar-menu">
@@ -14,11 +15,11 @@
         <li class="account-sidebar-menu__item{% if template.name == 'addresses' %} account-sidebar-menu__item--active{% endif %}">
           <a href="{{ routes.account_addresses_url }}" class="account-sidebar-menu__item-link">Addresses</a>
         </li>
-
-        <li class="account-sidebar-menu__item">
-          <a href="{{ routes.account_url }}?view=subscriptions#/" class="account-sidebar-menu__item-link">Subscription</a>
+        {%- if is_upscribe_customer != false -%}
+        <li class="account-sidebar-menu__item" v-on:click="showUpscribe">
+          <a href="" class="account-sidebar-menu__item-link">Subscription</a>
         </li>
-
+        {%- endif -%}
         <li class="account-sidebar-menu__item">
           <a href="{{ routes.account_logout_url }}" class="account-sidebar-menu__item-link">Log Out</a>
         </li>

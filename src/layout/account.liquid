@@ -28,44 +28,50 @@
   {%- else -%}
     {{- 'main.min.css' | asset_url | stylesheet_tag -}}
   {%- endif -%}
-  {%- render 'upscribe-cart-logic' -%}
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
 {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
-  <main id="page" class="relative z0 bg--shadow" role="main">
-    <div class="account-wrapper container">
-      {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
-      {%- assign account_title = account_title | upcase -%}
-      {%- render 'section-title', title: account_title, class: 'section-title--account'  -%}
-      <div class="account-wrapper__left">
 
-      {%- for tag in customer.tags -%}
-          {%- if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'-%}
-              {% assign is_upscribe_customer = true %}
-          {%- endif -%}
-      {%- endfor -%}
+<div id="subscription-wrapper">
+<d  iv id="shopify-account-portal-wrapper">
+    <main id="page" class="relative z0 bg--shadow" role="main" v-show="showPortal === false">
+      <div class="account-wrapper container">
+        {%- capture account_title -%}Hey, {{ customer.first_name }}{%- endcapture -%}
+        {%- assign account_title = account_title | upcase -%}
+        {%- render 'section-title', title: account_title, class: 'section-title--account'  -%}
+        <div class="account-wrapper__left">
 
-      {%- comment -%}
-        {%- if is_upscribe_customer -%}
-            <a href="https://{{ shop.domain }}/account?view=subscriptions#/">Your Subscription</a>
-        {%- endif -%}
-      {%- endcomment -%}
+        {%- for tag in customer.tags -%}
+            {%- if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'-%}
+                {% assign is_upscribe_customer = true %}
+            {%- endif -%}
+        {%- endfor -%}
 
-        {%- render 'account-sidebar-menu' -%}
-        {%- render 'customer-info' -%}
+          {%- render 'account-sidebar-menu' is_upscribe_customer: is_upscribe_customer -%}
+          {%- render 'customer-info' -%}
+        </div>
+        <div class="account-wrapper__right shopify-account-portal-wrapper">
+          {{ content_for_layout }}
+        </div>
       </div>
-      <div class="account-wrapper__right">
-        {{ content_for_layout }}
-      </div>
-    </div>
-  </main>
+    </main>
+  </d>
+  
+    {%- unless settings.is_dev_mode -%}
+      {{- 'main.js' | asset_url | script_tag -}}
+    {%- endunless -%}
+  
+    {% render 'upscribe-wrapper' %}
+  </div>  
+
   {%- render 'footer' -%}
 
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}
   {%- endunless -%}
+
 </body>
 </html>
 
