@@ -7,7 +7,7 @@
 {%- assign product = product | default: false -%}
 {%- assign show_title = show_title | default: false -%}
 {%- assign class = class | default: false -%}
-{%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- capture class -%}product-form product-form--type-{{ form_type }}{% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
 <!-- Upscribe -->
   {% comment %}
