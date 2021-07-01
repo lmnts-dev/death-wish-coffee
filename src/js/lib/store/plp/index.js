@@ -87,8 +87,8 @@ export default {
 
       return filteredProducts
     },
-    productsCount ({ totalCount, sortOrder }, { displayedProducts, isFiltering }) {
-      return (isFiltering || sortOrder) ? displayedProducts.length : totalCount
+    productsCount (state, { displayedProducts }) {
+      return displayedProducts.length
     },
     isFiltering ({ filterValues }) {
       return Object.entries(filterValues).length > 0
