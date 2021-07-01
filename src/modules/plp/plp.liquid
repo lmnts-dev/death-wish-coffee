@@ -11,6 +11,7 @@
 >
   <div is="plp"
        inline-template
+       :current-tags='{{ current_tags | json }}'
   >
     <div class="container plp__container">
       <div class="plp__inner">
@@ -40,7 +41,7 @@
             children: product_cards
           -%}
         </template>
-        <p class="plp__empty" v-else>No products found</p>
+        <p class="plp__empty" v-else>No products found<template v-if="!isFiltered && formattedCurrentTags"> with the tag ${formattedCurrentTags}</template></p>
       </div>
     </div>
   </div>

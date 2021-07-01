@@ -32,5 +32,12 @@
 
   @media (--lg) {
     flex: 1 0 auto;
+    padding-left: 367px;
+  }
+
+  .plp-filter + & {
+    @media (--lg) {
+      padding-left: 0;
+    }
   }
 }
