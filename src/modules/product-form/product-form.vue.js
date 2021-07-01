@@ -9,10 +9,6 @@ export default {
       type: Object,
       required: true
     },
-    productId: {
-      type: Number,
-      required: true
-    },
     shop: {
       type: Object,
       required: true
@@ -125,6 +121,9 @@ export default {
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
+    productId () {
+      return this.product.id
+    },
     productName () {
       return this.product.title
     },
