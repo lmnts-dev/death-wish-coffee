@@ -219,6 +219,7 @@
     content: none;
   }
 
+  .carousel--associate &,
   .carousel--plp &,
   .carousel--pdp-hero &,
   .carousel--product-hero-card & {
@@ -299,6 +300,10 @@
   .carousel--article & {
     right: 73px;
   }
+
+  .carousel--associate & {
+    right: 0;
+  }
 }
 
 .carousel-prev {
@@ -338,6 +343,10 @@
 
   .carousel--article & {
     left: 73px;
+  }
+
+  .carousel--associate & {
+    left: 0;
   }
 }
 
