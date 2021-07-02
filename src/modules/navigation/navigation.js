@@ -15,18 +15,13 @@ const navigation = el => {
   const searchButton = el.querySelector('.navigation__utilities-search')
   const searchBar = el.querySelector('.search-bar')
   const breakpointXLMax = window.matchMedia('(max-width: 1199px)')
-  const menuContainer = el.querySelector('.navigation__menu-container')
   const navContainer = el.querySelector('.navigation__container')
 
+  console.log('test', navContainer)
+
   const searchBarRepos = () => {
-    if (breakpointXLMax.matches) {
-      if (menuContainer && searchBar) {
-        menuContainer.insertBefore(searchBar, menuContainer.childNodes[0])
-      }
-    } else {
-      if (searchBar) {
-        el.insertBefore(searchBar, el.childNodes[0])
-      }
+    if (searchBar) {
+      el.insertBefore(searchBar, el.childNodes[0])
     }
   }
 
