@@ -8,11 +8,12 @@ const upscribewrapper = el => {
   const upscribeBtn = document.getElementById('upscribe-btn')
   const portalWrapper = document.getElementById('upscribe-portal-wrapper')
   const accountWrapper = document.getElementById('account-parent')
-  console.log('test', upscribeBtn)
-  upscribeBtn.addEventListener('click', () => {
-    accountWrapper.style.display = 'none'
-    portalWrapper.style.display = 'block'
-  })
+  if (upscribeBtn) {
+    upscribeBtn.addEventListener('click', () => {
+      accountWrapper.style.display = 'none'
+      portalWrapper.style.display = 'block'
+    })
+  }
 }
 
 export default upscribewrapper
