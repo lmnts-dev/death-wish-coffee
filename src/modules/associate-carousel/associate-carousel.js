@@ -4,10 +4,13 @@
  * @param {Object} el - The site's associatecarousel container element.
  */
 
-import Swiper from 'swiper'
+import Swiper, { Navigation } from 'swiper'
 import { addClass, removeClass } from 'lib/util'
 
 const associatecarousel = el => {
+  Swiper.use([Navigation])
+  const nextEl = el.querySelector('.carousel-next')
+  const prevEl = el.querySelector('.carousel-prev')
   const numberOfItemsPerView = el.getAttribute('data-item-per-view') || 24
   const swiperEl = el.querySelector('.js-swiper')
   const mobileBreakpoints = window.matchMedia('(max-width: 991px)')
@@ -41,10 +44,12 @@ const associatecarousel = el => {
     swiper.slideToLoop(0, 0)
   }
   if (swiperEl) {
+    const navigation = nextEl && prevEl ? { navigation: { nextEl, prevEl } } : false
     const swiper = new Swiper(swiperEl, {
       slidesPerView: 1,
       loop: true,
-      spaceBetween: 10
+      spaceBetween: 10,
+      ...navigation
     })
     updateSlides(swiper, mobileBreakpoints.matches)
     mobileBreakpoints.addEventListener('change', e => {

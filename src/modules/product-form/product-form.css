@@ -240,7 +240,9 @@
 
   .product-form--pdp-add-to-cart & {
     margin-left: 0;
+  }
 
+  .product-form--pdp-add-to-cart:not(.product-form--type-dropdown) & {
     @media (--lg) {
       width: calc(33.3333333333% - 4px);
       max-width: 208px;
