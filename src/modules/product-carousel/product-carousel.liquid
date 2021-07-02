@@ -1,0 +1,15 @@
+{% assign init_at_breakpoint = init_at_breakpoint | default: false %}
+
+<section class="product-carousel" {% if init_at_breakpoint %}data-init-at-breakpoint="{{- init_at_breakpoint -}}" {% endif %}data-module="product-carousel">
+  <div class="product-carousel__container swiper-container">
+    <div class="product-carousel__wrapper swiper-wrapper">
+      {{- children -}}
+    </div>
+    <div class="product-carousel-next swiper-button-next">
+      {% render 'svg', type: 'chevron-right', class: 'carousel-next-icon' %}
+    </div>
+    <div class="product-carousel-prev swiper-button-prev">
+      {% render 'svg', type: 'chevron-left', class: 'carousel-prev-icon' %}
+    </div>
+  </div>
+</section>
