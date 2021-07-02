@@ -17,8 +17,6 @@ const navigation = el => {
   const breakpointXLMax = window.matchMedia('(max-width: 1199px)')
   const navContainer = el.querySelector('.navigation__container')
 
-  console.log('test', navContainer)
-
   const searchBarRepos = () => {
     if (searchBar) {
       el.insertBefore(searchBar, el.childNodes[0])
