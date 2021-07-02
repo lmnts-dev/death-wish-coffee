@@ -1,6 +1,20 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.3.0 - 2021-07-02
+### CHANGED:
+- Address [PDP > Price line displays (Free Shipping) if logged in; if not logged in, price line display (Want FREE shipping?)](https://app.asana.com/0/0/1200530329194867/f)
+- Address [New Product > Add to cart button incorrect size](https://app.asana.com/0/0/1200530329194992/f)
+- Address [Social Meta not rendering correctly](https://app.asana.com/0/0/1200519984216390/f)
+- Address [About Us (Team) > Add bolts to team carousel](https://app.asana.com/0/0/1200530329194852/f)
+- Address [PLP Featured Carousel > Unexpected behavior of hover state effect](https://app.asana.com/0/0/1200495266673818/f)
+- Address [Homepage > 4 Items shown in featured carousel](https://app.asana.com/0/0/1200495266350995/f)
+- Address [Mobile > Search Icon](https://app.asana.com/0/0/1200495829064640/f)
+- Address [Blog - Listing](https://app.asana.com/0/0/1200043138484859/f)
+- Address [upscribe portal fix](https://app.asana.com/0/0/1200539125634797/f)
+- Address [Account Activation Designs](https://app.asana.com/0/0/1200495829064650/f)
+- Address [Implement fallback images for blogs](https://app.asana.com/0/0/1200398522722831/f)
+
 ## 1.2.0 - 2021-06-25
 ### CHANGED:
 - Address [Gift_card.liquid file deleted](https://app.asana.com/0/1187243774580389/1200522833493028/f)
