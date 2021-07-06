@@ -2,7 +2,8 @@
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
 
 {%- capture product_form -%}
-  {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: ':product="product" @update-variant-id="handleSelectedVariant" @added-to-cart-error="handleAddedToCartError"' -%}
+  {%- capture product_form_attrs -%}:shop='{{shop.metafields.sf_upscribe | json}}' :product="product" @update-variant-id="handleSelectedVariant" @added-to-cart-error="handleAddedToCartError"{%- endcapture -%}
+  {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: product_form_attrs -%}
 {%- endcapture -%}
 
 <section class="{{- class -}}"
@@ -11,6 +12,7 @@
 >
   <div is="plp"
        inline-template
+       :current-tags='{{ current_tags | json }}'
   >
     <div class="container plp__container">
       <div class="plp__inner">
@@ -40,7 +42,7 @@
             children: product_cards
           -%}
         </template>
-        <p class="plp__empty" v-else>No products found</p>
+        <p class="plp__empty" v-else>No products found<template v-if="!isFiltered && formattedCurrentTags"> with the tag ${formattedCurrentTags}</template></p>
       </div>
     </div>
   </div>
