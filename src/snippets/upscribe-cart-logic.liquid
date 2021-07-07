@@ -169,10 +169,10 @@
 		//var checkout_button_selectors = '[name="checkout"], [href="/checkout"], form[action="/checkout"] input[type="submit"], .checkout_button, .btn-checkout, .cart__checkout';
 
 		// Used for checkout buttons in Online Store
-		$(document).on('click', '.upscribe-create-checkout, .cart__checkout', function(e) {
-			e.preventDefault();
-			upscribeBuildCheckout()
-		})
+		$(document).on('click', '.upscribe-create-checkout, .upscribe-checkout-button, .cart__checkout', function(e) {
+      e.preventDefault();
+      upscribeBuildCheckout()
+    })
 
 		// Used to check if we're on the checkout.liquid
 		// If somehow a checkout goes to Shopify when it should of gone to Upscribe,
