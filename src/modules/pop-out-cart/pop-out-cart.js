@@ -57,6 +57,9 @@ const popOutCart = (el) => {
     methods: {
       removeItem (item) {
         store.dispatch('cart/updateCart', { id: item.id, quantity: 0 })
+      },
+      checkout () {
+        window.upscribeBuildCheckout()
       }
     }
   })
