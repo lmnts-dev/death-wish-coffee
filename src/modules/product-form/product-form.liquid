@@ -98,7 +98,7 @@
     TODO:
     Need to re-add @submit.prevent="handleAddToCart" to form tag once we can properly pass line item props through to cart.js
     {%- endcomment -%}
-    <form method="post" action="/cart/add" class="product-form__form">
+    <form method="post" action="/cart/add" class="product-form__form" @submit.prevent="handleAddToCart">
 
       <template v-if="isEnableUpscribe">
       
