@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.3.1 - 2021-07-07
+### CHANGED:
+- Update class selector for upscribe checkout button 
+
 ## 1.3.0 - 2021-07-02
 ### CHANGED:
 - Address [PDP > Price line displays (Free Shipping) if logged in; if not logged in, price line display (Want FREE shipping?)](https://app.asana.com/0/0/1200530329194867/f)
