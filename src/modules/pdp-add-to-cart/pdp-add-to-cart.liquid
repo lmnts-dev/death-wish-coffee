@@ -14,7 +14,7 @@
       <div class="pdp-add-to-cart__wrapper">
         <div class="pdp-add-to-cart__header">
           <h2 class="pdp-add-to-cart__title h2">${productTitle}</h2>
-          <p class="pdp-add-to-cart__price h5">${formattedProductPrice}{% if customer %} (FREE SHIPPING){% else %} <a class="pdp-add-to-cart__price-link" href="{{ routes.account_register_url }}">(Want FREE Shipping?)</a>{% endif %}
+          <p class="pdp-add-to-cart__price h5">${formattedProductPrice}{% if customer %} (FREE SHIPPING){% else %} <a class="pdp-add-to-cart__price-link" href="{{ routes.account_register_url }}">(WANT FREE SHIPPING?)</a>{% endif %}
             {% if product_upc != false %}
             or <a href="/pages/store-locator?MM=panel2&PROD={{product_upc}}" class='h5'>FIND IN STORE</a>
             {% endif %}
