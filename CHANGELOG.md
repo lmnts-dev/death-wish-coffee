@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.3.2 - 2021-07-09
+### CHANGED:
+- Add mising closing div tag
+
 ## 1.3.1 - 2021-07-07
 ### CHANGED:
 - Update class selector for upscribe checkout button 
