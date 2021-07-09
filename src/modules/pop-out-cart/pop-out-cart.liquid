@@ -101,9 +101,19 @@
           <p class="pop-out-cart__free-shipping b4">{{ 'cart.general.free_shipping' | t }}</p>
 
           <p class="b3">{{ 'cart.general.shipping_at_checkout' | t }}</p>
-
-          <button v-if="cartHasSubscriptionItem" onclick="window.upscribeBuildCheckout()" class="pop-out-cart__checkout-button upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
-          <input v-else type="submit" name="checkout" value="{{ 'cart.general.checkout' | t }}" class="pop-out-cart__checkout-button button button--small-h button--full">
+          
+          {%- capture checkout_button_attrs -%}
+            type="button"
+            name="checkout"
+            @click="checkout"
+            :class="{ 'upscribe-checkout-button': cartHasSubscriptionItem, 'pop-out-cart__checkout-button': !cartHasSubscriptionItem }"
+          {%- endcapture -%}
+          {%- assign checkout_button_value = 'cart.general.checkout' | t -%}
+          {%- render 'button'
+            tag: 'button',
+            class: 'button button--small-h button--full',
+            custom_attrs: checkout_button_attrs,
+            button_value: checkout_button_value -%}
 
         </div>
       </form>

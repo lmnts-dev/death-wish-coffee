@@ -85,6 +85,7 @@ export default {
     selectedVariantId (newValue) {
       if (newValue) {
         this.$emit('update-variant-id', newValue)
+        store.dispatch('pdp/setSelectedVariantId', { id: newValue })
       }
     },
     productPurchaseType (newVal) {
@@ -335,6 +336,9 @@ export default {
     isActive () {
       console.log(this.selectedFrequencyIndex, this.index)
       return this.selectedFrequencyIndex === this.index
+    },
+    isEnableUpscribe () {
+      return this.product.sf_upscribe.enable_subscription
     }
   },
   methods: {
@@ -386,7 +390,22 @@ export default {
       if (!this.selectedVariantId) {
         return
       }
-      await store.dispatch('cart/addToCart', { id: this.selectedVariantId, quantity: 1 })
+      const params = { id: this.selectedVariantId, quantity: 1, properties: {} }
+      if (this.subscriptionSelected) {
+        const subscriptionProperties = {
+          'Discount Amount': this.activeDiscountAmount,
+          'Interval Frequency': this.intervalFrequency,
+          'Interval Unit': this.intervalUnit,
+          Subscription: this.finalSubscriptionProperty,
+          'Subscription Amount': this.subscriptionAmount,
+          'Subscription Product Title': this.subscriptionProductTitleDisplay,
+          'Charge Limit': this.chargeLimit,
+          'Recurring Discount Amount': this.recurringDiscountAmount,
+          'Recurring Discount After Order': this.recurringDiscountAfterOrder
+        }
+        params.properties = Object.assign({}, params.properties, subscriptionProperties)
+      }
+      await store.dispatch('cart/addToCart', params)
       this.$nextTick(() => {
         this.resetSelectedOptions()
         if (this.addedToCartSuccessfully) {
@@ -398,6 +417,7 @@ export default {
     },
     resetSelectedOptions () {
       this.selectedOptions = { ...this.initialSelectedOptions }
+      this.productPurchaseType = 'onetime'
     },
     handleVariantSelecting (e) {
       const variantId = parseInt(e.target.value)
@@ -633,12 +653,13 @@ export default {
       })
     },
     toggleOption (option, value) {
-      // console.log(option, value)
-      if (this.selectedOptions[option] && this.selectedOptions[option] === value) {
-        this.selectedOptions[option] = null
+      const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
+      if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
+        cloneSelectedOptions[option] = null
       } else {
-        this.selectedOptions[option] = value
+        cloneSelectedOptions[option] = value
       }
+      this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     }
   },
   destroyed () {

@@ -1,41 +1,50 @@
 {% assign form_type = 'button' %}
-{% assign class = class | default:false %}
+{% assign class = class | default: false %}
+{% assign vue_attrs = vue_attrs | default: false %}
 {% assign product_upc = product_upc | default: false %}
 {% assign palette = palette | default: false %}
 {% capture class %}pdp-add-to-cart{% if class %} {{- class -}}{% endif %}{% if palette %} pdp-add-to-cart--palette-{{ palette }}{% endif %}{% endcapture %}
 {%- if template.suffix == 'merch' -%}
   {% assign form_type = 'dropdown' %}
 {%- endif -%}
-{% assign product_acf = product.metafields.accentuate %}
 
-<section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
+<div is="pdp-add-to-cart" inline-template {{ vue_attrs }}>
+  <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
     <div class="container pdp-add-to-cart__container">
-    <div class="pdp-add-to-cart__wrapper">
-      <div class="pdp-add-to-cart__header">
-        <h2 class="pdp-add-to-cart__title h2">{{product.title}}</h2>
-        <p class="pdp-add-to-cart__price h5">{{product.price | money}}{% if customer %} (FREE SHIPPING){% else %} <a class="pdp-add-to-cart__price-link" href="{{ routes.account_register_url }}">(Want FREE Shipping?)</a>{% endif %}
-          {% if product_upc != false %}
-          or <a href="/pages/store-locator?MM=panel2&PROD={{product_upc}}" class='h5'>FIND IN STORE</a>
-          {% endif %}
-        </p>
-        <div class="pdp-add-to-card__review js-review{% if palette %} review--palette-{{ palette }}{% endif %}">
-          <p class="pdp-add-to-cart__review-content">
-            <span class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product.id }}"></span>
+      <div class="pdp-add-to-cart__wrapper">
+        <div class="pdp-add-to-cart__header">
+          <h2 class="pdp-add-to-cart__title h2">${productTitle}</h2>
+          <p class="pdp-add-to-cart__price h5">${formattedProductPrice}{% if customer %} (FREE SHIPPING){% else %} <a class="pdp-add-to-cart__price-link" href="{{ routes.account_register_url }}">(Want FREE Shipping?)</a>{% endif %}
+            {% if product_upc != false %}
+            or <a href="/pages/store-locator?MM=panel2&PROD={{product_upc}}" class='h5'>FIND IN STORE</a>
+            {% endif %}
           </p>
+          <div class="pdp-add-to-card__review js-review{% if palette %} review--palette-{{ palette }}{% endif %}">
+            <p class="pdp-add-to-cart__review-content">
+              <span class="yotpo bottomLine" style="display: inline-block;" :data-product-id="productId"></span>
+            </p>
+          </div>
         </div>
+        <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart" v-html="productDescription"></div>
+
+        {%- capture form_attrs -%}
+          {% assign upscribe_keep_component_in_sync = false %}
+          {% assign upscribe_regular_price_query_selector = false %}
+          {% assign upscribe_sale_price_query_selector = false %}
+          :product="product"
+          :shop='{{shop.metafields.sf_upscribe | json}}' 
+          :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
+          :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
+          :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}"
+        {%- endcapture -%}
+        {%- render 'product-form', is_vue_component: true, class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, custom_attrs: form_attrs -%}
+
+        <template v-if="productExtraDescriptions.length">
+          <template v-for="description in productExtraDescriptions">
+            <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents" v-html="descirption"></div>
+          </template>
+        </template>
       </div>
-      <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart">{{product.description}}</div>
-      {%- render 'product-form', class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, product: product -%}
-      {%- if product_acf.extra_description_1 != blank or product_acf.extra_description_2 != blank -%}
-        <div class="pdp-add-to-cart__extra-contents">
-          {%- if product_acf.extra_description_1 != blank -%}
-            <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents">{{- product_acf.extra_description_1 -}}</div>
-          {%- endif -%}
-          {%- if product_acf.extra_description_2 != blank -%}
-            <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents">{{- product_acf.extra_description_2 -}}</div>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
     </div>
-  </div>
-</section>
+  </section>
+</div>
