@@ -359,6 +359,10 @@
   padding-top: 3px;
   color: var(--blood);
 
+  svg {
+    width: 100%;
+  }
+
   .carousel--alt-product-card & {
     @media (--md-max) {
       width: 40px;
