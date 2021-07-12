@@ -32,10 +32,11 @@
           {% assign upscribe_regular_price_query_selector = false %}
           {% assign upscribe_sale_price_query_selector = false %}
           :product="product"
-          :shop='{{shop.metafields.sf_upscribe | json}}' 
+          :shop='{{shop.metafields.sf_upscribe | json}}'
+          :is-active-subscription="true"
           :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
           :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
-          :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}"
+          :upscribe-keep-component-in-sync="{{upscribe_keep_component_in_sync}}"
         {%- endcapture -%}
         {%- render 'product-form', is_vue_component: true, class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, custom_attrs: form_attrs -%}
 

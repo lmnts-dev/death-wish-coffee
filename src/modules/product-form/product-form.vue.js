@@ -13,6 +13,7 @@ export default {
       type: Object,
       required: true
     },
+    isActiveSubscription: Boolean,
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
@@ -224,13 +225,17 @@ export default {
       var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
       var activeDiscount = discountAmount || defaultGlobalDiscountAmount
 
-      return activeDiscount.indexOf('$') > -1 ? '$' : '%'
+      if (activeDiscount) {
+        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
+      } else {
+        return ''
+      }
     },
     activeDiscountAmount () {
       var discountAmount = this.discountAmount
       var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
 
-      return discountAmount || defaultGlobalDiscountAmount || 0
+      return discountAmount || defaultGlobalDiscountAmount || '0'
     },
     chargeLimit () {
       return this.initialChargeLimit ? this.initialChargeLimit : 0
@@ -338,7 +343,7 @@ export default {
       return this.selectedFrequencyIndex === this.index
     },
     isEnableUpscribe () {
-      return this.product.sf_upscribe.enable_subscription
+      return this.product.sf_upscribe.enable_subscription && this.isActiveSubscription
     }
   },
   methods: {
