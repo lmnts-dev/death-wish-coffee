@@ -44,7 +44,8 @@ export default {
       subscriptionPrice: null,
       subscriptionAmount: null,
       optionIcons: iconData,
-      componentMounted: !1
+      componentMounted: !1,
+      sizeChartActive: false
     }
   },
   mounted () {
@@ -660,6 +661,9 @@ export default {
         cloneSelectedOptions[option] = value
       }
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
+    },
+    toggleSizeChart () {
+      this.sizeChartActive = !this.sizeChartActive
     }
   },
   destroyed () {
