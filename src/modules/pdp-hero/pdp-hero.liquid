@@ -6,7 +6,7 @@
 {%- capture product_json -%}{%- render 'product-json', include_media: true, include_extra_contents: true, include_description: true -%}{%- endcapture -%}
 
 <section class="{{ class }} bg--black" data-module="pdp-hero">
-  <div is="pdp-hero" inline-template :product='{{- product_json -}}'>
+  <div is="pdp-hero" inline-template :product='{{- product_json | escape -}}'>
     <div class="pdp-hero__wrapper">
       {%- capture pdp_media -%}
         {%- comment -%}
