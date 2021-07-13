@@ -214,5 +214,6 @@ function upload_theme {
     --password="$development_password" \
     --store="$development_store" \
     --themeid="$1" \
-    --dir="$2"
+    --dir="$2" \
+    --allow-live
 }
