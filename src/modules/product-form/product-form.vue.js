@@ -9,14 +9,11 @@ export default {
       type: Object,
       required: true
     },
-    productId: {
-      type: Number,
-      required: true
-    },
     shop: {
       type: Object,
       required: true
     },
+    isActiveSubscription: Boolean,
     upscribeKeepComponentInSync: {
       type: Boolean,
       default: false
@@ -89,6 +86,7 @@ export default {
     selectedVariantId (newValue) {
       if (newValue) {
         this.$emit('update-variant-id', newValue)
+        store.dispatch('pdp/setSelectedVariantId', { id: newValue })
       }
     },
     productPurchaseType (newVal) {
@@ -125,6 +123,9 @@ export default {
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
+    productId () {
+      return this.product.id
+    },
     productName () {
       return this.product.title
     },
@@ -224,13 +225,17 @@ export default {
       var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
       var activeDiscount = discountAmount || defaultGlobalDiscountAmount
 
-      return activeDiscount.indexOf('$') > -1 ? '$' : '%'
+      if (activeDiscount) {
+        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
+      } else {
+        return ''
+      }
     },
     activeDiscountAmount () {
       var discountAmount = this.discountAmount
       var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
 
-      return discountAmount || defaultGlobalDiscountAmount || 0
+      return discountAmount || defaultGlobalDiscountAmount || '0'
     },
     chargeLimit () {
       return this.initialChargeLimit ? this.initialChargeLimit : 0
@@ -336,6 +341,9 @@ export default {
     isActive () {
       console.log(this.selectedFrequencyIndex, this.index)
       return this.selectedFrequencyIndex === this.index
+    },
+    isEnableUpscribe () {
+      return this.product.sf_upscribe.enable_subscription && this.isActiveSubscription
     }
   },
   methods: {
@@ -387,7 +395,22 @@ export default {
       if (!this.selectedVariantId) {
         return
       }
-      await store.dispatch('cart/addToCart', { id: this.selectedVariantId, quantity: 1 })
+      const params = { id: this.selectedVariantId, quantity: 1, properties: {} }
+      if (this.subscriptionSelected) {
+        const subscriptionProperties = {
+          'Discount Amount': this.activeDiscountAmount,
+          'Interval Frequency': this.intervalFrequency,
+          'Interval Unit': this.intervalUnit,
+          Subscription: this.finalSubscriptionProperty,
+          'Subscription Amount': this.subscriptionAmount,
+          'Subscription Product Title': this.subscriptionProductTitleDisplay,
+          'Charge Limit': this.chargeLimit,
+          'Recurring Discount Amount': this.recurringDiscountAmount,
+          'Recurring Discount After Order': this.recurringDiscountAfterOrder
+        }
+        params.properties = Object.assign({}, params.properties, subscriptionProperties)
+      }
+      await store.dispatch('cart/addToCart', params)
       this.$nextTick(() => {
         this.resetSelectedOptions()
         if (this.addedToCartSuccessfully) {
@@ -399,6 +422,7 @@ export default {
     },
     resetSelectedOptions () {
       this.selectedOptions = { ...this.initialSelectedOptions }
+      this.productPurchaseType = 'onetime'
     },
     handleVariantSelecting (e) {
       const variantId = parseInt(e.target.value)
@@ -634,12 +658,13 @@ export default {
       })
     },
     toggleOption (option, value) {
-      // console.log(option, value)
-      if (this.selectedOptions[option] && this.selectedOptions[option] === value) {
-        this.selectedOptions[option] = null
+      const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
+      if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
+        cloneSelectedOptions[option] = null
       } else {
-        this.selectedOptions[option] = value
+        cloneSelectedOptions[option] = value
       }
+      this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     }
   },
   destroyed () {

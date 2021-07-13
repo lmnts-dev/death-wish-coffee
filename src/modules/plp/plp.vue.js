@@ -4,13 +4,25 @@ import PlpSortHeader from '../plp-sort-header/plp-sort-header.vue'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
+  props: {
+    currentTags: {
+      type: Array,
+      default: () => []
+    }
+  },
   components: {
     ProductCard,
     PlpFilter,
     PlpSortHeader
   },
   computed: {
-    ...mapState('plp', ['products']),
+    formattedCurrentTags () {
+      return this.currentTags.length && this.currentTags.map(tag => `"${tag}"`).join(', ')
+    },
+    isFiltered () {
+      return Object.entries(this.filterValues).length > 0
+    },
+    ...mapState('plp', ['products', 'filterValues']),
     ...mapGetters('plp', ['displayedProducts', 'displayedFeaturedProducts'])
   },
   methods: {

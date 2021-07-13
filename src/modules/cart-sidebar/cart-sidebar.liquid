@@ -19,8 +19,18 @@
     <div class="cart-sidebar__separator"></div>
     <p class="cart-sidebar__label b2">Shipping & taxes calculated at checkout</p>
 
-    <button v-if="cartHasSubscriptionItem" onclick="window.upscribeBuildCheckout()" class="upscribe-checkout-button button button--small-h button--full">{{ 'cart.general.checkout' | t }}</button>
-    {%- render 'button' tag: 'button' class: 'pop-out-cart__checkout-button button button button--full' custom_attrs: 'v-else type="submit" name="checkout"' button_value: "Check Out" -%}
+    {%- capture checkout_button_attrs -%}
+      type="button"
+      name="checkout"
+      @click="checkout"
+      :class="{ 'upscribe-checkout-button': cartHasSubscriptionItem, 'pop-out-cart__checkout-button': !cartHasSubscriptionItem }"
+    {%- assign checkout_button_value = 'cart.general.checkout' | t -%}
+    {%- endcapture -%}
+    {%- render 'button'
+      tag: 'button',
+      class: 'button button--small-h button--full',
+      custom_attrs: checkout_button_attrs,
+      button_value: checkout_button_value -%}
 
     <div class='cart-sidebar__payment-method-button-container'>
       {%- comment -%}requires shopify payments account setup{%- endcomment -%}
