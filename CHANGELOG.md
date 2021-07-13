@@ -1,6 +1,17 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
-
+## 1.4.0 - 2021-07-13
+### CHANGED:
+- Address [PLP > Quickshop - Subscribe and Save is populating when it should not be](https://app.asana.com/0/0/1200580209834624/f)
+- Address [PLP - Valhalla Java Odinforce Blend > Unexpected Behavior in Quick Shop and PDP](https://app.asana.com/0/0/1200580209834635/f)
+- Address [PDP > Page rendering issue](https://app.asana.com/0/0/1200583910715688/f)
+- Address [PDP > Price should change when variant changed](https://app.asana.com/0/0/1200495266673694/f)
+- Address [PDP > Price line displays (Free Shipping) if logged in; if not logged in, price line display (Want FREE shipping?)](https://app.asana.com/0/0/1200530329194867/f)
+- Address [Homepage Featured Product Carousel > Bolts (Arrows) do not render on actual mobile devices](https://app.asana.com/0/0/1200561559847663/f)
+- Address [PLP - Featured Item Carousel > Yotpo FOUC](https://app.asana.com/0/0/1200561559847674/f)
+- Address [PDP > Variant Imagery should change when different variants are selected](https://app.asana.com/0/0/1200495266673705/f)
+- Address [Add support to collections template for tag URLs](https://app.asana.com/0/0/1200536740359697/f)
+- Address [Global > When adding product to cart, pop out cart should show, not take user to /cart URL](https://app.asana.com/0/0/1200530329194869/f)
 ## 1.3.2 - 2021-07-09
 ### CHANGED:
 - Add mising closing div tag
