@@ -1,5 +1,9 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
+## 1.4.1 - 2021-07-14
+### CHANGED:
+- Fix extra description component on PDP that was causing it to not render
+
 ## 1.4.0 - 2021-07-13
 ### CHANGED:
 - Address [PLP > Quickshop - Subscribe and Save is populating when it should not be](https://app.asana.com/0/0/1200580209834624/f)
