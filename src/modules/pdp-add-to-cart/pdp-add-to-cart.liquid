@@ -41,9 +41,11 @@
         {%- render 'product-form', is_vue_component: true, class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, custom_attrs: form_attrs -%}
 
         <template v-if="productExtraDescriptions.length">
-          <template v-for="description in productExtraDescriptions">
-            <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents" v-html="descirption"></div>
-          </template>
+          <div class="pdp-add-to-cart__extra-contents">
+            <template v-for="description in productExtraDescriptions">
+              <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents" v-html="description"></div>
+            </template>
+          </div>
         </template>
       </div>
     </div>
