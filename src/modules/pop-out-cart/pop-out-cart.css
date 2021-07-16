@@ -50,7 +50,7 @@
 }
 
 .pop-out-cart__inner {
-  height: calc(100vh - 140px);
+  height: calc(85vh - 140px);
   padding: 29px 19px 20px 41px;
   -webkit-overflow-scrolling: touch;
 }
@@ -71,7 +71,7 @@
 .pop-out-cart__list {
   padding-right: 20px;
   overflow: auto;
-  height: 60%;
+  height: 50%;
 
   .cart-container__wrapper & {
     height: 100%;
@@ -139,7 +139,6 @@
 }
 
 .pop-out-cart__footer {
-  margin-top: 39px;
   border-top: 1px solid var(--slate);
   padding-top: 16px;
   margin-right: 20px;
