@@ -1,5 +1,12 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
+
+## 1.4.3 - 2021-07-19
+### CHANGED:
+- [Add impact radius script](https://app.asana.com/0/1187243774580389/1199881642990839/f)
+- Adjust heading tags for SEO
+- Add GTM container to source code
+
 ## 1.4.2 - 2021-07-16
 ### CHANGED:
 - Fix issue where mobile sticky cart was too tall and made it diffcult to touch the checkout button
