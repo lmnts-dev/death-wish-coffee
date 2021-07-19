@@ -33,7 +33,7 @@
          :class="{ 'is-active': isPopOutCartActive }"
          :aria-hidden="!isPopOutCartActive"
 >
-  <div class="pop-out-cart__inner bg--shadow">
+  <div class="pop-out-cart__inner bg--shadow" ref="cart">
     <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
 
     <template v-if="items.length">
