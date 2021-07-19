@@ -56,6 +56,9 @@ export default {
     this.productPurchaseType = 'onetime'
     this.subscriptionPrice = null
 
+    for (var key in this.product.options_by_name) {
+      this.$set(this.selectedOptions, key, this.product.options_by_name[key].option.values[0])
+    }
     // add listener for variant update, set in variant_selection.js
     // this listener could be different depeneding on if the theme uses the same base setup
     var vm = this
