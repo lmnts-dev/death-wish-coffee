@@ -44,3 +44,17 @@
 .form-create-account__checkbox {
   margin-top: 2rem;
 }
+
+.form-create-account__login {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.form-create-account__login-link {
+  color: var(--white);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

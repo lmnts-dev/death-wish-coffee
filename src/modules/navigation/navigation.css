@@ -556,6 +556,7 @@
   display: none;
   width: 67%;
   margin: 0 auto;
+  border-radius: 0;
 
   &.active {
     display: flex;
@@ -573,12 +574,12 @@
   .input-group-btn:first-child > .btn,
   input[type="hidden"]:first-child + .input-group-field,
   input[type="hidden"]:first-child + .input-group-btn > .btn {
-    border-radius: $radius 0 0 $radius;
+    border-radius: 0;
   }
 
   .input-group-field:last-child,
   .input-group-btn:last-child > .btn {
-    border-radius: 0 $radius $radius 0;
+    border-radius: 0;
   }
 
   input {

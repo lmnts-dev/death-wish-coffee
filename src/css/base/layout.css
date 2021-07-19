@@ -84,36 +84,26 @@
     padding-bottom: 50px;
   }
 
-  &--top-lg {
+  /* .spacing--top */
+
+  &--top-sm {
     padding-top: 50px;
   }
 
-  &--bottom-lg {
+  /* spacing--bottom */
+
+  &--bottom-md {
+    padding-bottom: 75px;
+
+    /* .spacing--bottom-md-secondary */
+
+    &-secondary {
+      padding-bottom: 64px;
+    }
+  }
+
+  &--bottom-sm {
     padding-bottom: 50px;
-
-    &.posts-carousel {
-      padding: 43px 0 0;
-
-      @media (--lg-max) {
-        padding: 0;
-      }
-    }
-
-    &.posts-carousel--first {
-      @media (--lg) {
-        padding-top: 65px;
-      }
-    }
-
-    &.posts-carousel--last {
-      @media (--lg) {
-        padding-bottom: 70px;
-      }
-
-      @media (--lg-max) {
-        padding-bottom: 120px;
-      }
-    }
   }
 
   &--article {

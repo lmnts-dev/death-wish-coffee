@@ -39,8 +39,15 @@ class Cart {
     })
   }
 
-  generateShopifyCartAddBody ({ id, quantity }) {
-    return `quantity=${quantity}&id=${id}`
+  generateShopifyCartAddBody ({ id, quantity, properties }) {
+    let propertiesParam = ''
+    if (properties && Object.keys(properties)) {
+      propertiesParam = Object.keys(properties)
+        .map(key => properties[key] ? `properties[${key}]=${encodeURIComponent(properties[key])}` : '')
+        .filter(item => !!item)
+        .join('&')
+    }
+    return `quantity=${quantity}&id=${id}&${propertiesParam}`
   }
 
   /**

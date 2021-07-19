@@ -6,7 +6,7 @@
 
 {%- if acf.collection_hero_carou_product == blank -%}
   {%- assign count = 1 -%}
-  {% for item in collection.products %}
+  {% for item in collections[collection.handle].products %}
     {%- if item.type == collection.title -%}
       {%- if count <= 8 -%}
         {%- assign list_products = list_products | append: item.handle | append: '|' -%}
@@ -103,8 +103,7 @@
               type: 'tag',
               options: [
                 'dark',
-                'medium',
-                'light'
+                'medium'
               ]
             },
             {
@@ -112,6 +111,67 @@
               name: 'Type',
               type: 'option'
             },
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            {%- comment -%}
+            {
+              name: 'Size',
+              type: 'option'
+            }
+            {%- endcomment -%}
+          {%- when 'bagged' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium',
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {%- comment -%}
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            
+            {
+              name: 'Size',
+              type: 'option'
+            }
+            {%- endcomment -%}
+          {%- when 'single-serve' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {%- comment -%}
             {
               name: 'Format',
               type: 'tag',
@@ -126,6 +186,37 @@
               name: 'Size',
               type: 'option'
             }
+            {%- endcomment -%}
+          {%- when 'canned' -%}
+            {
+              name: 'Roast',
+              type: 'tag',
+              options: [
+                'dark',
+                'medium'
+              ]
+            },
+            {
+              title: 'Style',
+              name: 'Type',
+              type: 'option'
+            },
+            {%- comment -%}
+            {
+              name: 'Format',
+              type: 'tag',
+              options: [
+                'Single Serve',
+                'Pour Over',
+                'Canned',
+                'Bagged'
+              ]
+            },
+            {
+              name: 'Size',
+              type: 'option'
+            }
+            {%- endcomment -%}
           {%- when 'merch' -%}
             {
               name: 'Category',

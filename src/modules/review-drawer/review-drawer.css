@@ -6,12 +6,20 @@
     padding-top: 96px;
   }
 
+  .yotpo-display-wrapper {
+    display: none;
+  }
+
   .yotpo,
   .yotpo.yotpo-main-widget {
     width: 100%;
     display: none;
 
     &.active {
+      display: block;
+    }
+
+    .yotpo-display-wrapper {
       display: block;
     }
 

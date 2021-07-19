@@ -15,7 +15,7 @@
       @mouseleave="handleHover"
     >
       <div class="product-card__header">
-        <a :href="product.url" v-if="product.video" class="product-card__video-container" :class="{'product-card__video-container--showing' : isHovered && isFeatured && product.video}">
+        <a :href="product.url" v-if="product.video" class="product-card__video-container" :class="{'product-card__video-container--showing' : isHovered && product.video}">
           {%- render 'video', mod_class: 'product-card__video', mod_loop: true, mod_is_vue: true, mod_vue_attrs: 'ref="videoComp" :src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
         </a>
         <div class="product-card__image-container">

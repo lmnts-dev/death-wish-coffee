@@ -11,5 +11,8 @@
         {%- render 'input-checkbox', label: 'I would like to receive email newsletters from DWC. See Privacy Policy and Terms of Service.', name: "customer[accepts_marketing]", class: 'form-create-account__checkbox' -%}
         {%- render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'CREATE', class: 'button--light create-account-form__submit' -%}
       {% endform %}
+      <div class="form-create-account__login">
+        <a href="{{ routes.account_login_url }}" class="form-create-account__login-link">Already have an account? Click here to log in.</a>
+      </div>
   </div>
 </section>

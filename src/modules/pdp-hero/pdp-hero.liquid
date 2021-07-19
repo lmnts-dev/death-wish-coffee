@@ -3,37 +3,41 @@
 {%- assign palette = product_acf.palette_selection | handle -%}
 {% capture class %}pdp-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
+{%- capture product_json -%}{%- render 'product-json', include_media: true, include_extra_contents: true, include_description: true -%}{%- endcapture -%}
+
 <section class="{{ class }} bg--black" data-module="pdp-hero">
-  <div class="pdp-hero__wrapper">
-    {%- capture pdp_hero -%}
-      {%- comment -%}
-      {%- if product_acf.video_loop_url != blank -%}
-        <div class="pdp-hero__item js-video-slide swiper-slide">
-          {%- render 'video', mod_src: product_acf.video_loop_url, mod_autoplay: true, mod_class: 'pdp-hero__video' -%}
-        </div>
-      {%- endif -%}
-      {%- endcomment -%}
-      {% for media in product.media %}
-        {% assign media_url = media | img_url: 'master' %}
-          <div class="pdp-hero__item swiper-slide">
-            {%- render 'image', src: media_url, class: 'pdp-hero__image' -%}
+  <div is="pdp-hero" inline-template :product='{{- product_json | escape -}}'>
+    <div class="pdp-hero__wrapper">
+      {%- capture pdp_media -%}
+        {%- comment -%}
+        {%- if product_acf.video_loop_url != blank -%}
+          <div class="pdp-hero__item js-video-slide swiper-slide">
+            {%- render 'video', mod_src: product_acf.video_loop_url, mod_autoplay: true, mod_class: 'pdp-hero__video' -%}
           </div>
-      {% endfor %}
-    {%- endcapture -%}
-    {%- assign loop = false -%}
-    {%- assign navigation = false -%}
-    {%- if product.media.size > 1 -%}
-      {%- assign loop = true -%}
-      {%- assign navigation = true -%}
-    {%- endif -%}
-    {%- capture carousel_class -%}carousel--pdp-hero js-carousel{% if palette != blank %} carousel--palette-{{ palette }}{% endif %}{%- endcapture -%}
-    {%- render 'carousel',
-      class: carousel_class,
-      children: pdp_hero,
-      slides_per_view: 1,
-      navigation: navigation,
-      loop: loop
-    -%}
-    {%- render 'pdp-add-to-cart', class: add_to_cart_class, palette: palette, product_upc: product_acf.product_upc -%}
+        {%- endif -%}
+        {%- endcomment -%}
+        <template v-for="image in images">
+          <div class="pdp-hero__item swiper-slide">
+            {%- render 'image', vue_attrs: ':image-src="image.src"', class: 'pdp-hero__image' -%}
+          </div>
+        </template>
+      {%- endcapture -%}
+      {%- capture carousel_class -%}carousel--pdp-hero js-carousel{% if palette != blank %} carousel--palette-{{ palette }}{% endif %}{%- endcapture -%}
+      {%- assign loop = false -%}
+      {%- assign navigation = false -%}
+      {%- if product.media.size > 1 -%}
+        {%- assign loop = true -%}
+        {%- assign navigation = true -%}
+      {%- endif -%}
+      {%- render 'carousel',
+        class: carousel_class,
+        children: pdp_media,
+        slides_per_view: 1,
+        navigation: navigation,
+        loop: loop,
+        custom_attrs: 'v-if="images.length" ref="carousel"'
+      -%}
+      {%- render 'pdp-add-to-cart', vue_attrs: ':product="product"', class: add_to_cart_class, palette: palette, product_upc: product_acf.product_upc -%}
+    </div>
   </div>
 </section>

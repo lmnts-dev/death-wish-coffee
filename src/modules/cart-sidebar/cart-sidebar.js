@@ -24,6 +24,11 @@ const cartsidebar = (el) => {
         }
         return false
       }
+    },
+    methods: {
+      checkout () {
+        window.upscribeBuildCheckout()
+      }
     }
   })
 }

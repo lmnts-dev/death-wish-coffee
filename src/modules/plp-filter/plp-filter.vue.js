@@ -16,9 +16,9 @@ export default {
       get () {
         const filterState = this.isManualFilter ? this.localFilterState : this.filterValues
 
-        return Object.entries(filterState).map(
-          ([key, values]) => values.map(value => `${key}|${value}`)
-        ).flat()
+        return Object.entries(filterState).length
+          ? Object.entries(filterState).map(([key, values]) => values.map(value => `${key}|${value}`)).flat()
+          : []
       },
       set (pairs) {
         // Otherwise on desktop, construct the state object and mutate the filters immediately

@@ -1,5 +1,72 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
+## 1.4.2 - 2021-07-16
+### CHANGED:
+- Fix issue where mobile sticky cart was too tall and made it diffcult to touch the checkout button
+
+## 1.4.1 - 2021-07-14
+### CHANGED:
+- Fix extra description component on PDP that was causing it to not render
+
+## 1.4.0 - 2021-07-13
+### CHANGED:
+- Address [PLP > Quickshop - Subscribe and Save is populating when it should not be](https://app.asana.com/0/0/1200580209834624/f)
+- Address [PLP - Valhalla Java Odinforce Blend > Unexpected Behavior in Quick Shop and PDP](https://app.asana.com/0/0/1200580209834635/f)
+- Address [PDP > Page rendering issue](https://app.asana.com/0/0/1200583910715688/f)
+- Address [PDP > Price should change when variant changed](https://app.asana.com/0/0/1200495266673694/f)
+- Address [PDP > Price line displays (Free Shipping) if logged in; if not logged in, price line display (Want FREE shipping?)](https://app.asana.com/0/0/1200530329194867/f)
+- Address [Homepage Featured Product Carousel > Bolts (Arrows) do not render on actual mobile devices](https://app.asana.com/0/0/1200561559847663/f)
+- Address [PLP - Featured Item Carousel > Yotpo FOUC](https://app.asana.com/0/0/1200561559847674/f)
+- Address [PDP > Variant Imagery should change when different variants are selected](https://app.asana.com/0/0/1200495266673705/f)
+- Address [Add support to collections template for tag URLs](https://app.asana.com/0/0/1200536740359697/f)
+- Address [Global > When adding product to cart, pop out cart should show, not take user to /cart URL](https://app.asana.com/0/0/1200530329194869/f)
+## 1.3.2 - 2021-07-09
+### CHANGED:
+- Add mising closing div tag
+
+## 1.3.1 - 2021-07-07
+### CHANGED:
+- Update class selector for upscribe checkout button 
+
+## 1.3.0 - 2021-07-02
+### CHANGED:
+- Address [PDP > Price line displays (Free Shipping) if logged in; if not logged in, price line display (Want FREE shipping?)](https://app.asana.com/0/0/1200530329194867/f)
+- Address [New Product > Add to cart button incorrect size](https://app.asana.com/0/0/1200530329194992/f)
+- Address [Social Meta not rendering correctly](https://app.asana.com/0/0/1200519984216390/f)
+- Address [About Us (Team) > Add bolts to team carousel](https://app.asana.com/0/0/1200530329194852/f)
+- Address [PLP Featured Carousel > Unexpected behavior of hover state effect](https://app.asana.com/0/0/1200495266673818/f)
+- Address [Homepage > 4 Items shown in featured carousel](https://app.asana.com/0/0/1200495266350995/f)
+- Address [Mobile > Search Icon](https://app.asana.com/0/0/1200495829064640/f)
+- Address [Blog - Listing](https://app.asana.com/0/0/1200043138484859/f)
+- Address [upscribe portal fix](https://app.asana.com/0/0/1200539125634797/f)
+- Address [Account Activation Designs](https://app.asana.com/0/0/1200495829064650/f)
+- Address [Implement fallback images for blogs](https://app.asana.com/0/0/1200398522722831/f)
+
+## 1.2.0 - 2021-06-25
+### CHANGED:
+- Address [Gift_card.liquid file deleted](https://app.asana.com/0/1187243774580389/1200522833493028/f)
+
+## 1.1.0 - 2021-06-24
+### CHANGED:
+- Enable initial subscriptions page in account
+- Address [PLP (mobile) > Review Styling bug](https://app.asana.com/0/0/1200495266673889/f)
+- Address [Semi-urgent please remove the "Light" from coffee roast filters](https://app.asana.com/0/0/1200512951352087/f)
+- Address [Blog - Article > Remove "More to Explore"](https://app.asana.com/0/0/1200495266673914/f)
+- Address [Shop All > Global Hover Affect not Applied](https://app.asana.com/0/0/1200512877874475/f)
+- Address [The Scoop (mobile) > Styling bug](https://app.asana.com/0/0/1200495266673900/f)
+- Address [PLP > Add hover state video playback support to ](https://app.asana.com/0/0/1200512877874502/f)
+- Address [Newsletter Signup Module > Module grows when fa](https://app.asana.com/0/0/1200512877874486/f)
+- Address [About Page > Increase text size](https://app.asana.com/0/0/1200495266673718/f)
+- Address [Global Carousel > increase click area](https://app.asana.com/0/0/1200495266673878/f)
+
+## 1.0.1 - 2021-06-23
+### CHANGED:
+- Fix variant selector 
+- Add stock notification for variants
+
+## 1.0.0 - 2021-06-23
+### CHANGED:
+- Initial theme launch
 
 ## 0.0.32 - 2021-06-23
 ### CHANGED:

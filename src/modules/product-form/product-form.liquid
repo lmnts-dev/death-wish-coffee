@@ -3,11 +3,11 @@
 {%- assign form_type = form_type | default: 'button' -%}
 {%- assign palette = palette | default: false -%}
 {%- assign button_class = button_class | default: false -%}
-{%- capture button_class -%}product-form__button js-form-submit{% if button_class %} {{ button_class }}{% endif %}{% if form_type != 'button' %} button--light{% elsif palette %} button--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- capture button_class -%}product-form__button js-form-submit{% if button_class %} {{ button_class }}{% endif %}{% if palette %} button--palette-{{ palette }}{% endif %}{%- endcapture -%}
 {%- assign product = product | default: false -%}
 {%- assign show_title = show_title | default: false -%}
 {%- assign class = class | default: false -%}
-{%- capture class -%}product-form {% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- capture class -%}product-form product-form--type-{{ form_type }}{% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
 <!-- Upscribe -->
   {% comment %}
@@ -83,7 +83,7 @@
             <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
               <option value selected>Select Field</option>
               <template v-for="variant in product.variants">
-                <option :key="variant.id" value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}</option>
+                <option :key="variant.id" :disabled="!variant.available" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}<span v-if="!variant.available">(Sold Out)</span></option>
               </template>
             </select>
           </div>
@@ -98,9 +98,9 @@
     TODO:
     Need to re-add @submit.prevent="handleAddToCart" to form tag once we can properly pass line item props through to cart.js
     {%- endcomment -%}
-    <form method="post" action="/cart/add" class="product-form__form">
+    <form method="post" action="/cart/add" class="product-form__form" @submit.prevent="handleAddToCart">
 
-      {% if product.metafields.sf_upscribe.enable_subscription == 1 %}
+      <template v-if="isEnableUpscribe">
       
         {%- comment -%}
         {%- render 'upscribe-product-options' upscribe_component_uid: upscribe_component_uid-%}
@@ -109,7 +109,8 @@
 
         <section class="cu-upscribe" data-module="upscribe-product-options">
           <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
-            v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}">
+            v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
+          >
             <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
               
               <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
@@ -179,7 +180,7 @@
           </div>
         </section>
 
-      {% endif %}
+      </template>
 
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
@@ -209,8 +210,7 @@
          :shop='{{shop.metafields.sf_upscribe | json}}' 
          :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
          :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
-         :upscribe-keep_component-in-sync="{{upscribe_keep_component_in_sync}}"
-         :product-id="{{product.id}}"
+         :upscribe-keep-component-in-sync="{{upscribe_keep_component_in_sync}}"
          inline-template
     >
       {{ content }}

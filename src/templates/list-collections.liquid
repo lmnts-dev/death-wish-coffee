@@ -14,7 +14,11 @@
     {%- assign link = links[forloop.index0] | prepend: 'collections/' -%}
 
     {%- capture after_content -%}
-      <a class="hero_cta button" href="{{ link }}">Shop Now</a>
+      {%- render 'button',
+        class: 'hero_cta',
+        button_url: link,
+        button_value: 'Shop Now'
+      -%}
     {%- endcapture -%}
 
     {%- render 'hero',

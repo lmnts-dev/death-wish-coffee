@@ -5,7 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
   <link rel="canonical" href="{{- canonical_url -}}">
-  
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WS7HLL9');</script>
+  <!-- End Google Tag Manager -->
+
   {%- include 'alternate-urls' -%}
 
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -18,7 +26,7 @@
   <link rel="icon" type="image/png" href="{{ 'favicon.ico' | asset_url }}" type="image/png">
   <link rel="stylesheet" href="https://use.typekit.net/dge3sjv.css">
 
-  {%- include 'social-meta' -%}
+  {%- render 'social-meta' -%}
 
   {{ content_for_header }}
 
@@ -30,7 +38,7 @@
   {%- endif -%}
   <!-- Yotpo JavaScript -->
   <script type="text/javascript">
-    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/EmlyH22Rv4gaBBcp1acP56ctxXacWhYtche9agiF/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/P17jnGh66lNzZJ0a3V4ntP4FXIPAZUGGWTnRuyfO/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
   </script>
   <!-- End of Yotpo JavaScript -->
   <script>
@@ -48,7 +56,13 @@
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
-{%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS7HLL9"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
+
   <main id="page" class="relative z0" role="main">
     {{ content_for_layout }}
   </main>
@@ -57,7 +71,9 @@
   {% render 'upscribe-cart-logic' %}
 
   {%- unless settings.is_dev_mode -%}
-    {{- 'main.js' | asset_url | script_tag -}}
+    {%- unless template.name == 'account' and template.suffix == 'subscriptions' -%}
+      {{- 'main.js' | asset_url | script_tag -}}
+    {%- endunless -%}
   {%- endunless -%}
   {% include 'findify-tagging' %}
   

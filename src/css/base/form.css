@@ -280,6 +280,23 @@
     order: -1;
     margin-top: 4px;
   }
+
+  .form-field--subscribe & {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+    padding-bottom: 4px;
+    transform: translateY(-100%);
+
+    @media (--md) {
+      bottom: 0;
+      top: auto;
+      padding-top: 4px;
+      padding-bottom: 0;
+      transform: translateY(100%);
+    }
+  }
 }
 
 .form-field__button {
