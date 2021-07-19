@@ -95,5 +95,49 @@
     </div>
 
     {{ tracking_code }}
+
+    <script type="text/javascript">
+    // Impact Radius Script Body
+
+      {% assign SHA1Email = customer.email | hmac_sha1: "secret_key" %}
+      if (Shopify.Checkout.step == 'thank_you'){
+        {% if {{order.total_discounts | money_without_currency }} == blank %}
+           {% assign totalDiscounts = '' %}
+        {% else %}
+           {% assign totalDiscounts = {{order.total_discounts | money_without_currency }} %}
+        {% endif %}
+
+        {% if customer.orders_count > 1 %}
+           {% assign customerStatus = 'returning' %}
+        {% else %}
+           {% assign customerStatus = 'new' %}
+        {% endif %}
+        ire('trackConversion', 20398, {
+          	orderId: "{{order.order_number}}",
+          	customerId: "{{customer.id}}",
+          	customerEmail: "{{SHA1Email}}",
+            customerStatus: "{{customerStatus}}",
+            currencyCode: "USD",
+            orderPromoCode: "{{order.discount_applications.first.title}}",
+            orderDiscount: totalDiscounts,
+            items: [
+            {% for item in order.line_items %}
+              {
+                subTotal: {{item.final_line_price | money_without_currency }},
+                category: '{{ item.product.collections.first.title }}',
+                sku: '{{ item.sku }}',
+                quantity:	'{{ item.quantity }}',
+                name: '{{ item.title }}'
+              },
+            {% endfor %}
+            ]
+          },
+          {
+            verifySiteDefinitionMatch: true
+          }
+        );
+      }
+      // End Impact Radius Script Body
+      </script>
   </body>
 </html>
