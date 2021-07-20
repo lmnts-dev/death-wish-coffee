@@ -242,6 +242,11 @@ h5 {
   line-height: 1.83;
 }
 
+.articles-font {
+  font-size: 20px;
+  line-height: 28px;
+}
+
 input,
 textarea,
 select {

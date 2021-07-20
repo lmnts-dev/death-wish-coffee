@@ -19,7 +19,7 @@
 
 {%- render 'post-hero', image: post_hero_image, image_mobile: post_hero_image_mobile -%}
 {%- render 'post-header' -%}
-{%- render 'wysiwyg', content: article.content, class: 'bg--bone' -%}
+{%- render 'wysiwyg', content: article.content, class: 'bg--bone wysiwyg--large' -%}
 {%- render 'post-navigation' -%}
 {% capture category_cards %}
   {%- render 'category-card',
