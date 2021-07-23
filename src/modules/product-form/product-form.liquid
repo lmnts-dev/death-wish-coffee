@@ -44,8 +44,32 @@
       :class="{'product-form__options--single': hasSingleVariant}"
     >
       <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
+        {%- assign acf_size_chart = product.metafields.accentuate -%}
+
+        {%- if acf_size_chart.size_chart_image -%}
+          <template v-if="option === 'Size'">
+            {%- assign src = acf_size_chart.size_chart_image | map: 'src' -%}
+            {%- assign src_mobile = acf_size_chart.size_chart_image_mobile | map: 'src' -%}
+            
+            <div class="product-form__size-chart" v-show="sizeChartActive">
+              {%- render 'image', src: src, class: 'product-form__size-chart-image-desktop image--contain image--relative' -%}
+              {%- assign src_mobile = src_mobile | default: src -%}
+              {%- render 'image', src: src_mobile, class: 'product-form__size-chart-image-mobile image--contain image--relative' -%}
+              <div class="product-form__size-chart-close" @click="toggleSizeChart()" >
+                {%- render 'svg', type: 'close', class: 'product-form__size-chart-icon-close' -%}
+              </div>
+            </div>
+          </template>
+        {%- endif -%}
         {%- if show_title -%}
-          <h4 class="product-form__option-title h4">${option}</h4>
+          <h4 class="product-form__option-title h4">
+            ${option}
+            {%- if product.metafields.accentuate.size_chart_image -%}
+              <template v-if="option === 'Size'">
+                <span class="product-form__size-chart-button" @click="toggleSizeChart()">(SIZING CHART)</span>
+              </template>
+            {%- endif -%}
+          </h4>
         {%- endif -%}
         {%- if form_type == 'button' -%}
           <div class="product-form__option-values">
