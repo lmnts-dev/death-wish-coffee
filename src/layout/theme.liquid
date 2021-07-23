@@ -50,7 +50,7 @@
   </script>
 
 <!-- Impact Radius Script -->
-  <script type="text/javascript"> (function(a,b,c,d,e,f,g){e['ire_o']=c;e[c]=e[c]||function(){(e[c].a=e[c].a||[]).push(arguments)};f=d.createElement(b); g=d.getElementsByTagName(b)[0];f.async=1;f.src=a;g.parentNode.insertBefore(f,g);})('//d.impactradius-event .com/A2111926-92bd-44aa-bb4f-83916a666b521.js','script','ire',document,window);
+  <script type="text/javascript"> (function(a,b,c,d,e,f,g){e['ire_o']=c;e[c]=e[c]||function(){(e[c].a=e[c].a||[]).push(arguments)};f=d.createElement(b); g=d.getElementsByTagName(b)[0];f.async=1;f.src=a;g.parentNode.insertBefore(f,g);})('//d.impactradius-event.com/A2111926-92bd-44aa-bb4f-83916a666b521.js','script','ire',document,window);
   </script>
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
@@ -58,7 +58,7 @@
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS7HLL9"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
