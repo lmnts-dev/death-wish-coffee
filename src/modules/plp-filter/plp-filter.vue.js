@@ -1,10 +1,17 @@
 import { mapGetters, mapMutations, mapState } from 'vuex'
 
 export default {
+  props: {
+    currentTags: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
       expandedFilters: [],
-      localFilterState: {}
+      localFilterState: {},
+      key: ''
     }
   },
   computed: {
@@ -28,6 +35,7 @@ export default {
             if (!result[key]) {
               result[key] = []
             }
+            this.key = key
             result[key].push(value)
 
             return result
@@ -57,5 +65,14 @@ export default {
       this.localFilterState = {}
     },
     ...mapMutations('plp', ['mutateFilterValues'])
+  },
+  mounted () {
+    console.log('test')
+    const tag = this.currentTags[0].toLowerCase()
+    console.log(tag)
+    if (tag !== '') {
+      this.localFilterState = { Category: [tag] }
+      this.selectedOptions = [`Category|${tag}`]
+    }
   }
 }
