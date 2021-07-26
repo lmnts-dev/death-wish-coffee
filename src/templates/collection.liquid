@@ -251,6 +251,27 @@
               type: 'option'
             }
             {%- endcomment -%}
+            {%- when 'apparel' -%}
+              {
+                name: 'Gender',
+                type: 'tag',
+                options: [
+                  'Men',
+                  'Women',
+                  'Unisex'
+                ]
+              },
+            {%- when 'active' -%}
+              {
+                name: 'Gender',
+                type: 'tag',
+                options: [
+                  'Men',
+                  'Women',
+                  'Unisex'
+                ]
+              },
+            {%- when 'mugs' -%}
         {%- endcase -%}
       ],
       products: {{ product_json }},
