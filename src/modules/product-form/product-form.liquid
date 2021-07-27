@@ -131,7 +131,7 @@
         {%- endcomment -%}
         {% assign upscribe_component_uid = upscribe_component_uid | default: blank %}
 
-        <section class="cu-upscribe" data-module="upscribe-product-options">
+        <section class="product-form__subscribe cu-upscribe" data-module="upscribe-product-options">
           <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
             v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
           >
@@ -164,18 +164,19 @@
             <div class="cu-productTypeSelect js-upscribe-product-type" :data-upscribe-product-type="productPurchaseType">
               <div class="cu-productTypeSelect__itemWrap">
                 <label class="cu-productTypeSelect__itemLabel" for="onetime-{{upscribe_component_uid}}">
-                  <input type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
-                  <span class="cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }
-                  </span>
+                  <input class="cu-productTypeSelect__itemInput" type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
+                  <span class="p1 p1--bold cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }</span>
+                  <span class="cu-productTypeSelect__itemMark"></span>
                 </label>
               </div>
 
-              <div class="cu-productTypeSelect__itemLabel">
-                <label class="cu-productTypeSelect__itemWrap" for="subscription-{{upscribe_component_uid}}">
-                  <input type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
+              <div class="cu-productTypeSelect__itemWrap">
+                <label class="cu-productTypeSelect__itemLabel" for="subscription-{{upscribe_component_uid}}">
+                  <input class="cu-productTypeSelect__itemInput" type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
                     v-model="productPurchaseType">
-                  <span class="cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
+                  <span class="p1 p1--bold cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
                     activeDiscountAmount }</span>
+                  <span class="cu-productTypeSelect__itemMark"></span>
                 </label>
               </div>
             </div>
@@ -194,8 +195,8 @@
                     v-if="option" 
                     
                     >
-                    <span class="cu-option__mainText" v-if="option.mainText">${ option.mainText }</span>
-                    <span class="cu-option__subText" v-if="option.subText">${ option.subText }</span>
+                    <span class="cu-option__mainText" v-if="option.mainText">${ option.mainText } ${ intervalUnit }s</span>
+                    <span class="cu-option__subText" v-if="option.subText">${ option.subText } ${ intervalUnit }s</span>
                   </div>
                 </div>
               </div>

@@ -388,3 +388,55 @@
   width: 100%;
   height: 100%;
 }
+
+.product-form__subscribe {
+  &.cu-upscribe {
+    margin-top: 46px;
+    padding: 42px 0 0;
+    border-top: 1px solid var(--white);
+  }
+
+  .cu-productTypeSelect__itemWrap {
+    display: block;
+    margin-top: 10px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .cu-productTypeSelect__itemLabel {
+    position: relative;
+    display: block;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .cu-productTypeSelect__itemText {
+    padding-left: 18px;
+    text-transform: uppercase;
+  }
+
+  .cu-productTypeSelect__itemInput {
+    display: none;
+
+    &:checked ~ .cu-productTypeSelect__itemMark {
+      background: var(--blood);
+    }
+  }
+
+  .cu-productTypeSelect__itemMark {
+    position: absolute;
+    top: 11px;
+    left: 0;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: var(--white);
+    transform: translate(0, -50%);
+  }
+
+  .cu-optionsTitle {
+    display: none;
+  }
+}
