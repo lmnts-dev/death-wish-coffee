@@ -54,6 +54,7 @@ export default {
       const count = Object.entries(this.localFilterState).length
       return count > 0 ? ` (${count})` : ''
     },
+
     ...mapState('plp', ['filterDefinitions', 'filterValues', 'isManualFilter']),
     ...mapGetters('plp', ['filterAvailableValues'])
   },
@@ -71,12 +72,22 @@ export default {
     const tag = this.currentTags[0].toLowerCase()
 
     if (tag !== '') {
+      // Loop through the inputs that contain the filter key value pairs
       for (const input of filterInputs) {
         const pair = input.value.split('|')
         const [key, value] = pair
         if (pair.includes(tag)) {
+          // Select option from collection tag in url
           this.localFilterState = { key: [value] }
           this.selectedOptions = [`${key}|${value}`]
+          // Open accordion that contains selected option
+          var node = input.parentNode
+          while (node != null) {
+            if ([...node.classList].includes('plp-filter__block')) {
+              return node.classList.add('active')
+            }
+            node = node.parentNode
+          }
         }
       }
     }
