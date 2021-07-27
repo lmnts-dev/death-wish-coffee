@@ -10,8 +10,7 @@ export default {
   data () {
     return {
       expandedFilters: [],
-      localFilterState: {},
-      key: ''
+      localFilterState: {}
     }
   },
   computed: {
