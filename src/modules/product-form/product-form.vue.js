@@ -348,6 +348,9 @@ export default {
     },
     isEnableUpscribe () {
       return this.product.sf_upscribe.enable_subscription && this.isActiveSubscription
+    },
+    formattedSubscriptionAmount () {
+      return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
     }
   },
   methods: {

@@ -439,4 +439,54 @@
   .cu-optionsTitle {
     display: none;
   }
+
+  .cu-optionsGrid {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .cu-option {
+    position: relative;
+    width: 100%;
+    max-width: 216px;
+    height: 64px;
+    margin: 16px 0 0;
+    padding: 0 16px;
+    border-radius: 0;
+    border: 1px solid transparent;
+    color: var(--black);
+    background: var(--steel);
+
+    &.is-active {
+      color: var(--white);
+      background: var(--slate);
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .cu-option__option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  .cu-option__price,
+  .cu-option__mainText {
+    @extend .b1;
+
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: none;
+    text-align: left;
+  }
+
+  .cu-option__option-icon {
+    width: 43px;
+    height: 27px;
+    margin-right: 14px;
+  }
 }
