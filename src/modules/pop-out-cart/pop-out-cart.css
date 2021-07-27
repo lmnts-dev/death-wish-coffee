@@ -63,13 +63,32 @@
   height: 100%;
 }
 
-.pop-out-cart__title {
+.pop-out-cart__header {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 9px;
   margin-right: 20px;
   border-bottom: 1px solid var(--slate);
   padding-bottom: 11px;
-  text-transform: uppercase;
   color: var(--steel);
+}
+
+.pop-out-cart__title {
+  text-transform: uppercase;
+}
+
+.pop-out-cart__close-button {
+  background: transparent;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.pop-out-cart__close-icon {
+  display: flex;
+  width: 20px;
+  height: 30px;
+  color: var(--white);
 }
 
 .pop-out-cart__list {

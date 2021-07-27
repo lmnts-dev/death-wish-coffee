@@ -34,7 +34,14 @@
          :aria-hidden="!isPopOutCartActive"
 >
   <div class="pop-out-cart__inner bg--shadow" ref="cart">
-    <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
+    <div class="pop-out-cart__header">
+      <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
+      <button
+        class="pop-out-cart__close-button"
+        aria-label="{{ 'cart.general.close' | t }}"
+        @click="closePopOutCart"
+      >{%- render 'svg', type: 'close', class: 'pop-out-cart__close-icon' -%}</button>
+    </div>
 
     <template v-if="items.length">
       <form action="/cart" class="pop-out-cart__form" method="post" novalidate>

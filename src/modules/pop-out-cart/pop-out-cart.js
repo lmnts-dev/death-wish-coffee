@@ -79,6 +79,9 @@ const popOutCart = (el) => {
       },
       resizeHandler () {
         this.isMobile = window.innerWidth < this.breakpoint
+      },
+      closePopOutCart () {
+        store.dispatch('cart/setIsPopOutCartActive', false)
       }
     },
     destroy () {
