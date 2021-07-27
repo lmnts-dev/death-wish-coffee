@@ -67,12 +67,18 @@ export default {
     ...mapMutations('plp', ['mutateFilterValues'])
   },
   mounted () {
-    console.log('test')
+    const filterInputs = document.querySelectorAll('.plp-filter__block-item__state')
     const tag = this.currentTags[0].toLowerCase()
-    console.log(tag)
+
     if (tag !== '') {
-      this.localFilterState = { Category: [tag] }
-      this.selectedOptions = [`Category|${tag}`]
+      for (const input of filterInputs) {
+        const pair = input.value.split('|')
+        const [key, value] = pair
+        if (pair.includes(tag)) {
+          this.localFilterState = { key: [value] }
+          this.selectedOptions = [`${key}|${value}`]
+        }
+      }
     }
   }
 }
