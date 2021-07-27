@@ -1,4 +1,4 @@
-import { formatPrice } from 'lib/util'
+import { formatPrice, triggerCustomEvent } from 'lib/util'
 import { mapState } from 'vuex'
 import ProductForm from '../product-form/product-form.vue'
 
@@ -34,6 +34,11 @@ export default {
     },
     productExtraDescriptions () {
       return [this.product.extra_description_1, this.product.extra_description_2].filter(item => !!item)
+    }
+  },
+  methods: {
+    reviewScroll () {
+      triggerCustomEvent(document, 'pdpReviewScroll')
     }
   }
 }
