@@ -441,8 +441,11 @@
   }
 
   .cu-optionsGrid {
-    justify-content: space-between;
     flex-wrap: wrap;
+
+    @media (--lg) {
+      width: calc((100% + 8px) / 3 * 2);
+    }
   }
 
   .cu-option {
@@ -451,11 +454,17 @@
     max-width: 216px;
     height: 64px;
     margin: 16px 0 0;
-    padding: 0 16px;
+    padding: 0 5px 0 16px;
     border-radius: 0;
     border: 1px solid transparent;
     color: var(--black);
     background: var(--steel);
+
+    @media (--lg) {
+      max-width: 208px;
+      width: calc(50% - 8px);
+      margin: 0 8px 8px 0;
+    }
 
     &.is-active {
       color: var(--white);
@@ -464,6 +473,12 @@
 
     &:first-child {
       margin-top: 0;
+    }
+
+    &:not(.is-active):hover {
+      color: var(--black);
+      background: var(--steel);
+      border-color: transparent;
     }
   }
 
@@ -482,6 +497,12 @@
     letter-spacing: 0;
     text-transform: none;
     text-align: left;
+  }
+
+  .cu-option__mainText {
+    @media (--xl) {
+      @extend .b2;
+    }
   }
 
   .cu-option__option-icon {
