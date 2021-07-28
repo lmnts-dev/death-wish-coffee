@@ -1,5 +1,8 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
+## 1.4.4 - 2021-07-28
+### CHANGED:
+- Address [Sizing Chart](https://app.asana.com/0/1187243774580389/1200561559847706)
 
 ## 1.4.3 - 2021-07-19
 ### CHANGED:
