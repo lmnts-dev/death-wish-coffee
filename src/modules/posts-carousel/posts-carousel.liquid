@@ -4,6 +4,7 @@
 {%- assign view_all_url = view_all_url | default: false -%}
 {%- assign total_slides = total_slides | default: 1 -%}
 {%- assign spacing_class = spacing_class | default: false -%}
+{%- assign carousel_class = carousel_class | default: 'bg--black' -%}
 {%- capture classes -%}{{ class }} posts-carousel{%- endcapture -%}
 
 <section class="{{ classes }}">
@@ -26,7 +27,7 @@
         slides_per_view: 4,
         navigation: navigation,
         loop: loop,
-        class: 'bg--black' %}
+        class: carousel_class %}
     </div>
   </div>
 </section>
