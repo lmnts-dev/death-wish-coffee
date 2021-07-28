@@ -50,15 +50,15 @@
         {%- if show_title -%}
           <h4 class="product-form__option-title h4">
             ${option}
-            {%- if product.metafields.accentuate.size_chart_image -%}
+            {%- if product.metafields.accentuate.sizing_chart_image -%}
               <template v-if="option === 'Size'">
                 <span class="product-form__size-chart-button" @click="toggleSizeChart()">(SIZING CHART)</span>
               </template>
             {%- endif -%}
-            {%- if acf_size_chart.size_chart_image -%}
+            {%- if acf_size_chart.sizing_chart_image -%}
               <template v-if="option === 'Size'">
-                {%- assign src = acf_size_chart.size_chart_image | map: 'src' -%}
-                {%- assign src_mobile = acf_size_chart.size_chart_image_mobile | map: 'src' -%}
+                {%- assign src = acf_size_chart.sizing_chart_image | map: 'src' -%}
+                {%- assign src_mobile = acf_size_chart.sizing_chart_image_mobile | map: 'src' -%}
                 
                 <div class="product-form__size-chart" v-cloak v-show="sizeChartActive">
                   {%- render 'image', src: src, class: 'product-form__size-chart-image-desktop image--contain image--relative' -%}
