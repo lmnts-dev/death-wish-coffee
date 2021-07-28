@@ -61,11 +61,8 @@ export default {
       return this.selectedVariant ? this.selectedVariant.price : this.product.price
     },
     comparePrice () {
-      return this.product.options_by_name.Size &&
-        this.product.options_by_name.Size.selected_variant_drop.compare_at_price &&
-        Number(formatPrice(this.price)) < Number(this.product.options_by_name.Size.selected_variant_drop.compare_at_price)
-        ? this.product.options_by_name.Size.selected_variant_drop.compare_at_price
-        : ''
+      const compareAtPrice = this.selectedVariant ? this.selectedVariant.compare_at_price : this.product.compareAtPrice
+      return this.price < compareAtPrice ? compareAtPrice : ''
     },
     videoComponent () {
       return this.$refs.videoComp instanceof Array ? this.$refs.videoComp[0] : this.$refs.videoComp

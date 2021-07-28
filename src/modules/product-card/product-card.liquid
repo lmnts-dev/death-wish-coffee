@@ -49,7 +49,7 @@
           </a>
         </div>
         <p class="h5 product-card__price">
-          <span v-if="comparePrice" class="product-card__compare">$${ comparePrice }</span>
+          <span v-if="comparePrice" class="product-card__compare">$${ formatPrice(comparePrice) }</span>
           <span class="product-card__original">$${formatPrice(price)}</span>
         </p>
         <p v-if="shouldShowMessage && addedToCartErrorMessage" class="b1 product-card__message">${addedToCartErrorMessage}</p>
