@@ -19,6 +19,7 @@
   "published_at": {{ product.published_at | json }},
   "video": {{ product.metafields.accentuate.video_loop_url | json }},
   "type": {{ product.type | json }},
+  "compareAtPrice": {{ product.compare_at_price | json }},
   "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }}
   {%- if include_media == true -%}
   ,"media": {{ product.media | json }}

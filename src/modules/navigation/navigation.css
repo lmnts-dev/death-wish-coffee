@@ -536,10 +536,12 @@
   width: 13px;
   position: relative;
   margin-left: 10px;
+  color: var(--white);
 }
 
 .navigation__search-btn {
   width: 13px;
+  height: 13px;
   position: relative;
   margin: 0 auto;
 
@@ -562,6 +564,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .input-group-field {
+    padding-left: 13px;
+    border: none;
   }
 }
 
