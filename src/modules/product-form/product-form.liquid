@@ -44,8 +44,33 @@
       :class="{'product-form__options--single': hasSingleVariant}"
     >
       <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
+        {%- assign acf_size_chart = product.metafields.accentuate -%}
+
+        
         {%- if show_title -%}
-          <h4 class="product-form__option-title h4">${option}</h4>
+          <h4 class="product-form__option-title h4">
+            ${option}
+            {%- if product.metafields.accentuate.sizing_chart_image -%}
+              <template v-if="option === 'Size'">
+                <span class="product-form__size-chart-button" @click="toggleSizeChart()">(SIZING CHART)</span>
+              </template>
+            {%- endif -%}
+            {%- if acf_size_chart.sizing_chart_image -%}
+              <template v-if="option === 'Size'">
+                {%- assign src = acf_size_chart.sizing_chart_image | map: 'src' -%}
+                {%- assign src_mobile = acf_size_chart.sizing_chart_image_mobile | map: 'src' -%}
+                
+                <div class="product-form__size-chart" v-cloak v-show="sizeChartActive">
+                  {%- render 'image', src: src, class: 'product-form__size-chart-image-desktop image--contain image--relative' -%}
+                  {%- assign src_mobile = src_mobile | default: src -%}
+                  {%- render 'image', src: src_mobile, class: 'product-form__size-chart-image-mobile image--contain image--relative' -%}
+                  <div class="product-form__size-chart-close" @click="toggleSizeChart()" >
+                    {%- render 'svg', type: 'close', class: 'product-form__size-chart-icon-close' -%}
+                  </div>
+                </div>
+              </template>
+            {%- endif -%}
+          </h4>
         {%- endif -%}
         {%- if form_type == 'button' -%}
           <div class="product-form__option-values">
@@ -107,7 +132,7 @@
         {%- endcomment -%}
         {% assign upscribe_component_uid = upscribe_component_uid | default: blank %}
 
-        <section class="cu-upscribe" data-module="upscribe-product-options">
+        <section class="product-form__subscribe cu-upscribe" data-module="upscribe-product-options">
           <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
             v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
           >
@@ -140,18 +165,19 @@
             <div class="cu-productTypeSelect js-upscribe-product-type" :data-upscribe-product-type="productPurchaseType">
               <div class="cu-productTypeSelect__itemWrap">
                 <label class="cu-productTypeSelect__itemLabel" for="onetime-{{upscribe_component_uid}}">
-                  <input type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
-                  <span class="cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }
-                  </span>
+                  <input class="cu-productTypeSelect__itemInput" type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
+                  <span class="p1 p1--bold cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }</span>
+                  <span class="cu-productTypeSelect__itemMark"></span>
                 </label>
               </div>
 
-              <div class="cu-productTypeSelect__itemLabel">
-                <label class="cu-productTypeSelect__itemWrap" for="subscription-{{upscribe_component_uid}}">
-                  <input type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
+              <div class="cu-productTypeSelect__itemWrap">
+                <label class="cu-productTypeSelect__itemLabel" for="subscription-{{upscribe_component_uid}}">
+                  <input class="cu-productTypeSelect__itemInput" type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
                     v-model="productPurchaseType">
-                  <span class="cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
+                  <span class="p1 p1--bold cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
                     activeDiscountAmount }</span>
+                  <span class="cu-productTypeSelect__itemMark"></span>
                 </label>
               </div>
             </div>
@@ -168,10 +194,12 @@
                     >
                   <div class="cu-option__option" 
                     v-if="option" 
-                    
-                    >
-                    <span class="cu-option__mainText" v-if="option.mainText">${ option.mainText }</span>
-                    <span class="cu-option__subText" v-if="option.subText">${ option.subText }</span>
+                  >
+                    {%- render 'svg', type: 'truck-lightning', class: 'cu-option__option-icon' -%}
+                    <div class="cu-option__option-text">
+                      <p class="cu-option__mainText" v-if="option.mainText">${ option.mainText } ${ intervalUnit }s</p>
+                      <p class="cu-option__price">$${formattedSubscriptionAmount}</p>
+                    </div>
                   </div>
                 </div>
               </div>

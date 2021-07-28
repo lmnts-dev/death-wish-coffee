@@ -45,7 +45,8 @@ export default {
       subscriptionPrice: null,
       subscriptionAmount: null,
       optionIcons: iconData,
-      componentMounted: !1
+      componentMounted: !1,
+      sizeChartActive: false
     }
   },
   mounted () {
@@ -56,6 +57,9 @@ export default {
     this.productPurchaseType = 'onetime'
     this.subscriptionPrice = null
 
+    for (var key in this.product.options_by_name) {
+      this.$set(this.selectedOptions, key, this.product.options_by_name[key].option.values[0])
+    }
     // add listener for variant update, set in variant_selection.js
     // this listener could be different depeneding on if the theme uses the same base setup
     var vm = this
@@ -344,6 +348,9 @@ export default {
     },
     isEnableUpscribe () {
       return this.product.sf_upscribe.enable_subscription && this.isActiveSubscription
+    },
+    formattedSubscriptionAmount () {
+      return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
     }
   },
   methods: {
@@ -665,6 +672,9 @@ export default {
         cloneSelectedOptions[option] = value
       }
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
+    },
+    toggleSizeChart () {
+      this.sizeChartActive = !this.sizeChartActive
     }
   },
   destroyed () {
