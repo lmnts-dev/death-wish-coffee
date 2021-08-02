@@ -53,11 +53,24 @@
         width='0' height='0' style='display: none;' />
   </noscript>
   <!-- End of Taboola Pixel Code -->
+  <style>
+.section__header {
+  display: flex;
+  flex-direction: row;
+}
+
+.section__title-link {
+  @extend .section__title;
+
+  margin-left: 5px;
+  font-size: 18px;
+}
+  </style>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS7HLL9"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {{ skip_to_content_link }}
 
@@ -138,6 +151,17 @@
         );
       }
       // End Impact Radius Script Body
+      </script>
+      <script>
+        var aTag = document.createElement('a');
+        aTag.setAttribute('href',"https://help.deathwishcoffee.com/article/nzyfiikl44-how-long-does-it-take-for-my-coffee-to-get-here");
+        aTag.setAttribute('target',"_blank");
+        aTag.setAttribute('rel',"noopener");
+        aTag.innerText = "Shipping Timelines";
+        aTag.classList.add("section__title-link")
+        const shippingHeader = document.querySelector('.section--shipping-address').children[0]
+        shippingHeader.appendChild(aTag)
+        console.log(shippingHeader)
       </script>
   </body>
 </html>
