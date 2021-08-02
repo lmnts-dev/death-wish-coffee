@@ -1,8 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
-## 1.4.4 - 2021-07-28
+## 1.4.5 - 2021-08-02
 ### CHANGED:
-- Address [Sizing Chart](https://app.asana.com/0/1187243774580389/1200561559847706)
+- Address [Refactor subscription options to match designs](https://app.asana.com/0/0/1200627666298825/f)
+- Address [Add sidebar filtering back into collections that aren't coffee/merch](https://app.asana.com/0/0/1200530329194859/f)
+- Address [PDP > Yotpo reviews anchor text not functioning](https://app.asana.com/0/0/1200620272278015/f)
+- Address [Pop out Cart > Add "X" top right hand corner of pop out cart](https://app.asana.com/0/0/1200616240038394/f)
 
 ## 1.4.3 - 2021-07-19
 ### CHANGED:
