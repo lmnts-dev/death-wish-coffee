@@ -152,9 +152,10 @@
       }
       // End Impact Radius Script Body
       </script>
+      {% assign shipping_time_url = shop.metafields.globals.shipping_time_url %}
       <script>
         var aTag = document.createElement('a');
-        aTag.setAttribute('href',"https://help.deathwishcoffee.com/article/nzyfiikl44-how-long-does-it-take-for-my-coffee-to-get-here");
+        aTag.setAttribute('href', {{shipping_time_url|json}});
         aTag.setAttribute('target',"_blank");
         aTag.setAttribute('rel',"noopener");
         aTag.innerText = "Shipping Timelines";
