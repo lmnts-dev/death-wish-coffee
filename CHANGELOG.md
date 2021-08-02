@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 - Address [PDP > Yotpo reviews anchor text not functioning](https://app.asana.com/0/0/1200620272278015/f)
 - Address [Pop out Cart > Add "X" top right hand corner of pop out cart](https://app.asana.com/0/0/1200616240038394/f)
 
+## 1.4.4 - 2021-07-28
+### CHANGED:
+- Address [Sizing Chart](https://app.asana.com/0/1187243774580389/1200561559847706)
+
 ## 1.4.3 - 2021-07-19
 ### CHANGED:
 - [Add impact radius script](https://app.asana.com/0/1187243774580389/1199881642990839/f)
