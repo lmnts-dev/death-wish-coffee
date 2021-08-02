@@ -257,3 +257,9 @@
     }
   }
 }
+
+.wysiwyg--large {
+  p {
+    @extend .articles-font;
+  }
+}

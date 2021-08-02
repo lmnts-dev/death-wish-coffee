@@ -43,16 +43,14 @@
       class="product-form__options"
       :class="{'product-form__options--single': hasSingleVariant}"
     >
-      <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
+      <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option" v-if="option !== 'Color'">
         {%- assign acf_size_chart = product.metafields.accentuate -%}
-
-        
         {%- if show_title -%}
           <h4 class="product-form__option-title h4">
             ${option}
             {%- if product.metafields.accentuate.sizing_chart_image -%}
               <template v-if="option === 'Size'">
-                <span class="product-form__size-chart-button" @click="toggleSizeChart()">(SIZING CHART)</span>
+                <span class="product-form__size-chart-button" @click="toggleSizeChart()">(VIEW CHART)</span>
               </template>
             {%- endif -%}
             {%- if acf_size_chart.sizing_chart_image -%}
@@ -106,7 +104,8 @@
         {%- else -%}
           <div class="product-form__select">
             <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
-              <option value selected>Select Field</option>
+              <option v-if="option === 'Size'" value selected>Select Size</option>
+              <option v-if="option !== 'Size'" value selected>Select Field</option>
               <template v-for="variant in product.variants">
                 <option :key="variant.id" :disabled="!variant.available" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}<span v-if="!variant.available">(Sold Out)</span></option>
               </template>

@@ -3,6 +3,7 @@ import { mapState, mapGetters } from 'vuex'
 import store from 'lib/store'
 import VImage from '../v-image/v-image.vue'
 import CartItemControl from '../cart-item-control/cart-item-control.vue'
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 /**
  * Initializes the javascript for the pop-out-cart module
@@ -11,6 +12,12 @@ import CartItemControl from '../cart-item-control/cart-item-control.vue'
 const popOutCart = (el) => {
   return new Vue({
     el,
+    data () {
+      return {
+        breakpoint: 768,
+        isMobile: false
+      }
+    },
     delimiters: ['${', '}'],
     name: 'PopOutCartRoot',
     store,
@@ -42,6 +49,13 @@ const popOutCart = (el) => {
         if (newValue) {
           store.dispatch('cart/setIsPopOutCartActive', false)
         }
+      },
+      isPopOutCartActive (value) {
+        if (value && this.isMobile) {
+          disableBodyScroll(this.$refs.cart)
+        } else {
+          clearAllBodyScrollLocks()
+        }
       }
     },
     mounted () {
@@ -53,6 +67,8 @@ const popOutCart = (el) => {
           }, 10)
         }
       })
+      this.resizeHandler()
+      window.addEventListener('resize', this.resizeHandler)
     },
     methods: {
       removeItem (item) {
@@ -60,7 +76,16 @@ const popOutCart = (el) => {
       },
       checkout () {
         window.upscribeBuildCheckout()
+      },
+      resizeHandler () {
+        this.isMobile = window.innerWidth < this.breakpoint
+      },
+      closePopOutCart () {
+        store.dispatch('cart/setIsPopOutCartActive', false)
       }
+    },
+    destroy () {
+      window.addEventListener('resize', this.resizeHandler)
     }
   })
 }

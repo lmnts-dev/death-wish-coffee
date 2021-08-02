@@ -100,7 +100,8 @@
       "line_price": "Line Price:",
       "free_shipping": "Free domestic shipping w/ account",
       "empty": "There aren't any items in your cart.",
-      "shop_all": "Shop All"
+      "shop_all": "Shop All",
+      "close": "Close"
     },
     "label": {
       "product": "Product",

@@ -5,6 +5,7 @@
 
 <div is="plp-filter"
      inline-template
+     :current-tags='{{ current_tags | json }}'
 >
   <section v-if="filterDefinitions.length > 0" :class="['{{ class | escape }}', { active: isManualFilter }]">
     <div class="plp-filter__container">
