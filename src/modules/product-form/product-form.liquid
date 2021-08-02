@@ -43,7 +43,7 @@
       class="product-form__options"
       :class="{'product-form__options--single': hasSingleVariant}"
     >
-      <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option">
+      <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option" v-if="option !== 'Color'">
         {%- assign acf_size_chart = product.metafields.accentuate -%}
         {%- if show_title -%}
           <h4 class="product-form__option-title h4">
