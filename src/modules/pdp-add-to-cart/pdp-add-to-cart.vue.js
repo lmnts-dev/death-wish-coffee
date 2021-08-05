@@ -10,6 +10,10 @@ export default {
     product: {
       type: Object,
       default: () => ({})
+    },
+    queryStringVariant: {
+      type: String,
+      default: () => ('')
     }
   },
   computed: {
@@ -40,5 +44,8 @@ export default {
     reviewScroll () {
       triggerCustomEvent(document, 'pdpReviewScroll')
     }
+  },
+  mounted () {
+    // console.log(this.queryStringVariant)
   }
 }

@@ -8,7 +8,9 @@
   {% assign form_type = 'dropdown' %}
 {%- endif -%}
 
-<div is="pdp-add-to-cart" inline-template {{ vue_attrs }}>
+{% assign queryParamVariant = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&' | split:'?variant=' | last-%}
+
+<div is="pdp-add-to-cart" inline-template {{ vue_attrs }} :query-string-variant='{{queryParamVariant}}'>
   <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
     <div class="container pdp-add-to-cart__container">
       <div class="pdp-add-to-cart__wrapper">
@@ -37,6 +39,7 @@
           :product="product"
           :shop='{{shop.metafields.sf_upscribe | json}}'
           :is-active-subscription="true"
+          :query-string-variant='{{queryParamVariant}}'
           :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
           :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
           :upscribe-keep-component-in-sync="{{upscribe_keep_component_in_sync}}"

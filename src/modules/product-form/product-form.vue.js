@@ -25,6 +25,10 @@ export default {
     upscribeRegularPriceQuerySelector: {
       type: Boolean,
       default: false
+    },
+    queryStringVariant: {
+      type: String,
+      default: () => ('')
     }
   },
   data () {
@@ -88,10 +92,8 @@ export default {
   },
   watch: {
     selectedVariantId (newValue) {
-      if (newValue) {
-        this.$emit('update-variant-id', newValue)
-        store.dispatch('pdp/setSelectedVariantId', { id: newValue })
-      }
+      this.$emit('update-variant-id', newValue)
+      store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
     productPurchaseType (newVal) {
       // if (this.upscribeKeepComponentInSync) {
