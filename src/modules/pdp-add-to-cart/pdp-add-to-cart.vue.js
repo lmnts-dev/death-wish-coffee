@@ -44,8 +44,5 @@ export default {
     reviewScroll () {
       triggerCustomEvent(document, 'pdpReviewScroll')
     }
-  },
-  mounted () {
-    // console.log(this.queryStringVariant)
   }
 }
