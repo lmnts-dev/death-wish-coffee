@@ -53,11 +53,24 @@
         width='0' height='0' style='display: none;' />
   </noscript>
   <!-- End of Taboola Pixel Code -->
+  <style>
+.section__header {
+  display: flex;
+  flex-direction: row;
+  line-height: 1.7em;
+}
+
+.section__title-link {
+  margin-left: 5px;
+  line-height: 1.8em;
+}
+
+  </style>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS7HLL9"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {{ skip_to_content_link }}
 
@@ -138,6 +151,18 @@
         );
       }
       // End Impact Radius Script Body
+      </script>
+      {% assign shipping_time_url = shop.metafields.globals.shipping_time_url %}
+      <script>
+        var aTag = document.createElement('a');
+        aTag.setAttribute('href', {{shipping_time_url|json}});
+        aTag.setAttribute('target',"_blank");
+        aTag.setAttribute('rel',"noopener");
+        aTag.innerText = "Shipping Timelines";
+        aTag.classList.add("section__title-link")
+        const shippingHeader = document.querySelector('.section--shipping-address').children[0]
+        shippingHeader.appendChild(aTag)
+        console.log(shippingHeader)
       </script>
   </body>
 </html>
