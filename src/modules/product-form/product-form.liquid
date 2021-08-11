@@ -76,7 +76,7 @@
                 class="product-form__option-value"
             >
               <input :id="optionInputId(option, value)"
-                    :name="option + value"
+                    :name="optionInputId(option, value)"
                     :value="value"
                     v-model="selectedOptions[option]"
                     class="radio product-form__option-value-input js-product-input"
