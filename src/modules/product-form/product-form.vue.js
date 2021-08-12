@@ -449,7 +449,6 @@ export default {
     setFrequency (val) {
       this.selectedFrequencyIndex = val
     },
-
     clickOption (index, option) {
       // console.log(this.selectedFrequency === this.index)
       this.index = index
@@ -670,6 +669,7 @@ export default {
       })
     },
     toggleOption (option, value) {
+      console.log(option, value)
       const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
       if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
         cloneSelectedOptions[option] = null
@@ -677,6 +677,14 @@ export default {
         cloneSelectedOptions[option] = value
       }
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
+    },
+    disableOption (option, value) {
+      console.log(option, value)
+      for (const variant of this.product.variants) {
+        if (variant.title === value && variant.available === false) {
+          return true
+        }
+      }
     },
     toggleSizeChart () {
       this.sizeChartActive = !this.sizeChartActive
