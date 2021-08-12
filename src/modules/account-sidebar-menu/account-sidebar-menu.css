@@ -106,6 +106,12 @@
   @media (--md) {
     display: none;
   }
+
+  .h4 {
+    @media (--md-max) {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .account-sidebar-menu__icon {
