@@ -226,6 +226,12 @@
   }
 }
 
+.product-form__option-value-name {
+  &.sold-out {
+    text-decoration: line-through;
+  }
+}
+
 .product-form__option-value-icon {
   display: block;
   flex: 0 0 40px;

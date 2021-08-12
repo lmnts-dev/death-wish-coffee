@@ -89,8 +89,15 @@
                 <div class="option-icon" v-if="optionIcons[value]" v-html="optionIcons[value]"></div>
                 <!-- {% render 'variant-icons', type: svg_unselected, class: 'product-form__option-value-icon' %} -->
                 <div class="product-form__option-value-text">
-                  <div class="product-form__option-value-name">
-                    ${value}
+                  <div class="product-form__option-value-name" :class="{}">
+                    <div v-for="variant in product.variants">
+                      <span v-if="variant.title === value && variant.available === false" class='product-form__option-value-name sold-out' style="text-decoration: line-through;">
+                        ${value}
+                      </span>
+                      <span v-if="variant.title === value && variant.available === true" class='product-form__option-value-name sold-out'>
+                        ${value}
+                      </span>
+                    </div>
                   </div>
                   <div v-if="option === priceDecidingFactor"
                       class="product-form__option-price b1"
