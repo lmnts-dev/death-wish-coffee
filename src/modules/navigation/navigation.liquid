@@ -17,7 +17,11 @@
       <div class="navigation__login">
         <a href="{{ routes.account_url }}" class="navigation__login-inner">
           {%- render 'svg', type: 'skull', class: 'navigation__login-icon' -%}
-          Login
+          {%- if customer -%}
+            Account
+            {%- else -%}
+            Login
+          {%- endif -%}
         </a>
         <button class="navigation__close js-close" type="button">
           {%- render 'svg', type: 'close', class: 'navigation__close-icon' -%}
