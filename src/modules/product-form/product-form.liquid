@@ -73,7 +73,7 @@
         {%- if form_type == 'button' -%}
           <div class="product-form__option-values">
             <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
-                class="product-form__option-value"
+                class="product-form__option-value" :class="{'product-form__unavailable': disableOption(option, value)}"
             >
               <input :id="optionInputId(option, value)"
                     :name="optionInputId(option, value)"
@@ -82,15 +82,28 @@
                     class="radio product-form__option-value-input js-product-input"
                     type="radio"
                     @click="toggleOption(option, value)"
+                    :disabled="disableOption(option, value)"
               >
               <label :for="optionInputId(option, value)"
-                    class="label label--radio product-form__option-value-label"
+                    class="label label--radio"
+                    :class="{'product-form__option-value-label': !disableOption(option, value), 'product-form__option-value-label disabled': disableOption(option, value)}"
               >
+              <svg v-if="disableOption(option, value)" class="product-form__diagonal-line">
+                <line x1='0' y1='100%' x2='100%' y2='0' />
+                <line x1='0' y1='0' x2='100%' y2='100%' />
+             </svg>
                 <div class="option-icon" v-if="optionIcons[value]" v-html="optionIcons[value]"></div>
                 <!-- {% render 'variant-icons', type: svg_unselected, class: 'product-form__option-value-icon' %} -->
                 <div class="product-form__option-value-text">
-                  <div class="product-form__option-value-name">
-                    ${value}
+                  <div class="product-form__option-value-name" >
+                    <div v-for="variant in product.variants">
+                      <span v-if="variant.title === value && variant.available === false" class='product-form__option-value-name sold-out'>
+                        ${value}
+                      </span>
+                      <span v-if="variant.title === value && variant.available === true" class='product-form__option-value-name'>
+                        ${value}
+                      </span>
+                    </div>
                   </div>
                   <div v-if="option === priceDecidingFactor"
                       class="product-form__option-price b1"
@@ -206,21 +219,18 @@
             </div>
           </div>
         </section>
-
       </template>
-
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
       {%- render 'button',
         button_value: 'Add To Cart',
         tag: 'button',
-        custom_attrs: 'type="submit" :disabled="!selectedVariantId"',
+        custom_attrs: 'type="submit" :disabled="!selectedVariantId || !this.product.available"',
         class: button_class
       -%}
     </form>
   </div>
 {%- endcapture -%}
-
 {%- if is_vue_component -%}
   <div is="product-form" inline-template {{ custom_attrs }}>
     <div v-if="product" class="{{- class -}}">
@@ -245,3 +255,4 @@
   </div>
 
 {%- endif -%}
+

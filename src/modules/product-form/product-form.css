@@ -119,6 +119,7 @@
 }
 
 .product-form__option-value-label {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,6 +212,15 @@
           }
         }
       }
+
+      &.disabled {
+        background: var(--steel);
+        color: var(--black);
+
+        &::before {
+          border: none;
+        }
+      }
     }
   }
 }
@@ -223,6 +233,23 @@
 
   & > * {
     line-height: 1;
+  }
+}
+
+.product-form__option-value-name {
+  &.sold-out {
+    text-decoration: line-through;
+  }
+}
+
+.product-form__diagonal-line {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  line {
+    stroke: var(--bone);
+    stroke-width: 1;
   }
 }
 
