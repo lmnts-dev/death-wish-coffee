@@ -47,6 +47,10 @@
       visibility: visible;
     }
   }
+
+  @media (--xxs-max) {
+    top: 96px;
+  }
 }
 
 .pop-out-cart__inner {
@@ -56,6 +60,10 @@
 
   @media (--xs) {
     height: calc(85vh - 140px);
+  }
+
+  @media (--xxs-max) {
+    height: calc(95vh - 122px);
   }
 }
 
@@ -95,6 +103,10 @@
   padding-right: 20px;
   overflow: auto;
   height: 50%;
+
+  @media (--xxs-max) {
+    height: 40%;
+  }
 
   .cart-container__wrapper & {
     height: 100%;
