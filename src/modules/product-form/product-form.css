@@ -236,12 +236,6 @@
   }
 }
 
-.product-form__option-value-name {
-  &.sold-out {
-    text-decoration: line-through;
-  }
-}
-
 .product-form__diagonal-line {
   width: 100%;
   height: 100%;
