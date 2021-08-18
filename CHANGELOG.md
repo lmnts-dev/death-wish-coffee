@@ -1,5 +1,19 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
+
+## 1.4.8 - 2021-08-12
+### CHANGED:
+- conditionally render account/login in mobile nav menu
+- remove bottom margin of h4 text in mobile account page
+
+## 1.4.7 - 2021-08-12
+### CHANGED:
+- Address [[mobile] Store locator stuck on scrolling](https://app.asana.com/0/1187243774580389/1200708540319411)
+
+## 1.4.6 - 2021-08-11
+### CHANGED:
+- Address [Google Merchant Center > Products display pricing incorrectly upon google search](https://app.asana.com/0/1187243774580389/1200694120864906)
+
 ## 1.4.5 - 2021-08-02
 ### CHANGED:
 - Address [Refactor subscription options to match designs](https://app.asana.com/0/0/1200627666298825/f)

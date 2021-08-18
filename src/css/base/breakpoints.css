@@ -26,6 +26,10 @@
 
 @custom-media --xs-max (max-width: 399px);
 
+@custom-media --xxs (min-width: 365px);
+
+@custom-media --xxs-max (max-width: 3364px);
+
 @custom-media --desktop-menu (min-width: 1001px);
 
 @custom-media --mobile-menu (max-width: 1000px);

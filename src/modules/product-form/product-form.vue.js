@@ -62,7 +62,9 @@ export default {
     this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {
-      this.$set(this.selectedOptions, key, this.product.options_by_name[key].option.values[0])
+      const option = this.product.options_by_name[key].option
+      const optionPosition = option.position
+      this.$set(this.selectedOptions, key, this.initialVariant[`option${optionPosition}`])
     }
     // add listener for variant update, set in variant_selection.js
     // this listener could be different depeneding on if the theme uses the same base setup
@@ -134,6 +136,9 @@ export default {
     },
     productName () {
       return this.product.title
+    },
+    initialVariant () {
+      return this.product.selected_or_first_available_variant
     },
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
@@ -446,7 +451,6 @@ export default {
     setFrequency (val) {
       this.selectedFrequencyIndex = val
     },
-
     clickOption (index, option) {
       // console.log(this.selectedFrequency === this.index)
       this.index = index
@@ -667,6 +671,7 @@ export default {
       })
     },
     toggleOption (option, value) {
+      console.log(option, value)
       const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
       if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
         cloneSelectedOptions[option] = null
@@ -674,6 +679,14 @@ export default {
         cloneSelectedOptions[option] = value
       }
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
+    },
+    disableOption (option, value) {
+      console.log(option, value)
+      for (const variant of this.product.variants) {
+        if (variant.title === value && variant.available === false) {
+          return true
+        }
+      }
     },
     toggleSizeChart () {
       this.sizeChartActive = !this.sizeChartActive
