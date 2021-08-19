@@ -21,8 +21,10 @@
     @extend .h1;
   }
 
+  /* h4 tags converted to h2 with h4 styling */
+
   h2 {
-    @extend .h2;
+    @extend .h4;
   }
 
   h3 {

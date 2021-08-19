@@ -131,6 +131,8 @@
 }
 
 .bolt-illustration-hero__title {
+  @extend .h1;
+
   padding-top: 42px;
   color: var(--blood);
 
