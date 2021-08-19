@@ -64,7 +64,7 @@
     "offers": {
       "@type": "Offer",
       "priceCurrency": "{{- shop.currency -}}",
-      "price": "{{- current_variant.price -}}",
+      "price": "{{- current_variant.price | money_without_currency -}}",
       {%- if current_variant.available -%}
         "availability": "http://schema.org/InStock"
       {%- else -%}
