@@ -10,6 +10,10 @@ export default {
     product: {
       type: Object,
       default: () => ({})
+    },
+    queryStringVariant: {
+      type: String,
+      default: () => ('')
     }
   },
   computed: {
