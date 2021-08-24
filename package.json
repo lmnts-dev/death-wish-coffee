@@ -1,6 +1,6 @@
 {
   "name": "shopify-base-theme",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "A base shopify theme for custom theme development at Ruckus.",
   "main": "webpack.config.js",
   "scripts": {
