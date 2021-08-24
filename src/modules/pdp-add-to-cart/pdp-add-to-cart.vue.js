@@ -10,6 +10,10 @@ export default {
     product: {
       type: Object,
       default: () => ({})
+    },
+    queryStringVariant: {
+      type: String,
+      default: () => ('')
     }
   },
   computed: {
@@ -30,7 +34,18 @@ export default {
       return this.productPrice ? '$' + formatPrice(this.productPrice) : ''
     },
     productDescription () {
-      return this.product.description
+      const hTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+      let tag
+      let closingTag
+
+      for (const item of hTags) {
+        if (this.product.description.includes(item)) {
+          console.log('original tag: ', item)
+          tag = item
+          closingTag = `/${item}`
+          return this.product.description.replace(tag, 'h2').replace(closingTag, '/h2')
+        }
+      }
     },
     productExtraDescriptions () {
       return [this.product.extra_description_1, this.product.extra_description_2].filter(item => !!item)

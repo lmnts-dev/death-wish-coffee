@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/dge3sjv.css">
 
   {%- render 'social-meta' -%}
+  {% render 'structured-data' %}
 
   {{ content_for_header }}
 
@@ -54,6 +55,8 @@
   </script>
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
+
+  {% render 'shogun-head' %}
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
   <!-- Google Tag Manager (noscript) -->
@@ -91,5 +94,7 @@
   ire('identify', {customerId: "{{customerID}}", customerEmail: "{{SHA1Email}}" });
 </script>
 <!-- End Impact Radius Script Body-->
+ {% include 'smile-initializer' %}
+
 </body>
 </html>

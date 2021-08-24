@@ -1,6 +1,15 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.4.9 - 2021-08-24
+### CHANGED:
+- Address (Store locator stuck on scrolling)[https://app.asana.com/0/0/1200708540319411/f]
+- Address (Typography > Increase font size of body copy to 20px)[https://app.asana.com/0/0/1200625307741540/f]
+- Address (Mobile Device Checkout > Small Screens obfuscate checkout button)[https://app.asana.com/0/0/1200758443723787/f]
+- Address (Quickshop showing zero inventory variants.)[https://app.asana.com/0/0/1200770205187249/f]
+- Address (<h> tag updates needed)[https://app.asana.com/0/0/1200786828167271/f]
+- Address (Follow up on "Google Merchant Center > Products display pricing incorrectly upon google search")[https://app.asana.com/0/0/1200774907141858/f]
+
 ## 1.4.8 - 2021-08-12
 ### CHANGED:
 - conditionally render account/login in mobile nav menu
