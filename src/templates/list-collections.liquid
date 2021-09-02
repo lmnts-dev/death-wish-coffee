@@ -3,15 +3,18 @@
 {%- assign shop_all_acf = pages['shop-all'].metafields.accentuate -%}
 {%- assign titles = shop_all_acf.shop_all_card_title -%}
 {%- assign links = shop_all_acf.shop_all_card_link -%}
+{%- assign urls = shop_all_acf.shop_all_card_url -%}
 {%- assign images = shop_all_acf.shop_all_card_image -%}
 {%- assign images_mobile = shop_all_acf.shop_all_card_image_mobile -%}
 
 {%- if titles.size > 0 -%}
   {%- for title in titles -%}
-
     {%- assign image = images[forloop.index0] | map: 'src' -%}
     {%- assign image_mobile = images_mobile[forloop.index0] | map: 'src' -%}
     {%- assign link = links[forloop.index0] | prepend: 'collections/' -%}
+    {% if urls[forloop.index0] != blank %}
+      {%- assign link = urls[forloop.index0] -%}
+    {% endif %}
 
     {%- capture after_content -%}
       {%- render 'button',
