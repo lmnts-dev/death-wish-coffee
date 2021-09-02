@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.0 - 2021-09-02
+### CHANGED:
+- Fix Shop page url not linking to /pages/subscription
+
 ## 1.4.9 - 2021-08-24
 ### CHANGED:
 - Address (Store locator stuck on scrolling)[https://app.asana.com/0/0/1200708540319411/f]
