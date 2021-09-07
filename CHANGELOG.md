@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.2 - 2021-09-07
+### CHANGED:
+- Update Impact Radius scripts on checkout page
+
 ## 1.5.1 - 2021-09-07
 ### CHANGED:
 - Add Impact Radius scripts to checkout page for troubleshooting
