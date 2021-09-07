@@ -66,7 +66,9 @@
 }
 
   </style>
-  </head>
+  
+  {% render 'shogun-head' %}
+</head>
   <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS7HLL9"
@@ -122,7 +124,7 @@
     <!-- Impact Radius Track Conversion -->
     <script type="text/javascript">
       {% assign SHA1Email = customer.email | hmac_sha1: "secret_key" %}
-      if (Shopify.Checkout.step == 'thank_you'){
+      if (Shopify.Checkout.page == 'thank_you'){
         {% if {{order.total_discounts | money_without_currency }} == blank %}
            {% assign totalDiscounts = '' %}
         {% else %}
@@ -141,7 +143,7 @@
             customerStatus: '{{customerStatus}}',
             currencyCode: 'USD',
             orderPromoCode: '{{order.discount_applications.first.title}}',
-            orderDiscount: totalDiscounts,
+            orderDiscount: '{{totalDiscounts}}',
             items: [
             {% for item in order.line_items %}
               {
