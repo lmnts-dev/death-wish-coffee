@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.3 - 2021-09-13
+### CHANGED:
+- Add Klaviyo tracking snippet on product templates
+
 ## 1.5.2 - 2021-09-07
 ### CHANGED:
 - Update Impact Radius scripts on checkout page
