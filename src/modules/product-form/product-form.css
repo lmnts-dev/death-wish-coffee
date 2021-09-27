@@ -470,6 +470,12 @@
 
     &:checked ~ .cu-productTypeSelect__itemMark {
       background: var(--blood);
+
+      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+        .product-form--palette-$(color) & {
+          background: var(--$color);
+        }
+      }
     }
   }
 
@@ -517,6 +523,12 @@
     &.is-active {
       color: var(--white);
       background: var(--slate);
+
+      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+        .product-form--palette-$(color) & {
+          border-color: var(--$color);
+        }
+      }
     }
 
     &:first-child {
