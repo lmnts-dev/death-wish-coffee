@@ -29,7 +29,8 @@ export default {
     queryStringVariant: {
       type: String,
       default: () => ('')
-    }
+    },
+    subscriptionChecked: Boolean
   },
   data () {
     const initialSelectedOptions = this.product.options.reduce(
@@ -58,7 +59,7 @@ export default {
     // reset
     this.index = ''
     this.selectedFrequencyIndex = 0
-    this.productPurchaseType = 'onetime'
+    this.productPurchaseType = this.subscriptionChecked ? 'subscription' : 'onetime'
     this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {

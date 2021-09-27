@@ -6,7 +6,7 @@
 {%- capture product_json -%}{%- render 'product-json', include_media: true, include_extra_contents: true, include_description: true -%}{%- endcapture -%}
 
 <section class="{{ class }} bg--black" data-module="pdp-hero">
-  <div is="pdp-hero" inline-template :product='{{- product_json | escape -}}'>
+  <div is="pdp-hero" inline-template :product='{{- product_json | escape -}}' :subscription-checked="subscriptionChecked">
     <div class="pdp-hero__wrapper">
       {%- capture pdp_media -%}
         {%- comment -%}
@@ -37,7 +37,7 @@
         loop: loop,
         custom_attrs: 'v-if="images.length" ref="carousel"'
       -%}
-      {%- render 'pdp-add-to-cart', vue_attrs: ':product="product"', class: add_to_cart_class, palette: palette, product_upc: product_acf.product_upc -%}
+      {%- render 'pdp-add-to-cart', vue_attrs: ':product="product" :subscription-checked="subscriptionChecked"', class: add_to_cart_class, palette: palette, product_upc: product_acf.product_upc -%}
     </div>
   </div>
 </section>
