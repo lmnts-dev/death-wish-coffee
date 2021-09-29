@@ -44,7 +44,7 @@
           <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
         </h4>
         <div class="b1 product-card__review">
-          <a :href="product.url + '#review-drawer'" class="product-card__review-link">
+          <a :href="product.url + '#review-drawer'" @click="setCookieReview" class="product-card__review-link">
             <div class="yotpo bottomLine" :data-product-id="product.id"></div>
           </a>
         </div>
