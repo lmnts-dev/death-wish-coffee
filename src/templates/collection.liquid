@@ -76,7 +76,7 @@
   -%}
 {%- endif -%}
 
-{%- render 'plp', class: 'bg--black' -%}
+{%- render 'plp', class: 'bg--black', collection_name: collection.title -%}
 {%- if shop.metafields.globals.footer_cta_title != blank -%}
   {%- render 'footer-cta',
     title: shop.metafields.globals.footer_cta_title,
