@@ -9,4 +9,13 @@
       image_url: page.metafields.reward_intro_item.image,
     -%}
   {%- endunless -%}
+
+  {%- unless customer -%}
+    {%- render 'cta-banner',
+      title: page.metafields.cta_banner.title
+      buttons_value: page.metafields.cta_banner.button_text,
+      buttons_url: page.metafields.cta_banner.button_url,
+      cta_text: page.metafields.cta_banner.cta_text
+    -%}
+  {%- endunless -%}
 </section>
