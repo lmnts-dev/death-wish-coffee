@@ -3,6 +3,7 @@ import ProductForm from '../product-form/product-form.vue'
 import VImage from '../v-image/v-image.vue'
 import VVideo from '../v-video/v-video.vue'
 import { formatPrice, debounce } from 'lib/util'
+import cookies from 'js-cookie'
 
 let yotpoApi = null
 let yotpoRetries = 0
@@ -107,6 +108,9 @@ export default {
     },
     handleVideoEnded () {
       this.isHovered = false
+    },
+    setCookieReview () {
+      cookies.set('anchor_review_drawer', 'true')
     }
   },
   mounted () {
