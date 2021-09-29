@@ -43,7 +43,11 @@ export default {
       type: Object,
       required: true
     },
-    isFeatured: Boolean
+    isFeatured: Boolean,
+    showReview: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
