@@ -1,10 +1,12 @@
 <section class="rewards-wrapper bg--black" data-module="rewards-wrapper">
   {%- render 'rewards-hero', custom_attrs: ':rewards-customer="rewardsCustomer"' -%}
 
-  {%- render 'rewards-intro',
-    heading: page.metafields.reward_intro.title,
-    description: page.metafields.reward_intro.description,
-    items: page.metafields.reward_intro_item.title,
-    image_url: page.metafields.reward_intro_item.image,
-  -%}
+  {%- unless customer -%}
+    {%- render 'rewards-intro',
+      heading: page.metafields.reward_intro.title,
+      description: page.metafields.reward_intro.description,
+      items: page.metafields.reward_intro_item.title,
+      image_url: page.metafields.reward_intro_item.image,
+    -%}
+  {%- endunless -%}
 </section>
