@@ -10,6 +10,13 @@
     -%}
   {%- endunless -%}
 
+  {%- render 'rewards-program',
+    info: page.metafields.reward_two_up.title,
+    descriptions: page.metafields.reward_two_up.description,
+    items: page.metafields.reward_programs.content,
+    image_url: page.metafields.reward_programs.image
+  -%}
+
   {%- unless customer -%}
     {%- render 'cta-banner',
       title: page.metafields.cta_banner.title

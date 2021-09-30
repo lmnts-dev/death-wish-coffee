@@ -265,3 +265,21 @@
     @extend .articles-font;
   }
 }
+
+.wysiwyg--rewards-program p {
+  @extend .p1--bold;
+
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0;
+  color: var(--white);
+
+  @media (--md) {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  &:last-of-type {
+    padding: 0;
+  }
+}
