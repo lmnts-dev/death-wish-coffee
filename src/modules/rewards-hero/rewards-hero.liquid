@@ -1,8 +1,10 @@
 {%- assign custom_attrs = custom_attrs | default: false -%}
-<div is="rewards-hero" inline-template{% if custom_attrs %} {{ custom_attrs }}{% endif %}>
+<div is="rewards-hero" inline-template{% if custom_attrs %} {{ custom_attrs }}{% endif %} v-cloak>
   <section class="rewards-hero">
-    <p>First name: ${firstName}</p> 
-    <p>VIP Tier: ${tier ? tier : 'None'}</p>
-    <p>Points Balance: ${pointsBalance}</p>
+    <div v-if="customerId">
+      <p>First name: ${firstName}</p> 
+      <p>VIP Tier: ${tier ? tier : 'None'}</p>
+      <p>Points Balance: ${pointsBalance}</p>
+    </div>
   </section>
 </div>

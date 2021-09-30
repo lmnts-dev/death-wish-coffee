@@ -5,10 +5,10 @@ export default {
       default: () => ({})
     }
   },
-  mounted () {
-    console.log(this.rewardsCustomer)
-  },
   computed: {
+    customerId () {
+      return this.rewardsCustomer && this.rewardsCustomer.id
+    },
     firstName () {
       return this.rewardsCustomer && this.rewardsCustomer.first_name
     },
@@ -16,7 +16,7 @@ export default {
       return this.rewardsCustomer && this.rewardsCustomer.points_balance
     },
     tier () {
-      return this.rewardsCustomer.vip_tier
+      return this.rewardsCustomer && this.rewardsCustomer.vip_tier
     }
   }
 }
