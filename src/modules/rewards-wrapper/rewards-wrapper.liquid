@@ -1,5 +1,9 @@
 <section class="rewards-wrapper bg--black" data-module="rewards-wrapper">
-  {%- render 'rewards-hero', custom_attrs: ':rewards-customer="rewardsCustomer"' -%}
+  {%- render 'rewards-hero', 
+    custom_attrs: ':rewards-customer="rewardsCustomer"',
+    title: page.metafields.rewards_hero.title,
+    description: page.metafields.rewards_hero.description,
+  -%}
 
   {%- unless customer -%}
     {%- render 'rewards-intro',
