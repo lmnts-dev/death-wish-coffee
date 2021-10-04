@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.4 - 2021-10-04
+### CHANGED:
+- Address (PLP > Clicking on reviews should open review drawer in PDP)[https://app.asana.com/0/1187243774580389/1200561559847683]
+
 ## 1.5.3 - 2021-09-13
 ### CHANGED:
 - Add Klaviyo tracking snippet on product templates
