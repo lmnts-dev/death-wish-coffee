@@ -8,6 +8,10 @@ export default {
     currentTags: {
       type: Array,
       default: () => []
+    },
+    collectionName: {
+      type: String,
+      default: ''
     }
   },
   components: {

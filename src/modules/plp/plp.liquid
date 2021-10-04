@@ -13,6 +13,7 @@
   <div is="plp"
        inline-template
        :current-tags='{{ current_tags | json }}'
+       :collection-name='{{ collection_name | json }}'
   >
     <div class="container plp__container">
       <div class="plp__inner">
@@ -25,6 +26,7 @@
               :key="product.id"
               :class="[checkIfProductFeatured(product) ? getFeaturedProductClass(productIndex) : '']"
               :is-featured="checkIfProductFeatured(product)"
+              :show-review="collectionName !== 'Merch'"
             {%- endcapture -%}
             {%- render 'product-card',
               class: 'product-card--bg-dark product-card--plp',
