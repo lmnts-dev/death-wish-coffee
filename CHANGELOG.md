@@ -1,6 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.5 - 2021-10-05
+### CHANGED:
+- Address (Products > Sold Out (all variations))[https://app.asana.com/0/1187243774580389/1200620272050314]
+- Address (Coffee PDP > Ability to select subscription choice on subscription PDPs via query string)[https://app.asana.com/0/1187243774580389/1200933260543359]
+
 ## 1.5.4 - 2021-10-04
 ### CHANGED:
 - Address (PLP > Clicking on reviews should open review drawer in PDP)[https://app.asana.com/0/1187243774580389/1200561559847683]
