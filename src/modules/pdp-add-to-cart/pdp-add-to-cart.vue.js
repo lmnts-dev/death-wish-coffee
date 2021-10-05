@@ -14,7 +14,8 @@ export default {
     queryStringVariant: {
       type: String,
       default: () => ('')
-    }
+    },
+    subscriptionChecked: Boolean
   },
   computed: {
     ...mapState('pdp', ['selectedVariantId']),

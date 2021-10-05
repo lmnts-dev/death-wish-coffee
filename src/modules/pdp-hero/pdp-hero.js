@@ -6,6 +6,7 @@
 import Vue from 'vue'
 import store from 'lib/store'
 import PdpHero from '../pdp-hero/pdp-hero.vue'
+import QueryString from 'query-string'
 
 const pdpHero = (el) => {
   return new Vue({
@@ -15,7 +16,16 @@ const pdpHero = (el) => {
     components: {
       PdpHero
     },
-    store
+    store,
+    data () {
+      return {
+        subscriptionChecked: false
+      }
+    },
+    created () {
+      const params = QueryString.parse(location.search, { parseBooleans: true })
+      this.subscriptionChecked = !!params['subscription-checked']
+    }
   })
 }
 
