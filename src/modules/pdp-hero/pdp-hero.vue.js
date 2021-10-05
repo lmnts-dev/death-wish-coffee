@@ -14,7 +14,8 @@ export default {
     product: {
       type: Object,
       default: () => ({})
-    }
+    },
+    subscriptionChecked: Boolean
   },
   data () {
     return {

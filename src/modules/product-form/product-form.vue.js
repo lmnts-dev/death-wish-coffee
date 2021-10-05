@@ -29,7 +29,8 @@ export default {
     queryStringVariant: {
       type: String,
       default: () => ('')
-    }
+    },
+    subscriptionChecked: Boolean
   },
   data () {
     const initialSelectedOptions = this.product.options.reduce(
@@ -58,7 +59,7 @@ export default {
     // reset
     this.index = ''
     this.selectedFrequencyIndex = 0
-    this.productPurchaseType = 'onetime'
+    this.productPurchaseType = this.subscriptionChecked ? 'subscription' : 'onetime'
     this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {
@@ -146,7 +147,10 @@ export default {
     hasSingleVariant () {
       return this.product.variants.length === 1
     },
-    selectedVariantId () {
+    hasSingleOption () {
+      return this.product.options.length === 1
+    },
+    selectedVariant () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
       // upscribe
       if (variant) {
@@ -154,14 +158,16 @@ export default {
           detail: variant
         }))
       }
-
-      if (this.hasSingleVariant) {
-        return this.product.variants[0].id
-      } else if (variant) {
-        return variant.id
-      } else {
-        return ''
-      }
+      return this.hasSingleVariant ? this.product.varaiants[0] : variant
+    },
+    selectedVariantId () {
+      return this.selectedVariant ? this.selectedVariant.id : ''
+    },
+    isAbleAddToCart () {
+      return !this.selectedVariant || this.selectedVariant.available
+    },
+    addToCartButtonText () {
+      return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
     },
     priceDecidingFactor () {
       // Find out which variant option affects pricing
