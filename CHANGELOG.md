@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.6 - 2021-10-06
+### CHANGED:
+- Revert (Products > Sold Out (all variations))[https://app.asana.com/0/1187243774580389/1200620272050314] due to missing add to cart button
+
 ## 1.5.5 - 2021-10-05
 ### CHANGED:
 - Address (Products > Sold Out (all variations))[https://app.asana.com/0/1187243774580389/1200620272050314]
