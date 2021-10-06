@@ -31,8 +31,16 @@ export default {
     copyReferralUrl () {
       if (this.referralUrl) {
         navigator.clipboard.writeText(this.referralUrl)
+        const inputEl = Array.isArray(this.$refs.input) ? this.$refs.input[0] : this.$refs.input
+        if (inputEl) {
+          inputEl.focus()
+        }
         this.isCopied = true
       }
+    },
+    focusInput (e) {
+      const inputEl = e.currentTarget
+      inputEl.setSelectionRange(0, this.referralUrl.length)
     }
   }
 }
