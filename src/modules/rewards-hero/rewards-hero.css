@@ -1,3 +1,7 @@
+.rewards-hero__container {
+  margin-top: 100px;
+}
+
 .rewards-hero__header {
   position: relative;
   display: flex;
@@ -10,6 +14,10 @@
 
   @media (--md) {
     min-height: 275px;
+  }
+
+  & + .rewards-hero__container {
+    margin-top: 0;
   }
 }
 
