@@ -7,6 +7,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import RewardsHero from '../rewards-hero/rewards-hero.vue'
+import RewardsCtaGroup from '../rewards-cta-group/rewards-cta-group.vue'
 
 // @TODO: This line is used for Vue debugging. Remove after finished this task.
 Vue.config.devtools = true
@@ -17,16 +18,24 @@ const rewardswrapper = el => {
     delimiters: ['${', '}'],
     name: 'RewardsWrapper',
     components: {
-      RewardsHero
+      RewardsHero,
+      RewardsCtaGroup
     },
     data () {
       return {
+        loaded: false,
         rewardsCustomer: null,
         smileChannel: null
       }
     },
+    computed: {
+      referralUrl () {
+        return this.rewardsCustomer && this.rewardsCustomer.referral_url
+      }
+    },
     created () {
       document.addEventListener('smile-shopify-loaded', async () => {
+        this.loaded = true
         const channelKey = window.Smile.channel_key
         await this.getChannelData(channelKey)
         window.SmileShopify.on('customer-identified', async () => {

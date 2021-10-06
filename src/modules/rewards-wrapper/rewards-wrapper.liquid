@@ -1,32 +1,48 @@
-<section class="rewards-wrapper bg--black" data-module="rewards-wrapper">
-  {%- render 'rewards-hero', 
-    custom_attrs: ':rewards-customer="rewardsCustomer"',
-    title: page.metafields.rewards_hero.title,
-    description: page.metafields.rewards_hero.description,
-  -%}
-
-  {%- unless customer -%}
-    {%- render 'rewards-intro',
-      heading: page.metafields.reward_intro.title,
-      description: page.metafields.reward_intro.description,
-      items: page.metafields.reward_intro_item.title,
-      image_url: page.metafields.reward_intro_item.image,
+<section class="rewards-wrapper" data-module="rewards-wrapper">
+  <template v-if="loaded">
+    {%- render 'rewards-hero', 
+      custom_attrs: ':rewards-customer="rewardsCustomer"',
+      title: page.metafields.rewards_hero.title,
+      description: page.metafields.rewards_hero.description,
     -%}
-  {%- endunless -%}
 
-  {%- render 'rewards-program',
-    info: page.metafields.reward_two_up.title,
-    descriptions: page.metafields.reward_two_up.description,
-    items: page.metafields.reward_programs.content,
-    image_url: page.metafields.reward_programs.image
-  -%}
+    {%- unless customer -%}
+      {%- render 'rewards-intro',
+        heading: page.metafields.reward_intro.title,
+        description: page.metafields.reward_intro.description,
+        items: page.metafields.reward_intro_item.title,
+        image_url: page.metafields.reward_intro_item.image,
+      -%}
+    {%- endunless -%}
 
-  {%- unless customer -%}
-    {%- render 'cta-banner',
-      title: page.metafields.cta_banner.title
-      buttons_value: page.metafields.cta_banner.button_text,
-      buttons_url: page.metafields.cta_banner.button_url,
-      cta_text: page.metafields.cta_banner.cta_text
+    {%- assign earn_image = page.metafields.rewards_cts_group.earn_image | map: 'src' | first -%}
+    {%- assign redeem_image = page.metafields.rewards_cts_group.redeem_image | map: 'src' | first -%}
+    {%- assign referral_image = page.metafields.rewards_cts_group.referral_image | map: 'src' | first -%}
+    {%- render 'rewards-cta-group',
+      vue_attrs: ':referral-url="referralUrl"',
+      earn_title: page.metafields.rewards_cta_group.earn_title,
+      earn_image: earn_image,
+      redeem_title: page.metafields.rewards_cta_group.redeem_title,
+      redeem_image: redeem_image,
+      referral_title: page.metafields.rewards_cta_group.referral_title,
+      referral_description: page.metafields.rewards_cta_group.referral_description,
+      referral_image: referral_image
     -%}
-  {%- endunless -%}
+
+    {%- render 'rewards-program',
+      info: page.metafields.reward_two_up.title,
+      descriptions: page.metafields.reward_two_up.description,
+      items: page.metafields.reward_programs.content,
+      image_url: page.metafields.reward_programs.image
+    -%}
+
+    {%- unless customer -%}
+      {%- render 'cta-banner',
+        title: page.metafields.cta_banner.title
+        buttons_value: page.metafields.cta_banner.button_text,
+        buttons_url: page.metafields.cta_banner.button_url,
+        cta_text: page.metafields.cta_banner.cta_text
+      -%}
+    {%- endunless -%}
+  </template>
 </section>

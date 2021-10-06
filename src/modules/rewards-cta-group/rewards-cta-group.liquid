@@ -1,0 +1,45 @@
+
+{%- assign earn_title = earn_title | default: false -%}
+{%- assign earn_image = earn_image | default: false -%}
+{%- assign redeem_title = redeem_title | default: false -%}
+{%- assign redeem_image = redeem_image | default: false -%}
+{%- assign referral_title = referral_title | default: false -%}
+{%- assign referral_description = referral_description | default: false -%}
+{%- assign referral_image = referral_image | default: false -%}
+{%- assign vue_attrs = vue_attrs | default: false -%}
+{%- assign class = class | default: false -%}
+<div is="rewards-cta-group" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
+  <section class="rewards-cta-group{% if class %} {{ class }}{% endif %}">
+    <div class="rewards-cta-group__inner">
+      <div class="rewards-cta-group__earn">
+        {%- capture earn_image_attrs -%}image-src="{{- earn_image -}}"{%- endcapture -%}
+        <div class="rewards-cta-group__earn-image-wrapper">
+          {%- render 'image', vue_attrs: earn_image_attrs, class: 'rewards-cta-group__earn-image' -%}
+        </div>
+        <p class="rewards-cta-group__earn-title">{{- earn_title -}}</p>
+      </div>
+      <div class="rewards-cta-group__redeem">
+        {%- capture redeem_image_attrs -%}image-src="{{- redeem_image -}}"{%- endcapture -%}
+        <div class="rewards-cta-group__redeem-image-wrapper">
+          {%- render 'image', vue_attrs: redeem_image_attrs, class: 'rewards-cta-group__redeem-image' -%}
+        </div>
+        <p class="rewards-cta-group__redeem-title">{{- redeem_title -}}</p>
+      </div>
+      <div class="rewards-cta-group__referral">
+        {%- capture referral_image_attrs -%}image-src="{{- referral_image -}}"{%- endcapture -%}
+        <div class="rewards-cta-group__referral-image-wrapper">
+          {%- render 'image', vue_attrs: referral_image_attrs, class: 'rewards-cta-group__referral-image' -%}
+        </div>
+        <div class="rewards-cta-group__referral-contents">
+          <p class="rewards-cta-group__referral-title">{{- referral_title -}}</p>
+          <div class="rewards-cta-group__referral-description">{{- referral_description -}}</div>
+          <div class="rewards-cta-group__referral-field">
+            <input type="text" class="rewards-cta-group__referral-input" readonly v-model="referralUrl">
+            <button class="rewards-cta-group__referral-button" @click.prevent="copyReferralUrl">Copy</button>
+            <div v-if="isCopied" class="rewards-cta-group__referral-message">Referral Url Copied!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

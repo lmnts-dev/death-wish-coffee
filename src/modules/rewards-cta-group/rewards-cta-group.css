@@ -1,0 +1,7 @@
+/* styles for rewards-cta-group */
+
+.rewards-cta-group__earn-image-wrapper,
+.rewards-cta-group__redeem-image-wrapper,
+.rewards-cta-group__referral-image-wrapper {
+  position: relative;
+}

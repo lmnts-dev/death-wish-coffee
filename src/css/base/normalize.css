@@ -47,6 +47,10 @@ body {
       padding-top: 140px;
     }
   }
+
+  &.template-page-smile-io {
+    background-color: var(--black);
+  }
 }
 
 img {
