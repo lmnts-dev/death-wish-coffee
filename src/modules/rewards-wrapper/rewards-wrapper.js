@@ -25,34 +25,43 @@ const rewardswrapper = el => {
       return {
         loaded: false,
         rewardsCustomer: null,
-        smileChannel: null
+        smileChannel: null,
+        channelKey: null,
+        activities: []
       }
     },
     computed: {
+      rewardsCustomerId () {
+        return this.rewardsCustomer && this.rewardsCustomer.id
+      },
       referralUrl () {
         return this.rewardsCustomer && this.rewardsCustomer.referral_url
+      },
+      enabledActivities () {
+        return this.activities.filter(activity => activity.activity_rule.is_enabled)
       }
     },
     created () {
       document.addEventListener('smile-shopify-loaded', async () => {
         this.loaded = true
-        const channelKey = window.Smile.channel_key
-        await this.getChannelData(channelKey)
+        this.channelKey = window.Smile.channel_key
+        await this.getChannelData()
         window.SmileShopify.on('customer-identified', async () => {
-          this.reloadCustomer()
+          await this.reloadCustomer()
+          await this.getCustomerActivities()
         })
       })
     },
     methods: {
-      async getChannelData (channelKey) {
-        if (!channelKey) {
+      async getChannelData () {
+        if (!this.channelKey) {
           return
         }
         try {
           const smileResponse = await axios.get('https://platform.smile.io/v1/smile_ui/init', {
-            params: { channel_key: channelKey },
+            params: { channel_key: this.channelKey },
             headers: {
-              'smile-channel-key': channelKey,
+              'smile-channel-key': this.channelKey,
               'smile-client': 'smile-ui'
             }
           })
@@ -67,6 +76,20 @@ const rewardswrapper = el => {
           this.rewardsCustomer = rewardsCustomer
         } catch (error) {
           console.log('Error fetching customer data')
+        }
+      },
+      async getCustomerActivities () {
+        try {
+          const activities = await axios.get('https://platform.smile.io/v1/customer_activity_rules', {
+            params: { customer_id: this.rewardsCustomerId },
+            headers: {
+              'smile-channel-key': this.channelKey,
+              'smile-client': 'smile-ui'
+            }
+          })
+          this.activities = activities.data && activities.data.customer_activity_rules ? activities.data.customer_activity_rules : []
+        } catch (error) {
+          console.log('Error fetching activities')
         }
       }
     }
