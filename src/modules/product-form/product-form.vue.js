@@ -147,10 +147,7 @@ export default {
     hasSingleVariant () {
       return this.product.variants.length === 1
     },
-    hasSingleOption () {
-      return this.product.options.length === 1
-    },
-    selectedVariant () {
+    selectedVariantId () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
       // upscribe
       if (variant) {
@@ -158,16 +155,14 @@ export default {
           detail: variant
         }))
       }
-      return this.hasSingleVariant ? this.product.varaiants[0] : variant
-    },
-    selectedVariantId () {
-      return this.selectedVariant ? this.selectedVariant.id : ''
-    },
-    isAbleAddToCart () {
-      return !this.selectedVariant || this.selectedVariant.available
-    },
-    addToCartButtonText () {
-      return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
+
+      if (this.hasSingleVariant) {
+        return this.product.variants[0].id
+      } else if (variant) {
+        return variant.id
+      } else {
+        return ''
+      }
     },
     priceDecidingFactor () {
       // Find out which variant option affects pricing
