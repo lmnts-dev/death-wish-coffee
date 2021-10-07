@@ -158,7 +158,7 @@ export default {
           detail: variant
         }))
       }
-      return this.hasSingleVariant ? this.product.varaiants[0] : variant
+      return this.hasSingleVariant ? this.product.variants[0] : variant
     },
     selectedVariantId () {
       return this.selectedVariant ? this.selectedVariant.id : ''
