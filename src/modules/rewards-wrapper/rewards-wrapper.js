@@ -27,7 +27,8 @@ const rewardswrapper = el => {
         rewardsCustomer: null,
         smileChannel: null,
         channelKey: null,
-        allEarnActivities: []
+        allEarnActivities: [],
+        redeemProducts: []
       }
     },
     computed: {
@@ -58,6 +59,7 @@ const rewardswrapper = el => {
         window.SmileShopify.on('customer-identified', async () => {
           await this.reloadCustomer()
           await this.getCustomerActivities()
+          await this.getRedeemProducts()
         })
       })
     },
@@ -99,6 +101,15 @@ const rewardswrapper = el => {
           this.allEarnActivities = activitiesResponse.data && activitiesResponse.data.customer_activity_rules ? activitiesResponse.data.customer_activity_rules : []
         } catch (error) {
           console.log('Error fetching activities')
+        }
+      },
+      async getRedeemProducts () {
+        try {
+          window.Smile.fetchAllPointsProducts().then(pointsProducts => {
+            this.redeemProducts = [...pointsProducts]
+          })
+        } catch (error) {
+          console.log('Error fetching redeem products')
         }
       }
     }

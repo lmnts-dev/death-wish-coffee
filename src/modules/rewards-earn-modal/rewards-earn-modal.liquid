@@ -1,3 +1,4 @@
+{%- assign vue_attrs = vue_attrs | default: false -%}
 <div is="rewards-earn-modal" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
   <div class="rewards-earn-modal" v-if="earnActivities.length">
     <div class="rewards-earn-modal__overlay"></div>

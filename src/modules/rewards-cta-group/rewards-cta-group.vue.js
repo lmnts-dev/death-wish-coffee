@@ -1,10 +1,12 @@
 import VImage from '../v-image/v-image.vue'
-import rewardsEarnModal from '../rewards-earn-modal/rewards-earn-modal.vue'
+import RewardsEarnModal from '../rewards-earn-modal/rewards-earn-modal.vue'
+import RewardsRedeemModal from '../rewards-redeem-modal/rewards-redeem-modal.vue'
 
 export default {
   components: {
     VImage,
-    rewardsEarnModal
+    RewardsEarnModal,
+    RewardsRedeemModal
   },
   props: {
     referralUrl: {
@@ -16,6 +18,10 @@ export default {
       default: 2000
     },
     earnActivities: {
+      type: Array,
+      default: () => []
+    },
+    redeemProducts: {
       type: Array,
       default: () => []
     }
