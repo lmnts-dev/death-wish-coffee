@@ -27,10 +27,7 @@
 
   &:disabled {
     cursor: default;
-
-    &:not(:hover) {
-      background: var(--steel);
-    }
+    background: var(--steel);
   }
 
   &--small-h {
