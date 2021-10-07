@@ -218,9 +218,9 @@
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
       {%- render 'button',
-        button_value: 'Add To Cart',
+        button_value: '${addToCartButtonText}',
         tag: 'button',
-        custom_attrs: 'type="submit" :disabled="!selectedVariantId || !this.product.available"',
+        custom_attrs: 'type="submit" :disabled="!isAbleAddToCart"',
         class: button_class
       -%}
     </form>
@@ -252,4 +252,3 @@
   </div>
 
 {%- endif -%}
-
