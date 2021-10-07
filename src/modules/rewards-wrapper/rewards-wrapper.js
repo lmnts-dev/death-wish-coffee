@@ -49,6 +49,9 @@ const rewardswrapper = el => {
           .sort((a, b) => b.default_sort_order - a.default_sort_order)
           .map(activity => Object.assign({}, activity, { is_actionable: false }))
         return [...actionableActivities, ...inactionableActivities]
+      },
+      pointsBalance () {
+        return this.rewardsCustomer && this.rewardsCustomer.points_balance
       }
     },
     created () {

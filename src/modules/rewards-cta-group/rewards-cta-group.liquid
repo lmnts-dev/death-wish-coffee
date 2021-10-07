@@ -12,7 +12,7 @@
   <section class="rewards-cta-group{% if class %} {{ class }}{% endif %}">
     <div class="container">
       <div class="rewards-cta-group__inner">
-        <div class="rewards-cta-group__item rewards-cta-group__item--earn">
+        <div class="rewards-cta-group__item rewards-cta-group__item--earn" @click="activateEarnModal">
           {%- capture earn_image_attrs -%}image-src="{{- earn_image -}}"{%- endcapture -%}
           <div class="rewards-cta-group__item-image-wrapper">
             {%- render 'image', vue_attrs: earn_image_attrs, class: 'image--contain rewards-cta-group__item-image' -%}
@@ -21,7 +21,7 @@
             <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- earn_title -}}</p>
           </div>
         </div>
-        <div class="rewards-cta-group__item rewards-cta-group__item--redeem">
+        <div class="rewards-cta-group__item rewards-cta-group__item--redeem" @click="activateRedeemModal">
           {%- capture redeem_image_attrs -%}image-src="{{- redeem_image -}}"{%- endcapture -%}
           <div class="rewards-cta-group__item-image-wrapper">
             {%- render 'image', vue_attrs: redeem_image_attrs, class: 'image--contain rewards-cta-group__item-image' -%}
@@ -48,7 +48,10 @@
       </div>
     </div>
     {%- render 'rewards-earn-modal',
-      vue_attrs: ':earn-activities="earnActivities"'
+      vue_attrs: ':earn-activities="earnActivities" ref="earnModal"'
+    -%}
+    {%- render 'rewards-redeem-modal',
+      vue_attrs: ':redeem-products="redeemProducts" :points-balance="pointsBalance" ref="redeemModal"'
     -%}
   </section>
 </div>
