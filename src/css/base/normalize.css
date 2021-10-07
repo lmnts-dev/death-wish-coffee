@@ -68,6 +68,10 @@ img {
   @media (--lg-max) {
     min-height: calc((100vh - var(--navbar-height)) - var(--footer-height-mobile));
   }
+
+  .is-modal-active & {
+    z-index: 99999999;
+  }
 }
 
 #preview-bar-iframe {
