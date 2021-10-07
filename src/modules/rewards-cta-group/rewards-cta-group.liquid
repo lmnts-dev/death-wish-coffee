@@ -47,8 +47,8 @@
         </div>
       </div>
     </div>
-    <div class="rewards-cta-group__earn-modal">
-      
-    </div>
+    {%- render 'rewards-earn-modal',
+      vue_attrs: ':earn-activities="earnActivities"'
+    -%}
   </section>
 </div>

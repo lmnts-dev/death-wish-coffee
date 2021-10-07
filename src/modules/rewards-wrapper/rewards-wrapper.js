@@ -27,7 +27,7 @@ const rewardswrapper = el => {
         rewardsCustomer: null,
         smileChannel: null,
         channelKey: null,
-        activities: []
+        allEarnActivities: []
       }
     },
     computed: {
@@ -37,8 +37,17 @@ const rewardswrapper = el => {
       referralUrl () {
         return this.rewardsCustomer && this.rewardsCustomer.referral_url
       },
-      enabledActivities () {
-        return this.activities.filter(activity => activity.activity_rule.is_enabled)
+      earnActivities () {
+        const enabledActivities = this.allEarnActivities.filter(activity => activity.activity_rule.is_enabled)
+        const actionableActivities = enabledActivities
+          .filter(activity => activity.is_actionable ? activity.activity_rule.type !== 'signup' : activity.activity_rule.type === 'shopify_online_order')
+          .sort((a, b) => a.default_sort_order - b.default_sort_order)
+          .map(activity => Object.assign({}, activity, { is_actionable: true }))
+        const inactionableActivities = enabledActivities
+          .filter(activity => actionableActivities.every(a => a.id !== activity.id))
+          .sort((a, b) => b.default_sort_order - a.default_sort_order)
+          .map(activity => Object.assign({}, activity, { is_actionable: false }))
+        return [...actionableActivities, ...inactionableActivities]
       }
     },
     created () {
@@ -80,14 +89,14 @@ const rewardswrapper = el => {
       },
       async getCustomerActivities () {
         try {
-          const activities = await axios.get('https://platform.smile.io/v1/customer_activity_rules', {
+          const activitiesResponse = await axios.get('https://platform.smile.io/v1/customer_activity_rules', {
             params: { customer_id: this.rewardsCustomerId },
             headers: {
               'smile-channel-key': this.channelKey,
               'smile-client': 'smile-ui'
             }
           })
-          this.activities = activities.data && activities.data.customer_activity_rules ? activities.data.customer_activity_rules : []
+          this.allEarnActivities = activitiesResponse.data && activitiesResponse.data.customer_activity_rules ? activitiesResponse.data.customer_activity_rules : []
         } catch (error) {
           console.log('Error fetching activities')
         }

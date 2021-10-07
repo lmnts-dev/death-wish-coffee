@@ -19,7 +19,7 @@
     {%- assign redeem_image = page.metafields.rewards_cts_group.redeem_image | map: 'src' | first -%}
     {%- assign referral_image = page.metafields.rewards_cts_group.referral_image | map: 'src' | first -%}
     {%- render 'rewards-cta-group',
-      vue_attrs: ':referral-url="referralUrl"',
+      vue_attrs: ':referral-url="referralUrl" :earn-activities="earnActivities"',
       earn_title: page.metafields.rewards_cta_group.earn_title,
       earn_image: earn_image,
       redeem_title: page.metafields.rewards_cta_group.redeem_title,

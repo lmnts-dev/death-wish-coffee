@@ -1,7 +1,10 @@
 import VImage from '../v-image/v-image.vue'
+import rewardsEarnModal from '../rewards-earn-modal/rewards-earn-modal.vue'
+
 export default {
   components: {
-    VImage
+    VImage,
+    rewardsEarnModal
   },
   props: {
     referralUrl: {
@@ -11,6 +14,10 @@ export default {
     copyAlertDuration: {
       type: Number,
       default: 2000
+    },
+    earnActivities: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
