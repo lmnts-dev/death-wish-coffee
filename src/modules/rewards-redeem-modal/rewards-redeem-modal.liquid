@@ -15,12 +15,14 @@
             <button
               :aria-label="'Redeem ' + product.reward.name"
               type="button"
-              class="rewards redeem-modal__item-button"
+              class="button rewards-redeem-modal__item-button"
               :disabled="!product.is_purchasable"
               @click.prevent="checkAndPurchase(product)"
             >
-              <template v-if="product.is_purchasable">Redeem</template>
-              <template v-else>Not Quite There</template>
+              <span class="b5">
+                <template v-if="product.is_purchasable">Redeem</template>
+                <template v-else>Not Quite There</template>
+              </span>
             </button>
           </li>
         </ul>
