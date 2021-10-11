@@ -10,25 +10,29 @@
 {%- assign class = class | default: false -%}
 <div is="rewards-cta-group" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
   <section class="rewards-cta-group{% if class %} {{ class }}{% endif %}">
-    <div class="container">
+    <div class="rewards-cta-group__container container">
       <div class="rewards-cta-group__inner">
-        <div class="rewards-cta-group__item rewards-cta-group__item--earn" @click="activateEarnModal">
+        <div class="rewards-cta-group__item rewards-cta-group__item--earn" :class="{'rewards-cta-group__item--available': earnActivities.length > 0}" @click="activateEarnModal">
           {%- capture earn_image_attrs -%}image-src="{{- earn_image -}}"{%- endcapture -%}
           <div class="rewards-cta-group__item-image-wrapper">
             {%- render 'image', vue_attrs: earn_image_attrs, class: 'image--contain rewards-cta-group__item-image' -%}
           </div>
-          <div class="rewards-cta-group__item-contents">
-            <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- earn_title -}}</p>
-          </div>
+          {% if earn_title %}
+            <div class="rewards-cta-group__item-contents">
+              <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- earn_title -}}</p>
+            </div>
+          {% endif %}
         </div>
-        <div class="rewards-cta-group__item rewards-cta-group__item--redeem" @click="activateRedeemModal">
+        <div class="rewards-cta-group__item rewards-cta-group__item--redeem" :class="{'rewards-cta-group__item--available': redeemProducts.length > 0}" @click="activateRedeemModal">
           {%- capture redeem_image_attrs -%}image-src="{{- redeem_image -}}"{%- endcapture -%}
           <div class="rewards-cta-group__item-image-wrapper">
             {%- render 'image', vue_attrs: redeem_image_attrs, class: 'image--contain rewards-cta-group__item-image' -%}
           </div>
-          <div class="rewards-cta-group__item-contents">
-            <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- redeem_title -}}</p>
-          </div>
+          {%- if redeem_title -%}
+            <div class="rewards-cta-group__item-contents">
+              <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- redeem_title -}}</p>
+            </div>
+          {%- endif -%}
         </div>
         <div class="rewards-cta-group__item rewards-cta-group__item--referral">
           {%- capture referral_image_attrs -%}image-src="{{- referral_image -}}"{%- endcapture -%}
@@ -36,11 +40,13 @@
             {%- render 'image', vue_attrs: referral_image_attrs, class: 'image--contain rewards-cta-group__item-image' -%}
           </div>
           <div class="rewards-cta-group__item-contents">
-            <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- referral_title -}}</p>
+            {%- if referral_title -%}
+              <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- referral_title -}}</p>
+            {%- endif -%}
             {%- render 'wysiwyg', content: referral_description, class: 'wysiwyg--white rewards-cta-group__item-description' -%}
             <div class="rewards-cta-group__referral">
               <input type="text" class="b5 rewards-cta-group__referral-input" readonly v-model="referralUrl" @focus="focusInput($event)" ref="input">
-              <button class="rewards-cta-group__referral-button" @click.prevent="copyReferralUrl">Copy</button>
+              <button class="button rewards-cta-group__referral-button" @click.prevent="copyReferralUrl"><span class="b5">Copy</span></button>
               <div v-if="isCopied" class="rewards-cta-group__referral-message">Referral Url Copied!</div>
             </div>
           </div>
