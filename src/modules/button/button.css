@@ -134,6 +134,10 @@
   opacity: 0;
   transition: all var(--transition-timing) ease;
 
+  svg {
+    width: 100%;
+  }
+
   .button:not(:disabled):hover & {
     width: 27px;
     margin-left: 8px;
