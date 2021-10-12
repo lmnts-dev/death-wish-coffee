@@ -30,7 +30,7 @@ const rewardswrapper = el => {
         smileChannel: null,
         channelKey: null,
         allEarnActivities: [],
-        redeemProducts: []
+        allRedeemProducts: []
       }
     },
     computed: {
@@ -104,6 +104,25 @@ const rewardswrapper = el => {
             condition
           }
         })
+      },
+      redeemProducts () {
+        return this.allRedeemProducts.map(product => {
+          let isPurchasable = this.pointsBalance > 0
+          if (product.exchange_type === 'fixed' && this.pointsBalance < product.points_price) {
+            isPurchasable = false
+          }
+          if (product.exchange_type === 'variable') {
+            if (product.variable_points_min && this.pointsBalance < product.variable_points_min) {
+              isPurchasable = false
+            } else if (product.variable_points_step && this.pointsBalance < product.variable_points_step) {
+              isPurchasable = false
+            }
+          }
+          return {
+            ...product,
+            is_purchasable: isPurchasable
+          }
+        })
       }
     },
     created () {
@@ -161,7 +180,7 @@ const rewardswrapper = el => {
       async getRedeemProducts () {
         try {
           window.Smile.fetchAllPointsProducts().then(pointsProducts => {
-            this.redeemProducts = [...pointsProducts]
+            this.allRedeemProducts = [...pointsProducts]
           })
         } catch (error) {
           console.log('Error fetching redeem products')

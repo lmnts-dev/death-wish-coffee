@@ -16,23 +16,6 @@ export default {
       isActive: false
     }
   },
-  computed: {
-    finalRedeemProducts () {
-      return this.redeemProducts.map(product => {
-        let isPurchasable = this.pointsBalance > 0
-        if (product.exchange_type === 'fixed' && this.pointsBalance < product.points_price) {
-          isPurchasable = false
-        }
-        if (product.exchange_type === 'variable' && this.pointsBalance < product.variable_points_min) {
-          isPurchasable = false
-        }
-        return {
-          ...product,
-          is_purchasable: isPurchasable
-        }
-      })
-    }
-  },
   methods: {
     async checkAndRedeem (product) {
       if (product.exchange_type === 'fixed') {

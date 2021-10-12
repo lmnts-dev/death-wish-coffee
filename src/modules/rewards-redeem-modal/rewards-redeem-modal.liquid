@@ -5,12 +5,12 @@
     <div class="rewards-redeem-modal__wrapper">
       <button class="rewards-redeem-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-redeem-modal__close-icon' -%}</button>
       <div class="rewards-redeem-modal__inner">
-        <h4 class="rewards-redeem-modal__title">Redeem</h4>
+        <h4 class="h2 rewards-redeem-modal__title">REDEEM YOUR REWARDS</h4>
         <ul class="rewards-redeem-modal__list">
-          <li v-for="product in finalRedeemProducts" class="rewards-redeem-modal__item">
+          <li v-for="product in redeemProducts" class="rewards-redeem-modal__item">
             <div class="rewards-redeem-modal__item-details">
-              <p class="rewards-redeem-modal__item-name">${product.reward.name}</p>
-              <p class="rewards-redeem-modal__item-description">${product.exchange_description}</p>
+              <p class="h4 rewards-redeem-modal__item-name">${product.reward.name}</p>
+              <p class="h3 h3--no-transform rewards-redeem-modal__item-description">${product.exchange_description}</p>
             </div>
             <button
               :aria-label="'Redeem ' + product.reward.name"
@@ -19,10 +19,8 @@
               :disabled="!product.is_purchasable"
               @click.prevent="checkAndPurchase(product)"
             >
-              <span class="b5">
-                <template v-if="product.is_purchasable">Redeem</template>
-                <template v-else>Not Quite There</template>
-              </span>
+              <template v-if="product.is_purchasable">Redeem</template>
+              <template v-else>Not Quite There</template>
             </button>
           </li>
         </ul>

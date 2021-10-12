@@ -5,19 +5,17 @@
     <div class="rewards-earn-modal__wrapper">
       <button class="rewards-earn-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-earn-modal__close-icon' -%}</button>
       <div class="rewards-earn-modal__inner">
-        <h4 class="h2 h2--xl-max rewards-earn-modal__title">Earn</h4>
+        <h4 class="h2 rewards-earn-modal__title">EARN DEATH WISHES</h4>
         <ul class="rewards-earn-modal__list">
           <li v-for="activity in earnActivities" class="rewards-earn-modal__item">
             <div class="rewards-earn-modal__item-details">
-              <p class="b2 rewards-earn-modal__item-name">${activity.activity_rule.name}</p>
-              <p class="b1 rewards-earn-modal__item-description">${activity.activity_rule.value_description}</p>
-            </div> 
+              <p class="h4 rewards-earn-modal__item-name">${activity.activity_rule.name}</p>
+              <p class="h3 h3--no-transform rewards-earn-modal__item-description">${activity.activity_rule.value_description}</p>
+            </div>
             <div class="rewards-earn-modal__item-action">
               <button class="button rewards-earn-modal__item-button" v-if="activity.is_actionable">
-                <span class="b5">
-                  <template v-if="activity.activity_rule.type === 'shopify_online_order'">Shop</template>
-                  <template v-else>${activity.activity_rule.action_text}</template>
-                </span>
+                <template v-if="activity.activity_rule.type === 'shopify_online_order'">Shop</template>
+                <template v-else>${activity.activity_rule.action_text}</template>
               </button>
               <template v-else>
                 {%- render 'svg', type: 'check', class: 'rewards-earn-modal__item-check' -%}

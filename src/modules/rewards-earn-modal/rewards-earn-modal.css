@@ -43,20 +43,38 @@
 
 .rewards-earn-modal__close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 10px;
-  height: 10px;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
   padding: 0;
   border: 0;
   background: transparent;
   color: var(--ashe);
+  cursor: pointer;
   z-index: 9;
+
+  @media (--md) {
+    top: 29px;
+    right: 29px;
+    width: 40px;
+    height: 40px;
+    transition: background var(--transition-timing) var(--transition-easing);
+
+    &:hover {
+      background: var(--gray);
+    }
+  }
 }
 
 .rewards-earn-modal__close-icon {
+  display: flex;
   width: 100%;
   height: 100%;
+
+  svg {
+    width: 100%;
+  }
 }
 
 .rewards-earn-modal__inner {
@@ -66,12 +84,23 @@
   width: calc(100% - 60px);
   height: calc(100% - 56px);
   overflow: auto;
+
+  @media (--lg) {
+    top: 64px;
+    left: 75px;
+    width: calc(100% - 150px);
+    height: calc(100% - 144px);
+  }
 }
 
 .rewards-earn-modal__title {
-  max-width: 38%;
+  max-width: 60%;
   margin: 0 auto 18px;
   text-align: center;
+
+  @media (--md) {
+    margin-bottom: 50px;
+  }
 }
 
 .rewards-earn-modal__list {
@@ -86,12 +115,21 @@
 
   & + .rewards-earn-modal__item {
     margin-top: 20px;
+
+    @media (--md) {
+      margin-top: 40px;
+    }
   }
 }
 
 .rewards-earn-modal__item-details {
   width: calc(100% - 100px);
   padding-right: 20px;
+
+  @media (--md) {
+    width: calc(100% - 212px);
+    padding-right: 96px;
+  }
 }
 
 .rewards-earn-modal__item-description {
@@ -103,16 +141,33 @@
   align-items: flex-start;
   justify-content: center;
   width: 100px;
+
+  @media (--md) {
+    width: 212px;
+  }
 }
 
 .rewards-earn-modal__item-button {
   width: 100%;
   height: 40px;
   color: var(--white);
+
+  @media (--md) {
+    height: 63px;
+  }
+
+  &.button:disabled {
+    background: var(--ashe);
+  }
 }
 
 .rewards-earn-modal__item-check {
   width: 18px;
   color: var(--ashe);
   margin: 14px auto 0;
+
+  @media (--md) {
+    width: 45px;
+    margin-top: 24px;
+  }
 }

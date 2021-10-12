@@ -35,6 +35,11 @@ export default {
       isCopied: false
     }
   },
+  computed: {
+    isRedeemable () {
+      return this.redeemProducts.some(function (product) { return product.is_purchasable })
+    }
+  },
   watch: {
     isCopied (currentValue) {
       if (currentValue) {
