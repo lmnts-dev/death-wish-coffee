@@ -24,9 +24,6 @@ export default {
     isDiscountCodeCopied (currentValue) {
       if (currentValue) {
         setTimeout(() => {
-          this.activeSliderProductId = null
-          this.variableProductAmount = 0
-          this.pointsPurchased = null
           this.isDiscountCodeCopied = false
         }, 2000)
       }
@@ -97,6 +94,11 @@ export default {
     deactivate () {
       this.isActive = false
       removeClass(document.body, 'is-modal-active')
+    },
+    back () {
+      this.activeSliderProductId = null
+      this.variableProductAmount = 0
+      this.pointsPurchased = null
     }
   }
 }
