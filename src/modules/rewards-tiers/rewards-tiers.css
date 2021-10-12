@@ -1,1 +1,106 @@
-/* styles for rewards-tiers */
+.rewards-tiers {
+  margin: 62px 0;
+
+  @media (--lg) {
+    margin: 100px 0;
+  }
+}
+
+.rewards-tiers__container {
+  padding: 0;
+
+  @media (--lg) {
+    padding: 0 25px;
+  }
+}
+
+.rewards-tiers__header {
+  padding: 0 25px;
+  text-align: center;
+
+  @media (--lg) {
+    padding: 0;
+  }
+}
+
+.rewards-tiers__description {
+  margin-top: 6px;
+}
+
+.rewards-tiers__table {
+  display: block;
+  margin: 62px auto 0;
+  overflow-x: auto;
+  border-spacing: 6px 0;
+
+  @media (--lg) {
+    display: table;
+    width: 100%;
+    margin-top: 98px;
+    border-spacing: 0;
+    overflow-x: visible;
+  }
+}
+
+.rewards-tiers__benefit-name,
+.rewards-tiers__benefit-value,
+.rewards-tiers__tier {
+  background: var(--shadow);
+  text-align: center;
+
+  @media (--lg) {
+    width: 20%;
+    background: transparent;
+    border-bottom: 1px solid var(--bone);
+  }
+}
+
+.rewards-tiers__tier:first-child,
+.rewards-tiers__benefit-name {
+  padding: 13px 26px;
+  text-align: left;
+
+  @media (--lg) {
+    padding: 23px 30px 30px 0;
+  }
+}
+
+.rewards-tiers__benefit-name {
+  .rewards-tiers__benefit:last-child & {
+    padding-bottom: 30px;
+  }
+}
+
+.rewards-tiers__benefit-value {
+  padding: 13px 46px;
+
+  @media (--lg) {
+    padding: 23px 30px 30px;
+  }
+}
+
+.rewards-tiers__tier {
+  padding: 30px 46px 20px;
+
+  @media (--lg) {
+    padding: 0 30px 33px;
+  }
+}
+
+.rewards-tiers__tier-name {
+  display: block;
+}
+
+.rewards-tiers__tier-condition {
+  white-space: nowrap;
+  color: var(--blood);
+}
+
+.rewards-tiers__benefit-checked {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+  background: var(--blood);
+  border-radius: 100%;
+}
