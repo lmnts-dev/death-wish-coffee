@@ -1,0 +1,39 @@
+{%- assign vue_attrs = vue_attrs | default: false -%}
+{%- assign heading = heading | default: false -%}
+{%- assign description = description | default: false -%}
+<div is="rewards-tiers" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
+  <section class="rewards-tiers" v-if="vipTiers.length">
+    <div class="rewards-tiers__container container">
+      {%- if heading -%}
+        <h2 class="rewards-tiers__heading">{{- heading -}}</h2>
+      {%- endif -%}
+      {%- if description -%}
+        <div class="rewards-tiers__description">{{- description -}}</div>
+      {%- endif -%}
+      <table class="rewards-tiers__table">
+        <thead class="rewards-tiers__table-head">
+          <tr class="rewards-tiers__table-head-row">
+            <th class="rewards-tiers__tier"></th>
+            <th v-for="tier in vipTiers" class="rewards-tiers__tier">
+              <span class="rewards-tiers__tier-name">${tier.name}</span>
+              <span class="rewards-tiers__tier-condition">${tier.condition}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="rewards-tiers__table-body">
+          <tr v-for="benefit in benefits" class="rewards-tiers__benefit">
+            <th class="rewards-tiers__benefit-name">${benefit.title}</th>
+            <td class="rewards-tiers__benefit-value" v-for="tier in vipTiers">
+              <template v-if="tier.benefits[benefit.key]">
+                <template v-if="typeof tier.benefits[benefit.key] === 'boolean'">
+                  <span class="rewards-tiers__benefit-checked"></span>
+                </template>
+                <template v-else>${tier.benefits[benefit.key]}</template>
+              </template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

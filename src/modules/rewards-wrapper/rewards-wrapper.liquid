@@ -29,6 +29,12 @@
       referral_image: referral_image
     -%}
 
+    {%- render 'rewards-tiers',
+      heading: page.metafields.rewards_tier.heading,
+      description: page.metafields.rewards_tier.description,
+      vue_attrs: ':vip-tiers="vipTiers"'
+    -%}
+
     {%- render 'rewards-program',
       info: page.metafields.reward_two_up.title,
       descriptions: page.metafields.reward_two_up.description,

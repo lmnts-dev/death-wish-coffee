@@ -8,6 +8,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import RewardsHero from '../rewards-hero/rewards-hero.vue'
 import RewardsCtaGroup from '../rewards-cta-group/rewards-cta-group.vue'
+import RewardsTiers from '../rewards-tiers/rewards-tiers.vue'
 
 // @TODO: This line is used for Vue debugging. Remove after finished this task.
 Vue.config.devtools = true
@@ -19,7 +20,8 @@ const rewardswrapper = el => {
     name: 'RewardsWrapper',
     components: {
       RewardsHero,
-      RewardsCtaGroup
+      RewardsCtaGroup,
+      RewardsTiers
     },
     data () {
       return {
@@ -52,6 +54,56 @@ const rewardswrapper = el => {
       },
       pointsBalance () {
         return this.rewardsCustomer && this.rewardsCustomer.points_balance
+      },
+      vipTiers () {
+        const tiers = this.smileChannel && this.smileChannel.milestone_vip_program && this.smileChannel.milestone_vip_program.vip_tiers ? this.smileChannel.milestone_vip_program.vip_tiers : []
+        return tiers.map((tier, index, originalArray) => {
+          const nextTier = originalArray[index + 1]
+          const condition = nextTier ? `${tier.milestone}-${nextTier.milestone - 1} DW` : `${tier.milestone}+ DW`
+          const benefits = {}
+          switch (tier.name) {
+            case 'Level 2': {
+              benefits.pointsEarned = '$1=3 DW'
+              benefits.birthdayGifts = '+300DW'
+              benefits.freeShip = true
+              benefits.giveaways = true
+              benefits.merch = false
+              benefits.privateRaffles = false
+              break
+            }
+            case 'Level 3': {
+              benefits.pointsEarned = '$1=5 DW'
+              benefits.birthdayGifts = '+400DW'
+              benefits.freeShip = true
+              benefits.giveaways = true
+              benefits.merch = true
+              benefits.privateRaffles = false
+              break
+            }
+            case 'Level 4': {
+              benefits.pointsEarned = '$1=7 DW'
+              benefits.birthdayGifts = '+500DW'
+              benefits.freeShip = true
+              benefits.giveaways = true
+              benefits.merch = true
+              benefits.privateRaffles = true
+              break
+            }
+            default: {
+              benefits.pointsEarned = '$1=1 DW'
+              benefits.birthdayGifts = '+200DW'
+              benefits.freeShip = true
+              benefits.giveaways = false
+              benefits.merch = false
+              benefits.privateRaffles = false
+            }
+          }
+          return {
+            ...tier,
+            benefits,
+            condition
+          }
+        })
       }
     },
     created () {
