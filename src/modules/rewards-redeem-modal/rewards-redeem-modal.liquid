@@ -3,14 +3,14 @@
   <div v-if="redeemProducts.length" class="rewards-redeem-modal z9" :class="{ 'rewards-redeem-modal--active': isActive }">
     <div class="rewards-redeem-modal__overlay" @click="deactivate"></div>
     <div class="rewards-redeem-modal__wrapper">
-      <button class="rewards-redeem-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-redeem-modal__close-icon' -%}</button>
+      <button aria-label="Close Redeem Modal" class="rewards-redeem-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-redeem-modal__close-icon' -%}</button>
       <div class="rewards-redeem-modal__inner">
         <h4 class="h2 rewards-redeem-modal__title">REDEEM YOUR REWARDS</h4>
         <div class="rewards-redeem-modal__results" v-if="pointsPurchased">
           <p class="rewards-redeem-modal__results-message">Congratulations! You've redeemed successfully. Please copy your code below:</p>
           <div class="rewards-redeem-modal__results-field">
             <input type="text" class="rewards-redeem-modal__results-code" @focus="focusInput" readonly v-model="purchasedDiscountCode" ref="input">
-            <button class="button rewards-redeem-modal__results-button" @click.prevent="copyDiscountCode">Copy</button>
+            <button aria-label="Copy Purchased Discount Code" class="button rewards-redeem-modal__results-button" @click.prevent="copyDiscountCode">Copy</button>
             <div v-if="isDiscountCodeCopied" class="rewards-redeem-modal__results-tooltip">Discount Code Copied!</div>
           </div>
         </div>
@@ -38,7 +38,7 @@
             </button>
           </li>
         </ul>
-        <button v-if="purchasedDiscountCode || variableProduct" class="rewards-redeem-modal__back" @click="back">Back</button>
+        <button aria-label="Redeem Modal Back" v-if="purchasedDiscountCode || variableProduct" class="rewards-redeem-modal__back" @click="back">Back</button>
       </div>
     </div>
   </div>
