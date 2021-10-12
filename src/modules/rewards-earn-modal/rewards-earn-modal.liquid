@@ -3,7 +3,7 @@
   <div class="rewards-earn-modal z9" v-if="earnActivities.length" :class="{ 'rewards-earn-modal--active': isActive }">
     <div class="rewards-earn-modal__overlay"></div>
     <div class="rewards-earn-modal__wrapper">
-      <button class="rewards-earn-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-earn-modal__close-icon' -%}</button>
+      <button aria-label="Close earn modal" class="rewards-earn-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-earn-modal__close-icon' -%}</button>
       <div class="rewards-earn-modal__inner">
         <h4 class="h2 rewards-earn-modal__title">EARN DEATH WISHES</h4>
         <ul class="rewards-earn-modal__list">
@@ -13,7 +13,7 @@
               <p class="h3 h3--no-transform rewards-earn-modal__item-description">${activity.activity_rule.value_description}</p>
             </div>
             <div class="rewards-earn-modal__item-action">
-              <button class="button rewards-earn-modal__item-button" v-if="activity.is_actionable">
+              <button :aria-label="'Earn Points: ' + activity.activity_rule.name" class="button rewards-earn-modal__item-button" v-if="activity.is_actionable">
                 <template v-if="activity.activity_rule.type === 'shopify_online_order'">Shop</template>
                 <template v-else>${activity.activity_rule.action_text}</template>
               </button>
