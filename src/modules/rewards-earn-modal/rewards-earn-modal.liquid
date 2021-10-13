@@ -1,7 +1,7 @@
 {%- assign vue_attrs = vue_attrs | default: false -%}
 <div is="rewards-earn-modal" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
   <div class="rewards-earn-modal z9" v-if="earnActivities.length" :class="{ 'rewards-earn-modal--active': isActive }">
-    <div class="rewards-earn-modal__overlay"></div>
+    <div class="rewards-earn-modal__overlay" @click="deactivate"></div>
     <div class="rewards-earn-modal__wrapper">
       <button aria-label="Close earn modal" class="rewards-earn-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-earn-modal__close-icon' -%}</button>
       <div class="rewards-earn-modal__inner">
