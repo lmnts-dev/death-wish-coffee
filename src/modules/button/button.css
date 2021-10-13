@@ -101,6 +101,26 @@
     }
   }
 
+  &--inline {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    color: var(--blood);
+    background: transparent;
+    font-weight: var(--normal);
+    text-decoration: underline;
+    text-transform: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    .button-icon {
+      display: none;
+    }
+  }
+
   &.form-submit {
     width: 65%;
     padding: 10px 15px;
