@@ -94,6 +94,7 @@ export default {
     deactivate () {
       this.isActive = false
       removeClass(document.body, 'is-modal-active')
+      this.back()
     },
     back () {
       this.activeSliderProductId = null
