@@ -16,6 +16,17 @@ export default {
       birthdayDayLast: ''
     }
   },
+  computed: {
+    birthdayMonth () {
+      return this.birthdayMonthFirst && this.birthdayMonthLast ? `${this.birthdayMonthFirst}${this.birthdayMonthLast}` : ''
+    },
+    birthdayDay () {
+      return this.birthdayDayFirst && this.birthdayDayLast ? `${this.birthdayDayFirst}${this.birthdayDayLast}` : ''
+    },
+    birthday () {
+      return this.birthdayMonth && this.birthdayDay ? `${this.birthdayMonth}/${this.birthdayDay}` : ''
+    }
+  },
   methods: {
     activate () {
       this.isActive = true
@@ -47,12 +58,6 @@ export default {
         }
       }
     },
-    focusInput (e) {
-      const inputEl = e.currentTarget
-      const value = e.currentTarget.value
-      const length = value ? value.length : 0
-      inputEl.setSelectionRange(0, length)
-    },
     nextInput (e) {
       const inputEl = e.currentTarget
       const inputMaxLength = inputEl.getAttribute('maxlength') ? parseInt(inputEl.getAttribute('maxlength')) : 0
@@ -65,7 +70,6 @@ export default {
       }
     },
     saveDate () {
-
     }
   }
 }
