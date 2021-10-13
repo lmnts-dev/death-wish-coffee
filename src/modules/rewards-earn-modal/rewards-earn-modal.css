@@ -251,5 +251,6 @@
 
 .rewards-earn-modal__birthday-error {
   margin-top: 30px;
+  color: var(--blood);
   text-align: center;
 }
