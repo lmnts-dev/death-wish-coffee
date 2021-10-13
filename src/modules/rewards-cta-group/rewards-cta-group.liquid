@@ -54,7 +54,7 @@
       </div>
     </div>
     {%- render 'rewards-earn-modal',
-      vue_attrs: ':earn-activities="earnActivities" ref="earnModal"'
+      vue_attrs: ':earn-activities="earnActivities" :rewards-customer-id="rewardsCustomerId" :channel-key="channelKey" ref="earnModal"'
     -%}
     {%- render 'rewards-redeem-modal',
       vue_attrs: ':redeem-products="redeemProducts" :points-balance="pointsBalance" ref="redeemModal"'

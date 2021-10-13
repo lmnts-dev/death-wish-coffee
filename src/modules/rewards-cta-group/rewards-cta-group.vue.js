@@ -28,6 +28,14 @@ export default {
     pointsBalance: {
       type: Number,
       default: 0
+    },
+    rewardsCustomerId: {
+      type: Number,
+      default: 0
+    },
+    channelKey: {
+      type: String,
+      default: ''
     }
   },
   data () {

@@ -1,11 +1,20 @@
 import { addClass, removeClass } from 'lib/util'
 import { isDate } from 'validator'
+import axios from 'axios'
 
 export default {
   props: {
     earnActivities: {
       type: Array,
       default: () => []
+    },
+    rewardsCustomerId: {
+      type: Number,
+      default: 0
+    },
+    channelKey: {
+      type: String,
+      default: 0
     }
   },
   data () {
@@ -72,14 +81,34 @@ export default {
         nextInputEl.focus()
       }
     },
-    saveDate () {
+    async saveDate () {
       this.birthdayErrorMessage = ''
       if (!this.birthday) {
         this.birthdayErrorMessage = 'Please enter your birthday first'
       } else if (!isDate(this.birthday)) {
         this.birthdayErrorMessage = 'Please enter a valid date'
+      } else if (this.rewardsCustomerId) {
+        const date = new Date(this.birthday)
+        const data = {
+          customer: {
+            date_of_birth: date.toISOString()
+          }
+        }
+        const config = {
+          headers: {
+            'smile-channel-key': this.channelKey,
+            'smile-client': 'smile-ui'
+          }
+        }
+        try {
+          await axios.put(`https://platform.smile.io/v1/customers/${this.rewardsCustomerId}`, data, config)
+          this.birthdayErrorMessage = false
+          this.back()
+        } catch (error) {
+          this.birthdayErrorMessage = 'Unexpected error occurred! Please try again later.'
+        }
       } else {
-        console.log('valid birth day')
+        this.birthdayErrorMessage = 'Please log in first'
       }
     }
   }
