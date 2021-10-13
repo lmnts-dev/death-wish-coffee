@@ -106,6 +106,9 @@ export default {
           this.back()
         } catch (error) {
           this.birthdayErrorMessage = 'Unexpected error occurred! Please try again later.'
+          setTimeout(() => {
+            this.back()
+          }, 1000)
         }
       } else {
         this.birthdayErrorMessage = 'Please log in first'
