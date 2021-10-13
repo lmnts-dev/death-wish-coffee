@@ -24,8 +24,9 @@
               </div>
             </div>
           </div>
+          <div class="rewards-earn-modal__birthday-error" v-if="birthdayErrorMessage">${birthdayErrorMessage}</div>
           <div class="rewards-earn-modal__birthday-actions">
-            <button class="rewards-earn-modal__submit" type="submit" @clic.prevent="saveDate">Save Date</button>
+            <button class="rewards-earn-modal__submit" type="submit" @click.prevent="saveDate">Save Date</button>
             <button v-if="isBirthdayFormActive" aria-label="Back to Earn Modal" class="rewards-earn-modal__back" type="button" @click="back">Back</button>
           </div>
         </form>

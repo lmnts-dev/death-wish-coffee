@@ -1,4 +1,6 @@
 import { addClass, removeClass } from 'lib/util'
+import { isDate } from 'validator'
+
 export default {
   props: {
     earnActivities: {
@@ -13,7 +15,8 @@ export default {
       birthdayMonthFirst: '',
       birthdayMonthLast: '',
       birthdayDayFirst: '',
-      birthdayDayLast: ''
+      birthdayDayLast: '',
+      birthdayErrorMessage: ''
     }
   },
   computed: {
@@ -24,7 +27,7 @@ export default {
       return this.birthdayDayFirst && this.birthdayDayLast ? `${this.birthdayDayFirst}${this.birthdayDayLast}` : ''
     },
     birthday () {
-      return this.birthdayMonth && this.birthdayDay ? `${this.birthdayMonth}/${this.birthdayDay}` : ''
+      return this.birthdayMonth && this.birthdayDay ? `1907-${this.birthdayMonth}-${this.birthdayDay}` : ''
     }
   },
   methods: {
@@ -70,6 +73,14 @@ export default {
       }
     },
     saveDate () {
+      this.birthdayErrorMessage = ''
+      if (!this.birthday) {
+        this.birthdayErrorMessage = 'Please enter your birthday first'
+      } else if (!isDate(this.birthday)) {
+        this.birthdayErrorMessage = 'Please enter a valid date'
+      } else {
+        console.log('valid birth day')
+      }
     }
   }
 }
