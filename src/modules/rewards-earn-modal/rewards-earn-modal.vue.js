@@ -50,6 +50,11 @@ export default {
     },
     back () {
       this.isBirthdayFormActive = false
+      this.birthdayErrorMessage = ''
+      this.birthdayMonthFirst = ''
+      this.birthdayMonthLast = ''
+      this.birthdayDayFirst = ''
+      this.birthdayDayLast = ''
     },
     async earnPoints (activity) {
       switch (activity.activity_rule.type) {
