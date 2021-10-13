@@ -26,11 +26,11 @@
       </div>
       <div v-else class="rewards-hero__actions">
         {%- render 'button', 
-          button_url: routes.account_register_url,
+          button_url: routes.account_login_url,
           button_value: 'JOIN',
           class: 'rewards-hero__button' 
         -%}
-        <a href="{{ routes.account_login_url }}"  class="rewards-hero__link">Feeling left out? Join now.</a>
+        <a href="{{ routes.account_register_url }}"  class="rewards-hero__link">Feeling left out? Join now.</a>
       </div>
     </div>
   </section>
