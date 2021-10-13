@@ -1,6 +1,7 @@
 import { addClass, removeClass } from 'lib/util'
 import { isDate } from 'validator'
 import axios from 'axios'
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 export default {
   props: {
@@ -37,6 +38,11 @@ export default {
     },
     birthday () {
       return this.birthdayMonth && this.birthdayDay ? `1907-${this.birthdayMonth}-${this.birthdayDay}` : ''
+    }
+  },
+  watch: {
+    isActive (value) {
+      value ? disableBodyScroll(this.$refs.content) : clearAllBodyScrollLocks()
     }
   },
   methods: {

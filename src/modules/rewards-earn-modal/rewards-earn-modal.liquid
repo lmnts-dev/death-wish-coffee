@@ -6,7 +6,7 @@
       <button aria-label="Close earn modal" class="rewards-earn-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-earn-modal__close-icon' -%}</button>
       <div class="rewards-earn-modal__inner">
         <h4 class="h2 rewards-earn-modal__title">EARN DEATH WISHES${isBirthdayFormActive ? ' - SAVE DATE' : ''}</h4>
-        <div class="rewards-earn-modal__wrapper-content">
+        <div class="rewards-earn-modal__wrapper-content" ref="content">
           <p class="rewards-earn-modal__birthday-message" v-if="isBirthdayFormActive">We want to celebrate your birthday! Make sure you let us know at least one month in advance — otherwise, you'll have to wait until next year.</p>
           <form class="rewards-earn-modal__birthday" v-if="isBirthdayFormActive">
             <div class="rewards-earn-modal__birthday-fields">

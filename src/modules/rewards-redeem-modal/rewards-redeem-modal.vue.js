@@ -1,4 +1,5 @@
 import { addClass, removeClass } from 'lib/util'
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 export default {
   props: {
@@ -27,6 +28,9 @@ export default {
           this.isDiscountCodeCopied = false
         }, 2000)
       }
+    },
+    isActive (value) {
+      value ? disableBodyScroll(this.$refs.content) : clearAllBodyScrollLocks()
     }
   },
   computed: {

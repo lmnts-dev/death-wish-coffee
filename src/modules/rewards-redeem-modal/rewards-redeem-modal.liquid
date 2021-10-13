@@ -6,7 +6,7 @@
       <button aria-label="Close Redeem Modal" class="rewards-redeem-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-redeem-modal__close-icon' -%}</button>
       <div class="rewards-redeem-modal__inner">
         <h4 class="h2 rewards-redeem-modal__title">REDEEM YOUR REWARDS</h4>
-        <div class="rewards-redeem-modal__wrapper-content">
+        <div class="rewards-earn-modal__wrapper-content" ref="content">
           <div class="rewards-redeem-modal__results" v-if="pointsPurchased">
             <p class="rewards-redeem-modal__results-message">Congratulations! You've redeemed successfully. Please copy your code below:</p>
             <div class="rewards-redeem-modal__results-field">
