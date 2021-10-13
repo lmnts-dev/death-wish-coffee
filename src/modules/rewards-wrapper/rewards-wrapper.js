@@ -7,8 +7,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 import RewardsHero from '../rewards-hero/rewards-hero.vue'
+import RewardsIntro from '../rewards-intro/rewards-intro.vue'
 import RewardsCtaGroup from '../rewards-cta-group/rewards-cta-group.vue'
 import RewardsTiers from '../rewards-tiers/rewards-tiers.vue'
+import RewardsProgram from '../rewards-program/rewards-program.vue'
 
 // @TODO: This line is used for Vue debugging. Remove after finished this task.
 Vue.config.devtools = true
@@ -20,8 +22,10 @@ const rewardswrapper = el => {
     name: 'RewardsWrapper',
     components: {
       RewardsHero,
+      RewardsIntro,
       RewardsCtaGroup,
-      RewardsTiers
+      RewardsTiers,
+      RewardsProgram
     },
     data () {
       return {
