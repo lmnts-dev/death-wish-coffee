@@ -27,6 +27,7 @@
   height: 100%;
   background: var(--black);
   opacity: 0.55;
+  cursor: pointer;
 }
 
 .rewards-earn-modal__wrapper {
@@ -101,14 +102,18 @@
   }
 }
 
-.rewards-earn-modal__list {
-  list-style-type: none;
+.rewards-earn-modal__wrapper-content {
+  width: 100%;
   padding: 0 30px;
   overflow-y: auto;
 
   @media (--lg) {
     padding: 0 75px;
   }
+}
+
+.rewards-earn-modal__list {
+  list-style-type: none;
 }
 
 .rewards-earn-modal__item {
@@ -173,4 +178,78 @@
     width: 45px;
     margin-top: 24px;
   }
+}
+
+.rewards-earn-modal__birthday {
+  position: relative;
+}
+
+.rewards-earn-modal__birthday-fields {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 30px;
+}
+
+.rewards-earn-modal__birthday-item {
+  width: auto;
+  margin: 0 10px;
+}
+
+.rewards-earn-modal__birthday-group {
+  display: flex;
+}
+
+.rewards-earn-modal__birthday-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.rewards-earn-modal__birthday-input {
+  width: 40px;
+  height: 55px;
+  color: var(--white);
+  background: transparent;
+  border: 1px solid var(--white);
+  border-radius: 5px;
+  text-align: center;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  &:focus {
+    border-color: var(--blood);
+  }
+
+  & + .rewards-earn-modal__birthday-input {
+    margin-left: 5px;
+  }
+}
+
+.rewards-earn-modal__birthday-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rewards-earn-modal__submit {
+  width: 140px;
+  height: 48px;
+  color: var(--white);
+
+  & + .rewards-earn-modal__back {
+    margin-left: 20px;
+  }
+}
+
+.rewards-earn-modal__birthday-error {
+  margin-top: 30px;
+  text-align: center;
 }
