@@ -33,6 +33,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  display: flex;
   width: 86%;
   max-width: 836px;
   height: 85vh;
@@ -78,17 +79,14 @@
 }
 
 .rewards-earn-modal__inner {
-  position: absolute;
-  top: 22px;
-  left: 30px;
-  width: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: calc(100% - 56px);
-  overflow: auto;
+  margin: auto;
+  overflow: hidden;
 
   @media (--lg) {
-    top: 64px;
-    left: 75px;
-    width: calc(100% - 150px);
     height: calc(100% - 144px);
   }
 }
@@ -105,7 +103,12 @@
 
 .rewards-earn-modal__list {
   list-style-type: none;
-  padding: 0;
+  padding: 0 30px;
+  overflow-y: auto;
+
+  @media (--lg) {
+    padding: 0 75px;
+  }
 }
 
 .rewards-earn-modal__item {

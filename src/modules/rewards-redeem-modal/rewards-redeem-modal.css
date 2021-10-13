@@ -33,6 +33,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  display: flex;
   width: 86%;
   max-width: 836px;
   height: 85vh;
@@ -78,17 +79,14 @@
 }
 
 .rewards-redeem-modal__inner {
-  position: absolute;
-  top: 28px;
-  left: 30px;
-  width: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: calc(100% - 56px);
-  overflow: auto;
+  margin: auto;
+  overflow: hidden;
 
   @media (--lg) {
-    top: 64px;
-    left: 75px;
-    width: calc(100% - 150px);
     height: calc(100% - 144px);
   }
 }
@@ -103,9 +101,18 @@
   }
 }
 
+.rewards-redeem-modal__wrapper-content {
+  width: 100%;
+  padding: 0 30px;
+  overflow-y: auto;
+
+  @media (--lg) {
+    padding: 0 75px;
+  }
+}
+
 .rewards-redeem-modal__list {
   list-style-type: none;
-  padding: 0;
 }
 
 .rewards-redeem-modal__item {
@@ -149,4 +156,46 @@
   &.button:disabled {
     background: var(--ashe);
   }
+}
+
+.rewards-redeem-modal__results-field {
+  position: relative;
+  display: flex;
+  max-width: 460px;
+  margin: 30px auto 10px 0;
+  padding-bottom: 20px;
+}
+
+.rewards-redeem-modal__results-code,
+.rewards-redeem-modal__results-button {
+  width: 50%;
+  height: 48px;
+  border: 0;
+}
+
+.rewards-redeem-modal__results-code {
+  padding: 6px;
+
+  @media (--md) {
+    padding: 15px 18px;
+  }
+
+  @media (--lg) {
+    width: calc(100% - 160px);
+  }
+}
+
+.rewards-redeem-modal__results-button {
+  color: var(--white);
+  appearance: none;
+
+  @media (--lg) {
+    width: 160px;
+  }
+}
+
+.rewards-redeem-modal__results-tooltip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
