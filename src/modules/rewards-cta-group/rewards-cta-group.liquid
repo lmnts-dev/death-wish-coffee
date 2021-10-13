@@ -43,7 +43,7 @@
             {%- if referral_title -%}
               <p class="p1 p1--large p1--bold rewards-cta-group__item-title">{{- referral_title -}}</p>
             {%- endif -%}
-            {%- render 'wysiwyg', content: referral_description, class: 'wysiwyg--white rewards-cta-group__item-description' -%}
+            {%- render 'wysiwyg', content: referral_description, class: 'wysiwyg--white wysiwyg--rewards-cta-group rewards-cta-group__item-description' -%}
             <div class="rewards-cta-group__referral">
               <input type="text" class="rewards-cta-group__referral-input" readonly v-model="referralUrl" @focus="focusInput($event)" ref="input">
               <button class="button rewards-cta-group__referral-button" @click.prevent="copyReferralUrl">Copy</button>
