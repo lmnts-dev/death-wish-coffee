@@ -47,6 +47,10 @@ export default {
     showReview: {
       type: Boolean,
       default: true
+    },
+    showQuickShop: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

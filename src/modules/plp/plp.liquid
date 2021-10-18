@@ -27,6 +27,7 @@
               :class="[checkIfProductFeatured(product) ? getFeaturedProductClass(productIndex) : '']"
               :is-featured="checkIfProductFeatured(product)"
               :show-review="collectionName !== 'Merch'"
+              :show-quick-shop="collectionName !== 'Merch'"
             {%- endcapture -%}
             {%- render 'product-card',
               class: 'product-card--bg-dark product-card--plp',
