@@ -66,10 +66,26 @@ export default {
         {}
       )
     },
+    filterChildrenAvailableValues ({ filterDefinitions, filterValues }) {
+      return filterDefinitions.reduce(
+        (result, filter) => {
+          const children = (filterValues[filter.name] && filter.children) ? filter.children.find(c => filterValues[filter.name].indexOf(c.parent.toLowerCase()) >= 0) : null
+          if (children) {
+            result[filter.name] = {
+              name: children.name,
+              type: children.type,
+              options: children.options.map(o => ({ value: o.toLowerCase(), label: o }))
+            }
+          }
+          return result
+        },
+        {}
+      )
+    },
     displayedFeaturedProducts ({ products, sortOrder, featuredIndexes }, { isFiltering }) {
       return isFiltering || sortOrder ? [] : products.filter((product, index) => featuredIndexes.findIndex(i => i === index) >= 0)
     },
-    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }) {
+    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }, { filterChildrenAvailableValues }) {
       let filteredProducts = [...products]
 
       for (const filter of filterDefinitions) {
@@ -79,6 +95,19 @@ export default {
 
         const criteria = filterByTypes[filter.type](filter.name, filterValues[filter.name])
         filteredProducts = filteredProducts.filter(criteria)
+      }
+
+      console.log(filterChildrenAvailableValues)
+
+      if (Object.keys(filterChildrenAvailableValues).length) {
+        for (const key in filterChildrenAvailableValues) {
+          const children = filterChildrenAvailableValues[key]
+          if (!filterValues[children.name] || filterValues[children.name].length === 0) {
+            continue
+          }
+          const criteria = filterByTypes[children.type](children.name, filterValues[children.name])
+          filteredProducts = filteredProducts.filter(criteria)
+        }
       }
 
       if (sortOrder) {
