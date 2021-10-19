@@ -97,8 +97,6 @@ export default {
         filteredProducts = filteredProducts.filter(criteria)
       }
 
-      console.log(filterChildrenAvailableValues)
-
       if (Object.keys(filterChildrenAvailableValues).length) {
         for (const key in filterChildrenAvailableValues) {
           const children = filterChildrenAvailableValues[key]
