@@ -40,8 +40,9 @@ export default {
         .reduce(
           (result, product) => {
             const type = product.type
+            const relatedTags = product.tags
             if (!result.some(r => r.value === type.toLowerCase())) {
-              result.push({ value: type.toLowerCase(), label: type })
+              result.push({ value: type.toLowerCase(), label: type, relatedTags })
             }
             return result
           },
@@ -66,21 +67,29 @@ export default {
         {}
       )
     },
-    filterChildrenAvailableValues ({ filterDefinitions, filterValues }) {
-      return filterDefinitions.reduce(
-        (result, filter) => {
-          const children = (filterValues[filter.name] && filter.children) ? filter.children.find(c => filterValues[filter.name].indexOf(c.parent.toLowerCase()) >= 0) : null
-          if (children) {
-            result[filter.name] = {
-              name: children.name,
-              type: children.type,
-              options: children.options.map(o => ({ value: o.toLowerCase(), label: o }))
+    filterChildrenAvailableValues ({ filterDefinitions, filterValues }, { allProductTypeValues }) {
+      return filterDefinitions
+        .filter(filter => filter.children && filterValues[filter.name])
+        .reduce(
+          (result, filter) => {
+            const children = filter.children.find(c => filterValues[filter.name].indexOf(c.parentValue.toLowerCase()) >= 0)
+            if (children) {
+              let options = []
+              if (children.type === 'tag') {
+                options = children.options.map(o => ({ value: o.toLowerCase(), label: o }))
+              } else if (children.type === 'type') {
+                options = allProductTypeValues.filter(type => type.relatedTags.some(tag => tag === children.parentValue))
+              }
+              result[filter.name] = {
+                name: children.name,
+                type: children.type,
+                options: options
+              }
             }
-          }
-          return result
-        },
-        {}
-      )
+            return result
+          },
+          {}
+        )
     },
     displayedFeaturedProducts ({ products, sortOrder, featuredIndexes }, { isFiltering }) {
       return isFiltering || sortOrder ? [] : products.filter((product, index) => featuredIndexes.findIndex(i => i === index) >= 0)
