@@ -49,8 +49,8 @@
               </div>
             </div>
             <template v-if="filterChildrenAvailableValues[filter.name] && filterChildrenAvailableValues[filter.name].options && filterChildrenAvailableValues[filter.name].options.length">
-              <div 
-                  :class="['plp-filter__block', { 'active': expandedFilters.includes(filterChildrenAvailableValues[filter.name].name) }]"
+              <div
+                :class="['plp-filter__block', { 'active': expandedFilters.includes(filterChildrenAvailableValues[filter.name].name) }]"
               >
                 <label class="plp-filter__block-title h5">
                   <input class="plp-filter__block-state"

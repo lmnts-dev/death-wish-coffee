@@ -41,8 +41,11 @@ export default {
           (result, product) => {
             const type = product.type
             const relatedTags = product.tags
-            if (!result.some(r => r.value === type.toLowerCase())) {
+            const index = result.findIndex(r => r.label === type)
+            if (index < 0) {
               result.push({ value: type.toLowerCase(), label: type, relatedTags })
+            } else {
+              result[index].relatedTags = [...result[index].relatedTags, ...relatedTags]
             }
             return result
           },
@@ -72,19 +75,19 @@ export default {
         .filter(filter => filter.children && filterValues[filter.name])
         .reduce(
           (result, filter) => {
-            const children = filter.children.find(c => filterValues[filter.name].indexOf(c.parentValue.toLowerCase()) >= 0)
-            if (children) {
-              let options = []
-              if (children.type === 'tag') {
-                options = children.options.map(o => ({ value: o.toLowerCase(), label: o }))
-              } else if (children.type === 'type') {
-                options = allProductTypeValues.filter(type => type.relatedTags.some(tag => tag === children.parentValue))
-              }
-              result[filter.name] = {
-                name: children.name,
-                type: children.type,
-                options: options
-              }
+            let options = []
+            if (filter.children.type === 'tag') {
+              options = filter.children.options.map(o => ({ value: o.toLowerCase(), label: o }))
+            } else if (filter.children.type === 'type') {
+              options = allProductTypeValues.filter(type => type.relatedTags.some(tag => filter.children.parentValue
+                ? tag === filter.children.parentValue
+                : filterValues[filter.name].indexOf(tag.toLowerCase()) >= 0
+              ))
+            }
+            result[filter.name] = {
+              name: filter.children.name,
+              type: filter.children.type,
+              options: options
             }
             return result
           },
