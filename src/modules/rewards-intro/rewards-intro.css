@@ -1,0 +1,60 @@
+.rewards-intro {
+  display: block;
+  text-align: center;
+
+  & > * {
+    color: var(--white);
+  }
+}
+
+.rewards-intro__container {
+  max-width: 1490px;
+}
+
+.rewards-intro__title {
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.rewards-intro__description {
+  margin-top: 5px;
+
+  @media (--md) {
+    padding: 0 15px;
+  }
+}
+
+.rewards-intro__items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 35px;
+  max-width: 770px;
+  margin: 74px auto 0;
+
+  @media (--md) {
+    grid-gap: 120px;
+  }
+}
+
+.rewards-intro__item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.rewards-intro__image {
+  width: 100%;
+  max-height: 173px;
+
+  img {
+    object-position: 50% 80%;
+  }
+}
+
+.rewards-intro__item-title {
+  margin-top: 10px;
+
+  @media (--md) {
+    margin-top: 38px;
+  }
+}
