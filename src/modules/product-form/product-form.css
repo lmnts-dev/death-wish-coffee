@@ -29,10 +29,6 @@
 .product-form__option {
   width: 100%;
 
-  &:not(:first-child) {
-    margin-top: -1px;
-  }
-
   & + .product-form__option {
     border-top: 1px solid var(--shadow);
 

@@ -158,7 +158,7 @@ export default {
           detail: variant
         }))
       }
-      return this.hasSingleVariant ? this.product.varaiants[0] : variant
+      return this.hasSingleVariant ? this.product.variants[0] : variant
     },
     selectedVariantId () {
       return this.selectedVariant ? this.selectedVariant.id : ''
@@ -677,7 +677,6 @@ export default {
       })
     },
     toggleOption (option, value) {
-      console.log(option, value)
       const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
       if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
         cloneSelectedOptions[option] = null
@@ -687,7 +686,6 @@ export default {
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
     disableOption (option, value) {
-      console.log(option, value)
       for (const variant of this.product.variants) {
         if (variant.title === value && variant.available === false) {
           return true

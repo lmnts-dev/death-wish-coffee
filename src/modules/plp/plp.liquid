@@ -12,13 +12,13 @@
 >
   <div is="plp"
        inline-template
-       :current-tags='{{ current_tags | json }}'
+       {% if current_tags.size %}:current-tags=‘{{ current_tags | json }}’{% endif %}
        :collection-name='{{ collection_name | json }}'
   >
     <div class="container plp__container">
       <div class="plp__inner">
         {%- render 'plp-sort-header', class: 'js-sort-header' -%}
-        {%- render 'plp-filter' -%}
+        {%- render 'plp-filter', vue_attrs: ':current-tags="currentTags"' -%}
         {%- capture product_cards -%}
           <template v-for="(product, productIndex) in displayedProducts">
             {%- capture product_attrs -%}
@@ -27,6 +27,7 @@
               :class="[checkIfProductFeatured(product) ? getFeaturedProductClass(productIndex) : '']"
               :is-featured="checkIfProductFeatured(product)"
               :show-review="collectionName !== 'Merch'"
+              :show-quick-shop="collectionName !== 'Merch'"
             {%- endcapture -%}
             {%- render 'product-card',
               class: 'product-card--bg-dark product-card--plp',

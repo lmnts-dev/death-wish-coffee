@@ -23,7 +23,8 @@
             {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
           </a>
         </div>
-        {%- if quick_shop_form -%}
+        <template v-if="showQuickShop">
+          {%- if quick_shop_form -%}
           <div
             class="product-card__form"
           >
@@ -38,6 +39,8 @@
             {%- render 'svg', type: 'close', class: 'product-card__close' -%}
           </template>
         </div>
+        </template>
+        
       </div>
       <div class="product-card__content">
         <h4 class="product-card__title">
