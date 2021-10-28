@@ -48,6 +48,41 @@
                 </div>
               </div>
             </div>
+            <template v-if="filterChildrenAvailableValues[filter.name] && filterChildrenAvailableValues[filter.name].options && filterChildrenAvailableValues[filter.name].options.length">
+              <div
+                :class="['plp-filter__block', { 'active': expandedFilters.includes(filterChildrenAvailableValues[filter.name].name) }]"
+              >
+                <label class="plp-filter__block-title h5">
+                  <input class="plp-filter__block-state"
+                        type="checkbox"
+                        v-model="expandedFilters"
+                        :value="filterChildrenAvailableValues[filter.name].name"
+                  >
+                  ${filterChildrenAvailableValues[filter.name].title || filterChildrenAvailableValues[filter.name].name}
+                  <span class="plp-filter__block-title-icon plp-filter__block-title-icon--inactive">+</span>
+                  <span class="plp-filter__block-title-icon plp-filter__block-title-icon--active">&ndash;</span>
+                </label>
+
+                <div class="plp-filter__block-list">
+                  <div v-for="option in filterChildrenAvailableValues[filter.name].options"
+                      class="plp-filter__block-item"
+                  >
+                    <label :class="['plp-filter__block-item__link', {'is-selected': selectedOptions.includes(filterChildrenAvailableValues[filter.name].name + '|' + option.value)}]">
+                      <input class="plp-filter__block-item__state"
+                            type="checkbox"
+                            v-model="selectedOptions"
+                            :value="filterChildrenAvailableValues[filter.name].name + '|' + option.value"
+                      >
+                      {% comment %}
+                      TODO: Need svg assets of all available options
+                      {%- render 'svg', type: matched_tag_handle, class: 'plp-filter__block-item__icon' -%}
+                      {% endcomment %}
+                      <span class="plp-filter__block-item__link-text b1">${option.label}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </template>
           </template>
         </div>
         <div class="plp-filter__buttons" v-if="isManualFilter">

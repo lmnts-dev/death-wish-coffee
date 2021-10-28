@@ -55,7 +55,7 @@ export default {
     },
 
     ...mapState('plp', ['filterDefinitions', 'filterValues', 'isManualFilter']),
-    ...mapGetters('plp', ['filterAvailableValues'])
+    ...mapGetters('plp', ['filterAvailableValues', 'filterChildrenAvailableValues'])
   },
   methods: {
     applyFilters () {

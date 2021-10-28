@@ -40,8 +40,12 @@ export default {
         .reduce(
           (result, product) => {
             const type = product.type
-            if (!result.some(r => r.value === type.toLowerCase())) {
-              result.push({ value: type.toLowerCase(), label: type })
+            const relatedTags = product.tags
+            const index = result.findIndex(r => r.label === type)
+            if (index < 0) {
+              result.push({ value: type.toLowerCase(), label: type, relatedTags })
+            } else {
+              result[index].relatedTags = [...result[index].relatedTags, ...relatedTags]
             }
             return result
           },
@@ -66,10 +70,34 @@ export default {
         {}
       )
     },
+    filterChildrenAvailableValues ({ filterDefinitions, filterValues }, { allProductTypeValues }) {
+      return filterDefinitions
+        .filter(filter => filter.children && filterValues[filter.name])
+        .reduce(
+          (result, filter) => {
+            let options = []
+            if (filter.children.type === 'tag') {
+              options = filter.children.options.map(o => ({ value: o.toLowerCase(), label: o }))
+            } else if (filter.children.type === 'type') {
+              options = allProductTypeValues.filter(type => type.relatedTags.some(tag => filter.children.parentValue
+                ? tag === filter.children.parentValue
+                : filterValues[filter.name].indexOf(tag.toLowerCase()) >= 0
+              ))
+            }
+            result[filter.name] = {
+              name: filter.children.name,
+              type: filter.children.type,
+              options: options
+            }
+            return result
+          },
+          {}
+        )
+    },
     displayedFeaturedProducts ({ products, sortOrder, featuredIndexes }, { isFiltering }) {
       return isFiltering || sortOrder ? [] : products.filter((product, index) => featuredIndexes.findIndex(i => i === index) >= 0)
     },
-    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }) {
+    displayedProducts ({ products, filterValues, filterDefinitions, sortOrder }, { filterChildrenAvailableValues }) {
       let filteredProducts = [...products]
 
       for (const filter of filterDefinitions) {
@@ -79,6 +107,17 @@ export default {
 
         const criteria = filterByTypes[filter.type](filter.name, filterValues[filter.name])
         filteredProducts = filteredProducts.filter(criteria)
+      }
+
+      if (Object.keys(filterChildrenAvailableValues).length) {
+        for (const key in filterChildrenAvailableValues) {
+          const children = filterChildrenAvailableValues[key]
+          if (!filterValues[children.name] || filterValues[children.name].length === 0) {
+            continue
+          }
+          const criteria = filterByTypes[children.type](children.name, filterValues[children.name])
+          filteredProducts = filteredProducts.filter(criteria)
+        }
       }
 
       if (sortOrder) {
