@@ -1,0 +1,60 @@
+/* styles for rewards-cta-group */
+
+.rewards-cta-group {
+  color: var(--white);
+}
+
+.rewards-cta-group__item {
+  width: 64%;
+  margin: 24px auto 0;
+  padding: 36px 24px;
+  text-align: center;
+  background: var(--shadow);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.rewards-cta-group__item-image-wrapper {
+  position: relative;
+  width: 112px;
+  height: 82px;
+  margin: 0 auto;
+
+  @media (--lg) {
+    width: 180px;
+    height: 130px;
+  }
+}
+
+.rewards-cta-group__item-title {
+  text-transform: uppercase;
+}
+
+.rewards-cta-group__item-description {
+  color: var(--white);
+
+  &.wysiwyg * {
+    color: var(--white);
+  }
+}
+
+.rewards-cta-group__referral {
+  display: flex;
+  height: 30px;
+}
+
+.rewards-cta-group__referral-button,
+.rewards-cta-group__referral-input {
+  width: 50%;
+  height: 100%;
+}
+
+.rewards-cta-group__referral-input {
+  padding: 6px;
+}
+
+.rewards-cta-group__referral-button {
+  appearance: none;
+}

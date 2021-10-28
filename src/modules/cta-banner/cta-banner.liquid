@@ -1,0 +1,26 @@
+{%- assign title = title | default: false -%}
+{%- assign buttons_value = buttons_value | default: false -%}
+{%- assign buttons_url = buttons_url | default: false -%}
+{%- assign cta_text = cta_text | default: false -%}
+
+{%- if title or buttons_value and buttons_url or cta_text -%}
+<section class="cta-banner section-padding bg--black" data-module="cta-banner">
+  <div class="cta-banner__container container">
+    <div class="cta-banner__inner">
+      {%- if title -%}
+        <h2 class="h2 cta-banner__title">{{- title -}}</h2>
+      {%- endif -%}
+      {%- if buttons_value and buttons_url -%}
+        {%- render 'button', 
+          button_url: buttons_url,
+          button_value: buttons_value,
+          class: 'cta-banner__button' 
+        -%}
+      {%- endif -%}
+      {%- if cta_text -%}
+        <a href="{{ routes.account_url }}"  class="cta-banner__link">{{- cta_text -}}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}

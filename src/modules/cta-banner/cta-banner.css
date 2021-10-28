@@ -1,0 +1,41 @@
+.cta-banner {
+  margin: 74px 0;
+
+  @media (--lg) {
+    margin: 98px 0 114px;
+  }
+}
+
+.cta-banner__container {
+  padding: 0 36px;
+}
+
+.cta-banner__title {
+  color: var(--white);
+}
+
+.cta-banner__button {
+  margin: 24px auto 0;
+
+  @media (--md) {
+    margin-top: 50px;
+  }
+}
+
+.cta-banner__inner {
+  text-align: center;
+}
+
+.cta-banner__link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--bone);
+
+  @media (--md) {
+    margin-top: 16px;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
