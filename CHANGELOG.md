@@ -1,6 +1,15 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 1.5.8 - 2021-10-29
+### CHANGED:
+
+- [Merch PLP > Subcategories](https://app.asana.com/0/0/1200933260543359/f )
+- [Rewards Page](https://app.asana.com/0/0/1201185800998527/f )
+- [Products > Sold Out (all variations)](https://app.asana.com/0/0/1200620272050314/f )
+- [Disable Quick Shop on Merch PLP Only](https://app.asana.com/0/0/1200785553761351/f )
+- [Coffee PDP > Ability to select subscription choice on subscription PDPs via query string](https://app.asana.com/0/0/1201185800998549/f)
+
 ## 1.5.7 - 2021-10-07
 ### CHANGED:
 - Address ([Duplicate] SOS: Buy button not displaying on Mug products)[https://app.asana.com/0/1187243774580389/1201130874843133/f]
