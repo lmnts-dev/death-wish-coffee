@@ -55,7 +55,7 @@ export default {
     },
 
     ...mapState('plp', ['filterDefinitions', 'filterValues', 'isManualFilter']),
-    ...mapGetters('plp', ['filterAvailableValues'])
+    ...mapGetters('plp', ['filterAvailableValues', 'filterChildrenAvailableValues'])
   },
   methods: {
     applyFilters () {
@@ -68,7 +68,7 @@ export default {
   },
   mounted () {
     const filterInputs = document.querySelectorAll('.plp-filter__block-item__state')
-    const tag = this.currentTags[0].toLowerCase()
+    const tag = this.currentTags.length > 0 ? this.currentTags[0].toLowerCase() : ''
 
     if (tag !== '') {
       // Loop through the inputs that contain the filter key value pairs

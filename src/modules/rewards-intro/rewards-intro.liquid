@@ -1,0 +1,29 @@
+{%- assign heading = heading | default: false -%}
+{%- assign description = description | default: false -%}
+{%- assign items = items | default: false -%}
+
+{% if items or heading or description %}
+<section class="rewards-intro spacing--md" data-module="rewards-intro">
+  <div class="rewards-intro__container container">
+    <div class="rewards-intro__inner">
+      {%- if heading -%}
+        <h2 class="rewards-intro__title h2 h2--xl-max">{{- heading -}}</h2>
+      {%- endif -%}
+      {% if description %}
+        <p class="rewards-intro__description p1 p1--large">{{- description -}}</p>
+      {% endif %}
+      {% if items and items.size > 0 %}
+        <div class="rewards-intro__items">
+          {% for title in items limit: 3 %}
+            <div class="rewards-intro__item">
+              {%- assign url = image_url[forloop.index0] | map: 'src' -%}
+              {%- render 'image', src: url, class: 'rewards-intro__image image--relative image--contain no-hover' -%}
+              <p class="rewards-intro__item-title h4">{{- title -}}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}

@@ -1,0 +1,37 @@
+{%- assign custom_attrs = custom_attrs | default: false -%}
+{%- assign title = title | default: false -%}
+{%- assign description = description | default: false -%}
+<div is="rewards-hero" inline-template{% if custom_attrs %} {{ custom_attrs }}{% endif %} v-cloak>
+  <section class="rewards-hero">
+    {%- if title -%}
+      <div class="rewards-hero__header">
+        {%- for i in (1..2) -%}
+          <div class="rewards-hero__image-wrapper">
+            {% render 'svg', type: 'thunder-large', class: 'rewards-hero__image' %}
+          </div>
+        {%- endfor -%}
+        <h1 class="h1 rewards-hero__title">{{ title }}</h1>
+      </div>
+    {%- endif -%}
+    <div class="rewards-hero__container container">
+      <div class="rewards-hero__inner">
+        {%- if description -%}
+          <p class="p1 p1--large rewards-hero__description">{{ description }}</p>
+        {%- endif -%}
+      </div>
+      <div v-if="customerId" class="rewards-hero__info-customer" >
+        <p v-if="firstName" class="h1 reward-hero__name">Hey, ${firstName}</p> 
+        <p v-if="tier" class="h2 rewards-hero__level">REAPER ${tier ? tier.name : ''}</p>
+        <p v-if="pointsBalance" class="h2 rewards-hero__point">YOUR DEATH WISHES: ${pointsBalance}</p>
+      </div>
+      <div v-else class="rewards-hero__actions">
+        {%- render 'button', 
+          button_url: routes.account_register_url,
+          button_value: 'JOIN',
+          class: 'rewards-hero__button' 
+        -%}
+        <a href="{{ routes.account_login_url }}"  class="rewards-hero__link">Feeling left out? Join now.</a>
+      </div>
+    </div>
+  </section>
+</div>

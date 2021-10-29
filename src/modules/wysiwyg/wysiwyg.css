@@ -149,6 +149,19 @@
   margin: 100px auto;
 }
 
+.wysiwyg--white {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li {
+    color: var(--white);
+  }
+}
+
 .wysiwyg--margin-bottom {
   margin-bottom: 80px;
 
@@ -263,5 +276,23 @@
 .wysiwyg--large {
   p {
     @extend .articles-font;
+  }
+}
+
+.wysiwyg--rewards-program p {
+  @extend .p1--bold;
+
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0;
+  color: var(--white);
+
+  @media (--md) {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  &:last-of-type {
+    padding: 0;
   }
 }

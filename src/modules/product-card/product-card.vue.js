@@ -47,6 +47,10 @@ export default {
     showReview: {
       type: Boolean,
       default: true
+    },
+    showQuickShop: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -96,11 +100,11 @@ export default {
     handleAddedToCartError () {
       this.shouldShowMessage = true
     },
-    handleHover (e) {
+    async handleHover (e) {
       if (this.videoComponent) {
         this.isHovered = e.type === 'mouseenter'
         if (e.type === 'mouseenter') {
-          this.videoComponent.play()
+          await this.videoComponent.play()
         } else {
           this.videoComponent.reset()
         }

@@ -677,7 +677,6 @@ export default {
       })
     },
     toggleOption (option, value) {
-      console.log(option, value)
       const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
       if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
         cloneSelectedOptions[option] = null
@@ -687,7 +686,6 @@ export default {
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
     disableOption (option, value) {
-      console.log(option, value)
       for (const variant of this.product.variants) {
         if (variant.title === value && variant.available === false) {
           return true
