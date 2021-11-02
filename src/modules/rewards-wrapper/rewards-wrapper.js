@@ -12,9 +12,6 @@ import RewardsCtaGroup from '../rewards-cta-group/rewards-cta-group.vue'
 import RewardsTiers from '../rewards-tiers/rewards-tiers.vue'
 import RewardsProgram from '../rewards-program/rewards-program.vue'
 
-// @TODO: This line is used for Vue debugging. Remove after finished this task.
-Vue.config.devtools = true
-
 const rewardswrapper = el => {
   return new Vue({
     el,
