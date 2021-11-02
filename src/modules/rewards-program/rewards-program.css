@@ -81,7 +81,7 @@
 .rewards-program__wrapper-image {
   position: relative;
   width: 71%;
-  margin: 0 0 0 auto;
+  margin: 0 auto;
 
   @media (--lg) {
     width: 74%;

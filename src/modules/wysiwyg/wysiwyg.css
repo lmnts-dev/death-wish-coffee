@@ -296,3 +296,18 @@
     padding: 0;
   }
 }
+
+.wysiwyg--rewards-cta-group p {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: var(--normal);
+
+  @media (--md) {
+    font-size: 28px;
+    line-height: 37px;
+  }
+
+  strong {
+    font-weight: var(--semi-bold);
+  }
+}

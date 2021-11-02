@@ -1,4 +1,5 @@
 .rewards-wrapper {
   flex: 1 0 auto;
   height: 100%;
+  color: var(--white);
 }

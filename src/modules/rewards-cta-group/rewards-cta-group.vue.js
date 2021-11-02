@@ -24,11 +24,28 @@ export default {
     redeemProducts: {
       type: Array,
       default: () => []
+    },
+    pointsBalance: {
+      type: Number,
+      default: 0
+    },
+    rewardsCustomerId: {
+      type: Number,
+      default: 0
+    },
+    channelKey: {
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
       isCopied: false
+    }
+  },
+  computed: {
+    isRedeemable () {
+      return this.redeemProducts.some(function (product) { return product.is_purchasable })
     }
   },
   watch: {
@@ -54,6 +71,18 @@ export default {
     focusInput (e) {
       const inputEl = e.currentTarget
       inputEl.setSelectionRange(0, this.referralUrl.length)
+    },
+    activateEarnModal () {
+      const redeemModalComponent = Array.isArray(this.$refs.redeemModal) ? this.$refs.redeemModal[0] : this.$refs.redeemModal
+      redeemModalComponent.deactivate()
+      const earnModalComponent = Array.isArray(this.$refs.earnModal) ? this.$refs.earnModal[0] : this.$refs.earnModal
+      earnModalComponent.activate()
+    },
+    activateRedeemModal () {
+      const earnModalComponent = Array.isArray(this.$refs.earnModal) ? this.$refs.earnModal[0] : this.$refs.earnModal
+      earnModalComponent.deactivate()
+      const redeemModalComponent = Array.isArray(this.$refs.redeemModal) ? this.$refs.redeemModal[0] : this.$refs.redeemModal
+      redeemModalComponent.activate()
     }
   }
 }

@@ -7,10 +7,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 import RewardsHero from '../rewards-hero/rewards-hero.vue'
+import RewardsIntro from '../rewards-intro/rewards-intro.vue'
 import RewardsCtaGroup from '../rewards-cta-group/rewards-cta-group.vue'
-
-// @TODO: This line is used for Vue debugging. Remove after finished this task.
-Vue.config.devtools = true
+import RewardsTiers from '../rewards-tiers/rewards-tiers.vue'
+import RewardsProgram from '../rewards-program/rewards-program.vue'
 
 const rewardswrapper = el => {
   return new Vue({
@@ -19,7 +19,10 @@ const rewardswrapper = el => {
     name: 'RewardsWrapper',
     components: {
       RewardsHero,
-      RewardsCtaGroup
+      RewardsIntro,
+      RewardsCtaGroup,
+      RewardsTiers,
+      RewardsProgram
     },
     data () {
       return {
@@ -28,7 +31,7 @@ const rewardswrapper = el => {
         smileChannel: null,
         channelKey: null,
         allEarnActivities: [],
-        redeemProducts: []
+        allRedeemProducts: []
       }
     },
     computed: {
@@ -49,6 +52,78 @@ const rewardswrapper = el => {
           .sort((a, b) => b.default_sort_order - a.default_sort_order)
           .map(activity => Object.assign({}, activity, { is_actionable: false }))
         return [...actionableActivities, ...inactionableActivities]
+      },
+      pointsBalance () {
+        return this.rewardsCustomer && this.rewardsCustomer.points_balance
+      },
+      vipTiers () {
+        const tiers = this.smileChannel && this.smileChannel.milestone_vip_program && this.smileChannel.milestone_vip_program.vip_tiers ? this.smileChannel.milestone_vip_program.vip_tiers : []
+        return tiers.map((tier, index, originalArray) => {
+          const nextTier = originalArray[index + 1]
+          const condition = nextTier ? `${tier.milestone}-${nextTier.milestone - 1} DW` : `${tier.milestone}+ DW`
+          const benefits = {}
+          switch (tier.name) {
+            case 'Level 2': {
+              benefits.pointsEarned = '$1=3 DW'
+              benefits.birthdayGifts = '+300DW'
+              benefits.freeShip = true
+              benefits.giveaways = true
+              benefits.merch = false
+              benefits.privateRaffles = false
+              break
+            }
+            case 'Level 3': {
+              benefits.pointsEarned = '$1=5 DW'
+              benefits.birthdayGifts = '+400DW'
+              benefits.freeShip = true
+              benefits.giveaways = true
+              benefits.merch = true
+              benefits.privateRaffles = false
+              break
+            }
+            case 'Level 4': {
+              benefits.pointsEarned = '$1=7 DW'
+              benefits.birthdayGifts = '+500DW'
+              benefits.freeShip = true
+              benefits.giveaways = true
+              benefits.merch = true
+              benefits.privateRaffles = true
+              break
+            }
+            default: {
+              benefits.pointsEarned = '$1=1 DW'
+              benefits.birthdayGifts = '+200DW'
+              benefits.freeShip = true
+              benefits.giveaways = false
+              benefits.merch = false
+              benefits.privateRaffles = false
+            }
+          }
+          return {
+            ...tier,
+            benefits,
+            condition
+          }
+        })
+      },
+      redeemProducts () {
+        return this.allRedeemProducts.map(product => {
+          let isPurchasable = this.pointsBalance > 0
+          if (product.exchange_type === 'fixed' && this.pointsBalance < product.points_price) {
+            isPurchasable = false
+          }
+          if (product.exchange_type === 'variable') {
+            if (product.variable_points_min && this.pointsBalance < product.variable_points_min) {
+              isPurchasable = false
+            } else if (product.variable_points_step && this.pointsBalance < product.variable_points_step) {
+              isPurchasable = false
+            }
+          }
+          return {
+            ...product,
+            is_purchasable: isPurchasable
+          }
+        })
       }
     },
     created () {
@@ -106,7 +181,7 @@ const rewardswrapper = el => {
       async getRedeemProducts () {
         try {
           window.Smile.fetchAllPointsProducts().then(pointsProducts => {
-            this.redeemProducts = [...pointsProducts]
+            this.allRedeemProducts = [...pointsProducts]
           })
         } catch (error) {
           console.log('Error fetching redeem products')

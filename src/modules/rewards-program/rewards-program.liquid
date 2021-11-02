@@ -3,35 +3,38 @@
 {%- assign items = items | default: false -%}
 {%- assign image_url = image_url | default: false -%}
 
-{% if info.size > 0 or items.size > 0 %}
-<section class="rewards-program">
-  <div class="rewards-program__container container">
-    <div class="rewards-program__inner">
-      {%- if info and info.size > 0 -%}
-        <div class="rewards-program__info">
-          {% for title in info %}
-            {%- assign description = descriptions[forloop.index0] -%}
-            <div class="rewards-program__info-item">
-              <h2 class="rewards-program__info-title h2 h2--xl-max">{{- title -}}</h2>
-              <p class="rewards-program__info-description p1 p1--large">{{- description -}}</p>
+{%- if info.size > 0 or items.size > 0-%}
+<div is="rewards-program" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
+  <section class="rewards-program">
+    <div class="rewards-program__container container">
+      <div class="rewards-program__inner">
+        {%- if info and info.size > 0 -%}
+          <div class="rewards-program__info">
+            {% for title in info %}
+              {%- assign description = descriptions[forloop.index0] -%}
+              <div class="rewards-program__info-item">
+                <h2 class="rewards-program__info-title h2 h2--xl-max">{{- title -}}</h2>
+                <p class="rewards-program__info-description p1 p1--large">{{- description -}}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {%- endif -%}
+        {%- if items and items.size > 0 -%}
+        <div class="rewards-program__items">
+          {% for content_item in items %}
+            <div class="rewards-program__item">
+              {%- assign url = image_url[forloop.index0] | map: 'src' | first -%}
+              {%- capture image_attrs -%}image-src="{{- url -}}"{%- endcapture -%}
+              <div class="rewards-program__wrapper-image">
+                {%- render 'image', vue_attrs: image_attrs, class: 'rewards-program__item-image image--contain no-hover' -%}
+              </div>
+              <div class="rewards-program__item-content wysiwyg wysiwyg--rewards-program">{{- content_item -}}</div>
             </div>
           {% endfor %}
         </div>
-      {%- endif -%}
-      {%- if items and items.size > 0 -%}
-      <div class="rewards-program__items">
-        {% for content_item in items %}
-          <div class="rewards-program__item">
-            {%- assign url = image_url[forloop.index0] | map: 'src' -%}
-            <div class="rewards-program__wrapper-image">
-              {%- render 'image', src: url, class: 'rewards-program__item-image image--contain no-hover' -%}
-            </div>
-            <div class="rewards-program__item-content wysiwyg wysiwyg--rewards-program">{{- content_item -}}</div>
-          </div>
-        {% endfor %}
+        {%- endif -%}
       </div>
-      {%- endif -%}
     </div>
-  </div>
-</section>
-{% endif %}
+  </section>
+</div>
+{%- endif -%}

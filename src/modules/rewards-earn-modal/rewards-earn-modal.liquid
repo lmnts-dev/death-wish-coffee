@@ -1,12 +1,55 @@
 {%- assign vue_attrs = vue_attrs | default: false -%}
 <div is="rewards-earn-modal" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
-  <div class="rewards-earn-modal" v-if="earnActivities.length">
-    <div class="rewards-earn-modal__overlay"></div>
-    <div class="rewards-earn-modal__inner">
-      <h4 class="rewards-earn-modal__title">Earn</h4>
-      <ul class="rewards-earn-modal__list">
-        
-      </ul>
+  <div class="rewards-earn-modal z9" v-if="earnActivities.length" :class="{ 'rewards-earn-modal--active': isActive }">
+    <div class="rewards-earn-modal__overlay" @click="deactivate"></div>
+    <div class="rewards-earn-modal__wrapper">
+      <button aria-label="Close earn modal" class="rewards-earn-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-earn-modal__close-icon' -%}</button>
+      <div class="rewards-earn-modal__inner">
+        <h4 class="h2 rewards-earn-modal__title">EARN DEATH WISHES${isBirthdayFormActive ? ' - SAVE DATE' : ''}</h4>
+        <div class="rewards-earn-modal__wrapper-content" ref="content">
+          <p class="rewards-earn-modal__birthday-message" v-if="isBirthdayFormActive">We want to celebrate your birthday! Make sure you let us know at least one month in advance — otherwise, you'll have to wait until next year.</p>
+          <form class="rewards-earn-modal__birthday" v-if="isBirthdayFormActive">
+            <div class="rewards-earn-modal__birthday-fields">
+              <div class="rewards-earn-modal__birthday-item">
+                <label class="rewards-earn-modal__birthday-label">Month</label>
+                <div class="rewards-earn-modal__birthday-group">
+                  <input type="number" maxlength="1" placeholder="M" class="rewards-earn-modal__birthday-input" @input="nextInput" v-model="birthdayMonthFirst" data-index="1" ref="input1">
+                  <input type="number" maxlength="1" placeholder="M" class="rewards-earn-modal__birthday-input" @input="nextInput" v-model="birthdayMonthLast" data-index="2" ref="input2">
+                </div>
+              </div>
+              <div class="rewards-earn-modal__birthday-item">
+                <label class="rewards-earn-modal__birthday-label">Day</label>
+                <div class="rewards-earn-modal__birthday-group">
+                  <input type="number" maxlength="1" placeholder="D" class="rewards-earn-modal__birthday-input" @input="nextInput" v-model="birthdayDayFirst" data-index="3" ref="input3">
+                  <input type="number" maxlength="1" placeholder="D" class="rewards-earn-modal__birthday-input" @input="nextInput" v-model="birthdayDayLast" data-index="4" ref="input4">
+                </div>
+              </div>
+            </div>
+            <div class="rewards-earn-modal__birthday-actions">
+              <button class="button rewards-earn-modal__submit" type="submit" @click.prevent="saveDate">Save Date</button>
+              <button v-if="isBirthdayFormActive" aria-label="Back to Earn Modal" class="button button--inline rewards-earn-modal__back" type="button" @click="back">Back</button>
+            </div>
+            <div class="rewards-earn-modal__birthday-error" v-if="birthdayErrorMessage">${birthdayErrorMessage}</div>
+          </form>
+          <ul class="rewards-earn-modal__list" v-else>
+            <li v-for="activity in earnActivities" class="rewards-earn-modal__item">
+              <div class="rewards-earn-modal__item-details">
+                <p class="h4 rewards-earn-modal__item-name">${activity.activity_rule.name}</p>
+                <p class="h3 h3--no-transform rewards-earn-modal__item-description">${activity.activity_rule.value_description}</p>
+              </div>
+              <div class="rewards-earn-modal__item-action">
+                <button :aria-label="'Earn Points: ' + activity.activity_rule.name" class="button rewards-earn-modal__item-button" v-if="activity.is_actionable" @click.prevent="earnPoints(activity)">
+                  <template v-if="activity.activity_rule.type === 'shopify_online_order'">Shop</template>
+                  <template v-else>${activity.activity_rule.action_text}</template>
+                </button>
+                <template v-else>
+                  {%- render 'svg', type: 'check', class: 'rewards-earn-modal__item-check' -%}
+                </template>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -22,15 +22,15 @@
       <div v-if="customerId" class="rewards-hero__info-customer" >
         <p v-if="firstName" class="h1 reward-hero__name">Hey, ${firstName}</p> 
         <p v-if="tier" class="h2 rewards-hero__level">REAPER ${tier ? tier.name : ''}</p>
-        <p v-if="pointsBalance" class="h2 rewards-hero__point">YOUR DEATH WISHES: ${pointsBalance}</p>
+        <p class="h2 rewards-hero__point">YOUR DEATH WISHES: ${pointsBalance}</p>
       </div>
       <div v-else class="rewards-hero__actions">
         {%- render 'button', 
-          button_url: routes.account_register_url,
-          button_value: 'JOIN',
+          button_url: routes.account_login_url,
+          button_value: 'SIGN IN',
           class: 'rewards-hero__button' 
         -%}
-        <a href="{{ routes.account_login_url }}"  class="rewards-hero__link">Feeling left out? Join now.</a>
+        <a href="{{ routes.account_register_url }}"  class="rewards-hero__link">Feeling left out? Join now.</a>
       </div>
     </div>
   </section>

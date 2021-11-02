@@ -15,18 +15,26 @@
       -%}
     {%- endunless -%}
 
-    {%- assign earn_image = page.metafields.rewards_cts_group.earn_image | map: 'src' | first -%}
-    {%- assign redeem_image = page.metafields.rewards_cts_group.redeem_image | map: 'src' | first -%}
-    {%- assign referral_image = page.metafields.rewards_cts_group.referral_image | map: 'src' | first -%}
-    {%- render 'rewards-cta-group',
-      vue_attrs: ':referral-url="referralUrl" :earn-activities="earnActivities" :redeem-products="redeemProducts"',
-      earn_title: page.metafields.rewards_cta_group.earn_title,
-      earn_image: earn_image,
-      redeem_title: page.metafields.rewards_cta_group.redeem_title,
-      redeem_image: redeem_image,
-      referral_title: page.metafields.rewards_cta_group.referral_title,
-      referral_description: page.metafields.rewards_cta_group.referral_description,
-      referral_image: referral_image
+    {%- assign earn_image = page.metafields.rewards_cta_group.earn_image | map: 'src' | first -%}
+    {%- assign redeem_image = page.metafields.rewards_cta_group.redeem_image | map: 'src' | first -%}
+    {%- assign referral_image = page.metafields.rewards_cta_group.referral_image | map: 'src' | first -%}
+    {%- if customer -%}
+      {%- render 'rewards-cta-group',
+        vue_attrs: ':rewards-customer-id="rewardsCustomerId" :channel-key="channelKey" :referral-url="referralUrl" :earn-activities="earnActivities" :redeem-products="redeemProducts" :points-balance="pointsBalance"',
+        earn_title: page.metafields.rewards_cta_group.earn_title,
+        earn_image: earn_image,
+        redeem_title: page.metafields.rewards_cta_group.redeem_title,
+        redeem_image: redeem_image,
+        referral_title: page.metafields.rewards_cta_group.referral_title,
+        referral_description: page.metafields.rewards_cta_group.referral_description,
+        referral_image: referral_image
+      -%}
+    {%- endif -%}
+
+    {%- render 'rewards-tiers',
+      heading: page.metafields.rewards_tier.heading,
+      description: page.metafields.rewards_tier.description,
+      vue_attrs: ':vip-tiers="vipTiers"'
     -%}
 
     {%- render 'rewards-program',

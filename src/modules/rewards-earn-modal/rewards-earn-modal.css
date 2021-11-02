@@ -1,1 +1,256 @@
 /* styles for rewards-earn-modal */
+
+.rewards-earn-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+  overflow: hidden;
+  transition: all var(--transition-timing) var(--transition-easing);
+
+  &--active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+  }
+}
+
+.rewards-earn-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--black);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.rewards-earn-modal__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: 86%;
+  max-width: 836px;
+  height: 85vh;
+  transform: translate(-50%, -50%);
+  background: var(--shadow);
+  overflow: hidden;
+}
+
+.rewards-earn-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ashe);
+  cursor: pointer;
+  z-index: 9;
+
+  @media (--md) {
+    top: 29px;
+    right: 29px;
+    width: 40px;
+    height: 40px;
+    transition: background var(--transition-timing) var(--transition-easing);
+
+    &:hover {
+      background: var(--gray);
+    }
+  }
+}
+
+.rewards-earn-modal__close-icon {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  svg {
+    width: 100%;
+  }
+}
+
+.rewards-earn-modal__inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 56px);
+  margin: auto;
+  overflow: hidden;
+
+  @media (--lg) {
+    height: calc(100% - 144px);
+  }
+}
+
+.rewards-earn-modal__title {
+  max-width: 60%;
+  margin: 0 auto 18px;
+  text-align: center;
+
+  @media (--md) {
+    margin-bottom: 50px;
+  }
+}
+
+.rewards-earn-modal__wrapper-content {
+  width: 100%;
+  padding: 0 30px;
+  overflow-y: auto;
+
+  @media (--lg) {
+    padding: 0 75px;
+  }
+}
+
+.rewards-earn-modal__list {
+  list-style-type: none;
+}
+
+.rewards-earn-modal__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  & + .rewards-earn-modal__item {
+    margin-top: 20px;
+
+    @media (--md) {
+      margin-top: 40px;
+    }
+  }
+}
+
+.rewards-earn-modal__item-details {
+  width: calc(100% - 100px);
+  padding-right: 20px;
+
+  @media (--md) {
+    width: calc(100% - 212px);
+    padding-right: 96px;
+  }
+}
+
+.rewards-earn-modal__item-description {
+  color: var(--gray);
+}
+
+.rewards-earn-modal__item-action {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100px;
+
+  @media (--md) {
+    width: 212px;
+  }
+}
+
+.rewards-earn-modal__item-button {
+  width: 100%;
+  height: 40px;
+  color: var(--white);
+
+  @media (--md) {
+    height: 63px;
+  }
+
+  &.button:disabled {
+    background: var(--ashe);
+  }
+}
+
+.rewards-earn-modal__item-check {
+  width: 18px;
+  color: var(--ashe);
+  margin: 14px auto 0;
+
+  @media (--md) {
+    width: 45px;
+    margin-top: 24px;
+  }
+}
+
+.rewards-earn-modal__birthday {
+  position: relative;
+}
+
+.rewards-earn-modal__birthday-fields {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 30px;
+}
+
+.rewards-earn-modal__birthday-item {
+  width: auto;
+  margin: 0 10px;
+}
+
+.rewards-earn-modal__birthday-group {
+  display: flex;
+}
+
+.rewards-earn-modal__birthday-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.rewards-earn-modal__birthday-input {
+  width: 40px;
+  height: 55px;
+  color: var(--white);
+  background: transparent;
+  border: 1px solid var(--white);
+  border-radius: 5px;
+  text-align: center;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  &:focus {
+    border-color: var(--blood);
+  }
+
+  & + .rewards-earn-modal__birthday-input {
+    margin-left: 5px;
+  }
+}
+
+.rewards-earn-modal__birthday-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rewards-earn-modal__submit {
+  width: 140px;
+  height: 48px;
+  color: var(--white);
+
+  & + .rewards-earn-modal__back {
+    margin-left: 20px;
+  }
+}
+
+.rewards-earn-modal__birthday-error {
+  margin-top: 30px;
+  color: var(--blood);
+  text-align: center;
+}

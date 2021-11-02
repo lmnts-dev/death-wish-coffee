@@ -1,18 +1,81 @@
 /* styles for rewards-cta-group */
 
 .rewards-cta-group {
+  margin: 38px 0;
   color: var(--white);
 }
 
+.rewards-cta-group__container {
+  max-width: 1015px;
+}
+
+.rewards-cta-group__inner {
+  @media (--md) {
+    display: grid;
+    grid-template-areas: 'earn redeem' 'referral referral';
+    grid-gap: 30px;
+  }
+}
+
 .rewards-cta-group__item {
-  width: 64%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 68%;
+  min-height: 204px;
   margin: 24px auto 0;
   padding: 36px 24px;
   text-align: center;
   background: var(--shadow);
 
+  @media (--md) {
+    width: 100%;
+    min-height: 316px;
+    padding: 45px;
+    margin: 0;
+  }
+
   &:first-child {
     margin-top: 0;
+  }
+
+  &--earn,
+  &--redeem {
+    cursor: pointer;
+    transition: all var(--transition-timing) var(--transition-easing);
+    border: 10px solid transparent;
+
+    &:hover {
+      background: var(--gray);
+    }
+  }
+
+  &--earn {
+    grid-area: earn;
+  }
+
+  &--redeem {
+    grid-area: redeem;
+  }
+
+  &--referral {
+    grid-area: referral;
+
+    @media (--md) {
+      flex-direction: row;
+      align-items: flex-start;
+      min-height: unset;
+      padding: 50px 70px;
+    }
+
+    @media (--lg) {
+      padding: 50px 140px 30px;
+    }
+  }
+
+  &--available {
+    border-color: var(--blood);
   }
 }
 
@@ -22,39 +85,111 @@
   height: 82px;
   margin: 0 auto;
 
-  @media (--lg) {
+  @media (--md) {
     width: 180px;
     height: 130px;
+  }
+
+  .rewards-cta-group__item--referral & {
+    @media (--md) {
+      margin-top: 24px;
+    }
+  }
+}
+
+.rewards-cta-group__item-contents {
+  .rewards-cta-group__item--referral & {
+    @media (--md) {
+      width: calc(100% - 180px);
+      padding-left: 45px;
+      text-align: left;
+    }
   }
 }
 
 .rewards-cta-group__item-title {
+  margin-top: 10px;
   text-transform: uppercase;
+
+  @media (--md) {
+    margin-top: 5px;
+    max-width: 242px;
+  }
+
+  .rewards-cta-group__item--referral & {
+    @media (--md) {
+      max-width: unset;
+      margin-top: 0;
+    }
+  }
 }
 
 .rewards-cta-group__item-description {
   color: var(--white);
+  margin-top: 3px;
 
-  &.wysiwyg * {
-    color: var(--white);
+  &.wysiwyg {
+    p {
+      &:last-of-type {
+        padding: 0;
+      }
+
+      & + p {
+        margin-top: 24px;
+      }
+    }
+
+    * {
+      color: var(--white);
+    }
   }
 }
 
 .rewards-cta-group__referral {
+  position: relative;
   display: flex;
-  height: 30px;
+  margin-top: 14px;
+  padding-bottom: 30px;
+
+  @media (--md) {
+    margin-top: 31px;
+  }
 }
 
 .rewards-cta-group__referral-button,
 .rewards-cta-group__referral-input {
   width: 50%;
-  height: 100%;
+  height: 30px;
+  border: 0;
+
+  @media (--md) {
+    height: 48px;
+  }
 }
 
 .rewards-cta-group__referral-input {
   padding: 6px;
+
+  @media (--md) {
+    padding: 15px 18px;
+  }
+
+  @media (--lg) {
+    width: calc(100% - 160px);
+  }
 }
 
 .rewards-cta-group__referral-button {
+  color: var(--white);
   appearance: none;
+
+  @media (--lg) {
+    width: 160px;
+  }
+}
+
+.rewards-cta-group__referral-message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
