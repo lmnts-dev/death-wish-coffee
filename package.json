@@ -6,6 +6,7 @@
   "scripts": {
     "start": "brrl -w",
     "build": "brrl -b -e production",
+    "build-dev": "brrl -b -e development",
     "dependencies": "brrl-install",
     "development": "brrl -d -e development",
     "staging": "brrl -d -e staging",

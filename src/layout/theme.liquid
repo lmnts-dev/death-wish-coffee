@@ -6,6 +6,10 @@
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
   <link rel="canonical" href="{{- canonical_url -}}">
 
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -57,6 +61,7 @@
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 
   {% render 'shogun-head' %}
+  {%- render 'ordergroove_static_asset' -%}
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
   <!-- Google Tag Manager (noscript) -->
@@ -67,6 +72,7 @@
   {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
 
   <main id="page" class="relative z0" role="main">
+    {%- render 'ordergroove_global' -%}
     {{ content_for_layout }}
   </main>
   {%- render 'footer' -%}
