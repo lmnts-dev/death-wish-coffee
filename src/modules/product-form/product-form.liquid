@@ -102,9 +102,13 @@
     TODO:
     Need to re-add @submit.prevent="handleAddToCart" to form tag once we can properly pass line item props through to cart.js
     {%- endcomment -%}
-    <form method="post" action="/cart/add" class="product-form__form" @submit.prevent="handleAddToCart">
+
+    <form method="post" action="/cart/add" class="product-form__form today" @submit.prevent="handleAddToCart">
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
+
+      {%- render 'ordergroove_offer' product: product.selected_or_first_available_variant location: 'pdp' -%}
+
       {%- render 'button',
         button_value: '${addToCartButtonText}',
         tag: 'button',
@@ -112,6 +116,7 @@
         class: button_class
       -%}
     </form>
+
   </div>
 {%- endcapture -%}
 {%- if is_vue_component -%}
@@ -124,7 +129,6 @@
   {%- capture product_json -%}
     {%- render 'product-json', product: product -%}
   {%- endcapture -%}
-
 
   <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
     <div is="product-form"
