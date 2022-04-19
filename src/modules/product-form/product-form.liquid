@@ -133,22 +133,6 @@
     
     <form method="post" action="/cart/add" class="product-form__form today" @submit.prevent="handleAddToCart">
 
-      <span style="color:green">Ordergroove Snippet given a liquid variant object</span>
-      {%- render 'ordergroove_offer' product: product.variants[0] location: 'pdp' -%}
-      </br>
-
-       <span style="color:green">Ordergroove Snippet given a vue object</span>
-      {%- render 'ordergroove_offer' product: ${selectedVariant} location: 'pdp' -%}
-      </br>
-
-      <span style="color:green">Shopify Variable</span>
-      {{ product.selected_or_first_available_variant | json }}
-      </br>
-
-      <span style="color:green">Vue Variable</span>
-      ${selectedVariant}
-      </br>
-
       {%  comment %}
       <template v-if="isEnableUpscribe">
       
@@ -236,6 +220,10 @@
       {% endcomment %}
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
+
+      {% comment %}Mutations, this is the snippet in question {% endcomment %}
+      {%- render 'ordergroove_offer' product: product.selected_or_first_available_variant location: 'pdp' -%}
+
       {%- render 'button',
         button_value: '${addToCartButtonText}',
         tag: 'button',
