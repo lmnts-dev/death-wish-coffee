@@ -44,7 +44,7 @@
       {% assign image_url = product.images[1] | img_url: 'master' %}
       {% assign url = product.url %}
       {%- capture price %}
-        {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+        {{ product.price | money }}
       {%- endcapture -%}
       {%- assign description = product.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}

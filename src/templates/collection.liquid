@@ -37,7 +37,7 @@
         {% assign image_url = default_image_url %}
       {% endif %}
       {%- capture price %}
-        {{ product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+        {{ product.price | money }}
       {%- endcapture -%}
       {%- assign description = product.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}
