@@ -31,12 +31,11 @@ const formsubscribe = el => {
         data: params
       }).then(response => {
         if (response.data.success) {
-
-          dataLayer.push({
+          /* dataLayer.push({
             event: 'form_submit',
-            form: 'general',
-          });
-          
+            form: 'general'
+          }) */
+
           if (response.data.data.is_subscribed) {
             updateFormFeedback('Looks like you are already subscribed to our mailing list.')
           } else {
