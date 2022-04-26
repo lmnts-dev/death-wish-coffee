@@ -72,7 +72,7 @@
         {% endif %}
         {% assign url = featured_product.url %}
         {%- capture price %}
-          {{ featured_product.price | money }}{% if customer %} (FREE SHIPPING){% endif %}
+          {{ featured_product.price | money }}
         {%- endcapture -%}
         {%- assign description = featured_product.description | strip_html | truncate: 500, '' -%}
         {%- assign cta_text = 'Take me There' -%}
