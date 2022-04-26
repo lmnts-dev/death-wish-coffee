@@ -8,11 +8,7 @@
   &::before {
     content: '';
     display: block;
-    padding-top: 160%;
-
-    @media (--md) {
-      padding-top: 42%;
-    }
+    padding-top: 42%;
   }
 }
 
