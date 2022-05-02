@@ -1,0 +1,50 @@
+version: "3.5"
+
+x-shared-config:
+  app_image_name: &app_image_name
+    # Gulp 3 requires an older version of node
+    # image: mutations/node:11.15.0-alpine-2022-04-27
+    image: mutations/node:12.16.1-alpine3.11-2020-03-04
+
+  caddy_image_name: &caddy_image_name
+    image: caddy:2.4.6-alpine
+
+  app_base: &app_base
+    <<: *app_image_name
+    env_file:
+      - .env
+      - .env.local
+    environment:
+      - HISTFILE=/app/log/.bash_history
+      - NODE_ENV=${NODE_ENV:-development}
+    stdin_open: true
+    tty: true
+    tmpfs:
+      - /tmp
+    user: "1069:1420"
+    volumes:
+      - .:/app:cached
+    working_dir: /app
+
+services:
+  app:
+    <<: *app_base
+    command: start
+    entrypoint: yarn
+    # TODO: move to caddy
+    ports:
+      - 3000:3000
+      - 3001:3001
+    tmpfs:
+      - /tmp:exec,mode=755
+
+  caddy:
+    <<: *caddy_image_name
+    ports:
+      - 443:443
+    volumes:
+      - ./.caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+
+volumes:
+  caddy_data:
