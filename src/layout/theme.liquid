@@ -37,7 +37,7 @@
 
   {%- render 'fonts' -%}
   {%- if settings.is_dev_mode -%}
-    {{- '/dev/main.js' | script_tag -}}
+    {{- '/dev/main.js' | prepend: settings.dev_url | script_tag -}}
   {%- else -%}
     {{- 'main.min.css' | asset_url | stylesheet_tag -}}
   {%- endif -%}
