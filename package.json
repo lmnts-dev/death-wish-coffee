@@ -9,6 +9,7 @@
     "build-dev": "brrl -b -e development",
     "dependencies": "brrl-install",
     "development": "brrl -d -e development",
+    "local-dev": "brrl -w -e development",
     "staging": "brrl -d -e staging",
     "production": "brrl -d -e production",
     "create-module": "sh scripts/create_module.sh",

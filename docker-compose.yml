@@ -24,7 +24,7 @@ x-shared-config:
 services:
   app:
     <<: *app_base
-    command: start
+    command: local-dev
     entrypoint: yarn
     ports:
       - 3000:3000
