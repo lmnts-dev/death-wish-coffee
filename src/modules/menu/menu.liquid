@@ -21,7 +21,7 @@
             {% endfor %}
           {% endif %}
 
-          {% If not, use the hardcoded images %}
+          {% comment %} If not, use the hardcoded images {% endcomment %}
           {%- assign banner = 'mega_banner.jpg' | file_url -%}
           {% if image_url == null %}
             {%- capture image_url -%}
@@ -33,7 +33,7 @@
               %}
             {%- endcapture -%}
           {% endif %}
-          
+
           {%- render 'image', src: image_url, class: 'sub-menu__item-image' -%}
         </a>
       {% comment %}End hard code{% endcomment %}
