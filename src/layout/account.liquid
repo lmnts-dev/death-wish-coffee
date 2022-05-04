@@ -56,7 +56,9 @@
           </div>
         </div>
     </main>
-    {% render 'upscribe-cart-logic' %}
+    <div style="display: none;">
+      {% render 'upscribe-cart-logic' %}
+    </div>
 
     {%- unless settings.is_dev_mode -%}
       {{- 'main.js' | asset_url | script_tag -}}
