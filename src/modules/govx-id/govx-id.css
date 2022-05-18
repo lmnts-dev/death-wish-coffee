@@ -1,0 +1,38 @@
+i.govx-id-slim-wrapper {
+  .govx-id-slim {
+    a {
+      border: none;
+      background-color: transparent !important;
+      padding: 0;
+      pointer-events: all;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .govx-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+
+        i {
+          width: 40px;
+          height: 40px;
+          min-width: auto;
+        }
+      }
+
+      .govx-text {
+        padding: 0;
+
+        span {
+          @extend .b4;
+
+          color: var(--white);
+          text-decoration: underline;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
