@@ -235,6 +235,18 @@
     }
   }
 
+  .carousel--pdp-hero & {
+    @media (--md-max) {
+      width: 30px;
+      height: 30px;
+      display: flex;
+
+      &.carousel-prev {
+        left: 10px;
+      }
+    }
+  }
+
   .carousel--article & {
     top: 63%;
 

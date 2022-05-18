@@ -23,10 +23,12 @@
         <p v-if="firstName" class="h1 reward-hero__name">Hey, ${firstName}</p> 
         <p v-if="tier" class="h2 rewards-hero__level">REAPER ${tier ? tier.name : ''}</p>
         <p class="h2 rewards-hero__point">YOUR DEATH WISHES: ${pointsBalance}</p>
+        <p><a href="{{ routes.account_logout_url }}" class="rewards-hero__link">Logout</a></p>
       </div>
       <div v-else class="rewards-hero__actions">
+        {% assign rewardsLoginUrl = routes.account_login_url | append: "?return_url=/pages/rewards" %}
         {%- render 'button', 
-          button_url: routes.account_login_url,
+          button_url: rewardsLoginUrl,
           button_value: 'SIGN IN',
           class: 'rewards-hero__button' 
         -%}
