@@ -9,6 +9,7 @@
     "build-dev": "brrl -b -e development",
     "dependencies": "brrl-install",
     "development": "brrl -d -e development",
+    "local-dev": "brrl -w -e development",
     "staging": "brrl -d -e staging",
     "production": "brrl -d -e production",
     "create-module": "sh scripts/create_module.sh",
@@ -111,7 +112,7 @@
     "vuex": "^3.6.2"
   },
   "resolutions": {
-    "graceful-fs": "^4.2.4",
+    "graceful-fs": "4.2.2",
     "vue-scrollto": "^2.13.0",
     "vuex": "^3.6.2"
   }
