@@ -56,9 +56,6 @@
     {%- render 'footer' -%}
   {%- endunless -%}
   {%- endcomment -%}
-
-  {% render 'upscribe-cart-logic' %}
-
   {%- unless settings.is_dev_mode -%}
     {{- 'main.js' | asset_url | script_tag -}}
   {%- endunless -%}

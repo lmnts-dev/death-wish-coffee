@@ -33,7 +33,7 @@
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
   {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
-  
+
   <div id="account-parent">
     <main id="page" class="relative z0 bg--shadow" role="main" >
       <div class="account-wrapper container">
@@ -56,21 +56,13 @@
           </div>
         </div>
     </main>
-    <div style="display: none;">
-      {% render 'upscribe-cart-logic' %}
-    </div>
 
     {%- unless settings.is_dev_mode -%}
       {{- 'main.js' | asset_url | script_tag -}}
     {%- endunless -%}
   </div>
 
-<div id="upscribe-portal-wrapper" style="display: none;">
-  {%- render 'upscribe-wrapper' -%}
-</div>
-
 {%- render 'footer' -%}
 
 </body>
 </html>
-

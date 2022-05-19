@@ -6,7 +6,7 @@
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
   <link rel="canonical" href="{{- canonical_url -}}">
 
-  
+
   <script>
     window.dataLayer = window.dataLayer || [];
   </script>
@@ -75,15 +75,13 @@
   </main>
   {%- render 'footer' -%}
 
-  {% render 'upscribe-cart-logic' %}
-
   {%- unless settings.is_dev_mode -%}
     {%- unless template.name == 'account' and template.suffix == 'subscriptions' -%}
       {{- 'main.js' | asset_url | script_tag -}}
     {%- endunless -%}
   {%- endunless -%}
   {% include 'findify-tagging' %}
-  
+
 <!-- Impact Radius Script Body-->
 {% if customer %}
   {% assign customerID = customer.id %}
