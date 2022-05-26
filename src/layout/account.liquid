@@ -44,11 +44,11 @@
 
           {%- for tag in customer.tags -%}
               {%- if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'-%}
-                  {% assign is_upscribe_customer = true %}
+                  {% assign is_subscription_customer = true %}
               {%- endif -%}
           {%- endfor -%}
 
-            {%- render 'account-sidebar-menu' is_upscribe_customer: is_upscribe_customer -%}
+            {%- render 'account-sidebar-menu' is_subscription_customer: is_subscription_customer -%}
             {%- render 'customer-info' -%}
           </div>
           <div class="account-wrapper__right shopify-account-portal-wrapper">
