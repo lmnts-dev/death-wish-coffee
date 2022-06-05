@@ -22,7 +22,6 @@
   {% assign upscribe_component_uid = false %}
 {%- endcomment -%}
 {% assign upscribe_component_uid = product.id %}
-{% assign upscribe_regular_price_query_selector = false %}
 {% assign upscribe_sale_price_query_selector = false %}
 {%- comment -%}
 {% unless upscribe_component_uid %}
@@ -236,7 +235,6 @@
          :product="{{- product_json | escape -}}"
          :shop='{{shop.metafields.sf_upscribe | json}}'
          :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
-         :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
          inline-template
     >
       {{ content }}
