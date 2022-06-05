@@ -459,15 +459,8 @@ export default {
       let saleEl
       let strikethroughPrice
       regularEl = document.querySelector('.upscribe-price-item-regular')
-
-      if (this.upscribeSalePriceQuerySelector) {
-        saleEl = document.querySelector(
-          this.upscribeSalePriceQuerySelector
-        )
-      } else {
-        saleEl = document.querySelector('.upscribe-price-item-sale')
-        strikethroughPrice = document.querySelector('.strikethrough-price')
-      }
+      saleEl = document.querySelector('.upscribe-price-item-sale')
+      strikethroughPrice = document.querySelector('.strikethrough-price')
 
       if (!regularEl && !saleEl) {
         return
