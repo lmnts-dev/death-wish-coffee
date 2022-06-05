@@ -1,4 +1,3 @@
-{% assign upscribe_total = 0 %}
 {% assign subscription_in_cart = false %}
 
 {% assign cart_has_subscription_item = 'false' %}
@@ -79,7 +78,7 @@
 
                   {%- comment -%}
                   TODO: Add subtotals to line items
-                  
+
                   <p v-else class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>
                     <span v-if="item.properties instanceof Object && typeof item.properties['Subscription Amount'] !== 'undefined'" class="pop-out-cart__line-price"><span class="sr-only">{{ 'cart.general.line_price' | t }}</span>${item.properties['Subscription Amount'] / 100}</span>
                     <span v-else>${item.price}</span></p>
@@ -109,7 +108,7 @@
           <p class="pop-out-cart__free-shipping b4">{{ 'cart.general.free_shipping' | t }}</p>
 
           <p class="b3">{{ 'cart.general.shipping_at_checkout' | t }}</p>
-          
+
           {%- capture checkout_button_attrs -%}
             type="button"
             name="checkout"
