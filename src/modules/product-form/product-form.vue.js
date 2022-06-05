@@ -313,9 +313,6 @@ export default {
       console.log(this.selectedFrequencyIndex, this.index)
       return this.selectedFrequencyIndex === this.index
     },
-    isEnableUpscribe () {
-      return this.product.sf_upscribe.enable_subscription && this.isActiveSubscription
-    },
     formattedSubscriptionAmount () {
       return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
     }
