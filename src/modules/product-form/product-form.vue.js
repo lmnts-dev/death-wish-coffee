@@ -447,8 +447,9 @@ export default {
       let regularEl
       let saleEl
       let strikethroughPrice
-      regularEl = document.querySelector('.upscribe-price-item-regular')
-      saleEl = document.querySelector('.upscribe-price-item-sale')
+      // TODO-ORDERGROOVE
+      regularEl = document.querySelector('.TODO-ORDERGROOVE-price-item-regular')
+      saleEl = document.querySelector('.TODO-ORDERGROOVE-price-item-sale')
       strikethroughPrice = document.querySelector('.strikethrough-price')
 
       if (!regularEl && !saleEl) {
