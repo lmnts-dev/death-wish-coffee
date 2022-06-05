@@ -22,7 +22,6 @@
   {% assign upscribe_component_uid = false %}
 {%- endcomment -%}
 {% assign upscribe_component_uid = product.id %}
-{% assign upscribe_keep_component_in_sync = false %}
 {% assign upscribe_regular_price_query_selector = false %}
 {% assign upscribe_sale_price_query_selector = false %}
 {%- comment -%}
@@ -32,9 +31,6 @@
 {%- endcomment -%}
 {% if upscribe_include_vue_cdn_in_snippet != false %}
   {% assign upscribe_include_vue_cdn_in_snippet = true %}
-{% endif %}
-{% if upscribe_keep_component_in_sync != false %}
-  {% assign upscribe_keep_component_in_sync = true %}
 {% endif %}
 
 {% assign queryParamVariant = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&' | split:'?variant=' | last-%}
@@ -241,7 +237,6 @@
          :shop='{{shop.metafields.sf_upscribe | json}}'
          :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
          :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
-         :upscribe-keep-component-in-sync="{{upscribe_keep_component_in_sync}}"
          inline-template
     >
       {{ content }}
