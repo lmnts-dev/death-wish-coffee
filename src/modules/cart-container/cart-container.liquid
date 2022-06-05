@@ -30,8 +30,7 @@
               {% assign subscription_line_price_total = item.discounted_price | times: item.quantity %}
             {% endif %}
 
-            {% assign upscribe_total = upscribe_total | plus: subscription_line_price_total %}
-
+            {% assign subscription_total = subscription_total | plus: subscription_line_price_total %}
 
             <div class="pop-out-cart__item">
               <a class="pop-out-cart__item-image" href="{{ item.url | within: collections.all }}">
@@ -70,14 +69,14 @@
                 X
               </a>
             </div>
-            
+
             {%- assign subscription_amount = false -%}
             {%- assign subscription_title = false -%}
             {%- assign discount_amount = false -%}
-  
+
           {% endfor %}
           </div>    </div>
-      {% render 'cart-sidebar', upscribe_total: upscribe_total, subscription_in_cart: subscription_in_cart %}
+      {% render 'cart-sidebar', subscription_total: subscription_total, subscription_in_cart: subscription_in_cart %}
     </div>
   </form>
 </section>

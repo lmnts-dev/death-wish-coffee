@@ -1,5 +1,5 @@
 {% assign class = class | default: false %}
-{% assign upscribe_total = upscribe_total | default: false %}
+{% assign subscription_total = subscription_total | default: false %}
 {% assign subscription_in_cart = subscription_in_cart | default: false %}
 {% capture class %}cart-sidebar{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
@@ -10,7 +10,7 @@
       <p class="cart-sidebar__label b2">Total</p>
       <p class="cart-sidebar__cost b1">
         {% if subscription_in_cart %}
-          <span>{{ upscribe_total | money }}</span>
+          <span>{{ subscription_total | money }}</span>
         {% else %}
           <span>{{ cart.total_price | money }}</span>
         {% endif %}
