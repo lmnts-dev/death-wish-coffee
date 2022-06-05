@@ -57,14 +57,6 @@ export default {
     }
     var vm = this
 
-    window.addEventListener(
-      'upscribeFrequencyIndexUpdate',
-      function (event) {
-        vm.setFrequency(event.detail)
-      },
-      false
-    )
-    // }
     this.componentMounted = 1
   },
   watch: {
@@ -427,10 +419,6 @@ export default {
       // console.log(index, this.option)
       this.$emit('click-option', this.index)
       console.log(this.index)
-      // Upscribe Frequency Update
-      window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
-        detail: this.index
-      }))
     },
     getParameterByName (name, url = window.location.href) {
       name = name.replace(/[\]]/g, '\\$&')
@@ -659,6 +647,5 @@ export default {
     }
   },
   destroyed () {
-    window.removeEventListener('upscribeFrequencyIndexUpdate', this.setFrequency)
   }
 }

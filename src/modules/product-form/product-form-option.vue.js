@@ -40,11 +40,6 @@ export default {
     // emit selected val
     clickOption () {
       this.$emit('click-option', this.index)
-
-      // Upscribe Frequency Update
-      window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
-        detail: this.index
-      }))
     }
   }
 }
