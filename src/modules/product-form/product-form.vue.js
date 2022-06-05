@@ -57,7 +57,6 @@ export default {
     }
     var vm = this
 
-    // if (this.upscribeKeepComponentInSync === true) {
     window.addEventListener(
       'upscribeProductPurchaseTypeUpdate',
       function (event) {
@@ -82,12 +81,10 @@ export default {
       store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
     productPurchaseType (newVal) {
-      // if (this.upscribeKeepComponentInSync) {
       // Upscribe Product Purchase Type Update
       window.dispatchEvent(new CustomEvent('upscribeProductPurchaseTypeUpdate', {
         detail: newVal
       }))
-      // }
       let originalPrice
       let comparePrice
       // if one time
