@@ -495,14 +495,7 @@ export default {
       return parseInt(amount)
     },
     calculateOriginalVariantPrices (variant) {
-      var price = variant.price
-      var originalNoDiscountPriceEl = document.querySelector(
-        '.upscribe-price-item-original'
-      )
-
-      if (originalNoDiscountPriceEl) {
-        originalNoDiscountPriceEl.innerHTML = price
-      }
+      // TODO-ORDERGROOVE
     },
     calculateVariantPrices (originalPrice, originalComparePrice) {
       var displayDiscountPrice = false
