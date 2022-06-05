@@ -14,18 +14,6 @@ export default {
       required: true
     },
     isActiveSubscription: Boolean,
-    upscribeKeepComponentInSync: {
-      type: Boolean,
-      default: false
-    },
-    upscribeSalePriceQuerySelector: {
-      type: Boolean,
-      default: false
-    },
-    upscribeRegularPriceQuerySelector: {
-      type: Boolean,
-      default: false
-    },
     queryStringVariant: {
       type: String,
       default: () => ('')
@@ -67,12 +55,7 @@ export default {
       const optionPosition = option.position
       this.$set(this.selectedOptions, key, this.initialVariant[`option${optionPosition}`])
     }
-    // add listener for variant update, set in variant_selection.js
-    // this listener could be different depeneding on if the theme uses the same base setup
     var vm = this
-    window.addEventListener('upscribeVariantUpdate', function (event) {
-      vm.handleVariantUpdateEvent(event)
-    }, false)
 
     // if (this.upscribeKeepComponentInSync === true) {
     window.addEventListener(
@@ -152,12 +135,6 @@ export default {
     },
     selectedVariant () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
-      // upscribe
-      if (variant) {
-        window.dispatchEvent(new CustomEvent('upscribeVariantUpdate', {
-          detail: variant
-        }))
-      }
       return this.hasSingleVariant ? this.product.variants[0] : variant
     },
     selectedVariantId () {
@@ -697,7 +674,6 @@ export default {
     }
   },
   destroyed () {
-    window.removeEventListener('upscribeVariantUpdate', this.handleVariantUpdateEvent)
     window.removeEventListener('upscribeProductPurchaseTypeUpdate', this.setProductPurchaseType)
     window.removeEventListener('upscribeFrequencyIndexUpdate', this.setFrequency)
   }
