@@ -250,24 +250,20 @@ export default {
       return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
     },
     initialApplicableVariants () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.applicable_variants
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     subscriptionProductTitle () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.subscription_product_title
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     intervalFrequncyMetafield () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.interval_frequency
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     intervalUnitMetafield () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.interval_unit
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     defaultGlobalDiscountAmount () {
       return this.shop.default_discount_amount
@@ -275,24 +271,20 @@ export default {
         : null
     },
     discountAmount () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.discount_amount
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     initialChargeLimit () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.charge_limit
-        : ''
+      // TODO-ORDERGROOVE
+      return ''
     },
     recurringDiscountAmount () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.recurring_discount_amount
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     recurringDiscountAfterOrder () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.recurring_discount_after_order
-        : null
+      // TODO-ORDERGROOVE
+      return null
     },
     oneTimeMessage () {
       return this.shop ? this.shop.one_time_message : ''
