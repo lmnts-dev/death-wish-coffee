@@ -58,14 +58,6 @@ export default {
     var vm = this
 
     window.addEventListener(
-      'upscribeProductPurchaseTypeUpdate',
-      function (event) {
-        vm.setProductPurchaseType(event.detail)
-      },
-      false
-    )
-
-    window.addEventListener(
       'upscribeFrequencyIndexUpdate',
       function (event) {
         vm.setFrequency(event.detail)
@@ -81,10 +73,6 @@ export default {
       store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
     productPurchaseType (newVal) {
-      // Upscribe Product Purchase Type Update
-      window.dispatchEvent(new CustomEvent('upscribeProductPurchaseTypeUpdate', {
-        detail: newVal
-      }))
       let originalPrice
       let comparePrice
       // if one time
@@ -671,7 +659,6 @@ export default {
     }
   },
   destroyed () {
-    window.removeEventListener('upscribeProductPurchaseTypeUpdate', this.setProductPurchaseType)
     window.removeEventListener('upscribeFrequencyIndexUpdate', this.setFrequency)
   }
 }
