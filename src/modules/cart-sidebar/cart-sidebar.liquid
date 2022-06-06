@@ -23,7 +23,7 @@
       type="button"
       name="checkout"
       @click="checkout"
-      :class="{ 'upscribe-checkout-button': cartHasSubscriptionItem, 'pop-out-cart__checkout-button': !cartHasSubscriptionItem }"
+      :class="{ 'subscription-checkout-button': cartHasSubscriptionItem, 'pop-out-cart__checkout-button': !cartHasSubscriptionItem }"
     {%- assign checkout_button_value = 'cart.general.checkout' | t -%}
     {%- endcapture -%}
     {%- render 'button'
