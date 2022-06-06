@@ -2,7 +2,7 @@
 {%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
 
 {%- capture product_form -%}
-  {%- capture product_form_attrs -%}:shop='{{shop.metafields.sf_upscribe | json}}' :product="product" @update-variant-id="handleSelectedVariant" @added-to-cart-error="handleAddedToCartError"{%- endcapture -%}
+  {%- capture product_form_attrs -%}:product="product" @update-variant-id="handleSelectedVariant" @added-to-cart-error="handleAddedToCartError"{%- endcapture -%}
   {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: product_form_attrs -%}
 {%- endcapture -%}
 

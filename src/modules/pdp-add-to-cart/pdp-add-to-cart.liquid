@@ -31,7 +31,6 @@
         <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart" v-html="productDescription"></div>
         {%- capture form_attrs -%}
           :product="product"
-          :shop='{{shop.metafields.sf_upscribe | json}}'
           :is-active-subscription="true"
           :subscription-checked="subscriptionChecked"
         {%- endcapture -%}
