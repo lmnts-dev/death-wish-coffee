@@ -75,7 +75,7 @@ const popOutCart = (el) => {
         store.dispatch('cart/updateCart', { id: item.id, quantity: 0 })
       },
       checkout () {
-        window.upscribeBuildCheckout()
+        // TODO-ORDERGROOVE: build checkout
       },
       resizeHandler () {
         this.isMobile = window.innerWidth < this.breakpoint

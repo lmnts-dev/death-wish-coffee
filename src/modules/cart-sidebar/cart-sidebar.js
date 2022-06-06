@@ -26,8 +26,8 @@ const cartsidebar = (el) => {
       }
     },
     methods: {
-      checkout () {
-        window.upscribeBuildCheckout()
+      checkout() {
+        // TODO-ORDERGROOVE: build checkout
       }
     }
   })
