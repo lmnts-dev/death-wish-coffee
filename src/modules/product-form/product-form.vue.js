@@ -503,7 +503,6 @@ export default {
       var displayDiscountComparePrice = false
 
       if (originalPrice) {
-      // var originalPriceEl = document.querySelector('.upscribe-price-item-regular')
         var discountPrice =
           originalPrice - this.discountCalculatedValue(originalPrice)
 
