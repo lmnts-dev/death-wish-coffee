@@ -141,13 +141,16 @@
   align-items: center;
 }
 
-.review-drawer__button {
+.review-drawer__yotpo-title::after {
+  content: "";
   width: 0;
   height: 0;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
   border-top: 20px solid var(--blood);
   margin: 14px auto 0;
+  display: block;
+  cursor: pointer;
 
   @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
     .review--palette-$(color) & {
