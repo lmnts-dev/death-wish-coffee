@@ -6,6 +6,12 @@
       "id": "is_dev_mode",
       "label": "Access site through BrowserSync?",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "dev_url",
+      "label": "Full URL (host and port)for local dev server",
+      "default": "https://localhost:3000"
     }
   ]
 }
