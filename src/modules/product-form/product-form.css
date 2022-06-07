@@ -202,7 +202,7 @@
         height: calc(100% - 1px);
         border: 1px solid var(--blood);
 
-        @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+        @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
           .product-form--palette-$(color) & {
             border-color: var(--$color);
           }
@@ -467,7 +467,7 @@
     &:checked ~ .cu-productTypeSelect__itemMark {
       background: var(--blood);
 
-      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
         .product-form--palette-$(color) & {
           background: var(--$color);
         }
@@ -520,7 +520,7 @@
       color: var(--white);
       background: var(--slate);
 
-      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
         .product-form--palette-$(color) & {
           border-color: var(--$color);
         }

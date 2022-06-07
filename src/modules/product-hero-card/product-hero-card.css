@@ -46,7 +46,7 @@
       pointer-events: none;
     }
 
-    @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+    @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
       .product-hero-card--hover.product-hero-card--palette-$(color) & {
         border-color: var(--$color);
       }
@@ -131,7 +131,7 @@
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
     .product-hero-card--palette-$(color) & {
       color: var(--$color);
     }

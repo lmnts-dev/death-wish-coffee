@@ -25,7 +25,7 @@
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
     &--palette-$(color) {
       background-color: var(--$color);
     }

@@ -31,6 +31,7 @@ i.govx-id-slim-wrapper {
           color: var(--white);
           text-decoration: underline;
           font-weight: 400;
+          font-size: 14px;
         }
       }
     }

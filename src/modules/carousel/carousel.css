@@ -386,7 +386,7 @@
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
     .carousel--palette-$(color) & {
       color: var(--$color);
     }
