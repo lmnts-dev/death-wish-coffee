@@ -2,8 +2,12 @@ import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
 import iconData from './product-icons'
+import OgOffer from '../og-offer/og-offer.vue'
 
 export default {
+  components: {
+    OgOffer
+  },
   props: {
     product: {
       type: Object,
@@ -496,6 +500,7 @@ export default {
     },
     calculateOriginalVariantPrices (variant) {
       // TODO-ORDERGROOVE
+      console.log('calculateOriginalVariantPrices', variant)
     },
     calculateVariantPrices (originalPrice, originalComparePrice) {
       var displayDiscountPrice = false

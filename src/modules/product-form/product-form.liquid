@@ -107,7 +107,7 @@
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
 
-      {%- render 'ordergroove_offer' product: product.selected_or_first_available_variant location: 'pdp' -%}
+      {%- render 'og_offer' product: product.selected_or_first_available_variant location: 'pdp' -%}
 
       {%- render 'button',
         button_value: '${addToCartButtonText}',
