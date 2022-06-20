@@ -55,7 +55,6 @@ export default {
       const optionPosition = option.position
       this.$set(this.selectedOptions, key, this.initialVariant[`option${optionPosition}`])
     }
-    var vm = this
 
     this.componentMounted = 1
   },
@@ -444,9 +443,9 @@ export default {
     },
     // replace pricing values, for compare and regular pricing
     setPricingDisplayEls (original, compare) {
-      let regularEl
-      let saleEl
-      let strikethroughPrice
+      let regularEl = null
+      let saleEl = null
+      let strikethroughPrice = null
       // TODO-ORDERGROOVE
       regularEl = document.querySelector('.TODO-ORDERGROOVE-price-item-regular')
       saleEl = document.querySelector('.TODO-ORDERGROOVE-price-item-sale')
