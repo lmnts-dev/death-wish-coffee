@@ -26,7 +26,7 @@ const cartsidebar = (el) => {
       }
     },
     methods: {
-      checkout() {
+      checkout () {
         // TODO-ORDERGROOVE: build checkout
       }
     }
