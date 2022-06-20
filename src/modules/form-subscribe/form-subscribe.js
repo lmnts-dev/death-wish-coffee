@@ -32,10 +32,10 @@ const formsubscribe = el => {
       }).then(response => {
         if (response.data.success) {
           // ordergroove
-          dataLayer.push({
-            event: "form_submit",
-            form: "general",
-          });
+          window.dataLayer && window.dataLayer.push({
+            event: 'form_submit',
+            form: 'general'
+          })
 
           if (response.data.data.is_subscribed) {
             updateFormFeedback('Looks like you are already subscribed to our mailing list.')
