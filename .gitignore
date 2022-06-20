@@ -5,6 +5,7 @@ config.yml
 jscs.js
 jshint.js
 temp
+tmp
 
 # Packages #
 ############
