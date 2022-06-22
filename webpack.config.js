@@ -4,7 +4,11 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
-    main: ['./src/css/main.css', './src/js/main']
+    main: [
+      'webpack-hot-middleware/client?path=//localhost:3000/__webpack_hmr',
+      './src/css/main.css',
+      './src/js/main'
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist/assets'),
