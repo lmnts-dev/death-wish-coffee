@@ -27,7 +27,12 @@ odd for site visitors.
   {% else %}
     {% assign subscription_url = "/apps/subscriptions/manage/?customer=" | append: customer.id | append: "&customer_signature=" | append: signature | append: "&customer_timestamp=" | append: timestamp %}
   {% endif %}
-  <div data-module="og-account-link">
+  <div
+    data-module="og-account-link"
+    data-og-customer-id="{{customer_id}}"
+    data-og-timestamp="{{timestamp}}"
+    data-og-signature="{{signature}}"
+  >
     <a
       class="account-sidebar-menu__item-link"
       href="{{subscription_url}}"
