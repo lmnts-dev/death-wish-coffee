@@ -1,6 +1,7 @@
 {% assign class = class | default: false %}
 {% assign is_subscription_customer = is_subscription_customer | default: false %}
 {% capture class %}account-sidebar-menu{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% assign full_template_name = template.name | append: "," | append: template.suffix | split: "," | compact | join: "." %}
 
 <section class="{{ class }}" data-module="account-sidebar-menu">
   <div class="account-sidebar-menu__wrapper">
@@ -9,10 +10,10 @@
     </div>
     <div class="account-sidebar-menu__content js-account-sidebar-menu-content">
       <ul class="account-sidebar-menu__list">
-        <li class="account-sidebar-menu__item{% if template.name == 'account' %} account-sidebar-menu__item--active{% endif %}">
+        <li class="account-sidebar-menu__item{% if full_template_name == 'account' %} account-sidebar-menu__item--active{% endif %}">
           <a href="{{ routes.account_url }}" class="account-sidebar-menu__item-link">Order History</a>
         </li>
-        <li class="account-sidebar-menu__item{% if template.name == 'addresses' %} account-sidebar-menu__item--active{% endif %}">
+        <li class="account-sidebar-menu__item{% if full_template_name == 'addresses' %} account-sidebar-menu__item--active{% endif %}">
           <a href="{{ routes.account_addresses_url }}" class="account-sidebar-menu__item-link">Addresses</a>
         </li>
         {%- if is_subscription_customer != false -%}
