@@ -1,4 +1,8 @@
-{%- layout 'theme' -%}
+{% comment %}
+Alternate view of the `account` template to view subscriptions.
+{% endcomment %}
+
+{%- layout 'account' -%}
 
 {% if customer %}
   <div id="og-msi" ng-jq=""></div>
@@ -6,7 +10,7 @@
 {% else %}
   <h1>You're not logged in</h1>
   {% assign subscriptionsLoginUrl = routes.account_url | append: "?view=subscriptions" %}
-  {%- render 'button', 
+  {%- render 'button',
     button_url: subscriptionsLoginUrl,
     button_value: 'LOG IN',
   -%}
