@@ -25,7 +25,7 @@ odd for site visitors.
   {% if use_page == true %}
     {% assign subscription_url = routes.account_url | append: "?view=subscriptions" %}
   {% else %}
-    {% assign subscription_url = "/apps/subscriptions/manage/?customer={{customer.id}}&customer_signature={{signature}}&customer_timestamp={{timestamp}}" %}
+    {% assign subscription_url = "/apps/subscriptions/manage/?customer=" | append: customer.id | append: "&customer_signature=" | append: signature | append: "&customer_timestamp=" | append: timestamp %}
   {% endif %}
   <div data-module="og-account-link">
     <a
