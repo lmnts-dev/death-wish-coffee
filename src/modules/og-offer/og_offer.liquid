@@ -3,29 +3,13 @@ NOTE: this is a customized version of the Ordergroove snippets. Modified
 areas are indicated with "OG-INTEGRATION"
 {% endcomment %}
 
-<!-- TODO-ORDERGROOVE: remove me -->
-<h1>og_offer</h1>
-
 {% comment %}
-OG-INTEGRATION: This code has been moved to the `.mounted` event on the vue module
-<script>
-  var productIds = [];
-  {% for item in cart.items %}
-  productIds.push("{{item.variant_id}}");
-  {% endfor %}
-  window.order_line_items = productIds;
-</script>
-{% endcomment %}
-
-{% comment %}
-OF-INTEGRATION: Create an array of product ids to pass to the module
+Create an array of product ids to pass to the module
 {% endcomment }
 {% assign og_product_ids = cart.items | map: "variant_id" | join: "," %}
 
 <div is="og-offer" inline-template product-ids-string="{{og_product_ids}}">
   <div data-module="og-offer">
-  <!-- TODO-ORDERGROOVE: remove me -->
-  <h1>og-offer</h1>
 {% if selected_variant %}
   {% assign product = selected_variant %}
 {% elsif line_item %}
