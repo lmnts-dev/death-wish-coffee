@@ -36,15 +36,15 @@ export default {
     )
 
     return {
-      moneyFormat: 'amount',
-      selectedOptions: { ...initialSelectedOptions },
-      selectedFrequencyIndex: 0,
-      productPurchaseType: 'onetime',
-      subscriptionPrice: null,
-      subscriptionAmount: null,
-      optionIcons: iconData,
       componentMounted: !1,
-      sizeChartActive: false
+      moneyFormat: 'amount',
+      optionIcons: iconData,
+      productPurchaseType: 'onetime',
+      selectedFrequencyIndex: 0,
+      selectedOptions: { ...initialSelectedOptions },
+      sizeChartActive: false,
+      subscriptionAmount: null,
+      subscriptionPrice: null,
     }
   },
   mounted () {
