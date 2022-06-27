@@ -270,17 +270,22 @@ export default {
         }
       })
     },
-    // plural unit display check
-    finalSubscriptionProperty () {
-      var selectedFrequency = this.selectedFrequency
-      var unit = this.intervalUnit
-      if (!this.subscriptionSelected && !this.isOnetimeSubscription) { return false }
-
-      if (selectedFrequency > 1) {
-        return selectedFrequency + ' ' + unit + 's'
-      } else {
-        return selectedFrequency + ' ' + unit
+    /**
+     * Subscription label used in the cart.
+     *
+     * i.e. "1 month", "3 months", etc.
+     *
+     * @returns String || Boolean
+     */
+    finalSubscriptionProperty() {
+      if (!this.subscriptionSelected && !this.isOnetimeSubscription) {
+        return false
       }
+
+      const label = this.ogOfferDetails.frequency.label
+
+      debug('finalSubscriptionProperty', label)
+      return label
     },
     selectedFrequency () {
       return this.selectFrequencyOptions[this.selectedFrequencyIndex].value
