@@ -193,8 +193,14 @@ export default {
       debug('subscriptionSelected', selected)
       return selected
     },
-    // used for single purchase that will be able to reactivate as a subscription in the future
-    isOnetimeSubscription () {
+    /**
+     * Indicates if this is a onetime subscription.
+     *
+     * Used for single purchase that is able to reactivate as a subscription.
+     *
+     * @returns Boolean
+     */
+    isOnetimeSubscription() {
       return this.chargeLimit === PURCHASE_TYPES.onetime
     },
     // subscription title, used in cart and sent to checkout for replacement
