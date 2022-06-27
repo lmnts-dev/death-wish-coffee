@@ -220,10 +220,15 @@ export default {
     chargeLimit () {
       return this.initialChargeLimit ? this.initialChargeLimit : 0
     },
-    intervalFrequency () {
-      return this.intervalFrequncyMetafield
-        ? this.intervalFrequncyMetafield
-        : '15,30,45,60'
+    /**
+     * Subscription frequency interval.
+     *
+     * Returns the value of the interval - number of days, months, etc.
+     *
+     * @returns String
+     */
+    intervalFrequency() {
+      return this.ogOfferDetails.frequency.interval || '1'
     },
     // build frequency options for select boxes
     selectFrequencyOptions () {
@@ -263,10 +268,6 @@ export default {
       return null
     },
     subscriptionProductTitle () {
-      // TODO-ORDERGROOVE
-      return null
-    },
-    intervalFrequncyMetafield () {
       // TODO-ORDERGROOVE
       return null
     },
