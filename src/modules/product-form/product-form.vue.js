@@ -321,10 +321,6 @@ export default {
       // TODO-ORDERGROOVE
       return ''
     },
-    recurringDiscountAmount () {
-      // TODO-ORDERGROOVE
-      return null
-    },
     recurringDiscountAfterOrder () {
       // TODO-ORDERGROOVE
       return null
@@ -421,7 +417,6 @@ export default {
           'Subscription Amount': this.subscriptionAmount,
           'Subscription Product Title': this.subscriptionProductTitleDisplay,
           'Charge Limit': this.chargeLimit,
-          'Recurring Discount Amount': this.recurringDiscountAmount,
           'Recurring Discount After Order': this.recurringDiscountAfterOrder
         }
         params.properties = Object.assign({}, params.properties, subscriptionProperties)
