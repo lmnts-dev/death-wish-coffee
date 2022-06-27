@@ -260,18 +260,21 @@ export default {
     selectedFrequency () {
       return this.selectFrequencyOptions[this.selectedFrequencyIndex].value
     },
-    intervalUnit () {
-      return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
+    /**
+     * Subscription frequency unit.
+     *
+     * Returns the singular value of the unit - 'day', 'week', 'month', etc.
+     *
+     * @returns String
+     */
+    intervalUnit() {
+      return this.ogOfferDetails.frequency.unit || 'day'
     },
     initialApplicableVariants () {
       // TODO-ORDERGROOVE
       return null
     },
     subscriptionProductTitle () {
-      // TODO-ORDERGROOVE
-      return null
-    },
-    intervalUnitMetafield () {
       // TODO-ORDERGROOVE
       return null
     },
