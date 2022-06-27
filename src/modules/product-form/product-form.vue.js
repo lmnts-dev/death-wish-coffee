@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle,space-before-function-paren */
 import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
@@ -622,3 +623,4 @@ export default {
   destroyed () {
   }
 }
+/* eslint-enable comma-dangle,space-before-function-paren */
