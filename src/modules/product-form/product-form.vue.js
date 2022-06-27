@@ -8,6 +8,12 @@ import OgOffer, { UPDATE_DETAILS_EVENT_NAME } from '../og-offer/og-offer.vue'
 // Flag to enable debug logging. Refer to `debug()` below.
 const DEBUG = true
 
+// Map of product purchase types
+const PURCHASE_TYPES = {
+  onetime: 'onetime',
+  subscription: 'subscription',
+}
+
 export default {
   components: {
     OgOffer
@@ -43,7 +49,6 @@ export default {
       moneyFormat: 'amount',
       ogOfferDetails: {},
       optionIcons: iconData,
-      productPurchaseType: 'onetime',
       selectedFrequencyIndex: 0,
       selectedOptions: { ...initialSelectedOptions },
       sizeChartActive: false,
@@ -56,7 +61,6 @@ export default {
     // reset
     this.index = ''
     this.selectedFrequencyIndex = 0
-    this.productPurchaseType = this.subscriptionChecked ? 'subscription' : 'onetime'
     this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {
@@ -77,7 +81,7 @@ export default {
       let originalPrice
       let comparePrice
       // if one time
-      if (newVal === 'onetime') {
+      if (newVal === PURCHASE_TYPES.onetime) {
       // use stored non-discount prices from previous changes
         originalPrice = this.activeSubsriptionDisplayPrice || false
         comparePrice = this.activeSubsriptionDisplayComparePrice || false
@@ -167,7 +171,6 @@ export default {
     // all are applicable
 
       if (!this.activeVariantId) {
-        this.productPurchaseType = 'onetime'
         return false
       }
 
@@ -176,18 +179,17 @@ export default {
       if (this.applicableVariants.includes(this.activeVariantId.toString())) {
         return true
       } else {
-        this.productPurchaseType = 'onetime'
         return false
       }
     },
 
     // helper for if current state is subscription
     subscriptionSelected () {
-      return this.productPurchaseType === 'subscription'
+      return this.productPurchaseType === PURCHASE_TYPES.subscription
     },
     // used for single purchase that will be able to reactivate as a subscription in the future
     isOnetimeSubscription () {
-      return this.chargeLimit === 'onetime'
+      return this.chargeLimit === PURCHASE_TYPES.onetime
     },
     // subscription title, used in cart and sent to checkout for replacement
     subscriptionProductTitleDisplay () {
@@ -320,7 +322,17 @@ export default {
     },
     formattedSubscriptionAmount () {
       return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
-    }
+    },
+    /**
+     * The purchase type for the selected product.
+     *
+     * @returns String
+     */
+    productPurchaseType() {
+      const subscribed = this.ogOfferDetails.subscribeChecked
+
+      return subscribed ? PURCHASE_TYPES.subscription : PURCHASE_TYPES.onetime
+    },
   },
   methods: {
     activeSubsriptionDisplayPrice () {
@@ -398,7 +410,6 @@ export default {
     },
     resetSelectedOptions () {
       this.selectedOptions = { ...this.initialSelectedOptions }
-      this.productPurchaseType = 'onetime'
     },
     handleVariantSelecting (e) {
       const variantId = parseInt(e.target.value)
@@ -433,10 +444,6 @@ export default {
     getIndex (index) {
       console.log(index)
       this.index = index
-    },
-    setProductPurchaseType (val) {
-      if (!val) return
-      this.productPurchaseType = val
     },
     discountCalculatedValue (total) {
       var discountType = this.activeDiscountType
