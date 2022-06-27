@@ -49,7 +49,6 @@ export default {
       moneyFormat: 'amount',
       ogOfferDetails: {},
       optionIcons: iconData,
-      selectedFrequencyIndex: 0,
       selectedOptions: { ...initialSelectedOptions },
       sizeChartActive: false,
       subscriptionAmount: null,
@@ -60,7 +59,6 @@ export default {
     this.activeVariantId = this.product.variants[0].id
     // reset
     this.index = ''
-    this.selectedFrequencyIndex = 0
     this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {
@@ -287,9 +285,6 @@ export default {
       debug('finalSubscriptionProperty', label)
       return label
     },
-    selectedFrequency () {
-      return this.selectFrequencyOptions[this.selectedFrequencyIndex].value
-    },
     /**
      * Subscription frequency unit.
      *
@@ -335,10 +330,6 @@ export default {
     },
     howItWorksText () {
       return this.shop ? this.shop.how_it_works_text : ''
-    },
-    isActive () {
-      console.log(this.selectedFrequencyIndex, this.index)
-      return this.selectedFrequencyIndex === this.index
     },
     formattedSubscriptionAmount () {
       return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
@@ -439,14 +430,9 @@ export default {
         {}
       )
     },
-    setFrequency (val) {
-      this.selectedFrequencyIndex = val
-    },
     clickOption (index, option) {
-      // console.log(this.selectedFrequency === this.index)
       this.index = index
       this.option = option
-      // this.isActive(index)
       // console.log(index, this.option)
       this.$emit('click-option', this.index)
       console.log(this.index)
