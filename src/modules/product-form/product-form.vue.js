@@ -52,14 +52,12 @@ export default {
       selectedOptions: { ...initialSelectedOptions },
       sizeChartActive: false,
       subscriptionAmount: null,
-      subscriptionPrice: null,
     }
   },
   mounted () {
     this.activeVariantId = this.product.variants[0].id
     // reset
     this.index = ''
-    this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {
       const option = this.product.options_by_name[key].option
