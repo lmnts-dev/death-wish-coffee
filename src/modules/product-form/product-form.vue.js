@@ -116,9 +116,6 @@ export default {
     hasSingleVariant () {
       return this.product.variants.length === 1
     },
-    hasSingleOption () {
-      return this.product.options.length === 1
-    },
     selectedVariant () {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
       return this.hasSingleVariant ? this.product.variants[0] : variant
