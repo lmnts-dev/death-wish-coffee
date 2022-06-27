@@ -22,7 +22,7 @@ const OG_OFFER_ATTRIBUTES_TO_OBSERVE = [
 const OG_OFFER_REF_KEY = 'og-offer'
 
 // Event name used when emitting details updates to the parent component
-const UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details'
+export const UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details'
 
 /**
  * `og-offer`

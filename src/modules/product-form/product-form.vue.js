@@ -3,6 +3,7 @@ import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
 import iconData from './product-icons'
+import OgOffer, { UPDATE_DETAILS_EVENT_NAME } from '../og-offer/og-offer.vue'
 
 // Flag to enable debug logging. Refer to `debug()` below.
 const DEBUG = true
@@ -40,6 +41,7 @@ export default {
     return {
       componentMounted: !1,
       moneyFormat: 'amount',
+      ogOfferDetails: {},
       optionIcons: iconData,
       productPurchaseType: 'onetime',
       selectedFrequencyIndex: 0,
@@ -63,6 +65,7 @@ export default {
       this.$set(this.selectedOptions, key, this.initialVariant[`option${optionPosition}`])
     }
 
+    this.$_addUpdateOgOfferDetailsListener()
     this.componentMounted = 1
   },
   watch: {
@@ -620,7 +623,34 @@ export default {
     },
     toggleSizeChart () {
       this.sizeChartActive = !this.sizeChartActive
-    }
+    },
+    /**
+     * Add a listener for `og-offer` details updates.
+     */
+    $_addUpdateOgOfferDetailsListener() {
+      const handler = this.$_handleOgOfferDetails
+
+      this.$children.forEach(child => {
+        if (child.ogOfferDetails) {
+          // Wire-up handler for og-offer selling plan details
+          child.$on(UPDATE_DETAILS_EVENT_NAME, handler)
+
+          // Fire handler when listener is added to capture any changes
+          handler(child.ogOfferDetails)
+        }
+      })
+    },
+    /**
+     * Handler for the `og-offer` update events.
+     *
+     * @param {*} ogOfferDetails
+     */
+    $_handleOgOfferDetails(ogOfferDetails) {
+      debug('$_handleOgOfferDetails', ogOfferDetails)
+
+      this.ogOfferDetails = ogOfferDetails
+      // FIXME: Add call to variant handler
+    },
   },
   destroyed () {
   }
