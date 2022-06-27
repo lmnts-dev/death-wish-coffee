@@ -203,15 +203,26 @@ export default {
     isOnetimeSubscription() {
       return this.chargeLimit === PURCHASE_TYPES.onetime
     },
-    // subscription title, used in cart and sent to checkout for replacement
-    subscriptionProductTitleDisplay () {
+    /**
+     * Subscription product title for display in the cart.
+     *
+     * Used in cart and sent to checkout for replacement.
+     *
+     * @returns String
+     */
+    subscriptionProductTitleDisplay() {
       let display = ''
+
+      // Product title
       display += this.subscriptionProductTitle
         ? this.subscriptionProductTitle
         : this.product.title
+
+      // Discount
       display += this.discountDisplay
         ? ' - ' + this.discountDisplay + ' off'
         : ''
+
       return display
     },
     activeDiscountType () {
