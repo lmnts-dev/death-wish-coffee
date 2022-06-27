@@ -182,10 +182,16 @@ export default {
         return false
       }
     },
+    /**
+     * Test if the current purchase type is a subscription.
+     *
+     * @returns Boolean
+     */
+    subscriptionSelected() {
+      const selected = this.productPurchaseType === PURCHASE_TYPES.subscription
 
-    // helper for if current state is subscription
-    subscriptionSelected () {
-      return this.productPurchaseType === PURCHASE_TYPES.subscription
+      debug('subscriptionSelected', selected)
+      return selected
     },
     // used for single purchase that will be able to reactivate as a subscription in the future
     isOnetimeSubscription () {
