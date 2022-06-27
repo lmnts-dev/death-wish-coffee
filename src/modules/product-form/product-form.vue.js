@@ -3,7 +3,9 @@ import { mapState } from 'vuex'
 import store from 'lib/store'
 import { formatPrice } from 'lib/util'
 import iconData from './product-icons'
-import OgOffer from '../og-offer/og-offer.vue'
+
+// Flag to enable debug logging. Refer to `debug()` below.
+const DEBUG = true
 
 export default {
   components: {
@@ -621,6 +623,15 @@ export default {
     }
   },
   destroyed () {
+  }
+}
+
+/**
+ * Simple debug function to conditionally display debug information.
+ */
+function debug() {
+  if (DEBUG) {
+    console.debug('[product-form] ', ...arguments)
   }
 }
 /* eslint-enable comma-dangle,space-before-function-paren */
