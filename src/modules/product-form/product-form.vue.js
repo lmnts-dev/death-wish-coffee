@@ -606,8 +606,6 @@ export default {
       this.$_handleVariantUpdate()
     },
   },
-  destroyed () {
-  }
 }
 
 /**
