@@ -431,9 +431,16 @@ export default {
         ...this.initialSelectedOptions,
       }
     },
-    handleVariantSelecting (e) {
-      const variantId = parseInt(e.target.value)
+    /**
+     * Handle variant selection from the form.
+     *
+     * @param {*} event
+     */
+    handleVariantSelect(event) {
+      const variantId = parseInt(event.target.value)
       const variant = this.product.variants.find(v => v.id === variantId)
+
+      // Update selectedOptions
       this.selectedOptions = this.product.options.reduce(
         (result, option, index) => Object.assign({}, result, {
           [option]: variant.options[index]
