@@ -175,25 +175,6 @@ export default {
 
       return this.product.options[0]
     },
-    applicableVariants () {
-      if (!this.initialApplicableVariants) return false
-      return this.initialApplicableVariants.split(',')
-    },
-    activeVariantIsApplicableVariant () {
-    // all are applicable
-
-      if (!this.activeVariantId) {
-        return false
-      }
-
-      if (!this.initialApplicableVariants) return true
-
-      if (this.applicableVariants.includes(this.activeVariantId.toString())) {
-        return true
-      } else {
-        return false
-      }
-    },
     /**
      * Test if the current purchase type is a subscription.
      *
@@ -308,10 +289,6 @@ export default {
      */
     intervalUnit() {
       return this.ogOfferDetails.frequency.unit || 'day'
-    },
-    initialApplicableVariants () {
-      // TODO-ORDERGROOVE
-      return null
     },
     subscriptionProductTitle () {
       // TODO-ORDERGROOVE
