@@ -69,7 +69,15 @@ export default {
     this.componentMounted = 1
   },
   watch: {
-    selectedVariantId (newValue) {
+    /**
+     * Watch `selectedVariantId` for updates.
+     *
+     * @param {*} newValue
+     */
+    selectedVariantId(newValue) {
+      debug('selectedVariantId', newValue)
+
+      this.$_handleVariantUpdate()
       this.$emit('update-variant-id', newValue)
       store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
