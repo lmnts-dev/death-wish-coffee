@@ -105,7 +105,7 @@ export default {
      * @returns Variant || {}
      */
     selectedVariant() {
-      const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
+      const variant = this.findVariantWithOptions(this.selectedOptionValues)
       debug('selectedVariant', variant)
 
       const selected = this.hasSingleVariant
@@ -339,15 +339,18 @@ export default {
     optionInputId(option, value) {
       return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(value)}`
     },
-    isVariantMatchingOptions (variant, options) {
-      return variant.options.every(
-        (value, valueIndex) => value === options[valueIndex]
-      )
-    },
-    getVariantMatchingOptions (options) {
-      return this.product.variants.find(
-        variant => this.isVariantMatchingOptions(variant, options)
-      )
+    /**
+     * Finds the variant that matches all options passed in.
+     *
+     * @param {Array} options
+     * @returns Variant || undefined
+     */
+    findVariantWithOptions(options) {
+      return this.product.variants.find(variant => {
+        return variant.options.every(
+          (value, valueIndex) => value === options[valueIndex]
+        )
+      })
     },
     getPriceForOptionValue (optionIndex, value) {
       const options = []
@@ -359,7 +362,7 @@ export default {
       }
       options[optionIndex] = value
 
-      const matchedVariant = this.getVariantMatchingOptions(options)
+      const matchedVariant = this.findVariantWithOptions(options)
 
       return formatPrice(matchedVariant ? matchedVariant.price : this.product.variants[0].price)
     },
