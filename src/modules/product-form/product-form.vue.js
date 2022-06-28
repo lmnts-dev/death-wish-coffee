@@ -448,10 +448,6 @@ export default {
         {}
       )
     },
-    getIndex (index) {
-      console.log(index)
-      this.index = index
-    },
     discountCalculatedValue (total) {
       var discountType = this.activeDiscountType
       var discountAmount = this.activeDiscountAmount
