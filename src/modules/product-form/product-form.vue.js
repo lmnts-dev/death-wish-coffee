@@ -93,7 +93,12 @@ export default {
     initialVariant () {
       return this.product.selected_or_first_available_variant
     },
-    selectedOptionValues () {
+    /**
+     * Array of `values` from the selected options.
+     *
+     * @returns Array
+     */
+    selectedOptionValues() {
       return Object.values(this.selectedOptions)
     },
     /**
