@@ -267,21 +267,6 @@ export default {
         ? this.shop.default_discount_amount
         : null
     },
-    oneTimeMessage () {
-      return this.shop ? this.shop.one_time_message : ''
-    },
-    subscriptionMessage () {
-      return this.shop ? this.shop.subscribe_message : ''
-    },
-    learnMoreUrl () {
-      return this.shop ? this.shop.learn_more_url : ''
-    },
-    howItWorksTitle () {
-      return this.shop ? this.shop.how_it_works_title : ''
-    },
-    howItWorksText () {
-      return this.shop ? this.shop.how_it_works_text : ''
-    },
     /**
      * The purchase type for the selected product.
      *
