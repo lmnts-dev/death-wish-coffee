@@ -96,7 +96,12 @@ export default {
     selectedOptionValues () {
       return Object.values(this.selectedOptions)
     },
-    hasSingleVariant () {
+    /**
+     * Indicates if the product only has a single variant.
+     *
+     * @returns Boolean
+     */
+    hasSingleVariant() {
       return this.product.variants.length === 1
     },
     /**
