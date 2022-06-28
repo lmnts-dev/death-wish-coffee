@@ -84,7 +84,12 @@ export default {
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
-    productId () {
+    /**
+     * Product ID.
+     *
+     * @returns String
+     */
+    productId() {
       return this.product.id
     },
     /**
