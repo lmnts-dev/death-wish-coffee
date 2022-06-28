@@ -352,7 +352,14 @@ export default {
         )
       })
     },
-    getPriceForOptionValue (optionIndex, value) {
+    /**
+     * Get the price for the option value.
+     *
+     * @param {*} optionIndex
+     * @param {*} value
+     * @returns String
+     */
+    getPriceForOptionValue(optionIndex, value) {
       const options = []
 
       // In case user hasn't actually selected anything, default to the first
@@ -360,11 +367,15 @@ export default {
       for (const [option, value] of Object.entries(this.selectedOptions)) {
         options.push(value || this.product.options_by_name[option].option.values[0])
       }
+
       options[optionIndex] = value
 
       const matchedVariant = this.findVariantWithOptions(options)
+      const price = matchedVariant
+        ? matchedVariant.price
+        : this.product.variants[0].price
 
-      return formatPrice(matchedVariant ? matchedVariant.price : this.product.variants[0].price)
+      return formatPrice(price)
     },
     async handleAddToCart () {
       if (!this.selectedVariantId) {
