@@ -70,77 +70,38 @@ export default {
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
-    /**
-     * Product ID.
-     *
-     * @returns String
-     */
-    productId() {
-      return this.product.id
-    },
-    /**
-     * Alias for the product.title.
-     *
-     * @returns String
-     */
-    productName() {
-      return this.product.title
-    },
-    /**
-     * Initial product variant.
-     *
-     * @returns Variant
-     */
-    initialVariant() {
-      return this.product.selected_or_first_available_variant
-    },
-    /**
-     * Array of `values` from the selected options.
-     *
-     * @returns Array
-     */
-    selectedOptionValues() {
-      return Object.values(this.selectedOptions)
-    },
-    /**
-     * Indicates if the product only has a single variant.
-     *
-     * @returns Boolean
-     */
-    hasSingleVariant() {
-      return this.product.variants.length === 1
-    },
-    /**
-     * Current selected variant.
-     *
-     * @returns Variant || {}
-     */
-    selectedVariant() {
-      const variant = this.findVariantWithOptions(this.selectedOptionValues)
-      debug('selectedVariant', variant)
 
-      const selected = this.hasSingleVariant
-        ? this.product.variants[0]
-        : variant
-
-      return selected
-    },
     /**
-     * The ID of the selected variant.
+     * Active discount amount.
+     *
+     * Checks for a global discount and provides an extension point for
+     * a specific discount override.
      *
      * @returns String
      */
-    selectedVariantId() {
-      return this.selectedVariant ? this.selectedVariant.id : ''
+    activeDiscountAmount() {
+      const defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
+
+      return defaultGlobalDiscountAmount || '0'
     },
+
     /**
-     * Determine if the product variant can be added to the cart.
+     * Active discount type.
      *
-     * @returns Boolean
+     * Determines if the `activeDiscountAmount` is in dollars or percent.
+     *
+     * @returns String ('$' || '%')
      */
-    isAbleAddToCart() {
-      return !this.selectedVariant || this.selectedVariant.available
+    activeDiscountType() {
+      const activeDiscount = this.activeDiscountAmount
+
+      if (activeDiscount) {
+        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
+      } else {
+        return ''
+      }
     },
+
     /**
      * Text for the Add to Cart button.
      *
@@ -149,6 +110,96 @@ export default {
     addToCartButtonText() {
       return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
     },
+
+    /**
+     * Default discount from the shop.
+     *
+     * @returns String || null
+     */
+    defaultGlobalDiscountAmount() {
+      return this.shop.default_discount_amount
+        ? this.shop.default_discount_amount
+        : null
+    },
+
+    /**
+     * Subscription label used in the cart.
+     *
+     * i.e. "1 month", "3 months", etc.
+     *
+     * @returns String || Boolean
+     */
+    finalSubscriptionProperty() {
+      if (!this.subscriptionSelected && !this.isOnetimeSubscription) {
+        return false
+      }
+
+      const label = this.ogOfferDetails.frequency.label
+
+      debug('finalSubscriptionProperty', label)
+      return label
+    },
+
+    /**
+     * Indicates if the product only has a single variant.
+     *
+     * @returns Boolean
+     */
+    hasSingleVariant() {
+      return this.product.variants.length === 1
+    },
+
+    /**
+     * Initial product variant.
+     *
+     * @returns Variant
+     */
+    initialVariant() {
+      return this.product.selected_or_first_available_variant
+    },
+
+    /**
+     * Subscription frequency interval.
+     *
+     * Returns the value of the interval - number of days, months, etc.
+     *
+     * @returns String
+     */
+    intervalFrequency() {
+      return this.ogOfferDetails.frequency.interval || '1'
+    },
+
+    /**
+     * Subscription frequency unit.
+     *
+     * Returns the singular value of the unit - 'day', 'week', 'month', etc.
+     *
+     * @returns String
+     */
+    intervalUnit() {
+      return this.ogOfferDetails.frequency.unit || 'day'
+    },
+
+    /**
+     * Determine if the product variant can be added to the cart.
+     *
+     * @returns Boolean
+     */
+    isAbleAddToCart() {
+      return !this.selectedVariant || this.selectedVariant.available
+    },
+
+    /**
+     * Indicates if this is a onetime subscription.
+     *
+     * Used for single purchase that is able to reactivate as a subscription.
+     *
+     * @returns Boolean
+     */
+    isOnetimeSubscription() {
+      return this.productPurchaseType === PURCHASE_TYPES.onetime
+    },
+
     /**
      * Determine the variant option that affects pricing.
      */
@@ -184,123 +235,25 @@ export default {
       debug('priceDecidingFactor default', defaultOptionName)
       return defaultOptionName
     },
-    /**
-     * Test if the current purchase type is a subscription.
-     *
-     * @returns Boolean
-     */
-    subscriptionSelected() {
-      const selected = this.productPurchaseType === PURCHASE_TYPES.subscription
 
-      debug('subscriptionSelected', selected)
-      return selected
-    },
     /**
-     * Indicates if this is a onetime subscription.
-     *
-     * Used for single purchase that is able to reactivate as a subscription.
-     *
-     * @returns Boolean
-     */
-    isOnetimeSubscription() {
-      return this.productPurchaseType === PURCHASE_TYPES.onetime
-    },
-    /**
-     * Subscription product title for display in the cart.
-     *
-     * Used in cart and sent to checkout for replacement.
+     * Product ID.
      *
      * @returns String
      */
-    subscriptionProductTitleDisplay() {
-      let display = ''
-
-      // Product title
-      display += this.product.title
-
-      // Discount
-      display += this.discountDisplay
-        ? ' - ' + this.discountDisplay + ' off'
-        : ''
-
-      return display
+    productId() {
+      return this.product.id
     },
-    /**
-     * Active discount type.
-     *
-     * Determines if the `activeDiscountAmount` is in dollars or percent.
-     *
-     * @returns String ('$' || '%')
-     */
-    activeDiscountType() {
-      const activeDiscount = this.activeDiscountAmount
 
-      if (activeDiscount) {
-        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
-      } else {
-        return ''
-      }
-    },
     /**
-     * Active discount amount.
-     *
-     * Checks for a global discount and provides an extension point for
-     * a specific discount override.
+     * Alias for the product.title.
      *
      * @returns String
      */
-    activeDiscountAmount() {
-      const defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
+    productName() {
+      return this.product.title
+    },
 
-      return defaultGlobalDiscountAmount || '0'
-    },
-    /**
-     * Subscription frequency interval.
-     *
-     * Returns the value of the interval - number of days, months, etc.
-     *
-     * @returns String
-     */
-    intervalFrequency() {
-      return this.ogOfferDetails.frequency.interval || '1'
-    },
-    /**
-     * Subscription label used in the cart.
-     *
-     * i.e. "1 month", "3 months", etc.
-     *
-     * @returns String || Boolean
-     */
-    finalSubscriptionProperty() {
-      if (!this.subscriptionSelected && !this.isOnetimeSubscription) {
-        return false
-      }
-
-      const label = this.ogOfferDetails.frequency.label
-
-      debug('finalSubscriptionProperty', label)
-      return label
-    },
-    /**
-     * Subscription frequency unit.
-     *
-     * Returns the singular value of the unit - 'day', 'week', 'month', etc.
-     *
-     * @returns String
-     */
-    intervalUnit() {
-      return this.ogOfferDetails.frequency.unit || 'day'
-    },
-    /**
-     * Default discount from the shop.
-     *
-     * @returns String || null
-     */
-    defaultGlobalDiscountAmount() {
-      return this.shop.default_discount_amount
-        ? this.shop.default_discount_amount
-        : null
-    },
     /**
      * The purchase type for the selected product.
      *
@@ -311,14 +264,41 @@ export default {
 
       return subscribed ? PURCHASE_TYPES.subscription : PURCHASE_TYPES.onetime
     },
+
     /**
-     * Ordergroove selling plan ID.
+     * Array of `values` from the selected options.
      *
-     * @returns String || undefined
+     * @returns Array
      */
-    sellingPlanId() {
-      return this.ogOfferDetails.sellingPlanId
+    selectedOptionValues() {
+      return Object.values(this.selectedOptions)
     },
+
+    /**
+     * Current selected variant.
+     *
+     * @returns Variant || {}
+     */
+    selectedVariant() {
+      const variant = this.findVariantWithOptions(this.selectedOptionValues)
+      debug('selectedVariant', variant)
+
+      const selected = this.hasSingleVariant
+        ? this.product.variants[0]
+        : variant
+
+      return selected
+    },
+
+    /**
+     * The ID of the selected variant.
+     *
+     * @returns String
+     */
+    selectedVariantId() {
+      return this.selectedVariant ? this.selectedVariant.id : ''
+    },
+
     /**
      * Selling plan allocation from the product variant.
      *
@@ -342,7 +322,49 @@ export default {
       debug('sellingPlanAllocation', allocation)
 
       return allocation || {}
-    }
+    },
+
+    /**
+     * Ordergroove selling plan ID.
+     *
+     * @returns String || undefined
+     */
+    sellingPlanId() {
+      return this.ogOfferDetails.sellingPlanId
+    },
+
+    /**
+     * Subscription product title for display in the cart.
+     *
+     * Used in cart and sent to checkout for replacement.
+     *
+     * @returns String
+     */
+    subscriptionProductTitleDisplay() {
+      let display = ''
+
+      // Product title
+      display += this.product.title
+
+      // Discount
+      display += this.discountDisplay
+        ? ' - ' + this.discountDisplay + ' off'
+        : ''
+
+      return display
+    },
+
+    /**
+     * Test if the current purchase type is a subscription.
+     *
+     * @returns Boolean
+     */
+    subscriptionSelected() {
+      const selected = this.productPurchaseType === PURCHASE_TYPES.subscription
+
+      debug('subscriptionSelected', selected)
+      return selected
+    },
   },
   methods: {
     /**
