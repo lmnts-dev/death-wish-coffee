@@ -116,9 +116,20 @@ export default {
     hasSingleVariant () {
       return this.product.variants.length === 1
     },
-    selectedVariant () {
+    /**
+     * Current selected variant.
+     *
+     * @returns Variant || {}
+     */
+    selectedVariant() {
       const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
-      return this.hasSingleVariant ? this.product.variants[0] : variant
+      debug('selectedVariant', variant)
+
+      const selected = this.hasSingleVariant
+        ? this.product.variants[0]
+        : variant
+
+      return selected || {}
     },
     selectedVariantId () {
       return this.selectedVariant ? this.selectedVariant.id : ''
