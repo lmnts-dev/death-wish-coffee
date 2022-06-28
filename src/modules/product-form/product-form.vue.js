@@ -329,7 +329,14 @@ export default {
     }
   },
   methods: {
-    optionInputId (option, value) {
+    /**
+     * Create DOM ID for option inputs.
+     *
+     * @param {*} option
+     * @param {*} value
+     * @returns String
+     */
+    optionInputId(option, value) {
       return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(value)}`
     },
     isVariantMatchingOptions (variant, options) {
