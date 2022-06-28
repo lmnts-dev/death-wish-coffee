@@ -10,8 +10,7 @@ On cart/minicart:
 {%- render 'ordergroove_offer' cart_type: true product: line_item location: 'cart' -%}
 You can use any string value for the location attribute.
 {% endcomment %}
-{% comment %}
-<!-- TODO-ORDERGROOVE: need to add the cart items to `window.order_line_items` -->
+
 <script>
   var productIds = [];
   {% for item in cart.items %}
@@ -19,8 +18,7 @@ You can use any string value for the location attribute.
   {% endfor %}
   window.order_line_items = productIds;
 </script>
-{% endcomment %}
-<h1>OG</h1>
+
 {% if selected_variant %}
   {% assign product = selected_variant %}
 {% elsif line_item %}
