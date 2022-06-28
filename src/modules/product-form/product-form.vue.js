@@ -68,20 +68,6 @@ export default {
     this.$_addUpdateOgOfferDetailsListener()
     this.componentMounted = 1
   },
-  watch: {
-    /**
-     * Watch `selectedVariantId` for updates.
-     *
-     * @param {*} newValue
-     */
-    selectedVariantId(newValue) {
-      debug('selectedVariantId', newValue)
-
-      this.$_handleVariantUpdate()
-      this.$emit('update-variant-id', newValue)
-      store.dispatch('pdp/setSelectedVariantId', { id: newValue })
-    },
-  },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
     /**
@@ -634,6 +620,20 @@ export default {
 
       this.ogOfferDetails = ogOfferDetails
       this.$_handleVariantUpdate()
+    },
+  },
+  watch: {
+    /**
+     * Watch `selectedVariantId` for updates.
+     *
+     * @param {*} newValue
+     */
+    selectedVariantId(newValue) {
+      debug('selectedVariantId', newValue)
+
+      this.$_handleVariantUpdate()
+      this.$emit('update-variant-id', newValue)
+      store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
   },
 }
