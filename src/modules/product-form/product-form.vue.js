@@ -531,7 +531,10 @@ export default {
       this.activeSubsriptionDisplayPrice = displayDiscountPrice
       this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
     },
-    initialSelectedOptions: () => {
+    /**
+     * Initial options selected in the form.
+     */
+    initialSelectedOptions() {
       this.product.options.reduce((result, option) => {
         // Initially, none of the option has any selected value
         result[option] = null
