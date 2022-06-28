@@ -329,20 +329,6 @@ export default {
     }
   },
   methods: {
-    activeSubsriptionDisplayPrice () {
-      return this.product
-        .selected_or_first_available_variant
-        ? this.product.selected_or_first_available_variant.price
-        : null
-    },
-    activeSubsriptionDisplayComparePrice () {
-      return this.product
-        .selected_or_first_available_variant
-        ? this.product.selected_or_first_available_variant
-          .compare_at_price
-        : null
-    },
-
     sanitize (name) {
       return name.replace(/[^\w-]+/g, '')
     },
