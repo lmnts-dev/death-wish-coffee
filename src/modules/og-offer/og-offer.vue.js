@@ -51,12 +51,9 @@ export default {
     console.warn('og-offer module created')
   },
   mounted() {
-    // Update window.product_ids for Ordergroove - adapted from the `<script>`
-    // tag in the original liquid template.
-    window.order_line_items = this.productIds
-
     this.$__initializeData()
     this.$_addOgOfferObserver()
+    this.$_updateWindowLineItems()
 
     debug('mounted')
   },
@@ -92,7 +89,10 @@ export default {
      * @returns Array
      */
     productIds() {
-      return this.productIdsString.split(',') || []
+      return this.productIdsString
+        .split(',')
+        .map(id => id.trim())
+        .filter(id => id.length > 0)
     },
 
     /**
@@ -189,7 +189,17 @@ export default {
       this.frequencyInterval = planMap.getAttribute('data-frequency-interval')
       this.frequencyLabel = planMap.getAttribute('data-frequency-label')
       this.frequencyUnit = planMap.getAttribute('data-frequency-unit')
-    }
+    },
+
+    /**
+     * Update window.order_line_items for Ordergroove.
+     *
+     * Code adapted from the `<script>` tag in the original liquid template.
+     */
+    $_updateWindowLineItems() {
+      window.order_line_items = this.productIds
+      debug('$_updateWindowLineItems', this.productIds)
+    },
   },
   watch: {
     /**
