@@ -558,7 +558,14 @@ export default {
 
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
-    disableOption (option, value) {
+    /**
+     * Indicate if an option should be disabled in the form.
+     *
+     * @param {*} option
+     * @param {*} value
+     * @returns Boolean || undefined
+     */
+    disableOption(option, value) {
       for (const variant of this.product.variants) {
         if (variant.title === value && variant.available === false) {
           return true
