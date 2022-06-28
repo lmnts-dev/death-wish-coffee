@@ -377,11 +377,22 @@ export default {
 
       return formatPrice(price)
     },
-    async handleAddToCart () {
+    /**
+     * Handle form add to cart.
+     *
+     * @returns void || undefined
+     */
+    async handleAddToCart() {
       if (!this.selectedVariantId) {
         return
       }
-      const params = { id: this.selectedVariantId, quantity: 1, properties: {} }
+
+      const params = {
+        id: this.selectedVariantId,
+        properties: {},
+        quantity: 1,
+      }
+
       if (this.subscriptionSelected) {
         const subscriptionProperties = {
           'Discount Amount': this.activeDiscountAmount,
@@ -391,12 +402,21 @@ export default {
           'Subscription Amount': this.subscriptionAmount,
           'Subscription Product Title': this.subscriptionProductTitleDisplay,
         }
-        params.properties = Object.assign({}, params.properties, subscriptionProperties)
+
+        params.properties = Object.assign(
+          {}, params.properties, subscriptionProperties
+        )
       }
+
+      debug('handleAddToCart', params)
+
       await store.dispatch('cart/addToCart', params)
+
       this.$nextTick(() => {
         this.resetSelectedOptions()
+
         if (this.addedToCartSuccessfully) {
+          // Display pop-out cart
           store.dispatch('cart/setIsPopOutCartActive', true)
         } else {
           this.$emit('added-to-cart-error')
