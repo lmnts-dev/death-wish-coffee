@@ -448,7 +448,13 @@ export default {
         {}
       )
     },
-    discountCalculatedValue (total) {
+    /**
+     * Discount the passed in total using the active discount.
+     *
+     * @param {*} total
+     * @returns Number
+     */
+    discountCalculatedValue(total) {
       var discountType = this.activeDiscountType
       var discountAmount = this.activeDiscountAmount
         .replace('%', '')
@@ -456,13 +462,14 @@ export default {
 
       var calcDiscountAmount = 0
 
+      // Fixed amount
       if (discountType === '$') {
-      // fixed
         calcDiscountAmount = discountAmount
+      // Percentage
       } else if (discountType === '%') {
-      // percentage
         calcDiscountAmount = (total * discountAmount) / 100
       }
+
       return total - calcDiscountAmount
     },
     /**
