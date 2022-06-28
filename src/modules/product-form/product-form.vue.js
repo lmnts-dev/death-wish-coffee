@@ -671,7 +671,7 @@ export default {
       debug('$_handleOgOfferDetails', ogOfferDetails)
 
       this.ogOfferDetails = ogOfferDetails
-      // FIXME: Add call to variant handler
+      this.$_handleVariantUpdate()
     },
   },
   destroyed () {
