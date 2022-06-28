@@ -329,11 +329,8 @@ export default {
     }
   },
   methods: {
-    sanitize (name) {
-      return name.replace(/[^\w-]+/g, '')
-    },
     optionInputId (option, value) {
-      return `product-${this.product.id}-option-${this.sanitize(option)}-${this.sanitize(value)}`
+      return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(value)}`
     },
     isVariantMatchingOptions (variant, options) {
       return variant.options.every(
@@ -614,4 +611,15 @@ function debug() {
     console.debug('[product-form] ', ...arguments)
   }
 }
+
+/**
+ * Sanitize string.
+ *
+ * @param {String} name
+ * @returns String
+ */
+function sanitize(name) {
+  return name.replace(/[^\w-]+/g, '')
+}
+
 /* eslint-enable comma-dangle,space-before-function-paren */
