@@ -123,13 +123,19 @@ export default {
     addToCartButtonText () {
       return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
     },
-    priceDecidingFactor () {
-      // Find out which variant option affects pricing
-      for (const option of this.product.options) {
-        const availableValues = this.product.options_by_name[option].option.values
+    /**
+     * Determine the variant option that affects pricing.
+     */
+    priceDecidingFactor() {
+      const product = this.product
+      const defaultOptionName = product.options[0]
+
+      for (const optionName of product.options) {
+        const option = product.options_by_name[optionName].option
+        const availableValues = option.values
         const pricesContainingOption = {}
 
-        for (const variant of this.product.variants) {
+        for (const variant of product.variants) {
           for (const value of variant.options) {
             if (!availableValues.includes(value)) {
               continue
@@ -138,9 +144,10 @@ export default {
             if (!pricesContainingOption[value]) {
               pricesContainingOption[value] = []
             } else if (pricesContainingOption[value].includes(variant.price)) {
-              // if multiple variants with the same option value has the same price then this is the
-              // option we're looking for
-              return option
+              // If multiple variants with the same option value have the
+              // same price then this is the option we're looking for
+              debug('priceDecidingFactor found', optionName)
+              return optionName
             }
 
             pricesContainingOption[value].push(variant.price)
@@ -148,7 +155,8 @@ export default {
         }
       }
 
-      return this.product.options[0]
+      debug('priceDecidingFactor default', defaultOptionName)
+      return defaultOptionName
     },
     /**
      * Test if the current purchase type is a subscription.
