@@ -112,7 +112,7 @@
   height: 100%;
   color: var(--blood);
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
     .bolt-illustration-hero--palette-$(color) & {
       color: var(--$color);
     }
@@ -144,7 +144,7 @@
     text-align: right;
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
     .bolt-illustration-hero--palette-$(color) & {
       color: var(--$color);
     }

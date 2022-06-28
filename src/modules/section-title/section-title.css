@@ -101,7 +101,7 @@
     color: var(--white);
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
     .section-title--palette-$(color) & {
       color: var(--$color);
     }

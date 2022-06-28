@@ -152,7 +152,7 @@
   display: block;
   cursor: pointer;
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
     .review--palette-$(color) & {
       border-top-color: var(--$color);
     }
@@ -166,7 +166,7 @@
 .yotpo .yotpo-bottomline .yotpo-icon-star,
 .yotpo .yotpo-bottomline .yotpo-icon-half-star,
 .yotpo .yotpo-bottomline .yotpo-icon-empty-star {
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
     .review--palette-$(color) & {
       color: var(--$color);
     }

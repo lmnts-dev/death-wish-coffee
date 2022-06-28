@@ -111,6 +111,18 @@
   &--independance {
     background-color: var(--independance);
   }
+
+  &--eggplant {
+    background-color: var(--eggplant);
+  }
+
+  &--lavender {
+    background-color: var(--lavender);
+  }
+
+  &--blue {
+    background-color: var(--blue);
+  }
 }
 
 .styleguide-swatch__description {
