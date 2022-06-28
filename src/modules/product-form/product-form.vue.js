@@ -147,7 +147,12 @@ export default {
     selectedVariantId() {
       return this.selectedVariant ? this.selectedVariant.id : ''
     },
-    isAbleAddToCart () {
+    /**
+     * Determine if the product variant can be added to the cart.
+     *
+     * @returns Boolean
+     */
+    isAbleAddToCart() {
       return !this.selectedVariant || this.selectedVariant.available
     },
     addToCartButtonText () {
