@@ -495,9 +495,6 @@ export default {
 
       this.calculateVariantPrices(originalPrice, originalComparePrice)
     },
-    getFinalCurrencyRate (amount) {
-      return parseInt(amount)
-    },
     /**
      * Calculate the variant prices taking into account discounts.
      *
@@ -513,9 +510,7 @@ export default {
           originalPrice - this.discountCalculatedValue(originalPrice)
 
         // Set unformatted amount for use in cart and checkout
-        this.subscriptionAmount = this.getFinalCurrencyRate(
-          originalPrice - discountPrice
-        )
+        this.subscriptionAmount = parseInt(originalPrice - discountPrice)
 
         displayDiscountPrice = this.formatMoney(originalPrice - discountPrice)
       }
