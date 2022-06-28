@@ -265,10 +265,6 @@ export default {
         ? this.shop.default_discount_amount
         : null
     },
-    discountAmount () {
-      // TODO-ORDERGROOVE
-      return null
-    },
     initialChargeLimit () {
       // TODO-ORDERGROOVE
       return ''
