@@ -572,6 +572,9 @@ export default {
         }
       }
     },
+    /**
+     * Toggle the size chart active data value.
+     */
     toggleSizeChart () {
       this.sizeChartActive = !this.sizeChartActive
     },
