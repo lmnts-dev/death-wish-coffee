@@ -368,15 +368,134 @@ export default {
   },
   methods: {
     /**
-     * Create DOM ID for option inputs.
+     * Add a listener for `og-offer` details updates.
+     */
+    $_addUpdateOgOfferDetailsListener() {
+      const handler = this.$_handleOgOfferDetails
+
+      this.$children.forEach(child => {
+        if (child.ogOfferDetails) {
+          // Wire-up handler for og-offer selling plan details
+          child.$on(UPDATE_DETAILS_EVENT_NAME, handler)
+
+          // Fire handler when listener is added to capture any changes
+          handler(child.ogOfferDetails)
+        }
+      })
+    },
+
+    /**
+     * Handler for the `og-offer` update events.
+     *
+     * @param {*} ogOfferDetails
+     */
+    $_handleOgOfferDetails(ogOfferDetails) {
+      debug('$_handleOgOfferDetails', ogOfferDetails)
+
+      this.ogOfferDetails = ogOfferDetails
+      this.$_handleVariantUpdate()
+    },
+
+    /**
+     * Handler for variant updates.
+     *
+     * Ensures pricing is updated in response to variant changes. Can
+     * be called in places that aren't strictly variant-related.
+     */
+    $_handleVariantUpdate() {
+      const variant = this.selectedVariant || {}
+      this.activeVariantId = variant.id
+
+      const originalPrice = this.sellingPlanAllocation.price ||
+        variant.price || false
+
+      const originalComparePrice = variant.compare_at_price || false
+
+      debug('handleVariantUpdate', {
+        sellingPlan: this.sellingPlanAllocation,
+        variant,
+      })
+
+      this.calculateVariantPrices(originalPrice, originalComparePrice)
+    },
+
+    /**
+     * Calculate the variant prices taking into account discounts.
+     *
+     * @param {*} originalPrice
+     * @param {*} originalComparePrice
+     */
+    calculateVariantPrices(originalPrice, originalComparePrice) {
+      let displayDiscountPrice = false
+      let displayDiscountComparePrice = false
+
+      if (originalPrice) {
+        const discountPrice =
+          originalPrice - this.discountCalculatedValue(originalPrice)
+
+        // Set unformatted amount for use in cart and checkout
+        this.subscriptionAmount = parseInt(originalPrice - discountPrice)
+
+        displayDiscountPrice = formatMoney(
+          originalPrice - discountPrice, this.moneyFormat
+        )
+      }
+
+      if (originalComparePrice) {
+        const discountComparePrice =
+          originalComparePrice -
+          this.discountCalculatedValue(originalComparePrice)
+
+        displayDiscountComparePrice = formatMoney(
+          originalComparePrice - discountComparePrice, this.moneyFormat
+        )
+      }
+
+      // Store the new prices
+      this.activeSubsriptionDisplayPrice = displayDiscountPrice
+      this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
+    },
+
+    /**
+     * Indicate if an option should be disabled in the form.
      *
      * @param {*} option
      * @param {*} value
-     * @returns String
+     * @returns Boolean || undefined
      */
-    optionInputId(option, value) {
-      return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(value)}`
+    disableOption(option, value) {
+      for (const variant of this.product.variants) {
+        if (variant.title === value && variant.available === false) {
+          return true
+        }
+      }
     },
+
+    /**
+     * Discount the passed in total using the active discount.
+     *
+     * @param {*} total
+     * @returns Number
+     */
+    discountCalculatedValue(total) {
+      var discountType = this.activeDiscountType
+      var discountAmount = this.activeDiscountAmount
+        .replace('%', '')
+        .replace('$', '')
+
+      var calcDiscountAmount = 0
+
+      // Fixed amount
+      if (discountType === '$') {
+        calcDiscountAmount = discountAmount
+      // Percentage
+      } else if (discountType === '%') {
+        calcDiscountAmount = (total * discountAmount) / 100
+      }
+
+      return total - calcDiscountAmount
+    },
+
     /**
      * Finds the variant that matches all options passed in.
      *
@@ -390,6 +509,7 @@ export default {
         )
       })
     },
+
     /**
      * Get the price for the option value.
      *
@@ -415,6 +535,7 @@ export default {
 
       return formatPrice(price)
     },
+
     /**
      * Handle form add to cart.
      *
@@ -461,14 +582,7 @@ export default {
         }
       })
     },
-    /**
-     * Reset the selected options for the form.
-     */
-    resetSelectedOptions() {
-      this.selectedOptions = {
-        ...this.initialSelectedOptions,
-      }
-    },
+
     /**
      * Handle variant selection from the form.
      *
@@ -486,89 +600,7 @@ export default {
         {}
       )
     },
-    /**
-     * Discount the passed in total using the active discount.
-     *
-     * @param {*} total
-     * @returns Number
-     */
-    discountCalculatedValue(total) {
-      var discountType = this.activeDiscountType
-      var discountAmount = this.activeDiscountAmount
-        .replace('%', '')
-        .replace('$', '')
 
-      var calcDiscountAmount = 0
-
-      // Fixed amount
-      if (discountType === '$') {
-        calcDiscountAmount = discountAmount
-      // Percentage
-      } else if (discountType === '%') {
-        calcDiscountAmount = (total * discountAmount) / 100
-      }
-
-      return total - calcDiscountAmount
-    },
-    /**
-     * Handler for variant updates.
-     *
-     * Ensures pricing is updated in response to variant changes. Can
-     * be called in places that aren't strictly variant-related.
-     */
-    // on event triggered from variant change in select boxes
-    $_handleVariantUpdate() {
-      const variant = this.selectedVariant || {}
-      this.activeVariantId = variant.id
-
-      const originalPrice = this.sellingPlanAllocation.price ||
-        variant.price || false
-
-      const originalComparePrice = variant.compare_at_price || false
-
-      debug('handleVariantUpdate', {
-        sellingPlan: this.sellingPlanAllocation,
-        variant,
-      })
-
-      this.calculateVariantPrices(originalPrice, originalComparePrice)
-    },
-    /**
-     * Calculate the variant prices taking into account discounts.
-     *
-     * @param {*} originalPrice
-     * @param {*} originalComparePrice
-     */
-    calculateVariantPrices(originalPrice, originalComparePrice) {
-      let displayDiscountPrice = false
-      let displayDiscountComparePrice = false
-
-      if (originalPrice) {
-        const discountPrice =
-          originalPrice - this.discountCalculatedValue(originalPrice)
-
-        // Set unformatted amount for use in cart and checkout
-        this.subscriptionAmount = parseInt(originalPrice - discountPrice)
-
-        displayDiscountPrice = formatMoney(
-          originalPrice - discountPrice, this.moneyFormat
-        )
-      }
-
-      if (originalComparePrice) {
-        const discountComparePrice =
-          originalComparePrice -
-          this.discountCalculatedValue(originalComparePrice)
-
-        displayDiscountComparePrice = formatMoney(
-          originalComparePrice - discountComparePrice, this.moneyFormat
-        )
-      }
-
-      // Store the new prices
-      this.activeSubsriptionDisplayPrice = displayDiscountPrice
-      this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
-    },
     /**
      * Initial options selected in the form.
      */
@@ -579,6 +611,27 @@ export default {
         return result
       })
     },
+
+    /**
+     * Create DOM ID for option inputs.
+     *
+     * @param {*} option
+     * @param {*} value
+     * @returns String
+     */
+    optionInputId(option, value) {
+      return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(value)}`
+    },
+
+    /**
+     * Reset the selected options for the form.
+     */
+    resetSelectedOptions() {
+      this.selectedOptions = {
+        ...this.initialSelectedOptions,
+      }
+    },
+
     /**
      * Handle the click event for product options.
      *
@@ -596,52 +649,12 @@ export default {
 
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
-    /**
-     * Indicate if an option should be disabled in the form.
-     *
-     * @param {*} option
-     * @param {*} value
-     * @returns Boolean || undefined
-     */
-    disableOption(option, value) {
-      for (const variant of this.product.variants) {
-        if (variant.title === value && variant.available === false) {
-          return true
-        }
-      }
-    },
+
     /**
      * Toggle the size chart active data value.
      */
     toggleSizeChart () {
       this.sizeChartActive = !this.sizeChartActive
-    },
-    /**
-     * Add a listener for `og-offer` details updates.
-     */
-    $_addUpdateOgOfferDetailsListener() {
-      const handler = this.$_handleOgOfferDetails
-
-      this.$children.forEach(child => {
-        if (child.ogOfferDetails) {
-          // Wire-up handler for og-offer selling plan details
-          child.$on(UPDATE_DETAILS_EVENT_NAME, handler)
-
-          // Fire handler when listener is added to capture any changes
-          handler(child.ogOfferDetails)
-        }
-      })
-    },
-    /**
-     * Handler for the `og-offer` update events.
-     *
-     * @param {*} ogOfferDetails
-     */
-    $_handleOgOfferDetails(ogOfferDetails) {
-      debug('$_handleOgOfferDetails', ogOfferDetails)
-
-      this.ogOfferDetails = ogOfferDetails
-      this.$_handleVariantUpdate()
     },
   },
   watch: {
