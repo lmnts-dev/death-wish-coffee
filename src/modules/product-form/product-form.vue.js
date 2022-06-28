@@ -81,31 +81,6 @@ export default {
       this.$emit('update-variant-id', newValue)
       store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
-    productPurchaseType (newVal) {
-      let originalPrice
-      let comparePrice
-      // if one time
-      if (newVal === PURCHASE_TYPES.onetime) {
-      // use stored non-discount prices from previous changes
-        originalPrice = this.activeSubsriptionDisplayPrice || false
-        comparePrice = this.activeSubsriptionDisplayComparePrice || false
-
-        // put into money format
-        var formatOriginalPrice = originalPrice ? this.formatMoney(originalPrice) : false
-        var formatComparePrice = comparePrice ? this.formatMoney(comparePrice) : false
-
-        // replace pricing elements with new vals
-        this.setPricingDisplayEls(formatOriginalPrice, formatComparePrice)
-      } else {
-      // if subscription
-      // use stored non-discount prices from previous changes
-        originalPrice = this.activeSubsriptionDisplayPrice || false
-        comparePrice = this.activeSubsriptionDisplayComparePrice || false
-
-        // calculate subscription discount and replace pricing elements with new vals
-        this.calculateVariantPrices(originalPrice, comparePrice)
-      }
-    }
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
@@ -314,6 +289,14 @@ export default {
 
       return subscribed ? PURCHASE_TYPES.subscription : PURCHASE_TYPES.onetime
     },
+    /**
+     * Ordergroove selling plan ID.
+     *
+     * @returns String || undefined
+     */
+    sellingPlanId() {
+      return this.ogOfferDetails.sellingPlanId
+    },
   },
   methods: {
     activeSubsriptionDisplayPrice () {
@@ -435,34 +418,6 @@ export default {
         calcDiscountAmount = (total * discountAmount) / 100
       }
       return total - calcDiscountAmount
-    },
-    // replace pricing values, for compare and regular pricing
-    setPricingDisplayEls (original, compare) {
-      let regularEl = null
-      let saleEl = null
-      let strikethroughPrice = null
-      // TODO-ORDERGROOVE
-      regularEl = document.querySelector('.TODO-ORDERGROOVE-price-item-regular')
-      saleEl = document.querySelector('.TODO-ORDERGROOVE-price-item-sale')
-      strikethroughPrice = document.querySelector('.strikethrough-price')
-
-      if (!regularEl && !saleEl) {
-        return
-      }
-
-      if (compare) {
-        if (regularEl) regularEl.innerHTML = compare
-        if (saleEl) {
-          saleEl.innerHTML = original
-          strikethroughPrice.innerHTML = original
-        }
-      } else {
-        if (regularEl) regularEl.innerHTML = original
-        if (saleEl) {
-          saleEl.innerHTML = ''
-          strikethroughPrice.innerHTML = ''
-        }
-      }
     },
     /**
      * Handler for variant updates.
