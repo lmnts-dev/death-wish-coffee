@@ -83,7 +83,7 @@
           </div>
         {%- else -%}
           <div class="product-form__select">
-            <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
+            <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelect">
               <option v-if="option === 'Size'" value selected>Select Size</option>
               <option v-if="option !== 'Size'" value selected>Select Field</option>
               <template v-for="variant in product.variants">

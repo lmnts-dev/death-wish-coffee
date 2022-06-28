@@ -423,8 +423,13 @@ export default {
         }
       })
     },
-    resetSelectedOptions () {
-      this.selectedOptions = { ...this.initialSelectedOptions }
+    /**
+     * Reset the selected options for the form.
+     */
+    resetSelectedOptions() {
+      this.selectedOptions = {
+        ...this.initialSelectedOptions,
+      }
     },
     handleVariantSelecting (e) {
       const variantId = parseInt(e.target.value)
