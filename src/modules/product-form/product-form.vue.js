@@ -541,13 +541,21 @@ export default {
         return result
       })
     },
-    toggleOption (option, value) {
+    /**
+     * Handle the click event for product options.
+     *
+     * @param {*} option
+     * @param {*} value
+     */
+    toggleOption(option, value) {
       const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
+
       if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
         cloneSelectedOptions[option] = null
       } else {
         cloneSelectedOptions[option] = value
       }
+
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
     disableOption (option, value) {
