@@ -169,7 +169,7 @@ export default {
      * @returns Boolean
      */
     isOnetimeSubscription() {
-      return this.chargeLimit === PURCHASE_TYPES.onetime
+      return this.productPurchaseType === PURCHASE_TYPES.onetime
     },
     /**
      * Subscription product title for display in the cart.
@@ -220,9 +220,6 @@ export default {
 
       return defaultGlobalDiscountAmount || '0'
     },
-    chargeLimit () {
-      return this.initialChargeLimit ? this.initialChargeLimit : 0
-    },
     /**
      * Subscription frequency interval.
      *
@@ -269,10 +266,6 @@ export default {
       return this.shop.default_discount_amount
         ? this.shop.default_discount_amount
         : null
-    },
-    initialChargeLimit () {
-      // TODO-ORDERGROOVE
-      return ''
     },
     oneTimeMessage () {
       return this.shop ? this.shop.one_time_message : ''
@@ -393,7 +386,6 @@ export default {
           Subscription: this.finalSubscriptionProperty,
           'Subscription Amount': this.subscriptionAmount,
           'Subscription Product Title': this.subscriptionProductTitleDisplay,
-          'Charge Limit': this.chargeLimit,
         }
         params.properties = Object.assign({}, params.properties, subscriptionProperties)
       }
