@@ -137,7 +137,7 @@ export default {
         ? this.product.variants[0]
         : variant
 
-      return selected || {}
+      return selected
     },
     /**
      * The ID of the selected variant.
@@ -333,7 +333,7 @@ export default {
      */
     sellingPlanAllocation() {
       const variant = this.selectedVariant
-      const planAllocations = variant.selling_plan_allocations
+      const planAllocations = variant && variant.selling_plan_allocations
 
       if (!planAllocations) return {}
 
