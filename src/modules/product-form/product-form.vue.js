@@ -448,13 +448,6 @@ export default {
         {}
       )
     },
-    clickOption (index, option) {
-      this.index = index
-      this.option = option
-      // console.log(index, this.option)
-      this.$emit('click-option', this.index)
-      console.log(this.index)
-    },
     getParameterByName (name, url = window.location.href) {
       name = name.replace(/[\]]/g, '\\$&')
       var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
