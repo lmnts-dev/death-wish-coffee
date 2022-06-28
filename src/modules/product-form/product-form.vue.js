@@ -282,9 +282,6 @@ export default {
     howItWorksText () {
       return this.shop ? this.shop.how_it_works_text : ''
     },
-    formattedSubscriptionAmount () {
-      return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
-    },
     /**
      * The purchase type for the selected product.
      *
