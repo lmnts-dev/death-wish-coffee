@@ -297,6 +297,30 @@ export default {
     sellingPlanId() {
       return this.ogOfferDetails.sellingPlanId
     },
+    /**
+     * Selling plan allocation from the product variant.
+     *
+     * `selling_plan_allocations` is a collection added to the product
+     * variant that contains pricing information for each selling plan.
+     *
+     * @returns Allocation || {}
+     */
+    sellingPlanAllocation() {
+      const variant = this.selectedVariant
+      const planAllocations = variant.selling_plan_allocations
+
+      if (!planAllocations) return {}
+
+      const allocation = planAllocations.find(planAllocation => {
+        const allocationPlanId = planAllocation.selling_plan_id
+
+        return parseInt(allocationPlanId) === parseInt(this.sellingPlanId)
+      })
+
+      debug('sellingPlanAllocation', allocation)
+
+      return allocation || {}
+    }
   },
   methods: {
     activeSubsriptionDisplayPrice () {
