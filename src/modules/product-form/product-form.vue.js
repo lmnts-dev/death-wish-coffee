@@ -155,7 +155,12 @@ export default {
     isAbleAddToCart() {
       return !this.selectedVariant || this.selectedVariant.available
     },
-    addToCartButtonText () {
+    /**
+     * Text for the Add to Cart button.
+     *
+     * @returns String
+     */
+    addToCartButtonText() {
       return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
     },
     /**
