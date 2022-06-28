@@ -61,7 +61,13 @@ export default {
     debug('mounted')
   },
   computed: {
-    // Aggregate object of selling plan details
+    /**
+     * Aggregate object of selling plan details.
+     *
+     * This is what is sent up to the parent for update events.
+     *
+     * @returns Object
+     */
     ogOfferDetails() {
       const details = {
         frequency: {
@@ -80,12 +86,20 @@ export default {
       return details
     },
 
-    // Array of product ids passed into the module
+    /**
+     * Array of product ids passed into the module.
+     *
+     * @returns Array
+     */
     productIds() {
       return this.productIdsString.split(',') || []
     },
 
-    // Reference to the DOM node where Ordergroove stores selling plan map
+    /**
+     * Reference to the DOM node where Ordergroove stores selling plan map
+     *
+     * @returns Vue Ref
+     */
     sellingPlanMap() {
       const frequency = this.frequency
       const variantId = this.variantId
@@ -98,6 +112,11 @@ export default {
       return map
     },
 
+    /**
+     * Explicit check if the subscribe button is checked.
+     *
+     * @returns Boolean
+     */
     subscribeChecked() {
       // eslint-disable-next-line no-unneeded-ternary
       return this.sellingPlanId ? true : false
