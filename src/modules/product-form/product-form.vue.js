@@ -420,6 +420,14 @@ export default {
     },
 
     /**
+     * Toggle the Ordergroove subscription button.
+     */
+    $_toggleSubscriptionButton() {
+      const button = document.querySelector('og-offer button.og-button-toggle')
+      button.click()
+    },
+
+    /**
      * Calculate the variant prices taking into account discounts.
      *
      * @param {*} originalPrice
@@ -627,6 +635,11 @@ export default {
      * Reset the selected options for the form.
      */
     resetSelectedOptions() {
+      // If there is a selling plan, we need to reset the button to "one-time"
+      if (this.sellingPlanId) {
+        this.$_toggleSubscriptionButton()
+      }
+
       this.selectedOptions = {
         ...this.initialSelectedOptions,
       }
