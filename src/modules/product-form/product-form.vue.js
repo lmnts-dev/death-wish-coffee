@@ -114,7 +114,12 @@ export default {
 
       return selected || {}
     },
-    selectedVariantId () {
+    /**
+     * The ID of the selected variant.
+     *
+     * @returns String
+     */
+    selectedVariantId() {
       return this.selectedVariant ? this.selectedVariant.id : ''
     },
     isAbleAddToCart () {
