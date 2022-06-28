@@ -191,10 +191,15 @@ export default {
 
       return display
     },
-    activeDiscountType () {
-      var discountAmount = this.discountAmount
-      var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
-      var activeDiscount = discountAmount || defaultGlobalDiscountAmount
+    /**
+     * Active discount type.
+     *
+     * Determines if the `activeDiscountAmount` is in dollars or percent.
+     *
+     * @returns String ('$' || '%')
+     */
+    activeDiscountType() {
+      const activeDiscount = this.activeDiscountAmount
 
       if (activeDiscount) {
         return activeDiscount.indexOf('$') > -1 ? '$' : '%'
@@ -202,11 +207,18 @@ export default {
         return ''
       }
     },
-    activeDiscountAmount () {
-      var discountAmount = this.discountAmount
-      var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
+    /**
+     * Active discount amount.
+     *
+     * Checks for a global discount and provides an extension point for
+     * a specific discount override.
+     *
+     * @returns String
+     */
+    activeDiscountAmount() {
+      const defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
 
-      return discountAmount || defaultGlobalDiscountAmount || '0'
+      return defaultGlobalDiscountAmount || '0'
     },
     chargeLimit () {
       return this.initialChargeLimit ? this.initialChargeLimit : 0
@@ -468,10 +480,6 @@ export default {
     },
     getFinalCurrencyRate (amount) {
       return parseInt(amount)
-    },
-    calculateOriginalVariantPrices (variant) {
-      // TODO-ORDERGROOVE
-      console.log('calculateOriginalVariantPrices', variant)
     },
     /**
      * Calculate the variant prices taking into account discounts.
