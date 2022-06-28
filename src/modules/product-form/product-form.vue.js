@@ -87,7 +87,12 @@ export default {
     productId () {
       return this.product.id
     },
-    productName () {
+    /**
+     * Alias for the product.title.
+     *
+     * @returns String
+     */
+    productName() {
       return this.product.title
     },
     /**
