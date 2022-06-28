@@ -260,7 +260,12 @@ export default {
     intervalUnit() {
       return this.ogOfferDetails.frequency.unit || 'day'
     },
-    defaultGlobalDiscountAmount () {
+    /**
+     * Default discount from the shop.
+     *
+     * @returns String || null
+     */
+    defaultGlobalDiscountAmount() {
       return this.shop.default_discount_amount
         ? this.shop.default_discount_amount
         : null
