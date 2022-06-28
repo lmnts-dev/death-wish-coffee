@@ -494,15 +494,21 @@ export default {
       // TODO-ORDERGROOVE
       console.log('calculateOriginalVariantPrices', variant)
     },
-    calculateVariantPrices (originalPrice, originalComparePrice) {
-      var displayDiscountPrice = false
-      var displayDiscountComparePrice = false
+    /**
+     * Calculate the variant prices taking into account discounts.
+     *
+     * @param {*} originalPrice
+     * @param {*} originalComparePrice
+     */
+    calculateVariantPrices(originalPrice, originalComparePrice) {
+      let displayDiscountPrice = false
+      let displayDiscountComparePrice = false
 
       if (originalPrice) {
-        var discountPrice =
+        const discountPrice =
           originalPrice - this.discountCalculatedValue(originalPrice)
 
-        // set for passing in cart property to checkout - not formatted
+        // Set unformatted amount for use in cart and checkout
         this.subscriptionAmount = this.getFinalCurrencyRate(
           originalPrice - discountPrice
         )
@@ -511,7 +517,7 @@ export default {
       }
 
       if (originalComparePrice) {
-        var discountComparePrice =
+        const discountComparePrice =
           originalComparePrice -
           this.discountCalculatedValue(originalComparePrice)
 
@@ -520,17 +526,9 @@ export default {
         )
       }
 
-      // replace price elements if subscription selected
-      if (this.subscriptionSelected) {
-        this.setPricingDisplayEls(
-          displayDiscountPrice,
-          displayDiscountComparePrice
-        )
-      } else {
-      // if onetime selected, store to use if selected next
-        this.activeSubsriptionDisplayPrice = displayDiscountPrice
-        this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
-      }
+      // Store the new prices
+      this.activeSubsriptionDisplayPrice = displayDiscountPrice
+      this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
     },
     // shopify format money
     formatMoney (cents, format) {
