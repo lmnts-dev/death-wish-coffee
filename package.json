@@ -93,6 +93,7 @@
     "lottie-web": "^5.7.6",
     "micro-jsonp": "^1.0.1",
     "nanoajax": "^0.4.3",
+    "node": "^11.15.0",
     "object-fit-images": "^3.2.4",
     "promobar": "0.0.6",
     "pubsub-js": "^1.5.3",
