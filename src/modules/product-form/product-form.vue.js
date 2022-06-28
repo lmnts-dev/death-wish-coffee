@@ -207,9 +207,7 @@ export default {
       let display = ''
 
       // Product title
-      display += this.subscriptionProductTitle
-        ? this.subscriptionProductTitle
-        : this.product.title
+      display += this.product.title
 
       // Discount
       display += this.discountDisplay
@@ -248,21 +246,6 @@ export default {
     intervalFrequency() {
       return this.ogOfferDetails.frequency.interval || '1'
     },
-    // build frequency options for select boxes
-    selectFrequencyOptions () {
-      var intervalFrequency = this.intervalFrequency
-      var intervalUnit = this.intervalUnit
-
-      if (!intervalFrequency || !intervalUnit) return false
-
-      return intervalFrequency.split(',').map(function (frequency) {
-        return {
-          value: frequency.trim(),
-          mainText: frequency.trim(),
-          subText: false
-        }
-      })
-    },
     /**
      * Subscription label used in the cart.
      *
@@ -289,10 +272,6 @@ export default {
      */
     intervalUnit() {
       return this.ogOfferDetails.frequency.unit || 'day'
-    },
-    subscriptionProductTitle () {
-      // TODO-ORDERGROOVE
-      return null
     },
     defaultGlobalDiscountAmount () {
       return this.shop.default_discount_amount
