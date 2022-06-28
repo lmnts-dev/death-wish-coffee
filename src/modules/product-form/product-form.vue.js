@@ -90,7 +90,12 @@ export default {
     productName () {
       return this.product.title
     },
-    initialVariant () {
+    /**
+     * Initial product variant.
+     *
+     * @returns Variant
+     */
+    initialVariant() {
       return this.product.selected_or_first_available_variant
     },
     /**
