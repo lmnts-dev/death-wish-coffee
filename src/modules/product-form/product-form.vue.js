@@ -500,27 +500,28 @@ export default {
         }
       }
     },
+    /**
+     * Handler for variant updates.
+     *
+     * Ensures pricing is updated in response to variant changes. Can
+     * be called in places that aren't strictly variant-related.
+     */
     // on event triggered from variant change in select boxes
-    handleVariantUpdateEvent (event) {
-      var variant = event.detail
-      var originalPrice = variant.price || false
-      var originalComparePrice = variant.compare_at_price || false
-
-      // console.log({ variant })
-
+    $_handleVariantUpdate() {
+      const variant = this.selectedVariant || {}
       this.activeVariantId = variant.id
 
-      // calculate and set new values
+      const originalPrice = this.sellingPlanAllocation.price ||
+        variant.price || false
+
+      const originalComparePrice = variant.compare_at_price || false
+
+      debug('handleVariantUpdate', {
+        sellingPlan: this.sellingPlanAllocation,
+        variant,
+      })
+
       this.calculateVariantPrices(originalPrice, originalComparePrice)
-
-      // update original price if available
-      this.calculateOriginalVariantPrices(variant)
-
-      // store values if subscription isn't currently selected
-      this.activeSubsriptionDisplayPrice = originalPrice
-      this.activeSubsriptionDisplayComparePrice = originalPrice
-    // this.activeSubsriptionDisplayComparePrice = originalComparePrice
-    // this.activeSubsriptionDisplayComparePrice = originalComparePrice
     },
     getFinalCurrencyRate (amount) {
       return parseInt(amount)
