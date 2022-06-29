@@ -39,7 +39,7 @@ class Cart {
     })
   }
 
-  generateShopifyCartAddBody ({ id, quantity, properties }) {
+  generateShopifyCartAddBody ({ id, quantity, properties, sellingPlan }) {
     let propertiesParam = ''
     if (properties && Object.keys(properties)) {
       propertiesParam = Object.keys(properties)
@@ -47,7 +47,14 @@ class Cart {
         .filter(item => !!item)
         .join('&')
     }
-    return `quantity=${quantity}&id=${id}&${propertiesParam}`
+
+    let body = `quantity=${quantity}&id=${id}&${propertiesParam}`
+
+    if (sellingPlan) {
+      body += `&selling_plan=${sellingPlan}`
+    }
+
+    return body
   }
 
   /**

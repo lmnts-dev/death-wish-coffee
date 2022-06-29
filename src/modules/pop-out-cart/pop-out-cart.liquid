@@ -53,12 +53,15 @@
               </a>
               <div class="pop-out-cart__item-details">
                 <a :href="item.url" class="pop-out-cart__item-title b2">
-                  <span v-if="!!item.properties && typeof item.properties['Subscription Product Title'] !== 'undefined'">${item.properties['Subscription Product Title']}</span>
-                  <span v-else>${item.product_title}</span>
+                  {% comment %} TODO: remove {% endcomment %}
+                  {% comment %} <span v-if="!!item.properties && typeof item.properties['Subscription Product Title'] !== 'undefined'">${item.properties['Subscription Product Title']}</span> {% endcomment %}
+                  <span>${item.product_title}</span>
                 </a>
 
                 <p class="pop-out-cart__item-subtext b3">${item.variant_title}</p>
-                <p v-if="!!item.properties && typeof item.properties['Subscription'] !== 'undefined'" class="b3">Subscription: ${item.properties['Subscription']}</p>
+                {% comment %} TODO: remove {% endcomment %}
+                {% comment %} <p v-if="!!item.properties && typeof item.properties['Subscription'] !== 'undefined'" class="b3">Subscription: ${item.properties['Subscription']}</p> {% endcomment %}
+                <p v-if="!!item.selling_plan_allocation && item.selling_plan_allocation.selling_plan">${item.selling_plan_allocation.selling_plan.name}</p>
 
                 <template v-if="item.properties && item.properties.length">
                   <template v-for="property in item.properties">

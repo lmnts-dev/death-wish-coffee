@@ -19,7 +19,9 @@ const cartsidebar = (el) => {
       cartHasSubscriptionItem () {
         if (this.items.length > 0) {
           return this.items.some(item => {
-            return item.properties instanceof Object ? Object.keys(item.properties).includes('Subscription') : false
+            // TODO: clean-up
+            return !!item.selling_plan_allocation
+            // return item.properties instanceof Object ? Object.keys(item.properties).includes('Subscription') : false
           })
         }
         return false
@@ -27,7 +29,7 @@ const cartsidebar = (el) => {
     },
     methods: {
       checkout () {
-        // TODO-ORDERGROOVE: build checkout
+        window.location.href = '/checkout'
       }
     }
   })

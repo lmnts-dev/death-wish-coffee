@@ -593,23 +593,27 @@ export default {
         quantity: 1,
       }
 
-      const discountAmount = this.sellingPlanDiscountPercent
-        ? this.sellingPlanDiscountPercentString
-        : this.activeDiscountAmount
+      // const discountAmount = this.sellingPlanDiscountPercent
+      //   ? this.sellingPlanDiscountPercentString
+      //   : this.activeDiscountAmount
 
       if (this.subscriptionSelected) {
-        const subscriptionProperties = {
-          'Discount Amount': discountAmount,
-          'Interval Frequency': this.intervalFrequency,
-          'Interval Unit': this.intervalUnit,
-          Subscription: this.finalSubscriptionProperty,
-          'Subscription Amount': this.subscriptionAmount,
-          'Subscription Product Title': this.subscriptionProductTitleDisplay,
-        }
+        // Add selling plan
+        params.sellingPlan = parseInt(this.sellingPlanId)
 
-        params.properties = Object.assign(
-          {}, params.properties, subscriptionProperties
-        )
+        // const subscriptionProperties = {
+        //   'Discount Amount': discountAmount,
+        //   'Interval Frequency': this.intervalFrequency,
+        //   'Interval Unit': this.intervalUnit,
+        //   Subscription: this.finalSubscriptionProperty,
+        //   'Subscription Amount': this.subscriptionAmount,
+        //   'Subscription Product Title': this.subscriptionProductTitleDisplay,
+        // }
+
+        // // Add subscription properties to line item properties
+        // params.properties = Object.assign(
+        //   {}, params.properties, subscriptionProperties
+        // )
       }
 
       debug('handleAddToCart', params)

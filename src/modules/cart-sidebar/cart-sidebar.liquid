@@ -1,6 +1,4 @@
 {% assign class = class | default: false %}
-{% assign subscription_total = subscription_total | default: false %}
-{% assign subscription_in_cart = subscription_in_cart | default: false %}
 {% capture class %}cart-sidebar{% if class %} {{- class -}}{% endif %}{% endcapture %}
 
 <section class="{{ class }}" data-module="cart-sidebar">
@@ -9,11 +7,7 @@
     <div class="cart-sidebar__item">
       <p class="cart-sidebar__label b2">Total</p>
       <p class="cart-sidebar__cost b1">
-        {% if subscription_in_cart %}
-          <span>{{ subscription_total | money }}</span>
-        {% else %}
-          <span>{{ cart.total_price | money }}</span>
-        {% endif %}
+        <span>{{ cart.total_price | money }}</span>
       </p>
     </div>
     <div class="cart-sidebar__separator"></div>

@@ -83,10 +83,10 @@ export default {
       const cart = await Cart.get()
       dispatch('setCart', cart)
     },
-    async addToCart ({ dispatch }, { id, quantity, properties }) {
+    async addToCart ({ dispatch }, { id, quantity, properties, sellingPlan }) {
       dispatch('resetAddedToCart')
       clearTimeout(timeout)
-      const result = await Cart.add({ id, quantity, properties })
+      const result = await Cart.add({ id, quantity, properties, sellingPlan })
       if (result.errors) {
         dispatch('setAddedToCartErrorMessage', result.description)
       } else {
