@@ -66,7 +66,7 @@
 }
 
   </style>
-  
+
   {% render 'shogun-head' %}
 </head>
   <body>
@@ -111,6 +111,8 @@
 
     {{ tracking_code }}
 
+    {%- render 'ordergroove_checkout' -%}
+
     <!-- Impact Radius UTT -->
     <script type="text/javascript"> (function(a,b,c,d,e,f,g){e['ire_o']=c;e[c]=e[c]||function(){(e[c].a=e[c].a||[]).push(arguments)};f=d.createElement(b); g=d.getElementsByTagName(b)[0];f.async=1;f.src=a;g.parentNode.insertBefore(f,g);})('//d.impactradius-event.com/A2111926-92bd-44aa-bb4f-83916a666b521.js','script','ire',document,window);
     </script>
@@ -120,7 +122,7 @@
     {% assign SHA1Email = customer.email | hmac_sha1: "secret_key" %}
       ire('identify', {customerId: '{{customer.id}}', customerEmail: '{{SHA1Email}}'});
     </script>
-    
+
     <!-- Impact Radius Track Conversion -->
     <script type="text/javascript">
       {% assign SHA1Email = customer.email | hmac_sha1: "secret_key" %}
