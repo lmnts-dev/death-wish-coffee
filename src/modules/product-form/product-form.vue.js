@@ -46,7 +46,7 @@ export default {
 
     return {
       componentMounted: !1,
-      moneyFormat: 'amount',
+      moneyFormat: '{{amount}}',
       ogOfferDetails: {},
       optionIcons: iconData,
       selectedOptions: { ...initialSelectedOptions },
@@ -708,9 +708,13 @@ function formatMoney(cents, format) {
   }
 
   var value = ''
+  // Regex to match a liquid-type token in a string, i.e. {{amount}}
   var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/
 
-  switch (format.match(placeholderRegex)) {
+  // Find matched "group" in the format string, i.e. {{amount}} -> amount
+  const match = format.match(placeholderRegex)[1]
+
+  switch (match) {
     case 'amount':
       value = formatWithDelimiters(cents, 2)
       break
@@ -735,7 +739,7 @@ function formatMoney(cents, format) {
       value = formatWithDelimiters(cents, 2, "'")
       break
   }
-
+  debug('formatMoney', { cents, format, value, match })
   return format.replace(placeholderRegex, value)
 }
 
