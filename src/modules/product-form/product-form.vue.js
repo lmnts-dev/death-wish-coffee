@@ -74,15 +74,14 @@ export default {
     /**
      * Active discount amount.
      *
-     * Checks for a global discount and provides an extension point for
-     * a specific discount override.
+     * Determines the active discount for the selected variant.
      *
      * @returns String
      */
     activeDiscountAmount() {
-      const defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
+      const discount = this.defaultGlobalDiscountAmount || '0'
 
-      return defaultGlobalDiscountAmount || '0'
+      return discount
     },
 
     /**
@@ -325,6 +324,32 @@ export default {
     },
 
     /**
+     * Calculated discount amount for the selected selling plan.
+     *
+     * @returns String || null
+     */
+    sellingPlanDiscountPercent() {
+      if (!this.sellingPlanAllocation) {
+        debug('sellingPlanDiscountPercent', { discount: 0 })
+        return null
+      }
+
+      // Calculate the discount percent from the selling plan
+      const plan = this.sellingPlanAllocation
+      const discount = 100 - Math.round((plan.price / plan.compare_at_price) * 100)
+
+      debug('sellingPlanDiscountPercent', { discount })
+      return discount
+    },
+
+    /**
+     * Format the selling plan discount percent as a string for display.
+     */
+    sellingPlanDiscountPercentString() {
+      return `${this.sellingPlanDiscountPercent}%`
+    },
+
+    /**
      * Ordergroove selling plan ID.
      *
      * @returns String || undefined
@@ -409,7 +434,8 @@ export default {
       const originalPrice = this.sellingPlanAllocation.price ||
         variant.price || false
 
-      const originalComparePrice = variant.compare_at_price || false
+      const originalComparePrice = this.sellingPlanAllocation.compare_at_price ||
+        variant.compare_at_price || false
 
       debug('handleVariantUpdate', {
         sellingPlan: this.sellingPlanAllocation,
@@ -458,6 +484,13 @@ export default {
           originalComparePrice - discountComparePrice, this.moneyFormat
         )
       }
+
+      debug('calculateVariantPrices', {
+        originalPrice,
+        displayDiscountPrice,
+        originalComparePrice,
+        displayDiscountComparePrice,
+      })
 
       // Store the new prices
       this.activeSubsriptionDisplayPrice = displayDiscountPrice
@@ -560,9 +593,13 @@ export default {
         quantity: 1,
       }
 
+      const discountAmount = this.sellingPlanDiscountPercent
+        ? this.sellingPlanDiscountPercentString
+        : this.activeDiscountAmount
+
       if (this.subscriptionSelected) {
         const subscriptionProperties = {
-          'Discount Amount': this.activeDiscountAmount,
+          'Discount Amount': discountAmount,
           'Interval Frequency': this.intervalFrequency,
           'Interval Unit': this.intervalUnit,
           Subscription: this.finalSubscriptionProperty,
