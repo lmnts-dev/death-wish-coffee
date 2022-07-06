@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     main: [
-      'webpack-hot-middleware/client?path=//localhost:3000/__webpack_hmr',
+      // 'webpack-hot-middleware/client?path=//localhost:3000/__webpack_hmr',
       './src/css/main.css',
       './src/js/main'
     ]
