@@ -1,12 +1,12 @@
 import Cookies from 'js-cookie'
 
 /**
- * Initializes the javascript for the og-offer module
- * @param {Object} el - The DOM Node containing the data-module="og-account-link" attribute.
+ * Initializes the javascript for the og-subscriptions module
+ * @param {Object} el - The DOM Node containing the data-module="og-subscription" attribute.
  */
 
-const ogAccountLink = (el) => {
-  console.warn('initializing og-account-link module')
+const ogSubscriptions = (el) => {
+  console.warn('initializing og-subscriptions module')
   if (!el) return
 
   const customerId = el.getAttribute('data-og-customer-id')
@@ -40,4 +40,4 @@ const writeOgAuthCookie = (customerId, timestamp, signature) => {
     }
   )
 }
-export default ogAccountLink
+export default ogSubscriptions
