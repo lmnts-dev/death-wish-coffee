@@ -15,6 +15,25 @@ const ogSubscriptions = (el) => {
 
   // Create a new `og_auth` cookie each time this module is initialized
   writeOgAuthCookie(customerId, timestamp, signature)
+
+  // Add the Ordergroove SMI script to the document after the cookie is set
+  addOgSMI()
+}
+
+/**
+ * Create the script element for the SMI (msi) script.
+ *
+ * The script attaches to the `#og-msi` element in the DOM and renders the
+ * subscription management interface (SMI) there.
+ */
+const addOgSMI = () => {
+  const smiScript = document.createElement('script')
+  smiScript.src = 'https://static.ordergroove.com/a967464e9f0e11ecbc8f5ec5529cdc00/msi.js'
+  smiScript.defer = true
+
+  if (!document.contains(smiScript)) {
+    document.body.appendChild(smiScript)
+  }
 }
 
 /**
