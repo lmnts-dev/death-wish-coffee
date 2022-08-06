@@ -4,29 +4,33 @@ NOTE: this is a customized version of the Ordergroove snippets.
 {% endcomment %}
 
 {% comment %}
-Flag to indicate if this page should use the "page" or the "app_url".
+Flag to indicate if this page should use the embedded smi or the smi link.
 
-The "page" is a Shopify page that adds the correct layout and code to allow
-for placing the subscription information within the styling of the account
-template.
+The embedded smi is an alternative view for the account page that adds the
+correct layout and code to embed the subscription information within the
+site template.
 
-The "app_url" is a page provided by the Ordergroove Shopify app that is not
-styled to use the account template and shows up as a new page which can be
-odd for site visitors.
+The smi link is a URL generated to a page provided by Ordergroove that lists
+the customer's subscriptions.
 {% endcomment %}
-{% assign use_page = true %}
+
+{% assign use_smi_embed = true %}
 
 {% if customer %}
   {% assign secret_key = "d9fe3a87a71c8e70e41775205aab741307dab756" %}
+  {% assign merchant_hash_key = "e-2#OipohePyrgAPXDtXQhPR+~{H1eZY" %}
   {% assign customer_id = customer.id  %}
   {% assign timestamp = "now" | date: "%s" %}
-  {% assign signature = customer_id | append: "|" | append: timestamp | hmac_sha256: secret_key %}
+  {% assign customer_signature = customer_id | append: "|" | append: timestamp | hmac_sha256: secret_key %}
+  {% assign raw_signature = customer_id | append: "|" | append: timestamp %}
+  {% assign signature = raw_signature | hmac_sha256: merchant_hash_key | base64_encode %}
 
-  {% if use_page == true %}
-    {% assign subscription_url = routes.account_url | append: "?view=subscriptions" %}
+  {% if use_smi_embed %}
+    {% assign subscriptions_url = routes.account_url | append: "?view=subscriptions" %}
   {% else %}
-    {% assign subscription_url = "/apps/subscriptions/manage/?customer=" | append: customer.id | append: "&customer_signature=" | append: signature | append: "&customer_timestamp=" | append: timestamp %}
+    {% assign subscriptions_url = "/apps/subscriptions/manage/?customer=" | append: customer.id | append: "&customer_signature=" | append: customer_signature | append: "&customer_timestamp=" | append: timestamp %}
   {% endif %}
+
   <div
     data-module="og-account-link"
     data-og-customer-id="{{customer_id}}"
@@ -35,7 +39,7 @@ odd for site visitors.
   >
     <a
       class="account-sidebar-menu__item-link"
-      href="{{subscription_url}}"
+      href="{{subscriptions_url}}"
     >
       Subscriptions
     </a>
