@@ -23,11 +23,7 @@
   {{ content_for_header }}
 
   {%- render 'fonts' -%}
-  {%- if settings.is_dev_mode -%}
-    {{- '/dev/main.js' | prepend: settings.dev_url | script_tag -}}
-  {%- else -%}
-    {{- 'main.min.css' | asset_url | stylesheet_tag -}}
-  {%- endif -%}
+  {%- render 'dev-mode-head' -%}
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
@@ -57,9 +53,7 @@
         </div>
     </main>
 
-    {%- unless settings.is_dev_mode -%}
-      {{- 'main.js' | asset_url | script_tag -}}
-    {%- endunless -%}
+    {%- render 'dev-mode-body' -%}
   </div>
 
 {%- render 'footer' -%}
