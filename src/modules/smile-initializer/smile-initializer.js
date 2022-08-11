@@ -5,7 +5,7 @@
  */
 
 const smileInitializer = el => {
-  console.warn("smile initializer module initialized");
+  console.warn('smile initializer module initialized')
 }
 
 export default smileInitializer
