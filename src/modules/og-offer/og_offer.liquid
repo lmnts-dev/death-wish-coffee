@@ -15,7 +15,7 @@ Create an array of product ids to pass to the module
 {% endif %}
 
 {% if product %}
-<div is="og-offer" inline-template product-ids-string="{{og_product_ids}}">
+<div is="og-offer" inline-template product-ids-string="{{og_product_ids}}" :selected-variant="selectedVariant">
   <div data-module="og-offer">
   {% if type == 'cart' %}
     {% assign cart_type = true %}
@@ -39,7 +39,7 @@ Create an array of product ids to pass to the module
         {% assign frequency_period = frequency[0] | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
         {% assign frequency = "1" |append: "_" | append: frequency_period %}
       {% endif %}
-      <span ref="{{product.variant_id}}-{{frequency}}" id="og-selling-plan-map-{{product.variant_id}}-{{frequency}}" selling-plan-id="{{selling_plan_allocation.selling_plan.id}}" data-frequency-interval="{{frequency_interval}}" data-frequency-unit="{{frequency_unit}}" data-frequency-label="{{frequency_label}}" style="display:none !important;"></span>
+      <span ref="{{product.variant_id}}-{{frequency}}" id="og-selling-plan-map-{{product.variant_id}}-{{frequency}}" selling-plan-id="{{selling_plan_allocation.selling_plan.id}}" data-frequency="{{frequency}}" data-frequency-interval="{{frequency_interval}}" data-frequency-unit="{{frequency_unit}}" data-frequency-label="{{frequency_label}}" data-compare-at-price="{{selling_plan_allocation.compare_at_price}}" data-price="{{selling_plan_allocation.price}}" style="display:none !important;"></span>
     {% endfor %}
     <og-offer ref="og-offer" product="{{ product.variant_id }}" data-line-id="{{ product.key }}" data-line-qty="{{ product.quantity }}" location="{{ location }}" os-version="1"></og-offer>
   {% else %}
@@ -59,7 +59,7 @@ Create an array of product ids to pass to the module
           {% assign frequency_period = frequency[0] | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
           {% assign frequency = "1" |append: "_" | append: frequency_period %}
         {% endif %}
-        <span ref="{{variant.id}}-{{frequency}}" id="og-selling-plan-map-{{variant.id}}-{{frequency}}" selling-plan-id="{{selling_plan_allocation.selling_plan.id}}" data-frequency-interval="{{frequency_interval}}" data-frequency-unit="{{frequency_unit}}" data-frequency-label="{{frequency_label}}" style="display:none !important;"></span>
+        <span ref="{{variant.id}}-{{frequency}}" id="og-selling-plan-map-{{variant.id}}-{{frequency}}" selling-plan-id="{{selling_plan_allocation.selling_plan.id}}" data-frequency="{{frequency}}"  data-frequency-interval="{{frequency_interval}}" data-frequency-unit="{{frequency_unit}}" data-frequency-label="{{frequency_label}}" data-compare-at-price="{{selling_plan_allocation.compare_at_price}}" data-price="{{selling_plan_allocation.price}}" style="display:none !important;"></span>
       {% endfor %}
     {%- endfor -%}
     <og-offer ref="og-offer" product="{{ product.id }}" location="{{location}}" os-version="1"></og-offer>
