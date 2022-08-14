@@ -25,7 +25,6 @@ export default {
     },
     shop: {
       type: Object,
-      required: true
     },
     isActiveSubscription: Boolean,
     queryStringVariant: {
@@ -116,7 +115,7 @@ export default {
      * @returns String || null
      */
     defaultGlobalDiscountAmount() {
-      return this.shop.default_discount_amount
+      return this.shop && this.shop.default_discount_amount
         ? this.shop.default_discount_amount
         : null
     },
