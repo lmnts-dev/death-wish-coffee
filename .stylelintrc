@@ -30,6 +30,12 @@
       }
     ],
     "csstools/use-nesting": "always",
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignore": ["custom-elements"]
+      }
+    ]
   }
 }

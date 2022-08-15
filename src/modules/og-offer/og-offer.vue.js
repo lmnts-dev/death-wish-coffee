@@ -56,6 +56,7 @@ export default {
   mounted() {
     this.$__initializeData()
     this.$_addOgOfferObserver()
+    this.$_addOgIncentiveTextObserver()
     this.$_updateWindowLineItems()
 
     debug('mounted')
@@ -163,6 +164,36 @@ export default {
     },
 
     /**
+     * Add an observer for the `og-incentive-text` element.
+     */
+    $_addOgIncentiveTextObserver() {
+      const vm = this
+
+      const mutationObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          const target = mutation.target
+          const text = target.innerHTML
+
+          // Ensure DOM is updated before updating incentive text
+          Vue.nextTick(() => {
+            vm.$_updateIncentiveTextOverride(text)
+          })
+
+          debug('[observer] og-incentive-text changed', text)
+        })
+      })
+
+      const ogIncentiveText = document.querySelector('og-incentive-text')
+
+      // Watch for changes to the `og-incentive-text` element
+      mutationObserver.observe(ogIncentiveText, {
+        attributes: false,
+        childList: true,
+        subtree: true,
+      })
+    },
+
+    /**
      * Update a value in `data`.
      *
      * Updates a key on the `data` object in a way that triggers reactive
@@ -188,6 +219,41 @@ export default {
       this.frequencyInterval = planMap.getAttribute('data-frequency-interval')
       this.frequencyLabel = planMap.getAttribute('data-frequency-label')
       this.frequencyUnit = planMap.getAttribute('data-frequency-unit')
+    },
+
+    /**
+     * Update the incentive text override.
+     *
+     * There is an issue with the Ordergroove offer snippet where the
+     * text in `og-incentive-text` is sometimes rendered as "undefined"
+     * when changing product variants. This method is a hack to copy the
+     * value from the `og-incentive-text` node to a custom `div` that
+     * displays the same information, but filters the update if the text
+     * matches `undefined`.
+     */
+    $_updateIncentiveTextOverride(text) {
+      let incentiveText = null
+
+      if (text) {
+        incentiveText = text
+      } else {
+        const ogIncentiveText = document.querySelector('og-incentive-text')
+        if (!ogIncentiveText) return
+
+        incentiveText = ogIncentiveText.innerHTML
+      }
+
+      const incentiveTextOverride =
+        document.querySelector('div.cmnc-incentive-text-override')
+      if (!incentiveTextOverride) return
+
+      if (incentiveText && !incentiveText.match(/undefined/)) {
+        incentiveTextOverride.innerHTML = incentiveText
+      } else {
+        incentiveTextOverride.innerHTML = ''
+      }
+
+      debug('$_updateIncentiveTextOverride', text)
     },
 
     /**
@@ -217,7 +283,8 @@ export default {
           // eslint-disable-next-line no-template-curly-in-string
           const formattedPrice = formatMoney(price, '${{amount}}')
 
-          ogPrice.shadowRoot.innerHTML = buildButtonPriceDocumentFragment(formattedPrice)
+          ogPrice.shadowRoot.innerHTML =
+            buildButtonPriceDocumentFragment(formattedPrice)
           debug('$_updateSubscriptionButtonsPrices', frequency, formattedPrice)
         }
       })
