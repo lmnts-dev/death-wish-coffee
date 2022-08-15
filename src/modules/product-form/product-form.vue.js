@@ -1,7 +1,7 @@
 /* eslint-disable comma-dangle,space-before-function-paren */
 import { mapState } from 'vuex'
 import store from 'lib/store'
-import { formatPrice } from 'lib/util'
+import { formatMoney, formatPrice } from 'lib/util'
 import iconData from './product-icons'
 import OgOffer, { UPDATE_DETAILS_EVENT_NAME } from '../og-offer/og-offer.vue'
 
@@ -733,83 +733,6 @@ function debug() {
   if (DEBUG) {
     console.debug('[product-form] ', ...arguments)
   }
-}
-
-/**
- * Shopify format money.
- *
- * @param {Number | String} cents
- * @param {String} format
- * @returns String
- */
-function formatMoney(cents, format) {
-  if (typeof cents === 'string') {
-    cents = cents.replace('.', '')
-  }
-
-  var value = ''
-  // Regex to match a liquid-type token in a string, i.e. {{amount}}
-  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/
-
-  // Find matched "group" in the format string, i.e. {{amount}} -> amount
-  const match = format.match(placeholderRegex)[1]
-
-  switch (match) {
-    case 'amount':
-      value = formatWithDelimiters(cents, 2)
-      break
-
-    case 'amount_no_decimals':
-      value = formatWithDelimiters(cents, 0)
-      break
-
-    case 'amount_with_comma_separator':
-      value = formatWithDelimiters(cents, 2, '.', ',')
-      break
-
-    case 'amount_no_decimals_with_comma_separator':
-      value = formatWithDelimiters(cents, 0, '.', ',')
-      break
-
-    case 'amount_no_decimals_with_space_separator':
-      value = formatWithDelimiters(cents, 0, ' ')
-      break
-
-    case 'amount_with_apostrophe_separator':
-      value = formatWithDelimiters(cents, 2, "'")
-      break
-  }
-  debug('formatMoney', { cents, format, value, match })
-  return format.replace(placeholderRegex, value)
-}
-
-/**
- * Format a number with delimiters.
- *
- * @param {*} number
- * @param {*} precision
- * @param {*} thousands
- * @param {*} decimal
- * @returns
- */
-function formatWithDelimiters(number, precision, thousands, decimal) {
-  thousands = thousands || ','
-  decimal = decimal || '.'
-
-  if (isNaN(number) || number === null) {
-    return 0
-  }
-
-  number = (number / 100.0).toFixed(precision)
-
-  var parts = number.split('.')
-  var dollarsAmount = parts[0].replace(
-    /(\d)(?=(\d\d\d)+(?!\d))/g,
-    '$1' + thousands
-  )
-  var centsAmount = parts[1] ? decimal + parts[1] : ''
-
-  return dollarsAmount + centsAmount
 }
 
 /**
