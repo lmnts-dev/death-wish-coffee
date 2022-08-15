@@ -482,3 +482,13 @@ export const triggerCustomEvent = (el, eventName, options) => {
   }
   el.dispatchEvent(event)
 }
+
+/**
+ * Sanitize string.
+ *
+ * @param {String} name
+ * @returns String
+ */
+export const sanitize = (name) => {
+  return name.replace(/[^\w-]+/g, '')
+}

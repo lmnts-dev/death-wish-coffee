@@ -1,7 +1,7 @@
 /* eslint-disable comma-dangle,space-before-function-paren */
 import { mapState } from 'vuex'
 import store from 'lib/store'
-import { formatMoney, formatPrice } from 'lib/util'
+import { formatMoney, formatPrice, sanitize } from 'lib/util'
 import iconData from './product-icons'
 import OgOffer, { UPDATE_DETAILS_EVENT_NAME } from '../og-offer/og-offer.vue'
 
@@ -733,16 +733,6 @@ function debug() {
   if (DEBUG) {
     console.debug('[product-form] ', ...arguments)
   }
-}
-
-/**
- * Sanitize string.
- *
- * @param {String} name
- * @returns String
- */
-function sanitize(name) {
-  return name.replace(/[^\w-]+/g, '')
 }
 
 /* eslint-enable comma-dangle,space-before-function-paren */
