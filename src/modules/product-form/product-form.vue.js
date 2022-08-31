@@ -1,9 +1,23 @@
+/* eslint-disable comma-dangle,space-before-function-paren */
 import { mapState } from 'vuex'
 import store from 'lib/store'
-import { formatPrice } from 'lib/util'
+import { formatMoney, formatPrice, sanitize } from 'lib/util'
 import iconData from './product-icons'
+import OgOffer, { UPDATE_DETAILS_EVENT_NAME } from '../og-offer/og-offer.vue'
+
+// Flag to enable debug logging. Refer to `debug()` below.
+const DEBUG = true
+
+// Map of product purchase types
+const PURCHASE_TYPES = {
+  onetime: 'onetime',
+  subscription: 'subscription',
+}
 
 export default {
+  components: {
+    OgOffer
+  },
   props: {
     product: {
       type: Object,
@@ -11,21 +25,8 @@ export default {
     },
     shop: {
       type: Object,
-      required: true
     },
     isActiveSubscription: Boolean,
-    upscribeKeepComponentInSync: {
-      type: Boolean,
-      default: false
-    },
-    upscribeSalePriceQuerySelector: {
-      type: Boolean,
-      default: false
-    },
-    upscribeRegularPriceQuerySelector: {
-      type: Boolean,
-      default: false
-    },
     queryStringVariant: {
       type: String,
       default: () => ('')
@@ -43,139 +44,173 @@ export default {
     )
 
     return {
-      moneyFormat: 'amount',
-      selectedOptions: { ...initialSelectedOptions },
-      selectedFrequencyIndex: 0,
-      productPurchaseType: 'onetime',
-      subscriptionPrice: null,
-      subscriptionAmount: null,
-      optionIcons: iconData,
       componentMounted: !1,
-      sizeChartActive: false
+      moneyFormat: '{{amount}}',
+      ogOfferDetails: {},
+      optionIcons: iconData,
+      selectedOptions: { ...initialSelectedOptions },
+      sizeChartActive: false,
+      subscriptionAmount: null,
     }
   },
   mounted () {
     this.activeVariantId = this.product.variants[0].id
     // reset
     this.index = ''
-    this.selectedFrequencyIndex = 0
-    this.productPurchaseType = this.subscriptionChecked ? 'subscription' : 'onetime'
-    this.subscriptionPrice = null
 
     for (var key in this.product.options_by_name) {
       const option = this.product.options_by_name[key].option
       const optionPosition = option.position
       this.$set(this.selectedOptions, key, this.initialVariant[`option${optionPosition}`])
     }
-    // add listener for variant update, set in variant_selection.js
-    // this listener could be different depeneding on if the theme uses the same base setup
-    var vm = this
-    window.addEventListener('upscribeVariantUpdate', function (event) {
-      vm.handleVariantUpdateEvent(event)
-    }, false)
 
-    // if (this.upscribeKeepComponentInSync === true) {
-    window.addEventListener(
-      'upscribeProductPurchaseTypeUpdate',
-      function (event) {
-        vm.setProductPurchaseType(event.detail)
-      },
-      false
-    )
-
-    window.addEventListener(
-      'upscribeFrequencyIndexUpdate',
-      function (event) {
-        vm.setFrequency(event.detail)
-      },
-      false
-    )
-    // }
+    this.$_addUpdateOgOfferDetailsListener()
     this.componentMounted = 1
-  },
-  watch: {
-    selectedVariantId (newValue) {
-      this.$emit('update-variant-id', newValue)
-      store.dispatch('pdp/setSelectedVariantId', { id: newValue })
-    },
-    productPurchaseType (newVal) {
-      // if (this.upscribeKeepComponentInSync) {
-      // Upscribe Product Purchase Type Update
-      window.dispatchEvent(new CustomEvent('upscribeProductPurchaseTypeUpdate', {
-        detail: newVal
-      }))
-      // }
-      let originalPrice
-      let comparePrice
-      // if one time
-      if (newVal === 'onetime') {
-      // use stored non-discount prices from previous changes
-        originalPrice = this.activeSubsriptionDisplayPrice || false
-        comparePrice = this.activeSubsriptionDisplayComparePrice || false
-
-        // put into money format
-        var formatOriginalPrice = originalPrice ? this.formatMoney(originalPrice) : false
-        var formatComparePrice = comparePrice ? this.formatMoney(comparePrice) : false
-
-        // replace pricing elements with new vals
-        this.setPricingDisplayEls(formatOriginalPrice, formatComparePrice)
-      } else {
-      // if subscription
-      // use stored non-discount prices from previous changes
-        originalPrice = this.activeSubsriptionDisplayPrice || false
-        comparePrice = this.activeSubsriptionDisplayComparePrice || false
-
-        // calculate subscription discount and replace pricing elements with new vals
-        this.calculateVariantPrices(originalPrice, comparePrice)
-      }
-    }
   },
   computed: {
     ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
-    productId () {
-      return this.product.id
+
+    /**
+     * Active discount amount.
+     *
+     * Determines the active discount for the selected variant.
+     *
+     * @returns String
+     */
+    activeDiscountAmount() {
+      const discount = this.defaultGlobalDiscountAmount || '0'
+
+      return discount
     },
-    productName () {
-      return this.product.title
-    },
-    initialVariant () {
-      return this.product.selected_or_first_available_variant
-    },
-    selectedOptionValues () {
-      return Object.values(this.selectedOptions)
-    },
-    hasSingleVariant () {
-      return this.product.variants.length === 1
-    },
-    hasSingleOption () {
-      return this.product.options.length === 1
-    },
-    selectedVariant () {
-      const variant = this.getVariantMatchingOptions(this.selectedOptionValues)
-      // upscribe
-      if (variant) {
-        window.dispatchEvent(new CustomEvent('upscribeVariantUpdate', {
-          detail: variant
-        }))
+
+    /**
+     * Active discount type.
+     *
+     * Determines if the `activeDiscountAmount` is in dollars or percent.
+     *
+     * @returns String ('$' || '%')
+     */
+    activeDiscountType() {
+      const activeDiscount = this.activeDiscountAmount
+
+      if (activeDiscount) {
+        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
+      } else {
+        return ''
       }
-      return this.hasSingleVariant ? this.product.variants[0] : variant
     },
-    selectedVariantId () {
-      return this.selectedVariant ? this.selectedVariant.id : ''
-    },
-    isAbleAddToCart () {
-      return !this.selectedVariant || this.selectedVariant.available
-    },
-    addToCartButtonText () {
+
+    /**
+     * Text for the Add to Cart button.
+     *
+     * @returns String
+     */
+    addToCartButtonText() {
       return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
     },
-    priceDecidingFactor () {
-      // Find out which variant option affects pricing
-      for (const option of this.product.options) {
-        const availableValues = this.product.options_by_name[option].option.values
+
+    /**
+     * Default discount from the shop.
+     *
+     * @returns String || null
+     */
+    defaultGlobalDiscountAmount() {
+      return this.shop && this.shop.default_discount_amount
+        ? this.shop.default_discount_amount
+        : null
+    },
+
+    /**
+     * Subscription label used in the cart.
+     *
+     * i.e. "1 month", "3 months", etc.
+     *
+     * @returns String || Boolean
+     */
+    finalSubscriptionProperty() {
+      if (!this.subscriptionSelected && !this.isOnetimeSubscription) {
+        return false
+      }
+
+      const label = this.ogOfferDetails.frequency.label
+
+      debug('finalSubscriptionProperty', label)
+      return label
+    },
+
+    /**
+     * Indicates if the product only has a single variant.
+     *
+     * @returns Boolean
+     */
+    hasSingleVariant() {
+      return this.product.variants.length === 1
+    },
+
+    /**
+     * Initial product variant.
+     *
+     * @returns Variant
+     */
+    initialVariant() {
+      return this.product.selected_or_first_available_variant
+    },
+
+    /**
+     * Subscription frequency interval.
+     *
+     * Returns the value of the interval - number of days, months, etc.
+     *
+     * @returns String
+     */
+    intervalFrequency() {
+      return this.ogOfferDetails.frequency.interval || '1'
+    },
+
+    /**
+     * Subscription frequency unit.
+     *
+     * Returns the singular value of the unit - 'day', 'week', 'month', etc.
+     *
+     * @returns String
+     */
+    intervalUnit() {
+      return this.ogOfferDetails.frequency.unit || 'day'
+    },
+
+    /**
+     * Determine if the product variant can be added to the cart.
+     *
+     * @returns Boolean
+     */
+    isAbleAddToCart() {
+      return !this.selectedVariant || this.selectedVariant.available
+    },
+
+    /**
+     * Indicates if this is a onetime subscription.
+     *
+     * Used for single purchase that is able to reactivate as a subscription.
+     *
+     * @returns Boolean
+     */
+    isOnetimeSubscription() {
+      return this.productPurchaseType === PURCHASE_TYPES.onetime
+    },
+
+    /**
+     * Determine the variant option that affects pricing.
+     */
+    priceDecidingFactor() {
+      const product = this.product
+      const defaultOptionName = product.options[0]
+
+      for (const optionName of product.options) {
+        const option = product.options_by_name[optionName].option
+        const availableValues = option.values
         const pricesContainingOption = {}
 
-        for (const variant of this.product.variants) {
+        for (const variant of product.variants) {
           for (const value of variant.options) {
             if (!availableValues.includes(value)) {
               continue
@@ -184,9 +219,10 @@ export default {
             if (!pricesContainingOption[value]) {
               pricesContainingOption[value] = []
             } else if (pricesContainingOption[value].includes(variant.price)) {
-              // if multiple variants with the same option value has the same price then this is the
-              // option we're looking for
-              return option
+              // If multiple variants with the same option value have the
+              // same price then this is the option we're looking for
+              debug('priceDecidingFactor found', optionName)
+              return optionName
             }
 
             pricesContainingOption[value].push(variant.price)
@@ -194,299 +230,294 @@ export default {
         }
       }
 
-      return this.product.options[0]
+      debug('priceDecidingFactor default', defaultOptionName)
+      return defaultOptionName
     },
-    applicableVariants () {
-      if (!this.initialApplicableVariants) return false
-      return this.initialApplicableVariants.split(',')
-    },
-    activeVariantIsApplicableVariant () {
-    // all are applicable
 
-      if (!this.activeVariantId) {
-        this.productPurchaseType = 'onetime'
-        return false
+    /**
+     * Product ID.
+     *
+     * @returns String
+     */
+    productId() {
+      return this.product.id
+    },
+
+    /**
+     * Alias for the product.title.
+     *
+     * @returns String
+     */
+    productName() {
+      return this.product.title
+    },
+
+    /**
+     * The purchase type for the selected product.
+     *
+     * @returns String
+     */
+    productPurchaseType() {
+      const subscribed = this.ogOfferDetails.subscribeChecked
+
+      return subscribed ? PURCHASE_TYPES.subscription : PURCHASE_TYPES.onetime
+    },
+
+    /**
+     * Array of `values` from the selected options.
+     *
+     * @returns Array
+     */
+    selectedOptionValues() {
+      return Object.values(this.selectedOptions)
+    },
+
+    /**
+     * Current selected variant.
+     *
+     * @returns Variant || {}
+     */
+    selectedVariant() {
+      const variant = this.findVariantWithOptions(this.selectedOptionValues)
+      debug('selectedVariant', variant)
+
+      const selected = this.hasSingleVariant
+        ? this.product.variants[0]
+        : variant
+
+      return selected
+    },
+
+    /**
+     * The ID of the selected variant.
+     *
+     * @returns String
+     */
+    selectedVariantId() {
+      return this.selectedVariant ? this.selectedVariant.id : ''
+    },
+
+    /**
+     * Selling plan allocation from the product variant.
+     *
+     * `selling_plan_allocations` is a collection added to the product
+     * variant that contains pricing information for each selling plan.
+     *
+     * @returns Allocation || {}
+     */
+    sellingPlanAllocation() {
+      const variant = this.selectedVariant
+      const planAllocations = variant && variant.selling_plan_allocations
+
+      if (!planAllocations) return {}
+
+      const allocation = planAllocations.find(planAllocation => {
+        const allocationPlanId = planAllocation.selling_plan_id
+
+        return parseInt(allocationPlanId) === parseInt(this.sellingPlanId)
+      })
+
+      debug('sellingPlanAllocation', allocation)
+
+      return allocation || {}
+    },
+
+    /**
+     * Calculated discount amount for the selected selling plan.
+     *
+     * @returns String || null
+     */
+    sellingPlanDiscountPercent() {
+      if (!this.sellingPlanAllocation) {
+        debug('sellingPlanDiscountPercent', { discount: 0 })
+        return null
       }
 
-      if (!this.initialApplicableVariants) return true
+      // Calculate the discount percent from the selling plan
+      const plan = this.sellingPlanAllocation
+      const discount = 100 - Math.round((plan.price / plan.compare_at_price) * 100)
 
-      if (this.applicableVariants.includes(this.activeVariantId.toString())) {
-        return true
-      } else {
-        this.productPurchaseType = 'onetime'
-        return false
-      }
+      debug('sellingPlanDiscountPercent', { discount })
+      return discount
     },
 
-    // helper for if current state is subscription
-    subscriptionSelected () {
-      return this.productPurchaseType === 'subscription'
+    /**
+     * Format the selling plan discount percent as a string for display.
+     */
+    sellingPlanDiscountPercentString() {
+      return `${this.sellingPlanDiscountPercent}%`
     },
-    // used for single purchase that will be able to reactivate as a subscription in the future
-    isOnetimeSubscription () {
-      return this.chargeLimit === 'onetime'
+
+    /**
+     * Ordergroove selling plan ID.
+     *
+     * @returns String || undefined
+     */
+    sellingPlanId() {
+      return this.ogOfferDetails.sellingPlanId
     },
-    // subscription title, used in cart and sent to checkout for replacement
-    subscriptionProductTitleDisplay () {
+
+    /**
+     * Subscription product title for display in the cart.
+     *
+     * Used in cart and sent to checkout for replacement.
+     *
+     * @returns String
+     */
+    subscriptionProductTitleDisplay() {
       let display = ''
-      display += this.subscriptionProductTitle
-        ? this.subscriptionProductTitle
-        : this.product.title
+
+      // Product title
+      display += this.product.title
+
+      // Discount
       display += this.discountDisplay
         ? ' - ' + this.discountDisplay + ' off'
         : ''
+
       return display
     },
-    activeDiscountType () {
-      var discountAmount = this.discountAmount
-      var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
-      var activeDiscount = discountAmount || defaultGlobalDiscountAmount
 
-      if (activeDiscount) {
-        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
-      } else {
-        return ''
-      }
-    },
-    activeDiscountAmount () {
-      var discountAmount = this.discountAmount
-      var defaultGlobalDiscountAmount = this.defaultGlobalDiscountAmount
+    /**
+     * Test if the current purchase type is a subscription.
+     *
+     * @returns Boolean
+     */
+    subscriptionSelected() {
+      const selected = this.productPurchaseType === PURCHASE_TYPES.subscription
 
-      return discountAmount || defaultGlobalDiscountAmount || '0'
+      debug('subscriptionSelected', selected)
+      return selected
     },
-    chargeLimit () {
-      return this.initialChargeLimit ? this.initialChargeLimit : 0
-    },
-    intervalFrequency () {
-      return this.intervalFrequncyMetafield
-        ? this.intervalFrequncyMetafield
-        : '15,30,45,60'
-    },
-    // build frequency options for select boxes
-    selectFrequencyOptions () {
-      var intervalFrequency = this.intervalFrequency
-      var intervalUnit = this.intervalUnit
-
-      if (!intervalFrequency || !intervalUnit) return false
-
-      return intervalFrequency.split(',').map(function (frequency) {
-        return {
-          value: frequency.trim(),
-          mainText: frequency.trim(),
-          subText: false
-        }
-      })
-    },
-    // plural unit display check
-    finalSubscriptionProperty () {
-      var selectedFrequency = this.selectedFrequency
-      var unit = this.intervalUnit
-      if (!this.subscriptionSelected && !this.isOnetimeSubscription) { return false }
-
-      if (selectedFrequency > 1) {
-        return selectedFrequency + ' ' + unit + 's'
-      } else {
-        return selectedFrequency + ' ' + unit
-      }
-    },
-    selectedFrequency () {
-      return this.selectFrequencyOptions[this.selectedFrequencyIndex].value
-    },
-    intervalUnit () {
-      return this.intervalUnitMetafield ? this.intervalUnitMetafield : 'day'
-    },
-    initialApplicableVariants () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.applicable_variants
-        : null
-    },
-    subscriptionProductTitle () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.subscription_product_title
-        : null
-    },
-    intervalFrequncyMetafield () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.interval_frequency
-        : null
-    },
-    intervalUnitMetafield () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.interval_unit
-        : null
-    },
-    defaultGlobalDiscountAmount () {
-      return this.shop.default_discount_amount
-        ? this.shop.default_discount_amount
-        : null
-    },
-    discountAmount () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.discount_amount
-        : null
-    },
-    initialChargeLimit () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.charge_limit
-        : ''
-    },
-    recurringDiscountAmount () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.recurring_discount_amount
-        : null
-    },
-    recurringDiscountAfterOrder () {
-      return this.product.sf_upscribe
-        ? this.product.sf_upscribe.recurring_discount_after_order
-        : null
-    },
-    oneTimeMessage () {
-      return this.shop ? this.shop.one_time_message : ''
-    },
-    subscriptionMessage () {
-      return this.shop ? this.shop.subscribe_message : ''
-    },
-    learnMoreUrl () {
-      return this.shop ? this.shop.learn_more_url : ''
-    },
-    howItWorksTitle () {
-      return this.shop ? this.shop.how_it_works_title : ''
-    },
-    howItWorksText () {
-      return this.shop ? this.shop.how_it_works_text : ''
-    },
-    isActive () {
-      console.log(this.selectedFrequencyIndex, this.index)
-      return this.selectedFrequencyIndex === this.index
-    },
-    isEnableUpscribe () {
-      return this.product.sf_upscribe.enable_subscription && this.isActiveSubscription
-    },
-    formattedSubscriptionAmount () {
-      return this.subscriptionAmount ? formatPrice(this.subscriptionAmount) : ''
-    }
   },
   methods: {
-    activeSubsriptionDisplayPrice () {
-      return this.product
-        .selected_or_first_available_variant
-        ? this.product.selected_or_first_available_variant.price
-        : null
-    },
-    activeSubsriptionDisplayComparePrice () {
-      return this.product
-        .selected_or_first_available_variant
-        ? this.product.selected_or_first_available_variant
-          .compare_at_price
-        : null
-    },
+    /**
+     * Add a listener for `og-offer` details updates.
+     */
+    $_addUpdateOgOfferDetailsListener() {
+      const handler = this.$_handleOgOfferDetails
 
-    sanitize (name) {
-      return name.replace(/[^\w-]+/g, '')
-    },
-    optionInputId (option, value) {
-      return `product-${this.product.id}-option-${this.sanitize(option)}-${this.sanitize(value)}`
-    },
-    isVariantMatchingOptions (variant, options) {
-      return variant.options.every(
-        (value, valueIndex) => value === options[valueIndex]
-      )
-    },
-    getVariantMatchingOptions (options) {
-      return this.product.variants.find(
-        variant => this.isVariantMatchingOptions(variant, options)
-      )
-    },
-    getPriceForOptionValue (optionIndex, value) {
-      const options = []
+      this.$children.forEach(child => {
+        if (child.ogOfferDetails) {
+          // Wire-up handler for og-offer selling plan details
+          child.$on(UPDATE_DETAILS_EVENT_NAME, handler)
 
-      // In case user hasn't actually selected anything, default to the first
-      // value of each option
-      for (const [option, value] of Object.entries(this.selectedOptions)) {
-        options.push(value || this.product.options_by_name[option].option.values[0])
-      }
-      options[optionIndex] = value
-
-      const matchedVariant = this.getVariantMatchingOptions(options)
-
-      return formatPrice(matchedVariant ? matchedVariant.price : this.product.variants[0].price)
-    },
-    async handleAddToCart () {
-      if (!this.selectedVariantId) {
-        return
-      }
-      const params = { id: this.selectedVariantId, quantity: 1, properties: {} }
-      if (this.subscriptionSelected) {
-        const subscriptionProperties = {
-          'Discount Amount': this.activeDiscountAmount,
-          'Interval Frequency': this.intervalFrequency,
-          'Interval Unit': this.intervalUnit,
-          Subscription: this.finalSubscriptionProperty,
-          'Subscription Amount': this.subscriptionAmount,
-          'Subscription Product Title': this.subscriptionProductTitleDisplay,
-          'Charge Limit': this.chargeLimit,
-          'Recurring Discount Amount': this.recurringDiscountAmount,
-          'Recurring Discount After Order': this.recurringDiscountAfterOrder
-        }
-        params.properties = Object.assign({}, params.properties, subscriptionProperties)
-      }
-      await store.dispatch('cart/addToCart', params)
-      this.$nextTick(() => {
-        this.resetSelectedOptions()
-        if (this.addedToCartSuccessfully) {
-          store.dispatch('cart/setIsPopOutCartActive', true)
-        } else {
-          this.$emit('added-to-cart-error')
+          // Fire handler when listener is added to capture any changes
+          handler(child.ogOfferDetails)
         }
       })
     },
-    resetSelectedOptions () {
-      this.selectedOptions = { ...this.initialSelectedOptions }
-      this.productPurchaseType = 'onetime'
+
+    /**
+     * Handler for the `og-offer` update events.
+     *
+     * @param {*} ogOfferDetails
+     */
+    $_handleOgOfferDetails(ogOfferDetails) {
+      debug('$_handleOgOfferDetails', ogOfferDetails)
+
+      this.ogOfferDetails = ogOfferDetails
+      this.$_handleVariantUpdate()
     },
-    handleVariantSelecting (e) {
-      const variantId = parseInt(e.target.value)
-      const variant = this.product.variants.find(v => v.id === variantId)
-      this.selectedOptions = this.product.options.reduce(
-        (result, option, index) => Object.assign({}, result, {
-          [option]: variant.options[index]
-        }),
-        {}
-      )
+
+    /**
+     * Handler for variant updates.
+     *
+     * Ensures pricing is updated in response to variant changes. Can
+     * be called in places that aren't strictly variant-related.
+     */
+    $_handleVariantUpdate() {
+      const variant = this.selectedVariant || {}
+      this.activeVariantId = variant.id
+
+      const originalPrice = this.sellingPlanAllocation.price ||
+        variant.price || false
+
+      const originalComparePrice = this.sellingPlanAllocation.compare_at_price ||
+        variant.compare_at_price || false
+
+      debug('handleVariantUpdate', {
+        sellingPlan: this.sellingPlanAllocation,
+        variant,
+      })
+
+      this.calculateVariantPrices(originalPrice, originalComparePrice)
     },
-    setFrequency (val) {
-      this.selectedFrequencyIndex = val
+
+    /**
+     * Toggle the Ordergroove subscription button.
+     */
+    $_toggleSubscriptionButton() {
+      const button = document.querySelector('og-offer button.og-button-toggle')
+      button.click()
     },
-    clickOption (index, option) {
-      // console.log(this.selectedFrequency === this.index)
-      this.index = index
-      this.option = option
-      // this.isActive(index)
-      // console.log(index, this.option)
-      this.$emit('click-option', this.index)
-      console.log(this.index)
-      // Upscribe Frequency Update
-      window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
-        detail: this.index
-      }))
+
+    /**
+     * Calculate the variant prices taking into account discounts.
+     *
+     * @param {*} originalPrice
+     * @param {*} originalComparePrice
+     */
+    calculateVariantPrices(originalPrice, originalComparePrice) {
+      let displayDiscountPrice = false
+      let displayDiscountComparePrice = false
+
+      if (originalPrice) {
+        const discountPrice =
+          originalPrice - this.discountCalculatedValue(originalPrice)
+
+        // Set unformatted amount for use in cart and checkout
+        this.subscriptionAmount = parseInt(originalPrice - discountPrice)
+
+        displayDiscountPrice = formatMoney(
+          originalPrice - discountPrice, this.moneyFormat
+        )
+      }
+
+      if (originalComparePrice) {
+        const discountComparePrice =
+          originalComparePrice -
+          this.discountCalculatedValue(originalComparePrice)
+
+        displayDiscountComparePrice = formatMoney(
+          originalComparePrice - discountComparePrice, this.moneyFormat
+        )
+      }
+
+      debug('calculateVariantPrices', {
+        originalPrice,
+        displayDiscountPrice,
+        originalComparePrice,
+        displayDiscountComparePrice,
+      })
+
+      // Store the new prices
+      this.activeSubsriptionDisplayPrice = displayDiscountPrice
+      this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
     },
-    getParameterByName (name, url = window.location.href) {
-      name = name.replace(/[\]]/g, '\\$&')
-      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
-      var results = regex.exec(url)
-      if (!results) return null
-      if (!results[2]) return ''
-      return decodeURIComponent(results[2].replace(/\+/g, ' '))
+
+    /**
+     * Indicate if an option should be disabled in the form.
+     *
+     * @param {*} option
+     * @param {*} value
+     * @returns Boolean || undefined
+     */
+    disableOption(option, value) {
+      for (const variant of this.product.variants) {
+        if (variant.title === value && variant.available === false) {
+          return true
+        }
+      }
     },
-    getIndex (index) {
-      console.log(index)
-      this.index = index
-    },
-    setProductPurchaseType (val) {
-      if (!val) return
-      this.productPurchaseType = val
-    },
-    discountCalculatedValue (total) {
+
+    /**
+     * Discount the passed in total using the active discount.
+     *
+     * @param {*} total
+     * @returns Number
+     */
+    discountCalculatedValue(total) {
       var discountType = this.activeDiscountType
       var discountAmount = this.activeDiscountAmount
         .replace('%', '')
@@ -494,211 +525,214 @@ export default {
 
       var calcDiscountAmount = 0
 
+      // Fixed amount
       if (discountType === '$') {
-      // fixed
         calcDiscountAmount = discountAmount
+      // Percentage
       } else if (discountType === '%') {
-      // percentage
         calcDiscountAmount = (total * discountAmount) / 100
       }
+
       return total - calcDiscountAmount
     },
-    // replace pricing values, for compare and regular pricing
-    setPricingDisplayEls (original, compare) {
-      let regularEl
-      let saleEl
-      let strikethroughPrice
-      if (this.upscribeRegularPriceQuerySelector === true) {
-        regularEl = document.querySelector(
-          this.upscribeRegularPriceQuerySelector
+
+    /**
+     * Finds the variant that matches all options passed in.
+     *
+     * @param {Array} options
+     * @returns Variant || undefined
+     */
+    findVariantWithOptions(options) {
+      return this.product.variants.find(variant => {
+        return variant.options.every(
+          (value, valueIndex) => value === options[valueIndex]
         )
-      } else {
-        regularEl = document.querySelector('.upscribe-price-item-regular')
+      })
+    },
+
+    /**
+     * Get the price for the option value.
+     *
+     * @param {*} optionIndex
+     * @param {*} value
+     * @returns String
+     */
+    getPriceForOptionValue(optionIndex, value) {
+      const options = []
+
+      // In case user hasn't actually selected anything, default to the first
+      // value of each option
+      for (const [option, value] of Object.entries(this.selectedOptions)) {
+        options.push(value || this.product.options_by_name[option].option.values[0])
       }
 
-      if (this.upscribeSalePriceQuerySelector) {
-        saleEl = document.querySelector(
-          this.upscribeSalePriceQuerySelector
-        )
-      } else {
-        saleEl = document.querySelector('.upscribe-price-item-sale')
-        strikethroughPrice = document.querySelector('.strikethrough-price')
-      }
+      options[optionIndex] = value
 
-      if (!regularEl && !saleEl) {
+      const matchedVariant = this.findVariantWithOptions(options)
+      const price = matchedVariant
+        ? matchedVariant.price
+        : this.product.variants[0].price
+
+      return formatPrice(price)
+    },
+
+    /**
+     * Handle form add to cart.
+     *
+     * @returns void || undefined
+     */
+    async handleAddToCart() {
+      if (!this.selectedVariantId) {
         return
       }
 
-      if (compare) {
-        if (regularEl) regularEl.innerHTML = compare
-        if (saleEl) {
-          saleEl.innerHTML = original
-          strikethroughPrice.innerHTML = original
-        }
-      } else {
-        if (regularEl) regularEl.innerHTML = original
-        if (saleEl) {
-          saleEl.innerHTML = ''
-          strikethroughPrice.innerHTML = ''
-        }
-      }
-    },
-    // on event triggered from variant change in select boxes
-    handleVariantUpdateEvent (event) {
-      var variant = event.detail
-      var originalPrice = variant.price || false
-      var originalComparePrice = variant.compare_at_price || false
-
-      // console.log({ variant })
-
-      this.activeVariantId = variant.id
-
-      // calculate and set new values
-      this.calculateVariantPrices(originalPrice, originalComparePrice)
-
-      // update original price if available
-      this.calculateOriginalVariantPrices(variant)
-
-      // store values if subscription isn't currently selected
-      this.activeSubsriptionDisplayPrice = originalPrice
-      this.activeSubsriptionDisplayComparePrice = originalPrice
-    // this.activeSubsriptionDisplayComparePrice = originalComparePrice
-    // this.activeSubsriptionDisplayComparePrice = originalComparePrice
-    },
-    getFinalCurrencyRate (amount) {
-      return parseInt(amount)
-    },
-    calculateOriginalVariantPrices (variant) {
-      var price = variant.price
-      var originalNoDiscountPriceEl = document.querySelector(
-        '.upscribe-price-item-original'
-      )
-
-      if (originalNoDiscountPriceEl) {
-        originalNoDiscountPriceEl.innerHTML = price
-      }
-    },
-    calculateVariantPrices (originalPrice, originalComparePrice) {
-      var displayDiscountPrice = false
-      var displayDiscountComparePrice = false
-
-      if (originalPrice) {
-      // var originalPriceEl = document.querySelector('.upscribe-price-item-regular')
-        var discountPrice =
-          originalPrice - this.discountCalculatedValue(originalPrice)
-
-        // set for passing in cart property to checkout - not formatted
-        this.subscriptionAmount = this.getFinalCurrencyRate(
-          originalPrice - discountPrice
-        )
-
-        displayDiscountPrice = this.formatMoney(originalPrice - discountPrice)
+      const params = {
+        id: this.selectedVariantId,
+        properties: {},
+        quantity: 1,
       }
 
-      if (originalComparePrice) {
-        var discountComparePrice =
-          originalComparePrice -
-          this.discountCalculatedValue(originalComparePrice)
+      // const discountAmount = this.sellingPlanDiscountPercent
+      //   ? this.sellingPlanDiscountPercentString
+      //   : this.activeDiscountAmount
 
-        displayDiscountComparePrice = this.formatMoney(
-          originalComparePrice - discountComparePrice
-        )
-      }
-
-      // replace price elements if subscription selected
       if (this.subscriptionSelected) {
-        this.setPricingDisplayEls(
-          displayDiscountPrice,
-          displayDiscountComparePrice
-        )
-      } else {
-      // if onetime selected, store to use if selected next
-        this.activeSubsriptionDisplayPrice = displayDiscountPrice
-        this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
-      }
-    },
-    // shopify format money
-    formatMoney (cents, format) {
-      if (typeof cents === 'string') {
-        cents = cents.replace('.', '')
-      }
-      var value = ''
-      var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/
-      var formatString = format || this.moneyFormat
+        // Add selling plan
+        params.sellingPlan = parseInt(this.sellingPlanId)
 
-      function formatWithDelimiters (number, precision, thousands, decimal) {
-        thousands = thousands || ','
-        decimal = decimal || '.'
+        // const subscriptionProperties = {
+        //   'Discount Amount': discountAmount,
+        //   'Interval Frequency': this.intervalFrequency,
+        //   'Interval Unit': this.intervalUnit,
+        //   Subscription: this.finalSubscriptionProperty,
+        //   'Subscription Amount': this.subscriptionAmount,
+        //   'Subscription Product Title': this.subscriptionProductTitleDisplay,
+        // }
 
-        if (isNaN(number) || number === null) {
-          return 0
+        // // Add subscription properties to line item properties
+        // params.properties = Object.assign(
+        //   {}, params.properties, subscriptionProperties
+        // )
+      }
+
+      debug('handleAddToCart', params)
+
+      await store.dispatch('cart/addToCart', params)
+
+      this.$nextTick(() => {
+        this.resetSelectedOptions()
+
+        if (this.addedToCartSuccessfully) {
+          // Display pop-out cart
+          store.dispatch('cart/setIsPopOutCartActive', true)
+        } else {
+          this.$emit('added-to-cart-error')
         }
-
-        number = (number / 100.0).toFixed(precision)
-
-        var parts = number.split('.')
-        var dollarsAmount = parts[0].replace(
-          /(\d)(?=(\d\d\d)+(?!\d))/g,
-          '$1' + thousands
-        )
-        var centsAmount = parts[1] ? decimal + parts[1] : ''
-
-        return dollarsAmount + centsAmount
-      }
-      switch (formatString.match(placeholderRegex)) {
-        case 'amount':
-          value = formatWithDelimiters(cents, 2)
-          break
-        case 'amount_no_decimals':
-          value = formatWithDelimiters(cents, 0)
-          break
-        case 'amount_with_comma_separator':
-          value = formatWithDelimiters(cents, 2, '.', ',')
-          break
-        case 'amount_no_decimals_with_comma_separator':
-          value = formatWithDelimiters(cents, 0, '.', ',')
-          break
-        case 'amount_no_decimals_with_space_separator':
-          value = formatWithDelimiters(cents, 0, ' ')
-          break
-        case 'amount_with_apostrophe_separator':
-          value = formatWithDelimiters(cents, 2, "'")
-          break
-      }
-      // console.log(value)
-
-      return formatString.replace(placeholderRegex, value)
+      })
     },
-    initialSelectedOptions: () => {
+
+    /**
+     * Handle variant selection from the form.
+     *
+     * @param {*} event
+     */
+    handleVariantSelect(event) {
+      const variantId = parseInt(event.target.value)
+      const variant = this.product.variants.find(v => v.id === variantId)
+
+      // Update selectedOptions
+      this.selectedOptions = this.product.options.reduce(
+        (result, option, index) => Object.assign({}, result, {
+          [option]: variant.options[index]
+        }),
+        {}
+      )
+    },
+
+    /**
+     * Initial options selected in the form.
+     */
+    initialSelectedOptions() {
       this.product.options.reduce((result, option) => {
         // Initially, none of the option has any selected value
         result[option] = null
         return result
       })
     },
-    toggleOption (option, value) {
+
+    /**
+     * Create DOM ID for option inputs.
+     *
+     * @param {*} option
+     * @param {*} value
+     * @returns String
+     */
+    optionInputId(option, value) {
+      return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(value)}`
+    },
+
+    /**
+     * Reset the selected options for the form.
+     */
+    resetSelectedOptions() {
+      // If there is a selling plan, we need to reset the button to "one-time"
+      if (this.sellingPlanId) {
+        this.$_toggleSubscriptionButton()
+      }
+
+      this.selectedOptions = {
+        ...this.initialSelectedOptions,
+      }
+    },
+
+    /**
+     * Handle the click event for product options.
+     *
+     * @param {*} option
+     * @param {*} value
+     */
+    toggleOption(option, value) {
       const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
+
       if (cloneSelectedOptions[option] && cloneSelectedOptions[option] === value) {
         cloneSelectedOptions[option] = null
       } else {
         cloneSelectedOptions[option] = value
       }
+
       this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
-    disableOption (option, value) {
-      for (const variant of this.product.variants) {
-        if (variant.title === value && variant.available === false) {
-          return true
-        }
-      }
-    },
+
+    /**
+     * Toggle the size chart active data value.
+     */
     toggleSizeChart () {
       this.sizeChartActive = !this.sizeChartActive
-    }
+    },
   },
-  destroyed () {
-    window.removeEventListener('upscribeVariantUpdate', this.handleVariantUpdateEvent)
-    window.removeEventListener('upscribeProductPurchaseTypeUpdate', this.setProductPurchaseType)
-    window.removeEventListener('upscribeFrequencyIndexUpdate', this.setFrequency)
+  watch: {
+    /**
+     * Watch `selectedVariantId` for updates.
+     *
+     * @param {*} newValue
+     */
+    selectedVariantId(newValue) {
+      debug('selectedVariantId', newValue)
+
+      this.$_handleVariantUpdate()
+      this.$emit('update-variant-id', newValue)
+      store.dispatch('pdp/setSelectedVariantId', { id: newValue })
+    },
+  },
+}
+
+/**
+ * Simple debug function to conditionally display debug information.
+ */
+function debug() {
+  if (DEBUG) {
+    console.debug('[product-form] ', ...arguments)
   }
 }
+
+/* eslint-enable comma-dangle,space-before-function-paren */

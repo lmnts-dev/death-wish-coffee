@@ -5,7 +5,7 @@
  */
 
 const shogunProducts = el => {
-  console.warn("shogun products module initialized");
+  console.warn('shogun products module initialized')
 }
 
 export default shogunProducts

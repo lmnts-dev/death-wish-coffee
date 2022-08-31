@@ -41,5 +41,14 @@
   ],
   "emmet.syntaxProfiles": {
     "postcss": "css"
-  }
+  },
+  "cSpell.words": [
+    "Frequncy",
+    "Metafield",
+    "Ordergroove",
+    "ORDERGROOVE",
+    "Subsription",
+    "vals",
+    "vuex"
+  ]
 }

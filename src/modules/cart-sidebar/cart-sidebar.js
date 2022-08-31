@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import store from 'lib/store'
-// import VImage from '../v-image/v-image.vue'
-// import CartItemControl from '../cart-item-control/cart-item-control.vue'
 
 /**
  * Initializes the javascript for the pop-out-cart module
@@ -19,7 +17,7 @@ const cartsidebar = (el) => {
       cartHasSubscriptionItem () {
         if (this.items.length > 0) {
           return this.items.some(item => {
-            return item.properties instanceof Object ? Object.keys(item.properties).includes('Subscription') : false
+            return !!item.selling_plan_allocation
           })
         }
         return false
@@ -27,7 +25,7 @@ const cartsidebar = (el) => {
     },
     methods: {
       checkout () {
-        window.upscribeBuildCheckout()
+        window.location.href = '/checkout'
       }
     }
   })

@@ -1,3 +1,5 @@
+// TODO: remove this file, it isn't used now that the upscribe options have been removed
+// from commit: https://github.com/lmnts-dev/death-wish-coffee/commit/763fb243c3c44f91d9847e0e86dbfd40d42123b4
 export default {
   template: `
       <div class="cu-option__option"
@@ -40,11 +42,6 @@ export default {
     // emit selected val
     clickOption () {
       this.$emit('click-option', this.index)
-
-      // Upscribe Frequency Update
-      window.dispatchEvent(new CustomEvent('upscribeFrequencyIndexUpdate', {
-        detail: this.index
-      }))
     }
   }
 }

@@ -23,11 +23,8 @@
   {{ content_for_header }}
 
   {%- render 'fonts' -%}
-  {%- if settings.is_dev_mode -%}
-    {{- '/dev/main.js' | prepend: settings.dev_url | script_tag -}}
-  {%- else -%}
-    {{- 'main.min.css' | asset_url | stylesheet_tag -}}
-  {%- endif -%}
+  {%- render 'dev-mode-head' -%}
+
   <!-- Yotpo JavaScript -->
   <script type="text/javascript">
     (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/P17jnGh66lNzZJ0a3V4ntP4FXIPAZUGGWTnRuyfO/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
@@ -56,12 +53,7 @@
     {%- render 'footer' -%}
   {%- endunless -%}
   {%- endcomment -%}
-
-  {% render 'upscribe-cart-logic' %}
-
-  {%- unless settings.is_dev_mode -%}
-    {{- 'main.js' | asset_url | script_tag -}}
-  {%- endunless -%}
+  {%- render 'dev-mode-body' -%}
   {% include 'findify-tagging' %}
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "extends": ["stylelint-config-standard"],
   "plugins": ["stylelint-use-nesting"],
-  "ignoreFiles": ["./src/css/lib/*.css", "src/assets/upscribe*"],
+  "ignoreFiles": ["./src/css/lib/*.css"],
   "rules": {
     "max-empty-lines": 1,
     "rule-empty-line-before": [
@@ -30,6 +30,12 @@
       }
     ],
     "csstools/use-nesting": "always",
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignore": ["custom-elements"]
+      }
+    ]
   }
 }

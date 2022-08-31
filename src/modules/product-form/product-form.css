@@ -418,28 +418,6 @@
 }
 
 .product-form__subscribe {
-  &.cu-upscribe {
-    position: relative;
-    margin-top: 46px;
-    padding: 42px 0 0;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      max-width: 216px;
-      height: 1px;
-      background: var(--white);
-
-      @media (--lg) {
-        width: calc((100% - 4px) / 3 * 2);
-        max-width: none;
-      }
-    }
-  }
-
   .cu-productTypeSelect__itemWrap {
     display: block;
     margin-top: 10px;

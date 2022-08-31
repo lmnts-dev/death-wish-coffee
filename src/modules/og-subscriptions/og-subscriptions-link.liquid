@@ -1,0 +1,48 @@
+
+{% comment %}
+NOTE: this is a customized version of the Ordergroove snippets.
+{% endcomment %}
+
+{% comment %}
+Flag to indicate if this page should use the embedded smi or the smi link.
+
+The embedded smi is an alternative view for the account page that adds the
+correct layout and code to embed the subscription information within the
+site template.
+
+The smi link is a URL generated to a page provided by Ordergroove that lists
+the customer's subscriptions.
+{% endcomment %}
+
+{% assign use_smi_embed = true %}
+
+{% if customer %}
+  {% assign secret_key = "d9fe3a87a71c8e70e41775205aab741307dab756" %}
+  {% assign merchant_hash_key = "e-2#OipohePyrgAPXDtXQhPR+~{H1eZY" %}
+  {% assign customer_id = customer.id  %}
+  {% assign timestamp = "now" | date: "%s" %}
+  {% assign customer_signature = customer_id | append: "|" | append: timestamp | hmac_sha256: secret_key %}
+  {% assign raw_signature = customer_id | append: "|" | append: timestamp %}
+  {% assign signature = raw_signature | hmac_sha256: merchant_hash_key | base64_encode %}
+
+  {% if use_smi_embed %}
+    {% assign subscriptions_url = routes.account_url | append: "?view=subscriptions" %}
+  {% else %}
+    {% assign subscriptions_url = "/apps/subscriptions/manage/?customer=" | append: customer.id | append: "&customer_signature=" | append: customer_signature | append: "&customer_timestamp=" | append: timestamp %}
+  {% endif %}
+
+  <div
+    data-module="og-subscriptions"
+    data-module-name="og-subscriptions"
+    data-og-customer-id="{{customer_id}}"
+    data-og-timestamp="{{timestamp}}"
+    data-og-signature="{{signature}}"
+  >
+    <a
+      class="account-sidebar-menu__item-link"
+      href="{{subscriptions_url}}"
+    >
+      Subscriptions
+    </a>
+  </div>
+{% endif %}

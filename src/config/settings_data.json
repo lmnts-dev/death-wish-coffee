@@ -14,6 +14,7 @@
       "favicon_enable": true,
       "footer_newsletter_enable": true,
       "footer_social_enable": true,
+      "is_dev_mode": true,
       "logo_use_image": true,
       "social_facebook_link": "https://www.facebook.com/",
       "social_twitter_link": "https://twitter.com/",

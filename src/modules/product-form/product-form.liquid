@@ -9,39 +9,11 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}product-form product-form--type-{{ form_type }}{% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
-<!-- Upscribe -->
-  {% comment %}
-  Snippet variables that can be passed
-  upscribe_exclude_vue_cdn_in_snippet = Whether or not to load the vue.js script from CDN
-  (excluded if loaded globally, defaults to true)
-  {% endcomment %}
-{% comment %} Reset snippet variables{% endcomment %}
-{% assign upscribe_include_vue_cdn_in_snippet = true %}
-  {% comment %} Used in case there are multiple Upscribe blocks loaded per page {% endcomment %}
-{%- comment -%}
-  {% assign upscribe_component_uid = false %}
-{%- endcomment -%}
-{% assign upscribe_component_uid = product.id %}
-{% assign upscribe_keep_component_in_sync = false %}
-{% assign upscribe_regular_price_query_selector = false %}
-{% assign upscribe_sale_price_query_selector = false %}
-{%- comment -%}
-{% unless upscribe_component_uid %}
-  {% assign upscribe_component_uid = product.id %}
-{% endunless %}
-{%- endcomment -%}
-{% if upscribe_include_vue_cdn_in_snippet != false %}
-  {% assign upscribe_include_vue_cdn_in_snippet = true %}
-{% endif %}
-{% if upscribe_keep_component_in_sync != false %}
-  {% assign upscribe_keep_component_in_sync = true %}
-{% endif %}
-
 {% assign queryParamVariant = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&' | split:'?variant=' | last-%}
 
 {%- capture content -%}
   <div class="product-form__form-wrapper">
-    <div 
+    <div
       class="product-form__options"
       :class="{'product-form__options--single': hasSingleVariant}"
     >
@@ -59,7 +31,7 @@
               <template v-if="option === 'Size'">
                 {%- assign src = acf_size_chart.sizing_chart_image | map: 'src' -%}
                 {%- assign src_mobile = acf_size_chart.sizing_chart_image_mobile | map: 'src' -%}
-                
+
                 <div class="product-form__size-chart" v-cloak v-show="sizeChartActive">
                   {%- render 'image', src: src, class: 'product-form__size-chart-image-desktop image--contain image--relative' -%}
                   {%- assign src_mobile = src_mobile | default: src -%}
@@ -93,7 +65,7 @@
               <svg v-if="disableOption(option, value)" class="product-form__diagonal-line">
                 <line x1='0' y1='100%' x2='100%' y2='0' />
                 <line x1='0' y1='0' x2='100%' y2='100%' />
-             </svg>
+              </svg>
                 <div class="option-icon" v-if="optionIcons[value]" v-html="optionIcons[value]"></div>
                 <!-- {% render 'variant-icons', type: svg_unselected, class: 'product-form__option-value-icon' %} -->
                 <div class="product-form__option-value-text">
@@ -111,7 +83,7 @@
           </div>
         {%- else -%}
           <div class="product-form__select">
-            <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelecting">
+            <select name="variant" class="product-form__select-dropdown" @change="handleVariantSelect">
               <option v-if="option === 'Size'" value selected>Select Size</option>
               <option v-if="option !== 'Size'" value selected>Select Field</option>
               <template v-for="variant in product.variants">
@@ -126,97 +98,12 @@
       <div v-if="!addedToCartSuccessfully && addedToCartErrorMessage" class="b1 product-form__message">${addedToCartErrorMessage}</div>
     {%- endunless -%}
 
-    {%- comment -%}
-    TODO:
-    Need to re-add @submit.prevent="handleAddToCart" to form tag once we can properly pass line item props through to cart.js
-    {%- endcomment -%}
-    <form method="post" action="/cart/add" class="product-form__form" @submit.prevent="handleAddToCart">
-
-      <template v-if="isEnableUpscribe">
-      
-        {%- comment -%}
-        {%- render 'upscribe-product-options' upscribe_component_uid: upscribe_component_uid-%}
-        {%- endcomment -%}
-        {% assign upscribe_component_uid = upscribe_component_uid | default: blank %}
-
-        <section class="product-form__subscribe cu-upscribe" data-module="upscribe-product-options">
-          <div class="cu-upscribe__inner" id="upscribe-subscription-product-{{upscribe_component_uid}}"
-            v-if="product && componentMounted" :class="{'cu-upscribe__inner--hidden': !activeVariantIsApplicableVariant}"
-          >
-            <div class="cu-subscription-inputs" v-if="subscriptionSelected || isOnetimeSubscription">
-              
-              <input v-if="finalSubscriptionProperty" type="hidden" :value="finalSubscriptionProperty"
-                name="properties[Subscription]">
-
-              <input v-if="subscriptionProductTitleDisplay" type="hidden" :value="subscriptionProductTitleDisplay"
-                name="properties[Subscription Product Title]">
-
-              <input v-if="subscriptionAmount" type="hidden" :value="subscriptionAmount" name="properties[Subscription Amount]">
-
-              <input v-if="activeDiscountAmount" type="hidden" :value="activeDiscountAmount" name="properties[Discount Amount]">
-
-              <input v-if="chargeLimit" type="hidden" :value="chargeLimit" name="properties[Charge Limit]">
-
-              <input v-if="recurringDiscountAmount" type="hidden" :value="recurringDiscountAmount"
-                name="properties[Recurring Discount Amount]">
-
-              <input v-if="recurringDiscountAfterOrder" type="hidden" :value="recurringDiscountAfterOrder"
-                name="properties[Recurring Discount After Order]">
-
-              <input v-if="intervalFrequency" type="hidden" :value="intervalFrequency" name="properties[Interval Frequency]">
-
-              <input v-if="intervalUnit" type="hidden" :value="intervalUnit" name="properties[Interval Unit]">
-
-            </div>
-
-            <div class="cu-productTypeSelect js-upscribe-product-type" :data-upscribe-product-type="productPurchaseType">
-              <div class="cu-productTypeSelect__itemWrap">
-                <label class="cu-productTypeSelect__itemLabel" for="onetime-{{upscribe_component_uid}}">
-                  <input class="cu-productTypeSelect__itemInput" type="radio" id="onetime-{{upscribe_component_uid}}" value="onetime" v-model="productPurchaseType">
-                  <span class="p1 p1--bold cu-productTypeSelect__itemText">${ oneTimeMessage || 'One-time Order' }</span>
-                  <span class="cu-productTypeSelect__itemMark"></span>
-                </label>
-              </div>
-
-              <div class="cu-productTypeSelect__itemWrap">
-                <label class="cu-productTypeSelect__itemLabel" for="subscription-{{upscribe_component_uid}}">
-                  <input class="cu-productTypeSelect__itemInput" type="radio" id="subscription-{{upscribe_component_uid}}" value="subscription"
-                    v-model="productPurchaseType">
-                  <span class="p1 p1--bold cu-productTypeSelect__itemText">${ subscriptionMessage || 'Subscribe & Save' } ${
-                    activeDiscountAmount }</span>
-                  <span class="cu-productTypeSelect__itemMark"></span>
-                </label>
-              </div>
-            </div>
-
-            <div v-if="selectFrequencyOptions && subscriptionSelected" class="cu-options cu-options--frequency">
-              <span class="cu-optionsTitle">Frequency (${ intervalUnit }s)</span>
-
-              <div class="cu-optionsGrid">
-                <div v-for="(option, index) in selectFrequencyOptions" 
-                    :key="option.frequency" 
-                    :class="{'is-active': selectedFrequencyIndex === index}" 
-                    @click="clickOption(index, option)"
-                    class="cu-option" 
-                    >
-                  <div class="cu-option__option" 
-                    v-if="option" 
-                  >
-                    {%- render 'svg', type: 'truck-lightning', class: 'cu-option__option-icon' -%}
-                    <div class="cu-option__option-text">
-                      <p class="cu-option__mainText" v-if="option.mainText">${ option.mainText } ${ intervalUnit }s</p>
-                      <p class="cu-option__price">$${formattedSubscriptionAmount}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-      </template>
+    <form method="post" action="/cart/add" class="product-form__form today" @submit.prevent="handleAddToCart">
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
+
+      {%- render 'og_offer' product: product.selected_or_first_available_variant location: 'pdp' -%}
+
       {%- render 'button',
         button_value: '${addToCartButtonText}',
         tag: 'button',
@@ -224,6 +111,7 @@
         class: button_class
       -%}
     </form>
+
   </div>
 {%- endcapture -%}
 {%- if is_vue_component -%}
@@ -237,15 +125,10 @@
     {%- render 'product-json', product: product -%}
   {%- endcapture -%}
 
-
   <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
     <div is="product-form"
-         :product="{{- product_json | escape -}}"
-         :shop='{{shop.metafields.sf_upscribe | json}}' 
-         :upscribe-sale-price-query-selector="{{upscribe_sale_price_query_selector}}"
-         :upscribe-regular-price-query-selector="{{upscribe_regular_price_query_selector}}"
-         :upscribe-keep-component-in-sync="{{upscribe_keep_component_in_sync}}"
-         inline-template
+      :product="{{- product_json | escape -}}"
+      inline-template
     >
       {{ content }}
     </div>

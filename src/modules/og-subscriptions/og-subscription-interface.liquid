@@ -1,0 +1,13 @@
+<section class="og-subscription-interface">
+  {% if customer %}
+  {% comment %} #og-msi element is attached via the `msi.js` script loaded in the module. {% endcomment %}
+    <div id="og-msi" ng-jq=""></div>
+  {% else %}
+    <h1>You're not logged in</h1>
+    {% assign subscriptionsLoginUrl = routes.account_url | append: "?view=subscriptions" %}
+    {%- render 'button',
+    button_url: subscriptionsLoginUrl,
+    button_value: 'LOG IN',
+    -%}
+  {% endif %}
+</section>

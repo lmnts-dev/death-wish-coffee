@@ -23,17 +23,13 @@
   {{ content_for_header }}
 
   {%- render 'fonts' -%}
-  {%- if settings.is_dev_mode -%}
-    {{- '/dev/main.js' | prepend: settings.dev_url | script_tag -}}
-  {%- else -%}
-    {{- 'main.min.css' | asset_url | stylesheet_tag -}}
-  {%- endif -%}
+  {%- render 'dev-mode-head' -%}
 
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
   {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
-  
+
   <div id="account-parent">
     <main id="page" class="relative z0 bg--shadow" role="main" >
       <div class="account-wrapper container">
@@ -44,11 +40,11 @@
 
           {%- for tag in customer.tags -%}
               {%- if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'-%}
-                  {% assign is_upscribe_customer = true %}
+                  {% assign is_subscription_customer = true %}
               {%- endif -%}
           {%- endfor -%}
 
-            {%- render 'account-sidebar-menu' is_upscribe_customer: is_upscribe_customer -%}
+            {%- render 'account-sidebar-menu' is_subscription_customer: is_subscription_customer -%}
             {%- render 'customer-info' -%}
           </div>
           <div class="account-wrapper__right shopify-account-portal-wrapper">
@@ -56,21 +52,11 @@
           </div>
         </div>
     </main>
-    <div style="display: none;">
-      {% render 'upscribe-cart-logic' %}
-    </div>
 
-    {%- unless settings.is_dev_mode -%}
-      {{- 'main.js' | asset_url | script_tag -}}
-    {%- endunless -%}
+    {%- render 'dev-mode-body' -%}
   </div>
-
-<div id="upscribe-portal-wrapper" style="display: none;">
-  {%- render 'upscribe-wrapper' -%}
-</div>
 
 {%- render 'footer' -%}
 
 </body>
 </html>
-

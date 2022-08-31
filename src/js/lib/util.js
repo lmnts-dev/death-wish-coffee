@@ -91,6 +91,83 @@ export const formatPrice = (num, fraction = 2) => {
   })
 }
 
+/**
+ * Shopify format money.
+ *
+ * @param {Number | String} cents
+ * @param {String} format
+ * @returns String
+ */
+export const formatMoney = (cents, format) => {
+  if (typeof cents === 'string') {
+    cents = cents.replace('.', '')
+  }
+
+  var value = ''
+  // Regex to match a liquid-type token in a string, i.e. {{amount}}
+  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/
+
+  // Find matched "group" in the format string, i.e. {{amount}} -> amount
+  const match = format.match(placeholderRegex)[1]
+
+  switch (match) {
+    case 'amount':
+      value = formatWithDelimiters(cents, 2)
+      break
+
+    case 'amount_no_decimals':
+      value = formatWithDelimiters(cents, 0)
+      break
+
+    case 'amount_with_comma_separator':
+      value = formatWithDelimiters(cents, 2, '.', ',')
+      break
+
+    case 'amount_no_decimals_with_comma_separator':
+      value = formatWithDelimiters(cents, 0, '.', ',')
+      break
+
+    case 'amount_no_decimals_with_space_separator':
+      value = formatWithDelimiters(cents, 0, ' ')
+      break
+
+    case 'amount_with_apostrophe_separator':
+      value = formatWithDelimiters(cents, 2, "'")
+      break
+  }
+
+  return format.replace(placeholderRegex, value)
+}
+
+/**
+ * Format a number with delimiters.
+ *
+ * @param {*} number
+ * @param {*} precision
+ * @param {*} thousands
+ * @param {*} decimal
+ * @returns
+ */
+export const formatWithDelimiters = (number, precision, thousands, decimal) => {
+  thousands = thousands || ','
+  decimal = decimal || '.'
+
+  if (isNaN(number) || number === null) {
+    return 0
+  }
+
+  number = (number / 100.0).toFixed(precision)
+
+  var parts = number.split('.')
+  var dollarsAmount = parts[0].replace(
+    /(\d)(?=(\d\d\d)+(?!\d))/g,
+    '$1' + thousands
+  )
+  var centsAmount = parts[1] ? decimal + parts[1] : ''
+
+  return dollarsAmount + centsAmount
+}
+
 export const getUrlParam = name => {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]') // eslint-disable-line
   const regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
@@ -404,4 +481,14 @@ export const triggerCustomEvent = (el, eventName, options) => {
     event.initCustomEvent(eventName, true, true, options)
   }
   el.dispatchEvent(event)
+}
+
+/**
+ * Sanitize string.
+ *
+ * @param {String} name
+ * @returns String
+ */
+export const sanitize = (name) => {
+  return name.replace(/[^\w-]+/g, '')
 }
