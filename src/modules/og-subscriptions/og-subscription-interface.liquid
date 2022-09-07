@@ -2,6 +2,19 @@
   {% if customer %}
   {% comment %} #og-msi element is attached via the `msi.js` script loaded in the module. {% endcomment %}
     <div id="og-msi" ng-jq=""></div>
+
+    <div id="og-send-update-email" class="grid__item">
+      <h3>Update your credit card for all subscriptions</h3>
+      <p>
+        We'll send you an email to update your credit card, and it'll
+        update all your subscriptions to that new card.
+      </p>
+      <form id="update-payment-form">
+        <div class="row">
+          <button id="send-update-payment-email-button" class="button button--small-w button--small-h" type="submit">Send Email</button>
+        </div>
+      </form>
+    </div>
   {% else %}
     <h1>You're not logged in</h1>
     {% assign subscriptionsLoginUrl = routes.account_url | append: "?view=subscriptions" %}
