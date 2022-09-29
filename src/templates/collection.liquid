@@ -1,8 +1,10 @@
 {%- layout 'theme' -%}
 {% assign acf = collection.metafields.accentuate %}
-{% assign list_products = acf.collection_hero_carou_product | default: blank %}
 
 {%- render 'breadcrumbs' -%}
+
+{% comment %}
+{% assign list_products = acf.collection_hero_carou_product | default: blank %}
 
 {%- if acf.collection_hero_carou_product == blank -%}
   {%- assign count = 1 -%}
@@ -75,6 +77,9 @@
     navigation: navigation_carousel
   -%}
 {%- endif -%}
+
+{% endcomment %}
+{%- render 'section-title', class: 'bg--black', title: collection.title -%}
 
 {%- render 'plp', class: 'bg--black', collection_name: collection.title -%}
 {%- if shop.metafields.globals.footer_cta_title != blank -%}

@@ -2,6 +2,8 @@
 {%- assign blog_titles = page.metafields.accentuate.title -%}
 {% assign scoop_articles = page.metafields.accentuate.articles %}
 {%- assign view_all_urls = page.metafields.accentuate.blog_listings_url-%}
+
+{% comment %}
 {% assign scoop_featured_articles = page.metafields.accentuate.scoop_featured_articles %}
 {%- assign featured_article_count = 0 -%}
 
@@ -57,7 +59,9 @@
   loop: featured_loop
 -%}
 
-{%- render 'footer-cta', title: shop.metafields.globals.footer_cta_title, enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
+{% endcomment %}
+
+{%- render 'section-title', class: 'bg--black', title: page.title -%}
 
 {% for blog_articles in scoop_articles %}
   {%- assign a = blog_articles | split: '|' -%}
@@ -96,3 +100,5 @@
 
   {%- render 'posts-carousel', class: carousel_class, spacing_class: 'spacing--bottom-md-secondary', title: blog_titles[forloop.index0], total_slides: posts_count, carousel_slides: post_cards, view_all_url: view_all_url, carousel_class: 'carousel--scoop-page bg--black' -%}
 {% endfor %}
+
+{%- render 'footer-cta', title: shop.metafields.globals.footer_cta_title, enable_subscribe_form: true, class: 'footer-cta--scoop-desktop' %}
