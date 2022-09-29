@@ -24,8 +24,6 @@
             {%- capture product_attrs -%}
               :product="product"
               :key="product.id"
-              :class="[checkIfProductFeatured(product) ? getFeaturedProductClass(productIndex) : '']"
-              :is-featured="checkIfProductFeatured(product)"
               :show-review="collectionName !== 'Merch'"
               :show-quick-shop="collectionName !== 'Merch'"
             {%- endcapture -%}
