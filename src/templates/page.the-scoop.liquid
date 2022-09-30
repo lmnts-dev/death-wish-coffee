@@ -61,8 +61,6 @@
 
 {% endcomment %}
 
-{%- render 'section-title', class: 'bg--black', title: page.title -%}
-
 {% for blog_articles in scoop_articles %}
   {%- assign a = blog_articles | split: '|' -%}
   {%- assign posts_count = 0 -%}
