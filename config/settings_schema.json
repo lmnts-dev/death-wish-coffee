@@ -1,0 +1,233 @@
+[{
+  "name": "Contact Info",
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone Number",
+      "default": "+1-401-555-1212"
+    }
+  ]
+}
+,{
+  "name": "Development",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_dev_mode",
+      "label": "Access site through BrowserSync?",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "dev_url",
+      "label": "Full URL (host and port)for local dev server",
+      "default": "https://localhost:3000"
+    }
+  ]
+}
+,{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Footer Menu"
+    },
+    {
+      "type": "text",
+      "id": "footer_menu_title_1",
+      "label": "Footer Menu Title #1"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_1",
+      "label": "Footer Menu #1"
+    },
+    {
+      "type": "text",
+      "id": "footer_menu_title_2",
+      "label": "Footer Menu Title #2"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_2",
+      "label": "Footer Menu #2"
+    },
+    {
+      "type": "header",
+      "content": "Right Footer Menu"
+    },
+    {
+      "type": "text",
+      "id": "footer_menu_title_3",
+      "label": "Footer Menu Title #3"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_3",
+      "label": "Footer Menu #3"
+    },
+    {
+      "type": "header",
+      "content": "Footer Social"
+    },
+    {
+      "type": "text",
+      "id": "footer_social_title",
+      "label": "Footer Social Title"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_social_menu",
+      "label": "Footer Social Menu"
+    }
+  ]
+}
+,{
+  "name": "theme_info",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Shopify Base Theme"
+    },
+    {
+      "type": "paragraph",
+      "content": "v0.0.1"
+    },
+    {
+      "type": "paragraph",
+      "content": "Check out [the repo](https://gitlab.com/ruckusco/shopify-base-theme) for more information."
+    }
+  ]
+}
+,{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_left",
+      "label": "Left Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_right",
+      "label": "Right Menu"
+    }
+  ]
+}
+,{
+  "name": "Logo",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+,{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "newsletter_prompt",
+      "label": "Newsletter prompt",
+      "default": "Sign up for our newsletter to be the first to know about new products, exclusive releases and promotions."
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_success",
+      "label": "Success Message",
+      "info": "If Mailchimp is enabled, this message will be ignored in favor of the response message from the Mailchimp servers.",
+      "default": "Thank you for signing up!"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_error",
+      "label": "Error Message",
+      "default": "Whoops, something went wrong. If this issue persists, please <a href=\"/pages/contact\">contact us.</a>"
+    },
+    {
+      "type": "checkbox",
+      "id": "mailchimp_enabled",
+      "label": "Enable Mailchimp"
+    },
+    {
+      "type": "text",
+      "id": "mailchimp_url",
+      "label": "Mailchimp form action URL",
+      "info": "For more info on where to find this, check out [this post](https://help.shopify.com/themes/customization/communication/get-a-mailchimp-form-action-url)."
+    }
+  ]
+}
+
+,{
+  "name": "PLP Filter",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tags"
+    },
+    {
+      "type": "paragraph",
+      "content": "The tags should have the following format: \"key:value\", such as \"Size:1lb\" or \"Grind:Ground\". Then the \"key\" part (prefix, i.e. \"Size\", \"Grind\", etc,...) is used to collect all the filterable tags in frontend."
+    },
+    {
+      "type": "text",
+      "id": "plp_filter_tags",
+      "label": "Tag Prefix",
+      "info": "Tag prefixes are separated by the ',' (comma) character",
+      "default": "Size,Grind"
+    }
+  ]
+}
+,{
+  "name": "Promo Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "promobar_enabled",
+      "label": "Enable"
+    },
+    {
+      "type": "textarea",
+      "id": "promobar_content",
+      "label": "Text Content",
+      "info": "Can contain HTML"
+    }
+  ]
+}
+,{
+  "name": "Socials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "socials_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "text",
+      "id": "socials_twitter",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "text",
+      "id": "socials_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "socials_youtube",
+      "label": "YouTube URL"
+    }
+  ]
+}
+]
