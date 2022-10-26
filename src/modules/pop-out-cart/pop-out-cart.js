@@ -39,7 +39,7 @@ const popOutCart = (el) => {
       totalCartPrice () {
         const price = this.items.reduce((a, b) => {
           const itemPrice = b.properties instanceof Object && typeof b.properties['Subscription Amount'] !== 'undefined' ? parseInt(b.properties['Subscription Amount']) : b.price
-          return a + itemPrice
+          return a + itemPrice * b.quantity
         }, 0)
         return price / 100
       }
