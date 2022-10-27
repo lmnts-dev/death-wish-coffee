@@ -31,7 +31,7 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
 {%- if product.metafields.spr.reviews -%}
-  {%- capture temp_reviews -%}product.metafields.spr.reviews{%- endcapture -%}
+  {%- capture temp_reviews -%}{{ product.metafields.spr.reviews }}{%- endcapture -%}
 
   {%- assign temp_reviews_count = temp_reviews | split: '<meta itemprop="reviewCount" content="' | last -%}
   {%- assign reviews_count = temp_reviews_count | split: '"' | first -%}
