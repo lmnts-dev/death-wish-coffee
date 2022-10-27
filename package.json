@@ -21,7 +21,9 @@
     "replace:staging": "shopify-themekit replace --force --env staging --verbose --config ./config.yml --no-ignore --dir /app/dist",
     "test-css": "stylelint 'src/css/base/*.css' && stylelint 'src/modules/**/*.css'",
     "test-js": "eslint $PWD/'src/modules/**/*.js'",
-    "test": "npm run test-js && npm run test-css"
+    "test": "npm run test-js && npm run test-css",
+    "gulp": "gulp --cwd /app/src",
+    "gulp:watch": "gulp --cwd /app/src watch"
   },
   "repository": {
     "type": "git",
@@ -50,7 +52,9 @@
     "eslint-plugin-standard": "^4.0.1",
     "file-loader": "^1.1.11",
     "globby": "^5.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.3",
+    "gulp-rename": "^2.0.0",
     "postcss": "^7.0.27",
     "postcss-automath": "^1.0.1",
     "postcss-cli": "^7.1.0",
