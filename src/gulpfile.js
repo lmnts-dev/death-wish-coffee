@@ -8,7 +8,7 @@ const rename = require(`gulp-rename`);
  * Asset paths.
  */
 const srcModulesLiquid = `modules/**/*.liquid`;
-const destSnippets = `../tmp/snippets`;
+const destSnippets = `../snippets`;
 
 /**
  * Modules liquid snippets task
