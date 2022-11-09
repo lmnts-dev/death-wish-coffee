@@ -10,7 +10,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, 'dist/assets'),
+    path: path.join(__dirname, 'assets'),
     filename: 'main.js',
     chunkFilename: `[name]-[id].js?version=${Date.now()}`
   },
