@@ -23,7 +23,7 @@ export default {
     formattedCurrentTags () {
       return (
         this.currentTags.length &&
-        this.currentTags.map((tag) => `'${tag}'`).join(', ')
+        this.currentTags.map((tag) => `"${tag}"`).join(', ')
       )
     },
     isFiltered () {
