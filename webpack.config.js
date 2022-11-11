@@ -1,19 +1,23 @@
+const entry = require('webpack-glob-entry')
 const path = require('path')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+
+const minimizeOutput = true
+const moduleCssFiles = entry('./modules/**/*.css')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     main: [
-      './src/css/main.css',
-      './src/js/main'
-    ]
+      './css/main.css',
+      ...Object.values(moduleCssFiles),
+      './js/main',
+    ],
   },
-  output: {
-    path: path.join(__dirname, 'assets'),
-    filename: 'main.js',
-    chunkFilename: `[name]-[id].js?version=${Date.now()}`
-  },
+  mode: 'production',
   module: {
     rules: [
       {
@@ -45,28 +49,61 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        extract: true,
         use: [
-          'style-loader',
+          // Extract css during build
+          MiniCssExtractPlugin.loader,
+          // Use instead of MiniCssExtract to load styles into DOM
+          // 'style-loader',
           'css-loader?importLoaders=1',
-          'postcss-loader'
-        ]
-      }
-    ]
+          'postcss-loader',
+        ],
+      },
+    ],
   },
+  output: {
+    path: path.join(__dirname, 'assets'),
+    filename: 'main.js',
+    chunkFilename: `[name]-[id].js?version=${Date.now()}`,
+    publicPath: '',
+  },
+  optimization: {
+    minimize: minimizeOutput,
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: {
+      cacheGroups: {
+        // Combine all CSS into a single file
+        styles: {
+          // CSS file name
+          name: 'main',
+          //  For webpack@5
+          // type: 'css/mini-extract',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
+
   resolve: {
     alias: {
       lib: path.resolve(__dirname, 'src/js/lib'),
       modules: path.resolve(__dirname, 'src/modules'),
       mixins: path.resolve(__dirname, 'src/js/mixins'),
       root: path.resolve(__dirname, 'src'),
-      vue: process.env.ENV === 'production' ? 'vue/dist/vue.min.js' : 'vue/dist/vue.js'
-    }
+      vue: 'vue/dist/vue.min.js',
+    },
   },
   plugins: [
     new StylelintPlugin({
       emitError: true,
-      files: './src/**/*.css'
-    })
-  ]
+      files: './**/*.css',
+    }),
+    new MiniCssExtractPlugin({
+      filename: `[name].min.css.liquid`,
+    }),
+  ],
 }
