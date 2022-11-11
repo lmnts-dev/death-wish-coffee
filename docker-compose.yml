@@ -2,7 +2,7 @@ version: "3.5"
 
 x-shared-config:
   app_image_name: &app_image_name
-    image: mutations/node:12.16.1-alpine3.11-2020-03-04
+    image: mutations/node:16.17.0-alpine3.16-2022-09-14
 
   app_base: &app_base
     <<: *app_image_name
@@ -24,8 +24,9 @@ x-shared-config:
 services:
   app:
     <<: *app_base
-    command: local-dev
-    entrypoint: yarn
+    # FIXME: update command after dev environment
+    # command: local-dev
+    entrypoint: npm
     ports:
       - 3000:3000
       - 3001:3001

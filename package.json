@@ -7,7 +7,6 @@
     "start": "brrl -w",
     "build": "brrl -b -e production",
     "build-dev": "brrl -b -e development",
-    "dependencies": "brrl-install",
     "development": "brrl -d -e development",
     "local-dev": "brrl -w -e development",
     "staging": "brrl -d -e staging",
@@ -38,7 +37,6 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "@barrelny/cli": "latest",
     "autoprefixer": "^7.2.6",
     "babel-loader": "^8.1.0",
     "core-js": "^3.6.4",
