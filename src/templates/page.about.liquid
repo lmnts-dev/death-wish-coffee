@@ -32,6 +32,8 @@
   -%}
 {% endfor %}
 
+{% comment %}
+///////////////// Removing these blocks due to DW request on 11/17/22 - Commence Team /////////////////////
 {% assign full_width_image = page.metafields.full_width_hero.hero_image | map: 'src' %}
 {%- render 'full-width-photo-hero',
   image: full_width_image,
@@ -52,6 +54,7 @@
   item_descriptions: member_positions,
   item_images: member_images,
   item_blurbs: member_blurbs -%}
+
 
 {%- render 'bolt-header', title: page.metafields.about.career_perks_headline_headline -%}
 
@@ -99,7 +102,8 @@
 
 {%  if mirror_image_hero != blank %}
   {%- render 'grid', class: 'grid--mirror-image-hero', children: mirror_image_hero, no_gutter: true -%}
-{% endif %}
+{%  endif  %}
+{% endcomment %}
 
 {%- render 'section-cta',
   title: page.metafields.about-us-section-cta.header,

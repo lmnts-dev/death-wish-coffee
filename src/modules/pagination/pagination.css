@@ -4,11 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
-  margin-bottom: 7rem;
+  padding-top: 4rem;
+  padding-bottom: 7rem;
 
   &--account {
-    margin: 10px 0;
+    padding: 10px 0;
   }
 }
 

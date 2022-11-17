@@ -66,10 +66,11 @@
 }
 
 div.step[data-step="payment_method"] .step__sections .section--reductions .section__title::after, .order-summary__section.order-summary__section--discount::after {
-  content: 'If your discount code brings your cart value below the free shipping threshold, you will have to return to "Shipping" to choose a new shipping rate or return to "Cart" to increase your cart total';
+  content: 'If your discount code brings your cart value below the free shipping threshold of $50, you will have to return to "Shipping" to choose a new shipping rate or return to "Cart" to increase your cart total';
   font-size: 14px;
   display: block;
   opacity: .8;
+  pointer-events: none;
 }
 
   </style>
