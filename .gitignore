@@ -173,3 +173,7 @@ storybook-static
 # Playwright generated files
 test-output/
 test-results/
+
+# Shopify files
+.cache
+.config/shopify/
