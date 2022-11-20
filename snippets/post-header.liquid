@@ -1,0 +1,11 @@
+{% assign class = class | default:false %}
+{% capture class %}post-header{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} bg--bone" data-module="post-header">
+  <div class="post-header__wrapper">
+    <div class="post-header__content">
+      <h1 class="h2 post-header__title">{{ article.title }}</h1>
+      <p class="b1 post-header__info">By {{ article.author }} — {{ article.updated_at | time_tag: format: 'month_day_year' }} / {{ blog.title }}</p>
+    </div>
+  </div>
+</section>

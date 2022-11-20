@@ -1,0 +1,47 @@
+{% assign class = class | default: false %}
+{% capture class %}super-hero-cta spacing--lg{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+{%- assign big_text = big_text | default: false -%}
+{%- assign description = description | default: false -%}
+{%- assign image = image | default: false -%}
+{%- assign video = video | default: false -%}
+{%- assign cta_text = cta_text | default: false -%}
+{%- assign cta_link = cta_link | default: false -%}
+
+<section class="{{ class }}" data-module="super-hero-cta">
+  <div class="shc__container container">
+    <div class="shc__wrapper">
+      {% if big_text %}
+        <p class="shc__big-text h1">{{- big_text -}}</p>
+      {% endif %}
+      <div class="shc__content">
+        {%- if video != blank -%}
+          <div class="shc__video">
+            {%- render 'video',
+              mod_src: video,
+              mod_loop: true,
+              mod_autoplay: true,
+              mod_class: 'video--super-hero-cta'
+            -%}
+          </div>
+        {%- else -%}
+          {% if image %}
+            <div class="shc__image">
+              {%- render 'image', src: image -%}
+            </div>
+          {% endif %}
+        {%- endif -%}
+        {% if description %}
+          <div class="shc__description h3 h3--no-transform">{{- description -}}</div>
+        {% endif %}
+        {% if cta_link and cta_text %}
+          {% capture cta_url %}{{cta_link}}{% endcapture %}
+          {%- render 'button', class: 'shc__button', button_value: cta_text, button_url: cta_url -%}
+        {% endif %}
+      </div>
+    </div>
+    <div class="shc__bolts-wrapper">
+      {% render 'svg', type: 'thunder-medium', class: 'shc__bolts' %}
+    </div>
+  </div>
+</section>

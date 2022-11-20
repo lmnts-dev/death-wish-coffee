@@ -1,0 +1,34 @@
+{%- assign class = class | default: blank -%}
+
+<div class="pagination{% if class != blank %} {{ class }}{% endif %}" data-module="pagination">
+  <div class="pagination__container{% if paginate == blank %} container{% endif %}">
+    {% if paginate.pages > 1 %}
+      <div class="pagination__pages">
+        {%- if paginate.previous -%}
+          <a href="{{- paginate.previous.url -}}" class="pagination__nav pagination__nav--prev">
+            {% render 'svg', type: 'polygon-left', class: 'pagination__svg' %}
+          </a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{- part.url -}}" class="pagination__page {% if part.title == paginate.current_page %} pagination__page--current{% endif %} p1">{{- forloop.index -}}</a>
+          {%- else -%}
+            <span class="pagination__page {% if part.title == paginate.current_page %} pagination__page--current{% endif %} p1">{{- part.title -}}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{- paginate.next.url -}}" class="pagination__nav pagination__nav--next">
+            {%- render 'svg', type: 'polygon-right', class: 'pagination__svg' -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {% else %}
+      {%- unless blog.previous_article == blank -%}
+        <a class="pagination__arrow pagination__arrow--prev p1" href="{{ blog.previous_article }}">< Read Previous Post</a>
+      {%- endunless -%}
+      {%- unless blog.next_article == blank -%}
+        <a class="pagination__arrow pagination__arrow--next p1" href="{{ blog.next_article }}">Read Next Post ></a>
+      {%- endunless -%}
+    {% endif %}
+  </div>
+</div>

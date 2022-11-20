@@ -1,0 +1,82 @@
+{%- assign is_vue_component = is_vue_component | default: false -%}
+{%- assign custom_attrs = custom_attrs | default: '' -%}
+{% assign class = class | default: false %}
+{% assign title = title | default: false %}
+{% assign link = link | default: false %}
+{% assign price = price | default: false %}
+{% assign quick_shop_form = quick_shop_form | default: false %}
+{% capture class %}product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+{%- capture content -%}
+    <div 
+      class="product-card__inner" 
+      :class="{ 'product-card__inner--active': showProductForm }"
+      @mouseenter="handleHover"
+      @mouseleave="handleHover"
+    >
+      <div class="product-card__header">
+        <a :href="product.url" v-if="product.video" class="product-card__video-container" :class="{'product-card__video-container--showing' : isHovered && product.video}">
+          {%- render 'video', mod_class: 'product-card__video', mod_loop: true, mod_is_vue: true, mod_vue_attrs: 'ref="videoComp" :src="product.video" :loop="false" @video-ended="handleVideoEnded"' -%}
+        </a>
+        <div class="product-card__image-container">
+          <a :href="product.url" class="product-card__image-link">
+            {%- render 'image', class: 'no-hover', vue_attrs: ':image-src="product.featured_image"' -%}
+          </a>
+        </div>
+        <template v-if="showQuickShop">
+          {%- if quick_shop_form -%}
+          <div
+            class="product-card__form"
+          >
+            {{- quick_shop_form -}}
+          </div>
+        {%- endif -%}
+        <div class="product-card__toggle-button" @click="showProductForm = !showProductForm">
+          <template v-if="!showProductForm">
+            {%- render 'svg', type: 'quick-shop', class: 'product-card__quick-shop' %}
+          </template>
+          <template v-else>
+            {%- render 'svg', type: 'close', class: 'product-card__close' -%}
+          </template>
+        </div>
+        </template>
+        
+      </div>
+      <div class="product-card__content">
+        <h4 class="product-card__title">
+          <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
+        </h4>
+        <div v-if="showReview" class="b1 product-card__review">
+          <a :href="product.url + '#review-drawer'" class="product-card__review-link">
+            <div class="yotpo bottomLine" :data-product-id="product.id"></div>
+          </a>
+        </div>
+        <p class="h5 product-card__price">
+          <span v-if="comparePrice" class="product-card__compare">$${ formatPrice(comparePrice) }</span>
+          <span class="product-card__original">$${formatPrice(price)}</span>
+        </p>
+        <p v-if="shouldShowMessage && addedToCartErrorMessage" class="b1 product-card__message">${addedToCartErrorMessage}</p>
+      </div>
+    </div>
+{%- endcapture -%}
+
+{%- if is_vue_component -%}
+  <div class="{{- class -}}" is="product-card" inline-template {{ custom_attrs }}>
+    <div v-if="product" class="{{- class -}}">
+      {{ content }}
+    </div>
+  </div>
+{%- elsif product -%}
+  {%- capture product_json -%}
+    {% render 'product-json', product: product %}
+  {%- endcapture -%}
+
+  <div class="{{- class -}}" data-module="product-card" {{ custom_attrs }}>
+    <div is="product-card"
+         :product="{{- product_json | escape }}"
+         inline-template
+    >
+      {{ content }}
+    </div>
+  </div>
+{%- endif -%}

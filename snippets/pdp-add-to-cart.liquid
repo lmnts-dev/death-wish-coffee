@@ -1,0 +1,49 @@
+{% assign form_type = 'button' %}
+{% assign class = class | default: false %}
+{% assign vue_attrs = vue_attrs | default: false %}
+{% assign product_upc = product_upc | default: false %}
+{% assign palette = palette | default: false %}
+{% capture class %}pdp-add-to-cart{% if class %} {{- class -}}{% endif %}{% if palette %} pdp-add-to-cart--palette-{{ palette }}{% endif %}{% endcapture %}
+{%- if template.suffix == 'merch' -%}
+  {% assign form_type = 'dropdown' %}
+{%- endif -%}
+
+<div is="pdp-add-to-cart" inline-template {{ vue_attrs }}>
+  <section class="{{ class }} bg--black" data-module="pdp-add-to-cart">
+    <div class="container pdp-add-to-cart__container">
+      <div class="pdp-add-to-cart__wrapper">
+        <div class="pdp-add-to-cart__header">
+          <h1 class="pdp-add-to-cart__title h2">${productTitle}</h1>
+          <p class="pdp-add-to-cart__price h5">${formattedProductPrice}
+            {% if product_upc != false %}
+            or <a href="/pages/store-locator?MM=panel2&PROD={{product_upc}}" class='h5'>FIND IN STORE</a>
+            {% endif %}
+          </p>
+          <div
+            class="pdp-add-to-card__review{% if palette %} review--palette-{{ palette }}{% endif %}"
+            @click="reviewScroll"
+          >
+            <p class="pdp-add-to-cart__review-content">
+              <span class="yotpo bottomLine" style="display: inline-block;" :data-product-id="productId"></span>
+            </p>
+          </div>
+        </div>
+        <div class="pdp-add-to-cart__description wysiwyg wysiwyg--pdp-add-to-cart" v-html="productDescription"></div>
+        {%- capture form_attrs -%}
+          :product="product"
+          :is-active-subscription="true"
+          :subscription-checked="subscriptionChecked"
+        {%- endcapture -%}
+        {%- render 'product-form', is_vue_component: true, class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, custom_attrs: form_attrs -%}
+
+        <template v-if="productExtraDescriptions.length">
+          <div class="pdp-add-to-cart__extra-contents">
+            <template v-for="description in productExtraDescriptions">
+              <div class="pdp-add-to-cart__extra-content wysiwyg wysiwyg--pdp-add-to-cart wysiwyg--pdp-extra-contents" v-html="description"></div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+</div>

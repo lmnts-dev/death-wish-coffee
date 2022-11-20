@@ -1,0 +1,20 @@
+{% assign address = address | default: false %}
+{% assign class = class | default: '' | prepend: 'address-list ' %}
+{% if address %}
+  <div class="{{ class }}" data-module="address-list">
+    <div class="address-list__content">
+      <p class="b1 address-card__text">{{ address.address1 }}{% if address.address2 %}, {{ address.address2 }}{% endif %}</p>
+      <p class="b1 address-card__text">
+        {{ address.city }}{%- if address.province_code or address.zip -%}, {{ address.province_code }} {{ address.zip }}
+        {%- endif -%}
+      </p>
+      <div class="address-list__buttons">
+        <a href="#" class="b3 address-list__button js-edit-button" data-id="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</a>
+        <form class="address-list__remove-form" method="post" action="/account/addresses/{{ address.id }}" data-confirm-message="{{ customer.addresses.delete_confirm | t }}">
+          <input name="_method" type="hidden" value="delete"/>
+          <button class="b3 address-list__button address-list__button--delete" type="submit">{{ 'customer.addresses.delete' | t }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,35 @@
+{%- assign bolt_image = bolt_image | default: false -%}
+{%- assign image = image | default: false -%}
+{%- assign palette = palette | default: false -%}
+{%- assign title = title | default: '' -%}
+{%- assign reverse_content = reverse_content | default: false -%}
+{%- assign description = description | default: '' -%}
+{%- capture class -%}bolt-illustration-hero bg--black{% if reverse_content %} bolt-illustration-hero--reverse{% endif %}{% if palette %} bolt-illustration-hero--palette-{{ palette }}{% endif %}{%- endcapture -%}
+{%- capture bolt -%}{%- if reverse_content -%}bolt-reverse{%- else -%}bolt{%- endif -%}{%- endcapture -%}
+
+<div class="{{- class -}}">
+  <div class="bolt-illustration-hero__container">
+    <div class="bolt-illustration-hero__inner">
+      {%- if image -%}
+        <div class="bolt-illustration-hero__image-block js-image-block">
+          <div class="bolt-illustration-hero__image-wrapper">
+            {%- render 'image', class: 'image--contain bolt-illustration-hero__image', src: image -%}
+          </div>
+          {%- if bolt_image -%}
+            <div class="bolt-illustration-hero__bolt js-bolt">
+              {%- render 'svg', type: bolt, class: 'bolt-illustration-hero__bolt-image' -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="bolt-illustration-hero__content">
+        {%- if title -%}
+          <h2 class="bolt-illustration-hero__title">{{ title }}</h2>
+        {%- endif -%}
+        {%- if description -%}
+          <p class="bolt-illustration-hero__description p1">{{ description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

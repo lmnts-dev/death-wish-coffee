@@ -16,8 +16,9 @@ process.env.NODE_ENV = 'production'
 const srcCss = `./**/*.css`;
 const srcJs = `./**/*.js`;
 const srcMainJs = `./js/main.js`;
-const srcModulesLiquid = `./modules/**/*.liquid`;
-const destSnippets = `../snippets/tmp`;
+const srcModulesSnippets = `./modules/**/*.liquid`;
+const srcSnippets = `./snippets/**/*.liquid`;
+const destSnippets = `../snippets/`;
 const destAssets = `../assets`;
 
 /**
@@ -33,7 +34,17 @@ gulp.task(`build`, () => {
  * Modules liquid snippets task
  */
 gulp.task(`copy-modules-snippets`, () => {
-  return gulp.src(srcModulesLiquid)
+  return gulp.src(srcModulesSnippets)
+        .pipe(rename({ dirname: '' }))
+        .pipe(changed(destSnippets)) // ignore unchanged files
+        .pipe(gulp.dest(destSnippets))
+});
+
+/**
+ * Snippets task
+ */
+gulp.task(`copy-snippets`, () => {
+  return gulp.src(srcSnippets)
         .pipe(rename({ dirname: '' }))
         .pipe(changed(destSnippets)) // ignore unchanged files
         .pipe(gulp.dest(destSnippets))
@@ -43,11 +54,12 @@ gulp.task(`copy-modules-snippets`, () => {
  * Watch task
  */
 gulp.task(`watch`, () => {
-    gulp.watch(srcModulesLiquid, gulp.series(`copy-modules-snippets`));
+    gulp.watch(srcModulesSnippets, gulp.series(`copy-modules-snippets`));
+    gulp.watch(srcSnippets, gulp.series(`copy-snippets`));
     gulp.watch([srcCss, srcJs], gulp.series(`build`));
 });
 
 /**
  * Default task
  */
-gulp.task(`default`, gulp.parallel(`build`, `copy-modules-snippets`));
+gulp.task(`default`, gulp.parallel(`build`, `copy-modules-snippets`, `copy-snippets`));

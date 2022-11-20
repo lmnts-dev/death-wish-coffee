@@ -1,0 +1,32 @@
+{% assign size = size | default: blank %}
+{% assign src = src | default: blank %}
+{% assign srcset_exclude_small = srcset_exclude_small | default: false %}
+{% assign alt = alt | default: '' %}
+{% assign vue_attrs = vue_attrs | default: blank %}
+{% assign is_zoom = is_zoom | default: false %}
+{% assign animation = animation | default: 'anim--fade' %}
+
+{% capture img_class %}image{% if class %} {{- class -}}{% endif %} {{- animation -}}{% endcapture %}
+
+{% assign container_tag = 'picture' %}
+{% if is_zoom %}
+  {% assign container_tag = 'div' %}
+{% endif %}
+
+{% if src != blank %}
+  {% if size != blank %}
+    {% capture src %}{{- src | img_url: size -}}{% endcapture %}
+  {% endif %}
+  <{{ container_tag }} class="{{img_class}}" data-module="image">
+      <img src="" data-src="{{- src -}}"{% if srcset_exclude_small %} data-srcset-exclude-small{% endif %} alt="{{- alt -}}" class="image__img{% if size != blank %} sized-img{% endif %}" />
+  </{{ container_tag }}>
+{% elsif vue_attrs != blank %}
+  <div is="v-image" inline-template {{ vue_attrs }}>
+    <picture class="{{img_class}}">
+      <template v-if="srcsets.length">
+        <source v-for="srcset in srcsets" :media="srcset.media" :srcset="srcset.url">
+      </template>
+      <img :src="src" :alt="alt" class="image__img vue-img" />
+    </picture>
+  </div>
+{% endif %}

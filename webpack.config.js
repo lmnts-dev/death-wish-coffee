@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
-const minimizeOutput = true
+const minimizeOutput = false
 const moduleCssFiles = entry('./modules/**/*.css')
 
 module.exports = {
@@ -103,7 +103,8 @@ module.exports = {
       files: './**/*.css',
     }),
     new MiniCssExtractPlugin({
-      filename: `[name].min.css.liquid`,
+      // filename: `[name].min.css.liquid`,
+      filename: `[name].min.css`,
     }),
   ],
 }

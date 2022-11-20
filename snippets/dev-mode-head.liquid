@@ -1,6 +1,1 @@
-{%- if settings.is_dev_mode -%}
-  {{- '/dev/main.js' | prepend: settings.dev_url | script_tag -}}
-  {% comment %} {{- '/dev/main.css' | prepend: settings.dev_url | stylesheet_tag -}} {% endcomment %}
-{%- else -%}
-  {{- 'main.min.css' | asset_url | stylesheet_tag -}}
-{%- endif -%}
+{{- 'main.min.css' | asset_url | stylesheet_tag -}}
