@@ -1,0 +1,7 @@
+{% if content_for_header contains 'shopifyorderlimits.s3.amazonaws.com' %}
+{% if shop.permanent_domain == 'deathwishcoffee.myshopify.com' %}
+<script src="https://shopifyorderlimits.s3.amazonaws.com/limits/deathwishcoffee.myshopify.com?v=93a&r=20221114152259&shop=deathwishcoffee.myshopify.com"></script>
+{% endif %}
+{% else %}
+<script type="text/javascript">console.error("MinMaxify is deactivated for this website. Please don't forget to remove minmaxify-head.liquid still being referenced by theme.liquid")</script>
+{% endif %}

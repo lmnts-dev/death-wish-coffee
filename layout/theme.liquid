@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html{% unless template contains 'password' or template contains 'access-denied' or cart.attributes.age_gate == '1' %} class="js-age-gate"{% endunless %} data-scroll="0">
 <head>
+{% include 'easylockdown_head' %}
+
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
@@ -33,7 +36,7 @@
 
   {%- render 'social-meta' -%}
   {% render 'structured-data' %}
-
+  
   {{ content_for_header }}
 
   {%- render 'fonts' -%}
@@ -44,6 +47,7 @@
     (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/P17jnGh66lNzZJ0a3V4ntP4FXIPAZUGGWTnRuyfO/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
   </script>
   <!-- End of Yotpo JavaScript -->
+  
   <script>
     window.addEventListener('load', function () {
       var script = document.createElement('script');
@@ -60,8 +64,9 @@
 
   {% render 'shogun-head' %}
   {%- render 'ordergroove_static_asset' -%}
-  <script src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
+<script src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
   <meta name="google-site-verification" content="rKwOILyVz1RZxv7Ptn93cEcDmAFWbsoHgsD67KpV5Ck" />
+{% render 'minmaxify-head' %}
 </head>
 <body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
   <!-- Google Tag Manager (noscript) -->
@@ -73,7 +78,7 @@
 
   <main id="page" class="relative z0" role="main">
     {%- render 'ordergroove_global' -%}
-    {{ content_for_layout }}
+    {% comment %}{{ content_for_layout }}{% endcomment %}{% include 'easylockdown_body' %}
   </main>
   {%- render 'footer' -%}
 

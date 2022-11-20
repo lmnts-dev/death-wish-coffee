@@ -8,7 +8,7 @@
 {%- assign images_mobile = shop_all_acf.shop_all_card_image_mobile -%}
 
 {%- if titles.size > 0 -%}
-  {%- for title in titles -%}
+  {%- for title in titles -%}{% include 'easylockdown_filter_collections' with title %}{% include 'easylockdown_filter_collection' with title %}
     {%- assign image = images[forloop.index0] | map: 'src' -%}
     {%- assign image_mobile = images_mobile[forloop.index0] | map: 'src' -%}
     {%- assign link = links[forloop.index0] | prepend: 'collections/' -%}

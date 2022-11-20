@@ -2,7 +2,7 @@
   "general": {
     "404": {
       "title": "404 Page Not Found",
-      "subtext_html": "The page you requested does not exist. Click <a href=\"/collections/all\">here</a> to continue shopping."
+      "subtext_html": "The page you requested does not exist. Click <a href=\"\/collections\/all\">here<\/a> to continue shopping."
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
@@ -92,14 +92,13 @@
       "shipping_at_checkout": "Shipping & taxes calculated at checkout",
       "update": "Update",
       "checkout": "Check out",
-      "empty": "Your cart is empty.",
-      "continue_browsing_html": "Continue browsing <a href=\"/collections/all\">here</a>.",
+      "empty": "There aren't any items in your cart.",
+      "continue_browsing_html": "Continue browsing <a href=\"\/collections\/all\">here<\/a>.",
       "close_cart": "Close Cart",
       "savings": "Discount",
       "keep_shopping": "Keep Shopping",
       "line_price": "Line Price:",
       "free_shipping": "Free domestic shipping on orders over $50",
-      "empty": "There aren't any items in your cart.",
       "shop_all": "Shop All",
       "close": "Close"
     },
@@ -215,7 +214,7 @@
       "city": "City",
       "country": "Country",
       "province": "Province",
-      "zip": "Postal/Zip Code",
+      "zip": "Postal\/Zip Code",
       "phone": "Phone",
       "set_default": "Set as default address",
       "add": "Add Address",
@@ -308,10 +307,10 @@
     },
     "onboarding": {
       "modal_title": "Almost there...",
-      "no_products_html": "You have no products in your Frontpage collection. This placeholder will appear until you <a href=\"/admin/collections?tutorial=Frontpage\">add a product to this collection</a>.",
+      "no_products_html": "You have no products in your Frontpage collection. This placeholder will appear until you <a href=\"\/admin\/collections?tutorial=Frontpage\">add a product to this collection<\/a>.",
       "add_product": "Add a Product",
       "product_title": "Example Product Title",
-      "no_collections_html": "You don't have any collections to show here. <a href=\"/admin/custom_collections\">Add some collections</a> to go along with the default Frontpage.",
+      "no_collections_html": "You don't have any collections to show here. <a href=\"\/admin\/custom_collections\">Add some collections<\/a> to go along with the default Frontpage.",
       "add_collection": "Add a Collection",
       "collection_title": "Example Collection Title"
     }
@@ -354,7 +353,7 @@
     "product": {
       "sold_out": "Sold Out",
       "on_sale": "On Sale",
-      "on_sale_from_html": "<strong>On Sale</strong> from {{ price }}",
+      "on_sale_from_html": "<strong>On Sale<\/strong> from {{ price }}",
       "unavailable": "Unavailable",
       "compare_at": "Compare at",
       "quantity": "Quantity",
@@ -381,6 +380,13 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y",
-    "month_day_year_minus": "%m/%d/%y"
+    "month_day_year_minus": "%m\/%d\/%y"
+  },
+  "shopify": {
+    "checkout": {
+      "contact": {
+        "phone_tooltip": "Send me updates about my order! Message and data rates apply. View our Terms of Service [https:\/\/help.deathwishcoffee.com\/article\/wxjs13rj9x-terms-conditions] and Privacy Policy [https:\/\/help.deathwishcoffee.com\/article\/r2xbvz3cx1-what-is-your-privacy-policy]"
+      }
+    }
   }
 }

@@ -80,7 +80,6 @@
 
 {% endcomment %}
 
-
 {%- render 'plp', class: 'bg--black', collection_name: collection.title -%}
 {%- if shop.metafields.globals.footer_cta_title != blank -%}
   {%- render 'footer-cta',
@@ -92,7 +91,7 @@
 {%- paginate collection.products by 50 -%}
   {%- capture product_json -%}
     [
-    {%- for product in collection.products -%}
+    {%- for product in collection.products -%}{% include 'easylockdown_filter_collection' with product %}
       ,{%- render 'product-json', product: product -%}
     {%- endfor -%}
     ]

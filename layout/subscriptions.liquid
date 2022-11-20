@@ -3,7 +3,9 @@
 
   <head>
     {{content_for_header}}
-  </head>
+  
+  {% render 'shogun-head' %}
+</head>
 
   <body id="{{- page_title | handle -}}"
     class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}">

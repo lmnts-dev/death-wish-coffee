@@ -33,7 +33,7 @@
                   <div class="b2 order-details__price">Price</div>
                 </div>
               </div>
-              
+
               {% for line_item in order.line_items %}
                 <div class="order-details__item">
                   <a href="{{ line_item.product.url }}" class="b1 order-details__product">{{ line_item.product.title }}</a>
@@ -81,7 +81,7 @@
         </div>
         <div class="order-details__info">
           <div class="order-details__info-left">
-            
+
             <div class="order-details__shipping">
               <div class="b2 order-details__shipping-label">Shipped To:</div>
               <div class="order-details__shipping-content">
@@ -118,8 +118,8 @@
               tag: 'a',
               button_url: order.order_status_url,
               custom_attrs: custom_attrs,
-              button_value: 'Tracking', 
-              class: 'order-details__btn button--small-h button--small-w button--dark' 
+              button_value: 'Tracking',
+              class: 'order-details__btn button--small-h button--small-w button--dark'
             -%}
             {% assign reorder_url = "" %}
             {% assign all_items_available = true %}
