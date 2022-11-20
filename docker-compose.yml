@@ -54,7 +54,7 @@ services:
     <<: *shopify_image_name
     depends_on:
       - caddy
-    command: theme serve
+    command: theme serve --host 0.0.0.0
     entrypoint: shopify
     ports:
       - 3456:3456
