@@ -30,16 +30,6 @@
 {%- elsif template contains 'product' -%}
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
-{%- if product.metafields.spr.reviews -%}
-  {%- capture temp_reviews -%}{{ product.metafields.spr.reviews }}{%- endcapture -%}
-
-  {%- assign temp_reviews_count = temp_reviews | split: '<meta itemprop="reviewCount" content="' | last -%}
-  {%- assign reviews_count = temp_reviews_count | split: '"' | first -%}
-
-  {%- assign temp_rating_value = temp_reviews | split: '<meta itemprop="ratingValue" content="' | last -%}
-  {%- assign rating_value = temp_rating_value | split: '"' | first -%}
-{%- endif -%}
-
 <script type="application/ld+json">
   {
     "@context": "http://schema.org/",
@@ -58,8 +48,8 @@
     },
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "{{- rating_value | default: 0 -}}",
-      "reviewCount": "{{- reviews_count | default: 0 -}}"
+      "ratingValue": "{{- product.metafields.yotpo.reviews_average -}}",
+      "reviewCount": "{{- product.metafields.yotpo.reviews_count -}}"
     },
     "offers": {
       "@type": "Offer",
