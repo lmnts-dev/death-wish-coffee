@@ -10,6 +10,7 @@
 {%- assign home_hero_cta_text = shop.metafields.accentuate.hero_cta_text -%}
 {%- assign home_hero_cta_link = shop.metafields.accentuate.hero_cta_link -%}
 {%- assign sub_hero_products = shop.metafields.sub_hero_carousel -%}
+{%- assign home_hero_mobile_stacking_reversed = shop.metafields.stack_content_below_media_on_mobile -%}
 
 {%- capture after_content -%}
   <a class="hero_cta button" href="{{ home_hero_cta_link }}">{{ home_hero_cta_text }}</a>
@@ -19,6 +20,10 @@
 
 {% if home_hero_position %}
   {% assign hero_class = hero_class | append: ' hero--content-' | append: home_hero_position %}
+{% endif %}
+
+{% if home_hero_mobile_stacking_reversed %}
+  {% assign hero_class = hero_class | append: ' hero--mobile-reversed' %}
 {% endif %}
 
 {%- render 'hero',
