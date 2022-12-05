@@ -9,8 +9,6 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}product-form product-form--type-{{ form_type }}{% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
-{% assign queryParamVariant = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&' | split:'?variant=' | last-%}
-
 {%- capture content -%}
   <div class="product-form__form-wrapper">
     <div
@@ -87,7 +85,8 @@
               <option v-if="option === 'Size'" value selected>Select Size</option>
               <option v-if="option !== 'Size'" value selected>Select Field</option>
               <template v-for="variant in product.variants">
-                <option :key="variant.id" :disabled="!variant.available" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}<span v-if="!variant.available">(Sold Out)</span></option>
+                <option v-if="variant.id === product.selected_variant_id" selected :key="variant.id" :disabled="!variant.available" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}<span v-if="!variant.available">(Sold Out)</span></option>
+                <option v-if="variant.id !== product.selected_variant_id" :key="variant.id" :disabled="!variant.available" :value="variant.id" data-title="variant.title" data-variant="variant">${variant.title}<span v-if="!variant.available">(Sold Out)</span></option>
               </template>
             </select>
           </div>
