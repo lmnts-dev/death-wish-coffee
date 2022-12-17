@@ -40,26 +40,39 @@
       {%- endif -%}
     {% endfor %}
   {%- endpaginate -%}
+
+  {%- if list_products == blank or count <= 8 -%}
+    {%- for collection in product.collections -%}
+      {%- for item in collection.products %}
+        {%- if item.id != product.id -%}
+          {%- if count <= 8 -%}
+            {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+          {%- endif -%}
+          {%- assign count = count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor  %}
+    {%- endfor -%}
+  {%- endif  -%}
 {%- endif -%}
 
 {%- if list_products != blank -%}
   {%- assign count_carousel = 0 -%}
   {%- capture content_slides -%}
-    {%- assign list_products = list_products | split: '|' -%}
+    {%- assign list_products = list_products | split: '|' | uniq -%}
     {% for handle in list_products %}
       {%- assign count_carousel = count_carousel | plus: 1 -%}
-      {%- assign product = all_products[handle] -%}
-      {% assign title = product.title %}
-      {% assign default_image_url = product.images[0] | img_url: 'master' %}
-      {% assign image_url = product.metafields.accentuate.featured_product_image_plp | map: 'src' | first %}
+      {%- assign product_card = all_products[handle] -%}
+      {% assign title = product_card.title %}
+      {% assign default_image_url = product_card.images[0] | img_url: 'master' %}
+      {% assign image_url = product_card.metafields.accentuate.featured_product_image_plp | map: 'src' | first %}
       {% if image_url == blank %}
         {% assign image_url = default_image_url %}
       {% endif %}
-      {% assign url = product.url %}
+      {% assign url = product_card.url %}
       {%- capture price %}
-        {{ product.price | money }}
+        {{ product_card.price | money }}
       {%- endcapture -%}
-      {%- assign description = product.description | strip_html | truncate: 500, '' -%}
+      {%- assign description = product_card.description | strip_html | truncate: 500, '' -%}
       {%- assign cta_text = 'Take me There' -%}
       {%- if title != blank -%}
         {%- render 'product-hero-card'
@@ -71,7 +84,7 @@
           description: description,
           sub_description: sub_description,
           cta_text: cta_text,
-          product_id: featured_product.id,
+          product_id: product_card.id,
           palette: palette
         -%}
       {%- endif -%}
