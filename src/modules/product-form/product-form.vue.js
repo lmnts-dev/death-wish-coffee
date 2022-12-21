@@ -553,22 +553,21 @@ export default {
     /**
      * Get the price for the option value.
      *
-     * @param {*} optionIndex
-     * @param {*} value
+     * Used for the option that is the `priceDecidingFactor` so we can
+     * make assumptions and only find matching variants on the single
+     * option/factor.
+     *
+     * @param {*} value - option value
+     * @param {*} optionIndex - index of the option in the variant
      * @returns String
      */
-    getPriceForOptionValue(optionIndex, value) {
-      const options = []
+    getPriceForOptionValue(value, optionIndex) {
+      // Find the variant that matches the passed in option value/index
+      const matchedVariant = this.product.variants.find(variant => {
+        return variant.options[optionIndex] === value
+      })
 
-      // In case user hasn't actually selected anything, default to the first
-      // value of each option
-      for (const [option, value] of Object.entries(this.selectedOptions)) {
-        options.push(value || this.product.options_by_name[option].option.values[0])
-      }
-
-      options[optionIndex] = value
-
-      const matchedVariant = this.findVariantWithOptions(options)
+      // Fallback: default to first variant if a match isn't found
       const price = matchedVariant
         ? matchedVariant.price
         : this.product.variants[0].price
