@@ -1,3 +1,5 @@
+/* main.css */
+
 /* Global Styles & Utilities */
 
 @import 'base/fonts.css';
@@ -24,11 +26,4 @@
 
 @import 'lib/swiper.css';
 
-/**
- * Get Module Styles
- *
- * Any css files within the modules directory are automatically imported.
- * No need to add them here.
- */
-
-@import '<Modules>';
+@import 'modules/modules.css';

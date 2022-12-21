@@ -6,14 +6,12 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
 const minimizeOutput = false
-const moduleCssFiles = entry('./modules/**/*.css')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     main: [
       './css/main.css',
-      ...Object.values(moduleCssFiles),
       './js/main',
     ],
   },
@@ -51,7 +49,12 @@ module.exports = {
         test: /\.s?css$/,
         use: [
           // Extract css during build
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
           // Use instead of MiniCssExtract to load styles into DOM
           // 'style-loader',
           'css-loader?importLoaders=1',
@@ -70,7 +73,16 @@ module.exports = {
     minimize: minimizeOutput,
     minimizer: [
       new TerserPlugin(),
-      new CssMinimizerPlugin(),
+      // TODO: review if this generates desired output
+      // new CssMinimizerPlugin({
+      //   minimizerOptions: {
+      //     preset: [
+      //       'cssnano-preset-default', {
+      //         normalizeWhitespace: false,
+      //       },
+      //     ],
+      //   }
+      // }),
     ],
     splitChunks: {
       cacheGroups: {
@@ -103,8 +115,8 @@ module.exports = {
       files: './**/*.css',
     }),
     new MiniCssExtractPlugin({
-      // filename: `[name].min.css.liquid`,
       filename: `[name].min.css`,
+      linkType: false,
     }),
   ],
 }
