@@ -26,13 +26,6 @@ if (process.env.ENV === 'development') {
   config.plugins.splice(1, 0,
     require('./postcss-tasks/postcss-shopify-fonts')('//cdn.shopify.com/s/files/1/2403/8187/t/77/assets/')
   )
-} else {
-  config.plugins.push(
-    require('cssnano')({
-      autoprefixer: false,
-      zindex: false
-    })
-  )
 }
 
 module.exports = config
