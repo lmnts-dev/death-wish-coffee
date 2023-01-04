@@ -4,16 +4,12 @@
   "description": "Shopify theme for Death Wish Coffee",
   "main": "webpack.config.js",
   "scripts": {
-    "fix-css": "stylelint --fix './css/**/*.css' && stylelint --fix './modules/**/*.css'",
-    "fix-js": "eslint --fix $PWD/'./modules/**/*.js'",
-    "fix-all": "eslint --fix $PWD/'./modules/**/*.js' && stylelint --fix './css/**/*.css' && stylelint --fix './modules/**/*.css'",
-    "replace:development": "shopify-themekit replace --force --env development --verbose --config ./config.yml --no-ignore --dir /app/dist",
-    "replace:staging": "shopify-themekit replace --force --env staging --verbose --config ./config.yml --no-ignore --dir /app/dist",
-    "test-css": "stylelint './css/**/*.css' && stylelint './modules/**/*.css'",
-    "test-js": "eslint $PWD/'./modules/**/*.js'",
-    "test": "npm run test-js && npm run test-css",
+    "gulp:watch": "gulp watch",
     "gulp": "gulp",
-    "gulp:watch": "gulp watch"
+    "lint:fix": "eslint --fix ./js/**/*.js ./modules/**/*.js",
+    "lint": "eslint ./js/**/*.js ./modules/**/*.js",
+    "stylelint:fix": "stylelint --fix ./css/**/*.css ./modules/**/*.css",
+    "stylelint": "stylelint ./css/**/*.css ./modules/**/*.css"
   },
   "repository": {
     "type": "git",
