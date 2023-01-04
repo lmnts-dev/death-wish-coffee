@@ -623,14 +623,14 @@ export default {
 
         if (this.addedToCartSuccessfully) {
           // Display pop-out cart
-          store.dispatch("cart/setIsPopOutCartActive", true);
+          store.dispatch('cart/setIsPopOutCartActive', true)
 
           // Klaviyo provided a non compatible snippet of code to track the add to cart event:
           // https://help.klaviyo.com/hc/en-us/articles/115001396711-How-to-create-an-Added-to-Cart-event-for-Shopify.
           // We pulled the compatible part out of snippet one and added it here. This can be removed if the DW team
           // no longer wants to track this event. It does not impact other functionality
-          var _learnq = _learnq || [];
-          fetch(`https://www.deathwishcoffee.com/cart.js`).then((res) =>
+          var _learnq = _learnq || []
+          fetch('https://www.deathwishcoffee.com/cart.js').then((res) =>
             res
               .clone()
               .json()
@@ -641,13 +641,16 @@ export default {
                   total_discount: data.total_discount,
                   original_total_price: data.original_total_price / 100,
                   items: data.items,
-                };
-                if (item !== "undefined") {
-                  cart = Object.assign(cart, item);
                 }
-                _learnq.push(["track", "Added to Cart", cart]);
+                // In the original snippet, `item` is undefined, this throws an eslint error
+                /* eslint-disable no-undef */
+                if (item !== 'undefined') {
+                  cart = Object.assign(cart, item)
+                }
+                /* eslint-enable no-undef */
+                _learnq.push(['track', 'Added to Cart', cart])
               })
-          );
+          )
           // End Klaviyo snippet
         } else {
           this.$emit('added-to-cart-error')
