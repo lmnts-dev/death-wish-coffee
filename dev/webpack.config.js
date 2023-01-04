@@ -101,10 +101,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      lib: path.resolve(__dirname, '../src/js/lib'),
-      modules: path.resolve(__dirname, '../src/modules'),
-      mixins: path.resolve(__dirname, '../src/js/mixins'),
-      root: path.resolve(__dirname, '../src'),
+      lib: path.resolve(__dirname, '../dev/js/lib'),
+      modules: path.resolve(__dirname, '../dev/modules'),
+      mixins: path.resolve(__dirname, '../dev/js/mixins'),
+      root: path.resolve(__dirname, '../dev'),
       vue: 'vue/dist/vue.min.js',
     },
   },

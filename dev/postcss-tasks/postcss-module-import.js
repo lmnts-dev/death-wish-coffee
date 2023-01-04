@@ -9,7 +9,7 @@ const resolve = (id, base, options) => {
     return postcssImportResolve(id, base, options)
   }
 
-  const modules = process.cwd() + '/src/modules/**/**.css'
+  const modules = process.cwd() + '/modules/**/**.css'
 
   return globby(modules)
     .then(files => {

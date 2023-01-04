@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["/assets", "src/data"],
+  "ignorePatterns": ["/assets", "dev/data"],
   "env": {
     "browser": true,
     "es6": true,

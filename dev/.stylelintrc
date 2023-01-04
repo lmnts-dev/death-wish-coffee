@@ -1,7 +1,7 @@
 {
   "extends": ["stylelint-config-standard"],
   "plugins": ["stylelint-use-nesting"],
-  "ignoreFiles": ["./src/css/lib/*.css"],
+  "ignoreFiles": ["./css/lib/*.css"],
   "rules": {
     "max-empty-lines": 1,
     "rule-empty-line-before": [
