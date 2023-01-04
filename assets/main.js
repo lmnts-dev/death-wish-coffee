@@ -43599,6 +43599,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 function accordion(el) {
   var accordionItems = el.querySelectorAll('.accordion__item');
+  console.log(el);
 
   var _iterator = _createForOfIteratorHelper(accordionItems),
       _step;
