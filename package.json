@@ -1,7 +1,7 @@
 {
-  "name": "shopify-base-theme",
-  "version": "1.5.8",
-  "description": "A base shopify theme for custom theme development at Ruckus.",
+  "name": "death-wish-coffee",
+  "version": "2.0.0",
+  "description": "Shopify theme for Death Wish Coffee",
   "main": "webpack.config.js",
   "scripts": {
     "start": "brrl -w",
@@ -26,14 +26,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:ruckusco/shopify-base-theme.git"
+    "url": "git@github.com:lmnts-dev/death-wish-coffee.git"
   },
-  "author": "Ruckus",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://gitlab.com/ruckusco/shopify-base-theme/issues"
-  },
-  "homepage": "https://gitlab.com/ruckusco/shopify-base-theme",
+  "author": "Commence Studio",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/lmnts-dev/death-wish-coffee",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
