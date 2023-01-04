@@ -39,10 +39,10 @@
   padding: 0;
 
   .carousel--scoop & {
-  @media (--md-max) {
-    overflow: initial;
+    @media (--md-max) {
+      overflow: initial;
+    }
   }
-}
 
   /* Fix of Webkit flickering */
   z-index: 1;
@@ -202,11 +202,10 @@
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  font-family: swiper-icons;
+  font-family: swiper-icons; /* stylelint-disable font-family-no-missing-generic-family-keyword */
   font-size: var(--swiper-navigation-size);
   text-transform: none !important;
   letter-spacing: 0;
-  text-transform: none;
   font-variant: initial;
   line-height: 1;
 }
@@ -487,7 +486,6 @@ button.swiper-pagination-bullet {
   border-radius: 50%;
   border-top-color: transparent;
 }
-
 
 @keyframes swiper-preloader-spin {
   100% {
