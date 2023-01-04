@@ -6,7 +6,7 @@ const compiler = require(`webpack`);
 const concat = require(`gulp-concat`);
 const rename = require(`gulp-rename`);
 const webpack = require(`webpack-stream`);
-const webpackConfig = require(`../webpack.config.js`)
+const webpackConfig = require(`./webpack.config.js`)
 
 // Set environment to production
 process.env.NODE_ENV = 'production'

@@ -64,7 +64,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.join(__dirname, 'assets'),
+    path: path.join(__dirname, '..', 'assets'),
     filename: 'main.js',
     chunkFilename: `[name]-[id].js?version=${Date.now()}`,
     publicPath: '',
@@ -99,13 +99,12 @@ module.exports = {
       },
     },
   },
-
   resolve: {
     alias: {
-      lib: path.resolve(__dirname, 'src/js/lib'),
-      modules: path.resolve(__dirname, 'src/modules'),
-      mixins: path.resolve(__dirname, 'src/js/mixins'),
-      root: path.resolve(__dirname, 'src'),
+      lib: path.resolve(__dirname, '../src/js/lib'),
+      modules: path.resolve(__dirname, '../src/modules'),
+      mixins: path.resolve(__dirname, '../src/js/mixins'),
+      root: path.resolve(__dirname, '../src'),
       vue: 'vue/dist/vue.min.js',
     },
   },
