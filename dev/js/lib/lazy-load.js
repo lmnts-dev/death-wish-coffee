@@ -1,5 +1,4 @@
 import on from 'dom-event'
-import select from 'select-dom'
 import Layzr from 'lib/layzr-fork'
 import { set, isIEorEdge } from 'lib/util'
 
@@ -12,7 +11,7 @@ const instance = Layzr({
 })
 
 instance.on('src:before', image => {
-  on(image, 'load', event => {
+  on(image, 'load', _event => {
     const container = image.parentNode
     const ancestor = container ? container.parentNode : false
 

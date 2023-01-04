@@ -28,7 +28,7 @@
       "error",
       {
         "varsIgnorePattern": "[sS]wiper|plyr|loadImg",
-        "argsIgnorePattern": "^el$"
+        "argsIgnorePattern": "^el$|_.*"
       }
     ]
   }

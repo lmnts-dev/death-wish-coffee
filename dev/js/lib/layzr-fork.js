@@ -86,6 +86,7 @@ export default (options = {}) => {
     instance.emit('src:before', node)
 
     // prefer srcset, fallback to pixel density
+    // eslint-disable-next-line no-undef
     if (srcset && node.hasAttribute(settings.srcset)) {
       node.setAttribute('srcset', node.getAttribute(settings.srcset))
     } else {
