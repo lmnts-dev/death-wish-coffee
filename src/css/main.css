@@ -10,6 +10,8 @@
 
 @import 'base/normalize.css';
 
+@import 'base/layout.css';
+
 @import 'base/form.css';
 
 @import 'base/breakpoints.css';
@@ -17,8 +19,6 @@
 @import 'base/placeholder.css';
 
 @import 'base/z-index.css';
-
-@import 'base/layout.css';
 
 /* Lib for Dependencies */
 
