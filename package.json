@@ -4,13 +4,6 @@
   "description": "Shopify theme for Death Wish Coffee",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "brrl -w",
-    "build": "brrl -b -e production",
-    "build-dev": "brrl -b -e development",
-    "development": "brrl -d -e development",
-    "local-dev": "brrl -w -e development",
-    "staging": "brrl -d -e staging",
-    "production": "brrl -d -e production",
     "fix-css": "stylelint --fix 'src/css/base/*.css' && stylelint --fix 'src/modules/**/*.css'",
     "fix-js": "eslint --fix $PWD/'src/modules/**/*.js'",
     "fix-all": "eslint --fix $PWD/'src/modules/**/*.js' && stylelint --fix 'src/css/base/*.css' && stylelint --fix 'src/modules/**/*.css'",
