@@ -8,7 +8,6 @@ x-shared-config:
     image: caddy:2.4.6-alpine
 
   shopify_image_name: &shopify_image_name
-    # image: dylansmith/shopify-cli:2.5.0
     # Locally build docker image with additional packages
     image: dwc/shopify:latest
 
@@ -38,6 +37,17 @@ services:
     ports:
       - 3000:3000
       - 3001:3001
+
+  dev:
+    <<: *app_base
+    <<: *app_image_name
+    # FIXME: update command after dev environment
+    # command: local-dev
+    entrypoint: npm
+    ports:
+      - 3000:3000
+      - 3001:3001
+    working_dir: /app/src
 
   # Proxy used for login and dev server and shopify auth proxy
   caddy:
