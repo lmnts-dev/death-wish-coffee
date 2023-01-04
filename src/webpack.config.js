@@ -108,6 +108,17 @@ module.exports = {
       vue: 'vue/dist/vue.min.js',
     },
   },
+  stats: {
+    warningsFilter: [
+      // postcss-extend displays several warnings about @extend being
+      // called to extend something in @media from another @media. We're
+      // not ready to fix these situations but the warnings don't help.
+      //
+      // https://github.com/travco/postcss-extend#extending-something-in-an-media-while-inside-an-media
+      /@media from within another @media/,
+
+    ],
+  },
   plugins: [
     new StylelintPlugin({
       emitError: true,
