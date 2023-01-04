@@ -55,7 +55,7 @@ module.exports = {
               esModule: false,
             },
           },
-          // Use instead of MiniCssExtract to load styles into DOM
+          // Uncomment to use MiniCssExtract to load styles into DOM
           // 'style-loader',
           'css-loader?importLoaders=1',
           'postcss-loader',
@@ -73,7 +73,7 @@ module.exports = {
     minimize: minimizeOutput,
     minimizer: [
       new TerserPlugin(),
-      // TODO: review if this generates desired output
+      // Uncomment to use CssMinimizer
       // new CssMinimizerPlugin({
       //   minimizerOptions: {
       //     preset: [
