@@ -11,8 +11,6 @@
     "local-dev": "brrl -w -e development",
     "staging": "brrl -d -e staging",
     "production": "brrl -d -e production",
-    "create-module": "sh scripts/create_module.sh",
-    "create-mr": "sh scripts/create-merge-request.sh",
     "fix-css": "stylelint --fix 'src/css/base/*.css' && stylelint --fix 'src/modules/**/*.css'",
     "fix-js": "eslint --fix $PWD/'src/modules/**/*.js'",
     "fix-all": "eslint --fix $PWD/'src/modules/**/*.js' && stylelint --fix 'src/css/base/*.css' && stylelint --fix 'src/modules/**/*.css'",
