@@ -572,9 +572,9 @@ export default {
      */
     getPriceForOptionValue(value, optionIndex) {
       // Find the variant that matches the passed in option value/index
-      const matchedVariant = this.product.variants.find((variant) => {
-        return variant.options[optionIndex] === value;
-      });
+      const matchedVariant = this.product.variants.find(variant => {
+        return variant.options[optionIndex] === value
+      })
 
       // Fallback: default to first variant if a match isn't found
       const price = matchedVariant
