@@ -274,6 +274,16 @@
   transform: translate3d(-8px, 0, 0) rotate(45deg) scale(0.7, 1);
 }
 
+.custom-shogun-arrows .shg-sld-nav-button.shg-sld-left::after, .custom-shogun-arrows .shg-sld-nav-button.shg-sld-right::after {
+  content: url('https://cdn.shopify.com/s/files/1/0271/7209/files/Path_224.svg?v=1672944245');
+}
+.custom-shogun-arrows .shg-sld-nav-button.shg-sld-left {
+  transform: scaleX(-1);
+}
+.custom-shogun-arrows .shg-sld-nav-button.shg-sld-left svg, .custom-shogun-arrows .shg-sld-nav-button.shg-sld-right svg {
+  display: none;
+}
+
 /*
    * Arrow Right
    */
