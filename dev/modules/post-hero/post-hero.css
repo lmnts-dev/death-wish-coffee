@@ -1,0 +1,27 @@
+/* styles for the post-hero module go in this file */
+
+.post-hero__image-wrapper {
+  position: relative;
+  width: 100%;
+  max-height: 80vh;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 42%;
+  }
+}
+
+.post-hero__image {
+  @media (--lg-max) {
+    display: none;
+  }
+
+  &--mobile {
+    display: block;
+
+    @media (--lg) {
+      display: none;
+    }
+  }
+}

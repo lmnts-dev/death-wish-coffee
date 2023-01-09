@@ -1,0 +1,261 @@
+.hero {
+  &--homepage,
+  &--content-left {
+    text-align: center;
+
+    @media (--lg) {
+      text-align: left;
+    }
+  }
+
+  &--content-right {
+    @media (--lg) {
+      text-align: right;
+    }
+  }
+
+  &--content-center {
+    @media (--lg) {
+      text-align: center;
+    }
+  }
+
+  &--list-collections {
+    & + .hero--list-collections {
+      padding-top: 11px;
+
+      @media (--lg) {
+        padding-top: 40px;
+      }
+    }
+  }
+}
+
+&--mobile-reversed {
+  @media (--lg-max) {
+    .hero__inner {
+      flex-direction: column;
+    }
+  }
+}
+
+.hero__inner {
+  position: relative;
+
+  @media (--lg-max) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.hero__feature {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: calc(100% * 573 / 375);
+
+    @media (--lg) {
+      padding-top: 50%;
+    }
+
+    .hero--homepage &,
+    .hero--list-collections & {
+      padding-top: 88%;
+
+      @media (--md) {
+        padding-top: 50%;
+      }
+    }
+
+    .hero--list-collections & {
+      padding-top: 113.3333333333%;
+
+      @media (--md) {
+        padding-top: 50%;
+      }
+    }
+  }
+}
+
+.hero__video-wrapper,
+.hero__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__image-desktop {
+  @media (--lg-max) {
+    display: none;
+  }
+}
+
+.hero__image-mobile {
+  @media (--lg) {
+    display: none;
+  }
+}
+
+.hero__wrapper-content {
+  background: var(--black);
+  color: var(--blood);
+
+  @media (--lg) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: var(--white);
+  }
+
+  .hero--homepage &,
+  .hero--content-left & {
+    color: var(--white);
+
+    @media (--lg) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  .hero--content-right & {
+    @media (--lg) {
+      justify-content: flex-end;
+    }
+  }
+
+  .hero--content-center & {
+    @media (--lg) {
+      justify-content: center;
+    }
+  }
+
+  .hero--list-collections & {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: var(--white);
+  }
+}
+
+.hero__container {
+  padding: 37px 24px 52px;
+
+  @media (--lg) {
+    max-width: 867px;
+    padding: 0 0 0 238px;
+  }
+
+  .hero--homepage &,
+  .hero--content-left & {
+    padding: 47px 24px 33px;
+
+    @media (--lg) {
+      max-width: 699px;
+      padding: 0 0 0 141px;
+    }
+  }
+
+  .hero--content-right & {
+    @media (--lg) {
+      padding: 0 141px 0 0;
+    }
+  }
+
+  .hero--content-center & {
+    @media (--lg) {
+      max-width: 738px;
+      padding: 0;
+    }
+  }
+
+  .hero--list-collections & {
+    @media (--lg-max) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+}
+
+.hero__title {
+  .hero--content-center & {
+    text-align: center;
+
+    @media (--lg) {
+      max-width: 558px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.hero__description {
+  color: var(--white);
+
+  .hero--content-right & {
+    @media (--lg) {
+      max-width: 538px;
+      margin-right: 0;
+    }
+  }
+
+  .hero--content-left & {
+    @media (--lg) {
+      max-width: 538px;
+      margin-left: 0;
+    }
+  }
+
+  p {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    color: inherit;
+  }
+}
+
+.hero_cta {
+  margin: 29px auto 0;
+
+  @media (--lg) {
+    margin-top: 32px;
+    margin-left: 0;
+  }
+
+  .hero--content-right & {
+    @media (--lg) {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+
+  .hero--content-center & {
+    @media (--lg) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .hero--list-collections & {
+    margin-top: 10px;
+  }
+}

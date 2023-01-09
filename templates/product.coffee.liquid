@@ -1,0 +1,97 @@
+{%- layout 'theme' -%}
+{%- assign product_acf = product.metafields.accentuate -%}
+{%- assign palette = product_acf.palette_selection | handle -%}
+
+{%- assign product_acf = product.metafields.accentuate -%}
+
+{%- comment -%}PDP Hero{%- endcomment -%}
+{%- render 'pdp-hero' -%}
+
+{%- comment -%}Video Section{%- endcomment -%}
+{%- assign video_section_embed_code = product_acf.coffee_detail_video_embed_code -%}
+{%- assign video_section_title = product_acf.coffee_detail_hero_video_title -%}
+{%- render 'pdp-video',
+  title: video_section_title, 
+  embed_code: video_section_embed_code
+  palette: palette
+-%}
+
+{%- comment -%}Review Drawer{%- endcomment -%}
+{%- render 'review-drawer', palette: palette, title: product_acf.pdp_review_heading -%}
+
+{%- comment -%}Featured Product Carousel{%- endcomment -%}
+{%- assign featured_products = product_acf.pdp_featured_products_selector | split: '|' -%}
+{%- assign featured_slides_count = 0 -%}
+{%- if featured_products.size < 0 -%}
+  {%- assign matched_count = 1 -%}
+  {%- paginate collections.all.products by 1000 -%}
+    {%- for item in collections.all.products -%}
+      {%- if item.type == product.type and item.id != product.id and matched_count <= 8 -%}
+        {%- assign list_products = list_products | append: item.handle | append: '|' -%}
+        {%- assign matched_count = matched_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endpaginate -%}
+  {%- assign featured_products = list_products | split: '|' -%}
+{%- endif -%}
+{%- if featured_products.size > 0 -%}
+  {%- comment -%}Featured Product Slides{%- endcomment -%}
+  {%- capture featured_slides -%}
+    {%- for handle in featured_products -%}
+      {%- assign featured_product = all_products[handle] -%}
+      {%- if featured_product != blank -%}
+        {%- assign featured_slides_count = featured_slides_count | plus: 1 -%}
+        {% assign title = featured_product.title %}
+        {% assign default_image_url = featured_product.images[0] | img_url: 'master' %}
+        {% assign image_url = featured_product.metafields.accentuate.featured_product_image_plp | map: 'src' | first %}
+        {% if image_url == blank %}
+          {% assign image_url = default_image_url %}
+        {% endif %}
+        {% assign url = featured_product.url %}
+        {%- capture price %}
+          {{ featured_product.price | money }}
+        {%- endcapture -%}
+        {%- assign description = featured_product.description | strip_html | truncate: 500, '' -%}
+        {%- assign cta_text = 'Take me There' -%}
+        {%- render 'product-hero-card'
+          class: 'swiper-slide product-hero-card--no-opacity product-hero-card--hover product-hero-card--no-padding js-product-hero-card',
+          title: title,
+          image_url: image_url,
+          url: url,
+          price: price,
+          description: description,
+          sub_description: sub_description,
+          cta_text: cta_text,
+          product_id: featured_product.id,
+          palette: palette
+        -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- comment -%}End:Featured Product Slides{%- endcomment -%}
+
+  {%- assign featured_navigation = true -%}
+  {%- assign featured_slides_per_view = 1 -%}
+  {%- assign featured_carousel_loop = true -%}
+
+  {%- if featured_slides_count == 1 -%}
+    {%- assign featured_navigation = false -%}
+    {%- assign featured_carousel_loop = false -%}
+  {%- endif -%}
+
+  {%- render 'carousel',
+    title: product_acf.pdp_featured_products_heading,
+    title_class: 'section-title--product-hero-card',
+    class: 'carousel--product-hero-card carousel--no-padding bg--shadow',
+    children: featured_slides,
+    spacing: 0,
+    slides_per_view: featured_slides_per_view,
+    navigation: featured_navigation,
+    loop: featured_carousel_loop,
+    palette: palette
+  -%}
+{%- endif -%}
+
+{%- comment -%}Footer CTA{%- endcomment -%}
+{%- render 'footer-cta', palette: palette, title: shop.metafields.globals.footer_cta_title, enable_subscribe_form: true %}
+{%- render 'klaviyo-tracking' -%}

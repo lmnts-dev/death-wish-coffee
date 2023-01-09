@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html">
+
+  <head>
+    {{content_for_header}}
+  
+  {% render 'shogun-head' %}
+</head>
+
+  <body id="{{- page_title | handle -}}"
+    class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}">
+    <main id="page" class="relative z0" role="main">
+      {{content_for_layout}}
+    </main>
+  </body>
+
+  </html>

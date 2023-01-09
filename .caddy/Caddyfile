@@ -1,0 +1,8 @@
+{
+  local_certs
+}
+
+caddy {
+  encode gzip
+  reverse_proxy shopify:3456 shopify:9292
+}

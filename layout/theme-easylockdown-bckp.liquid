@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html{% unless template contains 'password' or template contains 'access-denied' or cart.attributes.age_gate == '1' %} class="js-age-gate"{% endunless %} data-scroll="0">
+<head>
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="facebook-domain-verification" content="746k24eeouu4eet639meku4onwsree" />
+  <link rel="canonical" href="{{- canonical_url -}}">
+
+  <script>
+    // ordergroove
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WS7HLL9');</script>
+  <!-- End Google Tag Manager -->
+
+  {%- include 'alternate-urls' -%}
+
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{'apple-touch-icon.png' | asset_url -}}">
+  <link rel="icon" type="image/png" href="{{'favicon-32x32.png' | asset_url -}}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{'favicon-16x16.png' | asset_url -}}" sizes="16x16">
+ {% comment %}  <link rel="manifest" href="{{'manifest.json' | asset_url -}}"> {% endcomment %}
+  <link rel="mask-icon" href="{{'safari-pinned-tab.svg' | asset_url -}}" color="#5bbad5">
+  {% comment %} <meta name="theme-color" content="#ffffff"> {% endcomment %}
+  <link rel="icon" type="image/png" href="{{ 'favicon.ico' | asset_url }}" type="image/png">
+  <link rel="stylesheet" href="https://use.typekit.net/dge3sjv.css">
+
+  {%- render 'social-meta' -%}
+  {% render 'structured-data' %}
+  
+  {{ content_for_header }}
+
+  {%- render 'fonts' -%}
+  {%- render 'dev-mode-head' -%}
+
+  <!-- Yotpo JavaScript -->
+  <script type="text/javascript">
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/P17jnGh66lNzZJ0a3V4ntP4FXIPAZUGGWTnRuyfO/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+  <!-- End of Yotpo JavaScript -->
+  <script>
+    window.addEventListener('load', function () {
+      var script = document.createElement('script');
+      script.src = "//assets.findify.io/deathwishcoffee.myshopify.com.min.js";
+      document.head.appendChild(script);
+    });
+  </script>
+
+<!-- Impact Radius Script -->
+  <script type="text/javascript"> (function(a,b,c,d,e,f,g){e['ire_o']=c;e[c]=e[c]||function(){(e[c].a=e[c].a||[]).push(arguments)};f=d.createElement(b); g=d.getElementsByTagName(b)[0];f.async=1;f.src=a;g.parentNode.insertBefore(f,g);})('//d.impactradius-event.com/A2111926-92bd-44aa-bb4f-83916a666b521.js','script','ire',document,window);
+  </script>
+
+  <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
+
+  {% render 'shogun-head' %}
+  {%- render 'ordergroove_static_asset' -%}
+<script src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
+  <meta name="google-site-verification" content="rKwOILyVz1RZxv7Ptn93cEcDmAFWbsoHgsD67KpV5Ck" />
+{% render 'minmaxify-head' %}
+</head>
+<body id="{{- page_title | handle -}}" class="{%- if customer -%}customer-logged-in {%- endif -%}p template-{{- template | replace: '.', ' ' | handle -}}" >
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS7HLL9"
+  height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
+
+  <main id="page" class="relative z0" role="main">
+    {%- render 'ordergroove_global' -%}
+    {{ content_for_layout }}
+  </main>
+  {%- render 'footer' -%}
+
+  {%- render 'dev-mode-body' -%}
+  {% include 'findify-tagging' %}
+
+<!-- Impact Radius Script Body-->
+{% if customer %}
+  {% assign customerID = customer.id %}
+  {% assign customerEamil = customer.email %}
+  {% assign SHA1Email = customerEamil | hmac_sha1: "secret_key" %}
+{% else %}
+  {% assign customerID = "" %}
+  {% assign SHA1Email = "" %}
+{% endif %}
+
+<script type="text/javascript">
+  ire('identify', {customerId: "{{customerID}}", customerEmail: "{{SHA1Email}}" });
+</script>
+<!-- End Impact Radius Script Body-->
+ {% include 'smile-initializer' %}
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+{%- assign class = class | default: false -%}
+{%- capture class -%}plp{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
+
+{%- capture product_form -%}
+  {%- capture product_form_attrs -%}:product="product" @update-variant-id="handleSelectedVariant" @added-to-cart-error="handleAddedToCartError"{%- endcapture -%}
+  {%- render 'product-form', class: 'product-form--plp' is_vue_component: true, custom_attrs: product_form_attrs -%}
+{%- endcapture -%}
+
+<section class="{{- class -}}"
+         data-module="plp"
+         v-cloak
+>
+  <div is="plp"
+       inline-template
+       {% if current_tags.size %}:current-tags='{{ current_tags | json }}'{% endif %}
+       :collection-name='{{ collection_name | json }}'
+  >
+    <div class="container plp__container">
+      <div class="plp__inner">
+        {%- render 'plp-sort-header', class: 'js-sort-header' -%}
+        {%- render 'plp-filter', vue_attrs: ':current-tags="currentTags"' -%}
+        {%- capture product_cards -%}
+          <template v-for="(product, productIndex) in displayedProducts">
+            {%- capture product_attrs -%}
+              :product="product"
+              :key="product.id"
+              :show-review="collectionName !== 'Merch'"
+              :show-quick-shop="collectionName !== 'Merch'"
+            {%- endcapture -%}
+            {%- render 'product-card',
+              class: 'product-card--bg-dark product-card--plp',
+              is_vue_component: true,
+              custom_attrs: product_attrs,
+              quick_shop_form: product_form
+            -%}
+          </template>
+        {%- endcapture -%}
+
+        <template v-if="displayedProducts.length > 0">
+          {%- render 'grid',
+            use_container: false,
+            class: 'plp__grid grid--plp',
+            children: product_cards
+          -%}
+        </template>
+        <p class="plp__empty" v-else>No products found<template v-if="!isFiltered && formattedCurrentTags"> with the tag ${formattedCurrentTags}</template></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+{%- assign original_country = 'en-US' -%}
+{%- assign alternate_country = 'fr-FR' -%}
+{%- assign default_url = '' -%}
+
+{%- if template contains 'index' -%}
+  {%- capture original_url -%}{{- shop.url -}}{%- endcapture -%}
+  {%- capture alternate_url -%}{% comment %}shop.metafields.sf_general.alternate_url{% endcomment %}{%- endcapture -%}
+{%- elsif template contains 'product' -%}
+  {%- capture original_url -%}{{- shop.url -}}{{- product.url -}}{%- endcapture -%}
+  {%- capture alternate_url -%}{% comment %}product.metafields.sf_general.alternate_url{% endcomment %}{%- endcapture -%}
+{%- elsif template contains 'collection' -%}
+  {%- capture original_url -%}{{- shop.url -}}{{- collection.url -}}{%- endcapture -%}
+  {%- capture alternate_url -%}{% comment %}collection.metafields.sf_general.alternate_url{% endcomment %}{%- endcapture -%}
+{%- elsif template contains 'blog' -%}
+  {%- capture original_url -%}{{- shop.url -}}{{- blog.url -}}{%- endcapture -%}
+  {%- capture alternate_url -%}{% comment %}blog.metafields.sf_general.alternate_url{% endcomment %}{%- endcapture -%}
+{%- elsif template contains 'article' -%}
+  {%- capture original_url -%}{{- shop.url -}}{{- article.url -}}{%- endcapture -%}
+  {%- capture alternate_url -%}{% comment %}article.metafields.sf_general.alternate_url{% endcomment %}{%- endcapture -%}
+{%- elsif template contains 'page' -%}
+  {%- capture original_url -%}{{- shop.url -}}{{- page.url -}}{%- endcapture -%}
+  {%- capture alternate_url -%}{% comment %}page.metafields.sf_general.alternate_url{% endcomment %}{%- endcapture -%}
+{%- endif -%}
+
+<link rel="alternate" href="{{- original_url -}}" hreflang="{{- original_country -}}" />
+{%- if alternate_url and alternate_url != blank -%}
+  <link rel="alternate" href="{{- alternate_url -}}" hreflang="{{- alternate_country -}}" />
+{%- endif -%}
+<link rel="alternate" href="{{- default_url -}}" hreflang="x-default" />
+
+{% assign original_country = false %}
+{% assign alternate_country = false %}
+{% assign default_url = false %}
+{% assign target = false %}

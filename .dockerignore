@@ -1,0 +1,10 @@
+.docker
+.env
+.env.local
+.git
+.github
+.vscode
+*/node_modules
+dist
+docker-compose.yml
+node_modules

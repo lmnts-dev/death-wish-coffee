@@ -1,0 +1,164 @@
+.bolt-illustration-hero {
+  position: relative;
+  padding: 42px 0 90px;
+  color: var(--white);
+
+  @media (--lg) {
+    padding: 11% 0 13%;
+  }
+}
+
+.bolt-illustration-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  @media (--lg) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 calc(100% * 170 / 1920);
+  }
+
+  .bolt-illustration-hero--reverse & {
+    align-items: flex-end;
+
+    @media (--lg) {
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.bolt-illustration-hero__image-block {
+  position: relative;
+  width: 100%;
+  padding: 0 38px;
+
+  @media (--lg) {
+    position: static;
+    width: 19%;
+    margin-right: 40px;
+    padding: 0;
+  }
+}
+
+.bolt-illustration-hero__image-wrapper {
+  position: relative;
+  width: 196px;
+  z-index: 1;
+
+  @media (--lg) {
+    width: 100%;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: calc(100% * 230 / 196);
+
+    @media (--lg) {
+      padding-top: calc(100% * 408 / 348);
+    }
+  }
+
+  .bolt-illustration-hero--reverse & {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+.bolt-illustration-hero__bolt {
+  position: absolute;
+  bottom: 0;
+  right: -185px;
+  width: 360px;
+  z-index: 1;
+  pointer-events: none;
+
+  @media (--lg) {
+    top: auto;
+    bottom: 0;
+    right: -20%;
+    width: 56%;
+  }
+
+  @media (--xl) {
+    width: 61%;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 101.4%;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    left: -185px;
+    right: auto;
+
+    @media (--lg) {
+      left: -20%;
+    }
+  }
+}
+
+.bolt-illustration-hero__bolt-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--blood);
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+    .bolt-illustration-hero--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
+}
+
+.bolt-illustration-hero__content {
+  position: relative;
+  padding: 0 38px;
+
+  @media (--lg) {
+    position: static;
+    width: 41%;
+    padding: 0;
+  }
+}
+
+.bolt-illustration-hero__title {
+  @extend .h1;
+
+  padding-top: 42px;
+  color: var(--blood);
+
+  @media (--lg) {
+    padding-top: 0;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    text-align: right;
+  }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+    .bolt-illustration-hero--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
+}
+
+.bolt-illustration-hero__description {
+  padding-top: 3px;
+
+  @media (--lg) {
+    padding-top: 0;
+  }
+
+  .bolt-illustration-hero--reverse & {
+    text-align: right;
+  }
+}

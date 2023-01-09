@@ -1,0 +1,321 @@
+/* styles for wysiwyg */
+
+.wysiwyg {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--shadow);
+
+    @media (--md) {
+      margin-bottom: 26px;
+    }
+  }
+
+  h1 {
+    @extend .h1;
+  }
+
+  /* h4 tags converted to h2 with h4 styling */
+
+  h2 {
+    @extend .h4;
+
+    font-size: 36px * var(--sizing-coef);
+    line-height: 48px * var(--sizing-coef);
+
+    @media (--md-max) {
+      font-size: 28px * var(--sizing-coef);
+      line-height: 32px * var(--sizing-coef);
+    }
+  }
+
+  h3 {
+    @extend .h3;
+  }
+
+  h4 {
+    @extend .h4;
+
+    @media (--md) {
+      @extend .h3;
+
+      margin-bottom: 15px;
+      font-weight: var(--bold);
+    }
+  }
+
+  p, li, blockquote {
+    @extend .p1;
+  }
+
+  p {
+    &:last-of-type {
+      margin-bottom: 0;
+      padding-bottom: 24px;
+    }
+  }
+
+  ul, ol {
+    margin: 20px auto;
+    padding: 0 7% 15px 7%;
+  }
+
+  a {
+    color: var(--deep-purple);
+  }
+
+  /**
+    * Imported image styles from wordpress
+    * @see https://codex.wordpress.org/Styling_Images_in_Posts_and_Pages
+    */
+
+  img.alignright {
+    float: right;
+    margin: 0 0 1em 1em;
+  }
+
+  img.alignleft {
+    float: left;
+    margin: 0 1em 1em 0;
+  }
+
+  img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a img.alignright {
+    float: right;
+    margin: 0 0 1em 1em;
+  }
+
+  a img.alignleft {
+    float: left;
+    margin: 0 1em 1em 0;
+  }
+
+  a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 45px 0 0 -20px;
+    max-width: 800px;
+
+    .wpcf7-list-item {
+      margin-left: 0;
+    }
+  }
+
+  /* responsive images to not break the page content if the image is top wide */
+
+  img {
+    position: relative;
+    left: -24px;
+    max-width: calc(100% + 48px);
+    height: auto;
+    margin: 14px auto 10px;
+
+    @media (--md) {
+      position: static;
+      max-width: 100%;
+      margin-top: 2px;
+    }
+  }
+
+  li:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+
+  &--pad-bot {
+    padding-bottom: 7rem;
+  }
+
+  &--article {
+    margin-top: 2rem;
+  }
+
+  &--text-white {
+    & p {
+      color: var(--white);
+    }
+  }
+}
+
+.terms-container {
+  margin: 100px auto;
+}
+
+.wysiwyg--white {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li {
+    color: var(--white);
+  }
+}
+
+.wysiwyg--margin-bottom {
+  margin-bottom: 80px;
+
+  @media (--md-max) {
+    margin-bottom: 50px;
+  }
+}
+
+.wysiwyg--margin-top {
+  margin-top: 80px;
+
+  @media (--md-max) {
+    margin-top: 50px;
+  }
+}
+
+.wysiwyg--pdp-add-to-cart {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--white);
+  }
+
+  p {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    @extend .p1;
+
+    font-weight: 700;
+  }
+}
+
+.wysiwyg--pdp-extra-contents {
+  p {
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    position: relative;
+    padding-left: 15px;
+
+    &:not(:last-of-type) {
+      margin: 0;
+    }
+
+    &::before {
+      content: '•';
+      position: absolute;
+      top: 10px;
+      left: 0;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
+.wysiwyg--title-copy {
+  p {
+    @extend .p1;
+
+    @extend .p1--large;
+
+    @extend .p1--light;
+
+    margin-bottom: 8px;
+    color: var(--white);
+
+    @media (--md) {
+      margin-bottom: 14px;
+    }
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  strong {
+    @extend .h4;
+
+    text-transform: none;
+    color: var(--blood);
+  }
+}
+
+.wysiwyg--associate-carousel {
+  p {
+    @extend .p1--bold;
+
+    text-transform: uppercase;
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.wysiwyg--large {
+  p {
+    @extend .articles-font;
+  }
+}
+
+.wysiwyg--rewards-program p {
+  @extend .p1--bold;
+
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0;
+  color: var(--white);
+
+  @media (--md) {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  &:last-of-type {
+    padding: 0;
+  }
+}
+
+.wysiwyg--rewards-cta-group p {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: var(--normal);
+
+  @media (--md) {
+    font-size: 28px;
+    line-height: 37px;
+  }
+
+  strong {
+    font-weight: var(--semi-bold);
+  }
+}

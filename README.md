@@ -52,6 +52,8 @@ development:
 #### Installing dependencies
 Open up a terminal window, navigate to the theme root folder and run `npm i` to install all the dependencies referencered in `package.json`.
 
+If you run into `ReferenceError: primodials is not defined` than you might need to use version 11 of node by doing `npm install node@11` since because gulp v3 doesn't work under node v12. More info [here](https://timonweb.com/javascript/how-to-fix-referenceerror-primordials-is-not-defined-error/).
+
 #### Start development
 Open up a terminal window, navigate to the theme root folder and run `npm start`. This will compile, watch and hot reload your javascript and css. It'll also lint your js using [standardjs](https://standardjs.com/) best practices. If you make a change to a file that needs to be uploaded to Shopify, the process will handle it and reload your browser once it's been uploaded. 
 

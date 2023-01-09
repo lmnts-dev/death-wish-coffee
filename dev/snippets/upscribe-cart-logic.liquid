@@ -1,0 +1,208 @@
+<!-- Upscribe Cart Logic -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+	<script>
+
+	$(document).ready(function () {
+
+		window.getQueryString = function(url) {
+			console.log({url})
+			var splitUrl = url.split("?");
+			return splitUrl[splitUrl.length - 1];
+		}
+
+		window.parseQueryString = function(query) {
+			console.log({query})
+			var vars = query.split("&");
+			var query_string = {};
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				var key = decodeURIComponent(pair[0]);
+				var value = decodeURIComponent(pair[1]);
+				if (typeof query_string[key] === "undefined") {
+					query_string[key] = decodeURIComponent(value);
+				} else if (typeof query_string[key] === "string") {
+					query_string[key] = [query_string[key], decodeURIComponent(value)];
+				} else {
+					query_string[key].push(decodeURIComponent(value));
+				}
+			}
+			console.log({ query_string });
+			return query_string;
+		}
+
+		// Verify that necessary values are set in pqs.
+		window.checkIfUrlVarsSet = function(pqs) {
+			if (pqs.rfsnperma_aid === null || pqs.rfsnperma_ci === null) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		window.addStorageValues = function(pqs) {
+			localStorage.setItem("rfsn_aid", pqs.rfsnperma_aid);
+			localStorage.setItem("rfsn_ci", pqs.rfsnperma_ci);
+			localStorage.setItem("rfsn_cs", pqs.rfsnperma_cs);
+			if (pqs.rfsnperma_click && pqs.rfsnperma_click !== "null") {
+				localStorage.setItem("current_rfsn_click", pqs.rfsnperma_click);
+			}
+			if (pqs.rfsnperma_crlsts && pqs.rfsnperma_crlsts !== "null") {
+				localStorage.setItem("current_rfsn_lsts", pqs.rfsnperma_crlsts);
+			}
+		}
+
+		window.upscribeGetCookie = function(name) {
+			return (document.cookie.match("(^|; )" + name + "=([^;]*)") || 0)[2];
+		}
+
+		window.cartHasSubscriptionItems = function(parsedLineItems) {
+			if (!parsedLineItems) return false
+
+			return parsedLineItems.some(function (item) {
+				return (
+					item.properties && item.properties.hasOwnProperty("Subscription")
+				);
+			});
+		}
+
+		window.createCartTokenId = function(length) {
+			var length 					 = 32
+			var result           = ''
+			var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+			var charactersLength = characters.length
+			for ( var i = 0; i < length; i++ ) {
+				result += characters.charAt(Math.floor(Math.random() * charactersLength));
+			}
+			return result;
+		}
+
+		window.upscribeBuildCheckoutURL = function(cartToken) {
+			// Build the Checkout URL
+			var myshopify_domain = '{{ shop.permanent_domain }}';
+			var token = cartToken
+			try {
+				// Cross-domain tracking with Google Analytics
+				var ga_linker = ga.getAll()[0].get('linkerParam');
+			} catch (e) {
+				// 'ga' is not available
+				var ga_linker = '';
+			}
+
+			var checkout_url = 'https://cart.deathwishcoffee.com/checkout?store=' + myshopify_domain + '&token=' + token + '&is_first_load=true'
+
+			{% comment %} Refersion Tracking  {% endcomment %}
+			var rfsnAidParam = localStorage.getItem('rfsn_aid')
+			var rfsnCiParam = localStorage.getItem('rfsn_ci')
+			var rfsnCsparam = localStorage.getItem('rfsn_cs')
+			var rfsnCurrentCart = localStorage.getItem('current_rfsn_cart')
+
+			if (rfsnAidParam) checkout_url += '&rfsn_aid=' + rfsnAidParam
+			if (rfsnCiParam) checkout_url += '&rfsn_ci=' + rfsnCiParam
+			if (rfsnCsparam) checkout_url += '&rfsn_cs=' + rfsnCsparam
+			if (rfsnCurrentCart) checkout_url += '&current_rfsn_cart=' + rfsnCurrentCart
+
+			// uptrack_**** tracking codes
+			let uptrackCodes = []
+			Object.keys(pqs).forEach(function(queryParam) {
+				if (queryParam.indexOf('uptrack_') > -1) {
+					uptrackCodes.push({
+						field: queryParam,
+						value: pqs[queryParam]
+					})
+				}
+			})
+
+			if (uptrackCodes) {
+				uptrackCodes.forEach(function(uptrackCodeObj) {
+					checkout_url += '&' + uptrackCodeObj.field + '=' + uptrackCodeObj.value
+				})
+			}
+
+			return checkout_url;
+		}
+
+		window.upscribeBuildCheckout = function() {
+			$.ajax('/cart.json')
+			.done(function(cart) {
+				console.log('get cart done res', cart)
+
+				var cartToken = createCartTokenId()
+
+				if (cartHasSubscriptionItems(cart.items)) {
+					cart.url = "{{ shop.permanent_domain }}"
+					cart.analytics = window.ShopifyAnalytics
+					cart.token = cartToken
+					$.ajax({
+						url: "https://endpoint.upscribe.io/cart",
+						//url: "https://fxpflqhs52.execute-api.us-east-1.amazonaws.com/stage/cart",
+						type: "POST",
+						data: JSON.stringify(cart)
+					})
+					.done(function(res) {
+						var checkoutUrl = upscribeBuildCheckoutURL(cartToken);
+						sessionStorage.setItem('upscribe_cart', JSON.stringify(res))
+
+						window.location.href = checkoutUrl;
+					})
+					.fail(function(e) {
+						console.log('post cart error: ', e)
+						return e
+					})
+				} else {
+					window.location.href = "/checkout"
+				}
+			})
+			.fail(function(e) {
+				console.log('get cart error', e);
+				return e
+			})
+		}
+
+		var qs = getQueryString(window.location.href);
+		var pqs = parseQueryString(qs);
+
+		// Can use this by default or the onclick attribute directly
+		//var checkout_button_selectors = '[name="checkout"], [href="/checkout"], form[action="/checkout"] input[type="submit"], .checkout_button, .btn-checkout, .cart__checkout';
+
+		// Used for checkout buttons in Online Store
+		$(document).on('click', '.upscribe-create-checkout, .upscribe-checkout-button, .cart__checkout', function(e) {
+      e.preventDefault();
+      upscribeBuildCheckout()
+    })
+
+		// Used to check if we're on the checkout.liquid
+		// If somehow a checkout goes to Shopify when it should of gone to Upscribe,
+		// we rebuild the checkout and send them to Upscribe
+		var href = window.location.href;
+		if(href.indexOf('/checkouts/') > -1){
+			// If there are properties on the cart items
+			if ($('.product__description__property')) {
+
+				// only if we're not on the order confirmation tracking page - can be sent in order emails
+				// even if it was an Upscribe order
+			  if (window.location.href.indexOf('/orders/') < 0) {
+					// If any of those properties are an Upscribe "Subscription" property
+					$('.product__description__property').each(function() {
+						var prop = $(this).val()
+						if (prop.indexOf('Subscription') > -1) {
+							// we have subscription products in our checkout but somehow got to Shopify
+							// send them to the cart page to reattempt to direct to Upscribe checkout
+							upscribeBuildCheckout();
+						}
+					})
+				}
+			}
+		}
+	})
+
+
+        // If page is loaded from cache (browser back/forward button), force page reload
+    	window.addEventListener('pageshow', function (event) { if (event.persisted || window.performance &&
+		window.performance.navigation.type == 2) { window.location.reload(); } }, false);
+
+	</script>
+<!-- End Upscribe Cart Logic -->

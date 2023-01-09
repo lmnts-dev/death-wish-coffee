@@ -1,0 +1,21 @@
+{% assign class = class | default:false %}
+{% capture class %}post-navigation{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} bg--bone" data-module="post-navigation">
+  <div class="container container--post">
+    <div class="post-navigation__inner">
+      {%- if blog.previous_article -%}
+        <a href="{{ blog.previous_article }}" class="post-navigation__link post-navigation__link--previous">
+          <span class="post-navigation__arrow"></span>
+          {{ 'blogs.article.older_post' | t }}
+        </a>
+      {%- endif -%}
+      {%- if blog.next_article -%}
+        <a href="{{ blog.next_article }}" class="post-navigation__link post-navigation__link--next">
+          {{ 'blogs.article.newer_post' | t }}
+          <span class="post-navigation__arrow"></span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

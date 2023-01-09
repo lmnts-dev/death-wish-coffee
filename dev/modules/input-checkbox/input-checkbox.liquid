@@ -1,0 +1,10 @@
+{% assign required = required | default: '' %}
+{%- assign custom_attrs = custom_attrs | default: false -%}
+{%- capture class -%}{% if class %} {{- class -}}{% endif %}{%- endcapture -%}
+
+<div class="form-checkbox{{- class -}}" data-module="input-checkbox">
+  <label class="form-checkbox-container b3" for="{{- name -}}">{{- label -}}
+    <input type="checkbox" class="form-checkbox__checkbox" name="{{- name -}}" id="{{- name -}}" {{required}} {% if custom_attrs %}{{- custom_attrs = 'checked' -}}{% endif %}>
+    <span class="form-checkbox__check-mark"></span>
+  </label>
+</div>

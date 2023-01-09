@@ -1,0 +1,109 @@
+/* styles for the section-title module go in this file */
+
+.section-title {
+  padding: 80px 0;
+  text-align: center;
+
+  &--product-hero-card {
+    padding: 70px 46px 30px;
+    color: var(--blood);
+    text-align: center;
+
+    @media (--md) {
+      @extend .h1;
+
+      padding-top: 138px;
+      padding-bottom: 60px;
+    }
+  }
+
+  &--title-description-card {
+    padding: 24px 0 52px;
+
+    @media (--md) {
+      padding: 65px 0 20px;
+    }
+  }
+
+  &--account {
+    width: 100%;
+    text-align: left;
+    padding: 114px 0 28px;
+
+    @media (--md-max) {
+      display: none;
+    }
+
+    .template-customers-order & {
+      @media (--md) {
+        display: none;
+      }
+    }
+  }
+
+  &--review-drawer {
+    padding: 0 0 22px;
+
+    @media (--md) {
+      padding: 0 0 19px;
+    }
+  }
+
+  &--article-hero-card {
+    padding: 60px 0;
+
+    @media (--md) {
+      padding: 203px 0 40px;
+    }
+  }
+}
+
+.section-title__container {
+  max-width: 100%;
+
+  .section-title--account & {
+    width: calc(100% - 248px);
+    margin: 0 0 0 auto;
+    padding: 0;
+  }
+
+  .section-title--review-drawer & {
+    max-width: 936px;
+  }
+}
+
+.section-title__title {
+  @extend .h2;
+
+  color: var(--blood);
+
+  @media (--lg) {
+    @extend .h1;
+  }
+
+  .section-title--review-drawer & {
+    @extend .h2;
+
+    color: var(--white);
+  }
+
+  .section-title--title-description-card & {
+    @extend .h4;
+
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: none;
+    color: var(--white);
+  }
+
+  .section-title--article-hero-card & {
+    color: var(--white);
+  }
+
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+    .section-title--palette-$(color) & {
+      color: var(--$color);
+    }
+  }
+}

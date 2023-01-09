@@ -1,0 +1,17 @@
+{% assign class = class | default: false %}
+{% assign icon = icon | default: false %}
+{% assign content = content | default: false %}
+{% capture class %}icon-title{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+{% if icon and content %}
+  <section class="{{ class }} bg--black" data-module="icon-title">
+    <div class="icon-title__wrapper">
+      <div class="icon-title__icon">
+        {% render 'image', class: 'image--relative', src: icon %}
+      </div>
+      <h4 class="h4 h4--no-transform icon-title__content">
+        {{ content }}
+      </h4>
+    </div>
+  </section>
+{% endif %}

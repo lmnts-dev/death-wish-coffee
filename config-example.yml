@@ -1,0 +1,18 @@
+production:
+  theme_id: insecure-theme-id
+  password: insecure-password
+  api_key: insecure-api-key
+  store: insecure-store
+
+staging:
+  theme_id: insecure-theme-id
+  password: insecure-password
+  api_key: insecure-api-key
+  store: insecure-store
+
+development:
+  theme_id: insecure-theme-id
+  password: insecure-password
+  api_key: insecure-api-key
+  store: insecure-store
+  domain: insecure-domain

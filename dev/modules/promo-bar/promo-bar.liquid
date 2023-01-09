@@ -1,0 +1,12 @@
+{%- assign item = shop.metafields.promo_bar -%}
+
+{%- if item['enable'] == 'true' and item['text_content'] != blank -%}
+  <section class="promo-bar js-promo-bar" data-module="promo-bar">
+    <div class="promo-bar__container">
+      <div class="wysiwyg wysiwyg--promo-bar promo-bar__content js-content">
+        {{- item['text_content'] -}}
+      </div>
+      <div class="promo-bar__close js-close" aria-role="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.674 8.674"><path d="M5.627 4.336l2.92-2.92a.433.433 0 000-.612L7.869.126a.433.433 0 00-.612 0l-2.92 2.92-2.92-2.92a.433.433 0 00-.612 0L.127.802a.433.433 0 000 .612l2.92 2.92-2.92 2.92a.433.433 0 000 .612l.678.678a.433.433 0 00.612 0l2.92-2.92 2.92 2.92a.433.433 0 00.612 0l.678-.678a.433.433 0 000-.612z" fill="#fff"/></svg></div>
+    </div>
+  </section>
+{%- endif %}

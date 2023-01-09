@@ -1,0 +1,34 @@
+{% assign class = class | default: false %}
+{% assign image_src = image_src | default: false %}
+{% assign title = title | default: false %}
+{% assign description = description | default: false %}
+{% assign link = link | default: false %}
+{% assign product_id = product_id | default: false %}
+{% assign price = price | default: false %}
+{% assign product_url = product_url | default: false %}
+{% capture class %}alt-product-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }} bg--black" data-module="alt-product-card">
+  <div class="alt-product-card__inner">
+    <div class="alt-product-card__featured">
+      <a href="{{ link }}" class="alt-product-card__image">
+        {%- render 'image', src: image_src -%}
+      </a>
+    </div>
+    <div class="alt-product-card__content">
+      <a href="{{ link }}" class="h4 h4--uppercase alt-product-card__title">{{ title }}</a>
+      {%- comment -%}
+      <p class="b1 alt-product-card__description">{{ description }}</p>
+      {%- endcomment -%}
+      {% if product_id %}
+        <div class="b1 alt-product-card__review">
+          <a href="{{ link }}#review-drawer" class="alt-product-card__review-link">
+            <div class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></div>
+          </a>
+        </div>
+      {% endif %}
+     <p class="h5 alt-product-card__price">{{ price }}</p>
+      {% render 'button', button_value: 'Shop now', button_url: link, class: 'alt-product-card__button' %}
+    </div>
+  </div>
+</section>

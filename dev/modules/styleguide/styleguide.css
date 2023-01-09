@@ -1,0 +1,222 @@
+/* styles for styleguide */
+
+.styleguide h2 {
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #707070;
+}
+
+.styleguide-colors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 32px;
+}
+
+.styleguide-colors__item {
+  width: 100%;
+  margin-top: 50px;
+
+  @media (--xl) {
+    width: calc(50% - 24px);
+    margin-top: 100px;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:nth-child(-n+2) {
+    @media (--xl) {
+      margin-top: 0;
+    }
+  }
+}
+
+.styleguide-palette {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.styleguide-swatch {
+  position: relative;
+  margin: 13px 13px 0 0;
+  width: 100%;
+  max-width: 127px;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+
+  &--black {
+    background-color: var(--black);
+  }
+
+  &--white {
+    background-color: var(--white);
+    border: 1px solid #707070;
+  }
+
+  &--steel {
+    background-color: var(--steel);
+  }
+
+  &--bronze {
+    background-color: var(--bronze);
+  }
+
+  &--blood {
+    background-color: var(--blood);
+  }
+
+  &--shadow {
+    background-color: var(--shadow);
+  }
+
+  &--slate {
+    background-color: var(--slate);
+  }
+
+  &--ashe {
+    background-color: var(--ashe);
+  }
+
+  &--bone {
+    background-color: var(--bone);
+  }
+
+  &--pumpkin {
+    background-color: var(--pumpkin);
+  }
+
+  &--yule {
+    background-color: var(--yule);
+  }
+
+  &--passion {
+    background-color: var(--passion);
+  }
+
+  &--shamrock {
+    background-color: var(--shamrock);
+  }
+
+  &--bloom {
+    background-color: var(--bloom);
+  }
+
+  &--independance {
+    background-color: var(--independance);
+  }
+
+  &--eggplant {
+    background-color: var(--eggplant);
+  }
+
+  &--lavender {
+    background-color: var(--lavender);
+  }
+
+  &--blue {
+    background-color: var(--blue);
+  }
+}
+
+.styleguide-swatch__description {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: var(--white);
+  text-align: center;
+  text-transform: uppercase;
+
+  .styleguide-swatch--white & {
+    color: var(--steel);
+  }
+}
+
+.styleguide-typo p {
+  position: relative;
+  padding: 10px 0;
+
+  @media (--xxl-max) {
+    padding-left: 50px;
+  }
+
+  &::before {
+    content: attr(data-name);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 40px;
+    text-transform: uppercase;
+    transform: translate(0, -50%);
+
+    @media (--xxl) {
+      left: -50px;
+    }
+  }
+}
+
+.styleguide-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+}
+
+.styleguide-button {
+  margin: 12px 12px 0 0;
+}
+
+.styleguide-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.styleguide-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 32px;
+
+  @media (--md) {
+    width: calc(50% - 20px);
+    margin-top: 0;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  > * {
+    width: 100%;
+  }
+}
+
+.styleguide-input {
+  margin-bottom: 24px;
+}
+
+.styleguide-checkbox,
+.styleguide-radio {
+  width: calc(50% - 20px);
+}
+
+.styleguide-select {
+  margin-top: 24px;
+
+  @media (--lg) {
+    margin-top: 49px;
+  }
+}

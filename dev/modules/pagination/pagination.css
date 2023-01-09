@@ -1,0 +1,85 @@
+/* styles for the pagination module go in this file */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 7rem;
+
+  &--account {
+    padding: 10px 0;
+  }
+}
+
+.pagination__container {
+  position: relative;
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+}
+
+.pagination__nav {
+  color: var(--bone);
+  text-decoration: none;
+
+  &--prev {
+    margin-right: 13px;
+  }
+
+  &--next {
+    margin-left: 17px;
+  }
+
+  .pagination--account & {
+    color: var(--shadow);
+  }
+}
+
+.pagination__svg {
+  display: inline-flex;
+  width: 11px;
+  height: 14px;
+}
+
+.pagination__page {
+  display: inline-block;
+  padding: 1px 10px 3px;
+  color: var(--bone);
+  text-align: center;
+  min-width: 32px;
+  text-decoration: none;
+
+  &:not(:first-child) {
+    margin-left: 4px;
+  }
+
+  .pagination--account & {
+    color: var(--shadow);
+  }
+
+  &--current {
+    color: var(--shadow);
+    cursor: text;
+    background-color: var(--bone);
+
+    .pagination--account & {
+      color: var(--blood);
+    }
+  }
+}
+
+.pagination__arrow {
+  color: var(--bone);
+  position: absolute;
+
+  &--prev {
+    left: 2.5rem;
+  }
+
+  &--next {
+    right: 2.5rem;
+  }
+}
