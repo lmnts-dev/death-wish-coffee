@@ -1,0 +1,21 @@
+{% assign image = image | default: false %}
+{% assign title = title | default: false %}
+{% assign description = description | default: false %}
+{% assign class = class | default:false %}
+{% capture class %}mirror-image-hero{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+{%- if image and title -%}
+  <section class="{{ class }} bg--black" data-module="mirror-image-hero">
+    <div class="mirror-image-hero__wrapper">
+      <div class="mirror-image-hero__image">
+        {%- render 'image', src: image, class: 'navigation__logo-image' -%}
+      </div>
+      <div class="mirror-image-hero__content">
+        <h1 class="h1 mirror-image-hero__title">{{ title }}</h1>
+        {%- if description -%}
+          <div class="p1 mirror-image-hero__description">{{ description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}

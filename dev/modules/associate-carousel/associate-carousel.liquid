@@ -1,0 +1,49 @@
+{%- assign class = class | default: false -%}
+{%- assign item_titles = item_titles | default: false -%}
+{%- assign item_descriptions = item_descriptions | default: false -%}
+{%- assign item_images = item_images | default: false -%}
+{%- assign item_blurbs = item_blurbs | default: false -%}
+{%- assign column_number = column_number | default: 6 -%}
+{%- assign row_number = row_number | default: 4 -%}
+{%- assign item_per_view = column_number | times: row_number -%}
+{%- capture class -%}associate-carousel carousel--associate bg--black{% if class %} {{ class }}{% endif %} associate-carousel--column-{{ column_number }}{%- endcapture -%}
+{%- if item_titles and item_titles.size > 0 -%}
+  <section class="{{- class -}}" data-module="associate-carousel" data-item-per-view="{{- item_per_view -}}">
+    <div class="swiper-container associate-carousel__container js-swiper">
+      <div class="swiper-wrapper associate-carousel__wrapper">
+        {%- for title in item_titles -%}
+          {%- assign index0 = forloop.index0 -%}
+          {%- assign blurb = item_blurbs[index0] -%}
+          <div class="swiper-slide associate-carousel__item js-item{% if blurb != blank %} associate-carousel__item--animated{% endif %}">
+            <div class="associate-carousel__inner">
+              <div class="associate-carousel__item-main">
+                <div class="associate-carousel__item-image-wrapper">
+                  {%- if item_images[index0] != blank -%}
+                    {%- render 'image', src: item_images[index0], class: 'associate-carousel__item-image' -%}
+                  {%- endif -%}
+                </div>
+                <div class="associate-carousel__item-content">
+                  <h4 class="b1 associate-carousel__item-title">{{- title -}}</h4>
+                  {%- if item_descriptions[index0] != blank -%}
+                    <p class="b1 associate-carousel__item-description">{{- item_descriptions[index0] -}}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+              {%- if blurb != blank -%}
+                <div class="associate-carousel__item-blurb">
+                  <div class="associate-carousel__item-blurb-wysiwyg wysiwyg wysiwyg--associate-carousel wysiwyg--text-white">{{- blurb -}}</div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="carousel-next swiper-button-next">
+        {% render 'svg', type: 'chevron-right', class: 'carousel-next-icon' %}
+      </div>
+      <div class="carousel-prev swiper-button-prev">
+        {% render 'svg', type: 'chevron-left', class: 'carousel-prev-icon' %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}

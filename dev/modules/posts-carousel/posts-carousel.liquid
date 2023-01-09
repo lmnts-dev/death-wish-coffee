@@ -1,0 +1,33 @@
+{%- assign carousel_slides = carousel_slides | default: false -%}
+{%- assign class = class | default: false -%}
+{%- assign title = title | default: false -%}
+{%- assign view_all_url = view_all_url | default: false -%}
+{%- assign total_slides = total_slides | default: 1 -%}
+{%- assign spacing_class = spacing_class | default: false -%}
+{%- assign carousel_class = carousel_class | default: 'bg--black' -%}
+{%- capture classes -%}{{ class }} posts-carousel{%- endcapture -%}
+
+<section class="{{ classes }}">
+  <div class="posts-carousel__wrapper{% if spacing_class %} {{ spacing_class }}{% endif %}">
+    <div class="container posts-carousel__container">
+      <div class="h4 h4--no-transform posts-carousel__title">
+        <a href="{{view_all_url}}" class="posts-carousel__title-anchor">
+          <span class="posts-carousel__title-link">{{ title }}</span> <span class="b4 posts-carousel__view">View All</span>
+        </a>
+      </div>
+      {% assign navigation = false %}
+      {% assign loop = false %}
+      {% if total_slides > 1 %}
+        {% assign navigation = true %}
+        {% assign loop = true %}
+      {% endif %}
+      {% render 'carousel', 
+        children: carousel_slides,
+        spacing: 30,
+        slides_per_view: 4,
+        navigation: navigation,
+        loop: loop,
+        class: carousel_class %}
+    </div>
+  </div>
+</section>

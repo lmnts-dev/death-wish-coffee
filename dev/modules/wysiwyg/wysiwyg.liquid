@@ -1,0 +1,15 @@
+{%- assign content = content | default: false -%}
+{% assign class = class | default: false %}
+
+{% capture classes %}wysiwyg{% if class %} {{- class -}}{% endif %}{% endcapture %}
+<div class="{{- classes -}}" data-module="wysiwyg">
+  {% if content %}
+    {%- if template == 'article' -%}
+      <div class="container container--post">
+    {%- endif -%}
+      {{content}}
+    {%- if template == 'article' -%}
+      </div>
+    {%- endif -%}
+  {% endif %}
+</div>

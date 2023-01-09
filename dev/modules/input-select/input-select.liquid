@@ -1,0 +1,68 @@
+{% assign placeholder = placeholder | default: false %}
+{% assign options = options | default: false %}
+{% assign option_values = option_values | default: false %}
+{% assign label = label | default: false %}
+{% assign tip = tip | default: false %}
+{% assign use_country_tags = use_country_tags | default: false %}
+{% assign cta_val = cta_val | default: false %}
+{% assign cta_url = cta_url | default: shop.url %}
+{% assign custom_attrs = custom_attrs | default: false %}
+{% assign id = id | default: false %}
+{% assign name = name | default: id %}
+{% assign first_selected = first_selected | default: false %}
+{% assign selected_value = selected_value | default: false %}
+{% assign vue_options = vue_options | default: false %}
+{% capture class %}form-field form-field--select{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<div class="{{ class }}" data-module="input-select">
+  <div class="input-select__label-container">
+    {% if label %}
+      <label for="{{- id -}}" class="form-field__label"><span>{{- label -}}</span></label>
+    {% endif %}
+    {% if tip %}
+      {% render 'tool-tip', info: tip %}
+    {% endif %}
+    {% if cta_val %}
+      <a href="{{- cta_url -}}" class="input-select__cta b1">{{- cta_val -}}</a>
+    {% endif %}
+  </div>
+  <div class="input-select__select-container">
+    {% render 'svg', type: 'chevron-down', class: 'input-select__chevron' %}
+    <select 
+      id="{{- id -}}"
+      class="input-select__select b1"
+      name="{{-name -}}"
+      {% if custom_attrs %}{{custom_attrs}}{% endif %}>
+      {% if use_country_tags %}
+        {{- all_country_option_tags -}}
+      {% else %}
+        {% if placeholder %}
+          <option class="input-select__option" disabled{% unless first_selected or selected_value != false %} selected{% endunless %}>{{- placeholder -}}</option>
+        {% endif %}
+        {% if options %}
+          {% for option in options %}
+            {%- capture value -%}
+              {%- if option_values and option_values.size == options.size -%}
+                {{- option_values[forloop.index0] -}}
+              {%- else -%}
+                {{- option -}}
+              {%- endif -%}
+            {%- endcapture -%}
+
+            {%- assign is_selected = false -%}
+            {%- if selected_value == false and first_selected and forloop.first -%}
+              {%- assign is_selected = true -%}
+            {%- elsif selected_value == value -%}
+              {%- assign is_selected = true -%}
+            {%- endif -%}
+
+            <option class="input-select__option" value="{{- value | strip -}}"{% if is_selected %} selected{% endif %}>{{- option | strip -}}</option>
+          {% endfor %}
+        {% elsif vue_options %}
+          <!-- {% capture options_statement %}option in {{ vue_options }}{% endcapture %} -->
+          <option class="input-select__option" v-for="option in {{ vue_options }}" v-bind:value="option.value">${option.text}</option>
+        {% endif %}
+      {% endif %}
+    </select>
+  </div>
+</div>

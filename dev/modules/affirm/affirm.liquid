@@ -1,0 +1,9 @@
+{% assign class = class | default: false %}
+{% assign color = color | default: 'white' %}
+{% assign page_type = page_type | default: 'cart' %}
+{% assign price = price | default: cart.total_price %}
+{% capture class %}affirm b1 affirm--{{ color }}{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<section class="{{ class }}">
+  <p class="affirm-as-low-as" data-page-type="{{ page_type }}" data-affirm-type="text" data-amount="{{price}}" data-affirm-color="{{ black }}"></p>
+</section>

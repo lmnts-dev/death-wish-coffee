@@ -1,0 +1,72 @@
+{%- assign social_type = 'website' -%}
+  {% comment %}
+    the split: '//' | first filter on the title is specifically to remove the "// Performance Level #" from the product titles.
+    that nomenclature is required for the PDP form to work properly, but we don't want it to show up in metadata, so we'll remove it here.
+  {% endcomment %}
+{%- assign social_title = page_title | split: '//' | first | strip_html | escape -%}
+{%- assign social_description = page_description | strip_html | escape -%}
+{%- assign social_image = 'social-image.jpg' | file_url -%}
+
+{%- if template contains 'product' -%}
+  {%- assign social_type = 'product' -%}
+  {%- assign social_title = product.title | split: '//' | first | strip_html | escape -%}
+  {%- assign social_price = product.price | money_without_currency | strip_html | escape -%}
+  {%- assign social_currency = shop.currency -%}
+  {%- if product.featured_image -%}
+    {%- assign social_product_img = current_variant.featured_image | default: product.featured_image -%}
+    {%- assign social_image = social_product_img | img_url: '1024x' -%}
+  {%- endif -%}
+{%- elsif template contains 'collection' -%}
+  {%- if collection.description != blank -%}
+    {%- assign social_description = collection.description | strip_html | escape -%}
+  {%- endif -%}
+  {%- if collection.image -%}
+    {%- assign social_image = collection.image | img_url: 'master' -%}
+  {%- endif -%}
+{%- elsif template contains 'blog' -%}
+  {%- for article in blog.articles -%}
+    {%- if article.image -%}
+      {%- assign social_image = article.image | img_url: 'master' -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- elsif template contains 'article' -%}
+  {%- assign social_type = 'article' -%}
+  {%- assign img_tag = '<' | append: 'img' -%}
+  {%- if article.image -%}
+    {%- assign social_image = article.image | img_url: 'master' -%}
+  {%- elsif article.content contains img_tag -%}
+    {%- assign src = article.content | split: 'src="' -%}
+    {%- assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' -%}
+    {%- assign social_image = src -%}
+  {%- endif -%}
+{%- elsif template contains 'index' -%}
+  {% assign social_image = shop.metafields.homepage_hero.background_image | map: 'src' | first | remove: 'https:' | remove: 'http:' %}
+{%- elsif template contains 'page' -%}
+  {%- assign social_image = page.metafields.hero.image | map: 'src' | first | remove: 'https:' | remove: 'http:' -%}
+{%- endif -%}
+
+{% comment %}
+  Page-level Overrides
+
+  Override variable assignments below this
+  using `template contains` and similar operators.
+{% endcomment %}
+
+<meta name="description" content="{{social_description | default: shop.name}}" />
+<meta property="og:url" content="{{canonical_url}}">
+<meta property="og:site_name" content="{{shop.name}}">
+<meta property="og:type" content="{{social_type | default: 'website'}}">
+<meta property="og:title" content="{{social_title | default: shop.name}}">
+<meta property="og:description" content="{{social_description | default: shop.name}}">
+<meta property="og:image" content="http:{{social_image}}">
+<meta property="og:image:secure_url" content="https:{{social_image}}">
+{%- if social_price -%}<meta property="og:price:amount" content="{{social_price}}">{%- endif -%}
+{%- if social_currency -%}<meta property="og:price:currency" content="{{social_currency}}">{%- endif -%}
+
+<meta name="twitter:title" content="{{social_title | default: shop.name}}">
+<meta name="twitter:description" content="{{social_description | default: shop.name}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https:{{social_image}}">
+<meta name="twitter:image:width" content="480">
+<meta name="twitter:image:height" content="480">

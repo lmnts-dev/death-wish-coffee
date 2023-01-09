@@ -1,0 +1,52 @@
+{%- assign vue_attrs = vue_attrs | default: false -%}
+<div is="rewards-redeem-modal" inline-template{% if vue_attrs %} {{ vue_attrs }}{% endif %}>
+  <div v-if="redeemProducts.length" class="rewards-redeem-modal z9" :class="{ 'rewards-redeem-modal--active': isActive }">
+    <div class="rewards-redeem-modal__overlay" @click="deactivate"></div>
+    <div class="rewards-redeem-modal__wrapper">
+      <button aria-label="Close Redeem Modal" class="rewards-redeem-modal__close" @click="deactivate">{%- render 'svg', type: 'close', class: 'rewards-redeem-modal__close-icon' -%}</button>
+      <div class="rewards-redeem-modal__inner">
+        <h4 class="h2 rewards-redeem-modal__title">REDEEM YOUR REWARDS</h4>
+        <div class="rewards-earn-modal__wrapper-content" ref="content">
+          <div class="rewards-redeem-modal__results" v-if="pointsPurchased">
+            <p class="rewards-redeem-modal__results-message">Congratulations! You've redeemed successfully. Please copy your code below:</p>
+            <div class="rewards-redeem-modal__results-field">
+              <input type="text" class="rewards-redeem-modal__results-code" @focus="focusInput" readonly v-model="purchasedDiscountCode" ref="input">
+              <button aria-label="Copy Purchased Discount Code" class="button rewards-redeem-modal__results-button" @click.prevent="copyDiscountCode">Copy</button>
+              <div v-if="isDiscountCodeCopied" class="rewards-redeem-modal__results-tooltip">Discount Code Copied!</div>
+            </div>
+          </div>
+          <ul v-else class="rewards-redeem-modal__list">
+            <li v-for="product in redeemProducts" class="rewards-redeem-modal__item" v-if="!activeSliderProductId || activeSliderProductId === product.id">
+              <div class="rewards-redeem-modal__item-details">
+                <p class="h4 rewards-redeem-modal__item-name">${product.reward.name}</p>
+                <p class="h3 h3--no-transform rewards-redeem-modal__item-description">${product.exchange_description}</p>
+                <div class="rewards-redeem-modal__item-slider" v-if="product.exchange_type === 'variable' && activeSliderProductId === product.id">
+                  <input type="range" v-model.number="variableProductAmount" :min="variableProductMin" :max="variableProductMax" :step="variableProductStep">
+                </div>
+              </div>
+              <button
+                :aria-label="'Redeem ' + product.reward.name"
+                type="button"
+                class="button rewards-redeem-modal__item-button"
+                :disabled="!product.is_purchasable"
+                @click.prevent="checkAndPurchase(product)"
+              >
+                <template v-if="product.is_purchasable">
+                  <template v-if="product.exchange_type !== 'variable' || activeSliderProductId === product.id">Redeem</template>
+                  <template v-else>View</template>
+                </template>
+                <template v-else>Not Quite There</template>
+              </button>
+            </li>
+          </ul>
+          {%- render 'button'
+            tag: 'button',
+            class: 'button--inline',
+            custom_attrs: 'v-if="purchasedDiscountCode || variableProduct" aria-label="Redeem Modal Back" @click="back"',
+            button_value: 'Back'
+          -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

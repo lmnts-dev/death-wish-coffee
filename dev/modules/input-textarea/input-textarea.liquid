@@ -1,0 +1,20 @@
+{%- assign id = id | default: false -%}
+{%- assign label = label | default: false -%}
+{%- assign placeholder = placeholder | default: blank -%}
+{%- assign name = name | default: false -%}
+{%- assign label_top = label_top | default: false -%}
+{%- assign required = required | default: 'required' -%}
+{%- assign custom_attrs = custom_attrs | default: false -%}
+{% capture class %}form-field form-field--textarea{% if class %} {{- class -}}{% endif %}{% if label_top %} form-field--label-top{% endif %}{% endcapture %}
+
+{% if name and label and id %}
+<div class="{{- class -}}" data-module="input-textarea">
+  <div class="form-field__input-wrapper">
+    <textarea class="form-field__input" id="{{- id -}}" name="{{- name -}}" placeholder="{{- placeholder -}}" rows="5" {{required}} {% if custom_attrs %}{{- custom_attrs -}}{% endif %}></textarea>
+    <label class="form-field__label{% unless label_top %} form-field__label--as-placeholder{% endunless %}" for="{{- id -}}">
+      <span class="{% if label_top %}h8{% else %}b1{% endif %}">{{- label -}}</span>
+    </label>
+    <span class="form-field__error"></span>
+  </div>
+</div>
+{% endif %}

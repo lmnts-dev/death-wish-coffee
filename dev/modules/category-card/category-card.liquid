@@ -1,0 +1,16 @@
+{% assign class = class | default: false %}
+{% assign title = title | default: '' %}
+{% assign image = image | default: false %}
+{% assign url = url | default: false %}
+{% capture class %}category-card{% if class %} {{- class -}}{% endif %}{% endcapture %}
+
+<{% if url %}a href="{{ url }}"{% else %}div{% endif %} class="{{ class }}" data-module="category-card">
+  {% if image %}
+    <div class="category-card__image">
+      {% render 'image', src: image %}
+    </div>
+  {% endif %}
+  {% if title %}
+    <p class="h5 category-card__title">{{ title }}</p>
+  {% endif %}
+</{% if url %}a{% else %}div{% endif %}>

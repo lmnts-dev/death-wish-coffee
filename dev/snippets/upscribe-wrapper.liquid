@@ -1,0 +1,13 @@
+<section class="upscribe-wrapper" data-module="upscribe-wrapper">
+  <script>window.upscribeStoreDomain = '{{ shop.permanent_domain }}'; window.upscribeCustomerId = '{{ customer.id }}'; window.customer = '{{ customer | json }}'; window.customerMetafieldAccessToken = {% if customer.metafields.customer['upscribe-access-token'] %}"{{ customer.metafields.customer['upscribe-access-token'] }}"{% else %} false{% endif %};</script>
+  {{ 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' | asset_url | stylesheet_tag }}{{
+  'upscribe_8f6cc6aa17623d5b0fe6.css' | asset_url | stylesheet_tag }}{{ 'upscribe_25c5779741da7019e2eb.css' | asset_url
+  | stylesheet_tag }}
+  <div id="__nuxt">
+    <script>window.addEventListener("error", function () { var e = document.getElementById("nuxt-loading"); e && (e.className += " error") })</script>
+    <div id="nuxt-loading" aria-live="polite" role="status">
+      <div>Loading...</div>
+    </div>
+  </div>{{ 'upscribe_78c682bbf8552466e695.js' | asset_url | script_tag }}{{ 'upscribe_ff8beb8852edaeb43f90.js' |
+  asset_url | script_tag }}{{ 'upscribe_8b5b8720a10a803eeb71.js' | asset_url | script_tag }}
+</section>

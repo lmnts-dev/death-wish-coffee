@@ -1,0 +1,18 @@
+<section class="form-create-account spacing--lg" data-module="form-create-account">
+  <div class="form-create-account__container container">
+    <h1 class="create-account-header__title h1">CREATE ACCOUNT</h1>
+      {% form 'create_customer', class: 'form-create-account__form' %}
+        {{ form.errors | default_errors }}
+        {%- render 'input-text', placeholder: 'First Name', id: 'fName', name: 'customer[first_name]', class: 'form-create-account__field form-field--account' -%}
+        {%- render 'input-text', placeholder: 'Last Name', id: 'lName', name: 'customer[last_name]', class: 'form-create-account__field form-field--account' -%}
+        {%- render 'input-text', placeholder: 'Email Address', id: 'email', name: 'customer[email]', class: 'form-create-account__field form-field--account' -%}
+        {%- render 'input-password', placeholder: 'Password', id: 'password', name: 'customer[password]', class: 'form-create-account__field' -%}
+        <input type="hidden" name="customer[accepts_marketing]" value="" />
+        {%- render 'input-checkbox', label: 'I would like to receive email newsletters from DWC. See Privacy Policy and Terms of Service.', name: "customer[accepts_marketing]", class: 'form-create-account__checkbox' -%}
+        {%- render 'button', tag: 'button', custom_attrs: 'type="submit"', button_value: 'CREATE', class: 'button--light create-account-form__submit' -%}
+      {% endform %}
+      <div class="form-create-account__login">
+        <a href="{{ routes.account_login_url }}" class="form-create-account__login-link">Already have an account? Click here to log in.</a>
+      </div>
+  </div>
+</section>

@@ -2,10 +2,16 @@ version: "3.5"
 
 x-shared-config:
   app_image_name: &app_image_name
-    image: mutations/node:12.16.1-alpine3.11-2020-03-04
+    image: mutations/node:16.17.0-alpine3.16-2022-09-14
+
+  caddy_image_name: &caddy_image_name
+    image: caddy:2.4.6-alpine
+
+  shopify_image_name: &shopify_image_name
+    # Locally build docker image with additional packages
+    image: dwc/shopify:latest
 
   app_base: &app_base
-    <<: *app_image_name
     env_file:
       - .env
       - .env.local
@@ -15,7 +21,7 @@ x-shared-config:
     stdin_open: true
     tty: true
     tmpfs:
-      - /tmp
+      - /tmp:exec,mode=755
     user: "1069:1420"
     volumes:
       - .:/app:cached
@@ -24,10 +30,49 @@ x-shared-config:
 services:
   app:
     <<: *app_base
-    command: local-dev
-    entrypoint: yarn
+    <<: *app_image_name
+    # FIXME: update command after dev environment
+    # command: local-dev
+    entrypoint: npm
     ports:
       - 3000:3000
       - 3001:3001
-    tmpfs:
-      - /tmp:exec,mode=755
+
+  dev:
+    <<: *app_base
+    <<: *app_image_name
+    # FIXME: update command after dev environment
+    # command: local-dev
+    entrypoint: npm
+    ports:
+      - 3000:3000
+      - 3001:3001
+    working_dir: /app/dev
+
+  # Proxy used for login and dev server and shopify auth proxy
+  caddy:
+    <<: *caddy_image_name
+    ports:
+      - 443:443
+    volumes:
+      - ./.caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+
+  # Used for the shopify-cli
+  shopify:
+    <<: *app_base
+    <<: *shopify_image_name
+    depends_on:
+      - caddy
+    command: theme serve --host 0.0.0.0
+    entrypoint: shopify
+    ports:
+      - 3456:3456
+      - 9292:9292
+    volumes:
+      - .:/app:cached
+      - ./.cache:/.cache
+      - ./.config:/.config
+
+volumes:
+  caddy_data:

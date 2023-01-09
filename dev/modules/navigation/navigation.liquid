@@ -1,0 +1,61 @@
+{%- assign logo = settings.logo | img_url: 'master' -%}
+{%- render 'promo-bar' -%}
+
+<header class="navigation z10 bg--black" data-module="navigation">
+  <div class="navigation__container">
+    <button class="navigation__hamburger hamburger js-hamburger" type="button">
+      <div class="navigation__hamburger-box hamburger-box">
+        <span class="navigation__hamburger-inner hamburger-inner"></span>
+      </div>
+    </button>
+    <div class="navigation__logo">
+      <a href="{{ routes.root_url }}" class="naviation__logo-link">
+        {%- render 'image', src: logo, class: 'navigation__logo-image' -%}
+      </a>
+    </div>
+    <div class="navigation__main js-mobile-menu">
+      <div class="navigation__login">
+        <a href="{{ routes.account_url }}" class="navigation__login-inner">
+          {%- render 'svg', type: 'skull', class: 'navigation__login-icon' -%}
+          {%- if customer -%}
+            Account
+            {%- else -%}
+            Login
+          {%- endif -%}
+        </a>
+        <button class="navigation__close js-close" type="button">
+          {%- render 'svg', type: 'close', class: 'navigation__close-icon' -%}
+        </button>
+      </div>
+      {%- render 'menu', links: menu_left.links, class: 'navigation__menu navigation__menu--left' -%}
+      <div class="navigation__partition">
+        {%- assign banner = 'menu_slideout.png' | file_url -%}
+        {% render 'svg', type: 'thunder-small', class: 'navigation__partition-image' %}
+      </div>
+      {%- render 'menu', links: menu_right.links, class: 'navigation__menu navigation__menu--right' -%}
+      {%- render 'footer', class: 'footer--navigation navigation__footer' -%}
+      <div class="navigation__copyright">&copy; Death Wish Coffee Co. {{ 'now' | date: '%Y' }}. All Rights Reserved.</div>
+    </div>
+
+    <div class="navigation__utilities">
+      <a href="{{ routes.account_url }}" class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</a>
+      <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
+      <form action="/search" method="get" class="input-group search-bar search-bar--modal" role="search">
+        <input name="q" value="" placeholder="Search our store" class="input-group-field" aria-label="Search our store" autocomplete="off">
+        <div class="input-group-btn">
+          <button type="submit" class="btn icon-fallback-text">
+            <div class="navigation__search-btn">
+              {% render 'svg' type: 'search' %}
+            </div>
+          </button>
+        </div>
+        <div class="navigation__search-close js-close" aria-label="Search close">
+          {% render 'svg' type: 'close' %}
+        </div>
+      </form>
+      {%- render 'pop-out-cart-trigger', class: 'navigation__utilities-cart' -%}
+    </div>
+
+    {% render 'pop-out-cart' %}
+  </div>
+</header>

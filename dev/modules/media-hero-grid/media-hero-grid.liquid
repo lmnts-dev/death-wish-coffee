@@ -1,0 +1,49 @@
+{% assign class = class | default: false %}
+{% assign types = types | default: false %}
+{% assign types = types | default: false %}
+{% assign images = images | default: false %}
+{% assign title = title | default: false %}
+{% assign palette = palette | default: false %}
+{% capture class %}media-hero-grid{% if class %} {{- class -}}{% endif %}{% endcapture %}
+{% capture title_class %}section-title--media-hero-grid bg--black{% if palette %} section-title--palette-{{ palette }}{% endif %}{% endcapture %}
+
+{%- if types and types.size >= 5 -%}
+  <section class="{{ class }}" data-module="media-hero-grid">
+    {%- if title -%}
+      {%- render 'section-title', title: title, class: title_class -%}
+    {%- endif -%}
+    <div class="media-hero-grid__inner">
+      {%- for item in types limit: 5 -%}
+        {%- assign type = types[forloop.index0] -%}
+        {%- assign img_src = images[forloop.index0] | map: 'src' -%}
+        <div class="media-hero-grid__item">
+          {% case type %}
+            {% when 'Image' %}
+              {%- if images -%}
+                {%- render 'image',
+                  src: img_src,
+                  class: 'media-hero-grid__image'
+                -%}
+              {%- endif -%}
+            {% when 'Video' %}
+              {%- if videos -%}
+                {%- assign video_src = videos[forloop.index0] | default: '' %}
+                {%- render 'video',
+                  mod_src: video_src,
+                  mod_loop: true,
+                  mod_autoplay: true,
+                  mod_fallback_mobile: img_src,
+                  mod_class: 'media-hero-grid__video video--media-hero-grid'
+                -%}
+              {%- endif -%}
+          {% endcase %}
+        </div>
+        {%- assign modulo = forloop.index | modulo: 5 -%}
+        {%- if modulo == 0 and forloop.index < types.size -%}
+          </div>
+          <div class="media-hero-grid__inner">
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
