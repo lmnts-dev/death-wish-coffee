@@ -292,6 +292,12 @@
   display: none;
 }
 
+.custom-shogun-arrows .shg-sld-nav-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /*
    * Arrow Right
    */
