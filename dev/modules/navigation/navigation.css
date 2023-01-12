@@ -311,8 +311,10 @@
 }
 
 .navigation__utilities-login {
-  width: 21px;
   margin-right: 12px;
+  display: flex;
+  text-decoration: none;
+  gap: 10px;
 
   @media (--lg-max) {
     display: none;

@@ -8352,7 +8352,7 @@ var PURCHASE_TYPES = {
     queryStringVariant: {
       type: String,
       default: function _default() {
-        return '';
+        return "";
       }
     },
     subscriptionChecked: Boolean
@@ -8365,7 +8365,7 @@ var PURCHASE_TYPES = {
     }, {});
     return {
       componentMounted: !1,
-      moneyFormat: '{{amount}}',
+      moneyFormat: "{{amount}}",
       ogOfferDetails: {},
       optionIcons: _product_icons__WEBPACK_IMPORTED_MODULE_33__["default"],
       selectedOptions: _objectSpread({}, initialSelectedOptions),
@@ -8376,7 +8376,7 @@ var PURCHASE_TYPES = {
   mounted: function mounted() {
     this.activeVariantId = this.product.variants[0].id; // reset
 
-    this.index = '';
+    this.index = "";
 
     for (var key in this.product.options_by_name) {
       var option = this.product.options_by_name[key].option;
@@ -8387,7 +8387,7 @@ var PURCHASE_TYPES = {
     this.$_addUpdateOgOfferDetailsListener();
     this.componentMounted = 1;
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_30__[/* mapState */ "d"])('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage'])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_30__[/* mapState */ "d"])("cart", ["addedToCartSuccessfully", "addedToCartErrorMessage"])), {}, {
     /**
      * Active discount amount.
      *
@@ -8396,7 +8396,7 @@ var PURCHASE_TYPES = {
      * @returns String
      */
     activeDiscountAmount: function activeDiscountAmount() {
-      var discount = this.defaultGlobalDiscountAmount || '0';
+      var discount = this.defaultGlobalDiscountAmount || "0";
       return discount;
     },
 
@@ -8411,9 +8411,9 @@ var PURCHASE_TYPES = {
       var activeDiscount = this.activeDiscountAmount;
 
       if (activeDiscount) {
-        return activeDiscount.indexOf('$') > -1 ? '$' : '%';
+        return activeDiscount.indexOf("$") > -1 ? "$" : "%";
       } else {
-        return '';
+        return "";
       }
     },
 
@@ -8423,7 +8423,7 @@ var PURCHASE_TYPES = {
      * @returns String
      */
     addToCartButtonText: function addToCartButtonText() {
-      return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out';
+      return this.isAbleAddToCart ? "Add To Cart" : "Sold Out";
     },
 
     /**
@@ -8448,7 +8448,7 @@ var PURCHASE_TYPES = {
       }
 
       var label = this.ogOfferDetails.frequency.label;
-      debug('finalSubscriptionProperty', label);
+      debug("finalSubscriptionProperty", label);
       return label;
     },
 
@@ -8478,7 +8478,7 @@ var PURCHASE_TYPES = {
      * @returns String
      */
     intervalFrequency: function intervalFrequency() {
-      return this.ogOfferDetails.frequency.interval || '1';
+      return this.ogOfferDetails.frequency.interval || "1";
     },
 
     /**
@@ -8489,7 +8489,7 @@ var PURCHASE_TYPES = {
      * @returns String
      */
     intervalUnit: function intervalUnit() {
-      return this.ogOfferDetails.frequency.unit || 'day';
+      return this.ogOfferDetails.frequency.unit || "day";
     },
 
     /**
@@ -8552,7 +8552,7 @@ var PURCHASE_TYPES = {
                   } else if (pricesContainingOption[value].includes(variant.price)) {
                     // If multiple variants with the same option value have the
                     // same price then this is the option we're looking for
-                    debug('priceDecidingFactor found', optionName);
+                    debug("priceDecidingFactor found", optionName);
                     return optionName;
                   }
 
@@ -8576,7 +8576,7 @@ var PURCHASE_TYPES = {
         _iterator.f();
       }
 
-      debug('priceDecidingFactor default', defaultOptionName);
+      debug("priceDecidingFactor default", defaultOptionName);
       return defaultOptionName;
     },
 
@@ -8624,7 +8624,7 @@ var PURCHASE_TYPES = {
      */
     selectedVariant: function selectedVariant() {
       var variant = this.findVariantWithOptions(this.selectedOptionValues);
-      debug('selectedVariant', variant);
+      debug("selectedVariant", variant);
       var selected = this.hasSingleVariant ? this.product.variants[0] : variant;
       return selected;
     },
@@ -8635,7 +8635,7 @@ var PURCHASE_TYPES = {
      * @returns String
      */
     selectedVariantId: function selectedVariantId() {
-      return this.selectedVariant ? this.selectedVariant.id : '';
+      return this.selectedVariant ? this.selectedVariant.id : "";
     },
 
     /**
@@ -8656,7 +8656,7 @@ var PURCHASE_TYPES = {
         var allocationPlanId = planAllocation.selling_plan_id;
         return parseInt(allocationPlanId) === parseInt(_this.sellingPlanId);
       });
-      debug('sellingPlanAllocation', allocation);
+      debug("sellingPlanAllocation", allocation);
       return allocation || {};
     },
 
@@ -8667,7 +8667,7 @@ var PURCHASE_TYPES = {
      */
     sellingPlanDiscountPercent: function sellingPlanDiscountPercent() {
       if (!this.sellingPlanAllocation) {
-        debug('sellingPlanDiscountPercent', {
+        debug("sellingPlanDiscountPercent", {
           discount: 0
         });
         return null;
@@ -8676,7 +8676,7 @@ var PURCHASE_TYPES = {
 
       var plan = this.sellingPlanAllocation;
       var discount = 100 - Math.round(plan.price / plan.compare_at_price * 100);
-      debug('sellingPlanDiscountPercent', {
+      debug("sellingPlanDiscountPercent", {
         discount: discount
       });
       return discount;
@@ -8706,11 +8706,11 @@ var PURCHASE_TYPES = {
      * @returns String
      */
     subscriptionProductTitleDisplay: function subscriptionProductTitleDisplay() {
-      var display = ''; // Product title
+      var display = ""; // Product title
 
       display += this.product.title; // Discount
 
-      display += this.discountDisplay ? ' - ' + this.discountDisplay + ' off' : '';
+      display += this.discountDisplay ? " - " + this.discountDisplay + " off" : "";
       return display;
     },
 
@@ -8721,7 +8721,7 @@ var PURCHASE_TYPES = {
      */
     subscriptionSelected: function subscriptionSelected() {
       var selected = this.productPurchaseType === PURCHASE_TYPES.subscription;
-      debug('subscriptionSelected', selected);
+      debug("subscriptionSelected", selected);
       return selected;
     }
   }),
@@ -8747,7 +8747,7 @@ var PURCHASE_TYPES = {
      * @param {*} ogOfferDetails
      */
     $_handleOgOfferDetails: function $_handleOgOfferDetails(ogOfferDetails) {
-      debug('$_handleOgOfferDetails', ogOfferDetails);
+      debug("$_handleOgOfferDetails", ogOfferDetails);
       this.ogOfferDetails = ogOfferDetails;
       this.$_handleVariantUpdate();
     },
@@ -8763,7 +8763,7 @@ var PURCHASE_TYPES = {
       this.activeVariantId = variant.id;
       var originalPrice = this.sellingPlanAllocation.price || variant.price || false;
       var originalComparePrice = this.sellingPlanAllocation.compare_at_price || variant.compare_at_price || false;
-      debug('handleVariantUpdate', {
+      debug("handleVariantUpdate", {
         sellingPlan: this.sellingPlanAllocation,
         variant: variant
       });
@@ -8774,7 +8774,7 @@ var PURCHASE_TYPES = {
      * Toggle the Ordergroove subscription button.
      */
     $_toggleSubscriptionButton: function $_toggleSubscriptionButton() {
-      var button = document.querySelector('og-offer button.og-button-toggle');
+      var button = document.querySelector("og-offer button.og-button-toggle");
       button.click();
     },
 
@@ -8800,7 +8800,7 @@ var PURCHASE_TYPES = {
         displayDiscountComparePrice = Object(lib_util__WEBPACK_IMPORTED_MODULE_32__[/* formatMoney */ "e"])(originalComparePrice - discountComparePrice, this.moneyFormat);
       }
 
-      debug('calculateVariantPrices', {
+      debug("calculateVariantPrices", {
         originalPrice: originalPrice,
         displayDiscountPrice: displayDiscountPrice,
         originalComparePrice: originalComparePrice,
@@ -8845,12 +8845,12 @@ var PURCHASE_TYPES = {
      */
     discountCalculatedValue: function discountCalculatedValue(total) {
       var discountType = this.activeDiscountType;
-      var discountAmount = this.activeDiscountAmount.replace('%', '').replace('$', '');
+      var discountAmount = this.activeDiscountAmount.replace("%", "").replace("$", "");
       var calcDiscountAmount = 0; // Fixed amount
 
-      if (discountType === '$') {
+      if (discountType === "$") {
         calcDiscountAmount = discountAmount; // Percentage
-      } else if (discountType === '%') {
+      } else if (discountType === "%") {
         calcDiscountAmount = total * discountAmount / 100;
       }
 
@@ -8938,9 +8938,9 @@ var PURCHASE_TYPES = {
                   // )
                 }
 
-                debug('handleAddToCart', params);
+                debug("handleAddToCart", params);
                 _context.next = 7;
-                return lib_store__WEBPACK_IMPORTED_MODULE_31__[/* default */ "a"].dispatch('cart/addToCart', params);
+                return lib_store__WEBPACK_IMPORTED_MODULE_31__[/* default */ "a"].dispatch("cart/addToCart", params);
 
               case 7:
                 _this2.$nextTick(function () {
@@ -8977,7 +8977,7 @@ var PURCHASE_TYPES = {
                       });
                     }); // End Klaviyo snippet
                   } else {
-                    _this2.$emit('added-to-cart-error');
+                    _this2.$emit("added-to-cart-error");
                   }
                 });
 
@@ -9072,10 +9072,10 @@ var PURCHASE_TYPES = {
      * @param {*} newValue
      */
     selectedVariantId: function selectedVariantId(newValue) {
-      debug('selectedVariantId', newValue);
+      debug("selectedVariantId", newValue);
       this.$_handleVariantUpdate();
-      this.$emit('update-variant-id', newValue);
-      lib_store__WEBPACK_IMPORTED_MODULE_31__[/* default */ "a"].dispatch('pdp/setSelectedVariantId', {
+      this.$emit("update-variant-id", newValue);
+      lib_store__WEBPACK_IMPORTED_MODULE_31__[/* default */ "a"].dispatch("pdp/setSelectedVariantId", {
         id: newValue
       });
     }

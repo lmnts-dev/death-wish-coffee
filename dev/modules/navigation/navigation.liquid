@@ -38,7 +38,12 @@
     </div>
 
     <div class="navigation__utilities">
-      <a href="{{ routes.account_url }}" class="navigation__utilities-login">{%- render 'svg', type: 'skull' -%}</a>
+      <a href="{{ routes.account_url }}" class="navigation__utilities-login">
+        <span class="b1">
+          Login
+        </span>
+        {%- render 'svg', type: 'skull' -%}
+      </a>
       <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
       <form action="/search" method="get" class="input-group search-bar search-bar--modal" role="search">
         <input name="q" value="" placeholder="Search our store" class="input-group-field" aria-label="Search our store" autocomplete="off">

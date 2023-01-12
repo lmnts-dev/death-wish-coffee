@@ -4,6 +4,8 @@
 
 /* We've synchronized @custom-media with bootstrap breakpoints layout */
 
+@custom-media --xxxl-max (max-width: 1680px);
+
 @custom-media --xxl (min-width: 1440px);
 
 @custom-media --xxl-max (max-width: 1439px);

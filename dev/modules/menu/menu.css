@@ -99,18 +99,20 @@
 
 .menu__item {
   position: relative;
+  margin: 40px 52px 0;
+  padding: 0 6px 30px;
 
-  @media (--lg) {
-    margin: 40px 10px 0;
-    padding: 0 6px 30px;
+  @media (--xxxl-max) {
+    margin: 40px 2vw 0;
   }
 
-  @media (--xl) {
-    margin: 40px 35px 0;
+  @media (--xxl-max) {
+    margin: 40px 1vw 0;
   }
 
-  @media (--xxl) {
-    margin: 40px 52px 0;
+  @media (--lg-max) {
+    padding: 0;
+    margin: 0;
   }
 
   &:last-child {
@@ -132,17 +134,18 @@
   @extend .h5;
 
   display: block;
-  padding: 6px 0;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--white);
+  padding-bottom: 0;
 
-  @media (--md-max) {
-    @extend .h5;
+  @media (--xl-max) {
+    font-size: 1.5vw;
+    padding: 6px 0;
   }
 
-  @media (--lg) {
-    padding-bottom: 0;
+  @media (--lg-max) {
+    @extend .h5;
   }
 
   &.is-active,
