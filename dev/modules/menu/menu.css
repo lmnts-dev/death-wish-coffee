@@ -139,11 +139,6 @@
   color: var(--white);
   padding-bottom: 0;
 
-  @media (--xl-max) {
-    font-size: 1.5vw;
-    padding: 6px 0;
-  }
-
   @media (--lg-max) {
     @extend .h5;
   }

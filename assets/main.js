@@ -8948,34 +8948,9 @@ var PURCHASE_TYPES = {
 
                   if (_this2.addedToCartSuccessfully) {
                     // Display pop-out cart
-                    lib_store__WEBPACK_IMPORTED_MODULE_31__[/* default */ "a"].dispatch('cart/setIsPopOutCartActive', true); // Klaviyo provided a non compatible snippet of code to track the add to cart event:
-                    // https://help.klaviyo.com/hc/en-us/articles/115001396711-How-to-create-an-Added-to-Cart-event-for-Shopify.
-                    // We pulled the compatible part out of snippet one and added it here. This can be removed if the DW team
-                    // no longer wants to track this event. It does not impact other functionality
+                    lib_store__WEBPACK_IMPORTED_MODULE_31__[/* default */ "a"].dispatch('cart/setIsPopOutCartActive', true); // Function written by Klaviyo included in the klaviyo-tracking snippet
 
-                    var _learnq = _learnq || [];
-
-                    fetch('https://www.deathwishcoffee.com/cart.js').then(function (res) {
-                      return res.clone().json().then(function (data) {
-                        var cart = {
-                          total_price: data.total_price / 100,
-                          $value: data.total_price / 100,
-                          total_discount: data.total_discount,
-                          original_total_price: data.original_total_price / 100,
-                          items: data.items
-                        }; // In the original snippet, `item` is undefined, this throws an eslint error
-
-                        /* eslint-disable no-undef */
-
-                        if (item !== 'undefined') {
-                          cart = Object.assign(cart, item);
-                        }
-                        /* eslint-enable no-undef */
-
-
-                        _learnq.push(['track', 'Added to Cart', cart]);
-                      });
-                    }); // End Klaviyo snippet
+                    addedToCart();
                   } else {
                     _this2.$emit("added-to-cart-error");
                   }

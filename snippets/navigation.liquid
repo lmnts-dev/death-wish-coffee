@@ -20,7 +20,7 @@
           {%- if customer -%}
             Account
             {%- else -%}
-            Login
+            Login/Create Account
           {%- endif -%}
         </a>
         <button class="navigation__close js-close" type="button">
@@ -39,10 +39,7 @@
 
     <div class="navigation__utilities">
       <a href="{{ routes.account_url }}" class="navigation__utilities-login">
-        <span class="b1">
-          Login
-        </span>
-        {%- render 'svg', type: 'skull' -%}
+        {%- render 'svg', type: 'user' -%}
       </a>
       <div class="navigation__utilities-search">{%- render 'svg', type: 'search-light' -%}</div>
       <form action="/search" method="get" class="input-group search-bar search-bar--modal" role="search">
