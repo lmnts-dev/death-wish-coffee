@@ -10881,8 +10881,8 @@ div.cmnc-incentive-text-override {
   }
 }
 
-.pdp-add-to-cart__extra-content {
-  margin-top: 20px;
+.pdp-add-to-cart__extra-content:nth-child(-n+2) > *:not(ul):not(ol) {
+      margin-top: 20px;
 }
 
 @media (min-width: 1200px) {
@@ -10898,8 +10898,8 @@ div.cmnc-incentive-text-override {
 
 @media (min-width: 1200px) {
 
-  .pdp-add-to-cart__extra-content:nth-child(-n+2) {
-    margin-top: 0;
+  .pdp-add-to-cart__extra-content:nth-child(-n+2) > *:not(ul):not(ol) {
+        margin-top: 0;
   }
 }
 
