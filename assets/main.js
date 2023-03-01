@@ -14899,7 +14899,9 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
 
         var plan = _this.getSellingPlanMap(_this.variantId, frequency);
 
+        if (!plan) return;
         var price = plan.getAttribute('data-price');
+        if (!price) return;
         var ogPrice = button.querySelector('og-price');
 
         if (ogPrice && ogPrice.shadowRoot) {
