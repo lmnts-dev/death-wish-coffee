@@ -11,21 +11,27 @@
     Price: {{ product.price|money|json }},
     CompareAtPrice: {{ product.compare_at_price_max|money|json }}
   };
+</script>
 
-  _learnq.push(['track', 'Viewed Product', item]);
-  _learnq.push(['trackViewedItem', {
-    Title: item.Name,
-    ItemId: item.ProductID,
-    Categories: item.Categories,
-    ImageUrl: item.ImageURL,
-    Url: item.URL,
-    Metadata: {
-      Brand: item.Brand,
-      Price: item.Price,
-      CompareAtPrice: item.CompareAtPrice
-    }
-  }]);
+{% if template.name == "product" %}
+  <script type="text/javascript">
+    _learnq.push(['track', 'Viewed Product', item]);
+    _learnq.push(['trackViewedItem', {
+      Title: item.Name,
+      ItemId: item.ProductID,
+      Categories: item.Categories,
+      ImageUrl: item.ImageURL,
+      Url: item.URL,
+      Metadata: {
+        Brand: item.Brand,
+        Price: item.Price,
+        CompareAtPrice: item.CompareAtPrice
+      }
+    }]);
+  </script>
+{% endif %}
 
+<script type="text/javascript">
     function addedToCart() {
     fetch(`${window.location.origin}/cart.js`)
     .then(res => res.clone().json().then(data => {
