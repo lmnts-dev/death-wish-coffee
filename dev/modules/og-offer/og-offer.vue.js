@@ -276,7 +276,10 @@ export default {
       buttons.forEach(button => {
         const frequency = button.getAttribute('default-frequency')
         const plan = this.getSellingPlanMap(this.variantId, frequency)
+        if (!plan) return
+
         const price = plan.getAttribute('data-price')
+        if (!price) return
 
         const ogPrice = button.querySelector('og-price')
 
