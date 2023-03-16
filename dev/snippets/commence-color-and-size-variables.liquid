@@ -1,0 +1,80 @@
+{%  style %}
+  :root {
+    --color-background-default: {{ settings.background_color.rgb }};
+    --color-text-default: {{ settings.text_color.rgb }};
+    --color-foreground-default: {{ settings.button_color.rgb }};
+    --color-foreground-text-default: {{ settings.button_text_color.rgb }};
+    --color-border-default: {{ settings.border_color.rgb }};
+  
+    --color-background-2: {{ settings.background_color_2.rgb }};
+    --color-text-2: {{ settings.text_color_2.rgb }};
+    --color-foreground-2: {{ settings.button_color_2.rgb }};
+    --color-foreground-text-2: {{ settings.button_text_color_2.rgb }};
+    --color-border-2: {{ settings.border_color_2.rgb }};
+  
+    --color-background-3: {{ settings.background_color_3.rgb }};
+    --color-text-3: {{ settings.text_color_3.rgb }};
+    --color-foreground-3: {{ settings.button_color_3.rgb }};
+    --color-foreground-text-3: {{ settings.button_text_color_3.rgb }};
+    --color-border-3: {{ settings.border_color_3.rgb }};
+  
+    --color-background-4: {{ settings.background_color_4.rgb }};
+    --color-text-4: {{ settings.text_color_4.rgb }};
+    --color-foreground-4: {{ settings.button_color_4.rgb }};
+    --color-foreground-text-4: {{ settings.button_text_color_4.rgb }};
+    --color-border-4: {{ settings.border_color_4.rgb }};
+  
+    --color-background-5: {{ settings.background_color_5.rgb }};
+    --color-text-5: {{ settings.text_color_5.rgb }};
+    --color-foreground-5: {{ settings.button_color_5.rgb }};
+    --color-foreground-text-5: {{ settings.button_text_color_5.rgb }};
+    --color-border-5: {{ settings.border_color_5.rgb }};
+  
+    --btnBorderRadius: 0px;
+    --btnHeight: 64px;
+    --btnSidesSpace: 100px;
+  
+    --pxSize: 50px;
+    --vwSize: 2vw;
+  
+    --sectionVerticalSpacing: 100px;
+    --sectionGuttersSpacing: calc(var(--vwSize) * 5.5);
+  
+    --topSpacingRatio: 1;
+    --bottomSpacingRatio: 1;
+    --overlayOpacity: 0.5;
+  
+    --inputHeight: 48px;
+    --arrowBtnHeight: calc(var(--pxSize) * 4 / 5);
+    --customIconHeight: var(var(--pxSize));
+  
+    --stickyElementTransition: transformY(0);
+    --maxWidth: 750px;
+    --siteMaxWidth: 1680px;
+  
+    @media (min-width: 1680px) {
+      --vwSize: calc(var(--siteMaxWidth) * 0.02);
+    }
+  
+    @media (max-width: 1024px) {
+      --pxSize: 40px;
+      --vwSize: 1.6vw;
+  
+      --sectionVerticalSpacing: 70px;
+      --sectionGuttersSpacing: calc(var(--vwSize) * 3);
+  
+      --inputHeight: 48px;
+    }
+  
+    @media (max-width: 676px) {
+      --pxSize: 30px;
+      --vwSize: 1.2vw;
+  
+      --sectionVerticalSpacing: 65px;
+      --sectionGuttersSpacing: 20px;
+  
+      --inputHeight: 45px;
+    }
+  }
+
+{% endstyle %}

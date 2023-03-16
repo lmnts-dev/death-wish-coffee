@@ -1,0 +1,23 @@
+{% comment %}
+  Renders a heading
+
+  Accepts:
+  - heading_size: {String} "h2", "h4", "h5", "h6"
+  - heading: {String}
+  - class: {String}
+  - heading_tag: {string} Optional "h1", "h2" (default), "h3" 
+
+  Usage:
+  {% render 'heading', class: "split-section__text", heading: block.settings.heading, heading_size: block.settings.heading_size %}
+{% endcomment %}
+
+{% assign heading_tag = heading_tag | default: "h2" %}
+
+{% if heading != blank %}
+    <{{ heading_tag }}
+      class="{% if class %}{{ class }}__heading{% endif %} {{ heading_size }} {% if alt_heading %}alt{% endif%}"
+      {{ block.shopify_attributes }}
+    >
+      {{ heading | escape }}
+    </{{ heading_tag }}>
+{% endif %}

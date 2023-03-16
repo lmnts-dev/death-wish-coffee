@@ -1,0 +1,418 @@
+{% comment %}
+  Pass all settings to the image-banner snippet so other section's can use its styles too
+{% endcomment %}
+
+{% capture section_id %}Image-banner-{{ section.id }}{% endcapture %}
+
+{% capture text_content %}
+  {% if section.blocks.size > 0 %}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+          {% comment %} Type Caption {% endcomment %}
+        {%- when 'caption' -%}
+          <div class="image-banner__caption caption">{{ block.settings.caption }}</div>
+
+          {% comment %} Type Heading {% endcomment %}
+        {%- when 'heading' -%}
+          {% if section.settings.hero == true %}
+            {% assign heading_tag = "h1" %}
+          {% endif %}
+
+          {% render 'heading',
+            class: 'image-banner',
+            heading_tag: heading_tag,
+            heading: block.settings.heading,
+            heading_size: block.settings.heading_size
+          %}
+
+          {% comment %} Type Text {% endcomment %}
+        {%- when 'text' -%}
+          <div class="image-banner__text __article-txt">{{ block.settings.text }}</div>
+
+          {% comment %} Type Button {% endcomment %}
+        {%- when 'button' -%}
+          {% render 'button',
+            class: 'image-banner',
+            button_label: block.settings.button_label,
+            button_link: block.settings.button_link,
+            button_color: block.settings.button_color
+          %}
+      {%- endcase -%}
+    {%- endfor -%}
+  {% endif %}
+{% endcapture %}
+
+{%- if section.settings.image != blank -%}
+  {% assign section_image =  section.settings.image %}
+{%- endif -%}
+
+
+{% render 'image-banner' 
+  top_spacing: section.settings.top_spacing,
+  bottom_spacing: section.settings.bottom_spacing,
+  top_internal_spacing: section.settings.top_internal_spacing,
+  bottom_internal_spacing: section.settings.bottom_internal_spacing,
+  overlay: section.settings.overlay,
+  section_id: section_id,
+  theme: section.settings.theme,
+  crop_shape: section.settings.crop_shape,
+  overlay_theme: section.settings.overlay_theme,
+  alignment: section.settings.alignment,
+  text_content: text_content,
+  image: section_image 
+%}
+
+{% schema %}
+{
+  "name": "Image Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Overlay Opacity",
+      "info": "If above 0%, an overlay will be added on top of the image to create contrast behind the text.",
+      "min": 0,
+      "max": 70,
+      "step": 10,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "overlay_theme",
+      "info": "Only applies when the image crop shape is not set to default.",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary Theme"
+        },
+        {
+          "value": "2",
+          "label": "2nd Theme"
+        },
+        {
+          "value": "3",
+          "label": "3rd Theme"
+        },
+        {
+          "value": "4",
+          "label": "4th Theme"
+        },
+        {
+          "value": "5",
+          "label": "5th Theme"
+        }
+      ],
+      "default": "primary",
+      "label": "Overlay Theme"
+    },
+    {
+      "type": "select",
+      "id": "crop_shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "No Crop"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "rounded-square",
+          "label": "Rounded Square"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "rounded-portrait",
+          "label": "Rounded Portrait"
+        },
+        {
+          "value": "semicircle-portrait",
+          "label": "Semicircle Portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "rounded-landscape",
+          "label": "Rounded Landscape"
+        },
+        {
+          "value": "semicircle-landscape",
+          "label": "Semicircle Landscape"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        },
+        {
+          "value": "rounded-wide",
+          "label": "Rounded Wide"
+        },
+        {
+          "value": "semicircle-wide",
+          "label": "Semicircle Wide"
+        },
+        {
+          "value": "arch",
+          "label": "Semicircle Arch"
+        }
+      ],
+      "default": "default",
+      "label": "Image Crop Shape"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero",
+      "label": "Use as hero?",
+      "info": "Should be selected if this section is the first or second on a page and contains the page title."
+    },
+    {
+      "type": "radio",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "select",
+      "id": "theme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary Theme"
+        },
+        {
+          "value": "2",
+          "label": "2nd Theme"
+        },
+        {
+          "value": "3",
+          "label": "3rd Theme"
+        },
+        {
+          "value": "4",
+          "label": "4th Theme"
+        },
+        {
+          "value": "5",
+          "label": "5th Theme"
+        }
+      ],
+      "default": "primary",
+      "label": "Theme"
+    },
+    {
+      "type": "range",
+      "id": "top_internal_spacing",
+      "min": 0,
+      "max": 300,
+      "step": 10,
+      "unit": "%",
+      "label": "Top Text Content Spacing",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "bottom_internal_spacing",
+      "min": 0,
+      "max": 300,
+      "step": 10,
+      "unit": "%",
+      "label": "Bottom Text Content Spacing",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "top_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Top Section Spacing",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Bottom Section Spacing",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "caption",
+      "name": "Caption",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "default": "Lorem ipsum",
+          "label": "Caption"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Lorem ipsum dolor sit",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "X-Large"
+            },
+            {
+              "value": "h2",
+              "label": "Large"
+            },
+            {
+              "value": "h3",
+              "label": "Medium"
+            },
+            {
+              "value": "h4",
+              "label": "Small"
+            }
+          ],
+          "default": "h2",
+          "label": "Heading Size"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Laboris Nisi",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_color",
+          "label": "Button Color",
+          "default": "default",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "primary",
+              "label": "Primary Theme"
+            },
+            {
+              "value": "2",
+              "label": "2nd Theme"
+            },
+            {
+              "value": "3",
+              "label": "3rd Theme"
+            },
+            {
+              "value": "4",
+              "label": "4th Theme"
+            },
+            {
+              "value": "5",
+              "label": "5th Theme"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,288 @@
+{% style %}
+   #Icons-section-{{ section.id }} {
+     --topSpacingRatio: {{section.settings.top_spacing}} / 100;
+     --bottomSpacingRatio: {{section.settings.bottom_spacing}} / 100;
+     --iconHeight: {{section.settings.icon_height}}px;
+   }
+
+  @media screen and (max-width: 676px) {
+     {% if section.settings.icon_height > 400 %}
+        #Icons-section-{{ section.id }} {
+           --iconHeight: {{ section.settings.icon_height | times: 0.6}}px;
+        }
+     {% endif %}
+  }
+{% endstyle %}
+
+{{ 'icons-section.css' | asset_url | stylesheet_tag }}
+
+<div
+  id="Icons-section-{{ section.id }}"
+  class="icons-section __theme-{{ section.settings.theme }} __align-{{section.settings.alignment}}"
+>
+  {% comment %} Text Content {% endcomment %}
+  {% render 'heading',
+    class: 'icons-section',
+    heading: section.settings.heading,
+    heading_size: section.settings.heading_size,
+    alt_heading: section.settings.alt_heading
+  %}
+
+  {% comment %} Icons {% endcomment %}
+  <div
+    class="icons-section__icons {% if section.settings.layout == "rows" %}__layout-rows{% endif%} {% if section.settings.mobile_layout == "rows" %}__mobile-layout-rows{% endif%}"
+    style="--numColumns: {{ section.settings.layout }}; --mobileNumColumns: {{ section.settings.mobile_layout }};"
+  >
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'icon' -%}
+          <div class="icons-section__icons__icon">
+            {%- if block.settings.icon != blank -%}
+              {% render 'next-gen-img', image: block.settings.icon %}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+
+            {% if block.settings.heading != '' %}
+              <h3 class="h6">{{ block.settings.heading }}</h3>
+            {% endif %}
+
+            {% if block.settings.text != '' %}
+              <p class="p-sm">{{ block.settings.text }}</p>
+            {% endif %}
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Icons Section",
+  "tag": "section",
+  "class": "commence-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Lorem ipsum",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "X-Large"
+        },
+        {
+          "value": "h4",
+          "label": "Large"
+        },
+        {
+          "value": "h5",
+          "label": "Medium"
+        },
+        {
+          "value": "h6",
+          "label": "Small"
+        }
+      ],
+      "default": "h5",
+      "label": "Heading Size"
+    },
+    {
+      "type": "checkbox",
+      "id": "alt_heading",
+      "label": "Use body font instead of heading font for heading?"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "rows",
+          "label": "Row(s)"
+        },
+        {
+          "value": "2",
+          "label": "Two Columns"
+        },
+        {
+          "value": "3",
+          "label": "Three Columns"
+        },
+        {
+          "value": "4",
+          "label": "Four Columns"
+        },
+        {
+          "value": "5",
+          "label": "Five Columns"
+        },
+        {
+          "value": "6",
+          "label": "Six Columns"
+        },
+        {
+          "value": "7",
+          "label": "Seven Columns"
+        }
+      ],
+      "default": "3",
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "options": [
+        {
+          "value": "rows",
+          "label": "Row(s)"
+        },
+        {
+          "value": "2",
+          "label": "Two Columns"
+        },
+        {
+          "value": "3",
+          "label": "Three Columns"
+        }
+      ],
+      "default": "3",
+      "label": "Mobile Layout"
+    },
+    {
+      "type": "range",
+      "id": "icon_height",
+      "min": 30,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Icon Height",
+      "default": 100
+    },
+    {
+      "type": "radio",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "select",
+      "id": "theme",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary Theme"
+        },
+        {
+          "value": "2",
+          "label": "2nd Theme"
+        },
+        {
+          "value": "3",
+          "label": "3rd Theme"
+        },
+        {
+          "value": "4",
+          "label": "4th Theme"
+        },
+        {
+          "value": "5",
+          "label": "5th Theme"
+        }
+      ],
+      "default": "primary",
+      "label": "Theme"
+    },
+    {
+      "type": "range",
+      "id": "top_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Top Spacing",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "bottom_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Bottom Spacing",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Nostrud exercitation"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons Section",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

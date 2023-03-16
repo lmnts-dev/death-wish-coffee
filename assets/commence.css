@@ -1,0 +1,220 @@
+.__theme-primary {
+  --color-background: var(--color-background-default);
+  --color-text: var(--color-text-default);
+  --color-foreground: var(--color-foreground-default);
+  --color-foreground-text: var(--color-foreground-text-default);
+  --color-border: var(--color-border-default);
+}
+
+.__btn-clr-primary {
+  --color-foreground: var(--color-background-default);
+  --color-foreground-text: var(--color-text-default);
+}
+
+.__theme-2 {
+  --color-background: var(--color-background-2);
+  --color-text: var(--color-text-2);
+  --color-foreground: var(--color-foreground-2);
+  --color-foreground-text: var(--color-foreground-text-2);
+  --color-border: var(--color-border-2);
+}
+
+.__btn-clr-2 {
+  --color-foreground: var(--color-background-2);
+  --color-foreground-text: var(--color-text-2);
+}
+
+.__theme-3 {
+  --color-background: var(--color-background-3);
+  --color-text: var(--color-text-3);
+  --color-foreground: var(--color-foreground-3);
+  --color-foreground-text: var(--color-foreground-text-3);
+  --color-border: var(--color-border-3);
+}
+
+.__btn-clr-3 {
+  --color-foreground: var(--color-background-3);
+  --color-foreground-text: var(--color-text-3);
+}
+
+.__theme-4 {
+  --color-background: var(--color-background-4);
+  --color-text: var(--color-text-4);
+  --color-foreground: var(--color-foreground-4);
+  --color-foreground-text: var(--color-foreground-text-4);
+  --color-border: var(--color-border-4);
+}
+
+.__btn-clr-4 {
+  --color-foreground: var(--color-background-4);
+  --color-foreground-text: var(--color-text-4);
+}
+
+.__theme-5 {
+  --color-background: var(--color-background-5);
+  --color-text: var(--color-text-5);
+  --color-foreground: var(--color-foreground-5);
+  --color-foreground-text: var(--color-foreground-text-5);
+  --color-border: var(--color-border-5);
+}
+
+.__btn-clr-5 {
+  --color-foreground: var(--color-background-5);
+  --color-foreground-text: var(--color-text-5);
+}
+
+body > main > .commence-section > div {
+  padding: calc(var(--sectionVerticalSpacing) * var(--topSpacingRatio))
+    var(--sectionGuttersSpacing)
+    calc(var(--sectionVerticalSpacing) * var(--bottomSpacingRatio))
+    var(--sectionGuttersSpacing);
+  position: relative;
+  color: RGB(var(--color-text));
+}
+
+body > main > .commence-section > div:after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: RGB(var(--color-background));
+  z-index: -1;
+}
+body > main > .commence-section {
+  max-width: var(--siteMaxWidth);
+  margin: 0 auto;
+}
+
+.__align-center {
+  text-align: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.__align-center p,
+.__align-center > * {
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.__align-default,
+.__align-left {
+  text-align: left;
+  align-items: flex-start;
+  margin-right: auto;
+}
+.__align-default p,
+.__align-default > *,
+.__align-left p,
+.__align-left > * {
+  justify-content: flex-start;
+  margin-right: auto;
+}
+.__align-right {
+  text-align: right;
+  align-items: flex-end;
+  margin-left: auto;
+}
+.__align-right p,
+.__align-right > * {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.__crop-default {
+  padding-top: var(--imageRatio);
+}
+.__crop-circle,
+.__crop-rounded-square,
+.__crop-square {
+  padding-top: 100%;
+}
+.__crop-landscape,
+.__crop-rounded-landscape,
+.__crop-semicircle-landscape {
+  padding-top: 66.66%;
+}
+.__crop-rounded-wide,
+.__crop-semicircle-wide,
+.__crop-wide {
+  padding-top: 30%;
+}
+.__crop-arch,
+.__crop-portrait,
+.__crop-rounded-portrait,
+.__crop-semicircle-portrait {
+  padding-top: 133.33%;
+}
+.__crop-circle,
+.__crop-semicircle,
+.__crop-semicircle-landscape,
+.__crop-semicircle-portrait,
+.__crop-semicircle-wide {
+  border-radius: 4000px;
+}
+.__crop-circle img,
+.__crop-circle:after,
+.__crop-semicircle img,
+.__crop-semicircle-landscape img,
+.__crop-semicircle-landscape:after,
+.__crop-semicircle-portrait img,
+.__crop-semicircle-portrait:after,
+.__crop-semicircle-wide img,
+.__crop-semicircle-wide:after,
+.__crop-semicircle:after {
+  border-radius: 4000px;
+}
+.__crop-rounded,
+.__crop-rounded-landscape,
+.__crop-rounded-portrait,
+.__crop-rounded-square,
+.__crop-rounded-wide {
+  border-radius: calc(var(--vwSize) * 2);
+}
+.__crop-rounded img,
+.__crop-rounded-landscape img,
+.__crop-rounded-landscape:after,
+.__crop-rounded-portrait img,
+.__crop-rounded-portrait:after,
+.__crop-rounded-square img,
+.__crop-rounded-square:after,
+.__crop-rounded-wide img,
+.__crop-rounded-wide:after,
+.__crop-rounded:after {
+  border-radius: calc(var(--vwSize) * 2);
+}
+@media screen and (max-width: 676px) {
+  .__crop-rounded,
+  .__crop-rounded-landscape,
+  .__crop-rounded-portrait,
+  .__crop-rounded-square,
+  .__crop-rounded-wide {
+    border-radius: calc(var(--pxSize) * 2);
+  }
+  .__crop-rounded img,
+  .__crop-rounded-landscape img,
+  .__crop-rounded-landscape:after,
+  .__crop-rounded-portrait img,
+  .__crop-rounded-portrait:after,
+  .__crop-rounded-square img,
+  .__crop-rounded-square:after,
+  .__crop-rounded-wide img,
+  .__crop-rounded-wide:after,
+  .__crop-rounded:after {
+    border-radius: calc(var(--pxSize) * 2);
+  }
+}
+.__crop-arch {
+  border-top-left-radius: 4000px;
+  border-top-right-radius: 4000px;
+}
+.__crop-arch img,
+.__crop-arch:after {
+  border-top-left-radius: 4000px;
+  border-top-right-radius: 4000px;
+}
+
