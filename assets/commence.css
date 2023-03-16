@@ -219,7 +219,23 @@ body > main > .commence-section {
   border-top-right-radius: 4000px;
 }
 
-.h0, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, .p-sm, .p-lg {
+.commence-section .h0, 
+.commence-section h1, 
+.commence-section .h1, 
+.commence-section h2, 
+.commence-section .h2, 
+.commence-section h3, 
+.commence-section .h3, 
+.commence-section h4, 
+.commence-section .h4, 
+.commence-section h5, 
+.commence-section .h5, 
+.commence-section h6, 
+.commence-section .h6, 
+.commence-section p, 
+.commence-section .p, 
+.commence-section .p-sm, 
+.commence-section .p-lg {
   margin-bottom: 1rem;
 }
 
