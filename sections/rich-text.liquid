@@ -27,7 +27,7 @@
 
         {% comment %} Type Text {% endcomment %}
       {%- when 'text' -%}
-        <div class="p" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        <div class="{{ block.settings.text_size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
 
         {% comment %} Type Button {% endcomment %}
       {%- when 'button' -%}
@@ -141,23 +141,23 @@
           "id": "heading_size",
           "options": [
             {
-              "value": "h2",
+              "value": "h1",
               "label": "X-Large"
             },
             {
-              "value": "h4",
+              "value": "h2",
               "label": "Large"
             },
             {
-              "value": "h5",
+              "value": "h4",
               "label": "Medium"
             },
             {
-              "value": "h6",
+              "value": "h5",
               "label": "Small"
             }
           ],
-          "default": "h5",
+          "default": "h1",
           "label": "Heading Size"
         }
       ]
@@ -172,6 +172,26 @@
           "id": "text",
           "default": "<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>",
           "label": "Content"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "p-sm",
+              "label": "Small Text"
+            },
+            {
+              "value": "p",
+              "label": "Basic Text"
+            },
+            {
+              "value": "p-lg",
+              "label": "Large Text"
+            }
+          ],
+          "default": "p",
+          "label": "Text Size"
         }
       ]
     },

@@ -59,13 +59,15 @@
   overlay_theme: section.settings.overlay_theme,
   alignment: section.settings.alignment,
   text_content: text_content,
-  image: section_image 
+  image: section_image,
+  max_width: section.settings.max_width
 %}
 
 {% schema %}
 {
   "name": "Image Banner",
   "tag": "section",
+  "class": "commence-section",
   "settings": [
     {
       "type": "header",
@@ -191,6 +193,16 @@
       "info": "Should be selected if this section is the first or second on a page and contains the page title."
     },
     {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1900,
+      "step": 100,
+      "unit": "px",
+      "label": "Text Max Width",
+      "default": 600
+    },
+    {
       "type": "radio",
       "id": "alignment",
       "label": "Alignment",
@@ -313,15 +325,15 @@
           "id": "heading_size",
           "options": [
             {
-              "value": "h1",
+              "value": "h1 h0",
               "label": "X-Large"
             },
             {
-              "value": "h2",
+              "value": "h1",
               "label": "Large"
             },
             {
-              "value": "h3",
+              "value": "h2",
               "label": "Medium"
             },
             {

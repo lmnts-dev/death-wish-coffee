@@ -85,6 +85,7 @@ body > main > .commence-section > div:after {
   z-index: -1;
 }
 body > main > .commence-section {
+  width: 100%;
   max-width: var(--siteMaxWidth);
   margin: 0 auto;
 }
@@ -216,5 +217,62 @@ body > main > .commence-section {
 .__crop-arch:after {
   border-top-left-radius: 4000px;
   border-top-right-radius: 4000px;
+}
+
+
+
+.commence-section p,
+.commence-section .p,
+.commence-section .p-sm,
+.commence-section .p-lg {
+  letter-spacing: 0;
+  font-family: var(--fenomen);
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+}
+
+.commence-section p,
+.commence-section .p {
+  font-size: calc(1.125rem * var(--font-body-scale));
+}
+
+.commence-section .p-sm,
+.commence-section .p-sm > p {
+  font-size: calc(0.8rem * var(--font-body-scale));
+}
+
+.commence-section .p-lg,
+.commence-section .p-lg > p {
+  font-size: calc(1.375rem * var(--font-body-scale));
+}
+
+@media (max-width: 1024px) {
+  .commence-section .p-lg,
+  .commence-section .p-lg > p {
+    font-size: calc(1.2rem * var(--font-body-scale));
+  }
+}
+
+.commence-section .h0, .__article-txt h1 {
+  font-family: 'Revans', sans-serif;
+  font-size: calc(4.13vw * var(--font-heading-scale));
+}
+
+@media (max-width: 1440px) {
+  .commence-section .h0, .__article-txt h1 {
+    font-size: calc(6rem * var(--font-heading-scale));
+  }
+}
+
+@media (max-width: 1024px) {
+  .commence-section .h0, .__article-txt h1 {
+    font-size: calc(4rem * var(--font-heading-scale));
+  }
+}
+
+@media (max-width: 676px) {
+  .commence-section .h0, .__article-txt h1 {
+    font-size: calc(3.2rem * var(--font-heading-scale));
+  }
 }
 

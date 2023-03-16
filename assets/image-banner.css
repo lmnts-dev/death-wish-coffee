@@ -20,7 +20,7 @@
   );
 }
 .image-banner__text-container > * {
-  max-width: 600px;
+  max-width: var(--imageBannerMaxWidth);
 }
 .image-banner__image {
   pointer-events: none;
@@ -47,7 +47,7 @@
   grid-column: 1/-1;
 }
 .image-banner__text * {
-  max-width: var(--maxWidth);
+  max-width: var(--imageBannerMaxWidth);
 }
 .image-banner.__fullwidth-bg {
   padding-left: 0;

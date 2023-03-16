@@ -36,13 +36,15 @@
 
   {%- render 'social-meta' -%}
   {% render 'structured-data' %}
-  {% render 'commence-color-and-size-variables' %}
-  {{ 'commence.css' | asset_url | stylesheet_tag }}
   
   {{ content_for_header }}
 
   {%- render 'fonts' -%}
   {%- render 'dev-mode-head' -%}
+
+  {% render 'commence-color-and-size-variables' %}
+  {{ 'commence.css' | asset_url | stylesheet_tag }}
+
 
   <!-- Yotpo JavaScript -->
   <script type="text/javascript">

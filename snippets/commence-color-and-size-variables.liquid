@@ -50,13 +50,20 @@
   
     --stickyElementTransition: transformY(0);
     --maxWidth: 750px;
-    --siteMaxWidth: 1680px;
-  
-    @media (min-width: 1680px) {
+    --siteMaxWidth: 1920px;
+
+    --font-body-scale: 1.5;
+    --font-heading-scale: 1.5;
+  }
+
+  @media (min-width: 1680px) {
+    :root {
       --vwSize: calc(var(--siteMaxWidth) * 0.02);
     }
-  
-    @media (max-width: 1024px) {
+  }
+
+  @media (max-width: 1024px) {
+    :root {
       --pxSize: 40px;
       --vwSize: 1.6vw;
   
@@ -65,8 +72,10 @@
   
       --inputHeight: 48px;
     }
-  
-    @media (max-width: 676px) {
+  }
+
+  @media (max-width: 676px) {
+    :root {
       --pxSize: 30px;
       --vwSize: 1.2vw;
   

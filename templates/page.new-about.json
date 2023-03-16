@@ -3,16 +3,15 @@
     "bc522a3f-2a22-47e9-8f82-d9940ea9b745": {
       "type": "image-banner",
       "blocks": {
-        "template--14484764131383__bc522a3f-2a22-47e9-8f82-d9940ea9b745-1678742482b130d686-0": {
-          "type": "heading",
+        "template--14484764131383__bc522a3f-2a22-47e9-8f82-d9940ea9b745-1678742482b130d686-1": {
+          "type": "text",
           "settings": {
-            "heading": "REBELLIOUS BY NATURE",
-            "heading_size": "h1"
+            "text": "<h1>REBELLIOUS </br> BY NATURE</h1>"
           }
         }
       },
       "block_order": [
-        "template--14484764131383__bc522a3f-2a22-47e9-8f82-d9940ea9b745-1678742482b130d686-0"
+        "template--14484764131383__bc522a3f-2a22-47e9-8f82-d9940ea9b745-1678742482b130d686-1"
       ],
       "settings": {
         "image": "shopify://shop_images/Death_Wish_-_About_-_Hero.png",
@@ -20,6 +19,7 @@
         "overlay_theme": "primary",
         "crop_shape": "default",
         "hero": true,
+        "max_width": 900,
         "alignment": "center",
         "theme": "primary",
         "top_internal_spacing": 200,
@@ -35,13 +35,14 @@
           "type": "heading",
           "settings": {
             "heading": "FUELED BY DEATH",
-            "heading_size": "h2"
+            "heading_size": "h1"
           }
         },
         "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-1": {
           "type": "text",
           "settings": {
-            "text": "<p>To some, a “death wish” may sounds irresponsible, morbid, a step too far —but we believe it’s the boldest sign of living life to the fullest. At Death Wish Coffee, we stand for the bold souls who never slow down. So get out there and get it done. We’ll bring the coffee.</p>"
+            "text": "<p>To some, a “death wish” may sounds irresponsible, morbid, a step too far —but we believe it’s the boldest sign of living life to the fullest. At Death Wish Coffee, we stand for the bold souls who never slow down. So get out there and get it done. We’ll bring the coffee.</p>",
+            "text_size": "p-lg"
           }
         }
       },
@@ -63,13 +64,14 @@
           "type": "heading",
           "settings": {
             "heading": "REAP WHAT YOU SOW",
-            "heading_size": "h2"
+            "heading_size": "h1"
           }
         },
         "template--14484764131383__bf721c2d-ed22-4429-9270-46c378546bdd-16787439588c4f0857-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Death Wish Coffee follows strict grading requirements for all coffee beans to ensure quality and consistency from cup to cup. We source USDA Organic and Fair Trade Certified™ arabica and robusta coffee beans from India, Peru, and other countries throughout South and Central America. This means our coffee is made according to rigorous standards that protect the environment and the livelihoods of coffee farmers.</p>"
+            "text": "<p>Death Wish Coffee follows strict grading requirements for all coffee beans to ensure quality and consistency from cup to cup. We source USDA Organic and Fair Trade Certified™ arabica and robusta coffee beans from India, Peru, and other countries throughout South and Central America. This means our coffee is made according to rigorous standards that protect the environment and the livelihoods of coffee farmers.</p>",
+            "text_size": "p-lg"
           }
         }
       },
@@ -137,13 +139,14 @@
           "type": "heading",
           "settings": {
             "heading": "REDEFINING ROBUSTA",
-            "heading_size": "h2"
+            "heading_size": "h1"
           }
         },
         "template--14484764131383__f664326f-c805-4675-8edb-393d9ed10905-1678381575951dc529-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Death Wish Coffee has harnessed robusta’s magical powers since 2012, before other coffee companies caught on to its resistance to climate change and ability to brew a bold cup. We’re bold enough to find the best qualities in robusta and give these power-packed beans proper care through processing at origin and roasting at our manufacturing sites.<br/><br/>This rigorous process results in a strong cup of coffee with increased aroma and mouth feel, low acidity, and an extra kick of caffeine. Paired with our Fair Trade and organic arabica beans, you’re guaranteed a bold, smooth and premium cup of coffee every time—because who wants weak, watery coffee?</p>"
+            "text": "<p>Death Wish Coffee has harnessed robusta’s magical powers since 2012, before other coffee companies caught on to its resistance to climate change and ability to brew a bold cup. We’re bold enough to find the best qualities in robusta and give these power-packed beans proper care through processing at origin and roasting at our manufacturing sites.<br/><br/>This rigorous process results in a strong cup of coffee with increased aroma and mouth feel, low acidity, and an extra kick of caffeine. Paired with our Fair Trade and organic arabica beans, you’re guaranteed a bold, smooth and premium cup of coffee every time—because who wants weak, watery coffee?</p>",
+            "text_size": "p-lg"
           }
         }
       },
@@ -161,8 +164,8 @@
         "mobile_image_height": 450,
         "theme": "primary",
         "top_internal_spacing": 100,
-        "bottom_internal_spacing": 100,
-        "top_spacing": 50,
+        "bottom_internal_spacing": 0,
+        "top_spacing": 100,
         "bottom_spacing": 50
       }
     },
@@ -173,13 +176,14 @@
           "type": "heading",
           "settings": {
             "heading": "CAFFEINDS BEHIND THE BEANS",
-            "heading_size": "h2"
+            "heading_size": "h1"
           }
         },
         "template--14484764131383__ea321555-6fb6-47bc-a18a-e11c2402fbe7-1678382090bd01ede8-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Founded in 2012 in Saratoga Springs, New York, Death Wish Coffee is made up of a passionate team that’s always looking at fresh ways to provide bold, smooth cups of coffee to our people. We’re headquartered in downtown Saratoga Springs, with manufacturing down the road in Round Lake, New York and an office in New York City. We live to rebel against blah beans—and a boring, lackluster life.</p>"
+            "text": "<p>Founded in 2012 in Saratoga Springs, New York, Death Wish Coffee is made up of a passionate team that’s always looking at fresh ways to provide bold, smooth cups of coffee to our people. We’re headquartered in downtown Saratoga Springs, with manufacturing down the road in Round Lake, New York and an office in New York City. We live to rebel against blah beans—and a boring, lackluster life.</p>",
+            "text_size": "p-lg"
           }
         }
       },
