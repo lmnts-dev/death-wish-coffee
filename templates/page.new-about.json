@@ -205,6 +205,75 @@
         "top_spacing": 50,
         "bottom_spacing": 50
       }
+    },
+    "99e4b4fa-08b6-49ac-bb25-1ca6d1128d211": {
+      "type": "timeline-section",
+      "blocks": {
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-0": {
+          "type": "part",
+          "settings": {
+            "year": "2012",
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Timeline_1_3194d7f5-63e8-4121-9d57-d332c82b9b76.png",
+            "heading": "THE CREATION OF DEATH WISH COFFEE",
+            "text": "Mike Brown brings his idea for Death Wish Coffee to life, creating the recipe and roasting process."
+          }
+        },
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-1": {
+          "type": "part",
+          "settings": {
+            "year": "2013",
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Timeline_2_f3858a14-25dd-4f1a-ae03-0d20b5bf80ec.png",
+            "heading": "GOOD MORNING AMERICA",
+            "text": "“Good Morning America” airs a segment on Death Wish Coffee and introduces us to thousands of people."
+          }
+        },
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-2": {
+          "type": "part",
+          "settings": {
+            "year": "2016",
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Timeline_3_edea80e9-184b-4c9f-b615-2c7516c9aa82.png",
+            "heading": "SUPER BOWL 50 AD AIRS",
+            "text": "We became the smallest company to run a commercial during Super Bowl 50 after winning the Intuit Small Business Big Game Competition."
+          }
+        },
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-3": {
+          "type": "part",
+          "settings": {
+            "year": "2018",
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Timeline_4_4ae292b7-c199-41d4-8633-e4e5a49067aa.png",
+            "heading": "CAFFEINATED THE UNIVERSE",
+            "text": "With the help of NASA Food Labs, Death Wish Coffee developed an instant freeze-dried blend of our coffee to fuel astronauts on the International Space Station."
+          }
+        },
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-4": {
+          "type": "part",
+          "settings": {
+            "year": "2021 - 2022",
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Timeline_5_08cadae3-9181-49f4-9a47-e5c72ad581ae.png",
+            "heading": "NEW ROASTS AND FLAVORS",
+            "text": "Expanded beyond our original Dark Roast, adding Medium Roast & Espresso Roast to our everyday lineup and introducing flavors of Gingerdead and Blue and Buried."
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-0",
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-1",
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-2",
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-3",
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-4"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "alt_heading": false,
+        "cols_desktop": 3.5,
+        "cols_mobile": 1.5,
+        "icon_height": 180,
+        "alignment": "center",
+        "theme": "2",
+        "top_spacing": 50,
+        "bottom_spacing": 50
+      }
     }
   },
   "order": [
@@ -213,6 +282,7 @@
     "bf721c2d-ed22-4429-9270-46c378546bdd",
     "99e4b4fa-08b6-49ac-bb25-1ca6d1128d21",
     "f664326f-c805-4675-8edb-393d9ed10905",
-    "ea321555-6fb6-47bc-a18a-e11c2402fbe7"
+    "ea321555-6fb6-47bc-a18a-e11c2402fbe7",
+    "99e4b4fa-08b6-49ac-bb25-1ca6d1128d211"
   ]
 }

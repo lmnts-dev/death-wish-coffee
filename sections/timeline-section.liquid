@@ -1,5 +1,5 @@
 {% style %}
-   #Icons-section-{{ section.id }} {
+   #Timeline-section-{{ section.id }} {
      --topSpacingRatio: {{section.settings.top_spacing}} / 100;
      --bottomSpacingRatio: {{section.settings.bottom_spacing}} / 100;
      --iconHeight: {{section.settings.icon_height}}px;
@@ -7,22 +7,22 @@
 
   @media screen and (max-width: 676px) {
      {% if section.settings.icon_height > 400 %}
-        #Icons-section-{{ section.id }} {
+        #Timeline-section-{{ section.id }} {
            --iconHeight: {{ section.settings.icon_height | times: 0.6}}px;
         }
      {% endif %}
   }
 {% endstyle %}
 
-{{ 'icons-section.css' | asset_url | stylesheet_tag }}
+{{ 'timeline-section.css' | asset_url | stylesheet_tag }}
 
 <div
-  id="Icons-section-{{ section.id }}"
-  class="icons-section __theme-{{ section.settings.theme }} __align-{{section.settings.alignment}}"
+  id="Timeline-section-{{ section.id }}"
+  class="timeline-section __theme-{{ section.settings.theme }}"
 >
   {% comment %} Text Content {% endcomment %}
   {% render 'heading',
-    class: 'icons-section',
+    class: 'timeline-section',
     heading: section.settings.heading,
     heading_size: section.settings.heading_size,
     alt_heading: section.settings.alt_heading
@@ -30,21 +30,27 @@
 
   {% comment %} Icons {% endcomment %}
   <div
-    class="icons-section__icons {% if section.settings.layout == "rows" %}__layout-rows{% endif%} {% if section.settings.mobile_layout == "rows" %}__mobile-layout-rows{% endif%}"
-    style="--numColumns: {{ section.settings.layout }}; --mobileNumColumns: {{ section.settings.mobile_layout }};"
+    class="timeline-section__icons"
+    style="--numColumns: {{ section.settings.cols_desktop }}; --mobileNumColumns: {{ section.settings.cols_mobile }};"
   >
     {%- for block in section.blocks -%}
       {%- case block.type -%}
-        {%- when 'icon' -%}
-          <div class="icons-section__icons__icon">
+        {%- when 'part' -%}
+          <div class="timeline-section__icons__icon __align-{{section.settings.alignment}}">
             {%- if block.settings.icon != blank -%}
               {% render 'next-gen-img', image: block.settings.icon %}
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
 
-            {% if block.settings.heading != '' %}
-              <h3 class="h6">{{ block.settings.heading }}</h3>
+            {% if block.settings.heading != '' or block.settings.year != '' %}
+              <h3 class="h6">
+                {% if block.settings.year != '' %}
+                  <span class="h4 timeline-section__icons__icon__year">{{ block.settings.year }}</span>
+                {% endif %}
+
+                {{ block.settings.heading }}
+              </h3>
             {% endif %}
 
             {% if block.settings.text != '' %}
@@ -101,60 +107,22 @@
       "content": "General"
     },
     {
-      "type": "select",
-      "id": "layout",
-      "options": [
-        {
-          "value": "rows",
-          "label": "Row(s)"
-        },
-        {
-          "value": "2",
-          "label": "Two Columns"
-        },
-        {
-          "value": "3",
-          "label": "Three Columns"
-        },
-        {
-          "value": "4",
-          "label": "Four Columns"
-        },
-        {
-          "value": "5",
-          "label": "Five Columns"
-        },
-        {
-          "value": "6",
-          "label": "Six Columns"
-        },
-        {
-          "value": "7",
-          "label": "Seven Columns"
-        }
-      ],
-      "default": "3",
-      "label": "Layout"
+      "type": "range",
+      "id": "cols_desktop",
+      "min": 1.0,
+      "max": 6.0,
+      "step": 0.5,
+      "label": "Parts Shown On Desktop",
+      "default": 5.5
     },
     {
-      "type": "select",
-      "id": "mobile_layout",
-      "options": [
-        {
-          "value": "rows",
-          "label": "Row(s)"
-        },
-        {
-          "value": "2",
-          "label": "Two Columns"
-        },
-        {
-          "value": "3",
-          "label": "Three Columns"
-        }
-      ],
-      "default": "3",
-      "label": "Mobile Layout"
+      "type": "range",
+      "id": "cols_mobile",
+      "min": 1.0,
+      "max": 6.0,
+      "step": 0.5,
+      "label": "Parts Shown On Mobile",
+      "default": 1.5
     },
     {
       "type": "range",
@@ -241,13 +209,18 @@
   ],
   "blocks": [
     {
-      "type": "icon",
-      "name": "Icon",
+      "type": "part",
+      "name": "Part",
       "settings": [
         {
           "type": "image_picker",
           "id": "icon",
           "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year"
         },
         {
           "type": "text",
@@ -265,16 +238,16 @@
   ],
   "presets": [
     {
-      "name": "Icons Section",
+      "name": "Part Section",
       "blocks": [
         {
-          "type": "icon"
+          "type": "part"
         },
         {
-          "type": "icon"
+          "type": "part"
         },
         {
-          "type": "icon"
+          "type": "part"
         }
       ]
     }

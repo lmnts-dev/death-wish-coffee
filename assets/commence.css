@@ -219,7 +219,9 @@ body > main > .commence-section {
   border-top-right-radius: 4000px;
 }
 
-
+.h0, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, .p-sm, .p-lg {
+  margin-bottom: 1rem;
+}
 
 .commence-section p,
 .commence-section .p,
@@ -233,12 +235,12 @@ body > main > .commence-section {
 
 .commence-section p,
 .commence-section .p {
-  font-size: calc(1.125rem * var(--font-body-scale));
+  font-size: calc(1.15rem * var(--font-body-scale));
 }
 
 .commence-section .p-sm,
 .commence-section .p-sm > p {
-  font-size: calc(0.8rem * var(--font-body-scale));
+  font-size: calc(1rem * var(--font-body-scale));
 }
 
 .commence-section .p-lg,
@@ -258,6 +260,32 @@ body > main > .commence-section {
   font-size: calc(4.13vw * var(--font-heading-scale));
 }
 
+.commence-section .h1, h1 {
+  font-size: calc(4.5rem * var(--font-heading-scale));
+}
+
+.commence-section .h2, h2 {
+  font-size: calc(3.5rem * var(--font-heading-scale));
+}
+
+.commence-section .h3, h3 {
+  font-size: calc(2.8rem * var(--font-heading-scale));
+}
+
+.commence-section .h4, h4 {
+  font-size: calc(2.2rem * var(--font-heading-scale));
+}
+
+.commence-section .h5, h5 {
+  font-size: calc(1.8rem * var(--font-heading-scale));
+}
+
+.commence-section .h6, h6 {
+  font-size: calc(1.4rem * var(--font-heading-scale));
+}
+
+
+
 @media (max-width: 1440px) {
   .commence-section .h0, .__article-txt h1 {
     font-size: calc(6rem * var(--font-heading-scale));
@@ -271,8 +299,47 @@ body > main > .commence-section {
 }
 
 @media (max-width: 676px) {
+  .commence-section .h1, .commence-section h1 {
+    font-size: calc(2.8rem * var(--font-heading-scale));
+  }
+}
+
+@media (max-width: 676px) {
   .commence-section .h0, .__article-txt h1 {
     font-size: calc(3.2rem * var(--font-heading-scale));
   }
 }
+
+@media (max-width: 676px) {
+  .commence-section .h2, .commence-section h2, .__article-txt h2 {
+    font-size: calc(2.5rem * var(--font-heading-scale));
+  }
+}
+
+@media (max-width: 676px) {
+  .commence-section .h3, .commence-section h3, .__article-txt h3 {
+    font-size: calc(1.9rem * var(--font-heading-scale));
+  }
+}
+
+
+@media (max-width: 676px) {
+  .commence-section .h4, .commence-section h4, .__article-txt h4 {
+    font-size: calc(1.7rem * var(--font-heading-scale));
+  }
+}
+
+@media (max-width: 676px) {
+  .commence-section .h5, .commence-section h5, .__article-txt h5 {
+    font-size: calc(1.5rem * var(--font-heading-scale));
+  }
+}
+
+@media (max-width: 676px) {
+  .commence-section .h6, .commence-section h6, .__article-txt h6 {
+    font-size: calc(1.25rem * var(--font-heading-scale));
+  }
+}
+
+
 
