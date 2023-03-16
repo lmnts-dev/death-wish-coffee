@@ -1,17 +1,133 @@
 {
   "sections": {
-    "title-copy": {
-      "type": "title-copy",
+    "bc522a3f-2a22-47e9-8f82-d9940ea9b745": {
+      "type": "image-banner",
+      "blocks": {
+        "template--14484764131383__bc522a3f-2a22-47e9-8f82-d9940ea9b745-1678742482b130d686-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "REBELLIOUS BY NATURE",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__bc522a3f-2a22-47e9-8f82-d9940ea9b745-1678742482b130d686-0"
+      ],
       "settings": {
-        "heading": "FUELED BY DEATH",
-        "text": "<p>To some, a “death wish” may sounds irresponsible, morbid, a step too far—but we believe it’s the boldest sign<br/>of living life to the fullest. At Death Wish Coffee, we stand for the bold souls who never slow down. So get out there and get it done. We’ll bring the coffee.</p>"
+        "image": "shopify://shop_images/Death_Wish_-_About_-_Hero.png",
+        "overlay": 10,
+        "overlay_theme": "primary",
+        "crop_shape": "default",
+        "hero": true,
+        "alignment": "center",
+        "theme": "primary",
+        "top_internal_spacing": 200,
+        "bottom_internal_spacing": 200,
+        "top_spacing": 0,
+        "bottom_spacing": 0
       }
     },
-    "876fc6dd-10fe-4757-9e1c-571295c53c3d": {
-      "type": "title-copy",
+    "11b59e0b-029e-47f2-9481-ea3ed4f5cf39": {
+      "type": "rich-text",
+      "blocks": {
+        "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "FUELED BY DEATH",
+            "heading_size": "h2"
+          }
+        },
+        "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>To some, a “death wish” may sounds irresponsible, morbid, a step too far —but we believe it’s the boldest sign of living life to the fullest. At Death Wish Coffee, we stand for the bold souls who never slow down. So get out there and get it done. We’ll bring the coffee.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-0",
+        "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-1"
+      ],
       "settings": {
-        "heading": "REAP WHAT YOU SOW",
-        "text": "<p>Death Wish Coffee follows strict grading requirements for all coffee beans to ensure quality and consistency from cup to cup. We source USDA Organic and Fair Trade Certified™ arabica and robusta coffee beans from India, Peru, and other countries throughout South and Central America. This means our coffee is made according to rigorous standards that protect the environment and the livelihoods of coffee farmers.</p>"
+        "alignment": "center",
+        "theme": "primary",
+        "top_spacing": 100,
+        "bottom_spacing": 100
+      }
+    },
+    "bf721c2d-ed22-4429-9270-46c378546bdd": {
+      "type": "rich-text",
+      "blocks": {
+        "template--14484764131383__bf721c2d-ed22-4429-9270-46c378546bdd-16787439588c4f0857-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "REAP WHAT YOU SOW",
+            "heading_size": "h2"
+          }
+        },
+        "template--14484764131383__bf721c2d-ed22-4429-9270-46c378546bdd-16787439588c4f0857-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Death Wish Coffee follows strict grading requirements for all coffee beans to ensure quality and consistency from cup to cup. We source USDA Organic and Fair Trade Certified™ arabica and robusta coffee beans from India, Peru, and other countries throughout South and Central America. This means our coffee is made according to rigorous standards that protect the environment and the livelihoods of coffee farmers.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__bf721c2d-ed22-4429-9270-46c378546bdd-16787439588c4f0857-0",
+        "template--14484764131383__bf721c2d-ed22-4429-9270-46c378546bdd-16787439588c4f0857-1"
+      ],
+      "settings": {
+        "alignment": "center",
+        "theme": "2",
+        "top_spacing": 100,
+        "bottom_spacing": 0
+      }
+    },
+    "99e4b4fa-08b6-49ac-bb25-1ca6d1128d21": {
+      "type": "icons-section",
+      "blocks": {
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-0": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Icon_1_7f65fc1e-8b80-406b-aa3b-2dbbecc5a3dc.png",
+            "heading": "Guaranteed minimum prices to protect farmers",
+            "text": ""
+          }
+        },
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-1": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Icon_2_4885eae4-69de-4529-ae1e-d6628770241b.png",
+            "heading": "Safe and sustainable farming methods",
+            "text": ""
+          }
+        },
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-2": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Death_Wish_-_About_-_Icon_3_78d8d828-073f-485b-8e89-014aeef8c110.png",
+            "heading": "Community development funds in coffee-growing regions",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-0",
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-1",
+        "template--14484764131383__99e4b4fa-08b6-49ac-bb25-1ca6d1128d21-1678739514b232097c-2"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "alt_heading": false,
+        "layout": "3",
+        "mobile_layout": "3",
+        "icon_height": 180,
+        "alignment": "center",
+        "theme": "2",
+        "top_spacing": 50,
+        "bottom_spacing": 50
       }
     },
     "f664326f-c805-4675-8edb-393d9ed10905": {
@@ -21,13 +137,13 @@
           "type": "heading",
           "settings": {
             "heading": "REDEFINING ROBUSTA",
-            "heading_size": "h5"
+            "heading_size": "h2"
           }
         },
         "template--14484764131383__f664326f-c805-4675-8edb-393d9ed10905-1678381575951dc529-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Death Wish Coffee has harnessed robusta’s magical powers since 2012, before other coffee companies caught on to its resistance to climate<br/>change and ability to brew a bold cup. We’re bold enough to find the best qualities in robusta and give these power-packed beans proper care through processing at origin and roasting at our manufacturing sites.<br/><br/>This rigorous process results in a strong cup of coffee with increased aroma and mouth feel, low acidity, and an extra kick of caffeine. Paired<br/>with our Fair Trade and organic arabica beans, you’re guaranteed a bold, smooth and premium<br/>cup of coffee every time—because who wants weak, watery coffee?</p>"
+            "text": "<p>Death Wish Coffee has harnessed robusta’s magical powers since 2012, before other coffee companies caught on to its resistance to climate change and ability to brew a bold cup. We’re bold enough to find the best qualities in robusta and give these power-packed beans proper care through processing at origin and roasting at our manufacturing sites.<br/><br/>This rigorous process results in a strong cup of coffee with increased aroma and mouth feel, low acidity, and an extra kick of caffeine. Paired with our Fair Trade and organic arabica beans, you’re guaranteed a bold, smooth and premium cup of coffee every time—because who wants weak, watery coffee?</p>"
           }
         }
       },
@@ -37,7 +153,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/DW-about-2.jpg",
-        "image_style": "square",
+        "image_style": "wide",
         "hero": false,
         "alignment": "default",
         "layout": "default",
@@ -49,11 +165,50 @@
         "top_spacing": 50,
         "bottom_spacing": 50
       }
+    },
+    "ea321555-6fb6-47bc-a18a-e11c2402fbe7": {
+      "type": "split-section",
+      "blocks": {
+        "template--14484764131383__ea321555-6fb6-47bc-a18a-e11c2402fbe7-1678382090bd01ede8-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "CAFFEINDS BEHIND THE BEANS",
+            "heading_size": "h2"
+          }
+        },
+        "template--14484764131383__ea321555-6fb6-47bc-a18a-e11c2402fbe7-1678382090bd01ede8-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Founded in 2012 in Saratoga Springs, New York, Death Wish Coffee is made up of a passionate team that’s always looking at fresh ways to provide bold, smooth cups of coffee to our people. We’re headquartered in downtown Saratoga Springs, with manufacturing down the road in Round Lake, New York and an office in New York City. We live to rebel against blah beans—and a boring, lackluster life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__ea321555-6fb6-47bc-a18a-e11c2402fbe7-1678382090bd01ede8-0",
+        "template--14484764131383__ea321555-6fb6-47bc-a18a-e11c2402fbe7-1678382090bd01ede8-1"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DW-about-3.jpg",
+        "image_style": "wide",
+        "hero": false,
+        "alignment": "default",
+        "layout": "reversed",
+        "mobile_layout": "default",
+        "mobile_image_height": 450,
+        "theme": "primary",
+        "top_internal_spacing": 100,
+        "bottom_internal_spacing": 100,
+        "top_spacing": 50,
+        "bottom_spacing": 50
+      }
     }
   },
   "order": [
-    "title-copy",
-    "876fc6dd-10fe-4757-9e1c-571295c53c3d",
-    "f664326f-c805-4675-8edb-393d9ed10905"
+    "bc522a3f-2a22-47e9-8f82-d9940ea9b745",
+    "11b59e0b-029e-47f2-9481-ea3ed4f5cf39",
+    "bf721c2d-ed22-4429-9270-46c378546bdd",
+    "99e4b4fa-08b6-49ac-bb25-1ca6d1128d21",
+    "f664326f-c805-4675-8edb-393d9ed10905",
+    "ea321555-6fb6-47bc-a18a-e11c2402fbe7"
   ]
 }

@@ -1,0 +1,97 @@
+{% comment %}
+  Renders a image banner section, developed as snippet so it can
+  be rendered in main-collection-banner, main-blog-banner and the regular image-banner
+
+  Expects: 
+    - crop_shape {String} optional. default, square, rounded-square, circle, portrait, rounded-portrait, semicircle-portrait, landscape, rounded-landscape, semicircle-landscape, arch",
+    - overlay_theme: {String} optional. primary, 2, 3, 4, 5
+    - overlay: {int} optional
+    - top_spacing {int} optional
+    - bottom_spacing {int} optional
+    - top_internal_spacing {int}
+    - bottom_internal_spacing {int}
+    - theme {String} optional. primary, 2, 3, 4, 5
+    - section_id {String} required
+    - alignment: {String} optional. default, center, right
+    - image {object} optional, section works best with image
+    - text_content {html} optional, section works best with text_content
+
+    Usage:
+      {% capture section_id %}Section-{{ section.id }}{% endcapture %}
+
+      {% capture text_content %}
+        {% render 'heading',
+          class: 'image-banner',
+          heading: heading,
+          heading_tag: "h1",
+          heading_size: section.settings.heading_size,
+          alt_heading: section.settings.alt_heading
+        %}
+      {% endcapture %}
+
+      {% assign section_image =  section.settings.image %}
+
+      {% render 'image-banner' 
+        top_spacing: section.settings.top_spacing,
+        bottom_spacing: section.settings.bottom_spacing,
+        top_internal_spacing: section.settings.top_internal_spacing,
+        bottom_internal_spacing: section.settings.bottom_internal_spacing,
+        overlay: section.settings.overlay,
+        section_id: section_id,
+        theme: section.settings.theme,
+        crop_shape: section.settings.crop_shape,
+        overlay_theme: section.settings.overlay_theme,
+        alignment: section.settings.alignment,
+        text_content: text_content,
+        image: section_image 
+      %}
+
+{% endcomment %}
+
+
+{% liquid
+  assign crop_shape = crop_shape | default: "default"
+  assign overlay = overlay | default: 0
+  assign top_spacing = top_spacing | default: 0
+  assign bottom_spacing = bottom_spacing | default: 0
+  assign top_internal_spacing = top_internal_spacing | default: 100
+  assign bottom_internal_spacing = bottom_internal_spacing | default: 100
+  assign theme = theme | default: "primary"
+  assign section_id = section_id | default: "Image-banner"
+  assign overlay_theme = overlay_theme | default: "primary"
+  assign alignment = alignment | default: "left"
+%}
+
+{% style %}
+  #{{ section_id }} {
+    --topSpacingRatio: {{ top_spacing }} / 100;
+    --bottomSpacingRatio: {{ bottom_spacing }} / 100;
+    --topInternalSpacingRatio: {{ top_internal_spacing }} / 100;
+    --bottomInternalSpacingRatio: {{ bottom_internal_spacing }} / 100;
+    --overlayOpacity: calc({{ overlay }} / 100);
+  }
+{% endstyle %}
+
+{{ 'image-banner.css' | asset_url | stylesheet_tag }}
+
+<div
+  id="{{ section_id }}"
+  class="image-banner __theme-{{ theme }} {% if crop_shape == "default" %}__fullwidth-bg{% endif%}"
+>
+  <div class="image-banner__inner {% if crop_shape == "default" %}__theme-{{ overlay_theme }} {% endif %}">
+    {% comment %} Text content {% endcomment %}
+    {% if text_content != blank %}
+      <div class="image-banner__text-container __align-{{ alignment }}">
+        {{ text_content }}
+      </div>
+    {% endif %}
+
+    {% comment %} Image content {% endcomment %}
+    {%- if image != blank -%}
+      <div class="image-banner__image __crop-{{ crop_shape }} {% if crop_shape != "default" %}__theme-{{ overlay_theme }} {% endif %}">
+        {% render 'next-gen-img', image: image %}
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
