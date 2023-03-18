@@ -9,6 +9,8 @@
 {%- assign class = class | default: false -%}
 {%- capture class -%}product-form product-form--type-{{ form_type }}{% if class %} {{ class }}{% endif %}{% if palette %} product-form--palette-{{ palette }}{% endif %}{%- endcapture -%}
 
+{% assign queryParamVariant = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&' | split:'?variant=' | last-%}
+
 {%- capture content -%}
   <div class="product-form__form-wrapper">
     <div
@@ -73,7 +75,7 @@
                   <div v-if="option === priceDecidingFactor"
                       class="product-form__option-price b1"
                   >
-                    $${getPriceForOptionValue(value, optionIndex)}
+                    $${getPriceForOptionValue(optionIndex, value)}
                   </div>
                 </div>
               </label>
@@ -101,7 +103,7 @@
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
 
-      {%- render 'og_offer' product: product.selected_or_first_available_variant location: 'pdp' -%}
+      {%- render 'og_offer' product: product.selected_or_first_available_variant location: 'prepaid-pdp' -%}
 
       {%- render 'button',
         button_value: '${addToCartButtonText}',

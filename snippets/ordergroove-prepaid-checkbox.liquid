@@ -1,0 +1,63 @@
+<div id="og-prepaid-container">
+{%- for variant in product.variants -%}
+  {% assign number_of_prepaid_shipments_options = 0 %}
+  {%- for selling_plan_allocation in variant.selling_plan_allocations -%}
+    {% if selling_plan_allocation.selling_plan.name contains 'prepaid' %}
+      {% assign number_of_prepaid_shipments_options = number_of_prepaid_shipments_options | plus: 1 %}
+    {% endif %}
+  {%- endfor -%}
+  {% if number_of_prepaid_shipments_options > 0 %}
+
+    <div class="prepaid-div og-hidden" og-selling-plan-group-name="Prepaid-{{ variant.id }}">
+      <div class="og-prepaid-checkbox-label-container">
+        <label class="og-prepaid-checkbox-label og-bounce">
+          <input id="og-prepaid-checkbox-{{ variant.id }}" type="checkbox" variantId="{{ variant.id }}">
+          <svg viewBox="0 0 20 20">
+            <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+          </svg>
+        </label>
+        <span class="og-prepaid-text">Prepay for 
+
+    {% if number_of_prepaid_shipments_options != 1 %}
+      <select class="og-prepaid-shipments-select">
+    {% endif %}
+
+    {%- for selling_plan_allocation in variant.selling_plan_allocations -%}
+      {% assign selling_plan = selling_plan_allocation.selling_plan%}
+      {% if selling_plan.name contains 'prepaid' %}
+        {% assign prepaid_orders_per_billing = selling_plan.options[1].value | split: " " | first | times: 1 %}
+        {% assign prepaid_orders_per_billing_float = prepaid_orders_per_billing | times: 1.0 %}
+        {% assign total_prepaid_price = selling_plan.price_adjustments[0].value %}
+        {% assign prepaid_price_per_delivery = total_prepaid_price | divided_by: prepaid_orders_per_billing_float %}
+        {% assign total_prepaid_price_without_discount = variant.price | times: prepaid_orders_per_billing_float %}
+        {% assign total_discount = total_prepaid_price_without_discount | minus: total_prepaid_price %}
+        {% assign prepaid_percentage = total_discount | times: 100 | divided_by: total_prepaid_price_without_discount | round %}
+        {% assign pay_as_you_go_group = product.selling_plan_groups | where: "name", "Subscribe and Save" | first%}
+        {% assign pay_as_you_go_selling_plan = pay_as_you_go_group.selling_plans | first %}
+        {% assign normal_percentage = pay_as_you_go_selling_plan.price_adjustments[0].value %}
+        {% assign extra_percentage = prepaid_percentage | minus: normal_percentage %}
+        {% assign variant_id = group.name | split: "-" | last %}
+        {% if number_of_prepaid_shipments_options != 1 %}
+          <option data-prepaid_shipments="{{ prepaid_orders_per_billing }}" data-total_prepaid_price="{{ total_prepaid_price | money }}" data-prepaid_price_per_delivery="{{ prepaid_price_per_delivery | money }}" data-prepaid_percentage="{{ prepaid_percentage }}" data-prepaid_selling_plan_id="{{selling_plan.id}}" value="{{prepaid_orders_per_billing}}">{{prepaid_orders_per_billing}} deliveries ({{ prepaid_percentage }}%)</option>
+        {% else %}
+          <span class="og-prepaid-shipments-span" data-prepaid_shipments="{{ prepaid_orders_per_billing }}" data-total_prepaid_price="{{ total_prepaid_price | money }}" data-prepaid_price_per_delivery="{{ prepaid_price_per_delivery | money }}" data-prepaid_percentage="{{ prepaid_percentage }}" data-prepaid_selling_plan_id="{{selling_plan.id}}">{{ prepaid_orders_per_billing }} deliveries</span>
+        {% endif %}
+      {% endif %}
+    {%- endfor -%}
+
+    {% if number_of_prepaid_shipments_options > 1 %}
+      </select>
+    {% endif %}
+
+        and save <b><span class="og-prepaid-percentage">{{ prepaid_percentage }}</span>%</b></span>
+      </div>
+      <span class="og-prepaid-selling-plan-billing-explainer">
+        <div>- delivered monthly</div>
+        <div>- <span class="og-prepaid-total-discount">{{ total_discount | money}}</span> in savings</div>
+        <div class="og-prepaid-billing-total">- You will be billed <span class="og-total-prepaid-price">{{ total_prepaid_price | money }}</span> today</div>
+      </span>
+    </div>
+
+  {% endif %}
+{%- endfor -%}
+</div>

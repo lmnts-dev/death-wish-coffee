@@ -69,6 +69,7 @@ Create an array of product ids to pass to the module
       {% for selling_plan_allocation in variant.selling_plan_allocations %}
         {% assign frequency_label = selling_plan_allocation.selling_plan.options[0].value %}
         {% assign frequency = selling_plan_allocation.selling_plan.options[0].value | split: " " %}
+        {% assign prepaid_shipments = selling_plan_allocation.selling_plan.options[1].value | split: " " %}
         {% if frequency.size > 1 %}
           {% assign frequency_unit = frequency[1] | replace: "(s)", "" | replace: "s", "" %}
           {% assign frequency_interval = frequency[0] %}
@@ -81,18 +82,33 @@ Create an array of product ids to pass to the module
           {% assign frequency_period = frequency[0] | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
           {% assign frequency = "1" |append: "_" | append: frequency_period %}
         {% endif %}
-        <span
-          ref="{{variant.id}}-{{frequency}}"
-          id="og-selling-plan-map-{{variant.id}}-{{frequency}}"
-          selling-plan-id="{{selling_plan_allocation.selling_plan.id}}"
-          data-frequency="{{frequency}}"
-          data-frequency-interval="{{frequency_interval}}"
-          data-frequency-unit="{{frequency_unit}}"
-          data-frequency-label="{{frequency_label}}"
-          data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
-          data-price="{{selling_plan_allocation.price}}"
-          style="display:none !important;"
-        ></span>
+        {% if prepaid_shipments.size > 1 %}
+          <span
+            ref="{{variant.id}}-{{prepaid_shipments[0]}}-{{frequency}}"
+            id="og-selling-plan-map-{{variant.id}}-{{prepaid_shipments[0]}}-{{frequency}}"
+            selling-plan-id="{{selling_plan_allocation.selling_plan.id}}"
+            data-frequency="{{prepaid_shipments[0]}}-{{frequency}}"
+            data-frequency-interval="{{frequency_interval}}"
+            data-frequency-unit="{{frequency_unit}}"
+            data-frequency-label="{{frequency_label}}"
+            data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
+            data-price="{{selling_plan_allocation.price}}"
+            style="display:none !important;"
+          ></span>
+        {% else %}
+          <span
+            ref="{{variant.id}}-{{frequency}}"
+            id="og-selling-plan-map-{{variant.id}}-{{frequency}}"
+            selling-plan-id="{{selling_plan_allocation.selling_plan.id}}"
+            data-frequency="{{frequency}}"
+            data-frequency-interval="{{frequency_interval}}"
+            data-frequency-unit="{{frequency_unit}}"
+            data-frequency-label="{{frequency_label}}"
+            data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
+            data-price="{{selling_plan_allocation.price}}"
+            style="display:none !important;"
+          ></span>
+        {% endif %}
       {% endfor %}
     {%- endfor -%}
     <og-offer

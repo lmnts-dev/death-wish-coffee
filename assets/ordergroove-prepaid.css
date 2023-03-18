@@ -1,0 +1,135 @@
+.prepaid-div {
+  margin-bottom: 2.5em;
+  padding-left: 0.3em;
+  padding-right: 0.5em;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  max-width: 422px;
+  flex-wrap: wrap;
+  border: 1px solid #CF3C33;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.og-prepaid-checkbox-label-container {
+  display: flex;
+}
+
+.og-prepaid-selling-plan-billing-explainer {
+  margin-left: 24px;
+  margin-top: 4px;
+  flex-basis: 100%;
+}
+
+.og-prepaid-billing-total {
+  font-weight: 400;
+}
+
+.og-prepaid-checkbox-label {
+  accent-color: black;
+  --background: #fff;
+  --border: #d1d6ee;
+  --border-hover: #bbc1e1;
+  --border-active: #e12727;
+  --tick: #fff;
+  position: relative;
+  font-size: 18px;
+  margin-right: 8px;
+  margin-left: 5px;
+}
+.og-prepaid-checkbox-label input,
+.og-prepaid-checkbox-label svg {
+  width: 12px !important;
+  height: 12px !important;
+  min-height: 12px !important;
+}
+.og-prepaid-checkbox-label input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  outline: none;
+  background: var(--background);
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+  box-shadow: inset 0 0 0 var(--s, 1px) var(--b, var(--border));
+}
+.og-prepaid-checkbox-label input:hover {
+  --s: 2px;
+  --b: var(--border-hover);
+}
+.og-prepaid-checkbox-label input:checked {
+  --b: var(--border-active);
+}
+.og-prepaid-checkbox-label svg {
+  pointer-events: none;
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: var(--stroke, var(--border-active));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  transform: scale(var(--scale, 1)) translateZ(0);
+}
+.og-prepaid-checkbox-label.path input:checked {
+  --s: 2px;
+  transition-delay: 0.4s;
+}
+.og-prepaid-checkbox-label.path input:checked + svg {
+  --a: 16.1 86.12;
+  --o: 102.22;
+}
+.og-prepaid-checkbox-label.path svg {
+  stroke-dasharray: var(--a, 86.12);
+  stroke-dashoffset: var(--o, 86.12);
+  transition: stroke-dasharray 0.6s, stroke-dashoffset 0.6s;
+}
+/* .og-prepaid-checkbox-label.og-bounce {
+  --stroke: var(--tick);
+} */
+.og-prepaid-checkbox-label.og-bounce input:checked {
+  --s: 11px;
+}
+/* .og-prepaid-checkbox-label.og-bounce input:checked + svg {
+  -webkit-animation: og-bounce 0.4s linear forwards 0.2s;
+  animation: og-bounce 0.4s linear forwards 0.2s;
+} */
+.og-prepaid-checkbox-label.og-bounce svg {
+  --scale: 0;
+}
+@-webkit-keyframes og-bounce {
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes og-bounce {
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.og-hidden {
+  display: none;
+}
