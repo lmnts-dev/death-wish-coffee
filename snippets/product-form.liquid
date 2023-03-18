@@ -103,8 +103,8 @@
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
 
-      {%- render 'og_offer' product: product.selected_or_first_available_variant location: 'prepaid-pdp' -%}
-  
+      {%- render 'og_offer' variant: product.selected_or_first_available_variant location: 'prepaid-pdp' -%}
+
       {%- render 'button',
         button_value: '${addToCartButtonText}',
         tag: 'button',

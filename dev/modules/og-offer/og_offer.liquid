@@ -1,100 +1,54 @@
 {% comment %}
-NOTE: this is a customized version of the Ordergroove snippets.
+This is a customized copy of the original `ordergroove_offer` template.
+
+DWC does not display offers in the cart, so the cart-specific functionality
+has been removed.
 {% endcomment %}
 
 {% comment %}
-Create an array of product ids to pass to the module
+Create an array of product ids to pass to the Vue.js module.
 {% endcomment }
 {% assign og_product_ids = cart.items | map: "variant_id" | join: "," %}
 
-{% if selected_variant %}
-  {% assign product = selected_variant %}
-{% elsif line_item %}
-  {% assign product = line_item %}
-{% endif %}
+{%- comment -%}
+The `og-offer` module requires a variant to be passed in.
+{%- endcomment -%}
 
-{% if product %}
-<div
-  is="og-offer"
-  inline-template product-ids-string="{{og_product_ids}}"
-  :selected-variant="selectedVariant"
->
-  <div data-module="og-offer">
-  {% if type == 'cart' %}
-    {% assign cart_type = true %}
-    {% unless location %}
-      {% assign location = 'cart' %}
-    {% endunless %}
-  {% endif %}
-  {% if cart_type %}
-    {% for selling_plan_allocation in product.variant.selling_plan_allocations %}
-      {% assign frequency_label = selling_plan_allocation.selling_plan.options[0].value %}
-      {% assign frequency = selling_plan_allocation.selling_plan.options[0].value | split: " " %}
-      {% if frequency.size > 1 %}
-        {% assign frequency_unit = frequency[1] | replace: "(s)", "" | replace: "s", "" %}
-        {% assign frequency_interval = frequency[0] %}
-        {% assign frequency_period = frequency[1] | replace: "(s)", "" | replace: "s", "" | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
-        {% assign frequency = frequency[0] |append: "_" | append: frequency_period %}
-      {% elsif frequency.size == 1 %}
-        {% assign frequency_label = "1 " | append: frequency_label %}
-        {% assign frequency_unit = frequency[0] %}
-        {% assign frequency_interval = "1" %}
-        {% assign frequency_period = frequency[0] | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
-        {% assign frequency = "1" |append: "_" | append: frequency_period %}
-      {% endif %}
-      <span
-        ref="{{product.variant_id}}-{{frequency}}"
-        id="og-selling-plan-map-{{product.variant_id}}-{{frequency}}"
-        selling-plan-id="{{selling_plan_allocation.selling_plan.id}}"
-        data-frequency="{{frequency}}"
-        data-frequency-interval="{{frequency_interval}}"
-        data-frequency-unit="{{frequency_unit}}"
-        data-frequency-label="{{frequency_label}}"
-        data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
-        data-price="{{selling_plan_allocation.price}}"
-        style="display:none !important;"
-      ></span>
-    {% endfor %}
-    <og-offer
-      ref="og-offer"
-      product="{{ product.variant_id }}"
-      data-line-id="{{ product.key }}"
-      data-line-qty="{{ product.quantity }}"
-      location="{{ location }}"
-      os-version="1"
-    ></og-offer>
-  {% else %}
-    {%- for variant in product.product.variants -%}
-      {% for selling_plan_allocation in variant.selling_plan_allocations %}
-        {% assign frequency_label = selling_plan_allocation.selling_plan.options[0].value %}
-        {% assign frequency = selling_plan_allocation.selling_plan.options[0].value | split: " " %}
-        {% assign prepaid_shipments = selling_plan_allocation.selling_plan.options[1].value | split: " " %}
-        {% if frequency.size > 1 %}
-          {% assign frequency_unit = frequency[1] | replace: "(s)", "" | replace: "s", "" %}
-          {% assign frequency_interval = frequency[0] %}
-          {% assign frequency_period = frequency[1] | replace: "(s)", "" | replace: "s", "" | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
-          {% assign frequency = frequency[0] |append: "_" | append: frequency_period %}
-        {% elsif frequency.size == 1 %}
-          {% assign frequency_label = "1 " | append: frequency_label %}
-          {% assign frequency_unit = frequency[0] %}
-          {% assign frequency_interval = "1" %}
-          {% assign frequency_period = frequency[0] | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
-          {% assign frequency = "1" |append: "_" | append: frequency_period %}
-        {% endif %}
-        {% if prepaid_shipments.size > 1 %}
-          <span
-            ref="{{variant.id}}-{{prepaid_shipments[0]}}-{{frequency}}"
-            id="og-selling-plan-map-{{variant.id}}-{{prepaid_shipments[0]}}-{{frequency}}"
-            selling-plan-id="{{selling_plan_allocation.selling_plan.id}}"
-            data-frequency="{{prepaid_shipments[0]}}-{{frequency}}"
-            data-frequency-interval="{{frequency_interval}}"
-            data-frequency-unit="{{frequency_unit}}"
-            data-frequency-label="{{frequency_label}}"
-            data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
-            data-price="{{selling_plan_allocation.price}}"
-            style="display:none !important;"
-          ></span>
-        {% else %}
+{% if variant %}
+  {% assign variants = variant.product.variants %}
+
+  <div
+    is="og-offer"
+    inline-template product-ids-string="{{og_product_ids}}"
+    :selected-variant="selectedVariant"
+  >
+    {%- comment -%}
+    Create a list of `<span>` tags that contain the selling plan map. A few
+    attributes have been added to aid the Vue `og-offer` module in tracking
+    and looking up values as needed.
+
+    * `ref` = a Vue.js ref used to lookup the selling plan by the unique key
+    * `data-*` = values used internally by the Vue module.
+    {%- endcomment -%}
+    <div data-module="og-offer">
+      {%- for variant in variants -%}
+        {% for selling_plan_allocation in variant.selling_plan_allocations %}
+          {% assign frequency_label = selling_plan_allocation.selling_plan.options[0].value %}
+          {% assign frequency = selling_plan_allocation.selling_plan.options[0].value | split: " " %}
+
+          {% if frequency.size > 1 %}
+            {% assign frequency_unit = frequency[1] | replace: "(s)", "" | replace: "s", "" %}
+            {% assign frequency_interval = frequency[0] %}
+            {% assign frequency_period = frequency[1] | replace: "(s)", "" | replace: "s", "" | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
+            {% assign frequency = frequency[0] |append: "_" | append: frequency_period %}
+          {% elsif frequency.size == 1 %}
+            {% assign frequency_label = "1 " | append: frequency_label %}
+            {% assign frequency_unit = frequency[0] %}
+            {% assign frequency_interval = "1" %}
+            {% assign frequency_period = frequency[0] | upcase | replace: "DAY", "1" | replace: "WEEK", "2" | replace: "MONTH", "3" %}
+            {% assign frequency = "1" |append: "_" | append: frequency_period %}
+          {% endif %}
+
           <span
             ref="{{variant.id}}-{{frequency}}"
             id="og-selling-plan-map-{{variant.id}}-{{frequency}}"
@@ -107,18 +61,17 @@ Create an array of product ids to pass to the module
             data-price="{{selling_plan_allocation.price}}"
             style="display:none !important;"
           ></span>
-        {% endif %}
-      {% endfor %}
-    {%- endfor -%}
-    <og-offer
-      ref="og-offer"
-      product="{{ product.id }}"
-      location="{{location}}"
-      os-version="1"
-    ></og-offer>
-  {% endif %}
+        {% endfor %}
+      {%- endfor -%}
+
+      <og-offer
+        ref="og-offer"
+        product="{{variant.id}}"
+        location="{{location}}"
+        os-version="1"
+      ></og-offer>
+    </div>
   </div>
-</div>
 {% else %}
-  <!-- ordergroove_offer snippet requires a product -->
+  <!-- og_offer snippet requires a product variant -->
 {% endif %}
