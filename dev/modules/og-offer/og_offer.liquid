@@ -5,6 +5,12 @@ DWC does not display offers in the cart, so the cart-specific functionality
 has been removed.
 {% endcomment %}
 
+{%- comment -%}
+Set defaults if not passed in
+{%- endcomment -%}
+{% assign location = location | default: 'pdp' %}
+{% assign os_version = os_version | default: '1' %}
+
 {% comment %}
 Create an array of product ids to pass to the Vue.js module.
 {% endcomment }
@@ -68,7 +74,7 @@ The `og-offer` module requires a variant to be passed in.
         ref="og-offer"
         product="{{variant.id}}"
         location="{{location}}"
-        os-version="2"
+        os-version="{{os_version}}"
       ></og-offer>
     </div>
   </div>
