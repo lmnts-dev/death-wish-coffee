@@ -220,6 +220,12 @@
         "id": "ordergroove_feature_flag",
         "label": "Flag indicating the Ordergroove features being used",
         "default": "pre-2023-03--no-prepaid"
+      },
+      {
+        "type": "text",
+        "id": "ordergroove_os_version",
+        "label": "OS Version for the og-offer module",
+        "default": "1"
       }
     ]
   },
