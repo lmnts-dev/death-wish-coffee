@@ -103,7 +103,18 @@
       <input type="hidden" name="id" :value="selectedVariantId">
       <input type="hidden" name="quantity" value="1">
 
-      {%- render 'og_offer' variant: product.selected_or_first_available_variant location: 'prepaid-pdp' os_version: '2' -%}
+      {% if settings.ordergroove_feature_flag == '2023-03-prepaid-selling-plans' %}
+        {% assign location = 'prepaid-pdp' %}
+      {% else %}
+        {% assign location = 'pdp' %}
+      {% endif %}
+
+      {%- render 'og_offer',
+        feature_flag: settings.ordergroove_feature_flag,
+        location: location,
+        os_version: settings.ordergroove_os_version,
+        variant: product.selected_or_first_available_variant
+      -%}
 
       {%- render 'button',
         button_value: '${addToCartButtonText}',
