@@ -112,7 +112,7 @@ export default {
      * @returns Vue Ref
      */
     sellingPlanMap() {
-      const map = this.getSellingPlanMap(this.variantId, this.frequency)
+      const map = this.getSellingPlanMap(this.buildSellingPlanRefKey())
 
       debug('sellingPlanMap', map)
 
@@ -281,7 +281,7 @@ export default {
       // Update the price for each button
       buttons.forEach(button => {
         const frequency = button.getAttribute('default-frequency')
-        const plan = this.getSellingPlanMap(this.variantId, frequency)
+        const plan = this.getSellingPlanMap(this.buildRefKey([this.variantId, frequency]))
         if (!plan) return
 
         const price = plan.getAttribute('data-price')
@@ -311,12 +311,31 @@ export default {
     },
 
     /**
-     * Get the ref that stores the plan map for the variant and frequency.
+     * Build a ref key from passed in parts.
+     *
+     * @returns String
+     */
+    buildRefKey(parts = []) {
+      return parts.join('-')
+    },
+
+    /**
+     * Build the ref used to lookup the selling plan.
+     *
+     * @returns String
+     */
+    buildSellingPlanRefKey() {
+      const refKey = this.buildRefKey([this.variantId, this.frequency])
+
+      return refKey
+    },
+
+    /**
+     * Get the ref that stores the plan map the ref key
      *
      * @returns Vue Ref
      */
-    getSellingPlanMap(variantId, frequency) {
-      const refKey = `${variantId}-${frequency}`
+    getSellingPlanMap(refKey) {
       const map = this.$refs[refKey]
 
       debug('getSellingPlanMap', refKey, map)
