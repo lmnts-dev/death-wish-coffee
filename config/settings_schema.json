@@ -213,6 +213,17 @@
     ]
   },
   {
+    "name": "Ordergroove Integration",
+    "settings": [
+      {
+        "type": "text",
+        "id": "ordergroove_feature_flag",
+        "label": "Flag indicating the Ordergroove features being used",
+        "default": "pre-2023-03--no-prepaid"
+      }
+    ]
+  },
+  {
     "name": "Footer",
     "settings": [
       {

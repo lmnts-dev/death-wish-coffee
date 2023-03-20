@@ -31,6 +31,10 @@ export const UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details'
 export default {
   inheritAttrs: false,
   props: {
+    featureFlag: {
+      type: String,
+      required: true
+    },
     productIdsString: {
       type: String,
       required: true
@@ -53,6 +57,8 @@ export default {
   },
   created() {
     console.warn('og-offer module created')
+
+    debug('featureFlag', this.featureFlag)
   },
   mounted() {
     this.$__initializeData()

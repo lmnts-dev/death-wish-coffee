@@ -18,6 +18,7 @@
     "text_color_5": "#ffffff",
     "border_color_5": "#e6e6e6",
     "is_dev_mode": false,
+    "ordergroove_feature_flag": "pre-2023-03--no-prepaid",
     "footer_menu_title_1": "Company",
     "footer_menu_1": "footer",
     "footer_menu_title_2": "Accounts + Orders",

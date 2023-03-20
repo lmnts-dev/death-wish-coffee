@@ -8,6 +8,7 @@ has been removed.
 {%- comment -%}
 Set defaults if not passed in
 {%- endcomment -%}
+{% assign feature_flag = feature_flag | default: 'pre-2023-03--no-prepaid' %}
 {% assign location = location | default: 'pdp' %}
 {% assign os_version = os_version | default: '1' %}
 
@@ -27,6 +28,7 @@ The `og-offer` module requires a variant to be passed in.
     is="og-offer"
     inline-template product-ids-string="{{og_product_ids}}"
     :selected-variant="selectedVariant"
+    feature-flag="{{feature_flag}}"
   >
     {%- comment -%}
     Create a list of `<span>` tags that contain the selling plan map. A few
