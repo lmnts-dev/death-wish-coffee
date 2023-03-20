@@ -1,6 +1,16 @@
 {%- comment -%}
-Not sure this is needed. Should check with Hugo - was this being used before
-the new 2.3.x version? He mentioned they were on a beta and now things are
-different.
+Include additional Ordergroove JS resources depending on the feature flag.
 {%- endcomment -%}
-{{ 'ordergroove-prepaid.js' | asset_url | script_tag }}
+
+<!-- settings.ordergroove_feature_flag: {{settings.ordergroove_feature_flag }} -->
+{% if settings.ordergroove_feature_flag == '2023-03-prepaid-selling-plans' %}
+  {%- comment -%}
+  Not sure this is needed. Should check with Hugo - was this being used before
+  the new 2.3.x version? He mentioned they were on a beta and now things are
+  different.
+  {%- endcomment -%}
+  {{ 'ordergroove-prepaid.js' | asset_url | script_tag }}
+
+{% else %}
+  {{ 'ordergroove.js' | asset_url | script_tag }}
+{% endif %}
