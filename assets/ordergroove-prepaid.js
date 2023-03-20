@@ -1,3 +1,5 @@
+// Use with ordergroove_feature_flag: 2023-03-prepaid-selling-plans
+
 // We use it to check which frequency was selected before prepaid box was checked
 const previousPayAsYouGoFrequencies = {};
 // We need this to account for product variant changes and track last product variant selected
