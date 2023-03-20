@@ -58,8 +58,15 @@ The `og-offer` module requires a variant to be passed in.
             {% assign frequency = "1" |append: "_" | append: frequency_period %}
           {% endif %}
 
+          {% if settings.ordergroove_feature_flag == '2023-03-prepaid-selling-plans' %}
+            {% assign ref_key = selling_plan_id %}
+          {% else %}
+            {% assign ref_key = variant.id | append: "-" | append: frequency %}
+          {% endif %}
+
           <span
-            ref="{{variant.id}}-{{frequency}}"
+            ref="{{ref_key}}"
+            data-debug-ref-key="{{ref_key}}"
             id="og-selling-plan-map-{{variant.id}}-{{frequency}}"
             selling-plan-id="{{selling_plan_id}}"
             data-frequency="{{frequency}}"
