@@ -53,8 +53,11 @@
   padding: 0 var(--iconsSectionGap);
 }
 @media screen and (max-width: 676px) {
+  
+
   .timeline-section {
     --iconsSectionGap: var(--pxSize);
+    --sectionGuttersSpacing: 70px;
   }
 
   .timeline-section__icons__icon {

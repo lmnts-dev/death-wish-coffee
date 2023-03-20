@@ -70,6 +70,7 @@ body > main > .commence-section > div {
     var(--sectionGuttersSpacing);
   position: relative;
   color: RGB(var(--color-text));
+  background-color: RGB(var(--color-background));
 }
 
 body > main > .commence-section > div:after {

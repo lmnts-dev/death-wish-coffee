@@ -14,6 +14,8 @@
   }
 {% endstyle %}
 
+<script src="{{ 'timeline-section.js' | asset_url }}" defer="defer"></script>
+
 {{ 'timeline-section.css' | asset_url | stylesheet_tag }}
 
 <div
@@ -29,7 +31,7 @@
   %}
 
   {% comment %} Icons {% endcomment %}
-  <div
+  <timeline-section
     class="timeline-section__icons"
     style="--numColumns: {{ section.settings.cols_desktop }}; --mobileNumColumns: {{ section.settings.cols_mobile }};"
   >
@@ -59,12 +61,12 @@
           </div>
       {%- endcase -%}
     {%- endfor -%}
-  </div>
+  </timeline-section>
 </div>
 
 {% schema %}
 {
-  "name": "Icons Section",
+  "name": "Timeline Section",
   "tag": "section",
   "class": "commence-section",
   "settings": [
