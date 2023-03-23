@@ -6301,6 +6301,34 @@ button.swiper-pagination-bullet {
   }
 }
 
+.category-card {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+
+.category-card__image {
+  position: relative
+}
+
+.category-card__image::before {
+  display: block;
+  content: '';
+  padding-top: 100%;
+}
+
+.category-card__title {
+  margin-top: 9px;
+}
+
+@media (min-width: 992px) {
+
+  .category-card__title {
+    margin-top: 13px;
+    text-align: center;
+  }
+}
+
 .cta-banner {
   margin: 74px 0;
 }
@@ -6352,32 +6380,28 @@ button.swiper-pagination-bullet {
   text-decoration: none;
 }
 
-.category-card {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-}
-
-.category-card__image {
-  position: relative
-}
-
-.category-card__image::before {
-  display: block;
-  content: '';
-  padding-top: 100%;
-}
-
-.category-card__title {
-  margin-top: 9px;
-}
-
-@media (min-width: 992px) {
-
-  .category-card__title {
-    margin-top: 13px;
-    text-align: center;
+.template-customers-order .customer-info {
+    display: none;
   }
+
+.customer-info__content {
+  padding: 0 25px 46px;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+
+  .customer-info__content {
+    padding: 16px 0 0;
+  }
+}
+
+.customer-info__title {
+  margin-bottom: 5px;
+}
+
+.customer-info__item:not(:last-child) {
+  margin-bottom: 8px;
 }
 
 @media (min-width: 768px) {
@@ -6465,30 +6489,6 @@ button.swiper-pagination-bullet {
     margin-top: auto;
     margin-bottom: 16px;
   }
-}
-
-.template-customers-order .customer-info {
-    display: none;
-  }
-
-.customer-info__content {
-  padding: 0 25px 46px;
-  color: #fff;
-}
-
-@media (min-width: 768px) {
-
-  .customer-info__content {
-    padding: 16px 0 0;
-  }
-}
-
-.customer-info__title {
-  margin-bottom: 5px;
-}
-
-.customer-info__item:not(:last-child) {
-  margin-bottom: 8px;
 }
 
 /* styles for footer */
@@ -7107,6 +7107,8 @@ button.swiper-pagination-bullet {
   margin-bottom: 15px;
 }
 
+/* styles for the form-checkout-info module go in this file */
+
 /* styles for the form-contact module go in this file */
 
 .form-contact {
@@ -7147,11 +7149,11 @@ button.swiper-pagination-bullet {
   }
 }
 
-/* styles for the form-checkout-info module go in this file */
-
 /* styles for the form-contact-customer-service module go in this file */
 
 /* styles for the form-contact-sales module go in this file */
+
+/* styles for the form-contact-sponsor module go in this file */
 
 /* styles for the form-create-account module go in this file */
 
@@ -7240,8 +7242,6 @@ button.swiper-pagination-bullet {
 .form-create-account__login-link:hover {
   text-decoration: underline;
 }
-
-/* styles for the form-contact-sponsor module go in this file */
 
 /* styles for the form-forgot module go in this file */
 
@@ -15735,6 +15735,8 @@ div.cmnc-incentive-text-override {
 
 /* styles for shogun-products */
 
+/* styles for smile-initializer */
+
 /* styles for social-icons */
 
 .social-icons {
@@ -15769,8 +15771,6 @@ div.cmnc-incentive-text-override {
 .social-icons__link:not(:last-of-type) {
   margin-right: 18px;
 }
-
-/* styles for smile-initializer */
 
 /* styles for styleguide */
 

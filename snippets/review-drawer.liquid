@@ -3,11 +3,12 @@
 {% assign palette = palette | default: false %}
 {% capture class %}review-drawer{% if class %} {{- class -}}{% endif %}{% if palette != blank %} review--palette-{{ palette }}{% endif %}{% endcapture %}
 
-<section id="review-drawer" class="{{ class }} bg--black" data-module="review-drawer">
+<section id="review-drawer" class="{{ class }} bg--black" data-module="review-drawer" style="color: white;">
   {% render 'section-title', title: title, class: 'section-title--review-drawer' %}
   <div class="container review-drawer__container">
     <div class="review-drawer__inner">
-      <div class="review-drawer__yotpo-title yotpo bottomLine js-yotpo-bottomline active js-button-toggle-review"
+      REVIEWS: <div data-bv-show="reviews" data-bv-product-id=""></div>
+      {% comment %}<div class="review-drawer__yotpo-title yotpo bottomLine js-yotpo-bottomline active js-button-toggle-review"
       data-product-id="{{ product.id }}">
       </div>
       <div 
@@ -19,6 +20,7 @@
         data-price="{{ variant.price | money_without_currency }}"
         data-currency="{{ shop.currency }}"
       >
+      {% endcomment %}
       </div>
     </div>
   </div>
