@@ -14705,6 +14705,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
     }
 
     debug('featureFlag', this.featureFlag);
+    debug('created');
   },
   mounted: function mounted() {
     this.$__initializeData();
@@ -14773,14 +14774,10 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
   },
   methods: {
     /**
-     * Initialize data values.
+     * Initialize attribute map.
      */
-    $__initializeData: function $__initializeData() {
-      var ogOffer = this.$refs[OG_OFFER_REF_KEY];
-      this.frequency = ogOffer.getAttribute('frequency');
-      this.location = ogOffer.getAttribute('location');
-      this.variantId = ogOffer.getAttribute('product');
-      debug('$__initializeData featureFlag', this.featureFlag); // Initialize data based on feature flags
+    $__initializeAttributeMap: function $__initializeAttributeMap() {
+      var ogOffer = this.$refs[OG_OFFER_REF_KEY]; // Initialize data based on feature flags
 
       switch (this.featureFlag) {
         case 'pre-2023-03--no-prepaid':
@@ -14809,6 +14806,18 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
           });
       }
 
+      debug('$__initializeAttributeMap', OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP);
+    },
+
+    /**
+     * Initialize data values.
+     */
+    $__initializeData: function $__initializeData() {
+      var ogOffer = this.$refs[OG_OFFER_REF_KEY];
+      this.frequency = ogOffer.getAttribute('frequency');
+      this.location = ogOffer.getAttribute('location');
+      this.variantId = ogOffer.getAttribute('product');
+      this.$__initializeAttributeMap();
       debug('$__initializeData');
     },
 
