@@ -319,14 +319,20 @@ export default {
 
       // Update the price for each button
       buttons.forEach(button => {
+        const ogPrice = button.querySelector('og-price')
         const frequency = button.getAttribute('default-frequency')
-        const plan = this.getSellingPlanMap(this.buildRefKey([this.variantId, frequency]))
-        if (!plan) return
+        let refKey = this.buildRefKey([this.variantId, frequency])
+
+        const plan = this.getSellingPlanMap(refKey)
+        if (!plan) {
+          ogPrice.shadowRoot.innerHTML = ''
+          debug('$_updateSubscriptionButtonsPrices - reset')
+
+          return
+        }
 
         const price = plan.getAttribute('data-price')
         if (!price) return
-
-        const ogPrice = button.querySelector('og-price')
 
         if (ogPrice && ogPrice.shadowRoot) {
           // eslint-disable-next-line no-template-curly-in-string
