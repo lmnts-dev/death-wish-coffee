@@ -6,11 +6,7 @@ import { formatMoney } from 'lib/util'
 const DEBUG = true
 
 // Mapping of `og-offer` attribute names to the keys in the data object
-const OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP = {
-  frequency: 'frequency',
-  product: 'variantId',
-  'selling-plan-id': 'sellingPlanId',
-}
+const OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP = {}
 
 // List of attributes to observe for changes
 const OG_OFFER_ATTRIBUTES_TO_OBSERVE = [
@@ -143,8 +139,38 @@ export default {
 
       this.frequency = ogOffer.getAttribute('frequency')
       this.location = ogOffer.getAttribute('location')
-      this.sellingPlanId = ogOffer.getAttribute('selling-plan-id')
       this.variantId = ogOffer.getAttribute('product')
+
+      debug('$__initializeData featureFlag', this.featureFlag)
+
+      // Initialize data based on feature flags
+      switch (this.featureFlag) {
+        case 'pre-2023-03--no-prepaid':
+          this.sellingPlanId = ogOffer.getAttribute('selling-plan-id')
+
+          /**
+           * This version of Ordergroove has a simple map of attributes
+           * as their JavaScript keeps these all updated for us.
+           */
+          Object.assign(OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP, {
+            frequency: 'frequency',
+            product: 'variantId',
+            'selling-plan-id': 'sellingPlanId'
+          })
+
+        case '2023-03-prepaid-selling-plans':
+          this.sellingPlanId = ogOffer.getAttribute('frequency')
+
+          /**
+           * This version of Ordergroove prepaid overloads `frequency`
+           * with the selling plan id, so this broadcast changes from
+           * `frequency` to the other attributes the module cares about.
+           */
+          Object.assign(OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP, {
+            frequency: ['sellingPlanId'],
+          })
+
+      }
 
       debug('$__initializeData')
     },
