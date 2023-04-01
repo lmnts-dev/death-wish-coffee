@@ -60,19 +60,21 @@ The `og-offer` module requires a variant to be passed in.
 
           {% assign ref_key = variant.id | append: "-" | append: frequency %}
 
-          <span
-            ref="{{ref_key}}"
-            data-debug-ref-key="{{ref_key}}"
-            id="og-selling-plan-map-{{variant.id}}-{{frequency}}"
-            selling-plan-id="{{selling_plan_id}}"
-            data-frequency="{{frequency}}"
-            data-frequency-interval="{{frequency_interval}}"
-            data-frequency-unit="{{frequency_unit}}"
-            data-frequency-label="{{frequency_label}}"
-            data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
-            data-price="{{selling_plan_allocation.price}}"
-            style="display:none !important;"
-          ></span>
+            <span
+              ref="{{ref_key}}"
+              data-debug-ref-key="{{ref_key}}"
+              id="og-selling-plan-map-{{ref_key}}"
+              selling-plan-id="{{selling_plan_id}}"
+              data-frequency="{{frequency}}"
+              data-frequency-interval="{{frequency_interval}}"
+              data-frequency-unit="{{frequency_unit}}"
+              data-frequency-label="{{frequency_label}}"
+              data-compare-at-price="{{selling_plan_allocation.compare_at_price}}"
+              data-price="{{selling_plan_allocation.price}}"
+              data-selling-plan-id="{{selling_plan_id}}"
+              data-variant-id="{{variant.id}}"
+              style="display:none !important;"
+            ></span>
         {% endfor %}
       {%- endfor -%}
 
