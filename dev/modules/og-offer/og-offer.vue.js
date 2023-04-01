@@ -58,6 +58,11 @@ export default {
   created() {
     console.warn('og-offer module created')
 
+    if (!this.featureFlag) {
+      // Default feature flag
+      this.featureFlag = 'pre-2023-03--no-prepaid'
+    }
+
     debug('featureFlag', this.featureFlag)
   },
   mounted() {
