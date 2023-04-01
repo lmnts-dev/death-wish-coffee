@@ -370,7 +370,13 @@ export default {
      * @returns String
      */
     buildSellingPlanRefKey() {
-      const refKey = this.buildRefKey([this.variantId, this.frequency])
+      let keyParts = [this.variantId, this.frequency]
+
+      if (this.featureFlag === '2023-03-prepaid-selling-plans') {
+        keyParts = [this.variantId, this.sellingPlanId]
+      }
+
+      const refKey = this.buildRefKey(keyParts)
 
       return refKey
     },
