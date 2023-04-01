@@ -60,6 +60,7 @@ export default {
     }
 
     debug('featureFlag', this.featureFlag)
+    debug('created')
   },
   mounted() {
     this.$__initializeData()
@@ -132,16 +133,10 @@ export default {
   },
   methods: {
     /**
-     * Initialize data values.
+     * Initialize attribute map.
      */
-    $__initializeData() {
+    $__initializeAttributeMap() {
       const ogOffer = this.$refs[OG_OFFER_REF_KEY]
-
-      this.frequency = ogOffer.getAttribute('frequency')
-      this.location = ogOffer.getAttribute('location')
-      this.variantId = ogOffer.getAttribute('product')
-
-      debug('$__initializeData featureFlag', this.featureFlag)
 
       // Initialize data based on feature flags
       switch (this.featureFlag) {
@@ -171,6 +166,21 @@ export default {
           })
 
       }
+
+      debug('$__initializeAttributeMap', OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP)
+    },
+
+    /**
+     * Initialize data values.
+     */
+    $__initializeData() {
+      const ogOffer = this.$refs[OG_OFFER_REF_KEY]
+
+      this.frequency = ogOffer.getAttribute('frequency')
+      this.location = ogOffer.getAttribute('location')
+      this.variantId = ogOffer.getAttribute('product')
+
+      this.$__initializeAttributeMap()
 
       debug('$__initializeData')
     },
