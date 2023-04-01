@@ -425,9 +425,12 @@ export default {
 
     /**
      * Watch `variantId` for updates.
+     *
+     * Note: this is not updated in featureFlag 2023-03-prepaid-selling-plans
      */
     variantId() {
       debug('[watch] variantId', this.variantId)
+
       this.$_updateFrequencyData()
 
       // Ensure DOM is updated before updating subscription buttons
