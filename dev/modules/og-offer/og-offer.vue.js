@@ -408,6 +408,19 @@ export default {
      */
     selectedVariant() {
       debug('[watch] selectedVariant', this.selectedVariant)
+
+      if (this.featureFlag === '2023-03-prepaid-selling-plans') {
+        const newVariantId = this.selectedVariant && this.selectedVariant.id
+        // variantId is not changed in newer versions, force the id to
+        // change so the watcher below runs.
+        this.variantId = newVariantId
+
+        // Update the `product` attribute on og-offer
+        const ogOffer = this.$refs[OG_OFFER_REF_KEY]
+        ogOffer.setAttribute('product', newVariantId)
+
+        debug('[watch] selectedVariant variant.id', newVariantId)
+      }
     },
 
     /**
