@@ -14660,7 +14660,7 @@ var DEBUG = true; // Mapping of `og-offer` attribute names to the keys in the da
 
 var OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP = {}; // List of attributes to observe for changes
 
-var OG_OFFER_ATTRIBUTES_TO_OBSERVE = ['frequency', 'product', 'selling-plan-id']; // Key used for the `og-offer` ref
+var OG_OFFER_ATTRIBUTES_TO_OBSERVE = ['frequency', 'product', 'selling-plan-id', 'subscribed']; // Key used for the `og-offer` ref
 
 var OG_OFFER_REF_KEY = 'og-offer'; // Event name used when emitting details updates to the parent component
 
@@ -14739,6 +14739,20 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
     },
 
     /**
+     * Reference to the subscribed attribute.
+     *
+     * Ordergroove doesn't supply a "value" for this attribute. The
+     * presence of the attributes indicates a subscription has been
+     * selected.
+     *
+     * @returns Boolean
+     */
+    isSubscribed: function isSubscribed() {
+      var ogOffer = this.$refs[OG_OFFER_REF_KEY];
+      return ogOffer.hasAttribute('subscribed');
+    },
+
+    /**
      * Array of product ids passed into the module.
      *
      * @returns Array
@@ -14768,8 +14782,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
      * @returns Boolean
      */
     subscribeChecked: function subscribeChecked() {
-      // eslint-disable-next-line no-unneeded-ternary
-      return this.sellingPlanId ? true : false;
+      return this.isSubscribed;
     }
   },
   methods: {
@@ -14802,7 +14815,8 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
            */
 
           Object.assign(OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP, {
-            frequency: ['sellingPlanId']
+            frequency: ['sellingPlanId'],
+            subscribed: 'subscribed'
           });
       }
 
@@ -15050,6 +15064,13 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
         ogOffer.setAttribute('product', newVariantId);
         debug('[watch] selectedVariant variant.id', newVariantId);
       }
+    },
+
+    /**
+     * watch `subscribed` for updates.
+     */
+    subscribed: function subscribed() {
+      debug('[watch] subscribed', this.subscribed);
     },
 
     /**
