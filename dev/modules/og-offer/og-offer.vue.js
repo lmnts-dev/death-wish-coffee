@@ -13,6 +13,7 @@ const OG_OFFER_ATTRIBUTES_TO_OBSERVE = [
   'frequency',
   'product',
   'selling-plan-id',
+  'subscribed'
 ]
 
 // Key used for the `og-offer` ref
@@ -97,6 +98,21 @@ export default {
     },
 
     /**
+     * Reference to the subscribed attribute.
+     *
+     * Ordergroove doesn't supply a "value" for this attribute. The
+     * presence of the attributes indicates a subscription has been
+     * selected.
+     *
+     * @returns Boolean
+     */
+    isSubscribed() {
+      const ogOffer = this.$refs[OG_OFFER_REF_KEY]
+
+      return ogOffer.hasAttribute('subscribed')
+    },
+
+    /**
      * Array of product ids passed into the module.
      *
      * @returns Array
@@ -127,8 +143,7 @@ export default {
      * @returns Boolean
      */
     subscribeChecked() {
-      // eslint-disable-next-line no-unneeded-ternary
-      return this.sellingPlanId ? true : false
+      return this.isSubscribed
     },
   },
   methods: {
@@ -163,6 +178,7 @@ export default {
            */
           Object.assign(OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP, {
             frequency: ['sellingPlanId'],
+            subscribed: 'subscribed'
           })
 
       }
@@ -431,6 +447,13 @@ export default {
 
         debug('[watch] selectedVariant variant.id', newVariantId)
       }
+    },
+
+    /**
+     * watch `subscribed` for updates.
+     */
+    subscribed() {
+      debug('[watch] subscribed', this.subscribed)
     },
 
     /**
