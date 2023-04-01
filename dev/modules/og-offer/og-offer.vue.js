@@ -208,14 +208,22 @@ export default {
     /**
      * Update a value in `data`.
      *
-     * Updates a key on the `data` object in a way that triggers reactive
+     * Updates a value on the `data` object in a way that triggers reactive
      * updates and then emits a custom event for tracking in the parent.
      *
      * @param {String} key e
      * @param {Any} value - value to update
      */
     $_updateDataValue(key, value) {
-      Vue.set(this.$data, OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP[key], value)
+      // The mapping of attribute to data key may be 1 to many, assume that
+      // it is and always process this as a list.
+      const mappedDataKeys = OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP[key]
+      const dataKeys = Array.isArray(mappedDataKeys) ? mappedDataKeys : [mappedDataKeys]
+
+      dataKeys.forEach(dataKey => {
+        Vue.set(this.$data, dataKey, value)
+      })
+
       this.$emit(UPDATE_DETAILS_EVENT_NAME, this.ogOfferDetails)
 
       debug(`[emit] ${UPDATE_DETAILS_EVENT_NAME}`, this.ogOfferDetails)
