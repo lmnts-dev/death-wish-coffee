@@ -14636,9 +14636,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(22);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(14);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var lib_util__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(0);
+/* harmony import */ var lib_util__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(0);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(14);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -14662,7 +14662,10 @@ var OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP = {}; // List of attributes to observe fo
 
 var OG_OFFER_ATTRIBUTES_TO_OBSERVE = ['frequency', 'product', 'selling-plan-id', 'subscribed']; // Key used for the `og-offer` ref
 
-var OG_OFFER_REF_KEY = 'og-offer'; // Event name used when emitting details updates to the parent component
+var OG_OFFER_REF_KEY = 'og-offer'; // Prefixes used for selling plan maps
+
+var SELLING_PLAN_MAP_REF_PREFIX = 'selling-plan-map';
+var SELLING_PLAN_PRICE_MAP_REF_PREFIX = 'selling-plan-price-map'; // Event name used when emitting details updates to the parent component
 
 var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
 /**
@@ -14739,20 +14742,6 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
     },
 
     /**
-     * Reference to the subscribed attribute.
-     *
-     * Ordergroove doesn't supply a "value" for this attribute. The
-     * presence of the attributes indicates a subscription has been
-     * selected.
-     *
-     * @returns Boolean
-     */
-    isSubscribed: function isSubscribed() {
-      var ogOffer = this.$refs[OG_OFFER_REF_KEY];
-      return ogOffer.hasAttribute('subscribed');
-    },
-
-    /**
      * Array of product ids passed into the module.
      *
      * @returns Array
@@ -14771,7 +14760,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
      * @returns Vue Ref
      */
     sellingPlanMap: function sellingPlanMap() {
-      var map = this.getSellingPlanMap(this.buildSellingPlanRefKey());
+      var map = this.getSellingPlanMapEntry(this.buildSellingPlanRefKey());
       debug('sellingPlanMap', map);
       return map;
     },
@@ -14782,7 +14771,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
      * @returns Boolean
      */
     subscribeChecked: function subscribeChecked() {
-      return this.isSubscribed;
+      return this.isSubscribed();
     }
   },
   methods: {
@@ -14868,7 +14857,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
           var target = mutation.target;
           var text = target.innerHTML; // Ensure DOM is updated before updating incentive text
 
-          vue__WEBPACK_IMPORTED_MODULE_12___default.a.nextTick(function () {
+          vue__WEBPACK_IMPORTED_MODULE_13___default.a.nextTick(function () {
             vm.$_updateIncentiveTextOverride(text);
           });
           debug('[observer] og-incentive-text changed', text);
@@ -14900,7 +14889,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
       var mappedDataKeys = OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP[key];
       var dataKeys = Array.isArray(mappedDataKeys) ? mappedDataKeys : [mappedDataKeys];
       dataKeys.forEach(function (dataKey) {
-        vue__WEBPACK_IMPORTED_MODULE_12___default.a.set(_this.$data, dataKey, value);
+        vue__WEBPACK_IMPORTED_MODULE_13___default.a.set(_this.$data, dataKey, value);
       });
       this.$emit(UPDATE_DETAILS_EVENT_NAME, this.ogOfferDetails);
       debug("[emit] ".concat(UPDATE_DETAILS_EVENT_NAME), this.ogOfferDetails);
@@ -14970,9 +14959,9 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
         var ogPrice = button.querySelector('og-price');
         var frequency = button.getAttribute('default-frequency');
 
-        var refKey = _this2.buildRefKey([_this2.variantId, frequency]);
+        var refKey = _this2.buildRefKey([SELLING_PLAN_PRICE_MAP_REF_PREFIX, _this2.variantId, frequency]);
 
-        var plan = _this2.getSellingPlanMap(refKey);
+        var plan = _this2.getSellingPlanPriceMapEntry(refKey);
 
         if (!plan) {
           ogPrice.shadowRoot.innerHTML = '';
@@ -14985,7 +14974,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
 
         if (ogPrice && ogPrice.shadowRoot) {
           // eslint-disable-next-line no-template-curly-in-string
-          var formattedPrice = Object(lib_util__WEBPACK_IMPORTED_MODULE_13__[/* formatMoney */ "e"])(price, '${{amount}}');
+          var formattedPrice = Object(lib_util__WEBPACK_IMPORTED_MODULE_12__[/* formatMoney */ "e"])(price, '${{amount}}');
           ogPrice.shadowRoot.innerHTML = buildButtonPriceDocumentFragment(formattedPrice);
           debug('$_updateSubscriptionButtonsPrices', frequency, formattedPrice);
         }
@@ -15022,8 +15011,10 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
 
       if (this.featureFlag === '2023-03-prepaid-selling-plans') {
         keyParts = [this.variantId, this.sellingPlanId];
-      }
+      } // Add prefix to keyParts
 
+
+      keyParts.unshift(SELLING_PLAN_MAP_REF_PREFIX);
       var refKey = this.buildRefKey(keyParts);
       return refKey;
     },
@@ -15033,9 +15024,35 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
      *
      * @returns Vue Ref
      */
-    getSellingPlanMap: function getSellingPlanMap(refKey) {
+    getSellingPlanMapEntry: function getSellingPlanMapEntry(refKey) {
       var map = this.$refs[refKey];
-      debug('getSellingPlanMap', refKey, map);
+      debug('getSellingPlanMapEntry', refKey, map);
+      return map;
+    },
+
+    /**
+     * Reference to the subscribed attribute.
+     *
+     * Ordergroove doesn't supply a "value" for this attribute. The
+     * presence of the attributes indicates a subscription has been
+     * selected.
+     *
+     * @returns Boolean
+     */
+    isSubscribed: function isSubscribed() {
+      var ogOffer = this.$refs[OG_OFFER_REF_KEY];
+      return ogOffer.hasAttribute('subscribed');
+    },
+    // New methods for getting Selling Plan Price Map
+
+    /**
+     * Get the ref that stores the plan map the ref key
+     *
+     * @returns Vue Ref
+     */
+    getSellingPlanPriceMapEntry: function getSellingPlanPriceMapEntry(refKey) {
+      var map = this.$refs[refKey];
+      debug('getSellingPlanPriceMapEntry', refKey, map);
       return map;
     }
   },
@@ -15082,7 +15099,7 @@ var UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details';
       debug('[watch] variantId', this.variantId);
       this.$_updateFrequencyData(); // Ensure DOM is updated before updating subscription buttons
 
-      vue__WEBPACK_IMPORTED_MODULE_12___default.a.nextTick(this.$_updateSubscriptionButtonsPrices);
+      vue__WEBPACK_IMPORTED_MODULE_13___default.a.nextTick(this.$_updateSubscriptionButtonsPrices);
     }
   }
 });
