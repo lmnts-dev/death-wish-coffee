@@ -36,6 +36,10 @@ export default {
       type: String,
       required: true
     },
+    productData: {
+      type: Object,
+      required: true
+    },
     productIdsString: {
       type: String,
       required: true
@@ -51,6 +55,7 @@ export default {
       frequencyLabel: null,
       frequencyUnit: null,
       location: null,
+      productData: null,
       sellingPlanId: null,
       subscribed: false,
       variantId: null,

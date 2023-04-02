@@ -18,6 +18,11 @@ Create an array of product ids to pass to the Vue.js module.
 {% assign og_product_ids = cart.items | map: "variant_id" | join: "," %}
 
 {%- comment -%}
+Capture product JSON to be used in the Vue.js module.
+{%- endcomment -%}
+{%- capture product_json -%}{%- render 'og-offer-product-json' -%}{%- endcapture -%}
+
+{%- comment -%}
 The `og-offer` module requires a variant to be passed in.
 {%- endcomment -%}
 
@@ -27,6 +32,7 @@ The `og-offer` module requires a variant to be passed in.
   <div
     is="og-offer"
     inline-template product-ids-string="{{og_product_ids}}"
+    inline-template :product-data="{{- product_json | escape -}}"
     :selected-variant="selectedVariant"
     feature-flag="{{feature_flag}}"
   >

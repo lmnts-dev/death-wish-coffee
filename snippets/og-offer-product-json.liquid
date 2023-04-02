@@ -1,0 +1,13 @@
+{%- comment -%}
+Build product JSON used in the og-offer Vue.js module.
+{%- endcomment -%}
+{
+  "id": {{ product.id | json }},
+  "title": {{ product.title | json }},
+  "type": {{ product.type | json }},
+  "handle": {{ product.handle | json }},
+  "url": {{ product.url | json }},
+  "options": {{ product.options | json }},
+  "variants": {{ product.variants | json }},
+  "selling_plan_groups": {{ product.selling_plan_groups | json }}
+}
