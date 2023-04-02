@@ -130,7 +130,7 @@ export default {
      * @returns Vue Ref
      */
     sellingPlanMap() {
-      const map = this.getSellingPlanMap(this.buildSellingPlanRefKey())
+      const map = this.getSellingPlanMapEntry(this.buildSellingPlanRefKey())
 
       debug('sellingPlanMap', map)
 
@@ -349,7 +349,7 @@ export default {
         const frequency = button.getAttribute('default-frequency')
         let refKey = this.buildRefKey([this.variantId, frequency])
 
-        const plan = this.getSellingPlanMap(refKey)
+        const plan = this.getSellingPlanMapEntry(refKey)
         if (!plan) {
           ogPrice.shadowRoot.innerHTML = ''
           debug('$_updateSubscriptionButtonsPrices - reset')
@@ -412,10 +412,10 @@ export default {
      *
      * @returns Vue Ref
      */
-    getSellingPlanMap(refKey) {
+    getSellingPlanMapEntry(refKey) {
       const map = this.$refs[refKey]
 
-      debug('getSellingPlanMap', refKey, map)
+      debug('getSellingPlanMapEntry', refKey, map)
 
       return map
     },
