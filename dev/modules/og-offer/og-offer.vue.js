@@ -98,21 +98,6 @@ export default {
     },
 
     /**
-     * Reference to the subscribed attribute.
-     *
-     * Ordergroove doesn't supply a "value" for this attribute. The
-     * presence of the attributes indicates a subscription has been
-     * selected.
-     *
-     * @returns Boolean
-     */
-    isSubscribed() {
-      const ogOffer = this.$refs[OG_OFFER_REF_KEY]
-
-      return ogOffer.hasAttribute('subscribed')
-    },
-
-    /**
      * Array of product ids passed into the module.
      *
      * @returns Array
@@ -143,7 +128,7 @@ export default {
      * @returns Boolean
      */
     subscribeChecked() {
-      return this.isSubscribed
+      return this.isSubscribed()
     },
   },
   methods: {
@@ -180,7 +165,6 @@ export default {
             frequency: ['sellingPlanId'],
             subscribed: 'subscribed'
           })
-
       }
 
       debug('$__initializeAttributeMap', OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP)
@@ -418,6 +402,21 @@ export default {
       debug('getSellingPlanMapEntry', refKey, map)
 
       return map
+    },
+
+    /**
+     * Reference to the subscribed attribute.
+     *
+     * Ordergroove doesn't supply a "value" for this attribute. The
+     * presence of the attributes indicates a subscription has been
+     * selected.
+     *
+     * @returns Boolean
+     */
+    isSubscribed() {
+      const ogOffer = this.$refs[OG_OFFER_REF_KEY]
+
+      return ogOffer.hasAttribute('subscribed')
     },
   },
   watch: {
