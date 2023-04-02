@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle,space-before-function-paren */
-import Vue from 'vue'
 import { formatMoney } from 'lib/util'
+import Vue from 'vue'
 
 // Flag to enable debug logging. Refer to `debug()` below.
 const DEBUG = true
