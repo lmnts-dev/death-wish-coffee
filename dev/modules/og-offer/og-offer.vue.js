@@ -5,6 +5,9 @@ import Vue from 'vue'
 // Flag to enable debug logging. Refer to `debug()` below.
 const DEBUG = true
 
+// Flag to use internal plan map
+const USE_INTERNAL_PLAN_MAP = true
+
 // Mapping of `og-offer` attribute names to the keys in the data object
 const OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP = {}
 
@@ -161,6 +164,7 @@ export default {
             product: 'variantId',
             'selling-plan-id': 'sellingPlanId'
           })
+          break
 
         case '2023-03-prepaid-selling-plans':
           this.sellingPlanId = ogOffer.getAttribute('frequency')
@@ -174,6 +178,7 @@ export default {
             frequency: ['sellingPlanId'],
             subscribed: 'subscribed'
           })
+          break
       }
 
       debug('$__initializeAttributeMap', OG_OFFER_ATTRIBUTE_TO_DATA_KEY_MAP)
@@ -190,6 +195,10 @@ export default {
       this.variantId = ogOffer.getAttribute('product')
 
       this.$__initializeAttributeMap()
+
+      if (USE_INTERNAL_PLAN_MAP) {
+        this.buildSellingPlanMaps()
+      }
 
       debug('$__initializeData')
     },
@@ -281,9 +290,15 @@ export default {
       const planMap = this.sellingPlanMap
       if (!planMap) return
 
-      this.frequencyInterval = planMap.getAttribute('data-frequency-interval')
-      this.frequencyLabel = planMap.getAttribute('data-frequency-label')
-      this.frequencyUnit = planMap.getAttribute('data-frequency-unit')
+      if (USE_INTERNAL_PLAN_MAP) {
+        this.frequencyInterval = planMap.frequencyInterval
+        this.frequencyLabel = planMap.frequencyLabel
+        this.frequencyUnit = planMap.frequencyUnit
+      } else {
+        this.frequencyInterval = planMap.getAttribute('data-frequency-interval')
+        this.frequencyLabel = planMap.getAttribute('data-frequency-label')
+        this.frequencyUnit = planMap.getAttribute('data-frequency-unit')
+      }
     },
 
     /**
@@ -354,7 +369,13 @@ export default {
           return
         }
 
-        const price = plan.getAttribute('data-price')
+        let price = null
+
+        if (USE_INTERNAL_PLAN_MAP) {
+          price = plan.price
+        } else {
+          price = plan.getAttribute('data-price')
+        }
         if (!price) return
 
         if (ogPrice && ogPrice.shadowRoot) {
@@ -388,6 +409,141 @@ export default {
     },
 
     /**
+     * Build selling plan maps from product data.
+     *
+     * Builds maps used to lookup data for the module.
+     *
+     * - sellingPlanMap: mapping of the selling plan to product data. Used
+     * internally as the selling plan allocation.
+     *
+     * - sellingPlanPriceMap: mapping of the selling plan to the price data
+     * used to update prices on the subscription buttons.
+     */
+    buildSellingPlanMaps() {
+      // Maps to build
+      const planMap = {}
+      const priceMap = {}
+
+      // Helper function to convert frequency units
+      const frequencyUnitToPeriod = (unit) => {
+        return unit
+          .toUpperCase()
+          .replace('DAY', '1')
+          .replace('WEEK', '2')
+          .replace('MONTH', '3')
+      }
+
+      // Product data passed into the module
+      debug('buildSellingPlanMap', 'productData', this.productData)
+
+      // Build maps based on variants and selling_plan_allocations
+      this.productData.variants.forEach((variant) => {
+        variant.selling_plan_allocations.forEach((sellingPlanAllocation) => {
+          // Lookup selling plan group
+          const sellingPlanGroup = this.productData.selling_plan_groups.find((group) => {
+            return group.id === sellingPlanAllocation.selling_plan_group_id
+          })
+          if (!sellingPlanGroup) return
+
+          // Lookup the selling plan in the group
+          const sellingPlan = sellingPlanGroup.selling_plans.find((plan) => {
+            return plan.id === sellingPlanAllocation.selling_plan_id
+          })
+          if (!sellingPlan) return
+
+          const sellingPlanId = sellingPlan.id
+
+          /**
+           * Frequency is a string - either something like "month" or "2 months"
+           *
+           * Convert the string into a code usable to map to the attributes on
+           * the subscription buttons for `default_frequency`.
+           *
+           * Unit is day, week, or month.
+           * Interval is the number of units.
+           * Period is a conversion of the unit to a number code.
+           *
+           * So, "3 months" is an interval of 3 and a unit of "months" and
+           * a period of "3".
+           *
+           * Period codes for the "unit":
+           *   day(s) = 1
+           *   week(s) = 2
+           *   months(3) = 3
+           */
+          const frequency = sellingPlan.options[0].value.split(' ')
+
+          // Build variables needed for the map
+          let frequencyCode = null
+          let frequencyInterval = null
+          let frequencyLabel = null
+          let frequencyPeriod = null
+          let frequencyUnit = null
+
+          if (frequency.length > 1) {
+            frequencyInterval = frequency[0]
+            frequencyUnit = frequency[1].replace('(s)', '').replace('s', '')
+            frequencyPeriod = frequencyUnitToPeriod(frequencyUnit)
+            frequencyCode = `${frequencyInterval}_${frequencyPeriod}`
+            frequencyLabel = sellingPlan.options[0].value
+          } else {
+            frequencyInterval = '1'
+            frequencyUnit = frequency[0]
+            frequencyPeriod = frequencyUnitToPeriod(frequencyUnit)
+            frequencyCode = `1_${frequencyPeriod}`
+            frequencyLabel = `${frequencyInterval} ${frequencyUnit}`
+          }
+
+          const compareAtPrice = sellingPlanAllocation.compare_at_price
+          const price = sellingPlanAllocation.price
+          const variantId = variant.id
+
+          // Selling plan map
+          const planMapKey = [
+            SELLING_PLAN_MAP_REF_PREFIX,
+            variantId,
+            frequencyCode
+          ].join('-')
+
+          const planDetails = {
+            planMapKey,
+            sellingPlanId,
+            frequencyCode,
+            frequencyInterval,
+            frequencyUnit,
+            frequencyLabel,
+            compareAtPrice,
+            price,
+            variantId,
+          }
+
+          planMap[planMapKey] = planDetails
+
+          // Price plan map
+          const priceMapKey = [
+            SELLING_PLAN_PRICE_MAP_REF_PREFIX,
+            variantId,
+            frequencyCode
+          ].join('-')
+
+          const priceDetails = {
+            priceMapKey,
+            price,
+          }
+
+          priceMap[priceMapKey] = priceDetails
+        })
+      })
+
+      // TODO: rename these after the computed prop is removed
+      this._sellingPlanMap = planMap
+      debug('buildSellingPlanMap', planMap)
+
+      this._sellingPlanPriceMap = priceMap
+      debug('buildSellingPlanPriceMap', priceMap)
+    },
+
+    /**
      * Build the ref used to lookup the selling plan.
      *
      * @returns String
@@ -413,10 +569,15 @@ export default {
      * @returns Vue Ref
      */
     getSellingPlanMapEntry(refKey) {
-      const map = this.$refs[refKey]
+      let map = null
+
+      if (USE_INTERNAL_PLAN_MAP) {
+        map = this._sellingPlanMap[refKey]
+      } else {
+        map = this.$refs[refKey]
+      }
 
       debug('getSellingPlanMapEntry', refKey, map)
-
       return map
     },
 
@@ -443,10 +604,15 @@ export default {
      * @returns Vue Ref
      */
     getSellingPlanPriceMapEntry(refKey) {
-      const map = this.$refs[refKey]
+      let map = null
+
+      if (USE_INTERNAL_PLAN_MAP) {
+        map = this._sellingPlanPriceMap[refKey]
+      } else {
+        map = this.$refs[refKey]
+      }
 
       debug('getSellingPlanPriceMapEntry', refKey, map)
-
       return map
     },
 
