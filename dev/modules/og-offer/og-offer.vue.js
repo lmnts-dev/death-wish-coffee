@@ -347,7 +347,7 @@ export default {
       buttons.forEach(button => {
         const ogPrice = button.querySelector('og-price')
         const frequency = button.getAttribute('default-frequency')
-        let refKey = this.buildRefKey([this.variantId, frequency])
+        const refKey = this.buildRefKey([this.variantId, frequency])
 
         const plan = this.getSellingPlanMapEntry(refKey)
         if (!plan) {
