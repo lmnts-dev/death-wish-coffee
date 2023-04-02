@@ -19,6 +19,10 @@ const OG_OFFER_ATTRIBUTES_TO_OBSERVE = [
 // Key used for the `og-offer` ref
 const OG_OFFER_REF_KEY = 'og-offer'
 
+// Prefixes used for selling plan maps
+const SELLING_PLAN_MAP_REF_PREFIX = 'selling-plan-map'
+const SELLING_PLAN_PRICE_MAP_REF_PREFIX = 'selling-plan-price-map'
+
 // Event name used when emitting details updates to the parent component
 export const UPDATE_DETAILS_EVENT_NAME = 'update-og-offer-details'
 
@@ -331,9 +335,13 @@ export default {
       buttons.forEach(button => {
         const ogPrice = button.querySelector('og-price')
         const frequency = button.getAttribute('default-frequency')
-        const refKey = this.buildRefKey([this.variantId, frequency])
+        const refKey = this.buildRefKey([
+          SELLING_PLAN_PRICE_MAP_REF_PREFIX,
+          this.variantId,
+          frequency
+        ])
 
-        const plan = this.getSellingPlanMapEntry(refKey)
+        const plan = this.getSellingPlanPriceMapEntry(refKey)
         if (!plan) {
           ogPrice.shadowRoot.innerHTML = ''
           debug('$_updateSubscriptionButtonsPrices - reset')
@@ -386,6 +394,9 @@ export default {
         keyParts = [this.variantId, this.sellingPlanId]
       }
 
+      // Add prefix to keyParts
+      keyParts.unshift(SELLING_PLAN_MAP_REF_PREFIX)
+
       const refKey = this.buildRefKey(keyParts)
 
       return refKey
@@ -418,6 +429,22 @@ export default {
 
       return ogOffer.hasAttribute('subscribed')
     },
+
+    // New methods for getting Selling Plan Price Map
+
+    /**
+     * Get the ref that stores the plan map the ref key
+     *
+     * @returns Vue Ref
+     */
+    getSellingPlanPriceMapEntry(refKey) {
+      const map = this.$refs[refKey]
+
+      debug('getSellingPlanPriceMapEntry', refKey, map)
+
+      return map
+    },
+
   },
   watch: {
     /**

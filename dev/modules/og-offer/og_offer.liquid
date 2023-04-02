@@ -31,6 +31,11 @@ The `og-offer` module requires a variant to be passed in.
     feature-flag="{{feature_flag}}"
   >
     {%- comment -%}
+    Ordergroove Selling Plan Map
+    ============================
+    Created by Ordergroove for data lookup. Updated and expanded by Commence
+    to support additional data needs for the Vue.js module.
+
     Create a list of `<span>` tags that contain the selling plan map. A few
     attributes have been added to aid the Vue `og-offer` module in tracking
     and looking up values as needed.
@@ -59,15 +64,17 @@ The `og-offer` module requires a variant to be passed in.
           {% endif %}
 
           {% if settings.ordergroove_feature_flag == '2023-03-prepaid-selling-plans' %}
-            {% assign ref_key = selling_plan_id %}
+            {% assign span_id = variant.id | append: "-" | append: selling_plan_id %}
           {% else %}
-            {% assign ref_key = variant.id | append: "-" | append: frequency %}
+            {% assign span_id = variant.id | append: "-" | append: frequency %}
           {% endif %}
 
+          {% assign selling_plan_ref_key = 'selling-plan-map-' | append: span_id %}
+
             <span
-              ref="{{ref_key}}"
-              data-debug-ref-key="{{ref_key}}"
-              id="og-selling-plan-map-{{ref_key}}"
+              ref="{{selling_plan_ref_key}}"
+              data-debug-ref-key="{{selling_plan_ref_key}}"
+              id="og-selling-plan-map-{{span_id}}"
               selling-plan-id="{{selling_plan_id}}"
               data-frequency="{{frequency}}"
               data-frequency-interval="{{frequency_interval}}"
@@ -77,6 +84,22 @@ The `og-offer` module requires a variant to be passed in.
               data-price="{{selling_plan_allocation.price}}"
               data-selling-plan-id="{{selling_plan_id}}"
               data-variant-id="{{variant.id}}"
+              style="display:none !important;"
+            ></span>
+
+            {%- comment -%}
+            Selling Plan Price Map
+            ======================
+            Created by Commence to support button price display.
+
+            Create refs used to lookup prices for buttons.
+            {%- endcomment -%}
+            {% assign price_map_ref_key = "selling-plan-price-map-" | append: variant.id | append: "-" | append: frequency %}
+            <span
+              ref="{{price_map_ref_key}}"
+              data-debug-ref-key="{{price_map_ref_key}}"
+              id="{{price_map_ref_key}}"
+              data-price="{{selling_plan_allocation.price}}"
               style="display:none !important;"
             ></span>
         {% endfor %}
