@@ -4,37 +4,42 @@
     Expects:
     - image: {Image} Image object
     - alt: Alt text
+    - width: {int} The width of the image at its max width x2 for high resolution screens
+    - widths: {string} Different 1x or 2x widths of the image that can be decided on a loaded by the browser, include mobile, tablet and desktop options
+    - sizes { string } Specify which 1x size the image will display at, on different devices
+    - preload {bool}
 
     Usage:
     {% render 'next-gen-img' image: image, alt: alt %}
 {% endcomment %}
 
-{% assign altText = image.alt %} 
+{% liquid 
+  assign altText = image.alt 
+
+  if altText == blank 
+    if alt != blank 
+      assign altText = alt 
+    else 
+      assign altText = shop.name 
+    endif 
+  endif 
+
+  if preload == true 
+    assign loading = 'eager' 
+  else 
+    assign loading = 'lazy' 
+  endif 
+%}
 
 
-{% if altText == blank %} 
-  {% if alt != blank %}
-    {% assign altText = alt %} 
-  {% else %}
-    {% assign altText = shop.name %} 
-  {% endif %}
-{% endif %} 
-
-
-<img
-    srcset="{%- if image.width >= 375 -%}{{ image | image_url: width: 375 }} 375w,{%- endif -%}
-      {%- if image.width >= 550 -%}{{ image | image_url: width: 550 }} 550w,{%- endif -%}
-      {%- if image.width >= 750 -%}{{ image | image_url: width: 750 }} 750w,{%- endif -%}
-      {%- if image.width >= 1100 -%}{{ image | image_url: width: 1100 }} 1100w,{%- endif -%}
-      {%- if image.width >= 1500 -%}{{ image | image_url: width: 1500 }} 1500w,{%- endif -%}
-      {%- if image.width >= 1780 -%}{{ image | image_url: width: 1780 }} 1780w,{%- endif -%}
-      {%- if image.width >= 2000 -%}{{ image | image_url: width: 2000 }} 2000w,{%- endif -%}
-      {%- if image.width >= 3000 -%}{{ image | image_url: width: 3000 }} 3000w,{%- endif -%}
-      {%- if image.width >= 3840 -%}{{ image | image_url: width: 3840 }} 3840w,{%- endif -%}
-      {{ image | image_url: width: image.width }} {{ image.width }}w"
-    src="{{ image | image_url: width: image.width }}"
-    loading="lazy"
-    alt="{{ altText }}"
-    width="{{ image.width }}"
-    height="{{ image.height }}"
-  >
+{{ image | 
+  image_url: 
+    width: width | 
+    height: height |
+    image_tag:
+      widths: widths,
+      sizes: sizes,
+      loading: loading,
+      alt: altText,
+      preload: preload
+}}

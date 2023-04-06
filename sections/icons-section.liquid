@@ -38,7 +38,7 @@
         {%- when 'icon' -%}
           <div class="icons-section__icons__icon">
             {%- if block.settings.icon != blank -%}
-              {% render 'next-gen-img', image: block.settings.icon %}
+              {% render 'next-gen-img', image: block.settings.icon, height: section.settings.icon_height %}
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
