@@ -27,7 +27,7 @@
           {%- endif -%}
           {%- if product_id -%}
             <div class="product-hero-card__item-reviews p1">
-              <span class="yotpo bottomLine" style="display: inline-block;" data-product-id="{{ product_id }}"></span>
+              <div data-bv-show="inline_rating" data-bv-product-id="{{product.id}}" data-bv-redirect-url="{{ product.url }}" data-bv-seo="false"></div>
             </div>
           {%- endif -%}
           {%- if sub_description -%}
