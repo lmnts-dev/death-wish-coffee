@@ -15976,6 +15976,10 @@ div.cmnc-incentive-text-override {
     background-color: #009ada;
 }
 
+.styleguide-swatch--vanilla {
+    background-color: #ECD798;
+}
+
 .styleguide-swatch__description {
   position: absolute;
   bottom: 12px;

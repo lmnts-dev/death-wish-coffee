@@ -123,6 +123,10 @@
   &--blue {
     background-color: var(--blue);
   }
+
+  &--vanilla {
+    background-color: var(--vanilla);
+  }
 }
 
 .styleguide-swatch__description {
