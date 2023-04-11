@@ -32,7 +32,7 @@
     margin-bottom: 4px;
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .pdp-add-to-cart--palette-$(color) & {
       color: var(--$color);
     }

@@ -4794,6 +4794,10 @@ button.swiper-pagination-bullet {
       color: #009ada;
     }
 
+.bolt-illustration-hero--palette-vanilla .bolt-illustration-hero__bolt-image {
+  color: #ECD798;
+}
+
 .bolt-illustration-hero__content {
   position: relative;
   padding: 0 38px;
@@ -4871,6 +4875,10 @@ button.swiper-pagination-bullet {
 
 .bolt-illustration-hero--palette-blue .bolt-illustration-hero__title {
       color: #009ada;
+}
+
+.bolt-illustration-hero--palette-vanilla .bolt-illustration-hero__title {
+      color: #ECD798;
 }
 
 .bolt-illustration-hero__description {
@@ -5091,7 +5099,7 @@ button.swiper-pagination-bullet {
 
 .button--palette-independance .button-icon {
         display: none;
-      }
+}
 
 .button--palette-eggplant {
       background-color: #510c76;
@@ -5099,7 +5107,7 @@ button.swiper-pagination-bullet {
 
 .button--palette-eggplant .button-icon {
         display: none;
-      }
+}
 
 .button--palette-lavender {
       background-color: #7f5ec7;
@@ -5107,7 +5115,7 @@ button.swiper-pagination-bullet {
 
 .button--palette-lavender .button-icon {
         display: none;
-      }
+}
 
 .button--palette-blue {
       background-color: #009ada;
@@ -5115,7 +5123,15 @@ button.swiper-pagination-bullet {
 
 .button--palette-blue .button-icon {
         display: none;
-      }
+}
+
+.button--palette-vanilla {
+      background-color: #ECD798;
+}
+
+.button--palette-vanilla .button-icon {
+        display: none;
+}    
 
 .button--inline {
     display: inline-block;
@@ -5801,6 +5817,10 @@ button.swiper-pagination-bullet {
 
 .carousel--palette-blue .carousel-next-icon, .carousel--palette-blue .carousel-prev-icon {
       color: #009ada;
+}
+
+.carousel--palette-vanilla .carousel-next-icon, .carousel--palette-vanilla .carousel-prev-icon {
+      color: #ECD798;
 }
 
 .carousel-pagination.swiper-pagination {
@@ -6936,6 +6956,10 @@ button.swiper-pagination-bullet {
 
 .footer-cta--palette-blue {
       background-color: #009ada;
+}
+
+.footer-cta--palette-vanilla {
+      background-color: #ECD798;
 }
 
 .footer-cta__container {
@@ -10822,6 +10846,10 @@ div.cmnc-incentive-text-override {
       color: #009ada;
 }
 
+.pdp-add-to-cart--palette-vanilla .pdp-add-to-cart__title {
+      color: #ECD798;
+}
+
 .pdp-add-to-cart__price {
   margin-bottom: 5px;
 }
@@ -12837,6 +12865,10 @@ div.cmnc-incentive-text-override {
             border-color: #009ada;
 }
 
+.product-form--palette-vanilla .product-form__option-value-input:checked + .product-form__option-value-label::before {
+            border-color: #ECD798;
+}
+
 .product-form__option-value-input:checked + .product-form__option-value-label.disabled {
   background: #898e8e;
   color: #000;
@@ -13160,6 +13192,10 @@ div.cmnc-incentive-text-override {
           background: #009ada;
 }
 
+.product-form--palette-vanilla .product-form__subscribe .cu-productTypeSelect__itemInput:checked ~ .cu-productTypeSelect__itemMark {
+          background: #ECD798;;
+}
+
 .product-form__subscribe .cu-productTypeSelect__itemMark {
     position: absolute;
     top: 11px;
@@ -13263,6 +13299,10 @@ div.cmnc-incentive-text-override {
 
 .product-form--palette-blue .product-form__subscribe .cu-option.is-active {
           border-color: #009ada;
+}
+
+.product-form--palette-vanilla .product-form__subscribe .cu-option.is-active {
+          border-color: #ECD798;
 }
 
 .product-form__subscribe .cu-option:first-child {
@@ -13414,6 +13454,10 @@ div.cmnc-incentive-text-override {
 
 .product-hero-card--hover.product-hero-card--palette-blue .product-hero-card__inner::before {
         border-color: #009ada;
+}
+
+.product-hero-card--hover.product-hero-card--palette-vanilla .product-hero-card__inner::before {
+        border-color: #ECD798;
 }
 
 .product-hero-card--hover.swiper-slide-active:hover .product-hero-card__inner::before {
@@ -13571,6 +13615,10 @@ div.cmnc-incentive-text-override {
 
 .product-hero-card--palette-blue .product-hero-card__item-title {
       color: #009ada;
+}
+
+.product-hero-card--palette-vanilla .product-hero-card__item-title {
+      color: #ECD798;
 }
 
 .product-hero-card__item-price {
@@ -13880,6 +13928,10 @@ div.cmnc-incentive-text-override {
       border-top-color: #009ada;
     }
 
+.review--palette-vanilla .review-drawer__yotpo-title::after {
+  border-top-color: #ECD798;
+}
+
 .review-drawer__yotpo-title::after.rotate {
   -webkit-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
@@ -13933,6 +13985,10 @@ div.cmnc-incentive-text-override {
 .review--palette-blue .yotpo .yotpo-bottomline .yotpo-icon-star, .review--palette-blue .yotpo .yotpo-bottomline .yotpo-icon-half-star, .review--palette-blue .yotpo .yotpo-bottomline .yotpo-icon-empty-star {
       color: #009ada;
     }
+
+.review--palette-vanilla .yotpo .yotpo-bottomline .yotpo-icon-star, .review--palette-vanilla .yotpo .yotpo-bottomline .yotpo-icon-half-star, .review--palette-vanilla .yotpo .yotpo-bottomline .yotpo-icon-empty-star {
+  color: #ECD798;
+}
 
 /* styles for rewards-cta-group */
 
@@ -15729,6 +15785,10 @@ div.cmnc-incentive-text-override {
 
 .section-title--palette-blue .section-title__title {
       color: #009ada;
+}
+
+.section-title--palette-vanilla .section-title__title {
+      color: #ECD798;
 }
 
 /* styles for shogun-head */

@@ -830,7 +830,7 @@
   height: 100%;
   color: var(--blood);
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .bolt-illustration-hero--palette-$(color) & {
       color: var(--$color);
     }
@@ -862,7 +862,7 @@
     text-align: right;
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .bolt-illustration-hero--palette-$(color) & {
       color: var(--$color);
     }
@@ -1004,7 +1004,7 @@
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     &--palette-$(color) {
       background-color: var(--$color);
 
@@ -1522,7 +1522,7 @@
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .carousel--palette-$(color) & {
       color: var(--$color);
     }
@@ -2317,7 +2317,7 @@
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     &--palette-$(color) {
       background-color: var(--$color);
     }
@@ -5313,7 +5313,7 @@ div.cmnc-incentive-text-override {
     margin-bottom: 4px;
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .pdp-add-to-cart--palette-$(color) & {
       color: var(--$color);
     }
@@ -6831,7 +6831,7 @@ div.cmnc-incentive-text-override {
         height: calc(100% - 1px);
         border: 1px solid var(--blood);
 
-        @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+        @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
           .product-form--palette-$(color) & {
             border-color: var(--$color);
           }
@@ -7074,7 +7074,7 @@ div.cmnc-incentive-text-override {
     &:checked ~ .cu-productTypeSelect__itemMark {
       background: var(--blood);
 
-      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
         .product-form--palette-$(color) & {
           background: var(--$color);
         }
@@ -7127,7 +7127,7 @@ div.cmnc-incentive-text-override {
       color: var(--white);
       background: var(--slate);
 
-      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+      @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
         .product-form--palette-$(color) & {
           border-color: var(--$color);
         }
@@ -7223,7 +7223,7 @@ div.cmnc-incentive-text-override {
       pointer-events: none;
     }
 
-    @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+    @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
       .product-hero-card--hover.product-hero-card--palette-$(color) & {
         border-color: var(--$color);
       }
@@ -7308,7 +7308,7 @@ div.cmnc-incentive-text-override {
     }
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .product-hero-card--palette-$(color) & {
       color: var(--$color);
     }
@@ -7541,7 +7541,7 @@ div.cmnc-incentive-text-override {
   display: block;
   cursor: pointer;
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .review--palette-$(color) & {
       border-top-color: var(--$color);
     }
@@ -7555,7 +7555,7 @@ div.cmnc-incentive-text-override {
 .yotpo .yotpo-bottomline .yotpo-icon-star,
 .yotpo .yotpo-bottomline .yotpo-icon-half-star,
 .yotpo .yotpo-bottomline .yotpo-icon-empty-star {
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .review--palette-$(color) & {
       color: var(--$color);
     }
@@ -8931,7 +8931,7 @@ div.cmnc-incentive-text-override {
     color: var(--white);
   }
 
-  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue {
+  @each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
     .section-title--palette-$(color) & {
       color: var(--$color);
     }
