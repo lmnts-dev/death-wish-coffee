@@ -1,0 +1,26 @@
+.pdp-button-badges__badge {
+  display: flex;
+  flex-direction: column; }
+  .pdp-button-badges__badge label {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding-left: 0 !important;
+    padding-right: 0;
+    height: auto !important;
+    border: none !important; }
+    .pdp-button-badges__badge label > *:first-child {
+      margin-left: 16px; }
+    .pdp-button-badges__badge label > *:nth-child(2) {
+      padding-right: 10px;
+      height: 64px; }
+    .pdp-button-badges__badge label:after {
+      content: var(--pdpButtonBadgesText);
+      font-size: 14px;
+      grid-column: 1 / -1;
+      color: #000000;
+      font-weight: 400;
+      text-align: center;
+      display: block;
+      padding: 5px 3px 5px; }
+
+/*# sourceMappingURL=pdp-button-badges.css.map */

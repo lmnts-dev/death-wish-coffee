@@ -12869,6 +12869,62 @@ div.cmnc-incentive-text-override {
             border-color: #ECD798;
 }
 
+.product-form__option-value-label::after {
+            background-color: #e12727;
+}
+
+.product-form--palette-bronze .product-form__option-value-label::after {
+            background-color: #ad6f39;
+}
+
+.product-form--palette-steel .product-form__option-value-label::after {
+            background-color: #898e8e;
+}
+
+.product-form--palette-white .product-form__option-value-label::after {
+            background-color: #fff;
+}
+
+.product-form--palette-pumpkin .product-form__option-value-label::after {
+            background-color: #d24728;
+}
+
+.product-form--palette-yule .product-form__option-value-label::after {
+            background-color: #541110;
+}
+
+.product-form--palette-passion .product-form__option-value-label::after {
+            background-color: #a1316a;
+}
+
+.product-form--palette-shamrock .product-form__option-value-label::after {
+            background-color: #00793f;
+}
+
+.product-form--palette-bloom .product-form__option-value-label::after {
+            background-color: #3d3385;
+}
+
+.product-form--palette-independance .product-form__option-value-label::after {
+            background-color: #284196;
+}
+
+.product-form--palette-eggplant .product-form__option-value-label::after {
+            background-color: #510c76;
+}
+
+.product-form--palette-lavender .product-form__option-value-label::after {
+            background-color: #7f5ec7;
+}
+
+.product-form--palette-blue .product-form__option-value-label::after {
+            background-color: #009ada;
+}
+
+.product-form--palette-vanilla .product-form__option-value-label::after {
+            background-color: #ECD798;
+}
+
 .product-form__option-value-input:checked + .product-form__option-value-label.disabled {
   background: #898e8e;
   color: #000;

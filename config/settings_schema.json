@@ -196,6 +196,23 @@
     ]
   },
   {
+    "name": "PDP Subscription Badges",
+    "settings": [
+      {
+        "type": "text",
+        "id": "sub_badges_text",
+        "label": "Badge Text",
+        "default": "Subscription Eligible"
+      },
+      {
+        "type": "text",
+        "id": "sub_badges_option_values",
+        "label": "Option values to apply badge to",
+        "info": "Separate each value with a comma. Ex. 1 Bag, 2 Bag"
+      }
+    ]
+  },
+  {
     "name": "Development",
     "settings": [
       {

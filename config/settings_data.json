@@ -1,5 +1,7 @@
 {
   "current": {
+    "sub_badges_text": "Subscription Eligible",
+    "sub_badges_option_values": "2 Bag, 5 Bag, 2 lbs, 5 lbs",
     "background_color": "#000000",
     "text_color": "#ffffff",
     "border_color": "#201e1d",
