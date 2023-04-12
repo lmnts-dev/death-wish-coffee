@@ -132,6 +132,7 @@
   <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
     <div is="product-form"
       :product="{{- product_json | escape -}}"
+      :subBadgesOptionValues="{{ settings.sub_badges_option_values}}"
       inline-template
     >
       {{ content }}

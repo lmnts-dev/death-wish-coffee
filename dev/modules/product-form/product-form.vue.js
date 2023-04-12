@@ -695,12 +695,28 @@ export default {
      */
     isSubOptionValue: function isSubOptionValue(value) {
       var isElligible = false
-      this.subBadgesOptionValues.split(',').forEach((compareTo) => {
-        console.log(compareTo.trim(), value, compareTo.trim() === value)
-        if (compareTo.trim().toLowerCase() === value.toLowerCase()) {
-          isElligible = true
+      var hasSellingPlan = false
+
+      this.product.variants.forEach((variant) => {
+        if (
+          variant.selling_plan_allocations &&
+          variant.selling_plan_allocations.length > 0
+        ) {
+          variant.selling_plan_allocations.forEach((allocation) => {
+            if (allocation.selling_plan_group_id) {
+              hasSellingPlan = true
+            }
+          })
         }
       })
+
+      if (hasSellingPlan === true) {
+        this.subBadgesOptionValues.split(',').forEach((compareTo) => {
+          if (compareTo.trim().toLowerCase() === value.toLowerCase()) {
+            isElligible = true
+          }
+        })
+      }
 
       return isElligible
     },
