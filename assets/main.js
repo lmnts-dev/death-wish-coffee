@@ -8355,6 +8355,7 @@ var PURCHASE_TYPES = {
         return "";
       }
     },
+    subBadgesOptionValues: String,
     subscriptionChecked: Boolean
   },
   data: function data() {
@@ -9001,6 +9002,38 @@ var PURCHASE_TYPES = {
      */
     optionInputId: function optionInputId(option, value) {
       return "product-".concat(this.product.id, "-option-").concat(Object(lib_util__WEBPACK_IMPORTED_MODULE_32__[/* sanitize */ "k"])(option), "-").concat(Object(lib_util__WEBPACK_IMPORTED_MODULE_32__[/* sanitize */ "k"])(value));
+    },
+
+    /**
+     * Create DOM ID for option inputs.
+     *
+     * @param {*} value
+     * @param {*} compareToValues
+     * @returns Boolean
+     */
+    isSubOptionValue: function isSubOptionValue(value) {
+      var isElligible = false;
+      var hasSellingPlan = false;
+
+      this.product.variants.forEach((variant) => {
+        if (variant.selling_plan_allocations && variant.selling_plan_allocations.length > 0) {
+          variant.selling_plan_allocations.forEach((allocation) => {
+            if (allocation.selling_plan_group_id) {
+              hasSellingPlan = true;
+            }
+          })
+        }
+      });
+
+      if (hasSellingPlan === true) {
+        this.subBadgesOptionValues.split(",").forEach((compareTo) => {
+          if (compareTo.trim().toLowerCase() === value.toLowerCase()) {
+            isElligible = true;
+          }
+        });
+      }
+
+      return isElligible;
     },
 
     /**

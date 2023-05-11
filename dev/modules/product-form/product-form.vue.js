@@ -29,50 +29,51 @@ export default {
     isActiveSubscription: Boolean,
     queryStringVariant: {
       type: String,
-      default: () => "",
+      default: () => '',
     },
+    subBadgesOptionValues: String,
     subscriptionChecked: Boolean,
   },
   data() {
     const initialSelectedOptions = this.product.options.reduce(
       (result, option) => {
         // Initially, none of the option has any selected value
-        result[option] = null;
-        return result;
+        result[option] = null
+        return result
       },
       {}
-    );
+    )
 
     return {
       componentMounted: !1,
-      moneyFormat: "{{amount}}",
+      moneyFormat: '{{amount}}',
       ogOfferDetails: {},
       optionIcons: iconData,
       selectedOptions: { ...initialSelectedOptions },
       sizeChartActive: false,
       subscriptionAmount: null,
-    };
+    }
   },
   mounted() {
-    this.activeVariantId = this.product.variants[0].id;
+    this.activeVariantId = this.product.variants[0].id
     // reset
-    this.index = "";
+    this.index = ''
 
     for (var key in this.product.options_by_name) {
-      const option = this.product.options_by_name[key].option;
-      const optionPosition = option.position;
+      const option = this.product.options_by_name[key].option
+      const optionPosition = option.position
       this.$set(
         this.selectedOptions,
         key,
         this.initialVariant[`option${optionPosition}`]
-      );
+      )
     }
 
-    this.$_addUpdateOgOfferDetailsListener();
-    this.componentMounted = 1;
+    this.$_addUpdateOgOfferDetailsListener()
+    this.componentMounted = 1
   },
   computed: {
-    ...mapState("cart", ["addedToCartSuccessfully", "addedToCartErrorMessage"]),
+    ...mapState('cart', ['addedToCartSuccessfully', 'addedToCartErrorMessage']),
 
     /**
      * Active discount amount.
@@ -82,9 +83,9 @@ export default {
      * @returns String
      */
     activeDiscountAmount() {
-      const discount = this.defaultGlobalDiscountAmount || "0";
+      const discount = this.defaultGlobalDiscountAmount || '0'
 
-      return discount;
+      return discount
     },
 
     /**
@@ -95,12 +96,12 @@ export default {
      * @returns String ('$' || '%')
      */
     activeDiscountType() {
-      const activeDiscount = this.activeDiscountAmount;
+      const activeDiscount = this.activeDiscountAmount
 
       if (activeDiscount) {
-        return activeDiscount.indexOf("$") > -1 ? "$" : "%";
+        return activeDiscount.indexOf('$') > -1 ? '$' : '%'
       } else {
-        return "";
+        return ''
       }
     },
 
@@ -110,7 +111,7 @@ export default {
      * @returns String
      */
     addToCartButtonText() {
-      return this.isAbleAddToCart ? "Add To Cart" : "Sold Out";
+      return this.isAbleAddToCart ? 'Add To Cart' : 'Sold Out'
     },
 
     /**
@@ -121,7 +122,7 @@ export default {
     defaultGlobalDiscountAmount() {
       return this.shop && this.shop.default_discount_amount
         ? this.shop.default_discount_amount
-        : null;
+        : null
     },
 
     /**
@@ -133,13 +134,13 @@ export default {
      */
     finalSubscriptionProperty() {
       if (!this.subscriptionSelected && !this.isOnetimeSubscription) {
-        return false;
+        return false
       }
 
-      const label = this.ogOfferDetails.frequency.label;
+      const label = this.ogOfferDetails.frequency.label
 
-      debug("finalSubscriptionProperty", label);
-      return label;
+      debug('finalSubscriptionProperty', label)
+      return label
     },
 
     /**
@@ -148,7 +149,7 @@ export default {
      * @returns Boolean
      */
     hasSingleVariant() {
-      return this.product.variants.length === 1;
+      return this.product.variants.length === 1
     },
 
     /**
@@ -157,7 +158,7 @@ export default {
      * @returns Variant
      */
     initialVariant() {
-      return this.product.selected_or_first_available_variant;
+      return this.product.selected_or_first_available_variant
     },
 
     /**
@@ -168,7 +169,7 @@ export default {
      * @returns String
      */
     intervalFrequency() {
-      return this.ogOfferDetails.frequency.interval || "1";
+      return this.ogOfferDetails.frequency.interval || '1'
     },
 
     /**
@@ -179,7 +180,7 @@ export default {
      * @returns String
      */
     intervalUnit() {
-      return this.ogOfferDetails.frequency.unit || "day";
+      return this.ogOfferDetails.frequency.unit || 'day'
     },
 
     /**
@@ -188,7 +189,7 @@ export default {
      * @returns Boolean
      */
     isAbleAddToCart() {
-      return !this.selectedVariant || this.selectedVariant.available;
+      return !this.selectedVariant || this.selectedVariant.available
     },
 
     /**
@@ -199,43 +200,43 @@ export default {
      * @returns Boolean
      */
     isOnetimeSubscription() {
-      return this.productPurchaseType === PURCHASE_TYPES.onetime;
+      return this.productPurchaseType === PURCHASE_TYPES.onetime
     },
 
     /**
      * Determine the variant option that affects pricing.
      */
     priceDecidingFactor() {
-      const product = this.product;
-      const defaultOptionName = product.options[0];
+      const product = this.product
+      const defaultOptionName = product.options[0]
 
       for (const optionName of product.options) {
-        const option = product.options_by_name[optionName].option;
-        const availableValues = option.values;
-        const pricesContainingOption = {};
+        const option = product.options_by_name[optionName].option
+        const availableValues = option.values
+        const pricesContainingOption = {}
 
         for (const variant of product.variants) {
           for (const value of variant.options) {
             if (!availableValues.includes(value)) {
-              continue;
+              continue
             }
 
             if (!pricesContainingOption[value]) {
-              pricesContainingOption[value] = [];
+              pricesContainingOption[value] = []
             } else if (pricesContainingOption[value].includes(variant.price)) {
               // If multiple variants with the same option value have the
               // same price then this is the option we're looking for
-              debug("priceDecidingFactor found", optionName);
-              return optionName;
+              debug('priceDecidingFactor found', optionName)
+              return optionName
             }
 
-            pricesContainingOption[value].push(variant.price);
+            pricesContainingOption[value].push(variant.price)
           }
         }
       }
 
-      debug("priceDecidingFactor default", defaultOptionName);
-      return defaultOptionName;
+      debug('priceDecidingFactor default', defaultOptionName)
+      return defaultOptionName
     },
 
     /**
@@ -244,7 +245,7 @@ export default {
      * @returns String
      */
     productId() {
-      return this.product.id;
+      return this.product.id
     },
 
     /**
@@ -253,7 +254,7 @@ export default {
      * @returns String
      */
     productName() {
-      return this.product.title;
+      return this.product.title
     },
 
     /**
@@ -262,9 +263,9 @@ export default {
      * @returns String
      */
     productPurchaseType() {
-      const subscribed = this.ogOfferDetails.subscribeChecked;
+      const subscribed = this.ogOfferDetails.subscribeChecked
 
-      return subscribed ? PURCHASE_TYPES.subscription : PURCHASE_TYPES.onetime;
+      return subscribed ? PURCHASE_TYPES.subscription : PURCHASE_TYPES.onetime
     },
 
     /**
@@ -273,7 +274,7 @@ export default {
      * @returns Array
      */
     selectedOptionValues() {
-      return Object.values(this.selectedOptions);
+      return Object.values(this.selectedOptions)
     },
 
     /**
@@ -282,14 +283,14 @@ export default {
      * @returns Variant || {}
      */
     selectedVariant() {
-      const variant = this.findVariantWithOptions(this.selectedOptionValues);
-      debug("selectedVariant", variant);
+      const variant = this.findVariantWithOptions(this.selectedOptionValues)
+      debug('selectedVariant', variant)
 
       const selected = this.hasSingleVariant
         ? this.product.variants[0]
-        : variant;
+        : variant
 
-      return selected;
+      return selected
     },
 
     /**
@@ -298,7 +299,7 @@ export default {
      * @returns String
      */
     selectedVariantId() {
-      return this.selectedVariant ? this.selectedVariant.id : "";
+      return this.selectedVariant ? this.selectedVariant.id : ''
     },
 
     /**
@@ -310,20 +311,20 @@ export default {
      * @returns Allocation || {}
      */
     sellingPlanAllocation() {
-      const variant = this.selectedVariant;
-      const planAllocations = variant && variant.selling_plan_allocations;
+      const variant = this.selectedVariant
+      const planAllocations = variant && variant.selling_plan_allocations
 
-      if (!planAllocations) return {};
+      if (!planAllocations) return {}
 
       const allocation = planAllocations.find((planAllocation) => {
-        const allocationPlanId = planAllocation.selling_plan_id;
+        const allocationPlanId = planAllocation.selling_plan_id
 
-        return parseInt(allocationPlanId) === parseInt(this.sellingPlanId);
-      });
+        return parseInt(allocationPlanId) === parseInt(this.sellingPlanId)
+      })
 
-      debug("sellingPlanAllocation", allocation);
+      debug('sellingPlanAllocation', allocation)
 
-      return allocation || {};
+      return allocation || {}
     },
 
     /**
@@ -333,24 +334,24 @@ export default {
      */
     sellingPlanDiscountPercent() {
       if (!this.sellingPlanAllocation) {
-        debug("sellingPlanDiscountPercent", { discount: 0 });
-        return null;
+        debug('sellingPlanDiscountPercent', { discount: 0 })
+        return null
       }
 
       // Calculate the discount percent from the selling plan
-      const plan = this.sellingPlanAllocation;
+      const plan = this.sellingPlanAllocation
       const discount =
-        100 - Math.round((plan.price / plan.compare_at_price) * 100);
+        100 - Math.round((plan.price / plan.compare_at_price) * 100)
 
-      debug("sellingPlanDiscountPercent", { discount });
-      return discount;
+      debug('sellingPlanDiscountPercent', { discount })
+      return discount
     },
 
     /**
      * Format the selling plan discount percent as a string for display.
      */
     sellingPlanDiscountPercentString() {
-      return `${this.sellingPlanDiscountPercent}%`;
+      return `${this.sellingPlanDiscountPercent}%`
     },
 
     /**
@@ -359,7 +360,7 @@ export default {
      * @returns String || undefined
      */
     sellingPlanId() {
-      return this.ogOfferDetails.sellingPlanId;
+      return this.ogOfferDetails.sellingPlanId
     },
 
     /**
@@ -370,17 +371,17 @@ export default {
      * @returns String
      */
     subscriptionProductTitleDisplay() {
-      let display = "";
+      let display = ''
 
       // Product title
-      display += this.product.title;
+      display += this.product.title
 
       // Discount
       display += this.discountDisplay
-        ? " - " + this.discountDisplay + " off"
-        : "";
+        ? ' - ' + this.discountDisplay + ' off'
+        : ''
 
-      return display;
+      return display
     },
 
     /**
@@ -389,10 +390,10 @@ export default {
      * @returns Boolean
      */
     subscriptionSelected() {
-      const selected = this.productPurchaseType === PURCHASE_TYPES.subscription;
+      const selected = this.productPurchaseType === PURCHASE_TYPES.subscription
 
-      debug("subscriptionSelected", selected);
-      return selected;
+      debug('subscriptionSelected', selected)
+      return selected
     },
   },
   methods: {
@@ -400,17 +401,17 @@ export default {
      * Add a listener for `og-offer` details updates.
      */
     $_addUpdateOgOfferDetailsListener() {
-      const handler = this.$_handleOgOfferDetails;
+      const handler = this.$_handleOgOfferDetails
 
       this.$children.forEach((child) => {
         if (child.ogOfferDetails) {
           // Wire-up handler for og-offer selling plan details
-          child.$on(UPDATE_DETAILS_EVENT_NAME, handler);
+          child.$on(UPDATE_DETAILS_EVENT_NAME, handler)
 
           // Fire handler when listener is added to capture any changes
-          handler(child.ogOfferDetails);
+          handler(child.ogOfferDetails)
         }
-      });
+      })
     },
 
     /**
@@ -419,10 +420,10 @@ export default {
      * @param {*} ogOfferDetails
      */
     $_handleOgOfferDetails(ogOfferDetails) {
-      debug("$_handleOgOfferDetails", ogOfferDetails);
+      debug('$_handleOgOfferDetails', ogOfferDetails)
 
-      this.ogOfferDetails = ogOfferDetails;
-      this.$_handleVariantUpdate();
+      this.ogOfferDetails = ogOfferDetails
+      this.$_handleVariantUpdate()
     },
 
     /**
@@ -432,31 +433,31 @@ export default {
      * be called in places that aren't strictly variant-related.
      */
     $_handleVariantUpdate() {
-      const variant = this.selectedVariant || {};
-      this.activeVariantId = variant.id;
+      const variant = this.selectedVariant || {}
+      this.activeVariantId = variant.id
 
       const originalPrice =
-        this.sellingPlanAllocation.price || variant.price || false;
+        this.sellingPlanAllocation.price || variant.price || false
 
       const originalComparePrice =
         this.sellingPlanAllocation.compare_at_price ||
         variant.compare_at_price ||
-        false;
+        false
 
-      debug("handleVariantUpdate", {
+      debug('handleVariantUpdate', {
         sellingPlan: this.sellingPlanAllocation,
         variant,
-      });
+      })
 
-      this.calculateVariantPrices(originalPrice, originalComparePrice);
+      this.calculateVariantPrices(originalPrice, originalComparePrice)
     },
 
     /**
      * Toggle the Ordergroove subscription button.
      */
     $_toggleSubscriptionButton() {
-      const button = document.querySelector("og-offer button.og-button-toggle");
-      button.click();
+      const button = document.querySelector('og-offer button.og-button-toggle')
+      button.click()
     },
 
     /**
@@ -466,43 +467,43 @@ export default {
      * @param {*} originalComparePrice
      */
     calculateVariantPrices(originalPrice, originalComparePrice) {
-      let displayDiscountPrice = false;
-      let displayDiscountComparePrice = false;
+      let displayDiscountPrice = false
+      let displayDiscountComparePrice = false
 
       if (originalPrice) {
         const discountPrice =
-          originalPrice - this.discountCalculatedValue(originalPrice);
+          originalPrice - this.discountCalculatedValue(originalPrice)
 
         // Set unformatted amount for use in cart and checkout
-        this.subscriptionAmount = parseInt(originalPrice - discountPrice);
+        this.subscriptionAmount = parseInt(originalPrice - discountPrice)
 
         displayDiscountPrice = formatMoney(
           originalPrice - discountPrice,
           this.moneyFormat
-        );
+        )
       }
 
       if (originalComparePrice) {
         const discountComparePrice =
           originalComparePrice -
-          this.discountCalculatedValue(originalComparePrice);
+          this.discountCalculatedValue(originalComparePrice)
 
         displayDiscountComparePrice = formatMoney(
           originalComparePrice - discountComparePrice,
           this.moneyFormat
-        );
+        )
       }
 
-      debug("calculateVariantPrices", {
+      debug('calculateVariantPrices', {
         originalPrice,
         displayDiscountPrice,
         originalComparePrice,
         displayDiscountComparePrice,
-      });
+      })
 
       // Store the new prices
-      this.activeSubsriptionDisplayPrice = displayDiscountPrice;
-      this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice;
+      this.activeSubsriptionDisplayPrice = displayDiscountPrice
+      this.activeSubsriptionDisplayComparePrice = displayDiscountComparePrice
     },
 
     /**
@@ -515,7 +516,7 @@ export default {
     disableOption(option, value) {
       for (const variant of this.product.variants) {
         if (variant.title === value && variant.available === false) {
-          return true;
+          return true
         }
       }
     },
@@ -527,22 +528,22 @@ export default {
      * @returns Number
      */
     discountCalculatedValue(total) {
-      var discountType = this.activeDiscountType;
+      var discountType = this.activeDiscountType
       var discountAmount = this.activeDiscountAmount
-        .replace("%", "")
-        .replace("$", "");
+        .replace('%', '')
+        .replace('$', '')
 
-      var calcDiscountAmount = 0;
+      var calcDiscountAmount = 0
 
       // Fixed amount
-      if (discountType === "$") {
-        calcDiscountAmount = discountAmount;
+      if (discountType === '$') {
+        calcDiscountAmount = discountAmount
         // Percentage
-      } else if (discountType === "%") {
-        calcDiscountAmount = (total * discountAmount) / 100;
+      } else if (discountType === '%') {
+        calcDiscountAmount = (total * discountAmount) / 100
       }
 
-      return total - calcDiscountAmount;
+      return total - calcDiscountAmount
     },
 
     /**
@@ -555,8 +556,8 @@ export default {
       return this.product.variants.find((variant) => {
         return variant.options.every(
           (value, valueIndex) => value === options[valueIndex]
-        );
-      });
+        )
+      })
     },
 
     /**
@@ -572,16 +573,16 @@ export default {
      */
     getPriceForOptionValue(value, optionIndex) {
       // Find the variant that matches the passed in option value/index
-      const matchedVariant = this.product.variants.find(variant => {
+      const matchedVariant = this.product.variants.find((variant) => {
         return variant.options[optionIndex] === value
       })
 
       // Fallback: default to first variant if a match isn't found
       const price = matchedVariant
         ? matchedVariant.price
-        : this.product.variants[0].price;
+        : this.product.variants[0].price
 
-      return formatPrice(price);
+      return formatPrice(price)
     },
 
     /**
@@ -591,14 +592,14 @@ export default {
      */
     async handleAddToCart() {
       if (!this.selectedVariantId) {
-        return;
+        return
       }
 
       const params = {
         id: this.selectedVariantId,
         properties: {},
         quantity: 1,
-      };
+      }
 
       // const discountAmount = this.sellingPlanDiscountPercent
       //   ? this.sellingPlanDiscountPercentString
@@ -606,7 +607,7 @@ export default {
 
       if (this.subscriptionSelected) {
         // Add selling plan
-        params.sellingPlan = parseInt(this.sellingPlanId);
+        params.sellingPlan = parseInt(this.sellingPlanId)
 
         // const subscriptionProperties = {
         //   'Discount Amount': discountAmount,
@@ -623,23 +624,23 @@ export default {
         // )
       }
 
-      debug("handleAddToCart", params);
+      debug('handleAddToCart', params)
 
-      await store.dispatch("cart/addToCart", params);
+      await store.dispatch('cart/addToCart', params)
 
       this.$nextTick(() => {
-        this.resetSelectedOptions();
+        this.resetSelectedOptions()
 
         if (this.addedToCartSuccessfully) {
           // Display pop-out cart
           store.dispatch('cart/setIsPopOutCartActive', true)
 
           // Function written by Klaviyo included in the klaviyo-tracking snippet
-          addedToCart();
+          addedToCart()
         } else {
-          this.$emit("added-to-cart-error");
+          this.$emit('added-to-cart-error')
         }
-      });
+      })
     },
 
     /**
@@ -648,8 +649,8 @@ export default {
      * @param {*} event
      */
     handleVariantSelect(event) {
-      const variantId = parseInt(event.target.value);
-      const variant = this.product.variants.find((v) => v.id === variantId);
+      const variantId = parseInt(event.target.value)
+      const variant = this.product.variants.find((v) => v.id === variantId)
 
       // Update selectedOptions
       this.selectedOptions = this.product.options.reduce(
@@ -658,7 +659,7 @@ export default {
             [option]: variant.options[index],
           }),
         {}
-      );
+      )
     },
 
     /**
@@ -667,9 +668,9 @@ export default {
     initialSelectedOptions() {
       this.product.options.reduce((result, option) => {
         // Initially, none of the option has any selected value
-        result[option] = null;
-        return result;
-      });
+        result[option] = null
+        return result
+      })
     },
 
     /**
@@ -682,7 +683,42 @@ export default {
     optionInputId(option, value) {
       return `product-${this.product.id}-option-${sanitize(option)}-${sanitize(
         value
-      )}`;
+      )}`
+    },
+
+    /**
+     * Create DOM ID for option inputs.
+     *
+     * @param {*} value
+     * @param {*} compareToValues
+     * @returns Boolean
+     */
+    isSubOptionValue: function isSubOptionValue(value) {
+      var isElligible = false
+      var hasSellingPlan = false
+
+      this.product.variants.forEach((variant) => {
+        if (
+          variant.selling_plan_allocations &&
+          variant.selling_plan_allocations.length > 0
+        ) {
+          variant.selling_plan_allocations.forEach((allocation) => {
+            if (allocation.selling_plan_group_id) {
+              hasSellingPlan = true
+            }
+          })
+        }
+      })
+
+      if (hasSellingPlan === true) {
+        this.subBadgesOptionValues.split(',').forEach((compareTo) => {
+          if (compareTo.trim().toLowerCase() === value.toLowerCase()) {
+            isElligible = true
+          }
+        })
+      }
+
+      return isElligible
     },
 
     /**
@@ -691,12 +727,12 @@ export default {
     resetSelectedOptions() {
       // If there is a selling plan, we need to reset the button to "one-time"
       if (this.sellingPlanId) {
-        this.$_toggleSubscriptionButton();
+        this.$_toggleSubscriptionButton()
       }
 
       this.selectedOptions = {
         ...this.initialSelectedOptions,
-      };
+      }
     },
 
     /**
@@ -706,25 +742,25 @@ export default {
      * @param {*} value
      */
     toggleOption(option, value) {
-      const cloneSelectedOptions = Object.assign({}, this.selectedOptions);
+      const cloneSelectedOptions = Object.assign({}, this.selectedOptions)
 
       if (
         cloneSelectedOptions[option] &&
         cloneSelectedOptions[option] === value
       ) {
-        cloneSelectedOptions[option] = null;
+        cloneSelectedOptions[option] = null
       } else {
-        cloneSelectedOptions[option] = value;
+        cloneSelectedOptions[option] = value
       }
 
-      this.selectedOptions = Object.assign({}, cloneSelectedOptions);
+      this.selectedOptions = Object.assign({}, cloneSelectedOptions)
     },
 
     /**
      * Toggle the size chart active data value.
      */
     toggleSizeChart() {
-      this.sizeChartActive = !this.sizeChartActive;
+      this.sizeChartActive = !this.sizeChartActive
     },
   },
   watch: {
@@ -734,14 +770,14 @@ export default {
      * @param {*} newValue
      */
     selectedVariantId(newValue) {
-      debug("selectedVariantId", newValue);
+      debug('selectedVariantId', newValue)
 
-      this.$_handleVariantUpdate();
-      this.$emit("update-variant-id", newValue);
-      store.dispatch("pdp/setSelectedVariantId", { id: newValue });
+      this.$_handleVariantUpdate()
+      this.$emit('update-variant-id', newValue)
+      store.dispatch('pdp/setSelectedVariantId', { id: newValue })
     },
   },
-};
+}
 
 /**
  * Simple debug function to conditionally display debug information.

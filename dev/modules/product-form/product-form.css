@@ -220,6 +220,17 @@
     }
   }
 }
+.product-form__option-value-label::after {
+    background-color: var(--blood);
+}
+
+@each $color in bronze, steel, white, pumpkin, yule, passion, shamrock, bloom, independance, eggplant, lavender, blue, vanilla {
+  .product-form--palette-$(color) {
+    .product-form__option-value-label::after {
+      background-color: var(--$color);
+    }
+  }
+}
 
 .product-form__option-value-text {
   display: flex;
