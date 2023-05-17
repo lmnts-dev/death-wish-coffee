@@ -710,7 +710,7 @@ export default {
         }
       })
 
-      if (hasSellingPlan === true) {
+      if (hasSellingPlan === true && this.subBadgesOptionValues) {
         this.subBadgesOptionValues.split(',').forEach((compareTo) => {
           if (compareTo.trim().toLowerCase() === value.toLowerCase()) {
             isElligible = true
