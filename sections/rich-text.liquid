@@ -37,6 +37,16 @@
           button_link: block.settings.button_link,
           button_color: block.settings.button_color
         %}
+
+      {% comment %} Type custom liquid {% endcomment %}
+        {%- when 'custom_liquid' -%}
+          {{ block.settings.custom_liquid }}
+
+      {% comment %} Type app {% endcomment %}
+        {%- when '@app' -%}
+          <div class="app">
+            {% render block %}
+          </div>
     {%- endcase -%}
   {%- endfor -%}
 </div>
@@ -125,6 +135,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "heading",
       "name": "Heading",
@@ -242,6 +255,18 @@
               "label": "5th Theme"
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations"
         }
       ]
     }
