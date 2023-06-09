@@ -1,0 +1,14 @@
+.announcement-bar {
+  background: RGB(var(--color-background));
+  color: RGB(var(--color-text));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 100%;
+  overflow: hidden;
+  grid-column: 1 / -1; }
+  .announcement-bar__text, .marquee-styles__text {
+    margin-bottom: 0 !important;
+    padding: 10px 0 !important;
+    white-space: nowrap;
+    max-width: none; }

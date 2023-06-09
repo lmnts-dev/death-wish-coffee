@@ -33,17 +33,17 @@
          :aria-hidden="!isPopOutCartActive"
 >
   <div class="pop-out-cart__inner bg--shadow" ref="cart">
-    <div class="pop-out-cart__header">
-      <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
-      <button
-        class="pop-out-cart__close-button"
-        aria-label="{{ 'cart.general.close' | t }}"
-        @click="closePopOutCart"
-      >{%- render 'svg', type: 'close', class: 'pop-out-cart__close-icon' -%}</button>
-    </div>
 
     <template v-if="items.length">
       <form action="/cart" class="pop-out-cart__form" method="post" novalidate>
+        <div class="pop-out-cart__header">
+          <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
+          <button
+            class="pop-out-cart__close-button"
+            aria-label="{{ 'cart.general.close' | t }}"
+            @click="closePopOutCart"
+          >{%- render 'svg', type: 'close', class: 'pop-out-cart__close-icon' -%}</button>
+        </div>
         <div class="pop-out-cart__list">
           <template v-for="(item, index) in items">
             {% assign item_image = item.image | img_url: 'master' %}
@@ -129,6 +129,14 @@
       </form>
     </template>
     <template v-else>
+      <div class="pop-out-cart__header">
+        <h2 class="pop-out-cart__title h5">{{ 'cart.general.pop_out_title' | t }}</h2>
+        <button
+          class="pop-out-cart__close-button"
+          aria-label="{{ 'cart.general.close' | t }}"
+          @click="closePopOutCart"
+        >{%- render 'svg', type: 'close', class: 'pop-out-cart__close-icon' -%}</button>
+      </div>
       <p class="pop-out-cart__empty">{{ 'cart.general.empty' | t }}</p>
       <div class="pop-out-cart__footer">
         <a href="/collections" class="button button--small-h button--full">{{ 'cart.general.shop_all' | t }}</a>

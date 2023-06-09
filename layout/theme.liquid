@@ -75,13 +75,14 @@
   height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  {%- render 'navigation', menu_left: linklists[settings.menu_left], menu_right: linklists[settings.menu_right] -%}
+  {% sections 'header-group' %}
 
   <main id="page" class="relative z0" role="main">
     {%- render 'ordergroove_global' -%}
     {% comment %}{{ content_for_layout }}{% endcomment %}{% include 'easylockdown_body' %}
   </main>
-  {%- render 'footer' -%}
+
+  {% sections 'footer-group' %}
 
   {%- render 'dev-mode-body' -%}
   {% include 'findify-tagging' %}

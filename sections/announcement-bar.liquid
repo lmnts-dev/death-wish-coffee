@@ -1,0 +1,125 @@
+{{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
+{{ 'marquee-styles.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #Announcement-bar-{{ section.id }} {
+    --marqueeCharacterCount: {{ section.settings.announcement_bar_text | size }}ch;
+    --marqueeSpeed: {{ section.settings.announcement_bar_speed | minus: 11 | times: -10 }}s;
+  }
+{% endstyle %}
+
+{% unless section.settings.announcement_bar_text == blank %}
+  {% if template == 'index' or section.settings.announcement_bar_home_only == false %}
+    <div
+      id="Announcement-bar-{{ section.id }}"
+      class="announcement-bar __theme-{{ section.settings.announcement_bar_theme }} {% if section.settings.announcement_bar_marquee %}marquee-styles __style-fullwidth{% endif %}"
+    >
+
+      {% if section.settings.announcement_bar_marquee %}
+        <div class="marquee-styles__inner">
+          <p class="marquee-styles__text {{ section.settings.announcement_bar_text_size }}">
+            {{ section.settings.announcement_bar_text }}
+          </p>
+        </div>
+      {% else %}
+        <div class="announcement-bar__text {{ section.settings.announcement_bar_text_size }}">
+          {{ section.settings.announcement_bar_text }}
+        </div>
+      {% endif %}
+
+
+    </div>
+  {% endif %}
+{% endunless %}
+
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "tag": "section",
+    "class": "commence-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "default": "Welcome to our store",
+        "label": "t:sections.announcement-bar.settings.text.label"
+      },
+      {
+        "type": "select",
+        "id": "announcement_bar_text_size",
+        "options": [
+          {
+            "value": "p-sm",
+            "label": "Small Text"
+          },
+          {
+            "value": "p",
+            "label": "Basic Text"
+          },
+          {
+            "value": "p-lg",
+            "label": "Large Text"
+          }
+        ],
+        "default": "p-sm",
+        "label": "Text Size"
+      },
+      {
+        "type": "select",
+        "id": "announcement_bar_theme",
+        "options": [
+          {
+            "value": "primary",
+            "label": "Primary Theme"
+          },
+          {
+            "value": "2",
+            "label": "2nd Theme"
+          },
+          {
+            "value": "3",
+            "label": "3rd Theme"
+          },
+          {
+            "value": "4",
+            "label": "4th Theme"
+          },
+          {
+            "value": "5",
+            "label": "5th Theme"
+          }
+        ],
+        "default": "2",
+        "label": "Theme"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_home_only",
+        "label": "Show on home page only",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_marquee",
+        "label": "Turn on Scrolling Marquee",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "announcement_bar_speed",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "unit": "x",
+        "label": "Speed",
+        "default": 5,
+        "info": "Applies only when the scrolling marquee is turned on"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Announcement Bar"
+      }
+    ]
+  }
+{% endschema %}

@@ -22,19 +22,6 @@ html {
 body {
   font-size: 1.6rem; /* body font-size default is 16px */
   color: var(--black);
-  margin-top: var(--navbar-height);
-
-  @media (--xl-max) {
-    margin-top: var(--navbar-height-mobile);
-  }
-
-  &.has-promo-bar {
-    margin-top: var(--navbar-height) + var(--promo-bar-height);
-
-    @media (--xl-max) {
-      margin-top: var(--navbar-height-mobile) + var(--promo-bar-height);
-    }
-  }
 
   &.template-search {
     background-color: var(--black);

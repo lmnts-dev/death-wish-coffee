@@ -1,0 +1,21 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "announcement_bar_text": "Everything freee today. Let's do this",
+        "announcement_bar_text_size": "p",
+        "announcement_bar_theme": "2",
+        "announcement_bar_home_only": true,
+        "announcement_bar_marquee": true,
+        "announcement_bar_speed": 5
+      }
+    },
+    "header": {
+      "type": "header"
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

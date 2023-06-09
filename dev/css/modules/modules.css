@@ -3885,7 +3885,6 @@ i.govx-id-slim-wrapper {
 }
 
 .menu__item {
-  position: relative;
   margin: 40px 52px 0;
   padding: 0 6px 30px;
 
@@ -3949,10 +3948,10 @@ i.govx-id-slim-wrapper {
 
   & + .menu__item-content {
     @media (--lg) {
-      position: fixed;
-      top: 104px;
+      position: absolute;
+      top: 100%;
       left: 0;
-      width: 100%;
+      width: 100vw;
       background: var(--black);
       transform: translateY(-100%);
       opacity: 0;
@@ -4030,10 +4029,15 @@ i.govx-id-slim-wrapper {
 /* styles for navigation */
 
 .navigation {
-  position: fixed;
+  position: relative;
   width: 100%;
   height: var(--navbar-height);
   top: 0;
+
+  &__wrapper {
+    position: sticky;
+    top: 0px;
+  }
 
   @media (--xl-max) {
     height: var(--navbar-height-mobile);
@@ -5707,8 +5711,8 @@ div.cmnc-incentive-text-override {
 }
 
 .pop-out-cart {
-  position: absolute;
-  top: var(--navbar-height);
+  position: fixed;
+  top: 0;
   right: 0;
   flex-direction: column;
   display: flex;
@@ -5717,34 +5721,7 @@ div.cmnc-incentive-text-override {
   transition: opacity var(--transition-timing) var(--transition-easing), visibility var(--transition-timing) var(--transition-easing);
   width: 100%;
   max-width: 448px;
-  max-height: calc(100vh - var(--navbar-height));
-  padding-top: 23px;
   color: var(--white);
-
-  @media (--xl-max) {
-    top: var(--navbar-height-mobile);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    top: 5px;
-    right: 27px;
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-timing) var(--transition-easing), visibility var(--transition-timing) var(--transition-easing);
-    border-width: 0 12px 18px 12px;
-    border-style: solid;
-    border-color: transparent transparent var(--shadow) transparent;
-    width: 0;
-    height: 0;
-
-    @media (--lg) {
-      right: 60px;
-    }
-  }
 
   &.is-active {
     opacity: 1;
@@ -5762,21 +5739,15 @@ div.cmnc-incentive-text-override {
 }
 
 .pop-out-cart__inner {
-  height: calc(100vh - 122px);
+  height: 100vh;
   padding: 29px 19px 20px 41px;
   -webkit-overflow-scrolling: touch;
-
-  @media (--xs) {
-    height: calc(85vh - 140px);
-  }
-
-  @media (--xxs-max) {
-    height: calc(95vh - 122px);
-  }
 }
 
 .pop-out-cart__form {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .pop-out-cart__header {
@@ -5810,14 +5781,15 @@ div.cmnc-incentive-text-override {
 .pop-out-cart__list {
   padding-right: 20px;
   overflow: auto;
-  height: 50%;
+  min-height: 50%;
+  flex: 1;
 
   @media (--xxs-max) {
-    height: 40%;
+    min-height: 40%;
   }
 
   .cart-container__wrapper & {
-    height: 100%;
+    min-height: 100%;
   }
 }
 
@@ -7342,50 +7314,6 @@ div.cmnc-incentive-text-override {
   }
 }
 
-/* styles for promo-bar */
-
-.promo-bar {
-  background-color: var(--black);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2000;
-  display: none;
-
-  .has-promo-bar & {
-    display: block;
-  }
-}
-
-.promo-bar__content {
-  color: var(--white);
-  margin: 0;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 45px;
-  padding: 1rem 7rem;
-
-  @media (--md-max) {
-    padding: 1rem 4.5rem;
-  }
-}
-
-.promo-bar__close {
-  position: absolute;
-  top: 50%;
-  right: 50px;
-  transform: translateY(-50%);
-  color: var(--white);
-  width: 10px;
-  cursor: pointer;
-
-  @media (--md-max) {
-    right: 2.5rem;
-  }
-}
 
 .review-drawer {
   padding-top: 70px;
