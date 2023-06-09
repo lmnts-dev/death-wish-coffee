@@ -8,6 +8,12 @@
   width: 100%;
 }
 
+.footer__outer-wrapper + .announcement-bar__wrapper {
+  position: sticky;
+  -webkit-position: sticky;
+  bottom: 0px;
+}
+
 .footer__inner {
   display: flex;
   flex-direction: column;
