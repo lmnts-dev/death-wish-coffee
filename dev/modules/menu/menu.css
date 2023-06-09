@@ -145,18 +145,6 @@
   &.is-active,
   &:hover {
     color: var(--blood);
-
-    @media (--lg) {
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 30px;
-        width: 100%;
-        height: 1px;
-        background: var(--blood);
-      }
-    }
   }
 
   & + .menu__item-content {
