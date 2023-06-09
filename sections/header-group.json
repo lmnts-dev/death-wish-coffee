@@ -5,17 +5,22 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "announcement_bar_text": "Everything freee today. Let's do this",
+        "announcement_bar_text": "Everything <strong>freee <\/strong>today. <a href=\"\/products\/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this<\/a>",
         "announcement_bar_text_size": "p",
         "announcement_bar_theme": "2",
         "announcement_bar_home_only": true,
-        "announcement_bar_marquee": true,
+        "announcement_bar_marquee": false,
         "announcement_bar_speed": 5
       }
     },
     "header": {
-      "type": "header"
+      "type": "header",
+      "settings": {
+      }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }
