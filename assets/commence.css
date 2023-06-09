@@ -73,11 +73,11 @@ body > main > .commence-section > div {
   background-color: RGB(var(--color-background));
 }
 
-.commence-section {
-  a {
+
+ .commence-section a {
     color: RGB(var(--color-foreground));
   }
-}
+
 
 body > main > .commence-section > div:after {
   content: "";
