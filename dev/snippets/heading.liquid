@@ -6,6 +6,8 @@
   - heading: {String}
   - class: {String}
   - heading_tag: {string} Optional "h1", "h2" (default), "h3" 
+  - button_label: {string} optional
+  - button_link: {url} optional
 
   Usage:
   {% render 'heading', class: "split-section__text", heading: block.settings.heading, heading_size: block.settings.heading_size %}
@@ -19,5 +21,8 @@
       {{ block.shopify_attributes }}
     >
       {{ heading | escape }}
+      {%  if button_link and button_label %}
+        <a href="{{ button_link }}" class="b4">{{  button_label }}</a>
+      {%  endif %}
     </{{ heading_tag }}>
 {% endif %}

@@ -1,0 +1,30 @@
+.elfsight-container {
+  padding: 0 !important;
+  margin: 0 auto;
+}
+
+.elfsight-container__inner {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 100px;
+  padding-right: 100px;
+  max-width: 1366px !important;
+}
+
+@media (max-width: 991px) {
+  .elfsight-container__inner {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .elfsight-container__inner {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .elfsight-container .h5 {
+    font-size: 15px;
+  }
+}
