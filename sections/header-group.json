@@ -4,40 +4,44 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "settings": {
-        "announcement_bar_text_size": "p",
-        "announcement_bar_theme": "2",
-        "announcement_bar_home_only": true,
-        "announcement_bar_marquee": false,
-        "announcement_bar_speed": 5
-      },
       "blocks": {
-        "announcement": {
+        "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": "Everything <strong>freee </strong>today. <a href=\"/products/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this</a>"
+            "announcement_bar_text": "Welcome to our store"
           }
         },
-        "announcement-2": {
+        "3525da43-b14e-4381-8826-a8a1db023fbb": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": " 2 Everything <strong>freee </strong>today. <a href=\"/products/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this</a>"
+            "announcement_bar_text": "Another announcement"
           }
         },
-        "announcement-3": {
+        "6a0afdab-e10b-4da9-9206-7909e53d8051": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": " 3 Everything <strong>freee </strong>today. <a href=\"/products/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this</a>"
+            "announcement_bar_text": "Third <strong>annoucement!<\/strong>!!"
           }
         },
-        "include_page": {
+        "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4": {
           "type": "include_page",
           "settings": {
-            "page": "shopify://collections"
+            "page": ""
           }
         }
       },
-      "block_order": ["announcement", "announcement-2", "announcement-3", "include_page"]
+      "block_order": [
+        "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2",
+        "3525da43-b14e-4381-8826-a8a1db023fbb",
+        "6a0afdab-e10b-4da9-9206-7909e53d8051",
+        "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4"
+      ],
+      "settings": {
+        "announcement_bar_text_size": "p",
+        "announcement_bar_theme": "4",
+        "announcement_bar_marquee": true,
+        "announcement_bar_speed": 10
+      }
     },
     "header": {
       "type": "header",
