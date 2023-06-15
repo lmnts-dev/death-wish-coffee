@@ -3952,6 +3952,10 @@ i.govx-id-slim-wrapper {
       transition: all 0.5s;
       visibility: hidden;
     }
+
+    @media (min-width: 1647px) {
+      left: calc(calc(100vw - 1648px) / -2)
+    }
   }
 }
 

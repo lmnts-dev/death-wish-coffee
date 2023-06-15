@@ -9033,6 +9033,12 @@ a:hover .image:not(.no-hover)::after {
   }
 }
 
+@media (min-width: 1647px) {
+  .menu__item-link + .menu__item-content {
+    left: calc(calc(100vw - 1648px) / -2)
+  }
+}
+
 .mirror-image-hero {
   margin: 0;
 }
