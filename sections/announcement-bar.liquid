@@ -16,13 +16,13 @@
 
     {%- when 'include_page' -%}
       {% assign page_specific = true %}
-      {% if block.settings.page.url == page.url %}
+      {% if block.settings.page == page.url %}
         {% assign include_page = true %}
       {% endif %}
       {% assign include_pages = include_pages | join: ',' | append: block.settings.page | split: ',' %}
 
     {%- when 'exclude_page' -%}
-      {% if block.settings.page.url == page.url %}
+      {% if block.settings.page == page.url %}
         {% assign exclude_page = true %}
       {% endif %}
       {% assign exclude_pages = exclude_pages | join: ',' | append: block.settings.page | split: ',' %}
@@ -84,7 +84,7 @@
         "name": "Include Page",
         "settings": [
           {
-            "type": "page",
+            "type": "url",
             "id": "page",
             "label": "Page",
             "info": "If you don't specify any pages to include, this announcement bar will show on all pages minus the pages you've excluded. Once you've specified pages to include it on, it won't show on any pages besides those pages, minus the pages you've excluded."
@@ -96,7 +96,7 @@
         "name": "Exclude Page",
         "settings": [
           {
-            "type": "page",
+            "type": "url",
             "id": "page",
             "label": "Page",
             "info": "If you don't specify any pages to include, this announcement bar will show on all pages minus the pages you've excluded. Once you've specified pages to include it on, it won't show on any pages besides those pages, minus the pages you've excluded."

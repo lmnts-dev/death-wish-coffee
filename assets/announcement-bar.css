@@ -39,7 +39,7 @@
   transform: none;
 }
 
-.announcement-bar label:first-of-type, .announcement-bar label:last-of-type {
+.announcement-bar label:first-of-type, .announcement-bar label:last-of-type, .announcement-bar__slide:first-of-type:last-of-type ~ label {
   display: none !important;
 }
 
