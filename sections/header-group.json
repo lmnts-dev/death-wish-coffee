@@ -14,7 +14,7 @@
         "3525da43-b14e-4381-8826-a8a1db023fbb": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": "Another announcement"
+            "announcement_bar_text": "Another <a href=\"\/blogs\/lifestyle\/diy-coffee-grounds-candles\" title=\"DIY Coffee Grounds Candles\">announcement<\/a>"
           }
         },
         "6a0afdab-e10b-4da9-9206-7909e53d8051": {
@@ -39,7 +39,7 @@
       "settings": {
         "announcement_bar_text_size": "p",
         "announcement_bar_theme": "4",
-        "announcement_bar_marquee": true,
+        "announcement_bar_marquee": false,
         "announcement_bar_speed": 10
       }
     },
