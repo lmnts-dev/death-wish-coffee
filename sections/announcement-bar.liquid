@@ -16,7 +16,7 @@
 
     {%- when 'include_page' -%}
       {% assign page_specific = true %}
-      {% if block.settings.page == canonical_url %}
+      {% if block.settings.page.url == request.path %}
         {% assign include_page = true %}
       {% endif %}
       {% assign include_pages = include_pages | join: ',' | append: block.settings.page | split: ',' %}
@@ -85,7 +85,7 @@
         "settings": [
           {
             "type": "paragraph",
-            "content": "Leaving the field blank is the equivalent to selecting the homepage."
+            "content": "Typing '/' is the equivalent to selecting the homepage."
           },
           {
             "type": "url",
@@ -101,7 +101,7 @@
         "settings": [
           {
             "type": "paragraph",
-            "content": "Leaving the field blank is the equivalent to selecting the homepage."
+            "content": "Typing '/' is the equivalent to selecting the homepage."
           },
           {
             "type": "url",

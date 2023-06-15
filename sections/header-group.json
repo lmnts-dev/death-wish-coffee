@@ -20,13 +20,19 @@
         "6a0afdab-e10b-4da9-9206-7909e53d8051": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": "Third <strong>annoucement!<\/strong>!!"
+            "announcement_bar_text": "Third <strong>annoucement!</strong>!!"
           }
         },
         "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4": {
           "type": "include_page",
           "settings": {
-            "page": ""
+            "page": "shopify://pages/the-scoop"
+          }
+        },
+        "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4": {
+          "type": "include_page",
+          "settings": {
+            "page": "/"
           }
         }
       },
