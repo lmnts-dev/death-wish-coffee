@@ -11,18 +11,6 @@
             "announcement_bar_text": "Welcome to our store"
           }
         },
-        "3525da43-b14e-4381-8826-a8a1db023fbb": {
-          "type": "announcement",
-          "settings": {
-            "announcement_bar_text": "Another <a href=\"\/blogs\/lifestyle\/diy-coffee-grounds-candles\" title=\"DIY Coffee Grounds Candles\">announcement<\/a>"
-          }
-        },
-        "6a0afdab-e10b-4da9-9206-7909e53d8051": {
-          "type": "announcement",
-          "settings": {
-            "announcement_bar_text": "Third <strong>annoucement!<\/strong>!!"
-          }
-        },
         "215fee8b-bb0d-4cbb-85ac-0f7914ee004c": {
           "type": "exclude_page",
           "settings": {
@@ -32,8 +20,6 @@
       },
       "block_order": [
         "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2",
-        "3525da43-b14e-4381-8826-a8a1db023fbb",
-        "6a0afdab-e10b-4da9-9206-7909e53d8051",
         "215fee8b-bb0d-4cbb-85ac-0f7914ee004c"
       ],
       "settings": {
