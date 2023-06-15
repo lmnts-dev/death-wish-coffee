@@ -22,7 +22,7 @@
       {% assign include_pages = include_pages | join: ',' | append: block.settings.page | split: ',' %}
 
     {%- when 'exclude_page' -%}
-      {% if block.settings.page == canonical_url %}
+      {% if block.settings.page.url == request.path %}
         {% assign exclude_page = true %}
       {% endif %}
       {% assign exclude_pages = exclude_pages | join: ',' | append: block.settings.page | split: ',' %}
@@ -85,7 +85,7 @@
         "settings": [
           {
             "type": "paragraph",
-            "content": "Typing '/' is the equivalent to selecting the homepage."
+            "content": "Typing and selecting '/' is the equivalent to selecting the homepage."
           },
           {
             "type": "url",
@@ -101,7 +101,7 @@
         "settings": [
           {
             "type": "paragraph",
-            "content": "Typing '/' is the equivalent to selecting the homepage."
+            "content": "Typing and selecting '/' is the equivalent to selecting the homepage."
           },
           {
             "type": "url",
