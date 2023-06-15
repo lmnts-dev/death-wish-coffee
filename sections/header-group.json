@@ -20,19 +20,19 @@
         "6a0afdab-e10b-4da9-9206-7909e53d8051": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": "Third <strong>annoucement!</strong>!!"
+            "announcement_bar_text": "Third <strong>annoucement!<\/strong>!!"
           }
         },
         "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4": {
           "type": "include_page",
           "settings": {
-            "page": "shopify://pages/the-scoop"
+            "page": "\/"
           }
         },
-        "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4": {
+        "7dcfc2ed-4598-41ca-884e-8cfd638e32cb": {
           "type": "include_page",
           "settings": {
-            "page": "/"
+            "page": "shopify:\/\/pages\/the-scoop"
           }
         }
       },
@@ -40,7 +40,8 @@
         "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2",
         "3525da43-b14e-4381-8826-a8a1db023fbb",
         "6a0afdab-e10b-4da9-9206-7909e53d8051",
-        "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4"
+        "a2fa20d4-1254-40d3-81fe-9fe53bf0b0d4",
+        "7dcfc2ed-4598-41ca-884e-8cfd638e32cb"
       ],
       "settings": {
         "announcement_bar_text_size": "p",
