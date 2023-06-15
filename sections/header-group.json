@@ -5,13 +5,39 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "announcement_bar_text": "Everything <strong>freee <\/strong>today. <a href=\"\/products\/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this<\/a>",
         "announcement_bar_text_size": "p",
         "announcement_bar_theme": "2",
         "announcement_bar_home_only": true,
         "announcement_bar_marquee": false,
         "announcement_bar_speed": 5
-      }
+      },
+      "blocks": {
+        "announcement": {
+          "type": "announcement",
+          "settings": {
+            "announcement_bar_text": "Everything <strong>freee </strong>today. <a href=\"/products/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this</a>"
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "announcement_bar_text": " 2 Everything <strong>freee </strong>today. <a href=\"/products/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this</a>"
+          }
+        },
+        "announcement-3": {
+          "type": "announcement",
+          "settings": {
+            "announcement_bar_text": " 3 Everything <strong>freee </strong>today. <a href=\"/products/death-wish-coffee\" title=\"Dark Roast Coffee\">Let's do this</a>"
+          }
+        },
+        "include_page": {
+          "type": "include_page",
+          "settings": {
+            "page": "shopify://collections"
+          }
+        }
+      },
+      "block_order": ["announcement", "announcement-2", "announcement-3", "include_page"]
     },
     "header": {
       "type": "header",

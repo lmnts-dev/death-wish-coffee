@@ -75,7 +75,7 @@ body > main > .commence-section > div {
 
 
  .commence-section a {
-    color: RGB(var(--color-foreground));
+    color: RGB(var(--color-text));
   }
 
 

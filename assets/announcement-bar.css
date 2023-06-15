@@ -4,11 +4,83 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex: 0 0 100%;
   overflow: hidden;
-  grid-column: 1 / -1; }
-  .announcement-bar__text, .marquee-styles__text {
+  position: relative;
+  grid-column: 1 / -1; 
+}
+
+.announcement-bar__text, .marquee-styles__text {
     margin-bottom: 0 !important;
     padding: 10px 0 !important;
     white-space: nowrap;
-    max-width: none; }
+    max-width: none; 
+    }
+
+.announcement-bar input {
+  display: none;
+}
+
+.announcement-bar label {
+  left: 20px;
+  display: none;
+  transform: scaleX(-1);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  place-content: center;
+  z-index: 2;
+}
+
+.announcement-bar label + label + label, .announcement-bar input:first-of-type + label + label {
+  left: unset;
+  right: 20px;
+  transform: none;
+}
+
+.announcement-bar label:first-of-type, .announcement-bar label:last-of-type {
+  display: none !important;
+}
+
+.announcement-bar label:hover {
+  cursor: pointer;
+}
+
+.announcement-bar label svg {
+  width: 40px;
+  height: auto;
+}
+
+.announcement-bar label svg path {
+  fill: RGB(var(--color-foreground));
+}
+
+
+.announcement-bar__slide {
+  pointer-events: none;
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  transition: opacity .25s ease;
+}
+
+.announcement-bar input + label + label {
+  display: none;
+}
+
+.announcement-bar input:checked + label + label + label + .announcement-bar__slide {
+  display: block;
+  position: relative;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.announcement-bar input:checked + label + label + label, .announcement-bar input:checked + label {
+  display: grid;
+}
+
+.announcement-bar input:first-of-type + label + label, .announcement-bar input:last-of-type + label + label {
+  display: grid;
+  z-index: 1;
+}
