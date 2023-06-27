@@ -86,4 +86,12 @@
     }
   }
 
+  {% if template.name == 'product' %}
+    {% for variant in product.variants %}
+      {% if variant.metafields.custom.hide_subscription_widget == true %}
+        .product-form__form input[name="id"][value="{{ variant.id }}"] ~ div { display: none}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
 {% endstyle %}

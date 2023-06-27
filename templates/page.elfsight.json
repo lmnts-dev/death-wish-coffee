@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "11b59e0b-029e-47f2-9481-ea3ed4f5cf39": {
+      "type": "elfsight-container",
+      "blocks": {
+        "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tiktoks",
+            "heading_size": "h5",
+            "button_label": "Follow Us",
+            "button_link": "https://tiktok.com/@shopify"
+          }
+        },
+        "5a0c0749-e9ef-492c-8596-304424c6597f": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% comment %} \n  Elfsight Script\n{% endcomment %}\n\n<script src=\"https://static.elfsight.com/platform/platform.js\" data-use-service-core=\"\" defer=\"defer\"></script>\n<div class=\"elfsight-app-ee3f13dd-8870-40a3-a68b-ec618d1ac911\"></div>\n\n<style>\n\n#Rich-text-{{ section.id }} .swiper-slide {\nbackground: RGBA(var(--color-text) / .9);\ncolor: RGB(var(--color-background));\n}\n\n#Rich-text-{{ section.id }} .dLvfKD > div > div {\nbackground: RGBA(var(--color-text) / .5);\n}\n\n#Rich-text-{{ section.id }} .dLvfKD > div > .fumhUG {\nbackground: RGB(var(--color-text));\n}\n\n#Rich-text-{{ section.id }} .iZcgmv, #Rich-text-{{ section.id }} .ckyeTq {\ndisplay: block; \nwidth: 50px !important;\nheight: 50px !important;\nflex-basis: 50px !important; \nmargin: 0 !important; \ntransform: translateX(150%) !important;\n}\n\n@media (max-width: 991px) {\n#Rich-text-{{ section.id }} .iZcgmv {\n  transform: translateX(50%) !important;\n}\n}\n\n@media (max-width: 991px) {\n#Rich-text-{{ section.id }} .iZcgmv, #Rich-text-{{ section.id }} .ckyeTq {\ndisplay: none !important;\n}\n}\n\n#Rich-text-{{ section.id }} .ckyeTq { \ntransform: scaleX(-1)\ntranslateX(150%) !important;\n}\n\n@media (max-width: 991px) {\n#Rich-text-{{ section.id }} .ckyeTq {\n  transform: translateX(-50%) scaleX(-1) !important;\n}\n}\n\n#Rich-text-{{ section.id }} .ckyeTq > div {\nbackground: transparent !important;  \nbox-shadow: none !important; \nwidth: auto !important; \nheight: auto !important;\n}\n\n#Rich-text-{{ section.id }} .hwNwGz {\n  background: transparent !important;  \nbox-shadow: none !important;\n}\n\n#Rich-text-{{ section.id }} .iZcgmv svg, #Rich-text-{{ section.id }} .ckyeTq svg {\ndisplay: none;\n}\n\n#Rich-text-{{ section.id }} .diRvtN {\n  max-width: none !important;\n}\n\n#Rich-text-{{ section.id }} .iZcgmv:has(div):after, #Rich-text-{{ section.id }} .ckyeTq:has(div):after {\ncontent: url('https://cdn.shopify.com/s/files/1/0271/7209/files/arrow-50px.svg?v=1686673748'); \nposition: absolute;  \ntop: 50%; \nleft: 50%;  \nwidth: 100%;\ntransform: translate(-50%, -50%); \npointer-events: none;\n}\n\n</style>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14484764131383__11b59e0b-029e-47f2-9481-ea3ed4f5cf39-16787439588c4f0857-0",
+        "5a0c0749-e9ef-492c-8596-304424c6597f"
+      ],
+      "settings": {
+        "alignment": "left",
+        "theme": "primary",
+        "top_spacing": 100,
+        "bottom_spacing": 0
+      }
+    },
+    "e6288fdc-b007-4e5c-9e5c-9b54aab0700b": {
+      "type": "the-scoop",
+      "settings": {}
+    }
+  },
+  "order": [
+    "11b59e0b-029e-47f2-9481-ea3ed4f5cf39",
+    "e6288fdc-b007-4e5c-9e5c-9b54aab0700b"
+  ]
+}

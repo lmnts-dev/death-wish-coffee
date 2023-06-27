@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html{% unless template contains 'password' or template contains 'access-denied' or cart.attributes.age_gate == '1' %} class="js-age-gate"{% endunless %} data-scroll="0">
 <head>
+  <script src="https://cdn.noibu.com/collect.js"></script>
 {% include 'easylockdown_head' %}
 
 
@@ -53,10 +54,6 @@
     });
   </script>
 
-<!-- Impact Radius Script -->
-  <script type="text/javascript"> (function(a,b,c,d,e,f,g){e['ire_o']=c;e[c]=e[c]||function(){(e[c].a=e[c].a||[]).push(arguments)};f=d.createElement(b); g=d.getElementsByTagName(b)[0];f.async=1;f.src=a;g.parentNode.insertBefore(f,g);})('//d.impactradius-event.com/A2111926-92bd-44aa-bb4f-83916a666b521.js','script','ire',document,window);
-  </script>
-
   <title> {{- page_title | split: '//' | first -}}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{- 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}{%- if current_page != 1 -%} &ndash; {{- 'general.meta.page' | t: page: current_page -}}{%- endif -%}{%- unless page_title contains shop.name -%} - {{- shop.name -}}{%- endunless -%}</title>
 
   {% render 'shogun-head' %}
@@ -81,22 +78,7 @@
 
   {%- render 'dev-mode-body' -%}
   {% include 'findify-tagging' %}
-
-<!-- Impact Radius Script Body-->
-{% if customer %}
-  {% assign customerID = customer.id %}
-  {% assign customerEamil = customer.email %}
-  {% assign SHA1Email = customerEamil | hmac_sha1: "secret_key" %}
-{% else %}
-  {% assign customerID = "" %}
-  {% assign SHA1Email = "" %}
-{% endif %}
-
-<script type="text/javascript">
-  ire('identify', {customerId: "{{customerID}}", customerEmail: "{{SHA1Email}}" });
-</script>
-<!-- End Impact Radius Script Body-->
- {% include 'smile-initializer' %}
+  {% include 'smile-initializer' %}
 
 </body>
 </html>

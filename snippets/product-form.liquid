@@ -11,10 +11,13 @@
 
 {% assign queryParamVariant = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&' | split:'?variant=' | last-%}
 
+{{ 'pdp-button-badges.css' | asset_url | stylesheet_tag }}
+
 {%- capture content -%}
-  <div class="product-form__form-wrapper">
+
+  <div class="product-form__form-wrapper" {% if settings.sub_badges_text %}style="--pdpButtonBadgesText: '{{ settings.sub_badges_text }}'"{% endif %}>
     <div
-      class="product-form__options"
+      class="product-form__options pdp-button-badges"
       :class="{'product-form__options--single': hasSingleVariant}"
     >
       <div v-for="(option, optionIndex) in product.options" :key="option" class="product-form__option" v-if="option !== 'Color'">
@@ -47,7 +50,7 @@
         {%- if form_type == 'button' -%}
           <div class="product-form__option-values">
             <div v-for="value in product.options_by_name[option].option.values" :key="option + ':' + value"
-                class="product-form__option-value" :class="{'product-form__unavailable': disableOption(option, value)}"
+                class="product-form__option-value" :class="[isSubOptionValue(value) ? 'pdp-button-badges__badge' : '', {'product-form__unavailable': disableOption(option, value)}]"
             >
               <input :id="optionInputId(option, value)"
                     :name="optionInputId(option, value)"
@@ -66,7 +69,7 @@
                 <line x1='0' y1='100%' x2='100%' y2='0' />
                 <line x1='0' y1='0' x2='100%' y2='100%' />
               </svg>
-                <div class="option-icon" v-if="optionIcons[value]" v-html="optionIcons[value]"></div>
+                <div class="option-icon" v-html="optionIcons[value]"></div>
                 <!-- {% render 'variant-icons', type: svg_unselected, class: 'product-form__option-value-icon' %} -->
                 <div class="product-form__option-value-text">
                   <div class="product-form__option-value-name">
@@ -128,6 +131,7 @@
   <div class="{{- class -}}" data-module="product-form" {{ custom_attrs }}>
     <div is="product-form"
       :product="{{- product_json | escape -}}"
+      :subBadgesOptionValues="{{ settings.sub_badges_option_values}}"
       inline-template
     >
       {{ content }}

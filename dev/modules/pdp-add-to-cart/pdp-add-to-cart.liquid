@@ -33,6 +33,7 @@
           :product="product"
           :is-active-subscription="true"
           :subscription-checked="subscriptionChecked"
+          :sub-badges-option-values="'{{ settings.sub_badges_option_values }}'"
         {%- endcapture -%}
         {%- render 'product-form', is_vue_component: true, class: 'product-form--pdp-add-to-cart', form_type: form_type, palette: palette, show_title: true, custom_attrs: form_attrs -%}
 
