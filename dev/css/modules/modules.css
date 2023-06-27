@@ -1863,6 +1863,31 @@
   }
 }
 
+.category-card {
+  display: block;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.category-card__image {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    padding-top: 100%;
+  }
+}
+
+.category-card__title {
+  margin-top: 9px;
+
+  @media (--lg) {
+    margin-top: 13px;
+    text-align: center;
+  }
+}
+
 .cta-banner {
   margin: 74px 0;
 
@@ -1905,28 +1930,28 @@
   }
 }
 
-.category-card {
-  display: block;
-  color: var(--white);
-  text-decoration: none;
-}
-
-.category-card__image {
-  position: relative;
-
-  &::before {
-    display: block;
-    content: '';
-    padding-top: 100%;
+.customer-info {
+  .template-customers-order & {
+    display: none;
   }
 }
 
-.category-card__title {
-  margin-top: 9px;
+.customer-info__content {
+  padding: 0 25px 46px;
+  color: var(--white);
 
-  @media (--lg) {
-    margin-top: 13px;
-    text-align: center;
+  @media (--md) {
+    padding: 16px 0 0;
+  }
+}
+
+.customer-info__title {
+  margin-bottom: 5px;
+}
+
+.customer-info__item {
+  &:not(:last-child) {
+    margin-bottom: 8px;
   }
 }
 
@@ -1990,31 +2015,6 @@
   @media (--md) {
     margin-top: auto;
     margin-bottom: 16px;
-  }
-}
-
-.customer-info {
-  .template-customers-order & {
-    display: none;
-  }
-}
-
-.customer-info__content {
-  padding: 0 25px 46px;
-  color: var(--white);
-
-  @media (--md) {
-    padding: 16px 0 0;
-  }
-}
-
-.customer-info__title {
-  margin-bottom: 5px;
-}
-
-.customer-info__item {
-  &:not(:last-child) {
-    margin-bottom: 8px;
   }
 }
 
@@ -2448,6 +2448,8 @@
   margin-bottom: 15px;
 }
 
+/* styles for the form-checkout-info module go in this file */
+
 /* styles for the form-contact module go in this file */
 
 .form-contact {
@@ -2476,11 +2478,11 @@
   }
 }
 
-/* styles for the form-checkout-info module go in this file */
-
 /* styles for the form-contact-customer-service module go in this file */
 
 /* styles for the form-contact-sales module go in this file */
+
+/* styles for the form-contact-sponsor module go in this file */
 
 /* styles for the form-create-account module go in this file */
 
@@ -2542,8 +2544,6 @@
     text-decoration: underline;
   }
 }
-
-/* styles for the form-contact-sponsor module go in this file */
 
 /* styles for the form-forgot module go in this file */
 
@@ -8942,6 +8942,8 @@ div.cmnc-incentive-text-override {
 
 /* styles for shogun-products */
 
+/* styles for smile-initializer */
+
 /* styles for social-icons */
 
 .social-icons {
@@ -8968,8 +8970,6 @@ div.cmnc-incentive-text-override {
     margin-right: 18px;
   }
 }
-
-/* styles for smile-initializer */
 
 /* styles for styleguide */
 

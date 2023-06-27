@@ -13544,32 +13544,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-
-var yotpoApi = null;
-var yotpoRetries = 0;
-/**
- * Force Yotpo to re-render all review widgets after they're mounted.
- * Debounce is used to make sure this is only called once per batch of components.
- */
-
-var refreshYotpo = Object(lib_util__WEBPACK_IMPORTED_MODULE_15__[/* debounce */ "d"])(function () {
-  if (!window.yotpo || !window.Yotpo || !window.Yotpo.API) {
-    // If yotpo is not initialized yet, wait for one second and retry 5 times maximum
-    if (yotpoRetries < 5) {
-      setTimeout(refreshYotpo, 1000);
-    }
-
-    yotpoRetries++;
-    return;
-  }
-
-  if (!yotpoApi) {
-    yotpoApi = new window.Yotpo.API(window.yotpo);
-  }
-
-  yotpoApi.refreshWidgets();
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ProductForm: _product_form_product_form_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
@@ -13619,9 +13593,6 @@ var refreshYotpo = Object(lib_util__WEBPACK_IMPORTED_MODULE_15__[/* debounce */ 
     }
   }),
   watch: {
-    product: function product() {
-      this.renderReviews();
-    },
     addedToCartErrorMessage: function addedToCartErrorMessage(newValue) {
       if (!newValue) {
         this.shouldShowMessage = false;
@@ -13629,11 +13600,6 @@ var refreshYotpo = Object(lib_util__WEBPACK_IMPORTED_MODULE_15__[/* debounce */ 
     }
   },
   methods: {
-    renderReviews: function renderReviews() {
-      this.$nextTick(function () {
-        refreshYotpo();
-      });
-    },
     formatPrice: lib_util__WEBPACK_IMPORTED_MODULE_15__[/* formatPrice */ "f"],
     handleSelectedVariant: function handleSelectedVariant(variantId) {
       this.selectedVariantId = variantId;
@@ -13685,9 +13651,6 @@ var refreshYotpo = Object(lib_util__WEBPACK_IMPORTED_MODULE_15__[/* debounce */ 
     setCookieReview: function setCookieReview() {
       js_cookie__WEBPACK_IMPORTED_MODULE_16___default.a.set('anchor_review_drawer', 'true');
     }
-  },
-  mounted: function mounted() {
-    this.renderReviews();
   }
 });
 
@@ -43531,7 +43494,6 @@ var map = {
 	"./product-form/product-icons.js": 148,
 	"./product-hero-card/product-hero-card.js": 421,
 	"./promo-bar/promo-bar.js": 422,
-	"./review-drawer/review-drawer.js": 423,
 	"./rewards-cta-group/rewards-cta-group.vue.js": 111,
 	"./rewards-earn-modal/rewards-earn-modal.vue.js": 112,
 	"./rewards-hero/rewards-hero.vue.js": 114,
@@ -49425,53 +49387,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-/**
- * Initializes the javascript for the review-drawer module
- * @param {Object} el - The DOM Node containing the data-module="review-drawer" attribute.
- */
 
-
-
-
-var reviewDrawer = function reviewDrawer(el) {
-  var bottomline = document.querySelector('.js-yotpo-bottomline');
-  var buttonToggle = document.querySelector('.js-button-toggle-review');
-  var mainWidget = document.querySelector('.js-yotpo-main');
-  var anchorReviewDrawer = 'anchor_review_drawer';
-  buttonToggle.addEventListener('click', function () {
-    if (_toConsumableArray(buttonToggle.classList).includes('rotate')) {
-      Object(lib_util__WEBPACK_IMPORTED_MODULE_14__[/* addClass */ "a"])(bottomline, 'active');
-      Object(lib_util__WEBPACK_IMPORTED_MODULE_14__[/* removeClass */ "j"])(mainWidget, 'active');
-      Object(lib_util__WEBPACK_IMPORTED_MODULE_14__[/* removeClass */ "j"])(buttonToggle, 'rotate');
-      bottomline.after(buttonToggle);
-    } else {
-      Object(lib_util__WEBPACK_IMPORTED_MODULE_14__[/* removeClass */ "j"])(bottomline, 'active');
-      Object(lib_util__WEBPACK_IMPORTED_MODULE_14__[/* addClass */ "a"])(mainWidget, 'active');
-      Object(lib_util__WEBPACK_IMPORTED_MODULE_14__[/* addClass */ "a"])(buttonToggle, 'rotate');
-      mainWidget.after(buttonToggle);
-    }
-  });
-
-  var scrollToAndClick = function scrollToAndClick() {
-    var offset = -104; // header height
-
-    scroll_to_element__WEBPACK_IMPORTED_MODULE_13___default()(el, {
-      offset: offset
-    });
-    buttonToggle.click();
-  };
-
-  document.addEventListener('pdpReviewScroll', function () {
-    scrollToAndClick();
-  });
-
-  if (js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.get(anchorReviewDrawer)) {
-    scrollToAndClick();
-    js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.remove(anchorReviewDrawer);
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (reviewDrawer);
 
 /***/ }),
 /* 424 */

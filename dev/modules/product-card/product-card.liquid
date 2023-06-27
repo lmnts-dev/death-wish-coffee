@@ -47,9 +47,7 @@
           <a :href="product.url" class="b1 product-card__title-link">${ product.title }</a>
         </h4>
         <div v-if="showReview" class="b1 product-card__review">
-          <a :href="product.url + '#review-drawer'" class="product-card__review-link">
-            <div class="yotpo bottomLine" :data-product-id="product.id"></div>
-          </a>
+          <div data-bv-show="inline_rating" :data-bv-product-id="product.id" :data-bv-redirect-url="product.url" data-bv-seo="false"></div>
         </div>
         <p class="h5 product-card__price">
           <span v-if="comparePrice" class="product-card__compare">$${ formatPrice(comparePrice) }</span>

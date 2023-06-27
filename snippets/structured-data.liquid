@@ -28,39 +28,48 @@
   }
 </script>
 {%- elsif template contains 'product' -%}
-{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{%- liquid
+  if product.selected_or_first_available_variant.featured_media
+    assign seo_media = product.selected_or_first_available_variant.featured_media
+  else
+    assign seo_media = product.featured_media
+  endif
+-%}
 
 <script type="application/ld+json">
   {
     "@context": "http://schema.org/",
     "@type": "Product",
-    "name": "{{- product.title -}} {{- current_variant.title -}}",
-    "image": [
-      {%- for image in product.images -%}
-        "{{- image.src -}}"{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
-     ],
-    "description": {{- product.description | strip_html | json -}},
-    "sku": "{{- current_variant.sku -}}",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {%- if seo_media -%}
+      "image": [
+        {{ seo_media | image_url | prepend: "https:" | json }}
+      ],
+    {%- endif -%}
+    "description": {{ product.description | strip_html | json }},
+    {%- if product.selected_or_first_available_variant.sku != blank -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- endif -%}
     "brand": {
       "@type": "Thing",
-      "name": "{{- product.vendor -}}"
+      "name": {{ product.vendor | json }}
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "{{- product.metafields.yotpo.reviews_average -}}",
-      "reviewCount": "{{- product.metafields.yotpo.reviews_count -}}"
-    },
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "{{- shop.currency -}}",
-      "price": "{{- current_variant.price | money_without_currency -}}",
-      {%- if current_variant.available -%}
-        "availability": "http://schema.org/InStock"
-      {%- else -%}
-        "availability": "http://schema.org/OutOfStock"
-      {%- endif -%}
-    }
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type" : "Offer",
+          {%- if variant.sku != blank -%}
+            "sku": {{ variant.sku | json }},
+          {%- endif -%}
+          "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price" : {{ variant.price | divided_by: 100.00 | json }},
+          "priceCurrency" : {{ cart.currency.iso_code | json }},
+          "url" : {{ request.origin | append: variant.url | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
   }
 </script>
 {%- elsif template contains 'article' -%}

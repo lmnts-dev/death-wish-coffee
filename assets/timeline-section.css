@@ -54,10 +54,21 @@
 }
 @media screen and (max-width: 676px) {
   
-
   .timeline-section {
     --iconsSectionGap: var(--pxSize);
     --sectionGuttersSpacing: 70px;
+  }
+
+  .timeline-section__icons::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .timeline-section__icons::-webkit-scrollbar-thumb {
+    background-color: RGBA(var(--color-text) / 1);
+  }
+  .timeline-section__icons::-webkit-scrollbar-track {
+    background-color: RGBA(var(--color-text) / 0.4);
   }
 
   .timeline-section__icons__icon {

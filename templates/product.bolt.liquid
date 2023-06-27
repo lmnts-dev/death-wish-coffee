@@ -39,8 +39,7 @@
   palette: palette
 -%}
 
-{%- comment -%}Review Drawer{%- endcomment -%}
-{%- render 'review-drawer', palette: palette, title: product_acf.pdp_review_heading -%}
+<div data-bv-show="reviews" data-bv-product-id="{{ product.id }}"></div>
 
 {%- comment -%}Featured Product Carousel{%- endcomment -%}
 {%- assign featured_products = product_acf.pdp_featured_products_selector | split: '|' -%}
