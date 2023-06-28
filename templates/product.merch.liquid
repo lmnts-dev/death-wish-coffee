@@ -22,6 +22,7 @@
 -%}
 
 <div data-bv-show="reviews" data-bv-product-id="{{ product.id }}"></div>
+{{ 'smileCustomReviewEvent.js' | asset_url | script_tag }}
 
 {%- comment -%}Featured Product Carousel{%- endcomment -%}
 {%- assign list_products = product_acf.pdp_featured_products_selector -%}
