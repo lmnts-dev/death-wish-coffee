@@ -8,7 +8,13 @@
         "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2": {
           "type": "announcement",
           "settings": {
-            "announcement_bar_text": "Welcome to our store"
+            "announcement_bar_text": "100% off everything"
+          }
+        },
+        "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2a": {
+          "type": "announcement",
+          "settings": {
+            "announcement_bar_text": "Welcome <a href='\/'>to our</a> store Welcome to our store Welcome to our store Welcome to our store Welcome to our store Welcome to our store"
           }
         },
         "215fee8b-bb0d-4cbb-85ac-0f7914ee004c": {
@@ -16,10 +22,18 @@
           "settings": {
             "page": "\/"
           }
+        },
+        "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2b": {
+          "type": "announcement",
+          "settings": {
+            "announcement_bar_text": "Buy our coffee"
+          }
         }
       },
       "block_order": [
         "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2",
+        "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2a",
+        "d9252722-7f5a-4aaf-9f44-dd2cdfa33bc2b",
         "215fee8b-bb0d-4cbb-85ac-0f7914ee004c"
       ],
       "settings": {

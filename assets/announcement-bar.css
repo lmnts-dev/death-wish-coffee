@@ -1,7 +1,8 @@
 .announcement-bar {
   background: RGB(var(--color-background));
   color: RGB(var(--color-text));
-  display: flex;
+  display: grid;
+  grid-template-columns: 60%;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -15,16 +16,16 @@
     margin-bottom: 0 !important;
     padding: 10px 0 !important;
     max-width: none; 
-    }
+}
 
 .announcement-bar input {
   display: none;
 }
 
 .announcement-bar label {
-  left: 20px;
+  left: calc(20% - 30px);
   display: none;
-  transform: scaleX(-1);
+  transform: rotate(-90deg);
   position: absolute;
   top: 0;
   height: 100%;
@@ -34,8 +35,8 @@
 
 .announcement-bar label + label + label, .announcement-bar input:first-of-type + label + label {
   left: unset;
-  right: 20px;
-  transform: none;
+  right: calc(20% - 30px);
+  transform: rotate(90deg);
 }
 
 .announcement-bar label:first-of-type, .announcement-bar label:last-of-type, .announcement-bar input:first-of-type:last-of-type ~ label {
@@ -47,7 +48,7 @@
 }
 
 .announcement-bar label svg {
-  width: 40px;
+  width: 20px;
   height: auto;
 }
 
@@ -55,12 +56,13 @@
   fill: RGB(var(--color-foreground));
 }
 
-
 .announcement-bar__slide {
   pointer-events: none;
   opacity: 0;
-  position: absolute;
-  inset: 0;
+  grid-column: 1/1;
+  grid-row: 1/1;
+  margin-left: auto !important;
+  margin-right: auto !important;
   transition: opacity .25s ease;
 }
 
@@ -69,8 +71,6 @@
 }
 
 .announcement-bar input:checked + label + label + label + .announcement-bar__slide {
-  display: block;
-  position: relative;
   pointer-events: auto;
   opacity: 1;
 }
@@ -82,4 +82,19 @@
 .announcement-bar input:first-of-type + label + label, .announcement-bar input:last-of-type + label + label {
   display: grid;
   z-index: 1;
+}
+
+
+@media screen and (max-width: 676px) {
+  .announcement-bar {
+    grid-template-columns: calc(100% - 40px - 40px);
+  }
+
+  .announcement-bar label {
+    left: 10px;
+  }
+
+  .announcement-bar label + label + label, .announcement-bar input:first-of-type + label + label {
+    right: 10px;
+  }
 }

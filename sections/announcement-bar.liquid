@@ -8,8 +8,11 @@
   }
 {% endstyle %}
 
-{% assign page_specific = false %}
-{% assign show_section = false %}
+{% liquid 
+  assign announcements_index = 1
+  assign page_specific = false
+  assign show_section = false 
+%}
 
 {% for block in section.blocks %}
   {%- case block.type -%}
@@ -30,15 +33,15 @@
     {%- when 'announcement' -%}
       {% capture announcements %}
         {{ announcements }}
-        <input type="radio" name="slide-trigger-{{ section.id }}" value="Announcement {{ forloop.index }}" id="{{ forloop.index }}-{{ section.id }}" {% if forloop.index == 1 %}checked{% endif %} />
-        <label for="{{ forloop.index | minus: 1 }}-{{ section.id }}">
-          {% render 'svg', type: 'chevron-right' %}
+        <input type="radio" name="slide-trigger-{{ section.id }}" value="Announcement {{ announcements_index }}" id="{{ announcements_index }}-{{ section.id }}" {% if announcements_index == 1 %}checked{% endif %} />
+        <label for="{{ announcements_index | minus: 1 }}-{{ section.id }}">
+          {% render 'svg', type: 'arrow-up' %}
         </label>
-        <label for="{{ forloop.index }}-{{ section.id }}">
-          {% render 'svg', type: 'chevron-right' %}
+        <label for="{{ announcements_index }}-{{ section.id }}">
+          {% render 'svg', type: 'arrow-up' %}
         </label>
-        <label for="{{ forloop.index | plus: 1 }}-{{ section.id }}">
-          {% render 'svg', type: 'chevron-right' %}
+        <label for="{{ announcements_index | plus: 1 }}-{{ section.id }}">
+          {% render 'svg', type: 'arrow-up' %}
         </label>
         {% if section.settings.announcement_bar_marquee %}
           <div class="marquee-styles__inner announcement-bar__slide">
@@ -53,6 +56,7 @@
         {% endif %}
       {% endcapture %}
 
+      {% assign announcements_index = announcements_index | plus: 1 %}
   {%- endcase -%}
 {% endfor %}
 
