@@ -17,10 +17,22 @@ function handleSmileCustomReviewEventChange(e) {
     var button = target.querySelector(".bv-submit");
     foundEventInstance = true;
     button.addEventListener("click", () => {
-      smileCustomReviewSendEvent();
+      const myTimeout = setTimeout(() => {
+        if (document.querySelector(".bv-submission-thankyou")) {
+          smileCustomReviewSendEvent();
+        } else {
+          foundEventInstance = false;
+        }
+      }, 10000);
     });
     button.addEventListener("keypress", () => {
-      smileCustomReviewSendEvent();
+      const myTimeout = setTimeout(() => {
+        if (document.querySelector(".bv-submission-thankyou")) {
+          smileCustomReviewSendEvent();
+        } else {
+          foundEventInstance = false;
+        }
+      }, 10000);
     });
   }
 }
