@@ -15,6 +15,7 @@
 
 {%- render 'media-hero-grid' -%}
 <div data-bv-show="reviews" data-bv-product-id="{{ product.id }}"></div>
+{{ 'smileCustomReviewEvent.js' | asset_url | script_tag }}
 
 {%- assign list_products = product_acf.accentuate.pdp_featured_products_selector -%}
 {%- assign section_title_hero = product_acf.accentuate.pdp_featured_products_heading -%}

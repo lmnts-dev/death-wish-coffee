@@ -1,4 +1,5 @@
 {%- layout 'theme' -%}
+{{ 'smileCustomArticleEvent.js' | asset_url | script_tag }}
 
 {%- assign blog_acf = blog.metafields.accentuate -%}
 {%- assign fallback_images = blog_acf.default_image | first -%}
