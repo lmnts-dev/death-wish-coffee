@@ -2,7 +2,8 @@
   background: RGB(var(--color-background));
   color: RGB(var(--color-text));
   display: grid;
-  grid-template-columns: 60%;
+  grid-template-columns: 20px auto 20px;
+  grid-template-rows: auto;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -10,12 +11,13 @@
   overflow: hidden;
   position: relative;
   grid-column: 1 / -1; 
+  padding: 0 20px;
 }
 
 .announcement-bar__text, .marquee-styles__text {
-    margin-bottom: 0 !important;
-    padding: 10px 0 !important;
-    max-width: none; 
+  margin-bottom: 0 !important;
+  padding: 10px 20px !important;
+  max-width: none; 
 }
 
 .announcement-bar input {
@@ -23,20 +25,18 @@
 }
 
 .announcement-bar label {
-  left: calc(20% - 30px);
   display: none;
   transform: rotate(-90deg);
-  position: absolute;
-  top: 0;
   height: 100%;
   place-content: center;
   z-index: 2;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
 }
 
 .announcement-bar label + label + label, .announcement-bar input:first-of-type + label + label {
-  left: unset;
-  right: calc(20% - 30px);
   transform: rotate(90deg);
+  grid-column: 3 / 4;
 }
 
 .announcement-bar label:first-of-type, .announcement-bar label:last-of-type, .announcement-bar input:first-of-type:last-of-type ~ label {
@@ -58,12 +58,12 @@
 
 .announcement-bar__slide {
   pointer-events: none;
-  opacity: 0;
-  grid-column: 1/1;
+  grid-column: 2/3;
   grid-row: 1/1;
   margin-left: auto !important;
   margin-right: auto !important;
   transition: opacity .25s ease;
+  display: none;
 }
 
 .announcement-bar input + label + label {
@@ -72,7 +72,7 @@
 
 .announcement-bar input:checked + label + label + label + .announcement-bar__slide {
   pointer-events: auto;
-  opacity: 1;
+  display: block;
 }
 
 .announcement-bar input:checked + label + label + label, .announcement-bar input:checked + label {
